@@ -1,0 +1,13 @@
+# Lista anticlichê da co.juris: nada disto aparece em imagem gerada para a marca (um por linha, termo do prompt entre parênteses).
+martelo de juiz (gavel)
+balança da justiça (scales of justice)
+Têmis (Lady Justice statue)
+aperto de mão (handshake)
+robô (robot)
+cérebro de circuitos (circuit-board brain)
+mão robótica (robotic hand)
+holograma (hologram)
+neon (neon light)
+coluna (column)
+pessoa, rosto ou mão (people, faces, hands)
+texto, letras, números, logotipos (text, letters, numbers, logos)

@@ -6,7 +6,7 @@ RAIZ="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export UV_PROJECT_ENVIRONMENT="${UV_PROJECT_ENVIRONMENT:-$HOME/.venvs/apresentacao}"
 export UV_LINK_MODE=copy PYTHONUNBUFFERED=1
 cd "$RAIZ"
-uso="uso: ./ap <novo|abrir|sondar|paradas|pdf|video|empacotar|imagem|video-ia|trazer|render|lint|teste|sync> [args]"
+uso="uso: ./ap <novo|abrir|sondar|paradas|pdf|video|empacotar|imagem|video-ia|trazer|tratar|midia|render|lint|teste|sync> [args]"
 [ $# -eq 0 ] && { echo "$uso"; exit 1; }
 cmd="$1"; shift
 case "$cmd" in
@@ -14,6 +14,8 @@ case "$cmd" in
   teste) exec uv run --quiet pytest -q "$@" ;;
   novo|abrir|sondar|paradas|pdf|video|empacotar) exec uv run --quiet python -m ferramentas.palco "$cmd" "$@" ;;
   imagem|video-ia|trazer) exec uv run --quiet python -m ferramentas.midia "$cmd" "$@" ;;
+  midia) exec uv run --quiet python -m ferramentas.midia "$@" ;;          # ./ap midia conferir <deck>
+  tratar) exec uv run --quiet python -m ferramentas.tratar "$@" ;;
   render) exec uv run --quiet python -m ferramentas.render "$@" ;;
   lint) exec uv run --quiet python -m ferramentas.lint "$@" ;;
   *) echo "$uso"; exit 1 ;;

@@ -4,10 +4,10 @@
 ./ap abrir <deck>                           # serve e abre no navegador, para ensaiar e conferir ao vivo
 ./ap sondar <deck>                          # oráculo: legibilidade em projeção, parada por parada
 ./ap paradas <deck> [--finais]              # PNG por parada (ou só o fim de cada slide) + folha de contato
-./ap pdf <deck> [--todas]                   # uma página por slide (estado final; --todas, por parada)
+./ap pdf <deck> [--todas] [--rascunho]      # uma página por slide (estado final; --todas, por parada)
 ./ap video <deck> [--blur 2]                # MP4 pela linha de vídeo (segura cada parada)
-./ap empacotar <deck> [--saida X]           # pasta que abre por file://, sem internet, com PDF de emergência
-<deck> é decks/<slug>/deck.html ou só decks/<slug>.
+./ap empacotar <deck> [--saida X] [--rascunho]  # pasta que abre por file://, sem internet, com PDF de emergência
+<deck> é decks/<slug>/deck.html ou só decks/<slug>. pdf e empacotar recusam deck com [CONFERIR], salvo --rascunho.
 """
 from __future__ import annotations
 
@@ -135,6 +135,8 @@ def checar_parada(blocos: list[dict], img=None) -> list[tuple[str, str]]:
             achados.append(("AVISO", f"{nome}: invade a margem de segurança de 4%"))
         if b["transborda"]:
             achados.append(("ERRO", f"{nome}: o texto transborda a própria caixa"))
+        if b.get("topoCortado"):
+            achados.append(("ERRO", f"{nome}: o pai corta o topo das letras (acento de maiúscula?); dê padding-top ao pai"))
         if 0.1 <= b["alfa"] < 0.9:
             achados.append(("AVISO", f"{nome}: meio transparente ({b['alfa']:.2f}) numa parada; a animação terminou?"))
         if img is not None:
@@ -264,9 +266,30 @@ def paradas(deck: Path, saida: Path | None = None, *, todas: bool = True) -> Pat
     return arq
 
 
-def pdf(deck: Path, saida: Path | None = None, *, todas: bool = False) -> Path:
+def pendencias(deck: Path) -> list[str]:
+    """Cada [CONFERIR] do deck.html (texto, comentário ou código), como "linha N: trecho"."""
+    achados = []
+    marca = re.compile(r"\[CONFERIR\b[^\]]*\]")   # [CONFERIR] e [CONFERIR fonte ou nota]
+    for n, linha in enumerate(deck.read_text(encoding="utf-8").splitlines(), 1):
+        if marca.search(linha):
+            trecho = " ".join(re.sub(r"<(?!!--)[^>]*>", " ", linha).split())   # sem tags; comentário fica
+            i = marca.search(trecho).start()
+            achados.append(f"linha {n}: {trecho[max(0, i - 60):i + 40]}")
+    return achados
+
+
+def _recusar_pendencias(deck: Path, rascunho: bool) -> None:
+    """PDF e pacote vão para a plateia: dado sem fonte confirmada não sai, a menos que seja rascunho declarado."""
+    achados = [] if rascunho else pendencias(deck)
+    if achados:
+        raise SystemExit(f"{deck} tem {len(achados)} [CONFERIR] sem resolver (use --rascunho para gerar mesmo assim):\n  "
+                         + "\n  ".join(achados))
+
+
+def pdf(deck: Path, saida: Path | None = None, *, todas: bool = False, rascunho: bool = False) -> Path:
     from PIL import Image
 
+    _recusar_pendencias(deck, rascunho)
     fotos, info = fotografar(deck, todas=todas)
     arq = saida or deck.parent / "output" / f"{deck.parent.name}.pdf"
     arq.parent.mkdir(parents=True, exist_ok=True)
@@ -432,7 +455,8 @@ def conferir_pacote(arq: Path) -> list[str]:
     return problemas
 
 
-def empacotar(deck: Path, saida: Path | None = None, *, com_pdf: bool = True) -> Path:
+def empacotar(deck: Path, saida: Path | None = None, *, com_pdf: bool = True, rascunho: bool = False) -> Path:
+    _recusar_pendencias(deck, rascunho)
     pasta = (saida or deck.parent / "pacote").resolve()
     if pasta.exists():
         # Só se apaga um pacote anterior: pasta vazia ou que tem o apresentacao.html de um empacotamento.
@@ -455,7 +479,7 @@ def empacotar(deck: Path, saida: Path | None = None, *, com_pdf: bool = True) ->
     arq = pasta / "apresentacao.html"
     arq.write_text(doc, encoding="utf-8")
     if com_pdf:
-        pdf(deck, pasta / "apresentacao-emergencia.pdf")
+        pdf(deck, pasta / "apresentacao-emergencia.pdf", rascunho=True)   # pendências já conferidas acima
     (pasta / "LEIA-ME.txt").write_text(
         "Abra apresentacao.html no Google Chrome (dois cliques ou arrastar para o navegador). Funciona sem internet.\n"
         "Teclas: seta direita, espaço ou Page Down avançam; seta esquerda volta; F tela cheia; P tela do apresentador\n"
@@ -516,6 +540,8 @@ def main(argv=None) -> int:
             s.add_argument("--finais", action="store_true", help="só o estado final de cada slide")
         if nome == "pdf":
             s.add_argument("--todas", action="store_true", help="uma página por parada, não por slide")
+        if nome in ("pdf", "empacotar"):
+            s.add_argument("--rascunho", action="store_true", help="gera mesmo com [CONFERIR] no deck")
         if nome == "video":
             s.add_argument("--blur", type=int, default=1)
             s.add_argument("--paginas", type=int, choices=[1, 2, 3, 4], default=1)
@@ -540,11 +566,11 @@ def main(argv=None) -> int:
     elif a.cmd == "paradas":
         paradas(deck, saida, todas=not a.finais)
     elif a.cmd == "pdf":
-        pdf(deck, saida, todas=a.todas)
+        pdf(deck, saida, todas=a.todas, rascunho=a.rascunho)
     elif a.cmd == "video":
         video(deck, saida, blur=a.blur, paginas=a.paginas)
     elif a.cmd == "empacotar":
-        empacotar(deck, saida, com_pdf=not a.sem_pdf)
+        empacotar(deck, saida, com_pdf=not a.sem_pdf, rascunho=a.rascunho)
     return 0
 
 

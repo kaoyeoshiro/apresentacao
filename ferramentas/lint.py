@@ -9,6 +9,7 @@ nosso contrato "cada quadro é função pura do tempo":
   ERRO  setTimeout/setInterval dentro do desenho
   ERRO  CSS transition, animation ou @keyframes: o navegador anima sozinho e o quadro varia entre renders
   ERRO  id duplicado
+  AVISO getBoundingClientRect: inclui a escala do tocador e o zoom da câmera (meça com caixa() do motor)
   AVISO família de fonte usada no CSS sem <link> do Google Fonts nem @font-face
   AVISO palco() não chamada
 """
@@ -48,6 +49,9 @@ def checar(arq: Path) -> list[tuple[str, str]]:
     for padrao, msg in regras:
         for m in re.finditer(padrao, src):
             achados.append(("ERRO", f"linha {linha(m)}: {msg}"))
+
+    for m in re.finditer(r"\bgetBoundingClientRect\s*\(", src):
+        achados.append(("AVISO", f"linha {linha(m)}: getBoundingClientRect inclui a escala do tocador e o zoom da câmera; meça com caixa() do motor"))
 
     ids = re.findall(r'\bid="([^"]+)"', src)
     for i in sorted({i for i in ids if ids.count(i) > 1}):

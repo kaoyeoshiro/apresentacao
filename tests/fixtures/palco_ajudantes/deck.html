@@ -1,0 +1,63 @@
+<!doctype html>
+<!-- Ajudantes novos do motor (digitar, voar, anotar, kenburns, contar) e o contexto da câmera (ctx.camera, ctx.kCamera),
+     com viagem 0 (corte seco) e viagem curta. Valores exatos e determinismo em tests/test_palco.py. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ajudantes</title>
+<link rel="stylesheet" href="../../../temas/noite/tema.css">
+<style>
+  #palco { background: var(--cor-fundo); color: var(--cor-tinta); font-family: var(--fonte-texto); }
+  [data-slide="b"] { left: 2400px; }
+  [data-slide="c"] { left: 4800px; }
+  p, h1 { margin: 0; }
+  #frase { position: absolute; left: 160px; top: 140px; width: 900px; font-size: 56px; line-height: 1.25; }
+  #foto { position: absolute; left: 1200px; top: 140px; width: 560px; height: 360px; overflow: hidden; }
+  #foto div { width: 100%; height: 100%; background: linear-gradient(135deg, var(--cor-papel), var(--cor-destaque-fraca)); }
+  #origem { position: absolute; left: 160px; top: 620px; width: 160px; height: 100px; outline: 2px dashed var(--cor-linha); }
+  #peca { position: absolute; left: 640px; top: 760px; width: 320px; height: 200px; background: var(--cor-papel); font-size: 40px; }
+  #alvo { position: absolute; left: 1240px; top: 640px; font-size: 64px; }
+  #sub { position: absolute; left: 1240px; top: 860px; font-size: 44px; }
+  #num { position: absolute; left: 160px; top: 440px; font-size: 96px; }
+  h1 { position: absolute; left: 160px; top: 160px; font-size: 96px; }
+</style>
+</head>
+<body>
+<div id="palco"><div id="mundo">
+  <section data-slide="a">
+    <p id="frase">O juiz julgou o pedido, e a frase se escreve.</p>
+    <div id="foto"><div></div></div>
+    <p id="num">0</p>
+    <div id="origem"></div>
+    <div id="peca">peça</div>
+    <p id="alvo">voto B</p>
+    <p id="sub">linha sublinhada</p>
+  </section>
+  <section data-slide="b"><h1>Corte seco</h1></section>
+  <section data-slide="c"><h1>Viagem curta</h1></section>
+</div></div>
+<script type="module">
+import {palco, digitar, voar, anotar, kenburns, contar, saida} from '../../../motor/palco.js';
+
+const $ = (id) => document.getElementById(id);
+palco({
+  slides: [
+    {id: 'a', passos: [1.0, 1.0], camera: true},
+    {id: 'b', passos: [1.0], camera: true, viagem: 0},
+    {id: 'c', passos: [1.0], camera: true, viagem: 0.5},
+  ],
+  cenas: {
+    a: (t, c) => {
+      digitar($('frase'), c.p(0), {cursor: c.p(0) < 1, semente: 3});
+      kenburns($('foto').firstElementChild, saida(c.p(0)), {escala: 1.06, origem: '70% 55%'});
+      contar($('num'), c.p(1), 0, 8);
+      voar($('peca'), $('origem'), null, saida(c.p(1)), {arco: 120});
+      anotar($('alvo'), saida(c.p(1)), {semente: 7});
+      anotar($('sub'), saida(c.p(1)), {forma: 'sublinhado', semente: 2});
+    },
+  },
+  desenhar: (t, ctx) => { window.__ctx = {i: ctx.i, camera: ctx.camera, kCamera: ctx.kCamera}; },
+});
+</script>
+</body>
+</html>

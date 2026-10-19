@@ -271,3 +271,182 @@ def test_palco_ignora_mensagem_de_outra_janela():
         srv.shutdown()
     assert antes == depois
     assert pela_tela != antes                                 # a tela do apresentador que o palco abriu manda
+
+
+# ---------- base técnica: tempo, ajudantes, contexto da câmera, corte pelo topo, [CONFERIR] ----------
+
+AJUDANTES = Path(__file__).parent / "fixtures" / "palco_ajudantes" / "deck.html"
+ACENTO = Path(__file__).parent / "fixtures" / "palco_acento" / "deck.html"
+
+
+def _pagina(deck, f):
+    """Abre o deck em modo render, roda f(pg) e fecha."""
+    from playwright.sync_api import sync_playwright
+
+    with sync_playwright() as p:
+        srv, nav, pg, _ = html._abrir(p, deck)
+        try:
+            return f(pg)
+        finally:
+            nav.close()
+            srv.shutdown()
+
+
+def test_tempo_faixa_degrau_mola_curvas_e_onda():
+    r = _pagina(AJUDANTES, lambda pg: pg.evaluate("""async () => {
+        const T = await import('/motor/tempo.js');
+        const eq = {resposta: 2 * Math.PI / Math.sqrt(240), amortecimento: 24 / (2 * Math.sqrt(240))};
+        return {
+            faixa: [T.faixa(1, 1, 1), T.faixa(1.0001, 1, 1), T.faixa(0, 1, 1), T.faixa(2, 1, 0), T.faixa(0.5, 1, 0), T.faixa(0.5, 0, 1)],
+            mola: [T.molaAR(0), T.molaAR(0.05), T.molaAR(1), T.molaAR(5), T.molaAR(-1)],
+            equivale: [T.molaAR(0.1, eq), T.mola(0.1, {rigidez: 240, amortecimento: 24})],
+            curvas: [T.sair(0), T.sair(1), T.sair(0.5), T.chegar(0), T.chegar(1), T.chegar(0.5)],
+            onda: [T.escalonar(5), T.escalonar([{x: 0, y: 0}, {x: 3, y: 4}, {x: 6, y: 8}], {de: {x: 0, y: 0}}),
+                   T.escalonar(5, {de: 'centro', quantidade: 1}), T.escalonar(5, {de: 'bordas', quantidade: 1}),
+                   T.escalonar([{x: 0, y: 0, w: 10, h: 10}, {x: 20, y: 0, w: 10, h: 10}]), T.escalonar(1), T.escalonar([])],
+        };
+    }"""))
+    assert r["faixa"] == [0, 1, 0, 1, 0, 0.5]                         # viagem 0 é degrau, nunca NaN
+    m = r["mola"]
+    assert m[0] == 0 and 0 < m[1] < 1 and m[2] == 1 and m[3] == 1 and m[4] == 0   # assenta em 1 exato
+    assert r["equivale"][0] == pytest.approx(r["equivale"][1], abs=1e-12)          # entrar() = resposta 0,41 s e ζ 0,77
+    c = r["curvas"]
+    assert c[:2] == [0, 1] and c[2] < 0.5 and c[3:5] == [0, 1] and c[5] > 0.5     # sair arranca devagar, chegar pousa
+    onda = r["onda"]
+    assert onda[0] == pytest.approx([0, 0.1, 0.2, 0.3, 0.4])
+    assert onda[1] == pytest.approx([0, 0.2, 0.4])
+    assert onda[2] == pytest.approx([1, 0.5, 0, 0.5, 1]) and onda[3] == pytest.approx([0, 0.5, 1, 0.5, 0])
+    assert onda[4] == pytest.approx([0, 0.4]) and onda[5] == [0] and onda[6] == []
+
+
+def test_ajudantes_e_contexto_da_camera_valores_exatos():
+    def medir(pg):
+        ver = lambda t: pg.evaluate("t => __palco.ver(t)", t)
+        js = lambda e: pg.evaluate(e)
+        r = {}
+        ver(0.0)
+        r["t0"] = js("""({texto: document.querySelector('#frase span').textContent, kb: document.querySelector('#foto div').style.transform,
+            cursor: document.querySelector('#frase span:nth-child(2) span').style.visibility,
+            fundo: document.querySelector('#frase span:nth-child(2) span').style.background,
+            anel: document.querySelector('[data-slide=a] svg path').style.visibility})""")
+        for t in (0.5, 0.2, 0.5):
+            ver(t)
+            r.setdefault("meio", []).append(js("document.querySelector('#frase span').textContent"))
+        ver(1.0)
+        r["t1"] = js("""(() => { const a = document.getElementById('peca').getBoundingClientRect(), b = document.getElementById('origem').getBoundingClientRect();
+            return {texto: document.querySelector('#frase span').textContent, resto: document.querySelector('#frase span:nth-child(3)').textContent,
+                cursor: document.querySelector('#frase span:nth-child(2) span').style.visibility, kb: document.querySelector('#foto div').style.transform,
+                origem: document.querySelector('#foto div').style.transformOrigin, peca: [a.x, a.y, a.width, a.height], alvo: [b.x, b.y, b.width, b.height]}; })()""")
+        ver(1.5)
+        r["voo"] = [js("document.getElementById('peca').style.transform"), js("document.getElementById('num').textContent")]
+        ver(2.0)
+        r["t2"] = js("""({peca: document.getElementById('peca').style.transform, num: document.getElementById('num').textContent,
+            svgs: document.querySelectorAll('[data-slide=a] svg').length, traco: document.querySelector('[data-slide=a] svg path').style.strokeDasharray,
+            d: [...document.querySelectorAll('[data-slide=a] svg path')].map((p) => p.getAttribute('d'))})""")
+        ver(1.5)
+        ver(2.0)
+        r["d2"] = js("[...document.querySelectorAll('[data-slide=a] svg path')].map((p) => p.getAttribute('d'))")
+        r["svgs2"] = js("document.querySelectorAll('[data-slide=a] svg').length")
+        # contar só escreve quando o texto muda: redesenhar o mesmo instante não mexe no DOM
+        r["mutacoes"] = pg.evaluate("""async () => { const mo = new MutationObserver(() => {});
+            mo.observe(document.getElementById('num'), {childList: true, characterData: true, subtree: true});
+            await __palco.ver(2.0); await __palco.ver(2.0); const n = mo.takeRecords().length; mo.disconnect(); return n; }""")
+        r["ctx"] = {}
+        for t in (0.5, 2.0, 2.0001, 3.25, 4.0):
+            ver(t)
+            r["ctx"][t] = js("window.__ctx")
+        return r
+
+    r = _pagina(AJUDANTES, medir)
+    completo = "O juiz julgou o pedido, e a frase se escreve."
+    # digitar: nada em k = 0, prefixo determinístico no meio (mesmo k, mesmo texto em qualquer ordem), tudo em k = 1
+    assert r["t0"]["texto"] == "" and r["t0"]["cursor"] == "" and "var(--cor-destaque)" in r["t0"]["fundo"]
+    assert r["meio"][0] == r["meio"][2] and completo.startswith(r["meio"][0]) and 0 < len(r["meio"][0]) < len(completo)
+    assert r["t1"]["texto"] == completo and r["t1"]["resto"] == "" and r["t1"]["cursor"] == "hidden"
+    # kenburns: começa na escala pedida e assenta em scale(1) exato
+    assert r["t0"]["kb"] == "scale(1.06)" and r["t1"]["kb"] == "scale(1)" and r["t1"]["origem"] == "70% 55%"
+    # voar: em k = 0 a peça ocupa a caixa de origem; em k = 1 o transform fica vazio
+    assert r["t1"]["peca"] == pytest.approx(r["t1"]["alvo"], abs=0.5)
+    assert r["voo"][0].startswith("translate(") and r["voo"][1] == "4"
+    assert r["t2"]["peca"] == "" and r["t2"]["num"] == "8"
+    # anotar: uma camada por alvo, traço que termina sem tracejado, o mesmo desenho a cada redesenho
+    assert r["t0"]["anel"] == "hidden" and r["t2"]["svgs"] == r["svgs2"] == 2 and r["t2"]["traco"] == "none"
+    assert r["t2"]["d"] == r["d2"] and all(d.startswith("M") for d in r["t2"]["d"])
+    assert r["mutacoes"] == 0
+    # câmera: pose em ctx.camera; kCamera 1 no primeiro slide, degrau na viagem 0 (corte seco), suave na viagem curta
+    c = r["ctx"]
+    assert c[0.5] == {"i": 0, "camera": {"cx": 960, "cy": 540, "z": 1, "rot": 0}, "kCamera": 1}
+    assert c[2.0]["i"] == 0
+    assert c[2.0001]["i"] == 1 and c[2.0001]["kCamera"] == 1 and c[2.0001]["camera"]["cx"] == 3360
+    assert c[3.25]["kCamera"] == pytest.approx(0.5, abs=1e-6) and c[3.25]["camera"]["cx"] == pytest.approx(4560, abs=0.01)
+    assert c[4.0]["kCamera"] == 1 and c[4.0]["camera"]["cx"] == 5760
+    # o desenho da anotação sai da semente: página nova, mesmo traço
+    assert _pagina(AJUDANTES, lambda pg: (pg.evaluate("__palco.ver(2.0)"),
+                   pg.evaluate("[...document.querySelectorAll('[data-slide=a] svg path')].map((p) => p.getAttribute('d'))"))[1]) == r["t2"]["d"]
+
+
+def test_ajudantes_sao_deterministicos():
+    """digitar, voar, anotar e kenburns no meio da animação e nas paradas: mesmo quadro em outra ordem e em página nova
+    (T da linha de vídeo: 1,9 e 5,5 no meio dos passos de a, 7 na parada, 12,2 no meio da viagem para c)."""
+    assert html.verificar(AJUDANTES, [1.9, 5.5, 7.0, 12.2])
+
+
+def test_clique_no_meio_toca_o_resto_em_3x():
+    """Ao vivo, o segundo clique no meio do passo não salta: o resto toca em 3x e o passo seguinte começa sozinho."""
+    from playwright.sync_api import sync_playwright
+
+    with sync_playwright() as p:
+        nav = p.chromium.launch()
+        srv = html._servir(AJUDANTES)
+        pg = nav.new_page(viewport={"width": 1280, "height": 720})
+        pg.goto(f"http://127.0.0.1:{srv.server_address[1]}/{AJUDANTES.resolve().relative_to(config.RAIZ).as_posix()}?vivo")
+        pg.wait_for_timeout(800)
+        pg.keyboard.press("ArrowRight")
+        pg.wait_for_timeout(200)
+        pg.keyboard.press("ArrowRight")                       # resta 0,8 s do passo de 1 s: em 3x, uns 0,27 s
+        logo = pg.evaluate("location.hash")
+        pg.wait_for_timeout(700)
+        depois = pg.evaluate("location.hash")
+        pg.wait_for_timeout(1300)
+        fim = pg.evaluate("location.hash")
+        nav.close()
+        srv.shutdown()
+    assert logo == ""                                         # antes, o clique saltava direto para a parada 1
+    assert depois == "#parada=1" and fim == "#parada=2"
+
+
+def test_oraculo_ve_o_acento_cortado_pelo_topo_do_pai():
+    def medir(pg):
+        pg.evaluate("__palco.ir(1)")
+        return pg.evaluate("__palco.medir()")
+
+    blocos = {b["id"]: b for b in _pagina(ACENTO, medir)}
+    corta, inteiro = blocos["corta"], blocos["inteiro"]
+    assert corta["topoCortado"] and not corta["transborda"]  # a folga da entrelinha justa continua descontada
+    assert not inteiro["topoCortado"] and not inteiro["transborda"]
+    assert any("corta o topo" in m for m in _niveis(palco.checar_parada([corta]), "ERRO"))
+    assert not any("corta o topo" in m for _, m in palco.checar_parada([inteiro]))
+
+
+def test_pdf_e_pacote_recusam_conferir(tmp_path, monkeypatch):
+    deck = tmp_path / "d" / "deck.html"
+    deck.parent.mkdir()
+    deck.write_text('<!doctype html>\n<p>Lista de out/2026 <b>[CONFERIR]</b></p>\n<!-- fonte: [CONFERIR] -->\n'
+                    '<p>[CONFERIR Kalai et al.]</p>\n')
+    assert palco.pendencias(deck) == ["linha 2: Lista de out/2026 [CONFERIR]", "linha 3: <!-- fonte: [CONFERIR] -->",
+                                      "linha 4: [CONFERIR Kalai et al.]"]
+    with pytest.raises(SystemExit, match=r"3 \[CONFERIR\](.|\n)*linha 2"):
+        palco.pdf(deck)
+    with pytest.raises(SystemExit, match="rascunho"):
+        palco.empacotar(deck, tmp_path / "pacote", com_pdf=False)
+    assert not (tmp_path / "pacote").exists()
+    monkeypatch.setattr(palco, "fotografar", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("passou da trava")))
+    with pytest.raises(RuntimeError, match="passou da trava"):
+        palco.pdf(deck, rascunho=True)
+    assert palco.pendencias(DEMO) == [] and palco.pendencias(RUIM) == []
+
+
+def test_lint_avisa_getboundingclientrect(tmp_path):
+    deck = tmp_path / "deck.html"
+    deck.write_text("<script>palco({}); const r = el.getBoundingClientRect();</script>")
+    assert [n for n, m in lint.checar(deck) if "getBoundingClientRect" in m] == ["AVISO"]

@@ -1,0 +1,29 @@
+<!doctype html>
+<!-- Título em caixa alta com entrelinha justa dentro de um pai que corta (.corte): sem folga em cima, o pai apaga o
+     acento do É; com padding-top, não. O oráculo tem de ver a diferença (tests/test_palco.py). -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Acento</title>
+<link rel="stylesheet" href="../../../temas/cojuris/tema.css">
+<style>
+  #palco { background: var(--cor-fundo); color: var(--cor-tinta); }
+  .corte { position: absolute; left: 160px; overflow: hidden; }
+  .corte div { font-family: var(--fonte-titulo); font-weight: 800; font-size: 160px; line-height: 0.92; text-transform: uppercase; }
+  #w1 { top: 220px; }
+  #w2 { top: 600px; padding-top: 0.2em; font-size: 160px; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <section data-slide="a">
+    <div class="corte" id="w1"><div id="corta">é agora</div></div>
+    <div class="corte" id="w2"><div id="inteiro">é agora</div></div>
+  </section>
+</div>
+<script type="module">
+import {palco} from '../../../motor/palco.js';
+palco({slides: [{id: 'a', passos: [0.4]}]});
+</script>
+</body>
+</html>
