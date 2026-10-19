@@ -24,7 +24,7 @@ export function planejar(slides) {
 	const S = slides.map((s, i) => {
 		if (!s.id) erros.push(`slide ${i + 1} sem id`);
 		if (!Array.isArray(s.passos) || !s.passos.length) erros.push(`slide "${s.id}" sem passos (precisa de pelo menos a entrada)`);
-		if (s.viagem !== undefined && !(s.viagem >= 0)) erros.push(`slide "${s.id}": viagem ${s.viagem} inválida`);
+		if (s.viagem !== undefined && !(typeof s.viagem === 'number' && s.viagem >= 0)) erros.push(`slide "${s.id}": viagem ${s.viagem} inválida`);
 		const t0 = t;
 		const passos = (s.passos || []).map((d, n) => {
 			if (!(d > 0)) erros.push(`slide "${s.id}", passo ${n + 1}: duração ${d} inválida`);
