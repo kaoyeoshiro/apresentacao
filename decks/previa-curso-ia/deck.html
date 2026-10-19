@@ -1,0 +1,427 @@
+<!doctype html>
+<!-- Prévia do curso de IA da co.juris: quatro slides da Aula 1 (o que é IA, benchmarks e arenas, mercado) e quatro da
+     Aula 2 (prompt, contexto, skill, pasta de trabalho), em plano contínuo. Os slides são nós de uma trilha de
+     circuito dourada (grafismo da marca); a câmera segue a trilha de um nó ao seguinte.
+     Fontes e pendências em briefing.md. Ao vivo: ./ap abrir decks/previa-curso-ia -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Curso de IA: prévia</title>
+<link rel="stylesheet" href="../../temas/cojuris/tema.css">
+<style>
+  #palco { background: var(--cor-fundo); color: var(--cor-tinta); font-family: var(--fonte-texto); }
+  p { margin: 0; }
+  .mono { font-family: var(--fonte-mono, var(--fonte-titulo)); font-weight: 700; font-size: 30px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cor-tinta-suave); }
+  /* rótulo pequeno em dourado: puxado para a tinta para passar de 4,5:1 sobre o fundo claro */
+  .rotulo { color: color-mix(in srgb, var(--cor-destaque-texto) 78%, var(--cor-tinta)); }
+  .titulo { font-family: var(--fonte-titulo); text-transform: uppercase; font-weight: 800; letter-spacing: -0.01em; line-height: 1.02; margin: 0; }
+  .h2 { position: absolute; left: 120px; top: 110px; font-size: 68px; }
+  .corte { overflow: hidden; padding: 0.06em 0 0.08em; }
+  .ouro { color: var(--cor-destaque-texto); }
+  .regua { position: absolute; height: 8px; border-radius: 4px; background: var(--cor-destaque); transform-origin: 0 50%; }
+  .cartao { position: absolute; background: var(--cor-papel); border-radius: 20px; box-shadow: 0 2px 0 var(--cor-linha), 0 18px 40px color-mix(in srgb, var(--cor-tinta) 7%, transparent); box-sizing: border-box; }
+  .marca-ilustr { position: absolute; font-size: 30px; }
+  .logo { position: absolute; height: 150px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+
+  /* trilha de circuito que liga os slides no mundo */
+  #trilha { position: absolute; left: 0; top: -1000px; width: 21000px; height: 3000px; overflow: visible; pointer-events: none; }
+  #trilha path { fill: none; stroke: var(--cor-destaque); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+  #trilha circle { fill: var(--cor-destaque); }
+
+  /* circuito das aberturas */
+  .circuito { position: absolute; left: 1100px; top: 300px; width: 820px; height: 620px; overflow: visible; }
+  .circuito path { fill: none; stroke: var(--cor-destaque); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+  .circuito circle { fill: var(--cor-fundo); stroke: var(--cor-destaque); stroke-width: 5; }
+
+  /* aberturas */
+  .ab-logo { right: 120px; top: 70px; }
+  .ab-kicker { position: absolute; left: 120px; top: 120px; }
+  .ab-titulo { position: absolute; left: 112px; top: 250px; line-height: 1.08; }
+  .ab-regua { left: 120px; width: 260px; }
+  .ab-sub { position: absolute; left: 120px; width: 940px; font-size: 44px; line-height: 1.3; color: var(--cor-tinta-suave); }
+  #a1-l1 { font-size: 150px; } #a1-l2 { font-size: 260px; line-height: 1; }
+  #a1-regua { top: 760px; } #a1-sub { top: 800px; }
+  #a2-titulo div div { font-size: 124px; }
+  #a2-regua { top: 760px; } #a2-sub { top: 800px; }
+
+  /* próxima palavra */
+  #ia-linha { position: absolute; left: 120px; top: 330px; display: flex; align-items: flex-end; gap: 26px; font-size: 76px; line-height: 1.2; white-space: nowrap; }
+  #ia-vaga { display: block; width: 470px; height: 1.2em; border-bottom: 6px solid var(--cor-linha); position: relative; }
+  #ia-vaga-c { position: absolute; left: 12px; bottom: 0; overflow: hidden; }
+  #ia-escolha { display: inline-block; font-style: italic; }
+  .cand { position: absolute; left: 120px; height: 60px; display: flex; align-items: center; }
+  .cand .pal { width: 360px; font-size: 44px; }
+  .cand .trilho { position: relative; width: 760px; height: 26px; border-radius: 13px; background: var(--cor-linha); }
+  .cand .barra { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 13px; background: color-mix(in srgb, var(--cor-tinta) 32%, var(--cor-fundo)); transform-origin: 0 50%; }
+  .cand.vence .barra { background: var(--cor-destaque); }
+  .cand .pct { width: 150px; text-align: right; font-family: var(--fonte-titulo); font-weight: 700; font-size: 42px; font-variant-numeric: tabular-nums; }
+  #ia-ilustr { left: 1450px; top: 584px; }
+  #ia-leg { position: absolute; left: 120px; top: 846px; font-size: 40px; color: var(--cor-tinta-suave); }
+
+  /* benchmark e arena */
+  .painel { top: 290px; width: 800px; height: 600px; padding: 48px 52px; }
+  .painel h3 { margin: 22px 0 14px; font-family: var(--fonte-titulo); font-size: 48px; font-weight: 800; letter-spacing: -0.01em; }
+  .painel p { font-size: 36px; line-height: 1.3; color: var(--cor-tinta-suave); }
+  #bm-grade { position: absolute; left: 52px; top: 360px; display: grid; grid-template-columns: repeat(5, 64px); gap: 16px; }
+  #bm-grade i { width: 64px; height: 64px; border-radius: 12px; box-sizing: border-box; border: 4px solid var(--cor-destaque); position: relative; }
+  #bm-grade i.ok { background: var(--cor-destaque); }
+  #bm-grade svg { position: absolute; inset: 10px; width: 36px; height: 36px; overflow: visible; }
+  #bm-grade svg path { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  #bm-grade i.ok svg path { stroke: var(--cor-papel); } #bm-grade i.erro svg path { stroke: var(--cor-tinta-suave); }
+  #bm-nota { position: absolute; right: 56px; top: 360px; text-align: right; }
+  #bm-num { font-family: var(--fonte-titulo); font-size: 110px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  #bm-nota .mono { margin-top: 14px; }
+  #bm-ilustr { position: absolute; right: 52px; top: 48px; }
+  .resp { position: absolute; top: 360px; width: 300px; height: 168px; border-radius: 14px; border: 4px solid var(--cor-linha); box-sizing: border-box; padding: 22px 26px; }
+  .resp b { font-family: var(--fonte-titulo); font-size: 40px; font-weight: 800; }
+  .resp i { display: block; height: 10px; border-radius: 5px; background: var(--cor-linha); margin-top: 14px; }
+  #ar-b.voto { border-color: var(--cor-destaque); }
+  #ar-selo { position: absolute; left: 584px; top: 334px; width: 64px; height: 64px; border-radius: 32px; background: var(--cor-destaque); }
+  #ar-selo svg { position: absolute; inset: 14px; width: 36px; height: 36px; overflow: visible; }
+  #ar-selo path { fill: none; stroke: var(--cor-papel); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* mercado */
+  .ia { width: 520px; height: 250px; padding: 38px 40px; }
+  .ia .regua { left: 40px; top: 0; width: 140px; height: 6px; border-radius: 0 0 4px 4px; transform: scaleX(0); }
+  .ia .nome { margin-top: 18px; font-family: var(--fonte-titulo); font-size: 68px; font-weight: 800; letter-spacing: -0.01em; }
+  .ia .selo { position: absolute; left: 40px; bottom: 24px; padding: 6px 16px; border-radius: 10px; background: var(--cor-destaque-fraca); font-size: 30px; }
+  #me-leg { position: absolute; left: 120px; top: 856px; font-size: 40px; }
+  #me-conferir { right: 120px; top: 120px; }
+
+  /* prompt e contexto */
+  .peca { top: 290px; width: 760px; height: 470px; padding: 48px 52px; }
+  .peca h3 { margin: 18px 0 26px; font-family: var(--fonte-titulo); font-size: 48px; font-weight: 800; }
+  #pc-pedido { font-size: 42px; line-height: 1.35; font-style: italic; }
+  .doc { display: flex; align-items: center; gap: 22px; font-size: 38px; margin-bottom: 22px; }
+  .doc svg { width: 34px; height: 42px; flex: none; overflow: visible; }
+  .doc svg path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 3.5; stroke-linejoin: round; }
+  #pc-mais { position: absolute; left: 900px; top: 470px; width: 120px; text-align: center; font-family: var(--fonte-titulo); font-size: 96px; font-weight: 800; line-height: 1; }
+  #pc-igual { position: absolute; left: 120px; top: 832px; font-size: 44px; }
+
+  /* skill */
+  #sk-caixa { position: absolute; left: 100px; top: 290px; width: 1020px; height: 600px; overflow: visible; }
+  #sk-caixa rect { fill: none; stroke: var(--cor-tinta); stroke-width: 5; }
+  #sk-rotulo { position: absolute; left: 150px; top: 268px; padding: 0 18px; background: var(--cor-fundo); }
+  .bloco { left: 160px; width: 900px; height: 210px; padding: 40px 46px; }
+  .bloco p { margin-top: 18px; font-size: 40px; }
+  #sk-b1 { top: 360px; } #sk-b2 { top: 610px; }
+  #sk-lado { position: absolute; left: 1220px; top: 380px; width: 580px; }
+  #sk-lado p { font-size: 44px; line-height: 1.25; margin-bottom: 30px; }
+  #sk-lado p.suave { font-size: 38px; color: var(--cor-tinta-suave); }
+
+  /* pasta de trabalho */
+  #pt-linhas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  #pt-linhas path { fill: none; stroke: color-mix(in srgb, var(--cor-tinta) 35%, var(--cor-fundo)); stroke-width: 3; }
+  .no { position: absolute; display: flex; align-items: baseline; gap: 18px; font-family: var(--fonte-titulo); font-weight: 700; font-size: 42px; white-space: nowrap; }
+  .nota { position: absolute; left: 1020px; font-size: 38px; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .nota.ouro { color: color-mix(in srgb, var(--cor-destaque-texto) 78%, var(--cor-tinta)); font-weight: 600; }
+  #pt-ilustr { right: 120px; top: 120px; }
+</style>
+</head>
+<body>
+<div id="palco"><div id="mundo">
+
+  <svg id="trilha" viewBox="0 -1000 21000 3000"></svg>
+
+  <!-- ===== Aula 1 ===== -->
+  <section data-slide="aula1">
+    <div class="logo ab-logo" id="a1-logo"></div>
+    <div class="mono ab-kicker rotulo" id="a1-kicker">Curso de IA · Aula 1</div>
+    <h1 class="titulo ab-titulo"><div class="corte"><div id="a1-l1">O que é</div></div><div class="corte"><div id="a1-l2" class="ouro">IA</div></div></h1>
+    <div class="regua ab-regua" id="a1-regua"></div>
+    <p class="ab-sub" id="a1-sub">Como funciona, como se mede e quem está no mercado.</p>
+    <svg class="circuito" id="a1-circ" viewBox="0 0 820 620"></svg>
+  </section>
+
+  <section data-slide="palavra">
+    <div class="corte h2 titulo"><div id="ia-titulo">Prever a próxima palavra</div></div>
+    <div id="ia-linha"><p id="ia-frase">O juiz julgou o pedido</p><div id="ia-vaga"><div id="ia-vaga-c"><span id="ia-escolha" class="ouro">procedente</span></div></div></div>
+    <div class="cand vence" id="ia-c0" style="top:560px"><span class="pal">procedente</span><span class="trilho"><span class="barra"></span></span><span class="pct">0%</span></div>
+    <div class="cand" id="ia-c1" style="top:650px"><span class="pal">improcedente</span><span class="trilho"><span class="barra"></span></span><span class="pct">0%</span></div>
+    <div class="cand" id="ia-c2" style="top:740px"><span class="pal">extinto</span><span class="trilho"><span class="barra"></span></span><span class="pct">0%</span></div>
+    <div class="mono marca-ilustr" id="ia-ilustr">ilustrativo</div>
+    <div class="corte" id="ia-leg"><div id="ia-leg-t">Palavra após palavra, assim nasce o texto inteiro.</div></div>
+  </section>
+
+  <section data-slide="melhor">
+    <div class="corte h2 titulo"><div id="me1-titulo">Qual é a <span class="ouro">melhor</span> IA?</div></div>
+    <div class="cartao painel" id="bm" style="left:120px">
+      <div class="mono rotulo">Benchmark</div><h3>Prova com gabarito</h3>
+      <p>As mesmas questões para todos os modelos.</p>
+      <div id="bm-grade"></div>
+      <div id="bm-nota"><div id="bm-num">0</div><div class="mono">de 10</div></div>
+      <div class="mono" id="bm-ilustr">ilustrativo</div>
+    </div>
+    <div class="cartao painel" id="ar" style="left:1000px">
+      <div class="mono rotulo">Arena</div><h3>Votação às cegas</h3>
+      <p>Duas respostas sem nome. Pessoas escolhem a melhor.</p>
+      <div class="resp" id="ar-a" style="left:52px"><b>A</b><i style="width:90%"></i><i style="width:70%"></i><i style="width:80%"></i></div>
+      <div class="resp" id="ar-b" style="left:376px"><b>B</b><i style="width:85%"></i><i style="width:92%"></i><i style="width:60%"></i></div>
+      <div id="ar-selo"><svg viewBox="0 0 36 36"><path d="M4 19l9 9L32 8"/></svg></div>
+    </div>
+  </section>
+
+  <section data-slide="mercado">
+    <div class="corte h2 titulo"><div id="mk-titulo">Quem está no mercado</div></div>
+    <div class="mono marca-ilustr" id="me-conferir">[CONFERIR] lista de out/2026</div>
+    <div class="cartao ia" id="m0" style="left:120px;top:290px"><div class="regua"></div><div class="mono">OpenAI</div><div class="nome">ChatGPT</div></div>
+    <div class="cartao ia" id="m1" style="left:700px;top:290px"><div class="regua"></div><div class="mono">Anthropic</div><div class="nome">Claude</div></div>
+    <div class="cartao ia" id="m2" style="left:1280px;top:290px"><div class="regua"></div><div class="mono">Google</div><div class="nome">Gemini</div></div>
+    <div class="cartao ia" id="m3" style="left:120px;top:566px"><div class="regua"></div><div class="mono">xAI</div><div class="nome">Grok</div></div>
+    <div class="cartao ia aberto" id="m4" style="left:700px;top:566px"><div class="regua"></div><div class="mono">Meta</div><div class="nome">Llama</div><div class="mono selo rotulo">pesos abertos</div></div>
+    <div class="cartao ia aberto" id="m5" style="left:1280px;top:566px"><div class="regua"></div><div class="mono">DeepSeek</div><div class="nome">DeepSeek</div><div class="mono selo rotulo">pesos abertos</div></div>
+    <div class="corte" id="me-leg"><div id="me-leg-t">Pesos abertos: o modelo pode rodar em servidor próprio.</div></div>
+  </section>
+
+  <!-- ===== Aula 2 ===== -->
+  <section data-slide="aula2">
+    <div class="logo ab-logo" id="a2-logo"></div>
+    <div class="mono ab-kicker rotulo" id="a2-kicker">Curso de IA · Aula 2</div>
+    <h1 class="titulo ab-titulo" id="a2-titulo"><div class="corte"><div id="a2-l1">Prompt,</div></div><div class="corte"><div id="a2-l2">contexto</div></div><div class="corte"><div id="a2-l3">e <span class="ouro">skill</span></div></div></h1>
+    <div class="regua ab-regua" id="a2-regua"></div>
+    <p class="ab-sub" id="a2-sub">Como pedir, o que entregar e como guardar os dois.</p>
+    <svg class="circuito" id="a2-circ" viewBox="0 0 820 620"></svg>
+  </section>
+
+  <section data-slide="prompt">
+    <div class="corte h2 titulo"><div id="pc-titulo">Prompt e contexto</div></div>
+    <div class="cartao peca" id="pc-a" style="left:120px">
+      <div class="mono rotulo">Prompt</div><h3>O pedido</h3>
+      <p id="pc-pedido">“Redija a contestação. Ataque a prescrição e siga o modelo do escritório.”</p>
+    </div>
+    <div id="pc-mais">+</div>
+    <div class="cartao peca" id="pc-b" style="left:1040px">
+      <div class="mono rotulo">Contexto</div><h3>O material</h3>
+      <div class="doc" id="d0"><svg viewBox="0 0 34 42"><path d="M2 2h20l10 10v28H2z M22 2v10h10"/></svg>petição inicial</div>
+      <div class="doc" id="d1"><svg viewBox="0 0 34 42"><path d="M2 2h20l10 10v28H2z M22 2v10h10"/></svg>contrato e documentos</div>
+      <div class="doc" id="d2"><svg viewBox="0 0 34 42"><path d="M2 2h20l10 10v28H2z M22 2v10h10"/></svg>modelo do escritório</div>
+    </div>
+    <div class="corte" id="pc-igual"><div id="pc-igual-t">Pedido claro e material certo: a resposta serve ao caso.</div></div>
+  </section>
+
+  <section data-slide="skill">
+    <div class="corte h2 titulo"><div id="sk-titulo">A skill guarda os dois</div></div>
+    <svg id="sk-caixa" viewBox="0 0 1020 600"><rect id="sk-rect" x="2.5" y="2.5" width="1015" height="595" rx="26"/></svg>
+    <div class="mono rotulo" id="sk-rotulo">skill · contestação</div>
+    <div class="cartao bloco" id="sk-b1"><div class="mono rotulo">Instruções</div><p>o prompt fixo, num arquivo SKILL.md</p></div>
+    <div class="cartao bloco" id="sk-b2"><div class="mono rotulo">Referências</div><p>modelos, teses e checklist</p></div>
+    <div id="sk-lado">
+      <p id="sk-p1">Escrita uma vez, usada em todo caso do mesmo tipo.</p>
+      <p class="suave" id="sk-p2">A IA abre a skill<br>quando a tarefa pede.</p>
+    </div>
+  </section>
+
+  <section data-slide="pasta">
+    <div class="corte h2 titulo"><div id="pt-titulo">A pasta de trabalho</div></div>
+    <div class="mono marca-ilustr" id="pt-ilustr">ilustrativo</div>
+    <svg id="pt-linhas" viewBox="0 0 1920 1080">
+      <path id="pt-v0" d="M180 346V794"/>
+      <path id="pt-h1" d="M180 410H220"/><path id="pt-h4" d="M180 698H220"/><path id="pt-h5" d="M180 794H220"/>
+      <path id="pt-v1" d="M250 442V602"/>
+      <path id="pt-h2" d="M250 506H290"/><path id="pt-h3" d="M250 602H290"/>
+    </svg>
+    <div class="no" id="pt-n0" style="left:150px;top:288px">caso-exemplo/</div>
+    <div class="no" id="pt-n1" style="left:230px;top:384px">.claude/skills/contestacao/</div>
+    <div class="no" id="pt-n2" style="left:300px;top:480px">SKILL.md</div>
+    <div class="no" id="pt-n3" style="left:300px;top:576px">modelos/</div>
+    <div class="no" id="pt-n4" style="left:230px;top:672px">autos/</div>
+    <div class="no" id="pt-n5" style="left:230px;top:768px">minuta.docx</div>
+    <div class="nota" id="pt-o0" style="top:292px">a pasta do caso</div>
+    <div class="nota ouro" id="pt-o1" style="top:388px">baixada do curso</div>
+    <div class="nota" id="pt-o2" style="top:484px">instruções</div>
+    <div class="nota" id="pt-o3" style="top:580px">peças-modelo</div>
+    <div class="nota" id="pt-o4" style="top:676px">inicial e documentos</div>
+    <div class="nota" id="pt-o5" style="top:772px">o que a IA entrega</div>
+  </section>
+
+</div></div>
+
+<script type="module">
+import {palco, entrar, revelar, surgir, tracar, contar, saida, faixa, clamp} from '../../motor/palco.js';
+
+const $ = (id) => document.getElementById(id);
+const NS = 'http://www.w3.org/2000/svg';
+const svg = (pai, tag, attrs) => { const el = document.createElementNS(NS, tag); for (const k in attrs) el.setAttribute(k, attrs[k]); pai.appendChild(el); return el; };
+
+// Onde cada slide fica no mundo. Os degraus em y dão à trilha as curvas de 45° de uma placa de circuito.
+const POS = {aula1: [0, 0], palavra: [2400, 0], melhor: [4800, 340], mercado: [7200, 340],
+             aula2: [10200, -160], prompt: [12600, -160], skill: [15000, 180], pasta: [17400, 180]};
+for (const id in POS) {
+  const s = document.querySelector(`[data-slide="${id}"]`);
+  s.style.left = `${POS[id][0]}px`; s.style.top = `${POS[id][1]}px`;
+}
+
+const slides = [
+  {id: 'aula1', titulo: 'Aula 1: O que é IA', passos: [1.6, 0.9], camera: true, segura: 3,
+   notas: 'Abrir pela pergunta da turma: o que acontece quando digito no ChatGPT? Hoje: como funciona, como se mede, quem vende.'},
+  {id: 'palavra', titulo: 'Prever a próxima palavra', passos: [1.6, 1.4, 1.1], camera: true,
+   notas: 'Modelo de linguagem: calcula a palavra mais provável. Clique: as probabilidades (números ilustrativos). Clique: a escolhida entra e o texto segue.'},
+  {id: 'melhor', titulo: 'Benchmark e arena', passos: [1.6, 1.3, 1.1], camera: true,
+   notas: 'Benchmark: prova padronizada com gabarito. Arena: duas respostas sem nome, gente vota. Melhor depende da tarefa.'},
+  {id: 'mercado', titulo: 'Quem está no mercado', passos: [1.8, 1.0], camera: true,
+   notas: 'Seis nomes que a turma vai ouvir. Clique: pesos abertos, que permitem instalar em servidor próprio (sigilo). Conferir a lista antes da aula.'},
+  {id: 'aula2', titulo: 'Aula 2: Prompt, contexto e skill', passos: [2.2, 0.9], camera: true, segura: 3,
+   notas: 'Virada do curso: da teoria para o uso diário no escritório.'},
+  {id: 'prompt', titulo: 'Prompt e contexto', passos: [1.6, 1.2, 0.9], camera: true,
+   notas: 'Prompt é o pedido. Contexto é o material que a IA não tem. Sem contexto, ela inventa o que falta.'},
+  {id: 'skill', titulo: 'A skill', passos: [1.6, 1.2, 1.2, 0.9], camera: true,
+   notas: 'A skill é uma pasta: instruções num arquivo SKILL.md e o material de referência. Escreve uma vez, reaproveita.'},
+  {id: 'pasta', titulo: 'A pasta de trabalho', passos: [1.6, 1.1, 0.8, 0.8], camera: true,
+   notas: 'Na prática: baixe a skill do curso para a pasta do caso, junte os autos, peça a minuta. Revisão humana sempre.'},
+];
+
+// ---- trilha: uma linha de base em cada slide e um trecho com degrau de 45° entre slides vizinhos ----
+const trilha = $('trilha');
+const BASE_Y = 975, X0 = 120, X1 = 1800;
+const ids = slides.map((s) => s.id);
+const base = [], vao = [], pads = [];
+ids.forEach((id, i) => {
+  const [x, y] = POS[id];
+  base.push(svg(trilha, 'path', {d: `M${x + X0} ${y + BASE_Y}H${x + X1}`}));
+  pads.push([svg(trilha, 'circle', {cx: x + X0, cy: y + BASE_Y, r: 11}), svg(trilha, 'circle', {cx: x + X1, cy: y + BASE_Y, r: 11})]);
+  if (i === 0) { vao.push(null); return; }
+  const [xa, ya] = POS[ids[i - 1]];
+  const x1 = xa + X1, y1 = ya + BASE_Y, x2 = x + X0, y2 = y + BASE_Y, d = Math.abs(y2 - y1), xm = (x1 + x2) / 2;
+  vao.push(svg(trilha, 'path', {d: `M${x1} ${y1}H${xm - d / 2}L${xm + d / 2} ${y2}H${x2}`}));
+});
+
+// ---- circuito das aberturas: trilhas que chegam da borda direita e terminam em ilhas ----
+const CIRC = [
+  ['M820 60H560L500 120H360', [360, 120]],
+  ['M820 200H640L560 280H300', [300, 280]],
+  ['M820 380H440', [440, 380]],
+  ['M820 520H600L540 460H380', [380, 460]],
+];
+const circuitos = {};
+for (const id of ['a1-circ', 'a2-circ']) {
+  const el = $(id);
+  circuitos[id] = CIRC.map(([d, [cx, cy]]) => [svg(el, 'path', {d}), svg(el, 'circle', {cx, cy, r: 14})]);
+}
+const desenhaCircuito = (id, dt) => circuitos[id].forEach(([p, c], n) => {
+  const k = saida(faixa(dt - n * 0.12, 0, 0.9));
+  tracar(p, k);
+  c.style.visibility = k > 0.98 ? '' : 'hidden';
+  c.style.transform = `scale(${entrar(dt - n * 0.12 - 0.85)})`;
+  c.style.transformOrigin = `${c.getAttribute('cx')}px ${c.getAttribute('cy')}px`;
+});
+
+// ---- grade do benchmark: 10 questões, 8 certas (ilustrativo) ----
+const CERTAS = [1, 1, 0, 1, 1, 1, 1, 0, 1, 1];
+const grade = $('bm-grade');
+const celulas = CERTAS.map((ok) => {
+  const i = document.createElement('i');
+  i.className = ok ? 'ok' : 'erro';
+  const s = svg(i, 'svg', {viewBox: '0 0 36 36'});
+  svg(s, 'path', {d: ok ? 'M4 19l9 9L32 8' : 'M8 8l20 20M28 8L8 28'});
+  grade.appendChild(i);
+  return i;
+});
+
+const abertura = (p, c) => {
+  revelar($(p + '-kicker'), entrar(c.desde(0) - 0.35));
+  const linhas = [...document.querySelectorAll(`[data-slide="${p === 'a1' ? 'aula1' : 'aula2'}"] .ab-titulo .corte > div`)];
+  linhas.forEach((el, n) => revelar(el, entrar(c.desde(0) - 0.45 - n * 0.16)));
+  $(p + '-regua').style.transform = `scaleX(${saida(faixa(c.desde(0), 1.0, 1.6))})`;
+  surgir($(p + '-logo'), entrar(c.desde(0) - 0.6), {dy: 0, escala: 0.06});
+  desenhaCircuito(p + '-circ', c.desde(0) - 0.6);
+  revelar($(p + '-sub'), entrar(c.desde(1)));
+};
+
+const cenas = {
+  aula1: (t, c) => abertura('a1', c),
+  aula2: (t, c) => abertura('a2', c),
+
+  palavra: (t, c) => {
+    revelar($('ia-titulo'), entrar(c.desde(0) - 0.5));
+    surgir($('ia-linha'), entrar(c.desde(0) - 0.75), {dy: 30});
+    const PCT = [46, 38, 9];
+    PCT.forEach((v, n) => {
+      const el = $('ia-c' + n), k = saida(faixa(c.desde(1) - n * 0.12, 0, 1.1));
+      surgir(el, entrar(c.desde(1) - n * 0.1), {dx: -24, dy: 0});
+      el.querySelector('.barra').style.width = `${(v / 50) * 100}%`;
+      el.querySelector('.barra').style.transform = `scaleX(${k})`;
+      contar(el.querySelector('.pct'), k, 0, v, {sufixo: '%'});
+    });
+    surgir($('ia-ilustr'), entrar(c.desde(1) - 0.5), {dy: 0});
+    revelar($('ia-escolha'), entrar(c.desde(2)));
+    revelar($('ia-leg-t'), entrar(c.desde(2) - 0.35));
+  },
+
+  melhor: (t, c) => {
+    revelar($('me1-titulo'), entrar(c.desde(0) - 0.5));
+    surgir($('bm'), entrar(c.desde(1)), {dy: 50});
+    celulas.forEach((el, n) => surgir(el, entrar(c.desde(1) - 0.3 - n * 0.05), {dy: 0, escala: 0.4}));
+    contar($('bm-num'), saida(faixa(c.desde(1), 0.4, 1.2)), 0, CERTAS.filter(Boolean).length);
+    surgir($('ar'), entrar(c.desde(2)), {dy: 50});
+    const voto = c.desde(2) > 0.6;
+    $('ar-b').classList.toggle('voto', voto);
+    surgir($('ar-selo'), entrar(c.desde(2) - 0.6), {dy: 0, escala: 0.5});
+  },
+
+  mercado: (t, c) => {
+    revelar($('mk-titulo'), entrar(c.desde(0) - 0.5));
+    for (let n = 0; n < 6; n++) surgir($('m' + n), entrar(c.desde(0) - 0.7 - n * 0.09), {dy: 40});
+    surgir($('me-conferir'), entrar(c.desde(0) - 1.0), {dy: 0});
+    const k = saida(faixa(c.desde(1), 0, 0.6));
+    for (const el of document.querySelectorAll('.ia.aberto')) {
+      el.querySelector('.regua').style.transform = `scaleX(${k})`;
+      surgir(el.querySelector('.selo'), entrar(c.desde(1) - 0.15), {dy: 0, escala: 0.2});
+    }
+    revelar($('me-leg-t'), entrar(c.desde(1) - 0.3));
+  },
+
+  prompt: (t, c) => {
+    revelar($('pc-titulo'), entrar(c.desde(0) - 0.5));
+    surgir($('pc-a'), entrar(c.desde(0) - 0.75), {dy: 50});
+    surgir($('pc-mais'), entrar(c.desde(1)), {dy: 0, escala: 0.5});
+    surgir($('pc-b'), entrar(c.desde(1) - 0.1), {dy: 50});
+    for (let n = 0; n < 3; n++) surgir($('d' + n), entrar(c.desde(1) - 0.35 - n * 0.12), {dx: -24, dy: 0});
+    revelar($('pc-igual-t'), entrar(c.desde(2)));
+  },
+
+  skill: (t, c) => {
+    revelar($('sk-titulo'), entrar(c.desde(0) - 0.5));
+    surgir($('sk-b1'), entrar(c.desde(1)), {dx: -160, dy: 0});
+    surgir($('sk-b2'), entrar(c.desde(1) - 0.15), {dx: -160, dy: 0});
+    tracar($('sk-rect'), saida(faixa(c.desde(2), 0, 1.0)));
+    revelar($('sk-rotulo'), entrar(c.desde(2) - 0.6), {de: 'esquerda'});
+    surgir($('sk-p1'), entrar(c.desde(3)), {dy: 24});
+    surgir($('sk-p2'), entrar(c.desde(3) - 0.2), {dy: 24});
+  },
+
+  pasta: (t, c) => {
+    revelar($('pt-titulo'), entrar(c.desde(0) - 0.5));
+    surgir($('pt-ilustr'), entrar(c.desde(0) - 0.9), {dy: 0});
+    // Cada clique acrescenta um ramo da árvore: a skill baixada, os autos, a minuta.
+    const ramo = [0, 1, 1, 1, 2, 3];
+    for (let n = 0; n < 6; n++) {
+      const dt = c.desde(ramo[n]) - (ramo[n] === 0 ? 0.7 : 0) - (n === 2 ? 0.15 : n === 3 ? 0.3 : 0);
+      surgir($('pt-n' + n), entrar(dt - 0.1), {dx: -20, dy: 0});
+      surgir($('pt-o' + n), entrar(dt - 0.3), {dx: 20, dy: 0});
+    }
+    const lin = (id, dt) => tracar($(id), saida(faixa(dt, 0, 0.4)));
+    lin('pt-v0', c.desde(1) - 0.0); lin('pt-h1', c.desde(1) - 0.1);
+    lin('pt-v1', c.desde(1) - 0.2); lin('pt-h2', c.desde(1) - 0.25); lin('pt-h3', c.desde(1) - 0.4);
+    lin('pt-h4', c.desde(2)); lin('pt-h5', c.desde(3));
+  },
+};
+
+palco({
+  slides, cenas,
+  desenhar: (t, ctx) => {
+    // A trilha cresce com a viagem da câmera: o trecho até o slide atual acompanha a entrada, e a linha de base
+    // do slide se completa no fim dela.
+    ids.forEach((id, i) => {
+      const atual = i === ctx.i;
+      const kv = i < ctx.i ? 1 : atual ? saida(faixa(ctx.entrada, 0, 0.75)) : 0;
+      const kb = i < ctx.i ? 1 : atual ? saida(faixa(ctx.entrada, i === 0 ? 0 : 0.6, 1)) : 0;
+      if (vao[i]) tracar(vao[i], kv);
+      tracar(base[i], kb);
+      pads[i][0].style.visibility = kb > 0 ? '' : 'hidden';
+      pads[i][1].style.visibility = kb >= 1 ? '' : 'hidden';
+    });
+  },
+});
+</script>
+</body>
+</html>
