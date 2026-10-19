@@ -251,24 +251,30 @@ for (const id in POS) {
   s.style.left = `${POS[id][0]}px`; s.style.top = `${POS[id][1]}px`;
 }
 
+// Um clique por slide: a câmera viaja em VIAGEM segundos, recuando um pouco no meio para mostrar a trilha, e o conteúdo
+// entra em sequência logo antes de ela pousar. O slide termina parado, pronto para a fala.
+const VIAGEM = 1.3, RECUO = 0.14;
 const slides = [
-  {id: 'aula1', titulo: 'Aula 1: O que é IA', passos: [1.6, 0.9], camera: true, segura: 3,
+  {id: 'aula1', titulo: 'Aula 1: O que é IA', passos: [2.4], camera: true, segura: 3,
    notas: 'Abrir pela pergunta da turma: o que acontece quando digito no ChatGPT? Hoje: como funciona, como se mede, quem vende.'},
-  {id: 'palavra', titulo: 'Prever a próxima palavra', passos: [1.6, 1.4, 1.1], camera: true,
-   notas: 'Modelo de linguagem: calcula a palavra mais provável. Clique: as probabilidades (números ilustrativos). Clique: a escolhida entra e o texto segue.'},
-  {id: 'melhor', titulo: 'Benchmark e arena', passos: [1.6, 1.3, 1.1], camera: true,
+  {id: 'palavra', titulo: 'Prever a próxima palavra', passos: [3.4], camera: true, viagem: VIAGEM, recuo: RECUO, segura: 4,
+   notas: 'Modelo de linguagem: calcula a palavra mais provável (números ilustrativos). A escolhida entra e o texto segue.'},
+  {id: 'melhor', titulo: 'Benchmark e arena', passos: [3.3], camera: true, viagem: VIAGEM, recuo: RECUO, segura: 4,
    notas: 'Benchmark: prova padronizada com gabarito. Arena: duas respostas sem nome, gente vota. Melhor depende da tarefa.'},
-  {id: 'mercado', titulo: 'Quem está no mercado', passos: [1.8, 1.0], camera: true,
-   notas: 'Seis nomes que a turma vai ouvir. Clique: pesos abertos, que permitem instalar em servidor próprio (sigilo). Conferir a lista antes da aula.'},
-  {id: 'aula2', titulo: 'Aula 2: Prompt, contexto e skill', passos: [2.2, 0.9], camera: true, segura: 3,
+  {id: 'mercado', titulo: 'Quem está no mercado', passos: [3.3], camera: true, viagem: VIAGEM, recuo: RECUO, segura: 4,
+   notas: 'Seis nomes que a turma vai ouvir. Pesos abertos permitem instalar em servidor próprio (sigilo). Conferir a lista antes da aula.'},
+  {id: 'aula2', titulo: 'Aula 2: Prompt, contexto e skill', passos: [3.45], camera: true, viagem: 1.5, recuo: 0.22, segura: 3,
    notas: 'Virada do curso: da teoria para o uso diário no escritório.'},
-  {id: 'prompt', titulo: 'Prompt e contexto', passos: [1.6, 1.2, 0.9], camera: true,
+  {id: 'prompt', titulo: 'Prompt e contexto', passos: [3.2], camera: true, viagem: VIAGEM, recuo: RECUO, segura: 4,
    notas: 'Prompt é o pedido. Contexto é o material que a IA não tem. Sem contexto, ela inventa o que falta.'},
-  {id: 'skill', titulo: 'A skill', passos: [1.6, 1.2, 1.2, 0.9], camera: true,
+  {id: 'skill', titulo: 'A skill', passos: [3.3], camera: true, viagem: VIAGEM, recuo: RECUO, segura: 4,
    notas: 'A skill é uma pasta: instruções num arquivo SKILL.md e o material de referência. Escreve uma vez, reaproveita.'},
-  {id: 'pasta', titulo: 'A pasta de trabalho', passos: [1.6, 1.1, 0.8, 0.8], camera: true,
+  {id: 'pasta', titulo: 'A pasta de trabalho', passos: [3.3], camera: true, viagem: VIAGEM, recuo: RECUO, segura: 4,
    notas: 'Na prática: baixe a skill do curso para a pasta do caso, junte os autos, peça a minuta. Revisão humana sempre.'},
 ];
+
+// Segundos desde o começo do conteúdo do slide: 0,25 s antes de a câmera pousar.
+const d = (c, x = 0) => c.desde(0) - (c.slide.viagem ? c.slide.viagem - 0.25 : 0) - x;
 
 // ---- trilha: uma linha de base em cada slide e um trecho com degrau de 45° entre slides vizinhos ----
 const trilha = $('trilha');
@@ -298,10 +304,10 @@ for (const id of ['a1-circ', 'a2-circ']) {
   circuitos[id] = CIRC.map(([d, [cx, cy]]) => [svg(el, 'path', {d}), svg(el, 'circle', {cx, cy, r: 14})]);
 }
 const desenhaCircuito = (id, dt) => circuitos[id].forEach(([p, c], n) => {
-  const k = saida(faixa(dt - n * 0.12, 0, 0.9));
+  const k = saida(faixa(dt - n * 0.1, 0, 0.7));
   tracar(p, k);
   c.style.visibility = k > 0.98 ? '' : 'hidden';
-  c.style.transform = `scale(${entrar(dt - n * 0.12 - 0.85)})`;
+  c.style.transform = `scale(${entrar(dt - n * 0.1 - 0.65)})`;
   c.style.transformOrigin = `${c.getAttribute('cx')}px ${c.getAttribute('cy')}px`;
 });
 
@@ -318,13 +324,13 @@ const celulas = CERTAS.map((ok) => {
 });
 
 const abertura = (p, c) => {
-  revelar($(p + '-kicker'), entrar(c.desde(0) - 0.35));
+  revelar($(p + '-kicker'), entrar(d(c, 0)));
   const linhas = [...document.querySelectorAll(`[data-slide="${p === 'a1' ? 'aula1' : 'aula2'}"] .ab-titulo .corte > div`)];
-  linhas.forEach((el, n) => revelar(el, entrar(c.desde(0) - 0.45 - n * 0.16)));
-  $(p + '-regua').style.transform = `scaleX(${saida(faixa(c.desde(0), 1.0, 1.6))})`;
-  surgir($(p + '-logo'), entrar(c.desde(0) - 0.6), {dy: 0, escala: 0.06});
-  desenhaCircuito(p + '-circ', c.desde(0) - 0.6);
-  revelar($(p + '-sub'), entrar(c.desde(1)));
+  linhas.forEach((el, n) => revelar(el, entrar(d(c, 0.1 + n * 0.14))));
+  $(p + '-regua').style.transform = `scaleX(${saida(faixa(d(c), 0.6, 1.1))})`;
+  surgir($(p + '-logo'), entrar(d(c, 0.3)), {dy: 0, escala: 0.06});
+  desenhaCircuito(p + '-circ', d(c, 0.35));
+  revelar($(p + '-sub'), entrar(d(c, 0.9)));
 };
 
 const cenas = {
@@ -332,89 +338,87 @@ const cenas = {
   aula2: (t, c) => abertura('a2', c),
 
   palavra: (t, c) => {
-    revelar($('ia-titulo'), entrar(c.desde(0) - 0.5));
-    surgir($('ia-linha'), entrar(c.desde(0) - 0.75), {dy: 30});
+    revelar($('ia-titulo'), entrar(d(c, 0)));
+    surgir($('ia-linha'), entrar(d(c, 0.2)), {dy: 30});
     const PCT = [46, 38, 9];
     PCT.forEach((v, n) => {
-      const el = $('ia-c' + n), k = saida(faixa(c.desde(1) - n * 0.12, 0, 1.1));
-      surgir(el, entrar(c.desde(1) - n * 0.1), {dx: -24, dy: 0});
+      const el = $('ia-c' + n), k = saida(faixa(d(c, 0.55 + n * 0.12), 0, 0.9));
+      surgir(el, entrar(d(c, 0.5 + n * 0.1)), {dx: -24, dy: 0});
       el.querySelector('.barra').style.width = `${(v / 50) * 100}%`;
       el.querySelector('.barra').style.transform = `scaleX(${k})`;
       contar(el.querySelector('.pct'), k, 0, v, {sufixo: '%'});
     });
-    surgir($('ia-ilustr'), entrar(c.desde(1) - 0.5), {dy: 0});
-    revelar($('ia-escolha'), entrar(c.desde(2)));
-    revelar($('ia-leg-t'), entrar(c.desde(2) - 0.35));
+    surgir($('ia-ilustr'), entrar(d(c, 0.9)), {dy: 0});
+    revelar($('ia-escolha'), entrar(d(c, 1.55)));
+    revelar($('ia-leg-t'), entrar(d(c, 1.8)));
   },
 
   melhor: (t, c) => {
-    revelar($('me1-titulo'), entrar(c.desde(0) - 0.5));
-    surgir($('bm'), entrar(c.desde(1)), {dy: 50});
-    celulas.forEach((el, n) => surgir(el, entrar(c.desde(1) - 0.3 - n * 0.05), {dy: 0, escala: 0.4}));
-    contar($('bm-num'), saida(faixa(c.desde(1), 0.4, 1.2)), 0, CERTAS.filter(Boolean).length);
-    surgir($('ar'), entrar(c.desde(2)), {dy: 50});
-    const voto = c.desde(2) > 0.6;
-    $('ar-b').classList.toggle('voto', voto);
-    surgir($('ar-selo'), entrar(c.desde(2) - 0.6), {dy: 0, escala: 0.5});
+    revelar($('me1-titulo'), entrar(d(c, 0)));
+    surgir($('bm'), entrar(d(c, 0.25)), {dy: 50});
+    celulas.forEach((el, n) => surgir(el, entrar(d(c, 0.5 + n * 0.045)), {dy: 0, escala: 0.4}));
+    contar($('bm-num'), saida(faixa(d(c), 0.6, 1.25)), 0, CERTAS.filter(Boolean).length);
+    surgir($('ar'), entrar(d(c, 0.85)), {dy: 50});
+    $('ar-b').classList.toggle('voto', d(c, 1.5) > 0);
+    surgir($('ar-selo'), entrar(d(c, 1.5)), {dy: 0, escala: 0.5});
   },
 
   mercado: (t, c) => {
-    revelar($('mk-titulo'), entrar(c.desde(0) - 0.5));
-    for (let n = 0; n < 6; n++) surgir($('m' + n), entrar(c.desde(0) - 0.7 - n * 0.09), {dy: 40});
-    surgir($('me-conferir'), entrar(c.desde(0) - 1.0), {dy: 0});
-    const k = saida(faixa(c.desde(1), 0, 0.6));
+    revelar($('mk-titulo'), entrar(d(c, 0)));
+    for (let n = 0; n < 6; n++) surgir($('m' + n), entrar(d(c, 0.2 + n * 0.08)), {dy: 40});
+    surgir($('me-conferir'), entrar(d(c, 0.5)), {dy: 0});
+    const k = saida(faixa(d(c), 1.15, 1.6));
     for (const el of document.querySelectorAll('.ia.aberto')) {
       el.querySelector('.regua').style.transform = `scaleX(${k})`;
-      surgir(el.querySelector('.selo'), entrar(c.desde(1) - 0.15), {dy: 0, escala: 0.2});
+      surgir(el.querySelector('.selo'), entrar(d(c, 1.3)), {dy: 0, escala: 0.2});
     }
-    revelar($('me-leg-t'), entrar(c.desde(1) - 0.3));
+    revelar($('me-leg-t'), entrar(d(c, 1.55)));
   },
 
   prompt: (t, c) => {
-    revelar($('pc-titulo'), entrar(c.desde(0) - 0.5));
-    surgir($('pc-a'), entrar(c.desde(0) - 0.75), {dy: 50});
-    surgir($('pc-mais'), entrar(c.desde(1)), {dy: 0, escala: 0.5});
-    surgir($('pc-b'), entrar(c.desde(1) - 0.1), {dy: 50});
-    for (let n = 0; n < 3; n++) surgir($('d' + n), entrar(c.desde(1) - 0.35 - n * 0.12), {dx: -24, dy: 0});
-    revelar($('pc-igual-t'), entrar(c.desde(2)));
+    revelar($('pc-titulo'), entrar(d(c, 0)));
+    surgir($('pc-a'), entrar(d(c, 0.25)), {dy: 50});
+    surgir($('pc-mais'), entrar(d(c, 0.65)), {dy: 0, escala: 0.5});
+    surgir($('pc-b'), entrar(d(c, 0.7)), {dy: 50});
+    for (let n = 0; n < 3; n++) surgir($('d' + n), entrar(d(c, 0.95 + n * 0.12)), {dx: -24, dy: 0});
+    revelar($('pc-igual-t'), entrar(d(c, 1.5)));
   },
 
   skill: (t, c) => {
-    revelar($('sk-titulo'), entrar(c.desde(0) - 0.5));
-    surgir($('sk-b1'), entrar(c.desde(1)), {dx: -160, dy: 0});
-    surgir($('sk-b2'), entrar(c.desde(1) - 0.15), {dx: -160, dy: 0});
-    tracar($('sk-rect'), saida(faixa(c.desde(2), 0, 1.0)));
-    revelar($('sk-rotulo'), entrar(c.desde(2) - 0.6), {de: 'esquerda'});
-    surgir($('sk-p1'), entrar(c.desde(3)), {dy: 24});
-    surgir($('sk-p2'), entrar(c.desde(3) - 0.2), {dy: 24});
+    revelar($('sk-titulo'), entrar(d(c, 0)));
+    surgir($('sk-b1'), entrar(d(c, 0.25)), {dx: -160, dy: 0});
+    surgir($('sk-b2'), entrar(d(c, 0.4)), {dx: -160, dy: 0});
+    tracar($('sk-rect'), saida(faixa(d(c), 0.7, 1.35)));
+    revelar($('sk-rotulo'), entrar(d(c, 1.1)), {de: 'esquerda'});
+    surgir($('sk-p1'), entrar(d(c, 1.35)), {dy: 24});
+    surgir($('sk-p2'), entrar(d(c, 1.55)), {dy: 24});
   },
 
   pasta: (t, c) => {
-    revelar($('pt-titulo'), entrar(c.desde(0) - 0.5));
-    surgir($('pt-ilustr'), entrar(c.desde(0) - 0.9), {dy: 0});
-    // Cada clique acrescenta um ramo da árvore: a skill baixada, os autos, a minuta.
-    const ramo = [0, 1, 1, 1, 2, 3];
-    for (let n = 0; n < 6; n++) {
-      const dt = c.desde(ramo[n]) - (ramo[n] === 0 ? 0.7 : 0) - (n === 2 ? 0.15 : n === 3 ? 0.3 : 0);
-      surgir($('pt-n' + n), entrar(dt - 0.1), {dx: -20, dy: 0});
-      surgir($('pt-o' + n), entrar(dt - 0.3), {dx: 20, dy: 0});
-    }
-    const lin = (id, dt) => tracar($(id), saida(faixa(dt, 0, 0.4)));
-    lin('pt-v0', c.desde(1) - 0.0); lin('pt-h1', c.desde(1) - 0.1);
-    lin('pt-v1', c.desde(1) - 0.2); lin('pt-h2', c.desde(1) - 0.25); lin('pt-h3', c.desde(1) - 0.4);
-    lin('pt-h4', c.desde(2)); lin('pt-h5', c.desde(3));
+    revelar($('pt-titulo'), entrar(d(c, 0)));
+    surgir($('pt-ilustr'), entrar(d(c, 0.4)), {dy: 0});
+    // A árvore cresce de cima para baixo: a pasta do caso, a skill baixada, os autos, a minuta.
+    const quando = [0.2, 0.55, 0.7, 0.85, 1.15, 1.4];
+    quando.forEach((q, n) => {
+      surgir($('pt-n' + n), entrar(d(c, q)), {dx: -20, dy: 0});
+      surgir($('pt-o' + n), entrar(d(c, q + 0.15)), {dx: 20, dy: 0});
+    });
+    const lin = (id, q) => tracar($(id), saida(faixa(d(c, q), 0, 0.35)));
+    lin('pt-v0', 0.45); lin('pt-h1', 0.5); lin('pt-v1', 0.6); lin('pt-h2', 0.65); lin('pt-h3', 0.8);
+    lin('pt-h4', 1.1); lin('pt-h5', 1.35);
   },
 };
 
 palco({
   slides, cenas,
   desenhar: (t, ctx) => {
-    // A trilha cresce com a viagem da câmera: o trecho até o slide atual acompanha a entrada, e a linha de base
-    // do slide se completa no fim dela.
+    // A trilha cresce com a viagem da câmera: o trecho até o slide atual acompanha o deslocamento, e a linha de base
+    // do slide se completa quando ela pousa.
+    const v = ctx.slide.viagem || 0;
     ids.forEach((id, i) => {
       const atual = i === ctx.i;
-      const kv = i < ctx.i ? 1 : atual ? saida(faixa(ctx.entrada, 0, 0.75)) : 0;
-      const kb = i < ctx.i ? 1 : atual ? saida(faixa(ctx.entrada, i === 0 ? 0 : 0.6, 1)) : 0;
+      const kv = i < ctx.i ? 1 : atual ? saida(faixa(ctx.local, 0, v * 0.9)) : 0;
+      const kb = i < ctx.i ? 1 : atual ? saida(faixa(ctx.local, v * 0.6, v + 0.7)) : 0;
       if (vao[i]) tracar(vao[i], kv);
       tracar(base[i], kb);
       pads[i][0].style.visibility = kb > 0 ? '' : 'hidden';

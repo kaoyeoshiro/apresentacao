@@ -195,7 +195,8 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 	const secoes = Object.fromEntries(S.map((s) => [s.id, document.querySelector(`[data-slide="${s.id}"]`)]));
 
 	// Câmera: `camera: true` enquadra a própria seção; `camera: {x, y, w, h}` enquadra a caixa do mundo. Sem câmera,
-	// o slide herda a pose do anterior. A câmera viaja durante o primeiro passo do slide.
+	// o slide herda a pose do anterior. A câmera viaja no começo do primeiro passo, durante `viagem` segundos (padrão:
+	// o passo inteiro), e `recuo` (0 a 1) afasta a câmera no meio da viagem, para a plateia ver de onde vem e para onde vai.
 	const caixaDe = (s) => {
 		if (!s.camera) return null;
 		if (s.camera === true) {
@@ -214,8 +215,9 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 	const camera = (t, s) => {
 		if (!s.passos.length || s.i === 0) return poses[s.i];
 		const p0 = s.passos[0];
-		const k = entradaSaida(faixa(t, p0.t0, p0.t1));
-		return misturarPose(poses[s.i - 1], poses[s.i], k);
+		const k = entradaSaida(faixa(t, p0.t0, p0.t0 + Math.min(s.viagem ?? p0.dur, p0.dur)));
+		const pose = misturarPose(poses[s.i - 1], poses[s.i], k);
+		return s.recuo ? {...pose, z: pose.z * (1 - s.recuo * Math.sin(Math.PI * k))} : pose;
 	};
 
 	const slideEm = (t) => S.find((s) => t <= s.t1 + 1e-9) || S[S.length - 1];

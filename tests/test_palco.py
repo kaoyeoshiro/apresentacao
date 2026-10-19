@@ -149,6 +149,23 @@ def test_modo_mundo_move_a_camera():
     assert rotulos[0] > 1920                                 # antes, b estava fora do quadro
 
 
+def test_viagem_curta_chega_antes_do_fim_do_passo_e_recua_no_meio():
+    from playwright.sync_api import sync_playwright
+
+    deck = Path(__file__).parent / "fixtures" / "palco_viagem" / "deck.html"
+    with sync_playwright() as p:
+        srv, nav, pg, _ = html._abrir(p, deck)
+        medidas = []
+        for t in (0.85, 1.1, 2.6):                            # meio da viagem, fim da viagem, parada de b
+            pg.evaluate("t => __palco.ver(t)", t)
+            medidas.append(pg.evaluate("(() => { const r = document.querySelector('[data-slide=b] h1').getBoundingClientRect(); return [r.left, r.width]; })()"))
+        nav.close()
+        srv.shutdown()
+    assert medidas[1][0] == pytest.approx(160, abs=1)        # com viagem de 0,5 s, a câmera já enquadra b em t = 1,1
+    assert medidas[1] == pytest.approx(medidas[2], abs=0.5)  # e fica parada até o fim do passo
+    assert medidas[0][1] < medidas[1][1] * 0.8               # no meio da viagem, o recuo afasta a câmera
+
+
 def test_video_que_nao_abre_falha_sem_pendurar():
     deck = Path(__file__).parent / "fixtures" / "palco_sem_video" / "deck.html"
     with pytest.raises(Exception, match="vídeo não abriu"):
