@@ -1,0 +1,10 @@
+decks/*/output/
+decks/*/storyboard/
+decks/*/pacote/
+decks/*/cache/
+._*
+.DS_Store
+__pycache__/
+.venv/
+.env
+.pytest_cache/
