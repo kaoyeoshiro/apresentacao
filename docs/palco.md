@@ -51,7 +51,7 @@ passo termina numa parada. O primeiro passo de um slide contém a entrada dele e
 | `transicao` | `corte` (padrão), `fade` ou `empurrar`, aplicada às seções durante o primeiro passo |
 | `camera` | `true` (enquadra a própria seção) ou `{x, y, w, h}` no mundo; exige `<div id="mundo">` dentro do palco e liga o modo mundo, em que todas as seções ficam visíveis e a câmera viaja entre elas no primeiro passo |
 | `viagem` | segundos que a câmera leva para chegar, contados do início do primeiro passo (padrão: o passo inteiro); o resto do passo fica para a entrada do conteúdo, e um slide pode abrir inteiro num clique só |
-| `recuo` | de 0 a 1: quanto a câmera se afasta no meio da viagem (0,15 mostra os vizinhos e o caminho entre eles) |
+| `recuo` | de 0 a 1: quanto a câmera se afasta no meio da viagem (0,15 mostra os vizinhos e o caminho entre eles); só em slide com `camera` |
 
 ## Contexto das cenas
 

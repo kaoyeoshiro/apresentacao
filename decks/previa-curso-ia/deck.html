@@ -244,8 +244,9 @@ const NS = 'http://www.w3.org/2000/svg';
 const svg = (pai, tag, attrs) => { const el = document.createElementNS(NS, tag); for (const k in attrs) el.setAttribute(k, attrs[k]); pai.appendChild(el); return el; };
 
 // Onde cada slide fica no mundo. Os degraus em y dão à trilha as curvas de 45° de uma placa de circuito.
-const POS = {aula1: [0, 0], palavra: [2400, 0], melhor: [4800, 340], mercado: [7200, 340],
-             aula2: [10200, -160], prompt: [12600, -160], skill: [15000, 180], pasta: [17400, 180]};
+// Depois de cada abertura o vão é maior: é ali que os traços do circuito descem e se juntam à trilha.
+const POS = {aula1: [0, 0], palavra: [2900, 0], melhor: [5300, 340], mercado: [7700, 340],
+             aula2: [10700, -160], prompt: [13600, -160], skill: [16000, 180], pasta: [18400, 180]};
 for (const id in POS) {
   const s = document.querySelector(`[data-slide="${id}"]`);
   s.style.left = `${POS[id][0]}px`; s.style.top = `${POS[id][1]}px`;
@@ -302,6 +303,18 @@ const circuitos = {};
 for (const id of ['a1-circ', 'a2-circ']) {
   const el = $(id);
   circuitos[id] = CIRC.map(([d, [cx, cy]]) => [svg(el, 'path', {d}), svg(el, 'circle', {cx, cy, r: 14})]);
+}
+
+// Continuação dos traços fora da abertura: cada um sai pela borda direita, desce em 45° e se junta à trilha que leva
+// ao slide seguinte, como trilhas de placa entrando num barramento. As diagonais são paralelas e não se cruzam.
+const SAIDA_Y = [360, 500, 680, 820], DOBRA = [240, 160, 120, 40];   // altura de cada traço na borda e onde ele dobra
+const continua = {};
+for (const id of ['aula1', 'aula2']) {
+  const [x, y] = POS[id], E = x + 1920;
+  continua[id] = SAIDA_Y.map((sy, n) => {
+    const xb = E + DOBRA[n], xj = xb + (BASE_Y - sy);
+    return [svg(trilha, 'path', {d: `M${E} ${y + sy}H${xb}L${xj} ${y + BASE_Y}`}), svg(trilha, 'circle', {cx: xj, cy: y + BASE_Y, r: 9})];
+  });
 }
 const desenhaCircuito = (id, dt) => circuitos[id].forEach(([p, c], n) => {
   const k = saida(faixa(dt - n * 0.1, 0, 0.7));
@@ -423,6 +436,11 @@ palco({
       tracar(base[i], kb);
       pads[i][0].style.visibility = kb > 0 ? '' : 'hidden';
       pads[i][1].style.visibility = kb >= 1 ? '' : 'hidden';
+      // Os traços da abertura escorrem para a trilha junto com a viagem até o slide seguinte.
+      if (continua[id]) {
+        const kc = i + 1 < ctx.i ? 1 : i + 1 === ctx.i ? saida(faixa(ctx.local, 0, v * 0.8)) : 0;
+        continua[id].forEach(([ps, junta]) => { tracar(ps, kc); junta.style.visibility = kc >= 1 ? '' : 'hidden'; });
+      }
     });
   },
 });
