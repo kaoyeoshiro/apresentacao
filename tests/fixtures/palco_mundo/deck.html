@@ -1,0 +1,22 @@
+<!doctype html>
+<!-- Modo mundo: duas seções em lugares diferentes do mundo; a câmera tem de viajar de uma à outra (tests/test_palco.py). -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+  #palco { background: #0E1116; color: #F2EFE9; font-family: Helvetica, Arial, sans-serif; }
+  [data-slide="b"] { left: 2400px; top: 1400px; }
+  h1 { margin: 0; position: absolute; left: 160px; top: 160px; font-size: 96px; }
+</style>
+</head>
+<body>
+<div id="palco"><div id="mundo">
+  <section data-slide="a"><h1>Aqui</h1></section>
+  <section data-slide="b"><h1>Ali</h1></section>
+</div></div>
+<script type="module">
+import {palco} from '../../../motor/palco.js';
+palco({slides: [{id: 'a', passos: [0.6], camera: true}, {id: 'b', passos: [1.2], camera: true}]});
+</script>
+</body>
+</html>

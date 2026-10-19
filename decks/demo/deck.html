@@ -1,0 +1,274 @@
+<!doctype html>
+<!-- Demonstração do motor de palco e molde do ./ap novo. Fala só do próprio motor (nenhum fato de fora).
+     Cor, fonte e logo vêm do tema (link abaixo); o deck só usa os tokens de docs/temas.md.
+     Ao vivo: ./ap abrir decks/demo e use → ← P B F G ?
+     ./ap sondar decks/demo
+     ./ap paradas | pdf | video | empacotar decks/demo -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Do roteiro ao palco</title>
+<link rel="stylesheet" href="../../temas/noite/tema.css">
+<style>
+  /* cores próprias do deck, puxadas para a tinta: clareiam no tema escuro e escurecem no claro */
+  :root { --azul: color-mix(in srgb, #4F8FD6 62%, var(--cor-tinta)); --erro: color-mix(in srgb, #E0573F 64%, var(--cor-tinta)); }
+  #palco { background: var(--cor-fundo); color: var(--cor-tinta); font-family: var(--fonte-texto); }
+  .mono { font-family: var(--fonte-mono, var(--fonte-titulo)); font-size: 30px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cor-tinta-suave); }
+  .titulo { font-family: var(--fonte-titulo); text-transform: var(--titulo-caixa, none); font-weight: 500; letter-spacing: -0.03em; line-height: 1.02; margin: 0; }
+  .h2 { position: absolute; left: 120px; top: 110px; font-size: 76px; }
+  .corte { overflow: hidden; padding-bottom: 0.08em; }
+  .regua { position: absolute; height: 8px; border-radius: 4px; background: var(--cor-destaque); transform-origin: 0 50%; }
+  p { margin: 0; }
+  .anel { fill: none; stroke: var(--cor-linha); stroke-width: 3; }
+  .ponto { fill: var(--cor-destaque); }
+  /* logo do tema (recorte do arquivo oficial); no tema noite é vazio */
+  .logo { position: absolute; height: 88px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+  #ab-logo { right: 120px; top: 56px; }
+
+  /* 1. abertura */
+  #ab-kicker { position: absolute; left: 120px; top: 120px; }
+  #ab-titulo { position: absolute; left: 112px; top: 300px; font-size: 176px; }
+  #ab-regua { left: 120px; top: 708px; width: 300px; }
+  #ab-sub { position: absolute; left: 120px; top: 776px; width: 1000px; font-size: 44px; line-height: 1.3; color: var(--cor-tinta-suave); }
+  #ab-anel { position: absolute; right: -180px; top: 120px; width: 900px; height: 900px; overflow: visible; }
+
+  /* 2. quatro saídas */
+  .cartao { position: absolute; top: 360px; width: 392px; height: 470px; background: var(--cor-papel); border-radius: 20px; padding: 44px 36px; box-sizing: border-box; }
+  .cartao .regua { left: 36px; top: 0; width: 120px; height: 6px; border-radius: 0 0 4px 4px; }
+  /* rótulo pequeno: o destaque puxado para a tinta, para passar de 4,5:1 também nos temas claros */
+  .cartao .mono { color: color-mix(in srgb, var(--cor-destaque-texto, var(--cor-destaque)) 78%, var(--cor-tinta)); }
+  .cartao h3 { margin: 120px 0 18px; font-size: 52px; font-weight: 600; letter-spacing: -0.02em; }
+  .cartao p { font-size: 32px; line-height: 1.32; color: var(--cor-tinta-suave); }
+  .cartao svg { position: absolute; left: 36px; top: 104px; width: 72px; height: 72px; overflow: visible; }
+  .cartao svg * { fill: none; stroke: var(--cor-tinta); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* 3. clique, trecho, parada */
+  #tl { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  #tl .base { stroke: var(--cor-linha); stroke-width: 6; fill: none; stroke-linecap: round; }
+  #tl .feito { stroke: var(--cor-destaque); stroke-width: 6; fill: none; stroke-linecap: round; }
+  .parada { position: absolute; top: 588px; width: 32px; height: 32px; margin-left: -16px; border-radius: 16px; background: var(--cor-fundo); border: 6px solid var(--cor-tinta-suave); box-sizing: border-box; }
+  .rot-parada { position: absolute; top: 650px; width: 300px; margin-left: -150px; text-align: center; }
+  #cabeca { position: absolute; top: 576px; width: 56px; height: 56px; margin-left: -28px; border-radius: 28px; background: var(--cor-destaque); box-shadow: 0 0 0 14px color-mix(in srgb, var(--cor-destaque) 16%, transparent); }
+  .leg { position: absolute; left: 120px; font-size: 44px; line-height: 1.25; }
+  #leg1w { top: 800px; } #leg2w { top: 870px; color: var(--cor-tinta-suave); }
+
+  /* 4. oráculo */
+  #or-lista { position: absolute; left: 120px; top: 380px; width: 760px; }
+  .achado { display: flex; gap: 24px; align-items: baseline; margin-bottom: 44px; }
+  .achado .mono { color: var(--erro); letter-spacing: 0.1em; }
+  .achado p { font-size: 40px; line-height: 1.25; }
+  #or-moldura { position: absolute; left: 1000px; top: 300px; width: 800px; height: 450px; border-radius: 16px; overflow: hidden; background: #E9E5DC; outline: 2px solid var(--cor-linha); }
+  #or-ruim { position: absolute; inset: 0; transform-origin: 0 0; }
+  #or-ruim i { position: absolute; display: block; height: 9px; border-radius: 5px; background: #B9B3A6; }
+  #or-ruim b { position: absolute; display: block; height: 22px; border-radius: 6px; background: #8E887C; }
+  .marca { position: absolute; border: 4px solid var(--erro); border-radius: 10px; box-sizing: border-box; }
+  #or-legenda { position: absolute; left: 1000px; top: 786px; width: 800px; color: var(--cor-tinta-suave); font-size: 32px; line-height: 1.3; }
+
+  /* 5. vídeo */
+  #vd-quadro { position: absolute; left: 700px; top: 290px; width: 1100px; height: 619px; border-radius: 18px; overflow: hidden; background: #000; box-shadow: 0 40px 80px rgba(0,0,0,0.45); }
+  #vd-quadro video { width: 100%; height: 100%; display: block; }
+  #vd-texto { position: absolute; left: 120px; top: 360px; width: 500px; }
+  #vd-texto p { font-size: 40px; line-height: 1.3; margin-top: 28px; }
+  #vd-texto .mono { color: var(--azul); }
+
+  /* 6. fecho */
+  #fe-titulo { position: absolute; left: 0; right: 0; top: 360px; text-align: center; font-size: 150px; }
+  #fe-regua { left: 810px; top: 590px; width: 300px; }
+  #fe-sub { position: absolute; left: 360px; right: 360px; top: 650px; text-align: center; font-size: 40px; line-height: 1.35; color: var(--cor-tinta-suave); }
+  #fe-anel { position: absolute; left: 510px; top: 90px; width: 900px; height: 900px; overflow: visible; }
+
+  #progresso { position: absolute; left: 0; bottom: 0; height: 6px; background: var(--cor-destaque); }
+</style>
+</head>
+<body>
+<div id="palco">
+
+  <section data-slide="abertura">
+    <svg id="ab-anel" viewBox="0 0 900 900"><circle id="ab-circ" class="anel" cx="450" cy="450" r="420"/>
+      <circle id="ab-ponto" class="ponto" r="12"/></svg>
+    <div id="ab-logo" class="logo"></div>
+    <div id="ab-kicker" class="mono">Motor de palco</div>
+    <h1 id="ab-titulo" class="titulo"><div class="corte"><div id="ab-l1">Do roteiro</div></div><div class="corte"><div id="ab-l2">ao palco.</div></div></h1>
+    <div id="ab-regua" class="regua"></div>
+    <p id="ab-sub">Um arquivo de código vira a palestra ao vivo, o vídeo, o PDF e a revisão.</p>
+  </section>
+
+  <section data-slide="saidas">
+    <div class="corte h2 titulo"><div id="sa-titulo">Quatro saídas, um código só</div></div>
+    <div class="cartao" id="c0" style="left:120px"><div class="regua"></div><div class="mono">01</div>
+      <svg viewBox="0 0 72 72"><rect x="4" y="10" width="64" height="40" rx="6"/><path d="M24 64h24M36 50v14"/></svg>
+      <h3>Ao vivo</h3><p>passador, notas e cronômetro</p></div>
+    <div class="cartao" id="c1" style="left:544px"><div class="regua"></div><div class="mono">02</div>
+      <svg viewBox="0 0 72 72"><rect x="4" y="12" width="64" height="48" rx="6"/><path d="M30 26l16 10-16 10z"/></svg>
+      <h3>Vídeo</h3><p>MP4 quadro a quadro, sem gravar a tela</p></div>
+    <div class="cartao" id="c2" style="left:968px"><div class="regua"></div><div class="mono">03</div>
+      <svg viewBox="0 0 72 72"><path d="M14 4h30l14 14v50H14z"/><path d="M44 4v14h14M24 36h24M24 48h24"/></svg>
+      <h3>PDF</h3><p>uma página por slide, para enviar</p></div>
+    <div class="cartao" id="c3" style="left:1392px"><div class="regua"></div><div class="mono">04</div>
+      <svg viewBox="0 0 72 72"><circle cx="30" cy="30" r="22"/><path d="M46 46l20 20"/></svg>
+      <h3>Revisão</h3><p>stills e um oráculo que lê cada parada</p></div>
+  </section>
+
+  <section data-slide="tempo">
+    <div class="corte h2 titulo"><div id="te-titulo">Clique, trecho, parada</div></div>
+    <svg id="tl"><path class="base" id="tl-base" d="M200 604H1720"/><path class="feito" id="tl-feito" d="M200 604H1720"/></svg>
+    <div class="parada" style="left:200px"></div><div class="parada" style="left:706px"></div>
+    <div class="parada" style="left:1213px"></div><div class="parada" style="left:1720px"></div>
+    <div class="mono rot-parada" style="left:200px">parada 0</div><div class="mono rot-parada" style="left:706px">1</div>
+    <div class="mono rot-parada" style="left:1213px">2</div><div class="mono rot-parada" style="left:1720px">3</div>
+    <div id="cabeca"></div>
+    <div class="corte leg" id="leg1w"><div id="leg1t">Cada clique toca um trecho animado.</div></div>
+    <div class="corte leg" id="leg2w"><div id="leg2t">Em qualquer instante, o quadro é sempre o mesmo.</div></div>
+  </section>
+
+  <section data-slide="oraculo">
+    <div class="corte h2 titulo"><div id="or-titulo">O oráculo lê cada parada</div></div>
+    <div id="or-lista">
+      <div class="achado" id="a0"><span class="mono">erro</span><p>texto de 18 px, ilegível no projetor</p></div>
+      <div class="achado" id="a1"><span class="mono">erro</span><p>contraste de 2,1 para 1</p></div>
+      <div class="achado" id="a2"><span class="mono">aviso</span><p>71 palavras numa só parada</p></div>
+    </div>
+    <div id="or-moldura"><div id="or-ruim">
+      <b style="left:48px;top:44px;width:420px"></b>
+      <i style="left:48px;top:100px;width:700px"></i><i style="left:48px;top:122px;width:660px"></i><i style="left:48px;top:144px;width:690px"></i>
+      <i style="left:48px;top:166px;width:610px"></i><i style="left:48px;top:188px;width:680px"></i><i style="left:48px;top:210px;width:520px"></i>
+      <i style="left:48px;top:250px;width:330px;background:#D9D4C9"></i><i style="left:48px;top:272px;width:300px;background:#D9D4C9"></i>
+      <i style="left:420px;top:250px;width:330px"></i><i style="left:420px;top:272px;width:290px"></i><i style="left:420px;top:294px;width:310px"></i>
+      <i style="left:48px;top:320px;width:700px"></i><i style="left:48px;top:342px;width:640px"></i><i style="left:48px;top:364px;width:690px"></i>
+      <i style="left:48px;top:386px;width:560px"></i>
+      <div class="marca" id="m0" style="left:36px;top:88px;width:728px;height:138px"></div>
+      <div class="marca" id="m1" style="left:36px;top:238px;width:328px;height:50px"></div>
+      <div class="marca" id="m2" style="left:22px;top:30px;width:756px;height:386px"></div>
+    </div></div>
+    <p id="or-legenda">Um slide cheio, de propósito. As marcas são o que o oráculo apontaria.</p>
+  </section>
+
+  <section data-slide="video">
+    <div class="corte h2 titulo"><div id="vd-titulo">Vídeo feito por código, dentro do slide</div></div>
+    <div id="vd-texto"><div class="mono">ondas.html → mp4</div>
+      <p id="vd-p">Renderizado pelo mesmo motor e tocado sem internet.</p></div>
+    <div id="vd-quadro"><video id="vd" src="midia/ondas.mp4" muted playsinline preload="auto"></video></div>
+  </section>
+
+  <section data-slide="fecho">
+    <svg id="fe-anel" viewBox="0 0 900 900"><circle id="fe-circ" class="anel" cx="450" cy="450" r="420"/>
+      <circle id="fe-ponto" class="ponto" r="12"/></svg>
+    <h2 id="fe-titulo" class="titulo"><span id="fe-t">Agora, o conteúdo.</span></h2>
+    <div id="fe-regua" class="regua"></div>
+    <p id="fe-sub">A próxima apresentação é a palestra sobre IA no Direito, com cada fato de fonte lida e anotada.</p>
+  </section>
+
+  <div id="progresso"></div>
+</div>
+
+<script type="module">
+import {palco, entrar, revelar, surgir, tracar, palavras, video, saida, faixa, clamp, lerp} from '../../motor/palco.js';
+
+const $ = (id) => document.getElementById(id);
+const anel = (circ, ponto, k, giro) => {
+  tracar(circ, k);
+  const a = -Math.PI / 2 + giro;
+  ponto.setAttribute('cx', 450 + 420 * Math.cos(a));
+  ponto.setAttribute('cy', 450 + 420 * Math.sin(a));
+  ponto.style.opacity = clamp(k * 3 - 2);
+};
+
+const slides = [
+  {id: 'abertura', titulo: 'Do roteiro ao palco', passos: [1.6, 0.9], segura: 3,
+   notas: 'Abrir devagar. Um arquivo de código e quatro saídas: é a promessa da palestra inteira.'},
+  {id: 'saidas', titulo: 'Quatro saídas', passos: [1.1, 0.5, 0.5, 0.5], transicao: 'empurrar',
+   notas: 'Um cartão por clique. Ao vivo é o principal; vídeo, PDF e revisão saem do mesmo arquivo.'},
+  {id: 'tempo', titulo: 'Clique, trecho, parada', passos: [1.3, 1.1, 1.1], transicao: 'fade',
+   notas: 'Explicar a ideia central: o quadro é função do tempo, e o clique só escolhe até onde tocar.'},
+  {id: 'oraculo', titulo: 'O oráculo', passos: [1.1, 0.8, 0.8, 0.8], transicao: 'fade',
+   notas: 'O slide da direita é ruim de propósito. Cada clique marca um defeito que o oráculo mede.'},
+  {id: 'video', titulo: 'Vídeo dentro do slide', passos: [1.2], segura: 6, transicao: 'fade',
+   notas: 'O clipe toca enquanto se fala. Arquivo local, nada de internet no palco.'},
+  {id: 'fecho', titulo: 'Agora, o conteúdo', passos: [1.6, 0.9], transicao: 'fade',
+   notas: 'Fechar anunciando a palestra-piloto sobre IA no Direito.'},
+];
+
+const cenas = {
+  abertura: (t, c) => {
+    revelar($('ab-kicker'), entrar(c.desde(0) - 0.05));
+    revelar($('ab-l1'), entrar(c.desde(0) - 0.15));
+    revelar($('ab-l2'), entrar(c.desde(0) - 0.32));
+    $('ab-regua').style.transform = `scaleX(${saida(faixa(c.local, 0.7, 1.5))})`;
+    revelar($('ab-sub'), entrar(c.desde(1)));
+    anel($('ab-circ'), $('ab-ponto'), saida(c.p(0)), saida(c.p(0)) * 1.2 + c.ocioso * 0.08);
+  },
+  saidas: (t, c) => {
+    revelar($('sa-titulo'), entrar(c.desde(0) - 0.25));
+    for (let n = 0; n < 4; n++) {
+      const card = $('c' + n), dt = c.desde(n) - (n === 0 ? 0.45 : 0);
+      surgir(card, entrar(dt), {dy: 60});
+      card.querySelector('.regua').style.transform = `scaleX(${saida(faixa(dt, 0.15, 0.6))})`;
+      card.querySelectorAll('svg *').forEach((el) => tracar(el, saida(faixa(dt, 0.1, 0.65))));
+    }
+  },
+  tempo: (t, c) => {
+    revelar($('te-titulo'), entrar(c.desde(0)));
+    tracar($('tl-base'), saida(faixa(c.local, 0.2, 1.2)));
+    const xs = [200, 706, 1213, 1720];
+    document.querySelectorAll('[data-slide="tempo"] .parada').forEach((el, i) => {
+      const k = entrar(c.local - 0.2 - i * 0.14);
+      el.style.transform = `scale(${k})`;
+      el.style.borderColor = c.p(i) >= 1 || (i === 0 && c.p(0) >= 1) ? 'var(--cor-destaque)' : 'var(--cor-tinta-suave)';
+    });
+    document.querySelectorAll('[data-slide="tempo"] .rot-parada').forEach((el, i) => surgir(el, entrar(c.local - 0.3 - i * 0.14), {dy: 16}));
+    // A cabeça anda de parada em parada, cada passo leva à seguinte; o traço âmbar acompanha.
+    const pos = 0 + saida(c.p(1)) + saida(c.p(2));
+    const x = lerp(xs[0], xs[3], pos / 3);
+    $('cabeca').style.left = `${x}px`;
+    $('cabeca').style.transform = `scale(${entrar(c.local - 0.9)})`;
+    tracar($('tl-feito'), pos / 3);
+    revelar($('leg1t'), entrar(c.desde(1) - 0.1));
+    revelar($('leg2t'), entrar(c.desde(2) - 0.1));
+  },
+  oraculo: (t, c) => {
+    revelar($('or-titulo'), entrar(c.desde(0)));
+    surgir($('or-moldura'), entrar(c.desde(0) - 0.25), {dy: 40, escala: 0.04});
+    revelar($('or-legenda'), entrar(c.desde(0) - 0.55));
+    // Cada clique marca um defeito, e o slide ruim aproxima a câmera do trecho marcado.
+    const focos = [{x: 0, y: 0, z: 1}, {x: 36, y: 88, z: 1.08}, {x: 36, y: 200, z: 1.22}, {x: 0, y: 0, z: 1}];
+    let f = focos[0];
+    for (let n = 1; n <= 3; n++) {
+      const k = saida(c.p(n));
+      f = {x: lerp(f.x, focos[n].x, k), y: lerp(f.y, focos[n].y, k), z: lerp(f.z, focos[n].z, k)};
+    }
+    $('or-ruim').style.transform = `translate(${f.x * (1 - f.z)}px, ${f.y * (1 - f.z)}px) scale(${f.z})`;
+    for (let n = 0; n < 3; n++) {
+      const k = entrar(c.desde(n + 1));
+      surgir($('a' + n), k, {dx: -30, dy: 0});
+      const m = $('m' + n);
+      m.style.opacity = clamp(k * 2);
+      m.style.transform = `scale(${lerp(1.06, 1, clamp(k))})`;
+    }
+  },
+  video: (t, c) => {
+    revelar($('vd-titulo'), entrar(c.desde(0)));
+    surgir($('vd-quadro'), entrar(c.desde(0) - 0.2), {dy: 50, escala: 0.03});
+    surgir($('vd-texto'), entrar(c.desde(0) - 0.45), {dy: 30});
+    const v = $('vd');
+    video(v, (4.5 + c.ocioso) % 8);      // parado, mostra o quadro com o título do clipe; ao vivo, toca em laço
+  },
+  fecho: (t, c) => {
+    palavras($('fe-t'), saida(faixa(c.local, 0.1, 1.3)));
+    $('fe-regua').style.transform = `scaleX(${saida(faixa(c.local, 0.8, 1.6))})`;
+    revelar($('fe-sub'), entrar(c.desde(1)));
+    // O ponto fica no arco de cima, acima do título, e balança devagar enquanto se fala.
+    anel($('fe-circ'), $('fe-ponto'), saida(c.p(0)), -0.9 + 0.9 * saida(c.p(0)) + 0.5 * Math.sin(c.ocioso * 0.35));
+  },
+};
+
+palco({
+  slides, cenas,
+  desenhar: (t, ctx) => {
+    // Fio de progresso no rodapé: cresce com o slide e anda com a entrada de cada um.
+    const n = slides.length, k = (ctx.i + ctx.entrada) / n;
+    $('progresso').style.width = `${1920 * clamp(k)}px`;
+  },
+});
+</script>
+</body>
+</html>

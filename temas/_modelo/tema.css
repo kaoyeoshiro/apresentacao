@@ -1,0 +1,28 @@
+/* Tema modelo: neutro, sem fontes nem logo de ninguém. Copie esta pasta para temas/<cliente>/ e troque os valores.
+   Contrato dos temas: docs/temas.md. */
+
+/* Variáveis com url() precisam ser registradas como <url>: sem isso o endereço é resolvido em relação
+   à folha que USA a variável (a da apresentação), e não a esta. */
+@property --logo-marca { syntax: '<url>'; inherits: true; initial-value: url('data:,'); }
+
+:root {
+  --cor-fundo: #F6F5F2;
+  --cor-tinta: #16232E;
+  --cor-destaque: #0E9F8E;
+  --cor-papel: #FFFFFF;
+  --cor-destaque-texto: var(--cor-destaque); /* opcional: destaque com pelo menos 3:1 sobre o fundo, para texto grande */
+
+  --cor-tinta-suave: color-mix(in srgb, var(--cor-tinta) 72%, var(--cor-fundo));
+  --cor-linha: color-mix(in srgb, var(--cor-tinta) 16%, transparent);
+  --cor-destaque-fraca: color-mix(in srgb, var(--cor-destaque) 14%, var(--cor-fundo));
+  --cor-sobre-tinta: var(--cor-fundo);
+  --cor-suave-sobre-tinta: color-mix(in srgb, var(--cor-sobre-tinta) 74%, var(--cor-tinta));
+  --cor-linha-sobre-tinta: color-mix(in srgb, var(--cor-sobre-tinta) 22%, transparent);
+
+  /* fontes do sistema: troque por @font-face de fontes locais com licença que permita redistribuir */
+  --fonte-titulo: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fonte-texto: Georgia, 'Times New Roman', serif;
+
+  --logo-marca: url('marca/logo.png');
+  --logo-marca-proporcao: 3 / 1;
+}

@@ -1,0 +1,39 @@
+/* Tema PGE-MS. Contrato dos temas: docs/temas.md.
+   Cor, fonte e logo vivem só aqui e em marca/, fonts/. Cores da tabela oficial da PGE-MS,
+   conforme o tokens.css do design system das peças (visual-law/pge-ms/design-system). */
+
+@font-face { font-family: 'Montserrat'; font-weight: 100 900; font-style: normal; font-display: swap; src: url('fonts/Montserrat.ttf') format('truetype'); }
+@font-face { font-family: 'Source Serif 4'; font-weight: 200 900; font-style: normal; font-display: swap; src: url('fonts/SourceSerif4.ttf') format('truetype'); }
+@font-face { font-family: 'Source Serif 4'; font-weight: 200 900; font-style: italic; font-display: swap; src: url('fonts/SourceSerif4-Italic.ttf') format('truetype'); }
+
+/* Variáveis com url() precisam ser registradas como <url>: sem isso o endereço é resolvido em relação
+   à folha que USA a variável (a da apresentação), e não a esta. */
+@property --logo-marca { syntax: '<url>'; inherits: true; initial-value: url('data:,'); }
+
+:root {
+  --cor-fundo: #F4F7FA;    /* acento-fundo do design system: azul quase branco, distinto do papel */
+  --cor-tinta: #152B3F;    /* marinho da PGE: títulos e moldura institucional */
+  --cor-destaque: #F58634; /* laranja da PGE: só para chamar atenção, nunca estrutura */
+  --cor-papel: #FFFFFF;
+
+  /* derivadas do contrato (medidas em regras.md) */
+  --cor-tinta-suave: color-mix(in srgb, var(--cor-tinta) 72%, var(--cor-fundo));
+  --cor-linha: color-mix(in srgb, var(--cor-tinta) 16%, transparent);
+  --cor-destaque-fraca: color-mix(in srgb, var(--cor-destaque) 14%, var(--cor-fundo));
+  --cor-sobre-tinta: var(--cor-fundo);
+  --cor-suave-sobre-tinta: color-mix(in srgb, var(--cor-sobre-tinta) 74%, var(--cor-tinta));
+  --cor-linha-sobre-tinta: color-mix(in srgb, var(--cor-sobre-tinta) 22%, transparent);
+
+  /* extra desta marca: laranja escuro da tabela oficial, para número ou texto grande em destaque
+     sobre fundo claro (o laranja cheio não chega a 3:1 ali) */
+  --titulo-caixa: none; /* a PGE só admite caixa alta em rótulo curto: título de mais de uma linha fica em caixa normal */
+  --cor-destaque-escuro: #C16C2F;
+  --cor-destaque-texto: var(--cor-destaque-escuro); /* destaque legível como texto grande sobre o fundo (3,58:1) */
+
+  /* famílias oficiais do design system: Montserrat (institucional) e Source Serif 4 (peças) */
+  --fonte-titulo: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --fonte-texto: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+
+  --logo-marca: url('marca/logo-pge.png');
+  --logo-marca-proporcao: 607 / 186;
+}

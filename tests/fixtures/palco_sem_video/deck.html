@@ -1,0 +1,12 @@
+<!doctype html>
+<!-- Vídeo que não existe: as ferramentas têm de falhar com mensagem, não pendurar (tests/test_palco.py). -->
+<html lang="pt-BR">
+<head><meta charset="utf-8"><style>#palco { background: #000; }</style></head>
+<body>
+<div id="palco"><section data-slide="a"><video id="v" src="midia/nao-existe.mp4" muted></video></section></div>
+<script type="module">
+import {palco, video} from '../../../motor/palco.js';
+palco({slides: [{id: 'a', passos: [0.6]}], cenas: {a: (t, c) => video(document.getElementById('v'), 1 + c.ocioso)}});
+</script>
+</body>
+</html>
