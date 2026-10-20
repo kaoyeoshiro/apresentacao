@@ -1,0 +1,13 @@
+/* Folha com cor literal de propósito: o ./ap lint tem de recusar as linhas 4, 5, 6, 9, 12 e 13 (tests/test_palco.py).
+   Em comentário não conta: #FFFFFF, rgb(0, 0, 0), black. */
+#fade, #abc { color: var(--cor-tinta); }
+.a { color: #D49D38; }
+.b { background: rgb(15, 38, 65); }
+.c { border-color: hsla(40, 60%, 50%, .5); }
+.d { filter: url(#face); mask-image: linear-gradient(var(--cor-tinta), transparent); }
+@media (min-width: 10px) {
+  .e { box-shadow: 0 0 0 4px #fff; }
+}
+.f { background: color-mix(in srgb, var(--cor-destaque) 20%, var(--cor-fundo)); }
+.g { outline: 2px solid White; white-space: nowrap; font-family: "Red Hat Display"; --cor-red: var(--cor-tinta); rotate: calc(tan(1deg) * 1turn); }
+.h { mask-image: linear-gradient(black, transparent); }

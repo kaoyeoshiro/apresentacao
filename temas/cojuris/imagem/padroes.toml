@@ -1,0 +1,22 @@
+# Padrões de imagem da co.juris, lidos por ./ap imagens (contrato em docs/temas.md, seção Imagem).
+# O imagens.toml do deck só escreve o que foge daqui.
+
+# Geradores do image-video-api que a marca permite, liberados pelo usuário em 19/10/2026. O rascunho é sempre
+# gemini 1K. Só o gemini tem preço na tabela de ferramentas/imagens.py; os outros pedem preco_usd na entrada.
+# ideogram-4-5 é edição de uma imagem dada (correção local), não geração do zero.
+geradores = ["gemini", "azure-gpt-image", "azure-flux", "ideogram-4-5"]
+
+# Tratamento por papel, com os valores da prévia do curso de IA (decks/previa-curso-ia/imagens.toml).
+# Papel sem tabela aqui (textura, ainda sem uso) fica com o padrão do ./ap tratar: duotone 0.8, 2048 px.
+
+[tratamento.heroica]   # tela cheia sob o véu; heroi-aula2, de fundo quase preto, usou gama 1.4
+tom = "duotone"
+intensidade = 0.8
+largura = 2048
+
+[tratamento.objeto]    # recortado sobre o off-white; gama 1.8 põe o papel em L* ~90, contra 98 do --cor-fundo
+tom = "duotone"
+intensidade = 0.8
+largura = 900
+alfa = true
+gama = 1.8

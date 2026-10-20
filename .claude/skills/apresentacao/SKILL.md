@@ -1,107 +1,195 @@
 ---
 name: apresentacao
-description: Produz apresentações ao vivo de alto impacto feitas por código (motor de palco), para projetar com passador de slides, com animação a cada clique, imagens geradas por GPT ou Gemini, vídeo por código ou pelo Gemini Omni dentro do slide, tela do apresentador, PDF de contingência e pacote que roda sem internet. Use para "faz uma apresentação", "slides para minha palestra", "deck para a aula", "apresentação animada", "transforma isso em slides", "palestra sobre X", ou para revisar por que um deck parece PowerPoint de modelo. Não use para .pptx editável nem para vídeo narrado.
+description: Produz apresentações ao vivo de alto impacto feitas por código (motor de palco), para projetar com passador de slides, no nível da prévia aprovada do curso de IA. Plano contínuo por padrão, montado com a biblioteca de arquétipos (a câmera viaja por uma trilha dourada, um clique por slide abre tudo com animação), imagens geradas em série e tratadas nas cores do tema, vídeo dentro do slide, tela do apresentador, PDF de contingência e pacote que roda sem internet. Use para "faz uma apresentação", "slides para minha palestra", "deck para a aula", "apresentação animada", "transforma isso em slides", "palestra sobre X", ou para revisar por que um deck parece PowerPoint de modelo. Não use para .pptx editável nem para vídeo narrado.
 ---
 
 # apresentacao
 
-O agente é diretor de arte, roteirista, programador e revisor da apresentação. O deck é código em
-`decks/<slug>/deck.html`, sobre `motor/palco.js`; o contrato técnico está em `docs/palco.md` e o dos temas em
-`docs/temas.md`. A apresentação existe para alguém falar na frente dela: a tela carrega imagem, número e frase
-curta, e a fala carrega o argumento.
+A sessão é diretora de arte, roteirista, programadora e revisora. O deck é código em `decks/<slug>/deck.html`, e a
+apresentação existe para alguém falar na frente dela: a tela carrega imagem, número e frase curta, a fala carrega o
+argumento. A régua de qualidade é a prévia que o usuário aprovou, `decks/previa-curso-ia/` (14 slides, um clique cada,
+trilha dourada contínua, partitura de claro e escuro, imagens em série, vídeo dentro do slide).
 
-## Protocolo (nesta ordem)
+O modo padrão é o plano contínuo, montado a partir do catálogo `decks/catalogo/` com a biblioteca `motor/cenas.js` e
+`motor/cenas.css`. A biblioteca já faz o mundo, a trilha, as zonas noite, as viagens de câmera, a duração de cada
+clique e onze arquétipos de slide; o deck escreve só o conteúdo. Use a biblioteca antes de escrever qualquer maquinário
+próprio, e comece cada slide escolhendo o arquétipo no roteiro.
 
-### 1. Perguntar
+Leia cada referência no passo em que ela entra: `roteiro.md` (passo 4), `midia.md` (passo 6) e `critica.md` (passo 7),
+nesta pasta. Os contratos técnicos ficam em `docs/cenas.md` (arquétipos, andamentos, peças), `docs/palco.md` (motor,
+ferramentas, oráculo, mídia) e `docs/temas.md` (tema e série de imagens).
 
-Use a ferramenta de perguntas, no máximo três por vez, a opção recomendada primeiro. Sempre, mesmo que o pedido
-já cite um deles, confirme:
+## O que perguntar e o que decidir sozinha
 
-1. **Tema**: um de `temas/` (`ls temas | grep -v '^_'`: hoje `noite`, `cojuris`, `pge`) ou "Outro". Nunca herde o
-   tema da apresentação anterior. Tema novo se cria antes de tudo (`docs/temas.md`, seção final).
-2. **Modo**: "Slides com transições (Recomendado)", em que cada slide entra por corte, fade ou empurrão, ou "Plano
-   contínuo", em que os slides ficam espalhados num mundo e a câmera viaja entre eles (`camera` em cada slide e
-   `<div id="mundo">`). O plano contínuo impressiona mais e custa mais a fazer bem: cada viagem precisa de um motivo
-   no conteúdo.
-3. **Público, duração e a mensagem** que a plateia deve levar em uma frase, se o pedido não disser.
+Pergunte com a ferramenta de perguntas, no máximo três por vez, a opção recomendada primeiro e com o motivo:
 
-Dúvida técnica não vira pergunta: decida e anote no briefing.
+- tema: um de `temas/` (`ls temas | grep -v '^_'`), nunca herdado do deck anterior; tema novo se cria antes de tudo,
+  pela seção "Criar um tema novo" de `docs/temas.md`;
+- modo: "Plano contínuo (Recomendado)", em que a câmera viaja por uma trilha entre os slides, ou "Slides com
+  transições", mais simples, para deck curto ou conteúdo sem fio entre os slides;
+- público, duração e a mensagem que a plateia leva em uma frase, se o pedido não disser.
 
-### 2. Briefing → `decks/<slug>/briefing.md`
+Depois disso, só três coisas voltam ao usuário: o roteiro, porque é texto que o público vê; a escolha entre os
+rascunhos de imagem; e qualquer custo acima do teto do `./ap imagens` (US$ 2,00 por execução) ou clipe de vídeo pago.
+O resto a sessão decide e anota no briefing: arquétipo, andamento, ordem dos cliques, enquadramento, tratamento de
+imagem, correções da crítica e dúvidas técnicas.
 
-Público, duração, ocasião (sala, auditório, online), a mensagem em uma frase, o que a plateia deve fazer ou decidir
-no fim, tema e modo escolhidos, prazo. Leia `temas/<tema>/regras.md` antes de escrever qualquer texto: ele manda
-em voz, grafia de nomes e cargos, avisos obrigatórios e no que a marca nunca diz. Se o usuário mandar material
-(roteiro, apostila, deck antigo) e um arquivo não abrir, diga onde tentou; não invente o conteúdo.
+## Passos
 
-### 3. Apuração
+Cada passo termina num critério que se confere. Não avance com o critério em aberto.
 
-Cada número, nome, lei, data e caso vem de fonte lida nesta sessão e fica anotado no briefing ao lado do slide que
-o usa. O que não tiver fonte sai do deck; o que ficou por confirmar aparece na tela com `[CONFERIR]` e entra na
-lista de pendências da entrega; exemplo ilustrativo aparece marcado como tal. Telas de sistemas entram por captura
-no claude_video_maker (`./cvm capturar`), com dados pessoais mascarados, e chegam ao deck por `./ap trazer`.
+### 1. Perguntar e ver a régua
 
-### 4. Arco e roteiro de slides
-
-Escreva o arco antes dos slides: abertura que cria tensão, três a cinco movimentos, fecho com a mensagem e o
-pedido. Depois, uma linha por slide no briefing: a ideia única, o que a tela mostra, o que a fala diz, quantos
-cliques e, no plano contínuo, o que a câmera carrega de um slide ao seguinte. Densidade: até 45 palavras visíveis
-por parada, de preferência menos de 20. Um slide por minuto e meio a dois de fala é o ponto de partida. O texto que
-o público vê é escolha do usuário: mostre o roteiro e espere o sim antes de construir.
-
-### 5. Criar e prototipar
+Faça as perguntas acima. Gere e abra o storyboard da prévia (fica fora do git), para calibrar o olho:
 
 ```bash
-./ap novo <slug> --tema <tema>
+./ap paradas decks/previa-curso-ia --viagens
 ```
 
-Isso copia `decks/demo/` com o tema trocado. Cor, fonte e logo nunca aparecem no deck: só `var(--...)` do tema
-(cores próprias do deck, se precisar, misturadas com `--cor-tinta` por `color-mix`, como `--azul` e `--erro` da
-demonstração). Implemente primeiro a abertura, o slide mais denso e um slide com dado ou diagrama; rode `./ap
-sondar` e `./ap paradas`, abra a folha de contato e cada still, e corrija o sistema visual antes de seguir.
+Abra com a ferramenta Read `decks/previa-curso-ia/storyboard/folha.png` e `viagens.png`. Se `./ap` reclamar do
+ambiente Python, rode `./ap sync` uma vez.
 
-### 6. Deck completo
+Passa quando: tema, modo, público, duração e mensagem estão respondidos, e as duas folhas da prévia foram abertas.
 
-Movimento com função: revelar o que a fala anuncia, construir um diagrama na ordem do raciocínio, levar o olhar
-de um dado ao seguinte. Uma coisa se mexe por vez; cada passo dura de 0,5 a 1,5 s; entradas com `entrar` e
-`revelar`, nunca bounce nem zoom contínuo sem causa. Cada slide termina parado, numa tela estável para o
-apresentador falar em cima. Espaço vazio é bem-vindo, e um momento autoral por apresentação basta.
+### 2. Criar o deck
 
-Matéria-prima que eleva o slide, sempre arquivo local em `midia/` com crédito em `midia/creditos.json`:
+```bash
+./ap novo <slug> --tema <tema>                  # plano contínuo: copia decks/catalogo
+./ap novo <slug> --tema <tema> --modo slides    # só se o usuário escolheu slides com transições
+./ap sondar decks/<slug>
+```
 
-- imagem gerada (`./ap imagem decks/<slug> <nome> "prompt"`, GPT Image por padrão, `--backend gemini` para o
-  Gemini) quando prova ou ilustra algo que o código não desenha bem: fotografia, textura, cena. Nunca para
-  enfeitar, nunca logo, nunca pessoa real. Descreva luz, lente, composição e paleta do tema no prompt;
-- clipe do Gemini Omni (`./ap video-ia ...`), que custa dinheiro: rode sem `--aprovado`, mostre ao usuário o
-  custo e o que o clipe mostra, e só com o sim dele para aquele clipe e aquele custo rode com `--aprovado HASH`;
-- vídeo por código (`./cvm html`, Remotion ou Manim no claude_video_maker), trazido com `./ap trazer` e tocado com
-  `video(el, seg)`;
-- gráficos desenhados no próprio deck (SVG com `tracar`, números com `contar`), com a fonte no briefing.
+O deck novo traz os 12 slides do catálogo (um por arquétipo e um mergulho), o `briefing.md` do catálogo e a
+mídia-marcador dele, com crédito. No modo slides, o molde é `decks/demo/` e vale `docs/palco.md` no lugar de
+`docs/cenas.md`; os passos 3 a 9 são os mesmos.
 
-Logo é sempre recorte do arquivo oficial em `temas/<tema>/marca/`, por `var(--logo-marca)`; logo com tinta escura
-só entra sobre fundo claro. Notas do apresentador em cada slide (`notas`), escritas para leitura de relance.
+Passa quando: `./ap sondar decks/<slug>` termina com "0 erro(s)" antes de qualquer mudança, o que prova o ambiente e o
+tema.
 
-### 7. Crítica (três rodadas)
+### 3. Briefing e apuração
 
-A cada rodada: `./ap sondar` sem ERRO, `./ap paradas` com a folha e os stills abertos, e as perguntas: cada parada
-se lê em três segundos do fundo da sala? há slide que é só texto? o destaque aponta para a coisa certa? alguma
-animação existe só para enfeitar? o slide termina parado? Nomeie os piores defeitos, corrija os três maiores e
-registre o que ficou. Depois abra ao vivo (`./ap abrir decks/<slug>`) e passe o deck inteiro pelas teclas, com a
-tela do apresentador aberta (P).
+Reescreva `decks/<slug>/briefing.md`, que ainda fala do catálogo: público, duração, ocasião, a mensagem em uma frase,
+o que a plateia faz ou decide no fim, tema, modo e prazo. Leia `temas/<tema>/regras.md` antes de escrever qualquer
+texto, porque ele manda em voz, grafia de nomes e cargos, avisos obrigatórios e no que a marca nunca diz.
 
-### 8. Entrega
+Cada número, nome, lei, data e caso vem de fonte lida nesta sessão e fica anotado no briefing ao lado do slide que o
+usa. O que não tiver fonte sai do deck; o que ficou por confirmar aparece na tela com `[CONFERIR]` numa `.pilula`; o
+exemplo ilustrativo leva a pílula "ilustrativo". Material do usuário que não abrir: diga onde tentou e não invente o
+conteúdo. Telas de sistema real só entram por captura mascarada (`midia.md`).
 
-`./ap empacotar decks/<slug>` gera a pasta que abre sem internet, com o PDF de emergência; `./ap video` se pedido.
-Diga ao usuário onde está o pacote, como abrir (dois cliques em `apresentacao.html` no Chrome; F tela cheia; P tela
-do apresentador; o passador funciona como as setas) e que deve ensaiar uma vez no computador e no projetor do
-evento. Liste as pendências: `[CONFERIR]`, fonte provisória do tema, gastos de geração.
+Passa quando: o briefing não menciona mais o catálogo, e todo dado previsto tem fonte, `[CONFERIR]` ou "ilustrativo"
+anotado ao lado.
+
+### 4. Roteiro com um arquétipo por slide
+
+Leia `roteiro.md`. Escreva no briefing o arco e a tabela do roteiro (slide, manchete, o que a tela prova, clima e
+densidade, arquétipo, mídia e custo). O arquétipo de cada slide sai da função dele no arco, pela seção Arquétipos de
+`docs/cenas.md`, que diz também a densidade máxima de cada um. Mostre o roteiro ao usuário e espere o sim antes de
+construir.
+
+Passa quando: a lista de conferência do fim de `roteiro.md` fecha (o que ficar de fora tem motivo escrito no
+briefing) e o usuário aprovou o roteiro.
+
+### 5. Montar a partir do catálogo
+
+Trabalhe sobre o deck copiado, nunca do zero. Para cada linha do roteiro, use a section do catálogo com aquele
+arquétipo: troque o texto e os `data-*` (o contrato de cada um está em `docs/cenas.md`), o `data-slide` e a linha da
+lista `slides` no fim do arquivo. Arquétipo repetido no roteiro: copie a section e dê outro id. Slide do catálogo que o
+roteiro não usa: apague a section e a linha; ao apagar a demonstração, apague também a linha do mergulho dela.
+
+- A ordem dos slides é a da lista. `class="noite"` segue a coluna clima do roteiro.
+- `andamento` só se escreve para mudar o sentido de uma passagem: `corte` quando o assunto muda, `capitulo` no
+  respiro que fecha uma parte. O resto sai do padrão da biblioteca.
+- Cada slide tem `notas` para leitura de relance e `titulo` curto; `segura: 3` ou 4 na abertura e no fecho.
+- Texto sempre no HTML (o oráculo mede o HTML), dados em `data-*`, cor só por `var()` do tema. Reescreva também o
+  comentário do topo do arquivo e o `<title>`.
+- Monte primeiro a abertura, o slide mais denso e um slide com dado; rode `./ap sondar` e `./ap paradas` neles e
+  corrija o sistema visual antes de seguir. Erro de sistema achado no fim custa o deck inteiro.
+
+Cena própria só quando nenhum arquétipo conta aquilo (na prévia, um slide em 14: o pedido que vira arquivo). Ela entra
+por `m.cenas({id: (t, c) => {...}})`, com `conteudo(c)` de `motor/cenas.js` e os ajudantes da seção Ajudantes de
+`docs/palco.md`, numa section com `data-arquetipo` de nome próprio. Trilha, câmera, zonas noite e viagens continuam
+com a biblioteca; nunca reescreva esse maquinário no deck.
+
+Passa quando: `./ap lint decks/<slug>` diz "lint: tudo certo"; `./ap sondar decks/<slug>` termina sem ERRO; e
+`grep -o "titulo: '[^']*'" decks/<slug>/deck.html` lista exatamente os slides do roteiro, na ordem dele.
+
+### 6. Mídia
+
+Leia `midia.md` e suba a escada de mídia do mais barato ao mais caro. Imagem gerada sai do `./ap imagens`, a partir de
+`decks/<slug>/imagens.toml`:
+
+```bash
+./ap imagens decks/<slug>                          # situação e custo, sem gastar
+./ap imagens decks/<slug> --rascunhos -n 3         # rascunhos e storyboard/candidatos.png
+./ap imagens decks/<slug> --final nome=2 outra=1   # com a escolha do usuário na folha de candidatos
+./ap midia conferir decks/<slug>
+```
+
+Mostre `storyboard/candidatos.png` ao usuário e gere o final com a escolha dele. Vídeo por código vem do
+claude_video_maker por `./ap trazer` e entra no arquétipo demonstracao. Cada marcador do catálogo é trocado pela mídia
+do deck ou sai com o slide, e a entrada dele sai do `midia/creditos.json`.
+
+Passa quando: `./ap imagens decks/<slug>` termina em "N de N prontas" (se o deck tem imagem gerada);
+`./ap midia conferir decks/<slug>` dá "0 erro(s)"; `grep -c marcador decks/<slug>/midia/creditos.json` dá 0; e todo
+slide com imagem gerada tem `.selo-ia`.
+
+### 7. Crítica, no mínimo três rodadas
+
+Leia `critica.md` e siga o procedimento de lá a cada rodada:
+
+```bash
+./ap sondar decks/<slug>
+./ap paradas decks/<slug> --viagens
+```
+
+Abra com Read a folha de contato (`storyboard/folha.png`), cada still (`storyboard/parada-NN-<id>.png`) e a folha das
+viagens (`storyboard/viagens.png`), e o PNG inteiro do quadro de viagem onde algo parecer errado. Responda a rubrica,
+nomeie os piores defeitos e corrija os três maiores. Registre cada rodada numa seção "Crítica" do briefing (defeito,
+evidência, correção). Quando a sessão puder despachar um subagente, use o prompt pronto de `critica.md`, que olha o deck
+sem o viés de quem o fez; senão, a própria sessão aplica a rubrica, na mesma ordem.
+
+Passa quando: há pelo menos três rodadas registradas e a última não achou defeito de gravidade alta ou média;
+`./ap sondar` termina sem ERRO; e cada AVISO restante foi corrigido, isento no HTML com motivo (`data-contraste-ok`,
+`data-ritmo-ok`, `ritmoOk`) ou justificado no briefing.
+
+### 8. Ensaio ao vivo com o usuário
+
+```bash
+./ap abrir decks/<slug>
+```
+
+Abre no Chrome. Peça ao usuário que passe o deck inteiro pelo passador ou pelas setas, com a tela do apresentador
+aberta (P), e que diga o que muda. Pedido de mudança volta ao passo 5 ou 6 e passa de novo por uma rodada do passo 7.
+
+Passa quando: o usuário aprovou o deck ao vivo.
+
+### 9. Entrega
+
+```bash
+./ap empacotar decks/<slug>   # pacote/ que abre sem internet, com o PDF de emergência
+./ap pdf decks/<slug>         # se o usuário quiser o PDF à parte
+./ap video decks/<slug>       # só se pedido
+```
+
+`pdf` e `empacotar` recusam deck com `[CONFERIR]` e listam cada ocorrência; `--rascunho` gera assim mesmo, só para
+ensaio. Diga ao usuário onde está o pacote e como abrir: dois cliques em `apresentacao.html` no Chrome, F tela cheia,
+P tela do apresentador, o passador funciona como as setas. Peça um ensaio no computador e no projetor do evento, com a
+luz da sala acesa, porque o projetor lava o marinho. Liste as pendências: `[CONFERIR]` restantes, fonte provisória do
+tema, avisos aceitos e o gasto de mídia somado do `midia/creditos.json`.
+
+Passa quando: `./ap empacotar decks/<slug>` termina em "pacote: ok, abre sem internet".
 
 ## Proibido
 
-- Fato sem fonte, logo redesenhado ou gerado por IA, foto de banco genérica, ícone como decoração.
-- Lista de tópicos como layout padrão; parágrafo em slide.
-- Texto abaixo de 30 px; cor, fonte ou logo escritos no deck em vez de vir do tema.
-- Recurso da internet em tempo de palco (fonte, vídeo, imagem, iframe): tudo local no pacote.
-- Gerar clipe pago sem o sim do usuário para aquele custo.
-- Copiar código ou texto do onetake (PolyForm Noncommercial): as ideias inspiraram o plano contínuo, o código é
-  próprio.
+- Fato sem fonte; logo redesenhado ou gerado por IA; pessoa real, foto de banco genérica ou ícone como decoração.
+- Texto dentro de imagem ou vídeo, lista de tópicos como layout, parágrafo em slide, texto abaixo de 30 px.
+- Cor, fonte ou logo escritos no deck: só `var()` do tema.
+- Animação fora do tempo: `setTimeout`, `Date.now()`, `Math.random()` sem semente, CSS transition (o lint barra).
+- Paralaxe, câmera inclinada, pulsos correndo pela trilha, `mix-blend-mode` ou `will-change` no `#mundo`, filtro SVG
+  de duotone ao vivo, notebook ou celular ilustrado como moldura, rabisco à mão em toda parada, número ilustrativo
+  gigante (`docs/cenas.md`, "O que a biblioteca não faz").
+- Recurso da internet em tempo de palco: fonte, vídeo, imagem e iframe ficam locais no pacote.
+- Gerar clipe pago (Omni, Veo) sem o sim do usuário para aquele clipe e aquele custo; subir o `--teto` do
+  `./ap imagens` sem o sim dele; gerador que o `padroes.toml` do tema não libera.
+- Copiar código ou texto do onetake (PolyForm Noncommercial).

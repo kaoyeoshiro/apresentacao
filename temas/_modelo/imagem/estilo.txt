@@ -1,0 +1,20 @@
+# Bíblia da série de imagens: <cliente>
+#
+# Copie esta pasta para temas/<cliente>/imagem/ e escreva, abaixo destes comentários, um parágrafo só, em inglês,
+# começando por "SERIES STYLE:". O ./ap imagens tira as linhas com # e põe o resto no início de todo prompt; com o
+# arquivo só de comentários, ele se recusa a gerar. A bíblia descreve a série, nunca a cena: a cena vai no
+# imagens.toml do deck. Uns 120 a 160 palavras, nesta ordem (exemplo inteiro em temas/cojuris/imagem/estilo.txt):
+#
+# 1. Gênero numa frase, no mundo do cliente: "quiet editorial still-life photography of everyday legal work".
+# 2. Tom em preto e branco, com meios-tons abertos e sombras suaves. O tratamento joga fora a cor do original e
+#    mapeia só a luminância na paleta do tema, então pedir cor é pedir o que não vai aparecer.
+# 3. Uma luz só, com direção e queda: "one soft directional window light from the upper left, gentle falloff".
+#    É a luz igual que faz imagens diferentes parecerem da mesma sessão de fotos.
+# 4. Lente e câmera: "50mm lens look, f/5.6, camera level or pointing straight down, no tilt".
+# 5. Materiais do dia a dia do cliente, objetos concretos e não símbolos (papel A4, pasta parda, elástico, grampo,
+#    carimbo, caneta, mesa de carvalho claro, na co.juris).
+# 6. Acabamento e negativas: grão fino, contraste natural, "no HDR, no lens flare, no bokeh balls, no haze"; "No
+#    text, letters, numbers, logos, emblems or watermarks" (os modelos escrevem texto falso); "No people, faces or
+#    hands"; e os clichês de proibidos.txt, com o termo em inglês.
+#
+# Depois de escrita, gere a mestra (docs/temas.md, seção Imagem) e guarde em refs/mestra.png ou .jpg.

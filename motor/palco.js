@@ -432,17 +432,17 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 	};
 
 	// Medida do DOM para o oráculo (./ap sondar): blocos de texto visíveis, em coordenadas do quadro.
+	const visivel = (el) => {
+		let alfa = 1;
+		for (let n = el; n && n !== document.documentElement; n = n.parentElement) {
+			const cs = getComputedStyle(n);
+			if (cs.display === 'none' || cs.visibility === 'hidden') return 0;
+			alfa *= parseFloat(cs.opacity);
+		}
+		return alfa;
+	};
 	const medir = () => {
 		const blocos = [];
-		const visivel = (el) => {
-			let alfa = 1;
-			for (let n = el; n && n !== document.documentElement; n = n.parentElement) {
-				const cs = getComputedStyle(n);
-				if (cs.display === 'none' || cs.visibility === 'hidden') return 0;
-				alfa *= parseFloat(cs.opacity);
-			}
-			return alfa;
-		};
 		for (const el of palcoEl.querySelectorAll('*')) {
 			const nos = [...el.childNodes].filter((n) => n.nodeType === 3 && n.textContent.trim());
 			if (!nos.length || el.closest('svg') && el.tagName.toLowerCase() !== 'text') continue;
@@ -466,18 +466,33 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 			// sem transbordar de fato: a folga vertical desconta essa diferença, linha a linha.
 			const lh = parseFloat(cs.lineHeight) * escala, linha = rg.getClientRects()[0];
 			const fv = 2 + (lh && linha ? Math.max(0, (linha.height - lh) / 2) : 0);
+			const ink = tinta(el, cs, escala, rt);
 			blocos.push({
 				texto, palavras: texto.split(' ').length, fonte: parseFloat(cs.fontSize) * escala,
 				x: rt.left, y: rt.top, w: rt.width, h: rt.height,
+				ty: ink.y, th: ink.h,
 				cor: cor.slice(0, 3), alfa: alfa * (cor[3] ?? 1),
 				transborda: rt.right > r.right + 2 || rt.bottom > r.bottom + fv || rt.left < r.left - 2 || rt.top < r.top - fv ||
 					(clipaPai && (rt.right > pai.getBoundingClientRect().right + 2 || rt.bottom > pai.getBoundingClientRect().bottom + fv)),
 				topoCortado,
+				// isenção declarada do aviso de contraste (temas/*/regras.md): o motivo, ou null
+				contrasteOk: el.closest('[data-contraste-ok]')?.dataset.contrasteOk ?? null,
 				id: el.id || '', caminho: caminho(el), ...origem(el),
 			});
 		}
 		return blocos;
 	};
+	// Imagens e vídeos visíveis no quadro: tamanho natural, caixa do layout (ow, oh) e caixa na tela (w, h, já com o
+	// zoom da câmera e os transforms), para o oráculo ver foto ampliada e medir o maior elemento da parada.
+	const midias = () => [...palcoEl.querySelectorAll('img, video')].map((el) => {
+		const r = el.getBoundingClientRect();
+		return {
+			tag: el.tagName.toLowerCase(), src: el.getAttribute('src') || '',
+			nw: el.naturalWidth ?? el.videoWidth, nh: el.naturalHeight ?? el.videoHeight, ow: el.offsetWidth, oh: el.offsetHeight,
+			x: r.left, y: r.top, w: r.width, h: r.height, fit: getComputedStyle(el).objectFit, alfa: visivel(el),
+			tempo: el.tagName === 'VIDEO' ? el.currentTime : null,
+		};
+	}).filter((m) => m.alfa >= 0.1 && m.w >= 1 && m.h >= 1 && m.x < W && m.x + m.w > 0 && m.y < H && m.y + m.h > 0);
 	// Topo da tinta da primeira linha do texto direto de `el`, em px da tela. A caixa do Range vai da ascendente da fonte
 	// ao pé, e o acento de uma maiúscula cabe nela: um pai que corta abaixo da ascendente (título justo dentro de .corte)
 	// apaga o acento sem que a caixa transborde. A altura da tinta vem do canvas, com a mesma fonte e a mesma caixa.
@@ -506,6 +521,21 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 		const m = pincel.measureText(s.trim());
 		return topo + (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent) * escala;
 	};
+	// Faixa vertical da tinta do bloco, em px da tela. A caixa do Range vai da ascendente ao pé da fonte, e numa linha
+	// display em caixa alta a tinta ocupa só o meio dela: dois títulos empilhados pela tinta (a abertura da biblioteca)
+	// têm caixas que se cruzam sem que as letras se toquem. A sobreposição do oráculo mede esta faixa.
+	const tinta = (el, cs, escala, rt) => {
+		const lingua = document.documentElement.lang || undefined;
+		let s = el.textContent.replace(/\s+/g, ' ').trim();
+		if (cs.textTransform === 'uppercase') s = s.toLocaleUpperCase(lingua);
+		else if (cs.textTransform === 'lowercase') s = s.toLocaleLowerCase(lingua);
+		pincel = pincel || document.createElement('canvas').getContext('2d');
+		pincel.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+		const m = pincel.measureText(s);
+		const y = rt.top + (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent) * escala;
+		const fim = rt.bottom - (m.fontBoundingBoxDescent - m.actualBoundingBoxDescent) * escala;
+		return fim > y ? {y, h: fim - y} : {y: rt.top, h: rt.height};
+	};
 	// Canto da seção do slide na tela: o oráculo desconta o movimento da transição entre slides, que é do tocador.
 	const origem = (el) => {
 		const sec = el.closest('[data-slide]');
@@ -527,7 +557,11 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 
 	const resumo = {
 		titulo, largura: W, altura: H, duracao,
-		slides: S.map((s) => ({id: s.id, titulo: s.titulo, notas: s.notas || '', t0: s.t0, t1: s.t1, passos: s.passos.map((p) => p.dur)})),
+		// viagem e camera dizem ao ./ap paradas --viagens onde fotografar; arquetipo (data-arquetipo da seção) e ritmoOk
+		// (data-ritmo-ok da seção, ou `ritmoOk` no slide que é só uma pose de câmera, sem seção) vão para o oráculo.
+		slides: S.map((s) => ({id: s.id, titulo: s.titulo, notas: s.notas || '', t0: s.t0, t1: s.t1, passos: s.passos.map((p) => p.dur),
+			viagem: s.viagem ?? null, camera: !!s.camera, arquetipo: secoes[s.id]?.dataset.arquetipo || '',
+			ritmoOk: s.ritmoOk ?? secoes[s.id]?.dataset.ritmoOk ?? null})),
 		paradas: paradas.map((p) => ({...p, id: S[p.slide].id})),
 	};
 
@@ -553,7 +587,7 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 		};
 		window.__events = () => ({T: linha.duracao, eventos: [], voz: []});
 		window.__palco = {
-			...resumo, linha: linha.trechos, medir,
+			...resumo, linha: linha.trechos, medir, midias,
 			ir: async (n, ocioso = 0) => { await ver(paradas[n].t, ocioso); await new Promise((r) => requestAnimationFrame(() => r())); },
 			ver: async (t, ocioso = 0) => { await ver(t, ocioso); await new Promise((r) => requestAnimationFrame(() => r())); },
 		};

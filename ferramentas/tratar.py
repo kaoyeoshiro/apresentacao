@@ -36,17 +36,23 @@ def _hex(v: str) -> tuple[int, int, int]:
     return tuple(int(v[i:i + 2], 16) for i in (0, 2, 4))
 
 
-def cores_do_tema(pasta: Path) -> dict[str, tuple[int, int, int]]:
+def tema_css(pasta: Path) -> Path:
+    """O tema.css ligado no deck.html; a pasta dele é a do tema (temas/<nome>/)."""
     doc = (pasta / "deck.html").read_text(encoding="utf-8")
     m = re.search(r"<link[^>]+href=\"([^\"]*tema\.css)\"", doc)
     if not m:
         raise SystemExit(f"{pasta / 'deck.html'} não liga nenhum tema.css")
-    css = (pasta / m.group(1)).resolve().read_text(encoding="utf-8")
+    return (pasta / m.group(1)).resolve()
+
+
+def cores_do_tema(pasta: Path) -> dict[str, tuple[int, int, int]]:
+    arq = tema_css(pasta)
+    css = arq.read_text(encoding="utf-8")
     cores = {}
     for nome in ("tinta", "destaque", "fundo"):
         c = re.search(rf"--cor-{nome}\s*:\s*(#[0-9a-fA-F]{{3,8}})\b", css)
         if not c:
-            raise SystemExit(f"{m.group(1)} não define --cor-{nome} em hex")
+            raise SystemExit(f"{arq} não define --cor-{nome} em hex")
         cores[nome] = _hex(c.group(1))
     return cores
 

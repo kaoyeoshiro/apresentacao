@@ -164,3 +164,28 @@ def test_conferir_acusa_o_que_o_chromium_nao_toca(deck, codec, pix, esperado, ca
         pytest.skip(f"{codec} deste ffmpeg não grava {pix}")
     assert midia.conferir(str(deck)) == 1
     assert any(esperado in l and l.startswith("ERRO") for l in capsys.readouterr().out.splitlines())
+
+
+@sem_ffmpeg
+def test_conferir_avisa_av1_sem_erro(deck, capsys):
+    """AV1 toca no Chromium do render; o aviso é de desempenho no notebook do palco."""
+    if not _tem_encoder("libsvtav1"):
+        pytest.skip("este ffmpeg não tem o encoder libsvtav1")
+    (deck / "midia").mkdir()
+    _clipe(deck / "midia" / "av1.mp4", "-c:v", "libsvtav1", "-pix_fmt", "yuv420p", "-g", "15", "-movflags",
+           "+faststart", segundos=1)
+    assert midia.conferir(str(deck)) == 0
+    assert any(l.startswith("AVISO") and "AV1" in l for l in capsys.readouterr().out.splitlines())
+
+
+@sem_ffmpeg
+def test_conferir_avisa_largura_acima_do_perfil_do_credito(deck, capsys):
+    (deck / "midia").mkdir()
+    for nome in ("largo.mp4", "solto.mp4"):
+        _ffmpeg("-f", "lavfi", "-i", "testsrc=size=2048x64:rate=30", "-t", 1, "-c:v", "libx264", "-g", "15",
+                "-pix_fmt", "yuv420p", "-movflags", "+faststart", deck / "midia" / nome)
+    midia.creditar(deck, deck / "midia" / "largo.mp4", ferramenta="trazido", preparo={"perfil": "tela"})
+    assert midia.conferir(str(deck)) == 0
+    linhas = capsys.readouterr().out.splitlines()
+    assert any(l.startswith("AVISO largo.mp4") and "perfil tela (1920 px)" in l for l in linhas)
+    assert not any("solto.mp4" in l for l in linhas)   # sem crédito vale o demo, 2560 px

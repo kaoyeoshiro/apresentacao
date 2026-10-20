@@ -1,0 +1,5 @@
+# Lista anticlichê de <cliente>: nada disto aparece em imagem gerada para a marca (um por linha, termo do prompt entre parênteses).
+# Pergunte ao usuário o que o setor dele já gastou (na co.juris: martelo, balança, Têmis, robô, cérebro de circuitos).
+# Cada item também entra, em inglês, nas negativas do estilo.txt.
+pessoa, rosto ou mão (people, faces, hands)
+texto, letras, números, logotipos (text, letters, numbers, logos)

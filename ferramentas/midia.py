@@ -13,8 +13,9 @@ midia/creditos.json (ferramenta, modelo, prompt, custo, origem, data).
     largura até 1920 (tela) ou 2560 (demo); --ate corta o fim, --capa grava midia/<nome>-capa.webp daquele instante.
     O original fica em midia/originais/.
 ./ap midia conferir <deck>
-    ffprobe em cada vídeo de midia/: ERRO para HEVC, ProRes, 10 bits, croma 4:2:2 ou 4:4:4; AVISO para quadro-chave
-    acima de 1 s e índice (moov) no fim do arquivo. Sai 1 se houver ERRO.
+    ffprobe em cada vídeo de midia/: ERRO para HEVC, ProRes, 10 bits, croma 4:2:2 ou 4:4:4; AVISO para AV1,
+    quadro-chave acima de 1 s, índice (moov) no fim do arquivo e largura acima do perfil do crédito (sem crédito,
+    2560 px). Sai 1 se houver ERRO.
 """
 from __future__ import annotations
 
@@ -183,8 +184,9 @@ def _moov_no_fim(arq: Path) -> bool:
     return "moov" in ordem and "mdat" in ordem and ordem.index("mdat") < ordem.index("moov")
 
 
-def checar_video(arq: Path) -> list[tuple[str, str]]:
-    s = json.loads(_sonda(arq, "-show_entries", "stream=codec_name,pix_fmt,bits_per_raw_sample:format=duration",
+def checar_video(arq: Path, perfil: str = "demo") -> list[tuple[str, str]]:
+    """Perfil é o do ./ap trazer que preparou o vídeo (no crédito); sem crédito, vale o maior."""
+    s = json.loads(_sonda(arq, "-show_entries", "stream=codec_name,pix_fmt,bits_per_raw_sample,width:format=duration",
                           "-of", "json"))
     if not s.get("streams"):
         return [("AVISO", "sem faixa de vídeo")]
@@ -193,6 +195,12 @@ def checar_video(arq: Path) -> list[tuple[str, str]]:
     achados = []
     if codec in ("hevc", "prores"):
         achados.append(("ERRO", f"{codec.upper()}: o Chromium não toca; reconverta com ./ap trazer"))
+    if codec == "av1":  # toca no Chromium do render (conferido em 19/10/2026, Chromium 156)
+        achados.append(("AVISO", "AV1: toca, mas pode decodificar em software no notebook do palco e engasgar; "
+                                 "./ap trazer converte para H.264"))
+    if int(st.get("width") or 0) > (larg := PERFIS.get(perfil, max(PERFIS.values()))):
+        achados.append(("AVISO", f"{st['width']} px de largura, acima do perfil {perfil} ({larg} px); "
+                                 f"pesa e engasga ao buscar; ./ap trazer --perfil {perfil} reduz"))
     if any(b in pix for b in ("p10", "p12")) or int(st.get("bits_per_raw_sample") or 8) > 8:
         achados.append(("ERRO", f"{pix}: mais de 8 bits por cor; reconverta com ./ap trazer"))
     if "422" in pix or "444" in pix:
@@ -213,11 +221,13 @@ def conferir(deck: str) -> int:
     pasta = _deck(deck)
     total = {"ERRO": 0, "AVISO": 0}
     midia = pasta / "midia"
+    creditos = json.loads((midia / "creditos.json").read_text()) if (midia / "creditos.json").exists() else []
+    perfis = {i["arquivo"]: (i.get("preparo") or {}).get("perfil") for i in creditos}
     for v in sorted(midia.iterdir() if midia.is_dir() else []):
         if v.name.startswith("._") or v.suffix.lower() not in VIDEOS:
             continue
         try:
-            achados = checar_video(v)
+            achados = checar_video(v, perfis.get(f"midia/{v.name}") or "demo")
         except subprocess.CalledProcessError:
             achados = [("ERRO", "o ffprobe não conseguiu ler o arquivo")]
         for nivel, msg in achados:

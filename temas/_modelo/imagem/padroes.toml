@@ -1,0 +1,27 @@
+# Padrões de imagem de <cliente>, lidos por ./ap imagens (contrato em docs/temas.md, seção Imagem).
+# O imagens.toml do deck só escreve o que foge daqui.
+
+# Geradores do image-video-api que o usuário liberou para esta marca, com a data. O rascunho é sempre gemini 1K.
+# Opções: gemini, azure-gpt-image, azure-flux, ideogram-4-5 (edição de uma imagem dada). Só o gemini tem preço na
+# tabela de ferramentas/imagens.py; os outros pedem preco_usd na entrada do imagens.toml.
+geradores = ["gemini"]
+
+# Tratamento por papel: as opções do ./ap tratar (tom, intensidade, largura, alfa, grao, semente, niveis, gama).
+# Comece pelos valores da co.juris e ajuste olhando os stills do deck sobre o fundo do tema.
+
+[tratamento.heroica]   # tela cheia, com texto por cima
+tom = "duotone"
+intensidade = 0.8
+largura = 2048
+
+[tratamento.objeto]    # recortado sobre o fundo do slide; a gama escurece os meios-tons para o papel não sumir
+tom = "duotone"
+intensidade = 0.8
+largura = 900
+alfa = true
+gama = 1.8
+
+[tratamento.textura]   # fundo de seção, sem recorte
+tom = "duotone"
+intensidade = 0.8
+largura = 2048
