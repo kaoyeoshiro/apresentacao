@@ -113,6 +113,8 @@ def _entrada(e: dict, pasta: Path, serie: dict) -> dict:
         if not arq or not uso or Path(arq).suffix.lower() not in (".png", ".jpg", ".jpeg"):
             raise erro(f"ref {r!r}: caminho PNG ou JPG a partir do deck, ou {{arquivo = ..., uso = ...}} "
                        "(o image-video-api recusa WebP)")
+        if Path(arq).is_absolute() or not (pasta / arq).resolve().is_relative_to(pasta.resolve()):
+            raise erro(f"ref {arq!r}: fica fora da pasta do deck; a referência vai para o gerador externo")
         refs.append((pasta / arq, uso))
     zona = e.get("zona_texto")
     if zona is not None and not (len(zona) == 4 and 0 <= zona[0] < zona[2] <= 1 and 0 <= zona[1] < zona[3] <= 1):
@@ -465,8 +467,11 @@ def situacao(deck: str) -> int:
     if fora:
         print(f"{fora} original(is) fora do git, que não vêm num checkout novo: os WebP valem como estão, mas --tratar "
               "e as refs em midia/originais/ pedem os originais de volta da cópia de segurança")
-    if not serie["estilo"] or not serie["mestra"]:
-        print(f"AVISO o tema não tem estilo.txt e refs/mestra em {serie['pasta']}: a série sai sem bíblia de estilo")
+    if not serie["estilo"]:
+        print(f"AVISO o tema não tem estilo.txt em {serie['pasta']}: a série sai sem bíblia de estilo")
+    elif not serie["mestra"]:
+        print(f"AVISO o tema não tem refs/mestra.png ou .jpg em {serie['pasta']}: gere a mestra antes dos finais "
+              "(docs/temas.md, seção Imagem)")
     return 0
 
 

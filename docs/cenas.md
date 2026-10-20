@@ -37,7 +37,7 @@ A entrada do slide aceita os campos do palco (`id`, `titulo`, `notas`, `segura`,
 
 | campo | efeito |
 |---|---|
-| `andamento` | `corte`, `curta`, `media`, `longa`, `capitulo` ou `mergulho` (tabela abaixo); `viagem` e `recuo` explícitos vencem |
+| `andamento` | `corte`, `curta`, `media`, `longa`, `capitulo` ou `mergulho` (tabela abaixo; `capítulo`, com acento, também vale); `viagem` e `recuo` explícitos vencem |
 | `passos` | duração do clique em segundos; o padrão é a espera da viagem mais a duração do arquétipo, nunca menos que a viagem mais 0,4 s nem que o fim do vídeo |
 | `dy`, `vao` | degrau vertical e vão horizontal até o slide anterior, em px do mundo |
 | `x`, `y` | posição absoluta no mundo, quando a regra automática não serve |
@@ -55,11 +55,10 @@ com 400 px de anoitecer de cada lado; vizinhos noite dividem a mesma zona.
 para cenas próprias: `m.secao(id)`, `m.T0[id]` e `m.V[id]` (início e duração da viagem), `m.kCam(t, id)`,
 `m.proximo(id)`, `m.depois(f)` (desenho que atravessa slides, roda depois de todas as cenas) e `m[arquetipo](id,
 opções)`. Em `m.cenas(ajustes)`, `ajustes[id]` é um objeto de opções do arquétipo ou uma cena inteira `(t, c) =>
-{...}`, que substitui a da biblioteca; numa cena própria, `conteudo(c)` (exportado) dá os segundos do conteúdo, que
-começa antes de a câmera pousar, 0,5 s nas viagens de até 1 s e na metade das mais longas, para a viagem nunca
-atravessar um quadro vazio. O script mede uma vez, no primeiro quadro, e também põe no `#palco` três variáveis que o
-tema não tem: `--sinal-noite` (o dourado como texto na zona noite, puxado para a cor do texto quando o tema escuro não
-dá 3:1 ali), `--sobre-destaque` (texto sobre o dourado) e `--cor-sombra` (a mais escura entre tinta e fundo).
+{...}`, que substitui a da biblioteca (seção Cena própria, abaixo). O script mede uma vez, no primeiro quadro, e põe
+no `#palco` as variáveis que o tema não tem: `--sinal-noite` (o dourado como texto na zona noite, puxado para a cor
+do texto quando não dá 3:1 ali), `--sobre-destaque` (texto sobre o dourado), `--cor-sombra` (a mais escura entre
+tinta e fundo) e, no tema escuro, as quatro da zona noite (seção Partitura de luz).
 `m.cenas()` monta o DOM das peças (células, barras, ícones) e se chama uma vez só, na chamada do `palco`.
 
 Trocar, apagar e reordenar não mexem em script. Para apagar, tire a section e a linha da lista; ao apagar uma
@@ -87,10 +86,18 @@ O andamento é a duração e o recuo da viagem da câmera. O padrão sai do arqu
 O claro é a base e a noite marca o momento forte. Abertura de capítulo, respiro, demonstração e fecho vão na noite;
 explicação, número e fonte ficam no claro. O oráculo avisa quando três slides seguidos têm o mesmo clima e a mesma
 faixa de palavras, e quando passam mais de cinco sem respiro (até 12 palavras ou um texto de 200 px), de modo que a
-alternância é regra e não gosto. O dourado tem quatro usos, a trilha, a palavra `.sinal`, a `.marca` do fio e a barra
-que vence, e cada slide acende no máximo uma coisa dourada além da trilha; a exceção é a viagem, em que cada nome que
-recebe um objeto acende depois do pouso, um de cada vez, e por isso dois ou três objetos bastam. No tema escuro
-(`noite`) a zona noite fica clara, e a biblioteca corrige sozinha o contraste do dourado ali.
+alternância é regra e não gosto. O dourado tem cinco usos, a trilha, a palavra `.sinal`, a `.marca` do fio, a barra
+que vence e o marco de agora do tempo, e cada slide acende no máximo uma coisa dourada além da trilha; a exceção é a viagem, em que cada nome que
+recebe um objeto acende depois do pouso, um de cada vez, e por isso dois ou três objetos bastam.
+
+A zona noite tem quatro variáveis da biblioteca, que o CSS usa em tudo o que mora nela (fundo da zona, véu da
+abertura, holofote e legenda do mergulho, moldura do vídeo, textos e linhas): `--noite`, `--sobre-noite`,
+`--suave-sobre-noite` e `--linha-sobre-noite`. No tema claro valem a tinta e as cores "sobre tinta" do tema, como na
+prévia. No tema escuro (tinta mais clara que o fundo, como o `noite`), inverter para a tinta poria um bloco creme no
+meio da palestra; a zona fica então num tom abaixo do fundo, puxado 6% para o dourado, com a tinta clara por cima, e
+o holofote escurece em vez de clarear. A diferença para os slides claros (que no tema escuro também são escuros) é
+de temperatura e não de luz, por isso o capítulo se marca também pela foto e pelo título grande da abertura. Um
+tema escuro que queira outro tom define `--cor-noite` no `tema.css`.
 
 ## Peças comuns
 
@@ -103,6 +110,42 @@ clique: acima da duração do arquétipo o elemento não chega a aparecer na par
 cenas.js põe o selo à esquerda da pílula, na mesma faixa, porque acima dela ficam as legendas dos objetos e abaixo
 corre a trilha; na noite o selo já mora no canto de cima, e na viagem, embaixo da foto. `.display` é o texto grande em
 caixa alta da fonte de título, `.etiqueta` o rótulo pequeno solto e `.sinal` a palavra dourada.
+
+## Cena própria
+
+Só quando nenhum arquétipo conta aquilo (skill, passo 5). A section vai sem `data-arquetipo`, e a cena entra em
+`m.cenas({id: (t, c) => {...}})`; trilha, câmera, zona noite e viagem continuam com a biblioteca. Para o mesmo ritmo
+dos arquétipos, `motor/cenas.js` exporta o acabamento: `conteudo(c)` dá os segundos do conteúdo, que começa antes de
+a câmera pousar (0,5 s nas viagens de até 1 s, a metade nas mais longas); `titulo(sec, x, c)` faz o rótulo e a
+manchete entrarem juntos, com o encaixe numa linha (`encaixar(el)`, também exportado) e prontos no clique de um
+corte; e `fim(sec, x, t0)` traz pílula e selo por último, a partir de `t0`, e cada `data-entra` no seu segundo. O
+resto vem dos ajudantes de `docs/palco.md` (`surgir`, `revelar`, `tracar`, `molaAR`, `faixa`...). Sem `passos` na
+entrada, o clique dura a espera da viagem mais 2 s.
+
+```html
+<section data-slide="carimbo" class="noite">
+  <p class="rotulo">Revisão</p>
+  <h2 class="manchete">A minuta sai carimbada</h2>
+  <p class="display carimbo">Aprovado</p>
+  <p class="pilula">ilustrativo</p>
+</section>
+```
+
+```js
+import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
+import {palco, surgir, molaAR} from '../../motor/palco.js';
+const m = mundo(slides);
+palco({slides: m.slides, desenhar: m.desenhar, cenas: m.cenas({
+  carimbo: (t, c) => {
+    const sec = m.secao('carimbo'), x = conteudo(c);
+    titulo(sec, x, c);
+    surgir(sec.querySelector('.carimbo'), molaAR(x - 0.4), {dy: 0, escala: 1.4});
+    fim(sec, x, 1.0);
+  },
+})});
+```
+
+A posição e o corpo do `.carimbo` vão no `<style>` do deck, só com `var()` do tema.
 
 ## Arquétipos
 
@@ -176,8 +219,8 @@ vira número gigante.
 
 Duas versões lado a lado sem nome (teste cego, antes e depois), separadas por um fio; o texto de cada uma é
 desenhado em linhas cinza (`data-linhas`, largura de cada linha em %, até seis) e a `.janela.escolhida` ganha o
-círculo na letra. Sem mídia; no lugar das linhas cinza cabe uma frase real curta por janela, se a comparação for de
-texto.
+círculo na letra. Sem mídia. Se a comparação for de texto, troque as linhas cinza por uma frase real curta (até 15
+palavras) em `<p class="janela-txt">` dentro de cada janela, sem `data-linhas`; ela entra com a janela.
 
 ```html
 <section data-slide="arena" data-arquetipo="comparacao">
@@ -209,6 +252,30 @@ Sem mídia.
     <p class="caixa-txt">pode rodar no<br>escritório</p>
   </div>
   <p class="ramos-leg">Legenda curta.</p>
+</section>
+```
+
+### tempo
+
+Agenda, cronograma, linha do tempo ou etapas: o que acontece em que ordem (a semana de estudo, as fases de um
+processo, os passos de um método). Até seis marcos numa linha horizontal; cada `li` de `.etapas` tem a data, a hora
+ou o número do passo num `<b>` de até 8 caracteres, em cima da linha, e um texto de até quatro palavras embaixo. A
+linha se traça da esquerda, cada marco surge quando ela passa, e o `li.agora` (um só, o marco que importa: hoje, a
+fase atual, o prazo) enche de dourado depois de todos. Legenda `.tempo-leg` opcional, de até dez palavras. Densidade:
+até uns 40 palavras com a legenda. Sem mídia.
+
+```html
+<section data-slide="semana" data-arquetipo="tempo">
+  <p class="rotulo">Rotina</p>
+  <h2 class="manchete">A semana tem um ritmo fixo</h2>
+  <ol class="etapas">
+    <li><b>seg</b>lei seca</li>
+    <li><b>ter</b>questões</li>
+    <li class="agora"><b>qua</b>simulado</li>
+    <li><b>qui</b>revisão dos erros</li>
+    <li><b>sex</b>descanso</li>
+  </ol>
+  <p class="tempo-leg">O simulado de quarta mede a semana.</p>
 </section>
 ```
 

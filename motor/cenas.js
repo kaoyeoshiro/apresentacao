@@ -77,7 +77,8 @@ export function mundo(lista, {degraus = DEGRAUS} = {}) {
 		if (!s.mergulho && !sec) throw new Error(`cenas: slide "${s.id}" sem <section data-slide="${s.id}">`);
 		const tipo = tipoDe(s), ant = lista[i - 1], tipoAnt = tipoDe(ant);
 		if (tipo && !ARQUETIPOS[tipo]) throw new Error(`cenas: arquétipo "${tipo}" não existe (${Object.keys(ARQUETIPOS).join(', ')})`);
-		const nome = s.andamento ?? (i === 0 ? 'corte' : s.mergulho ? 'mergulho' : tipo === 'abertura' ? 'capitulo'
+		// "capítulo", com acento, vale como "capitulo" (o roteiro escreve com acento)
+		const nome = (s.andamento?.normalize('NFD').replace(/[\u0300-\u036f]/g, '')) ?? (i === 0 ? 'corte' : s.mergulho ? 'mergulho' : tipo === 'abertura' ? 'capitulo'
 			: tipoAnt === 'abertura' || tipo === 'viagem' ? 'media' : ant?.mergulho || tipo === 'demonstracao' ? 'longa' : 'curta');
 		const and = ANDAMENTOS[nome];
 		if (!and) throw new Error(`cenas: andamento "${nome}" não existe (${Object.keys(ANDAMENTOS).join(', ')})`);
@@ -125,13 +126,19 @@ export function mundo(lista, {degraus = DEGRAUS} = {}) {
 	const kCam = (t, id) => (V[id] > 0 ? entradaSaida(faixa(t - T0[id], 0, V[id])) : t > T0[id] ? 1 : 0);
 	const proximo = (id) => slides[slides.findIndex((s) => s.id === id) + 1]?.id;
 
-	// 5. dourado sobre a noite: no tema escuro a zona noite é clara e o dourado cheio fica abaixo de 3:1 ali; o sinal
-	// passa a vir puxado para a cor do texto da noite. Texto sobre o dourado (a .marca) usa a tinta ou o fundo, o que
-	// contrastar mais com ele. A sombra dos objetos recortados é a mais escura das duas (no tema escuro, o fundo).
+	// 5. zona noite e dourado sobre ela. No tema escuro (tinta mais clara que o fundo) a zona não inverte para a tinta
+	// creme: fica num tom abaixo do fundo, puxado para o dourado (ou a --cor-noite do tema), com a tinta clara por
+	// cima, e o holofote, o véu e a legenda vêm junto. O dourado como texto ali passa a vir puxado para a cor do texto
+	// da noite quando não dá 3:1. Texto sobre o dourado (a .marca) usa a tinta ou o fundo, o que contrastar mais com
+	// ele. A sombra dos objetos recortados é a mais escura das duas (no tema escuro, o fundo).
 	const sonda = html(palcoEl, 'span'), dourado = corDe(sonda, '--cor-destaque'), tinta = corDe(sonda, '--cor-tinta'), fundo = corDe(sonda, '--cor-fundo');
-	const cTinta = contraste(dourado, tinta), cFundo = contraste(dourado, fundo);
-	if (cTinta < 3) palcoEl.style.setProperty('--sinal-noite', 'color-mix(in srgb, var(--cor-destaque) 60%, var(--cor-sobre-tinta))');
-	palcoEl.style.setProperty('--sobre-destaque', cTinta >= cFundo ? 'var(--cor-tinta)' : 'var(--cor-fundo)');
+	if (lum(tinta) > lum(fundo)) {
+		const escuro = {'--noite': 'var(--cor-noite, color-mix(in srgb, var(--cor-destaque) 6%, var(--cor-fundo)))',
+			'--sobre-noite': 'var(--cor-tinta)', '--suave-sobre-noite': 'var(--cor-tinta-suave)', '--linha-sobre-noite': 'var(--cor-linha)'};
+		for (const k in escuro) palcoEl.style.setProperty(k, escuro[k]);
+	}
+	if (contraste(dourado, corDe(sonda, '--noite')) < 3) palcoEl.style.setProperty('--sinal-noite', 'color-mix(in srgb, var(--cor-destaque) 60%, var(--sobre-noite))');
+	palcoEl.style.setProperty('--sobre-destaque', contraste(dourado, tinta) >= contraste(dourado, fundo) ? 'var(--cor-tinta)' : 'var(--cor-fundo)');
 	palcoEl.style.setProperty('--cor-sombra', lum(tinta) <= lum(fundo) ? 'var(--cor-tinta)' : 'var(--cor-fundo)');
 	sonda.remove();
 
@@ -204,7 +211,7 @@ export function mundo(lista, {degraus = DEGRAUS} = {}) {
 			tracar(n.base, kb);
 			// pads: visitado em dourado cheio, futuro só em contorno (o miolo tem a cor do fundo da zona)
 			const [pe, pd] = n.pads, chegou = i === 0 ? kb > 0 : kv >= 1;
-			pe.style.fill = chegou ? 'var(--cor-destaque)' : n.noite ? 'var(--cor-tinta)' : 'var(--cor-fundo)';
+			pe.style.fill = chegou ? 'var(--cor-destaque)' : n.noite ? 'var(--noite)' : 'var(--cor-fundo)';
 			pd.style.fill = 'var(--cor-destaque)';
 			vis(pd, kb >= 1);
 			if (n.fim) {
@@ -241,10 +248,12 @@ export function mundo(lista, {degraus = DEGRAUS} = {}) {
 }
 
 // ---------- peças comuns às cenas ----------
+// Exportadas para a cena própria ter o mesmo acabamento dos arquétipos: titulo(sec, x, c) faz rótulo e manchete
+// (com o encaixe), e fim(sec, x, t0) faz pílula, selo e data-entra; x é conteudo(c). Exemplo em docs/cenas.md.
 
 // Manchete numa linha de até 1680 px: o corpo desce até 56 px; abaixo disso ela quebra (.quebra) e o console avisa.
 const encaixadas = new WeakSet();
-const encaixar = (el) => {
+export const encaixar = (el) => {
 	if (encaixadas.has(el)) return;
 	encaixadas.add(el);
 	const tam = parseFloat(getComputedStyle(el).fontSize), w = el.offsetWidth;
@@ -254,7 +263,7 @@ const encaixar = (el) => {
 	console.warn(`cenas: manchete longa demais, quebra em duas linhas e aperta o conteúdo; encurte: "${el.textContent.trim()}"`);
 };
 // Rótulo e manchete entram juntos; num corte seco já estão na tela no clique.
-const titulo = (sec, x, c) => {
+export const titulo = (sec, x, c) => {
 	const k = (d) => (c.slide.viagem === 0 && c.slide.i > 0 ? (x > 0 ? 1 : 0) : molaAR(x - d));
 	const r = sec.querySelector(':scope > .rotulo'), m = sec.querySelector(':scope > .manchete');
 	if (r) revelar(r, k(0));
@@ -264,7 +273,7 @@ const titulo = (sec, x, c) => {
 // dois caem no mesmo canto (slide claro), o selo vai para a esquerda da pílula, na mesma faixa: subir o selo o poria
 // sobre as legendas dos objetos, e descer, sobre a trilha.
 const aoLado = new WeakSet();
-const fim = (sec, x, t0) => {
+export const fim = (sec, x, t0) => {
 	const pil = sec.querySelector(':scope > .pilula'), selo = sec.querySelector(':scope > .selo-ia');
 	if (pil && selo && !aoLado.has(sec)) {
 		aoLado.add(sec);
@@ -314,6 +323,7 @@ const DURACAO = {
 	numero: (sec) => Math.max(2.4, agenda(marcas(sec)).fim + 0.35),
 	comparacao: () => 2.8,
 	ramos: () => 2.2,
+	tempo: (sec) => 1.9 + 0.12 * Math.max(0, sec.querySelectorAll('.etapas > li').length - 4),
 	objetos: () => 2.1,
 	viagem: () => 2.0,
 	fios: (sec) => 2.45 + 0.18 * (sec.querySelectorAll('.linha[data-fonte]').length - 1),
@@ -766,6 +776,42 @@ const demonstracao = (m, id) => {
 	};
 };
 
+// tempo: agenda, cronograma, linha do tempo ou etapas. Cada li de .etapas é um marco (<b> com a data ou a hora, em
+// cima da linha, e o texto embaixo); a linha se traça da esquerda, cada marco surge quando ela passa, e o marco
+// .agora ganha o ponto dourado, que cresce depois de todos. Os marcos se distribuem por igual entre 120 e 1800 px.
+const LINHA_Y = 600;
+const tempo = (m, id) => {
+	const sec = m.secao(id), itens = [...sec.querySelectorAll('.etapas > li')], n = itens.length || 1, passo = 1680 / n;
+	const camada = svg(sec, 'svg', {class: 'tempo-linha', viewBox: '0 0 1920 1080'});
+	sec.prepend(camada);
+	const linha = svg(camada, 'path', {d: `M120 ${LINHA_Y}H1800`});
+	const marcos = itens.map((li, k) => {
+		const cx = 120 + passo * (k + 0.5);
+		Object.assign(li.style, {left: `${cx - passo / 2 + 16}px`, width: `${passo - 32}px`});
+		const agora = li.classList.contains('agora');
+		const ponto = svg(camada, 'circle', {cx, cy: LINHA_Y, r: agora ? 20 : 13, class: agora ? 'agora' : ''});
+		ponto.style.transformOrigin = `${cx}px ${LINHA_Y}px`;
+		return {li, ponto, agora, t: 0.1 + 0.9 * (cx - 120) / 1680};   // quando a linha passa por ele
+	});
+	const leg = sec.querySelector('.tempo-leg'), tAgora = 1.25;
+	return (t, c) => {
+		const x = conteudo(c);
+		titulo(sec, x, c);
+		tracar(linha, faixa(x, 0.1, 1.0));
+		for (const {li, ponto, agora, t: tm} of marcos) {
+			const k = molaAR(x - tm);
+			surgir(li, k, {dy: 14});
+			// o anel do marco .agora já é dourado; o miolo enche de dourado com a mola, depois de todos
+			const q = agora ? molaAR(x - tAgora, {resposta: 0.45, amortecimento: 0.7}) : 0;
+			ponto.style.transform = `scale(${clamp(k, 0, 1.2) * (1 + 0.25 * q)})`;
+			ponto.style.fill = agora && q > 0 ? `color-mix(in srgb, var(--cor-destaque) ${(100 * clamp(q, 0, 1)).toFixed(1)}%, var(--ponto-tempo))` : '';
+			vis(ponto, k > 0);
+		}
+		if (leg) revelar(leg, molaAR(x - 1.4));
+		fim(sec, x, 1.55);
+	};
+};
+
 // respiro: uma frase curta (até 12 palavras), grande, em linhas (.respiro > span), centrada na altura.
 const respiro = (m, id) => {
 	const sec = m.secao(id), frase = sec.querySelector('.respiro'), linhas = [...frase.children];
@@ -802,4 +848,4 @@ const fecho = (m, id) => {
 	};
 };
 
-export const ARQUETIPOS = {abertura, escolha, numero, comparacao, ramos, objetos, viagem, fios, demonstracao, respiro, fecho};
+export const ARQUETIPOS = {abertura, escolha, numero, comparacao, ramos, tempo, objetos, viagem, fios, demonstracao, respiro, fecho};

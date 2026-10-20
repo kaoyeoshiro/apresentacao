@@ -9,7 +9,7 @@ parada por clique. Para qualquer pedido de apresentação, siga a skill `.claude
 - `motor/`: `palco.js` (tocador ao vivo, tela do apresentador, modo render, oráculo no navegador), `tempo.js`
   (curvas, mola, aleatório com semente), `camera.js` (plano contínuo). Contrato em `docs/palco.md`.
 - `motor/cenas.js` e `motor/cenas.css`: a biblioteca do plano contínuo (mundo, trilha dourada, zonas noite, viagens
-  e os 11 arquétipos de slide). Contrato em `docs/cenas.md`.
+  e os 12 arquétipos de slide). Contrato em `docs/cenas.md`.
 - `temas/`: um design system por pasta (`noite`, `cojuris`, `pge`, `_modelo`), com `imagem/` para a série de imagens
   geradas. Contrato em `docs/temas.md`.
 - `decks/<slug>/`: uma apresentação por pasta (`deck.html`, `briefing.md`, `imagens.toml`, `midia/` com

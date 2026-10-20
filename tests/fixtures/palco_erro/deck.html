@@ -1,0 +1,20 @@
+<!doctype html>
+<!-- Deck que lança erro ao montar (arquétipo que não existe): sondar e paradas param logo, com a mensagem do deck,
+     em vez de esperar 180 s por um TimeoutError (tests/test_palco.py). -->
+<html lang="pt-BR">
+<head><meta charset="utf-8">
+<link rel="stylesheet" href="../../../temas/noite/tema.css">
+<link rel="stylesheet" href="../../../motor/cenas.css">
+</head>
+<body>
+<div id="palco"><div id="mundo">
+  <section data-slide="a" data-arquetipo="agenda"><h2 class="manchete">Arquétipo errado</h2></section>
+</div></div>
+<script type="module">
+import {palco} from '../../../motor/palco.js';
+import {mundo} from '../../../motor/cenas.js';
+const m = mundo([{id: 'a', titulo: 'A'}]);
+palco({slides: m.slides, cenas: m.cenas(), desenhar: m.desenhar});
+</script>
+</body>
+</html>

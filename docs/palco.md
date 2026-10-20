@@ -199,6 +199,8 @@ Seletor com cara de hex (`#fade`), `url(#id)`, `transparent`, `currentColor` e p
 Mede o DOM e os pixels em cada parada e sai com código 1 se houver ERRO. As regras de hierarquia, escala e sequência
 olham a parada final de cada slide e o deck inteiro; os limiares delas foram calibrados na prévia do curso
 (`decks/previa-curso-ia`) e na primeira versão dela (commit a04455e), toda clara e sem nada grande, que reprova.
+Deck que lança erro ao abrir (arquétipo ou andamento que não existe, lista de slides inválida) para `sondar`,
+`paradas` e as outras ferramentas na hora, com a mensagem do deck, em vez de esperar o limite de 180 s.
 
 | medida | ERRO | AVISO |
 |---|---|---|

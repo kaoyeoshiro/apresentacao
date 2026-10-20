@@ -4,6 +4,7 @@ import json
 import os
 import re
 import shutil
+import time
 from pathlib import Path
 
 import pytest
@@ -184,6 +185,14 @@ def test_video_que_nao_abre_falha_sem_pendurar():
     deck = Path(__file__).parent / "fixtures" / "palco_sem_video" / "deck.html"
     with pytest.raises(Exception, match="vídeo não abriu"):
         palco.fotografar(deck)
+
+
+def test_deck_que_lanca_erro_falha_rapido_com_a_mensagem():
+    deck = Path(__file__).parent / "fixtures" / "palco_erro" / "deck.html"
+    t0 = time.monotonic()
+    with pytest.raises(html.ErroDoDeck, match='arquétipo "agenda" não existe'):
+        palco.sondar(deck)
+    assert time.monotonic() - t0 < 30
 
 
 @pytest.mark.parametrize("tema", ["cojuris", "pge"])

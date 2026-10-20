@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import tempfile
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -20,6 +21,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 from playwright.sync_api import Error as PlaywrightError
+from playwright.sync_api import TimeoutError as PlaywrightTimeout
 from playwright.sync_api import sync_playwright
 
 from . import config
@@ -87,13 +89,42 @@ def _servir(comp: Path):
     return srv
 
 
+class ErroDoDeck(RuntimeError):
+    """O deck lançou erro ao abrir (arquétipo ou andamento que não existe, lista de slides inválida...)."""
+
+
+def esperar(pg, expr: str, segundos: float) -> None:
+    """Espera `expr` ficar verdadeira na página, mas para logo, com a mensagem do deck, se ele lançar erro antes:
+    sem isso, um erro de digitação no deck vira 180 s de espera e um TimeoutError sem a causa."""
+    fim = time.monotonic() + segundos
+    while True:
+        try:
+            pg.wait_for_function(expr, timeout=500)
+            return
+        except PlaywrightTimeout:
+            if pg.erros_do_deck:
+                raise ErroDoDeck(f"o deck parou com erro: {pg.erros_do_deck[0]}") from None
+            if time.monotonic() > fim:
+                raise
+
+
 def _abrir(p, comp: Path, args: tuple[str, ...] = ()):
     srv = _servir(comp)
     rel = comp.resolve().relative_to(config.RAIZ).as_posix()
     nav = p.chromium.launch(args=list(args))
     pg = nav.new_page(viewport={"width": 1920, "height": 1920})
-    pg.goto(f"http://127.0.0.1:{srv.server_address[1]}/{rel}")
-    pg.wait_for_function("!!(window.__meta && window.__seek)", timeout=180000)
+    # erro não tratado do script e console.error do deck; recurso que falta (404) não para nada aqui
+    pg.erros_do_deck = []
+    pg.on("pageerror", lambda e: pg.erros_do_deck.append(str(e)))
+    pg.on("console", lambda m: m.type == "error" and not m.text.startswith("Failed to load resource")
+          and pg.erros_do_deck.append(m.text))
+    try:
+        pg.goto(f"http://127.0.0.1:{srv.server_address[1]}/{rel}")
+        esperar(pg, "!!(window.__meta && window.__seek)", 180)
+    except BaseException:
+        nav.close()
+        srv.shutdown()
+        raise
     meta = pg.evaluate("window.__meta")
     pg.evaluate("document.fonts.ready.then(() => 0)")  # texto em canvas com webfont atrasada sairia na fonte de reserva
     pg.set_viewport_size({"width": meta["largura"], "height": meta["altura"]})

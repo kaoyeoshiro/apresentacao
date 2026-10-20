@@ -37,10 +37,15 @@ Suba um degrau só quando o de baixo não prova a ideia.
 
 `temas/<tema>/imagem/` guarda a bíblia de estilo (`estilo.txt`, em inglês, prefixada a todo prompt), a lista
 anticlichê (`proibidos.txt`), os geradores liberados e o tratamento por papel (`padroes.toml`) e a placa-mestra
-(`refs/mestra.png` ou `.jpg`, a Image 1 de toda geração). Hoje só `cojuris` tem a pasta. Para outro tema, antes da
-primeira imagem: copie `temas/_modelo/imagem/`, escreva a bíblia pelas seis decisões de `docs/temas.md` (seção
-Imagem), pergunte ao usuário quais geradores ele libera e gere a mestra como lá se descreve. Sem bíblia, o comando
-gera com aviso e a série perde a âncora; não aceite isso.
+(`refs/mestra.png` ou `.jpg`, a Image 1 de toda geração). `cojuris`, `noite` e `pge` têm a pasta; só a `cojuris`
+tem a mestra. Os geradores já estão no `padroes.toml` (nos temas novos, só o `gemini`, o único com preço na tabela) e
+não se pergunta por eles: outro gerador entra só se o usuário pedir. Tema sem mestra: a mestra é a primeira linha do
+`imagens.toml` do deck, gerada como em `docs/temas.md` (seção Imagem), com custo na coluna mídia e custo do roteiro e
+escolha do usuário na folha de candidatos; o original vai para `temas/<tema>/imagem/refs/` e a entrada sai do deck.
+Sem mestra o comando gera com aviso e a série perde a âncora; não aceite isso. Tema novo copia
+`temas/_modelo/imagem/` e escreve a bíblia pelas seis decisões de `docs/temas.md`; num tema escuro, tire a `gama` do
+tratamento de objeto, que acinzenta o papel sobre o fundo escuro. A heroica num tema escuro fica escura como na
+prévia: o tratamento leva o preto da foto ao fundo e o branco à tinta, e o véu da abertura usa a cor da zona noite.
 
 ## Imagens do deck: `imagens.toml` e `./ap imagens`
 
@@ -121,9 +126,10 @@ dentro da `.tela`, no HTML (`docs/cenas.md`, demonstracao).
 
 Vídeo por código, sem custo:
 
-1. No claude_video_maker (pasta vizinha), escreva uma composição HTML em `videos/ap-<slug>/` pelo contrato do motor
-   HTML de lá (`docs/motores.md`, seção HTML, com `engines/html/exemplos/ondas.html` de exemplo): a interface
-   imitada, com dado fictício, em 2560 px de largura para o zoom do mergulho ficar nítido.
+1. No claude_video_maker (pasta vizinha, fora deste repositório: escrever lá pede o sim do usuário na conversa),
+   escreva uma composição HTML em `videos/ap-<slug>/` pelo contrato do motor HTML de lá (`docs/motores.md`, seção
+   HTML, com `engines/html/exemplos/ondas.html` de exemplo): a interface imitada, com dado fictício, em 2560 px de
+   largura para o zoom do mergulho ficar nítido.
 2. Renderize: `./cvm html videos/ap-<slug>/comp.html --saida videos/ap-<slug>/output/demo.mp4`.
 3. Traga para o deck: `./ap trazer decks/<slug> <caminho do mp4> --origem "./cvm html, código próprio, caso fictício"
    --perfil demo --capa 0`, que prepara o vídeo para o palco (H.264, quadro-chave a cada 0,5 s, sem áudio) e grava a

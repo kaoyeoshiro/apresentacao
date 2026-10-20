@@ -54,7 +54,12 @@ class _Deck:
 
     def __init__(self, p, deck: Path):
         self.srv, self.nav, self.pg, self.meta = html._abrir(p, deck)
-        self.pg.wait_for_function("!!window.__palco", timeout=60000)
+        try:
+            html.esperar(self.pg, "!!window.__palco", 60)
+        except BaseException:
+            self.nav.close()
+            self.srv.shutdown()
+            raise
         self.info = self.pg.evaluate("({titulo: __palco.titulo, slides: __palco.slides, paradas: __palco.paradas, linha: __palco.linha})")
 
     def foto(self, n: int, ocioso: float = 0.0) -> bytes:
@@ -103,7 +108,11 @@ def _abrir(deck: Path):
     from playwright.sync_api import sync_playwright
 
     pw = sync_playwright().start()
-    d = _Deck(pw, deck)
+    try:
+        d = _Deck(pw, deck)
+    except BaseException:
+        pw.stop()   # deck que não abre não pode deixar o Playwright preso para a próxima ferramenta
+        raise
     d._pw = pw
     return d
 

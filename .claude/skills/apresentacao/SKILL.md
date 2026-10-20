@@ -12,7 +12,7 @@ trilha dourada contínua, partitura de claro e escuro, imagens em série, vídeo
 
 O modo padrão é o plano contínuo, montado a partir do catálogo `decks/catalogo/` com a biblioteca `motor/cenas.js` e
 `motor/cenas.css`. A biblioteca já faz o mundo, a trilha, as zonas noite, as viagens de câmera, a duração de cada
-clique e onze arquétipos de slide; o deck escreve só o conteúdo. Use a biblioteca antes de escrever qualquer maquinário
+clique e doze arquétipos de slide; o deck escreve só o conteúdo. Use a biblioteca antes de escrever qualquer maquinário
 próprio, e comece cada slide escolhendo o arquétipo no roteiro.
 
 Leia cada referência no passo em que ela entra: `roteiro.md` (passo 4), `midia.md` (passo 6) e `critica.md` (passo 7),
@@ -59,7 +59,7 @@ Passa quando: tema, modo, público, duração e mensagem estão respondidos, e a
 ./ap sondar decks/<slug>
 ```
 
-O deck novo traz os 12 slides do catálogo (um por arquétipo e um mergulho), o `briefing.md` do catálogo e a
+O deck novo traz os 13 slides do catálogo (um por arquétipo e um mergulho), o `briefing.md` do catálogo e a
 mídia-marcador dele, com crédito. No modo slides, o molde é `decks/demo/` e vale `docs/palco.md` no lugar de
 `docs/cenas.md`; os passos 3 a 9 são os mesmos.
 
@@ -88,7 +88,8 @@ densidade, arquétipo, mídia e custo). O arquétipo de cada slide sai da funç�
 construir.
 
 Passa quando: a lista de conferência do fim de `roteiro.md` fecha (o que ficar de fora tem motivo escrito no
-briefing) e o usuário aprovou o roteiro.
+briefing), cada linha da tabela cabe na sua faixa de densidade (respiro até 12 palavras, nenhuma parada acima de 45)
+e o usuário aprovou o roteiro.
 
 ### 5. Montar a partir do catálogo
 
@@ -106,10 +107,11 @@ roteiro não usa: apague a section e a linha; ao apagar a demonstração, apague
 - Monte primeiro a abertura, o slide mais denso e um slide com dado; rode `./ap sondar` e `./ap paradas` neles e
   corrija o sistema visual antes de seguir. Erro de sistema achado no fim custa o deck inteiro.
 
-Cena própria só quando nenhum arquétipo conta aquilo (na prévia, um slide em 14: o pedido que vira arquivo). Ela entra
-por `m.cenas({id: (t, c) => {...}})`, com `conteudo(c)` de `motor/cenas.js` e os ajudantes da seção Ajudantes de
-`docs/palco.md`, numa section com `data-arquetipo` de nome próprio. Trilha, câmera, zonas noite e viagens continuam
-com a biblioteca; nunca reescreva esse maquinário no deck.
+Cena própria só quando nenhum arquétipo conta aquilo (na prévia, um slide em 14: o pedido que vira arquivo). A
+section vai sem `data-arquetipo` (um nome fora da biblioteca para o deck com erro), e a cena entra por
+`m.cenas({id: (t, c) => {...}})`, com `conteudo`, `titulo` e `fim` de `motor/cenas.js` para o mesmo ritmo dos
+arquétipos e os ajudantes de `docs/palco.md`; o exemplo está em `docs/cenas.md`, seção Cena própria. Trilha, câmera,
+zonas noite e viagens continuam com a biblioteca; nunca reescreva esse maquinário no deck.
 
 Passa quando: `./ap lint decks/<slug>` diz "lint: tudo certo"; `./ap sondar decks/<slug>` termina sem ERRO; e
 `grep -o "titulo: '[^']*'" decks/<slug>/deck.html` lista exatamente os slides do roteiro, na ordem dele.
@@ -126,13 +128,19 @@ Leia `midia.md` e suba a escada de mídia do mais barato ao mais caro. Imagem ge
 ./ap midia conferir decks/<slug>
 ```
 
+Todo tema de `temas/` tem a série em `imagem/` (bíblia, lista anticlichê e `padroes.toml`, com os geradores
+liberados), mas `noite` e `pge` ainda não têm a mestra. Sem ela o comando gera com aviso; não aceite isso: a mestra
+entra como primeira linha do `imagens.toml` (`docs/temas.md`, seção Imagem), com o custo dela na coluna mídia e custo
+do roteiro, e é escolhida na mesma folha de candidatos. Depois de copiada para `temas/<tema>/imagem/refs/`, a entrada
+e os arquivos dela saem do deck. Tema novo copia `temas/_modelo/imagem/` antes da primeira imagem.
+
 Mostre `storyboard/candidatos.png` ao usuário e gere o final com a escolha dele. Vídeo por código vem do
 claude_video_maker por `./ap trazer` e entra no arquétipo demonstracao. Cada marcador do catálogo é trocado pela mídia
 do deck ou sai com o slide, e a entrada dele sai do `midia/creditos.json`.
 
-Passa quando: `./ap imagens decks/<slug>` termina em "N de N prontas" (se o deck tem imagem gerada);
-`./ap midia conferir decks/<slug>` dá "0 erro(s)"; `grep -c marcador decks/<slug>/midia/creditos.json` dá 0; e todo
-slide com imagem gerada tem `.selo-ia`.
+Passa quando: `./ap imagens decks/<slug>` termina em "N de N prontas" sem nenhuma linha AVISO (se o deck tem imagem
+gerada); `./ap midia conferir decks/<slug>` dá "0 erro(s)"; `grep -c marcador decks/<slug>/midia/creditos.json` dá 0;
+e todo slide com imagem gerada tem `.selo-ia`.
 
 ### 7. Crítica, no mínimo três rodadas
 

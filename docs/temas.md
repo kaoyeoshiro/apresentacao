@@ -107,7 +107,10 @@ No `padroes.toml`, `geradores` lista os backends do image-video-api que o usuár
 `[tratamento.<papel>]` aceitam as opções do `./ap tratar` (`tom`, `intensidade`, `largura`, `alfa`, `grao`,
 `semente`, `niveis`, `gama`), e a entrada do deck sobrepõe só o que muda. Na co.juris, calibrados na prévia, a
 heroica é duotone 0,8 com 2048 px e o objeto é duotone 0,8, recortado (`alfa`), com 900 px e gama 1,8, que põe o
-papel em L* perto de 90 contra 98 do `--cor-fundo`. Papel sem tabela fica com o padrão do `./ap tratar`.
+papel em L* perto de 90 contra 98 do `--cor-fundo`; no tema escuro (`noite`) o objeto vai sem gama, porque o papel
+claro já se destaca do fundo e a gama o acinzentaria. O tratamento ordena as cores pela luz (o preto da foto vai à
+mais escura entre tinta e fundo), de modo que o tema escuro não sai em negativo. `noite` e `pge` têm bíblia, lista e
+padrões, mas ainda não a mestra. Papel sem tabela fica com o padrão do `./ap tratar`.
 
 ### O deck: `imagens.toml` e `./ap imagens`
 
@@ -183,4 +186,5 @@ arquivo avulso. Os dois ficam para exceção declarada ao usuário, e imagem da 
 4. Rodar o catálogo com o tema (`./ap novo _teste --tema <nome>`, `./ap sondar decks/_teste`, `./ap paradas
    decks/_teste`), repetir com `--modo slides` para a demonstração, olhar os stills e apagar as pastas de teste.
 5. Se a marca vai ter imagem gerada, copiar `temas/_modelo/imagem/`, escrever a bíblia e a lista anticlichê,
-   perguntar ao usuário quais geradores ele libera e gerar a mestra como descrito em Imagem.
+   acertar a `gama` do objeto pelo fundo (tema escuro sem ela) e gerar a mestra como descrito em Imagem. Os
+   geradores ficam no `gemini` do modelo; outro só entra se o usuário pedir, com a data no `padroes.toml`.

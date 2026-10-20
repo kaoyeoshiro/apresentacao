@@ -1,0 +1,24 @@
+# Padrões de imagem do tema noite, lidos por ./ap imagens (contrato em docs/temas.md, seção Imagem).
+# O imagens.toml do deck só escreve o que foge daqui.
+
+# Só o gemini, o padrão e o único com preço na tabela de ferramentas/imagens.py. Outro gerador entra aqui só se o
+# usuário pedir, com a data.
+geradores = ["gemini"]
+
+# Tratamento por papel. Tema escuro: o ./ap tratar leva o preto da foto ao --cor-fundo e o branco à --cor-tinta.
+
+[tratamento.heroica]   # tela cheia sob o véu escuro
+tom = "duotone"
+intensidade = 0.8
+largura = 2048
+
+[tratamento.objeto]    # recortado sobre o fundo escuro: sem gama, o papel fica claro e se destaca
+tom = "duotone"
+intensidade = 0.8
+largura = 900
+alfa = true
+
+[tratamento.textura]   # fundo de seção, sem recorte
+tom = "duotone"
+intensidade = 0.8
+largura = 2048

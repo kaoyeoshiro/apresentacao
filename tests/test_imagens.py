@@ -316,3 +316,51 @@ def test_imagens_toml_da_previa_vale_com_o_tema_real():
                                           "doc-modelo"]
     assert serie["estilo"].startswith("SERIES STYLE") and serie["mestra"].name.startswith("mestra")
     assert itens[3]["tratamento"]["gama"] == 1.8 and itens[5]["tratamento"]["gama"] == 2.6
+
+
+@pytest.mark.parametrize("tom", ["duotone", "tritone"])
+def test_tratamento_no_tema_escuro_nao_sai_em_negativo(tom):
+    """No tema noite a tinta é clara e o fundo escuro: o preto da foto vai ao fundo e o branco à tinta."""
+    from ferramentas import tratar
+    deck = config.DECKS / "_teste-tratar-noite"
+    deck.mkdir(exist_ok=True)
+    try:
+        (deck / "deck.html").write_text('<link rel="stylesheet" href="../../temas/noite/tema.css">', encoding="utf-8")
+        cores = tratar.cores_do_tema(deck)
+        assert sum(cores["tinta"]) > sum(cores["fundo"])
+        rgb = np.array([[[0.0, 0.0, 0.0], [255.0, 255.0, 255.0]]])
+        out = tratar.mapear(rgb, cores, tom=tom, intensidade=1, grao=0, lo=0, hi=1)
+        assert np.allclose(out[0, 0], cores["fundo"]) and np.allclose(out[0, 1], cores["tinta"])
+    finally:
+        shutil.rmtree(deck, ignore_errors=True)
+
+
+@pytest.mark.parametrize("tema", ["noite", "pge"])
+def test_temas_sem_mestra_tem_serie_e_geram_com_aviso(tema, capsys):
+    """noite e pge têm bíblia, lista e padrões; sem a mestra, o comando avisa e não aborta."""
+    img = config.TEMAS / tema / "imagem"
+    assert (img / "estilo.txt").is_file() and (img / "proibidos.txt").is_file() and (img / "padroes.toml").is_file()
+    deck = config.DECKS / f"_teste-serie-{tema}"
+    deck.mkdir(exist_ok=True)
+    try:
+        (deck / "deck.html").write_text(f'<link rel="stylesheet" href="../../temas/{tema}/tema.css">', encoding="utf-8")
+        (deck / "imagens.toml").write_text('[[imagem]]\nnome = "a"\nslide = "s"\npapel = "objeto"\nprompt = "A page."\n',
+                                           encoding="utf-8")
+        _, serie, itens = imagens.carregar(str(deck))
+        assert serie["estilo"].startswith("SERIES STYLE") and serie["geradores"] == ["gemini"]
+        assert ("gama" in itens[0]["tratamento"]) == (tema == "pge")   # tema escuro: o papel não leva gama
+        imagens._exigir_serie(serie)
+        imagens.situacao(str(deck))
+        assert "gere a mestra" in capsys.readouterr().out
+    finally:
+        shutil.rmtree(deck, ignore_errors=True)
+
+
+@pytest.mark.parametrize("ref", ["../../../segredo.png", "/etc/segredo.png"])
+def test_ref_fora_do_deck_e_recusada_antes_de_ir_ao_gerador(deck, gerador, ref):
+    chamadas, _ = gerador
+    toml = (deck / "imagens.toml").read_text().replace('"midia/originais/pasta.png"', f'"{ref}"')
+    (deck / "imagens.toml").write_text(toml)
+    with pytest.raises(SystemExit, match="fora da pasta do deck"):
+        imagens.rascunhos(str(deck), n=1)
+    assert chamadas == []

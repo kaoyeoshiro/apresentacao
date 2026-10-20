@@ -5,9 +5,10 @@
 
 Lê --cor-tinta, --cor-destaque e --cor-fundo do tema.css ligado no deck.html, calcula a luminância
 (0,2126R + 0,7152G + 0,0722B), estica os níveis, aplica a gama e mapeia cada pixel entre as cores do tema
-(duotone: tinta para fundo; tritone: tinta, destaque, fundo). Níveis: auto usa os percentis 0,5 e 99,5; claro não
-estica o escuro (papel sobre o off-white); fundo põe o topo na luminância do fundo da foto, que vira --cor-fundo e
-não deixa halo no recorte. Mistura com o original pela intensidade, soma um grão com semente e, com --alfa, torna
+(duotone: da mais escura para a mais clara entre tinta e fundo; tritone: a escura, destaque, a clara; assim o tema
+escuro não sai em negativo). Níveis: auto usa os percentis 0,5 e 99,5; claro não
+estica o escuro (papel sobre o off-white); fundo põe o topo na luminância do fundo da foto, que vira a cor mais clara
+do tema e não deixa halo no recorte. Mistura com o original pela intensidade, soma um grão com semente e, com --alfa, torna
 transparente o que estiver perto da cor do fundo da foto e ligado à borda, com borda suave de uns 2 px. O fundo é
 uma superfície ajustada à faixa da borda (acompanha o degradê da luz) e os limiares saem do ruído dessa faixa; o
 miolo do objeto fica opaco mesmo se tiver a cor do fundo. Grava midia/<nome>.webp (qualidade 85), guarda o original
@@ -82,7 +83,10 @@ def mapear(rgb: np.ndarray, cores: dict, *, tom="duotone", intensidade=0.8, grao
     if hi - lo > 1e-3:
         lum = np.clip((lum - lo) / (hi - lo), 0, 1)
     lum = lum ** gama
-    paradas = ["tinta", "fundo"] if tom == "duotone" else ["tinta", "destaque", "fundo"]
+    # luminância 0 vai à mais escura entre tinta e fundo e 1 à mais clara: no tema escuro (tinta clara) a foto não
+    # sai em negativo; o tritone mantém o destaque no meio
+    escura, clara = sorted(("tinta", "fundo"), key=lambda p: np.dot(cores[p], LUMA))
+    paradas = [escura, clara] if tom == "duotone" else [escura, "destaque", clara]
     xs = np.linspace(0, 1, len(paradas))
     tinto = np.stack([np.interp(lum, xs, [cores[p][c] for p in paradas]) for c in range(3)], axis=-1)
     out = intensidade * tinto + (1 - intensidade) * rgb

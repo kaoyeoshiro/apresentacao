@@ -26,7 +26,7 @@
   <section data-slide="abertura" data-arquetipo="abertura" class="noite">
     <div class="heroi-caixa"><img class="heroi" src="midia/heroi-aula1.webp" alt=""><div class="veu"></div></div>
     <p class="rotulo">Biblioteca de cenas · molde</p>
-    <div class="display ab-linha">Onze cenas,</div>
+    <div class="display ab-linha">Doze cenas,</div>
     <div class="display ab-linha">um só</div>
     <div class="display ab-linha sinal">plano</div>
     <p class="ab-sub">Cada slide é um arquétipo que se troca, se apaga ou muda de lugar sem refazer a trilha.</p>
@@ -86,6 +86,20 @@
   <section data-slide="respiro" data-arquetipo="respiro" class="noite">
     <p class="rotulo">Respiro</p>
     <p class="respiro"><span>Uma ideia por tela.</span><span>O resto é <span class="sinal">fala</span>.</span></p>
+  </section>
+
+  <!-- tempo: agenda, cronograma ou etapas; cada li é um marco (<b> em cima da linha, texto embaixo), .agora em dourado -->
+  <section data-slide="tempo" data-arquetipo="tempo">
+    <p class="rotulo">Tempo</p>
+    <h2 class="manchete">O deck se faz em cinco etapas</h2>
+    <ol class="etapas">
+      <li><b>passo 4</b>roteiro aprovado</li>
+      <li><b>passo 5</b>montar do catálogo</li>
+      <li><b>passo 6</b>mídia em série</li>
+      <li class="agora"><b>passo 7</b>três rodadas de crítica</li>
+      <li><b>passo 8</b>ensaio ao vivo</li>
+    </ol>
+    <p class="tempo-leg">O dourado marca a etapa em que o deck está.</p>
   </section>
 
   <!-- objetos: o pedido que se digita e os objetos recortados com legenda (os ids levam os papéis à viagem) -->
@@ -173,12 +187,13 @@ import {mundo} from '../../motor/cenas.js';
 // Uma linha por slide, na ordem da apresentação. Passos, viagem e recuo saem do arquétipo e do vizinho (docs/cenas.md);
 // `andamento: 'corte' | 'curta' | 'media' | 'longa' | 'capitulo' | 'mergulho'` troca a viagem, e `passos: [s]` a duração.
 const slides = [
-  {id: 'abertura', titulo: 'Onze cenas, um só plano', segura: 3, notas: 'Molde do plano contínuo: cada slide é um arquétipo de motor/cenas.js. A foto é marcador (selo no canto).'},
+  {id: 'abertura', titulo: 'Doze cenas, um só plano', segura: 3, notas: 'Molde do plano contínuo: cada slide é um arquétipo de motor/cenas.js. A foto é marcador (selo no canto).'},
   {id: 'escolha', titulo: 'Escolha', notas: 'Leque de candidatas com barras; a vencedora voa para a frase. Duas rodadas. Valores ilustrativos.'},
   {id: 'numero', titulo: 'Número', andamento: 'corte', notas: 'Corte seco: muda o assunto. A caneta corrige a grade e o placar sobe. Nota ilustrativa.'},
   {id: 'comparacao', titulo: 'Comparação', notas: 'Duas versões sem nome; a escolhida é circulada no fim.'},
   {id: 'ramos', titulo: 'Ramos', notas: 'A trilha se divide: em cima o que dá ritmo, embaixo o que prova a ideia.'},
   {id: 'respiro', titulo: 'Respiro', andamento: 'capitulo', notas: 'Pausa entre capítulos: uma frase, e a fala carrega o resto.'},
+  {id: 'tempo', titulo: 'Tempo', notas: 'Etapas numa linha: a linha se traça, cada marco surge quando ela passa e o de agora fica dourado.'},
   {id: 'objetos', titulo: 'Objetos', notas: 'O pedido se digita ao lado do material. Os papéis seguem para o próximo slide.'},
   {id: 'viagem', titulo: 'Viagem', notas: 'Os papéis atravessam grandes e entram nos arquivos da pasta do deck; o nome acende depois.'},
   {id: 'fios', titulo: 'Fios', notas: 'Cada linha aponta para a fonte; o dourado acende quando o fio chega. A linha sem fonte se confere ou sai.'},

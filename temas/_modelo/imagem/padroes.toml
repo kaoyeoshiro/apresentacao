@@ -14,11 +14,13 @@ tom = "duotone"
 intensidade = 0.8
 largura = 2048
 
-[tratamento.objeto]    # recortado sobre o fundo do slide; a gama escurece os meios-tons para o papel não sumir
+[tratamento.objeto]    # recortado sobre o fundo do slide
 tom = "duotone"
 intensidade = 0.8
 largura = 900
 alfa = true
+# Tema claro: gama 1,8 escurece os meios-tons para o papel branco não sumir no fundo claro (co.juris, PGE). Tema
+# escuro (tinta mais clara que o fundo): apague a linha, porque o papel claro já se destaca e a gama o acinzentaria.
 gama = 1.8
 
 [tratamento.textura]   # fundo de seção, sem recorte
