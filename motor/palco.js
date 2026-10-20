@@ -4,7 +4,7 @@
 //
 // Na composição continua valendo o contrato do motor HTML (nada de relógio, timer, aleatório sem semente ou CSS
 // transition). Este arquivo é o tocador e pode usar o relógio: ele só decide QUAL t desenhar, nunca o que há em t.
-import {clamp, lerp, faixa, saida, entradaSaida, mola} from './tempo.js';
+import {clamp, lerp, faixa, saida, entradaSaida, sair, chegar, mola, molaAR, escalonar, aleatorio, ruido} from './tempo.js';
 import {enquadrar, misturarPose, transformar} from './camera.js';
 
 // Mensagens entre o palco, a tela do apresentador e as prévias: só da mesma origem e só da janela esperada.
@@ -97,7 +97,8 @@ export function surgir(el, k, {dy = 28, dx = 0, escala = 0} = {}) {
 // Número que conta de `de` até `ate` (formato pt-BR).
 export function contar(el, k, de, ate, {casas = 0, prefixo = '', sufixo = ''} = {}) {
 	const v = lerp(de, ate, clamp(k));
-	el.textContent = prefixo + v.toLocaleString('pt-BR', {minimumFractionDigits: casas, maximumFractionDigits: casas}) + sufixo;
+	const texto = prefixo + v.toLocaleString('pt-BR', {minimumFractionDigits: casas, maximumFractionDigits: casas}) + sufixo;
+	if (el.textContent !== texto) el.textContent = texto;   // escrever o mesmo texto força layout a cada quadro
 }
 
 // Traço SVG que se desenha (o path recebe pathLength=1 na primeira chamada).
@@ -128,9 +129,10 @@ export function palavras(el, k, {atraso = 0.5} = {}) {
 }
 
 // Vídeo dentro do slide, em `seg` segundos do clipe. No render posiciona o quadro exato e espera; ao vivo deixa o
-// navegador tocar e só corrige se escorregar mais de 0,25 s. Devolve uma Promise que o palco aguarda sozinho.
+// navegador tocar e só corrige se escorregar mais de 0,25 s; parado (o tempo não avança), corrige acima de meio quadro
+// (`fps` do clipe), para a parada mostrar o mesmo quadro do PDF. No render, o palco aguarda a busca sozinho.
 const ultimoSeg = new WeakMap();
-export function video(el, seg) {
+export function video(el, seg, {fps = 30} = {}) {
 	seg = Math.max(0, Math.min(seg, (el.duration || Infinity) - 0.04));
 	if (estado.modo !== 'vivo') {
 		// Vídeo que não abriu nunca dispara `seeked`: falha alto em vez de pendurar o render.
@@ -150,10 +152,148 @@ export function video(el, seg) {
 	const andando = antes !== undefined && seg > antes;
 	if (andando && el.paused) el.play().catch(() => {});
 	if (!andando && !el.paused) el.pause();
-	if (Math.abs(el.currentTime - seg) > 0.25) el.currentTime = seg;
+	if (Math.abs(el.currentTime - seg) > (andando ? 0.25 : 0.5 / fps)) el.currentTime = seg;
 }
 
-export {clamp, lerp, faixa, saida, entradaSaida, mola, transformar, enquadrar};
+// Caixa de um elemento HTML no mundo ({x, y, w, h} em px de #mundo, ou de #palco fora do modo mundo), pela soma de
+// offsetLeft e offsetTop: ignora a escala do tocador, o zoom da câmera e os transforms das animações, que o
+// getBoundingClientRect inclui. Meça depois das fontes (o palco as carrega antes do primeiro quadro).
+export function caixa(el) {
+	if (!(el instanceof HTMLElement)) throw new Error('caixa() mede só elementos HTML');
+	const ref = el.closest('#mundo') || el.closest('#palco');
+	let x = 0, y = 0;
+	for (let n = el; n && n !== ref; n = n.offsetParent) {
+		x += n.offsetLeft;
+		y += n.offsetTop;
+		if (n.offsetParent && n.offsetParent !== ref) { x += n.offsetParent.clientLeft; y += n.offsetParent.clientTop; }
+	}
+	return {x, y, w: el.offsetWidth, h: el.offsetHeight};
+}
+// Medida única por elemento (só depois que ele entrou no layout).
+const medidas = new WeakMap();
+const medida = (el) => {
+	let c = medidas.get(el);
+	if (!c) { c = caixa(el); if (el.offsetParent) medidas.set(el, c); }
+	return c;
+};
+
+// Voo FLIP (First, Last, Invert, Play): o elemento fica no lugar dele no layout e é levado por translate e scale da
+// caixa `de` (k = 0) até a caixa `para` (k = 1). Caixa é um elemento (medido uma vez por caixa()) ou {x, y, w, h} no
+// mesmo sistema de caixa(); `para` nulo é o próprio lugar do elemento, e então k = 1 deixa o transform vazio. `arco`
+// levanta o meio do voo em px (-arco·sen(πk)). k pode passar de 1, como numa mola. Ancestrais sem transform próprio.
+export function voar(el, de, para, k, {arco = 0} = {}) {
+	const N = medida(el);
+	const A = de instanceof Element ? medida(de) : de || N, B = para instanceof Element ? medida(para) : para || N;
+	const L = (a, b) => (k === 1 ? b : lerp(a, b, k));
+	const x = L(A.x, B.x), y = L(A.y, B.y) - arco * Math.sin(Math.PI * clamp(k));
+	const sx = L(A.w, B.w) / (N.w || 1), sy = L(A.h, B.h) / (N.h || 1);
+	el.style.transformOrigin = '0 0';
+	el.style.transform = x === N.x && y === N.y && sx === 1 && sy === 1 ? '' : `translate(${x - N.x}px, ${y - N.y}px) scale(${sx}, ${sy})`;
+}
+
+// Texto que se digita. Na primeira chamada o texto vira duas partes, a visível e o resto com visibility: hidden (a
+// quebra de linha já é a final desde o começo), e cada caractere ganha um instante num ritmo de digitação fixado pela
+// semente, com pausa depois de vírgula e ponto. k de 0 a 1. `cursor: true` mostra uma barra fina depois do último
+// caractere visível: um span com fundo var(--cor-destaque), nunca um glifo (▌ cai na fonte do sistema). O deck
+// decide quando, por exemplo {cursor: k < 1}. Só texto simples, sem elementos dentro.
+const digitados = new WeakMap();
+export function digitar(el, k, {cursor = false, semente = 1} = {}) {
+	let d = digitados.get(el);
+	if (!d) {
+		const texto = el.textContent.replace(/\s+/g, ' ').trim();
+		const letras = [...new Intl.Segmenter('pt', {granularity: 'grapheme'}).segment(texto)].map((g) => g.segment);
+		const rnd = aleatorio(semente);
+		let soma = 0;
+		const acumulado = letras.map((c, i) => (soma += (0.6 + 0.8 * rnd()) * (/[,.;:!?]/.test(letras[i - 1] || '') ? 3 : 1)));
+		const [vis, ancora, barra, resto] = ['span', 'span', 'span', 'span'].map((t) => document.createElement(t));
+		resto.style.visibility = 'hidden';
+		// Âncora inline vazia: a barra é absoluta dentro dela, então não ocupa largura nem cria ponto de quebra.
+		ancora.style.position = 'relative';
+		barra.style.cssText = 'position:absolute;left:0;top:0;bottom:0;width:.08em;background:var(--cor-destaque)';
+		ancora.appendChild(barra);
+		el.replaceChildren(vis, ancora, resto);
+		d = {letras, limiares: acumulado.map((a) => a / soma), vis, resto, barra, n: -1};
+		digitados.set(el, d);
+	}
+	let n = 0;
+	while (n < d.letras.length && k >= d.limiares[n]) n++;
+	if (n !== d.n) {
+		d.vis.textContent = d.letras.slice(0, n).join('');
+		d.resto.textContent = d.letras.slice(n).join('');
+		d.n = n;
+	}
+	d.barra.style.visibility = cursor ? '' : 'hidden';
+}
+
+// Anotação à mão firme: um traço que se desenha (tracar) em volta do alvo ('circulo', 1,05 volta com o raio modulado
+// em 1,5% por ruido()) ou embaixo dele ('sublinhado'). Alvo HTML: uma camada SVG é criada no offsetParent dele, em
+// volta da caixa com `folga` px (se esse pai corta, anote o contêiner). Alvo <svg> (viewBox em px) ou <path>: o traço
+// ocupa a caixa do svg e o deck cuida do estilo. O desenho sai da semente e é guardado: o mesmo k dá o mesmo traço.
+const SVG = 'http://www.w3.org/2000/svg';
+const anotacoes = new WeakMap();
+const numero = (v) => v.toFixed(1);
+const tracoCirculo = (w, h, semente, m) => {
+	const cx = w / 2, cy = h / 2, rx = w / 2 - m, ry = h / 2 - m, a0 = -2.4, n = 120;
+	let d = '';
+	for (let i = 0; i <= n; i++) {
+		const u = i / n, a = a0 + u * 1.05 * 2 * Math.PI;
+		const f = 1 + 0.015 * (2 * ruido(a * 3, semente) - 1) + 0.02 * u;   // leve espiral: o fim passa por fora do começo
+		d += `${i ? 'L' : 'M'}${numero(cx + rx * f * Math.cos(a))} ${numero(cy + ry * f * Math.sin(a))}`;
+	}
+	return d;
+};
+const tracoSublinhado = (w, h, semente, m) => {
+	const n = 48, amp = Math.min(3, h / 2 - m);
+	let d = '';
+	for (let i = 0; i <= n; i++) {
+		const u = i / n;
+		d += `${i ? 'L' : 'M'}${numero(lerp(m, w - m, u))} ${numero(h / 2 + amp * (2 * ruido(u * 4, semente) - 1) - 2 * u)}`;
+	}
+	return d;
+};
+export function anotar(alvo, k, {forma = 'circulo', semente = 1, folga = 10} = {}) {
+	let path = anotacoes.get(alvo);
+	if (!path) {
+		const m = 8;   // margem para a ponta redonda e para o ruído não saírem da caixa
+		let w, h;
+		if (alvo instanceof SVGElement) {
+			const svg = alvo.ownerSVGElement || alvo;
+			const vb = svg.viewBox.baseVal;
+			w = vb && vb.width ? vb.width : svg.clientWidth;
+			h = vb && vb.height ? vb.height : svg.clientHeight;
+			path = alvo.tagName === 'path' ? alvo : svg.appendChild(document.createElementNS(SVG, 'path'));
+		} else {
+			const pai = alvo.offsetParent;
+			if (!pai || !alvo.offsetWidth) return;   // ainda fora do layout: tenta no próximo quadro
+			const ax = alvo.offsetLeft, ay = alvo.offsetTop, aw = alvo.offsetWidth, ah = alvo.offsetHeight;
+			// O círculo envolve as quinas do alvo: semieixos √2 vezes a meia caixa, mais a folga.
+			const c = forma === 'sublinhado'
+				? {x: ax - folga, y: ay + ah + 6 - 20, w: aw + 2 * folga, h: 40}
+				: {w: aw * Math.SQRT2 + 2 * (folga + m), h: ah * Math.SQRT2 + 2 * (folga + m)};
+			if (c.x === undefined) { c.x = ax + aw / 2 - c.w / 2; c.y = ay + ah / 2 - c.h / 2; }
+			const svg = document.createElementNS(SVG, 'svg');
+			svg.setAttribute('width', c.w);
+			svg.setAttribute('height', c.h);
+			svg.style.cssText = `position:absolute;left:${c.x}px;top:${c.y}px;overflow:visible;pointer-events:none`;
+			pai.appendChild(svg);
+			({w, h} = c);
+			path = svg.appendChild(document.createElementNS(SVG, 'path'));
+		}
+		if (path !== alvo) path.style.cssText = 'fill:none;stroke:var(--cor-destaque);stroke-width:6;stroke-linecap:round;stroke-linejoin:round';
+		path.setAttribute('d', forma === 'sublinhado' ? tracoSublinhado(w, h, semente, m) : tracoCirculo(w, h, semente, m));
+		anotacoes.set(alvo, path);
+	}
+	tracar(path, k);
+}
+
+// Aproximação lenta de foto (Ken Burns): começa em `escala` e assenta em scale(1) exato em k = 1, para a parada sair
+// nítida e igual por qualquer caminho. `origem` é o ponto que fica parado (transform-origin).
+export function kenburns(el, k, {escala = 1.06, origem = '50% 50%'} = {}) {
+	el.style.transformOrigin = origem;
+	el.style.transform = k >= 1 ? 'scale(1)' : `scale(${lerp(escala, 1, clamp(k))})`;
+}
+
+export {clamp, lerp, faixa, saida, entradaSaida, sair, chegar, mola, molaAR, escalonar, aleatorio, ruido, transformar, enquadrar};
 
 // ---------- o palco ----------
 
@@ -213,13 +353,18 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 		const c = caixaDe(s);
 		poses.push(c ? enquadrar(c, {largura: W, altura: H}, 0) : poses[i - 1] || {cx: W / 2, cy: H / 2, z: 1, rot: 0});
 	});
+	// Progresso suavizado da viagem do slide (viagem 0 é corte seco: faixa vira degrau).
+	const viagemK = (t, s) => {
+		const p0 = s.passos[0];
+		return entradaSaida(faixa(t, p0.t0, p0.t0 + Math.min(s.viagem ?? p0.dur, p0.dur)));
+	};
 	const camera = (t, s) => {
 		if (!s.passos.length || s.i === 0) return poses[s.i];
-		const p0 = s.passos[0];
-		const k = entradaSaida(faixa(t, p0.t0, p0.t0 + Math.min(s.viagem ?? p0.dur, p0.dur)));
+		const k = viagemK(t, s);
 		const pose = misturarPose(poses[s.i - 1], poses[s.i], k);
 		return s.recuo ? {...pose, z: pose.z * (1 - s.recuo * Math.sin(Math.PI * k))} : pose;
 	};
+	const kCamera = (t, s) => (usaCamera && s.i > 0 && s.camera ? viagemK(t, s) : 1);
 
 	const slideEm = (t) => S.find((s) => t <= s.t1 + 1e-9) || S[S.length - 1];
 
@@ -246,53 +391,58 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 	};
 
 	// Contexto de um slide em t: progresso linear de cada passo (p), segundos desde o início de cada passo (desde, para
-	// molas), entrada suavizada e `ocioso` (só no slide atual, parado numa parada).
-	const ctxDe = (s, t, ocioso, atual) => ({
+	// molas), entrada suavizada, `ocioso` (só no slide atual, parado numa parada), a pose da câmera em t e o progresso
+	// suavizado da viagem deste slide (kCamera: 0 antes, 1 depois e quando não há viagem).
+	const ctxDe = (s, t, ocioso, atual, pose) => ({
 		t, ocioso: atual ? ocioso : 0, modo: estado.modo, slide: s, i: s.i, atual, local: t - s.t0,
+		camera: pose, kCamera: kCamera(t, s),
 		passo: s.passos.findIndex((p) => t <= p.t1 + 1e-9),
 		p: (n) => (s.passos[n] ? faixa(t, s.passos[n].t0, s.passos[n].t1) : 0),
 		desde: (n) => t - (s.passos[n] ? s.passos[n].t0 : s.t1),
 		entrada: entradaSaida(faixa(t, s.passos[0].t0, s.passos[0].t1)),
 	});
-	const ctxEm = (t, ocioso) => {
+	const ctxEm = (t, ocioso, pose) => {
 		const s = slideEm(t);
 		const k = (id, n = 0) => {
 			const o = S.find((x) => x.id === id);
 			if (!o) throw new Error(`slide "${id}" não existe`);
-			return ctxDe(o, t, 0, false).p(n);
+			return ctxDe(o, t, 0, false, pose).p(n);
 		};
-		return {...ctxDe(s, t, ocioso, true), k, de: (id) => ctxDe(S.find((x) => x.id === id), t, 0, false)};
+		return {...ctxDe(s, t, ocioso, true, pose), k, de: (id) => ctxDe(S.find((x) => x.id === id), t, 0, false, pose)};
 	};
 
+	// Fontes carregadas antes do primeiro quadro, ao vivo e no render: as medidas (caixa, voar, anotar, oráculo) só
+	// valem com a métrica final, e document.fonts.ready não carrega fonte que ainda ninguém pediu.
+	const fontes = Promise.all([...document.fonts].map((f) => f.load().catch(() => {}))).then(() => document.fonts.ready);
+
 	let ver = async (t, ocioso = 0) => {
-		const ctx = ctxEm(t, ocioso);
-		if (usaCamera) {
-			const c = camera(t, ctx.slide);
-			mundoEl.style.transform = `translate(${W / 2}px, ${H / 2}px) rotate(${c.rot || 0}deg) scale(${c.z}) translate(${-c.cx}px, ${-c.cy}px)`;
-		}
+		await fontes;
+		const c = usaCamera ? camera(t, slideEm(t)) : {cx: W / 2, cy: H / 2, z: 1, rot: 0};
+		const ctx = ctxEm(t, ocioso, {...c});
+		if (usaCamera) mundoEl.style.transform = `translate(${W / 2}px, ${H / 2}px) rotate(${c.rot || 0}deg) scale(${c.z}) translate(${-c.cx}px, ${-c.cy}px)`;
 		visibilidade(t, ctx.slide);
 		estado.pendentes = [];
 		// Cada cena desenha o próprio slide a partir de t, então pular para qualquer instante dá o mesmo quadro. Desenha o
 		// slide atual e o anterior durante a entrada (no modo mundo, todos).
 		const s = ctx.slide, p0 = s.passos[0];
 		const vis = mundo ? S : s.i > 0 && t > p0.t0 && t < p0.t1 ? [S[s.i - 1], s] : [s];
-		for (const o of vis) if (cenas[o.id]) await cenas[o.id](t, o === s ? ctx : ctxDe(o, t, 0, false));
+		for (const o of vis) if (cenas[o.id]) await cenas[o.id](t, o === s ? ctx : ctxDe(o, t, 0, false, ctx.camera));
 		await desenhar(t, ctx);
 		if (estado.pendentes.length) await Promise.all(estado.pendentes);
 	};
 
 	// Medida do DOM para o oráculo (./ap sondar): blocos de texto visíveis, em coordenadas do quadro.
+	const visivel = (el) => {
+		let alfa = 1;
+		for (let n = el; n && n !== document.documentElement; n = n.parentElement) {
+			const cs = getComputedStyle(n);
+			if (cs.display === 'none' || cs.visibility === 'hidden') return 0;
+			alfa *= parseFloat(cs.opacity);
+		}
+		return alfa;
+	};
 	const medir = () => {
 		const blocos = [];
-		const visivel = (el) => {
-			let alfa = 1;
-			for (let n = el; n && n !== document.documentElement; n = n.parentElement) {
-				const cs = getComputedStyle(n);
-				if (cs.display === 'none' || cs.visibility === 'hidden') return 0;
-				alfa *= parseFloat(cs.opacity);
-			}
-			return alfa;
-		};
 		for (const el of palcoEl.querySelectorAll('*')) {
 			const nos = [...el.childNodes].filter((n) => n.nodeType === 3 && n.textContent.trim());
 			if (!nos.length || el.closest('svg') && el.tagName.toLowerCase() !== 'text') continue;
@@ -311,20 +461,80 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 			const texto = nos.map((n) => n.textContent).join(' ').replace(/\s+/g, ' ').trim();
 			const pai = el.parentElement, csPai = pai && getComputedStyle(pai);
 			const clipaPai = csPai && csPai.overflow !== 'visible';
+			const topoCortado = !!clipaPai && tintaTopo(el, cs, escala) < pai.getBoundingClientRect().top + pai.clientTop * escala - 1;
 			// Fonte com área de glifo maior que a entrelinha (título justo) passa da própria caixa em cima e embaixo
 			// sem transbordar de fato: a folga vertical desconta essa diferença, linha a linha.
 			const lh = parseFloat(cs.lineHeight) * escala, linha = rg.getClientRects()[0];
 			const fv = 2 + (lh && linha ? Math.max(0, (linha.height - lh) / 2) : 0);
+			const ink = tinta(el, cs, escala, rt);
 			blocos.push({
 				texto, palavras: texto.split(' ').length, fonte: parseFloat(cs.fontSize) * escala,
 				x: rt.left, y: rt.top, w: rt.width, h: rt.height,
+				ty: ink.y, th: ink.h,
 				cor: cor.slice(0, 3), alfa: alfa * (cor[3] ?? 1),
 				transborda: rt.right > r.right + 2 || rt.bottom > r.bottom + fv || rt.left < r.left - 2 || rt.top < r.top - fv ||
 					(clipaPai && (rt.right > pai.getBoundingClientRect().right + 2 || rt.bottom > pai.getBoundingClientRect().bottom + fv)),
+				topoCortado,
+				// isenção declarada do aviso de contraste (temas/*/regras.md): o motivo, ou null
+				contrasteOk: el.closest('[data-contraste-ok]')?.dataset.contrasteOk ?? null,
 				id: el.id || '', caminho: caminho(el), ...origem(el),
 			});
 		}
 		return blocos;
+	};
+	// Imagens e vídeos visíveis no quadro: tamanho natural, caixa do layout (ow, oh) e caixa na tela (w, h, já com o
+	// zoom da câmera e os transforms), para o oráculo ver foto ampliada e medir o maior elemento da parada.
+	const midias = () => [...palcoEl.querySelectorAll('img, video')].map((el) => {
+		const r = el.getBoundingClientRect();
+		return {
+			tag: el.tagName.toLowerCase(), src: el.getAttribute('src') || '',
+			nw: el.naturalWidth ?? el.videoWidth, nh: el.naturalHeight ?? el.videoHeight, ow: el.offsetWidth, oh: el.offsetHeight,
+			x: r.left, y: r.top, w: r.width, h: r.height, fit: getComputedStyle(el).objectFit, alfa: visivel(el),
+			tempo: el.tagName === 'VIDEO' ? el.currentTime : null,
+		};
+	}).filter((m) => m.alfa >= 0.1 && m.w >= 1 && m.h >= 1 && m.x < W && m.x + m.w > 0 && m.y < H && m.y + m.h > 0);
+	// Topo da tinta da primeira linha do texto direto de `el`, em px da tela. A caixa do Range vai da ascendente da fonte
+	// ao pé, e o acento de uma maiúscula cabe nela: um pai que corta abaixo da ascendente (título justo dentro de .corte)
+	// apaga o acento sem que a caixa transborde. A altura da tinta vem do canvas, com a mesma fonte e a mesma caixa.
+	let pincel = null;
+	const tintaTopo = (el, cs, escala) => {
+		const rg = document.createRange();
+		let s = '', topo = null;
+		linha: for (const n of el.childNodes) {
+			if (n.nodeType !== 3) continue;
+			for (let i = 0; i < n.data.length; i++) {
+				rg.setStart(n, i);
+				rg.setEnd(n, i + 1);
+				const b = rg.getClientRects()[0];
+				if (!b || !b.height) continue;
+				if (topo === null) topo = b.top;
+				else if (b.top > topo + b.height / 2) break linha;   // desceu para a segunda linha
+				s += n.data[i];
+			}
+		}
+		if (topo === null || !s.trim()) return Infinity;
+		const lingua = document.documentElement.lang || undefined;
+		if (cs.textTransform === 'uppercase') s = s.toLocaleUpperCase(lingua);
+		else if (cs.textTransform === 'lowercase') s = s.toLocaleLowerCase(lingua);
+		pincel = pincel || document.createElement('canvas').getContext('2d');
+		pincel.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+		const m = pincel.measureText(s.trim());
+		return topo + (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent) * escala;
+	};
+	// Faixa vertical da tinta do bloco, em px da tela. A caixa do Range vai da ascendente ao pé da fonte, e numa linha
+	// display em caixa alta a tinta ocupa só o meio dela: dois títulos empilhados pela tinta (a abertura da biblioteca)
+	// têm caixas que se cruzam sem que as letras se toquem. A sobreposição do oráculo mede esta faixa.
+	const tinta = (el, cs, escala, rt) => {
+		const lingua = document.documentElement.lang || undefined;
+		let s = el.textContent.replace(/\s+/g, ' ').trim();
+		if (cs.textTransform === 'uppercase') s = s.toLocaleUpperCase(lingua);
+		else if (cs.textTransform === 'lowercase') s = s.toLocaleLowerCase(lingua);
+		pincel = pincel || document.createElement('canvas').getContext('2d');
+		pincel.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+		const m = pincel.measureText(s);
+		const y = rt.top + (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent) * escala;
+		const fim = rt.bottom - (m.fontBoundingBoxDescent - m.actualBoundingBoxDescent) * escala;
+		return fim > y ? {y, h: fim - y} : {y: rt.top, h: rt.height};
 	};
 	// Canto da seção do slide na tela: o oráculo desconta o movimento da transição entre slides, que é do tocador.
 	const origem = (el) => {
@@ -347,7 +557,11 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 
 	const resumo = {
 		titulo, largura: W, altura: H, duracao,
-		slides: S.map((s) => ({id: s.id, titulo: s.titulo, notas: s.notas || '', t0: s.t0, t1: s.t1, passos: s.passos.map((p) => p.dur)})),
+		// viagem e camera dizem ao ./ap paradas --viagens onde fotografar; arquetipo (data-arquetipo da seção) e ritmoOk
+		// (data-ritmo-ok da seção, ou `ritmoOk` no slide que é só uma pose de câmera, sem seção) vão para o oráculo.
+		slides: S.map((s) => ({id: s.id, titulo: s.titulo, notas: s.notas || '', t0: s.t0, t1: s.t1, passos: s.passos.map((p) => p.dur),
+			viagem: s.viagem ?? null, camera: !!s.camera, arquetipo: secoes[s.id]?.dataset.arquetipo || '',
+			ritmoOk: s.ritmoOk ?? secoes[s.id]?.dataset.ritmoOk ?? null})),
 		paradas: paradas.map((p) => ({...p, id: S[p.slide].id})),
 	};
 
@@ -373,7 +587,7 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 		};
 		window.__events = () => ({T: linha.duracao, eventos: [], voz: []});
 		window.__palco = {
-			...resumo, linha: linha.trechos, medir,
+			...resumo, linha: linha.trechos, medir, midias,
 			ir: async (n, ocioso = 0) => { await ver(paradas[n].t, ocioso); await new Promise((r) => requestAnimationFrame(() => r())); },
 			ver: async (t, ocioso = 0) => { await ver(t, ocioso); await new Promise((r) => requestAnimationFrame(() => r())); },
 		};
@@ -433,10 +647,19 @@ function tocador({ver, resumo, palcoEl, previa}) {
 		history.replaceState(null, '', `#parada=${n}`);
 		avisarAp();
 	};
+	// Instante do trecho que está tocando: `vel` 3 quando um clique pediu pressa.
+	const tocado = (agora) => Math.min(paradas[tocando.para].t, tocando.de + ((agora - tocando.inicio) / 1000) * tocando.vel);
 	const proxima = () => {
-		if (tocando) chegou(tocando.para);                 // clique no meio da animação: completa e segue
+		// Clique no meio da animação: o resto dela toca em 3x e o trecho seguinte começa sozinho, sem salto. Um segundo
+		// clique durante a pressa completa na hora e segue.
+		if (tocando && tocando.vel === 1) {
+			const agora = performance.now();
+			tocando = {de: tocado(agora), para: tocando.para, inicio: agora, vel: 3, seguir: true};
+			return;
+		}
+		if (tocando) chegou(tocando.para);
 		if (atual >= paradas.length - 1) return;
-		tocando = {de: paradas[atual].t, para: atual + 1, inicio: performance.now()};
+		tocando = {de: paradas[atual].t, para: atual + 1, inicio: performance.now(), vel: 1};
 		avisarAp();
 	};
 	const anterior = () => { chegou(tocando ? Math.max(0, tocando.para - 1) : Math.max(0, atual - 1)); };
@@ -500,9 +723,9 @@ function tocador({ver, resumo, palcoEl, previa}) {
 		const agora = performance.now();
 		let t, ocioso = 0;
 		if (tocando) {
-			const alvo = paradas[tocando.para].t;
-			t = Math.min(alvo, tocando.de + (agora - tocando.inicio) / 1000);
-			if (t >= alvo) chegou(tocando.para);
+			const seguir = tocando.seguir;
+			t = tocado(agora);
+			if (t >= paradas[tocando.para].t) { chegou(tocando.para); if (seguir) proxima(); }
 		} else {
 			t = paradas[atual].t;
 			ocioso = (agora - chegada) / 1000;

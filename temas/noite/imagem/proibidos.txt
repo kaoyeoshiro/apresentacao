@@ -1,0 +1,12 @@
+# Lista anticlichê do tema noite: nada disto aparece em imagem gerada para ele (um por linha, termo do prompt entre parênteses).
+lâmpada acesa como ideia (light bulb)
+engrenagem (gears)
+cérebro (brain)
+foguete (rocket)
+alvo com flecha (target with arrow)
+peça de quebra-cabeça (puzzle pieces)
+troféu (trophy)
+ampulheta (hourglass)
+neon (neon light)
+pessoa, rosto ou mão (people, faces, hands)
+texto, letras, números, logotipos (text, letters, numbers, logos)

@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- Isenções declaradas e foto ampliada (tests/test_palco.py). O "IA" dourado de 96 px sobre o claro é isento por
+     data-contraste-ok; o texto dourado de 36 px com o mesmo atributo não é (a isenção só vale de 48 px para cima).
+     O passo longo do slide com vídeo tocando é isento por data-ritmo-ok; o do slide sem vídeo não é. A foto de
+     192×108 aparece em 960×540, ampliada 5x. Mídia: clipe.mp4 (testsrc do ffmpeg) e foto.png (degradê do PIL). -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Isenções</title>
+<style>
+  #palco { background: #FCF9F4; color: #0F2641; font-family: Helvetica, Arial, sans-serif; }
+  h2 { position: absolute; left: 160px; top: 140px; margin: 0; font-size: 72px; }
+  p { position: absolute; margin: 0; }
+  .ouro { color: #D49D38; }
+  #grande { left: 160px; top: 320px; font-size: 96px; }
+  #miudo { left: 160px; top: 520px; font-size: 36px; }
+  #clipe, #foto { position: absolute; left: 800px; top: 300px; width: 960px; height: 540px; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <section data-slide="contraste"><h2>Contraste</h2>
+    <p id="grande" class="ouro" data-contraste-ok="dourado oficial no nome, como na abertura">IA</p>
+    <p id="miudo" class="ouro" data-contraste-ok="tentativa em texto pequeno">texto dourado pequeno</p></section>
+  <section data-slide="video" data-ritmo-ok="o clipe mostra a demonstração inteira"><h2>Vídeo</h2>
+    <video id="clipe" src="clipe.mp4" muted playsinline preload="auto"></video></section>
+  <section data-slide="espera" data-ritmo-ok="sem vídeo nenhum"><h2>Espera</h2></section>
+  <section data-slide="foto"><h2>Foto</h2><img id="foto" src="foto.png" alt=""></section>
+</div>
+<script type="module">
+import {palco, video} from '../../../motor/palco.js';
+palco({
+  slides: [{id: 'contraste', passos: [0.4]}, {id: 'video', passos: [4.5]}, {id: 'espera', passos: [4.0]}, {id: 'foto', passos: [0.4]}],
+  cenas: {video: (t, c) => video(document.getElementById('clipe'), Math.max(0, c.desde(0)))},
+});
+</script>
+</body>
+</html>

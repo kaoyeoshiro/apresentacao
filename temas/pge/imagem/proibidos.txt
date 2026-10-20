@@ -1,0 +1,13 @@
+# Lista anticlichê da PGE-MS: nada disto aparece em imagem gerada para a marca (um por linha, termo do prompt entre parênteses).
+brasão, bandeira ou logo (coat of arms, flag, logo)
+martelo de juiz (gavel)
+balança da justiça (scales of justice)
+Têmis (Lady Justice statue)
+coluna ou mármore (column, marble)
+fachada de prédio público (government building)
+aperto de mão (handshake)
+robô (robot)
+cérebro de circuitos (circuit-board brain)
+holograma (hologram)
+pessoa, rosto ou mão (people, faces, hands)
+texto, letras, números, logotipos (text, letters, numbers, logos)

@@ -8,3 +8,7 @@ __pycache__/
 .venv/
 .env
 .pytest_cache/
+# originais e rascunhos de mídia ficam fora do git (pesados); entram só os arquivos que o deck usa e o creditos.json
+decks/*/midia/originais/
+# cache que o image-video-api grava ao lado de uma ref grande
+*.cache.jpg

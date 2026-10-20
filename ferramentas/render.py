@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import tempfile
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -20,6 +21,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 from playwright.sync_api import Error as PlaywrightError
+from playwright.sync_api import TimeoutError as PlaywrightTimeout
 from playwright.sync_api import sync_playwright
 
 from . import config
@@ -87,13 +89,42 @@ def _servir(comp: Path):
     return srv
 
 
-def _abrir(p, comp: Path):
+class ErroDoDeck(RuntimeError):
+    """O deck lançou erro ao abrir (arquétipo ou andamento que não existe, lista de slides inválida...)."""
+
+
+def esperar(pg, expr: str, segundos: float) -> None:
+    """Espera `expr` ficar verdadeira na página, mas para logo, com a mensagem do deck, se ele lançar erro antes:
+    sem isso, um erro de digitação no deck vira 180 s de espera e um TimeoutError sem a causa."""
+    fim = time.monotonic() + segundos
+    while True:
+        try:
+            pg.wait_for_function(expr, timeout=500)
+            return
+        except PlaywrightTimeout:
+            if pg.erros_do_deck:
+                raise ErroDoDeck(f"o deck parou com erro: {pg.erros_do_deck[0]}") from None
+            if time.monotonic() > fim:
+                raise
+
+
+def _abrir(p, comp: Path, args: tuple[str, ...] = ()):
     srv = _servir(comp)
     rel = comp.resolve().relative_to(config.RAIZ).as_posix()
-    nav = p.chromium.launch()
+    nav = p.chromium.launch(args=list(args))
     pg = nav.new_page(viewport={"width": 1920, "height": 1920})
-    pg.goto(f"http://127.0.0.1:{srv.server_address[1]}/{rel}")
-    pg.wait_for_function("!!(window.__meta && window.__seek)", timeout=180000)
+    # erro não tratado do script e console.error do deck; recurso que falta (404) não para nada aqui
+    pg.erros_do_deck = []
+    pg.on("pageerror", lambda e: pg.erros_do_deck.append(str(e)))
+    pg.on("console", lambda m: m.type == "error" and not m.text.startswith("Failed to load resource")
+          and pg.erros_do_deck.append(m.text))
+    try:
+        pg.goto(f"http://127.0.0.1:{srv.server_address[1]}/{rel}")
+        esperar(pg, "!!(window.__meta && window.__seek)", 180)
+    except BaseException:
+        nav.close()
+        srv.shutdown()
+        raise
     meta = pg.evaluate("window.__meta")
     pg.evaluate("document.fonts.ready.then(() => 0)")  # texto em canvas com webfont atrasada sairia na fonte de reserva
     pg.set_viewport_size({"width": meta["largura"], "height": meta["altura"]})
@@ -159,30 +190,47 @@ def stills(comp: Path, tempos: list[float], pasta: Path) -> None:
         srv.shutdown()
 
 
+# Ruído de rasterização do Chromium ao revisitar um instante (antialiasing de canto arredondado, transform de
+# identidade, raster parcial): até 5 níveis por canal medidos no catálogo com 61 instantes. Estado escondido de verdade
+# (objeto que some, quadro de vídeo errado) passa de 200.
+TOLERANCIA = 24
+
+
 def verificar(comp: Path, tempos: list[float]) -> bool:
     """Contrato "quadro = função pura do tempo": cada instante t renderizado depois de visitar outros
-    tempos (e numa página recém-aberta) tem de dar exatamente os mesmos pixels. Falha = estado
-    escondido (animação CSS, relógio, aleatório sem semente, acúmulo entre quadros)."""
-    import hashlib
+    tempos (e numa página recém-aberta) tem de dar os mesmos pixels, com folga de TOLERANCIA níveis por canal para o
+    ruído de rasterização. Falha = estado escondido (animação CSS, relógio, aleatório sem semente, acúmulo entre
+    quadros). O Chromium abre sem raster parcial, que é a maior fonte desse ruído."""
+    import io
+
+    from PIL import Image, ImageChops
 
     def foto(pg, meta, t):
         pg.evaluate("t => window.__seek(t)", t)
-        return hashlib.sha256(pg.screenshot(type="png", clip={"x": 0, "y": 0, "width": meta["largura"], "height": meta["altura"]})).hexdigest()
+        return pg.screenshot(type="png", clip={"x": 0, "y": 0, "width": meta["largura"], "height": meta["altura"]})
+
+    def diferenca(a: bytes, b: bytes) -> int:
+        """Maior diferença de um canal de um pixel entre os dois quadros, de 0 a 255."""
+        if a == b:
+            return 0
+        dif = ImageChops.difference(Image.open(io.BytesIO(a)).convert("RGB"), Image.open(io.BytesIO(b)).convert("RGB"))
+        return max(hi for _, hi in dif.getextrema())
 
     ok = True
+    args = ("--disable-partial-raster",)
     with sync_playwright() as p:
-        srv, nav, pg, meta = _abrir(p, comp)
+        srv, nav, pg, meta = _abrir(p, comp, args)
         primeira = {t: foto(pg, meta, t) for t in tempos}
         for t in reversed(tempos):          # revisita em outra ordem
-            if foto(pg, meta, t) != primeira[t]:
-                print(f"NÃO determinístico em t={t}s (mesma página, ordem diferente)")
+            if (d := diferenca(foto(pg, meta, t), primeira[t])) > TOLERANCIA:
+                print(f"NÃO determinístico em t={t}s (mesma página, ordem diferente; {d} níveis de diferença)")
                 ok = False
         nav.close()
         srv.shutdown()
-        srv, nav, pg, meta = _abrir(p, comp)   # página nova: isola estado de sessão
+        srv, nav, pg, meta = _abrir(p, comp, args)   # página nova: isola estado de sessão
         for t in tempos:
-            if foto(pg, meta, t) != primeira[t]:
-                print(f"NÃO determinístico em t={t}s (página nova)")
+            if (d := diferenca(foto(pg, meta, t), primeira[t])) > TOLERANCIA:
+                print(f"NÃO determinístico em t={t}s (página nova; {d} níveis de diferença)")
                 ok = False
         nav.close()
         srv.shutdown()

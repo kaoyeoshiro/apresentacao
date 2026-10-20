@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- Estado escondido de propósito: a cena soma um passo a cada chamada, então o mesmo instante, revisitado, põe o
+     bloco noutro lugar. O verificar do render tem de reprovar, mesmo com a folga para o ruído de rasterização
+     (tests/test_palco.py). -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Estado</title>
+<link rel="stylesheet" href="../../../temas/cojuris/tema.css">
+<style>
+  #palco { background: var(--cor-fundo); }
+  #bloco { position: absolute; top: 400px; left: 0; width: 240px; height: 240px; background: var(--cor-tinta); }
+</style>
+</head>
+<body>
+<div id="palco">
+  <section data-slide="a"><div id="bloco"></div></section>
+</div>
+<script type="module">
+import {palco} from '../../../motor/palco.js';
+let chamadas = 0;
+palco({slides: [{id: 'a', passos: [2]}], cenas: {a: () => { chamadas++; document.getElementById('bloco').style.left = `${(chamadas * 157) % 1600}px`; }}});
+</script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+/* Biblioteca de cenas do plano contínuo: o sistema visual da prévia do curso de IA (decks/previa-curso-ia), com as
+   mesmas medidas, preso a classes e a section[data-arquetipo]. Liga-se depois do tema:
+     <link rel="stylesheet" href="../../temas/<tema>/tema.css">
+     <link rel="stylesheet" href="../../motor/cenas.css">
+   Só var() do tema e color-mix sobre elas; nenhuma cor literal (o ./ap lint recusa). O maquinário está em
+   motor/cenas.js e o contrato, com o esqueleto HTML de cada arquétipo, em docs/cenas.md. */
+
+/* ---------- base: escala tipográfica e grade (12 colunas de 96 px, calha de 48 px, margem de 120 px) ---------- */
+:root { --esc-1: 30px; --esc-2: 44px; --esc-3: 68px; --esc-4: 110px; --esc-5: 180px; --esc-6: 320px;
+        --margem: 120px; --col: 96px; --calha: 48px;
+        /* zona noite: o momento forte da partitura de luz. No tema claro é a tinta, e o texto vai na cor do fundo; no
+           tema escuro (tinta mais clara que o fundo) o cenas.js troca as quatro para a zona ficar mais escura que o
+           fundo, com a tinta clara por cima, em vez de inverter para creme. Um tema pode dar --cor-noite. */
+        --noite: var(--cor-noite, var(--cor-tinta)); --sobre-noite: var(--cor-sobre-tinta);
+        --suave-sobre-noite: var(--cor-suave-sobre-tinta); --linha-sobre-noite: var(--cor-linha-sobre-tinta);
+        /* dourado como texto sobre a zona noite; o cenas.js troca quando o tema não dá 3:1 ali */
+        --sinal-noite: var(--cor-destaque); }
+#palco { background: var(--cor-fundo); color: var(--cor-tinta); font-family: var(--fonte-texto); }
+/* o mesmo posicionamento que o palco injeta ao começar, já no carregamento: o cenas.js mede o mundo antes disso */
+:where(#mundo) { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+:where(#palco section[data-slide]) { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; box-sizing: border-box; }
+/* reset sem peso (:where), para não vencer o padding da pílula, da legenda e as margens da minuta */
+:where(#palco) :where(p, h1, h2, h3, ol, ul, figure) { margin: 0; padding: 0; }
+:where(#palco) :where(ol, ul) { list-style: none; }
+section.noite { color: var(--sobre-noite); }
+/* o escuro é uma zona do mundo, atrás da trilha, com 400 px de anoitecer de cada lado (o cenas.js cria e mede) */
+.zona-noite { position: absolute; z-index: -2; background: linear-gradient(90deg, transparent, var(--noite) 400px, var(--noite) calc(100% - 400px), transparent); }
+
+/* ---------- tipos ---------- */
+.rotulo { position: absolute; left: 120px; top: 120px; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
+.noite .rotulo { color: var(--suave-sobre-noite); }
+/* manchete numa linha: o conteúdo começa em 330 px. Se não couber em 1680 px, o cenas.js reduz o corpo até 56 px e,
+   abaixo disso, deixa quebrar e avisa no console (encurte a frase) */
+.manchete { position: absolute; left: 120px; top: 170px; font: 800 var(--esc-3)/1.04 var(--fonte-titulo); letter-spacing: -0.01em; text-transform: var(--titulo-caixa, uppercase); white-space: nowrap; }
+.manchete.quebra { width: 1680px; white-space: normal; text-wrap: balance; }
+.display { font-family: var(--fonte-titulo); font-weight: 800; text-transform: var(--titulo-caixa, uppercase); line-height: .92; letter-spacing: -0.03em; text-wrap: balance; font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+.etiqueta { position: absolute; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
+.noite .etiqueta { color: var(--suave-sobre-noite); }
+/* dourado como sinal: sobre o claro, o destaque legível como texto (--cor-destaque-texto); sobre a noite, cheio */
+.sinal { color: var(--cor-destaque-texto, var(--cor-destaque)); }
+.noite .sinal { color: var(--sinal-noite); }
+.pilula { position: absolute; right: 120px; top: 888px; padding: 2px 22px; border: 3px dashed color-mix(in srgb, var(--cor-tinta) 30%, transparent); border-radius: 999px; font: 500 var(--esc-1)/1.3 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
+.noite .pilula { border-color: color-mix(in srgb, var(--sobre-noite) 35%, transparent); color: var(--suave-sobre-noite); }
+.selo-ia { position: absolute; right: 120px; top: 896px; font: 500 var(--esc-1)/1.2 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
+.noite .selo-ia { top: 64px; color: var(--suave-sobre-noite); }
+
+/* ---------- trilha de circuito que liga os slides (o cenas.js desenha em #trilha) ---------- */
+#trilha { position: absolute; overflow: visible; pointer-events: none; }
+#trilha path, .ramo-traco, .circuito path { fill: none; stroke: var(--cor-destaque); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+#trilha circle { stroke: var(--cor-destaque); stroke-width: 4; }
+#trilha .fim-anel { fill: none; }
+
+/* ---------- abertura: foto de tela cheia sob véu, título na zona livre à esquerda ---------- */
+.heroi-caixa { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; z-index: -1; }
+/* sem will-change: a camada própria guarda a rasterização de quadros anteriores e o mesmo instante sai com outros
+   pixels ao ser revisitado (o ./ap sondar reprova o determinismo) */
+.heroi { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover; object-position: 70% 50%; }
+/* cada borda começa em tinta cheia: fora do quadro a foto se dissolve na zona escura, sem emenda na viagem */
+.veu { position: absolute; inset: 0; background:
+    linear-gradient(180deg, var(--noite) 0%, color-mix(in srgb, var(--noite) 70%, transparent) 5%, transparent 18%),
+    linear-gradient(0deg, var(--noite) 0%, color-mix(in srgb, var(--noite) 80%, transparent) 6%, transparent 26%),
+    linear-gradient(270deg, var(--noite) 0%, color-mix(in srgb, var(--noite) 55%, transparent) 7%, transparent 20%),
+    linear-gradient(90deg, var(--noite) 0%, var(--noite) 22%, color-mix(in srgb, var(--noite) 72%, transparent) 42%, transparent 64%); }
+/* variante sem caixa: foto menor, solta no marinho, com as quatro bordas dissolvidas (posição no style do deck) */
+.heroi.recorte { width: auto; height: auto; object-fit: contain;
+    -webkit-mask-image: linear-gradient(90deg, transparent, var(--cor-tinta) 25%, var(--cor-tinta) 96%, transparent), linear-gradient(180deg, transparent, var(--cor-tinta) 8%, var(--cor-tinta) 92%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent, var(--cor-tinta) 25%, var(--cor-tinta) 96%, transparent), linear-gradient(180deg, transparent, var(--cor-tinta) 8%, var(--cor-tinta) 92%, transparent);
+    mask-composite: intersect; }
+.circuito { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+.circuito circle { fill: var(--noite); stroke: var(--cor-destaque); stroke-width: 5; }
+.ab-linha { position: absolute; left: 116px; top: 262px; font-size: var(--esc-4); }
+.ab-sub { position: absolute; left: 120px; top: 790px; width: 760px; font-size: var(--esc-2); line-height: 1.3; color: var(--suave-sobre-noite); text-wrap: pretty; }
+
+/* ---------- escolha: frase que se escreve e leque de candidatas ---------- */
+.frase { position: absolute; left: 120px; top: 330px; font-size: 96px; line-height: 1.15; white-space: nowrap; }
+.frase > span { display: inline-block; }
+.cursor { position: absolute; top: 18px; width: 8px; height: 92px; background: var(--cor-destaque); }
+.leque { position: absolute; left: 0; top: 0; }
+.cand { position: absolute; left: 0; height: 76px; display: flex; align-items: center; white-space: nowrap; }
+.cand .pal { width: 390px; font-size: 56px; line-height: 1.15; }
+.cand .pal span { display: inline-block; }
+.cand .trilho { position: relative; width: 240px; height: 20px; margin: 0 20px; border-radius: 10px; background: var(--cor-linha); }
+.cand .barra { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 10px; background: color-mix(in srgb, var(--cor-tinta) 34%, var(--cor-fundo)); transform-origin: 0 50%; }
+.cand.vence .barra { background: var(--cor-destaque); }
+.cand .pct { width: 110px; text-align: right; font: 700 var(--esc-2)/1 var(--fonte-titulo); font-variant-numeric: tabular-nums; }
+.noite .cand .trilho { background: var(--linha-sobre-noite); }
+.noite .cand .barra { background: color-mix(in srgb, var(--sobre-noite) 45%, var(--noite)); }
+.noite .cand.vence .barra { background: var(--cor-destaque); }
+.fios-leque { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+.fios-leque path { fill: none; stroke: color-mix(in srgb, var(--cor-tinta) 28%, transparent); stroke-width: 3; stroke-linecap: round; }
+.noite .fios-leque path { stroke: var(--linha-sobre-noite); }
+.anel-sorteio { position: absolute; height: 76px; box-sizing: border-box; border: 5px solid var(--cor-destaque); border-radius: 18px; }
+.frase-leg { position: absolute; top: 468px; font-size: var(--esc-2); font-style: italic; white-space: nowrap; }
+
+/* ---------- número: prova corrigida a caneta e o placar com barra ---------- */
+.celula { position: absolute; width: 136px; height: 136px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 16px; }
+.celula span { position: absolute; left: 14px; top: 8px; width: 60px; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+.tinta-caneta { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+/* correção a caneta de tinta: o dourado fica na ponta que corrige e, no fim, só na barra do resultado */
+.tinta-caneta path { fill: none; stroke: var(--cor-tinta); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.noite .tinta-caneta path { stroke: var(--sobre-noite); }
+.tinta-caneta circle { fill: var(--cor-destaque); stroke: none; }
+[data-arquetipo="numero"] .numero { position: absolute; left: 1104px; top: 430px; font-size: var(--esc-4); }
+.numero-trilho { position: absolute; left: 1104px; top: 580px; width: 560px; height: 16px; border-radius: 8px; background: var(--cor-linha); }
+.noite .numero-trilho { background: var(--linha-sobre-noite); }
+.numero-barra { position: absolute; inset: 0; border-radius: 8px; background: var(--cor-destaque); transform-origin: 0 50%; }
+.numero-leg { position: absolute; left: 1104px; top: 630px; font-size: var(--esc-2); color: var(--cor-tinta-suave); white-space: nowrap; }
+.noite .numero-leg { color: var(--suave-sobre-noite); }
+
+/* ---------- comparação: duas colunas sem nome, separadas por um fio só ---------- */
+.janela { position: absolute; left: 120px; top: 390px; width: 768px; height: 480px; }
+.janela ~ .janela { left: 1032px; }
+.janela .letra { position: absolute; left: 0; top: 36px; font-size: var(--esc-4); }
+.janela .etiqueta { left: 4px; top: 180px; }
+.janela i { position: absolute; left: 4px; height: 24px; border-radius: 12px; background: color-mix(in srgb, var(--cor-tinta) 24%, var(--cor-fundo)); transform-origin: 0 50%; }
+.janela .janela-txt { position: absolute; left: 4px; top: 236px; width: 740px; font-size: var(--esc-2); line-height: 1.3; text-wrap: pretty; }
+.noite .janela i { background: color-mix(in srgb, var(--sobre-noite) 30%, var(--noite)); }
+.fio-v { position: absolute; left: 958px; top: 390px; width: 4px; height: 480px; border-radius: 2px; background: var(--cor-linha); transform-origin: 50% 0; }
+.noite .fio-v { background: var(--linha-sobre-noite); }
+
+/* ---------- ramos: a trilha se divide em ramos com estações e caixas de destino ---------- */
+.mapa { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+.mapa rect { fill: none; stroke: var(--cor-tinta); stroke-width: 4; }
+.noite .mapa rect { stroke: var(--sobre-noite); }
+.mapa circle { fill: var(--cor-destaque); }
+.estacao { position: absolute; width: 280px; text-align: center; white-space: nowrap; }
+.estacao b { display: block; font: 800 var(--esc-2)/1.1 var(--fonte-titulo); }
+.estacao small { display: block; margin-top: 44px; font: 500 var(--esc-1)/1.2 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+.noite .estacao small { color: var(--suave-sobre-noite); }
+.caixa-txt { position: absolute; left: 1260px; width: 540px; font-size: var(--esc-2); line-height: 1.2; text-align: center; }
+.ramos-leg { position: absolute; left: 220px; top: 878px; font-size: 36px; color: var(--cor-tinta-suave); white-space: nowrap; }
+.noite .ramos-leg { color: var(--suave-sobre-noite); }
+
+/* ---------- tempo: agenda, cronograma ou etapas numa linha, com o marco de agora em dourado ---------- */
+/* a data fica em cima da linha (y 600) e o texto embaixo; o cenas.js distribui os marcos e traça a linha */
+.tempo-linha { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; --ponto-tempo: var(--cor-fundo); }
+.tempo-linha path { fill: none; stroke: var(--cor-linha); stroke-width: 6; stroke-linecap: round; }
+.noite .tempo-linha { --ponto-tempo: var(--noite); }
+.noite .tempo-linha path { stroke: var(--linha-sobre-noite); }
+.tempo-linha circle { fill: var(--ponto-tempo); stroke: var(--cor-tinta-suave); stroke-width: 5; }
+.noite .tempo-linha circle { stroke: var(--suave-sobre-noite); }
+.tempo-linha circle.agora { stroke: var(--cor-destaque); }
+.etapas li { position: absolute; top: 484px; padding: 6px 0; text-align: center; font-size: var(--esc-2); line-height: 1.2; text-wrap: balance; }
+.etapas b { display: block; height: 48px; margin-bottom: 114px; font: 800 var(--esc-2)/1.1 var(--fonte-titulo); white-space: nowrap; }
+.tempo-leg { position: absolute; left: 120px; top: 878px; font-size: 36px; color: var(--cor-tinta-suave); white-space: nowrap; }
+.noite .tempo-leg { color: var(--suave-sobre-noite); }
+
+/* ---------- objetos: o pedido que se digita ao lado de objetos recortados ---------- */
+.entrada { position: absolute; left: 120px; top: 452px; width: 672px; height: 196px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 26px; }
+.noite .entrada { border-color: var(--linha-sobre-noite); }
+.pedido { position: absolute; left: 156px; top: 486px; width: 600px; font-size: var(--esc-2); line-height: 1.3; }
+[data-arquetipo="objetos"] .etiqueta { left: 120px; top: 402px; }
+[data-arquetipo="objetos"] .etiqueta ~ .etiqueta { left: 906px; }
+/* recorte com transparência: a sombra dupla separa o papel branco do fundo claro (--cor-sombra: a mais escura do tema, posta pelo cenas.js) */
+.objeto { position: absolute; width: 300px; height: 402px;
+          filter: drop-shadow(0 18px 26px color-mix(in srgb, var(--cor-sombra, var(--cor-tinta)) 20%, transparent)) drop-shadow(0 2px 3px color-mix(in srgb, var(--cor-sombra, var(--cor-tinta)) 28%, transparent)); }
+.objetos { position: absolute; left: 900px; top: 436px; display: flex; }
+.objetos figure { position: relative; width: 300px; height: 470px; }
+.objetos .objeto { left: 0; top: 0; }
+.doc-leg { position: absolute; left: -20px; top: 390px; width: 340px; text-align: center; font-size: 32px; color: var(--cor-tinta-suave); white-space: nowrap; }
+.noite .doc-leg { color: var(--suave-sobre-noite); }
+.viaja { z-index: 5; }
+
+/* ---------- viagem: árvore de arquivos que nasce pela raiz e recebe os objetos ---------- */
+.arvore { position: absolute; left: 960px; top: 380px; }
+.no { position: absolute; display: flex; align-items: center; gap: 16px; height: 56px; font: 700 var(--esc-2)/1 var(--fonte-titulo); white-space: nowrap; }
+.ic { display: inline-block; width: 34px; height: 42px; }
+.ic svg { width: 34px; height: 42px; overflow: visible; display: block; }
+.ic path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 3.5; stroke-linejoin: round; }
+.noite .ic path { stroke: var(--suave-sobre-noite); }
+.arvore-ramos { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+.arvore-ramos path { fill: none; stroke: color-mix(in srgb, var(--cor-tinta) 35%, var(--cor-fundo)); stroke-width: 3; }
+.noite .arvore-ramos path { stroke: var(--linha-sobre-noite); }
+.viagem-foto { position: absolute; left: 100px; top: 380px; width: 760px; height: 567px; }
+[data-arquetipo="viagem"] .selo-ia { left: 235px; right: auto; top: 878px; }
+
+/* ---------- fios: cada linha aponta para uma fonte ---------- */
+.fontes { position: absolute; left: 120px; top: 450px; display: flex; flex-direction: column; gap: 40px; }
+.fontes .no { position: relative; }
+.minuta { position: absolute; left: 1000px; top: 420px; width: 800px; }
+.minuta .cab { font: 700 var(--esc-2)/1.2 var(--fonte-titulo); margin-bottom: 18px; }
+.minuta .linha { font-size: var(--esc-2); line-height: 1.32; margin-bottom: 22px; }
+.minuta .linha > span { display: inline-block; }
+.minuta .marca { background: var(--cor-destaque); box-shadow: 0 0 0 5px var(--cor-destaque); border-radius: 4px; color: var(--sobre-destaque, var(--cor-tinta)); }
+.minuta .sem-fonte { margin: -10px 0 18px; font-size: 40px; font-style: italic; color: var(--cor-tinta-suave); }
+.noite .minuta .sem-fonte { color: var(--suave-sobre-noite); }
+.fios { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+.fios path { fill: none; stroke: var(--cor-destaque); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.fios circle { fill: var(--cor-destaque); }
+/* só o fio que chega ao destaque é dourado; os outros são neutros */
+.fios path.neutro { stroke: color-mix(in srgb, var(--cor-tinta) 35%, var(--cor-fundo)); }
+.fios circle.neutro { fill: color-mix(in srgb, var(--cor-tinta) 35%, var(--cor-fundo)); }
+
+/* ---------- demonstração: vídeo numa moldura de navegador neutra, holofote e legenda nos mergulhos ---------- */
+.moldura { position: absolute; left: 120px; top: 290px; width: 1100px; border-radius: 18px; overflow: hidden; background: color-mix(in srgb, var(--sobre-noite) 14%, var(--noite)); }
+.moldura .barra-nav { position: relative; height: 44px; }
+.moldura .barra-nav i { position: absolute; top: 16px; width: 12px; height: 12px; border-radius: 6px; background: var(--linha-sobre-noite); }
+.moldura .barra-nav i:nth-child(1) { left: 20px; } .moldura .barra-nav i:nth-child(2) { left: 42px; } .moldura .barra-nav i:nth-child(3) { left: 64px; }
+.moldura .barra-nav u { position: absolute; left: 330px; top: 9px; width: 440px; height: 26px; border-radius: 13px; background: color-mix(in srgb, var(--noite) 55%, transparent); }
+.tela { position: relative; width: 1100px; height: 618.75px; overflow: hidden; }
+.tela video { display: block; width: 1100px; height: 618.75px; }
+/* holofote: marinho quase cheio fora do recorte, para a tela não virar um terceiro tom cinza-ardósia */
+.holofote { position: absolute; left: 0; top: 0; width: 1100px; height: 618.75px; }
+.holofote path { fill: var(--noite); fill-opacity: .94; fill-rule: evenodd; }
+.legenda { position: absolute; z-index: 2; padding: 2px 9px; border-radius: 6px; background: var(--noite); color: var(--sobre-noite); font: 500 12px/1.3 var(--fonte-titulo); white-space: nowrap; }
+.nota-lateral { position: absolute; left: 1300px; top: 330px; width: 500px; font-size: 36px; line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: pretty; }
+.noite .nota-lateral { color: var(--suave-sobre-noite); }
+
+/* ---------- respiro: uma frase curta, grande, para dar ritmo ---------- */
+/* as linhas crescem até a mais larga ocupar 1680 px (de --esc-4 a --esc-5); o cenas.js mede e centra na altura */
+.respiro { position: absolute; left: 116px; top: 330px; }
+.respiro > span { display: block; font: 800 var(--esc-4)/1.12 var(--fonte-titulo); letter-spacing: -0.02em; text-transform: var(--titulo-caixa, uppercase); white-space: nowrap; }
+
+/* ---------- fecho: a mensagem e o que a plateia faz agora; a trilha termina ---------- */
+/* a mensagem cresce como o respiro (o cenas.js mede); os passos ficam embaixo dela */
+.fecho-msg { position: absolute; left: 116px; top: 230px; font-size: var(--esc-4); line-height: 1.12; }
+.fecho-msg > span { display: block; }
+.fecho-passos { position: absolute; left: 120px; top: 600px; }
+.fecho-passos li { font-size: var(--esc-2); line-height: 1.4; white-space: nowrap; }
+.fecho-passos li + li { margin-top: 16px; }
+.fecho-passos b { display: inline-block; width: 68px; font: 800 var(--esc-2)/1.4 var(--fonte-titulo); color: var(--cor-destaque-texto, var(--cor-destaque)); font-variant-numeric: tabular-nums; }
+.noite .fecho-passos b { color: var(--sinal-noite); }
+.fecho-passos code { font-family: var(--fonte-mono, var(--fonte-titulo)); font-size: .86em; }

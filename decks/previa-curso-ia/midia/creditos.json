@@ -1,0 +1,971 @@
+[
+ {
+  "arquivo": "midia/demo-capa.webp",
+  "data": "2026-10-19",
+  "ferramenta": "trazido",
+  "origem": "./cvm html, código próprio, caso fictício; a digitação do pedido (0 a 4,8 s) e a escrita da minuta (de 6,6 s do original em diante) aceleradas 2x com ffmpeg a partir de midia/originais/demo.mp4",
+  "quadro_de": "midia/demo.mp4",
+  "segundo": 0.0
+ },
+ {
+  "arquivo": "midia/demo.mp4",
+  "data": "2026-10-19",
+  "ferramenta": "trazido",
+  "origem": "./cvm html, código próprio, caso fictício; a digitação do pedido (0 a 4,8 s) e a escrita da minuta (de 6,6 s do original em diante) aceleradas 2x com ffmpeg a partir de midia/originais/demo.mp4",
+  "original": "midia/originais/demo-pedido-2x.mp4",
+  "preparo": {
+   "perfil": "demo",
+   "ate": null,
+   "audio": false
+  }
+ },
+ {
+  "arquivo": "midia/doc-contrato.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A single A4 page with a faded round ink stamp made only of concentric rings, no letters, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.\nImage 2 is the approved draft: keep its composition, the page and the ring-only stamp exactly; render it at full fidelity.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/doc-contrato-1.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "original": "midia/originais/doc-contrato.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "duotone",
+   "intensidade": 0.8,
+   "largura": 900,
+   "alfa": true,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "auto",
+   "gama": 1.8,
+   "limiar": [
+    4.0,
+    8.0
+   ],
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  }
+ },
+ {
+  "arquivo": "midia/doc-modelo.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A short bundle of A4 pages held by one metal paper clip, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.\nImage 2 is the approved draft: keep the bundle's exact design and the paper clip, but make the bundle larger, filling about 75% of the frame height, centered; render it at full fidelity.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/doc-modelo-1.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "original": "midia/originais/doc-modelo.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "duotone",
+   "intensidade": 0.8,
+   "largura": 900,
+   "alfa": true,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "auto",
+   "gama": 2.6,
+   "limiar": [
+    3.9,
+    7.8
+   ],
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  }
+ },
+ {
+  "arquivo": "midia/doc-peticao.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A stapled multi-page A4 document, slightly fanned at one corner, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.\nImage 2 is a backdrop and lighting reference: match its uniform warm off-white backdrop, flat even light and soft contact shadow exactly; do not copy its page or stamp. The faint lines are plain solid grey bars, never letters or glyphs.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/doc-contrato.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "original": "midia/originais/doc-peticao.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "duotone",
+   "intensidade": 0.8,
+   "largura": 900,
+   "alfa": true,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "auto",
+   "gama": 1.8,
+   "limiar": [
+    4.1,
+    8.1
+   ],
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  }
+ },
+ {
+  "arquivo": "midia/heroi-aula1.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Title-slide photograph, low-key. Subject: an open wooden index-card drawer full of blank cards, seen from a low three-quarter angle; one blank card is lifted slightly above the others and catches the light. Subject in the right third of the frame. Background: smooth, dark, out-of-focus wall, slightly lighter behind the subject. Keep the left 50% of the frame completely empty: only the smooth dark background, no objects, no lines, no texture. Keep all important content inside the central horizontal band; the top and bottom 8% are plain background. All cards blank.\nImage 2 is the approved draft of this photograph: keep its subject, camera angle, light, tonal range and dark smooth wall, but shift the drawer and the desk slightly to the right so that nothing, not even the desk edge, enters the left 50% of the frame. Render at full fidelity with fine wood grain and crisp card edges.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "4K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/heroi-aula1-3.png"
+  ],
+  "custo_usd": 0.113,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "original": "midia/originais/heroi-aula1.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "duotone",
+   "intensidade": 0.8,
+   "largura": 2048,
+   "alfa": false,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "auto",
+   "gama": 1.0,
+   "limiar": null,
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  }
+ },
+ {
+  "arquivo": "midia/originais/heroi-aula2-tri.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Image 2 is the object reference: the same thin kraft cardboard case folder, shown open; here it is closed. Image 3 is the approved draft of this photograph: keep its camera pointing straight down, the closed folder's exact design, the vertical elastic band, the sheet edges showing at the open right side, and the folder's position in the right part of the frame. Make the folder slightly smaller, about 75% of the frame height, centred vertically, with dark space above and below it. The folder lies on a smooth, dark, matte, almost black surface with no visible wood grain, no lines and no texture; the left half of the frame is one even dark tone. Low raking light from the right falls only on the folder. Full-bleed, no borders, no frame. No text, no labels.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/pasta-aberta.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/heroi-aula2-v5.png"
+  ],
+  "original": "midia/originais/heroi-aula2-v6.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "tritone",
+   "intensidade": 0.8,
+   "largura": 2048,
+   "alfa": false,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "auto",
+   "gama": 1.4,
+   "limiar": null,
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  }
+ },
+ {
+  "arquivo": "midia/heroi-aula2.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Image 2 is the object reference: the same thin kraft cardboard case folder, shown open; here it is closed. Image 3 is the approved draft of this photograph: keep its camera pointing straight down, the closed folder's exact design, the vertical elastic band, the sheet edges showing at the open right side, and the folder's position in the right part of the frame. Make the folder slightly smaller, about 75% of the frame height, centred vertically, with dark space above and below it. The folder lies on a smooth, dark, matte, almost black surface with no visible wood grain, no lines and no texture; the left half of the frame is one even dark tone. Low raking light from the right falls only on the folder. Full-bleed, no borders, no frame. No text, no labels.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "original": "midia/originais/heroi-aula2-v6.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "duotone",
+   "intensidade": 0.8,
+   "largura": 2048,
+   "alfa": false,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "auto",
+   "gama": 1.4,
+   "limiar": null,
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  },
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/pasta-aberta.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/heroi-aula2-v5.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/doc-contrato.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A single A4 page with a faded round ink stamp made only of concentric rings, no letters, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.\nImage 2 is the approved draft: keep its composition, the page and the ring-only stamp exactly; render it at full fidelity.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/doc-contrato-1.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/doc-modelo.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A short bundle of A4 pages held by one metal paper clip, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.\nImage 2 is the approved draft: keep the bundle's exact design and the paper clip, but make the bundle larger, filling about 75% of the frame height, centered; render it at full fidelity.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/doc-modelo-1.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/doc-peticao.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A stapled multi-page A4 document, slightly fanned at one corner, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.\nImage 2 is a backdrop and lighting reference: match its uniform warm off-white backdrop, flat even light and soft contact shadow exactly; do not copy its page or stamp. The faint lines are plain solid grey bars, never letters or glyphs.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/doc-contrato.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/folha-mestra.png",
+  "data": "2026-10-19",
+  "ferramenta": "montagem local (Pillow, grade 3x2 numerada)",
+  "origem": "rascunhos midia/originais/rascunhos/mestra-1.png a mestra-6.png; a escolhida foi a 2",
+  "custo_usd": 0
+ },
+ {
+  "arquivo": "midia/originais/heroi-aula1.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Title-slide photograph, low-key. Subject: an open wooden index-card drawer full of blank cards, seen from a low three-quarter angle; one blank card is lifted slightly above the others and catches the light. Subject in the right third of the frame. Background: smooth, dark, out-of-focus wall, slightly lighter behind the subject. Keep the left 50% of the frame completely empty: only the smooth dark background, no objects, no lines, no texture. Keep all important content inside the central horizontal band; the top and bottom 8% are plain background. All cards blank.\nImage 2 is the approved draft of this photograph: keep its subject, camera angle, light, tonal range and dark smooth wall, but shift the drawer and the desk slightly to the right so that nothing, not even the desk edge, enters the left 50% of the frame. Render at full fidelity with fine wood grain and crisp card edges.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "4K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/heroi-aula1-3.png"
+  ],
+  "custo_usd": 0.113,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/heroi-aula2-v6.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Image 2 is the object reference: the same thin kraft cardboard case folder, shown open; here it is closed. Image 3 is the approved draft of this photograph: keep its camera pointing straight down, the closed folder's exact design, the vertical elastic band, the sheet edges showing at the open right side, and the folder's position in the right part of the frame. Make the folder slightly smaller, about 75% of the frame height, centred vertically, with dark space above and below it. The folder lies on a smooth, dark, matte, almost black surface with no visible wood grain, no lines and no texture; the left half of the frame is one even dark tone. Low raking light from the right falls only on the folder. Full-bleed, no borders, no frame. No text, no labels.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/pasta-aberta.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/heroi-aula2-v5.png"
+  ]
+ },
+ {
+  "arquivo": "midia/originais/heroi-aula2.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, proportions, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Full-bleed title-slide photograph, low-key, no borders, no letterbox bars, no frame. The closed case folder lies on a dark desk near the back wall, seen from a low three-quarter angle, in the right third of the frame. A narrow beam of window light falls only on the folder; everything else falls off into deep shadow. The left 50% of the frame is a smooth, dark, out-of-focus wall and shadowed desk: no visible wood grain, no light patches, no lines, no objects. Keep the folder inside the central horizontal band, away from the top and bottom edges.\nImage 3 is the approved draft of this photograph: keep its composition, camera angle, folder position and size, light and tonal range; render it at full fidelity with visible cardboard fibers. Let the back edge of the desk fade softly into the shadow on the left half, so no hard horizontal line crosses the left 50% of the frame.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "4K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/heroi-aula2-4.png"
+  ],
+  "custo_usd": 0.113,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "nota": "versão anterior (caderno de capa dura), substituída em 19/10/2026 pela heroi-aula2-v6, a mesma pasta kraft do slide pasta, fechada"
+ },
+ {
+  "arquivo": "midia/originais/mestra.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nMaster style plate for a photo series. A single sheet of plain A4 paper, a rubber stamp and a ballpoint pen on a light oak desk, seen from straight above. Objects grouped in the right 40% of the frame; the left 60% is empty desk surface. The sheet is slightly rotated; the pen lies diagonally across its lower corner; the stamp stands upright beside the sheet.\nImage 1 is the approved draft of this plate: keep its exact arrangement, framing, light direction, tonal range and empty left side; render it again at higher fidelity with crisp paper fibers and fine oak grain.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/rascunhos/mestra-2.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "copia": "temas/cojuris/imagem/refs/mestra.jpg (JPEG qualidade 85 desta; o image-video-api só aceita PNG ou JPG como ref)"
+ },
+ {
+  "arquivo": "midia/originais/pasta-aberta.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, color, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, grain and lens look; do not copy its objects. The folder lies open, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. Inside, a few blank pages are fanned out. All pages blank.\nImage 3 is the approved draft of this photograph: keep its composition, the open folder's exact design, the fanned pages and the loose rubber band; render it at full fidelity with visible cardboard fibers. The backdrop is one uniform tone edge to edge, with no vignette and no gradient.",
+  "parametros": {
+   "aspecto": "4:3",
+   "resolucao": "2K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/pasta-aberta-1.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/pasta-folha.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Product model sheet on a perfectly flat, evenly lit warm off-white seamless backdrop: the same kraft cardboard legal case folder shown three times in a row, evenly spaced, at the same scale: front view (closed), three-quarter view, side view showing its thickness. Plain kraft cardboard, about 3 cm thick, closed with one thin dark rubber band, a few blank pages slightly peeking out of one edge. No labels, no stickers. Soft even studio light, soft contact shadows.\nImage 2 is the approved draft of this sheet: keep its exact arrangement, views, spacing and the folder's exact design (cover, rubber band position, peeking pages); render it again at higher fidelity with visible cardboard fibers.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "2K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/pasta-folha-1.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/doc-contrato-1.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A single A4 page with a faded round ink stamp made only of concentric rings, no letters, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/doc-modelo-1.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A short bundle of A4 pages held by one metal paper clip, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/doc-peticao-1.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A stapled multi-page A4 document, slightly fanned at one corner, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/doc-peticao-final1.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A stapled multi-page A4 document, slightly fanned at one corner, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.\nImage 2 is the approved draft: keep the document's exact design, the staple and the curled, fanned corner; render it at full fidelity. Change the backdrop to a uniform warm off-white, identical in every corner.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/doc-peticao-1.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/doc-peticao-final2.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A stapled multi-page A4 document, slightly fanned at one corner, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula1-1.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Title-slide photograph, low-key. Subject: an open wooden index-card drawer full of blank cards, seen from a low three-quarter angle; one blank card is lifted slightly above the others and catches the light. Subject in the right third of the frame. Background: smooth, dark, out-of-focus wall, slightly lighter behind the subject. Keep the left 50% of the frame completely empty: only the smooth dark background, no objects, no lines, no texture. Keep all important content inside the central horizontal band; the top and bottom 8% are plain background. All cards blank.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula1-2.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Title-slide photograph, low-key. Subject: an open wooden index-card drawer full of blank cards, seen from a low three-quarter angle; one blank card is lifted slightly above the others and catches the light. Subject in the right third of the frame. Background: smooth, dark, out-of-focus wall, slightly lighter behind the subject. Keep the left 50% of the frame completely empty: only the smooth dark background, no objects, no lines, no texture. Keep all important content inside the central horizontal band; the top and bottom 8% are plain background. All cards blank.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula1-3.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Title-slide photograph, low-key. Subject: an open wooden index-card drawer full of blank cards, seen from a low three-quarter angle; one blank card is lifted slightly above the others and catches the light. Subject in the right third of the frame. Background: smooth, dark, out-of-focus wall, slightly lighter behind the subject. Keep the left 50% of the frame completely empty: only the smooth dark background, no objects, no lines, no texture. Keep all important content inside the central horizontal band; the top and bottom 8% are plain background. All cards blank.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula2-1.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, proportions, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Title-slide photograph, low-key. The closed case folder lies on a dark desk, seen from a low three-quarter angle, in the right third of the frame, lit by a narrow beam of window light. Keep the left 50% of the frame completely empty: smooth dark background only. The top and bottom 8% are plain background.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula2-2.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, proportions, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Title-slide photograph, low-key. The closed case folder lies on a dark desk, seen from a low three-quarter angle, in the right third of the frame, lit by a narrow beam of window light. Keep the left 50% of the frame completely empty: smooth dark background only. The top and bottom 8% are plain background.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula2-3.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, proportions, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Title-slide photograph, low-key. The closed case folder lies on a dark desk, seen from a low three-quarter angle, in the right third of the frame, lit by a narrow beam of window light. Keep the left 50% of the frame completely empty: smooth dark background only. The top and bottom 8% are plain background.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula2-4.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, proportions, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Full-bleed title-slide photograph, low-key, no borders, no letterbox bars, no frame. The closed case folder lies on a dark desk near the back wall, seen from a low three-quarter angle, in the right third of the frame. A narrow beam of window light falls only on the folder; everything else falls off into deep shadow. The left 50% of the frame is a smooth, dark, out-of-focus wall and shadowed desk: no visible wood grain, no light patches, no lines, no objects. Keep the folder inside the central horizontal band, away from the top and bottom edges.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula2-5.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, proportions, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Full-bleed title-slide photograph, low-key, no borders, no letterbox bars, no frame. The closed case folder lies on a dark desk near the back wall, seen from a low three-quarter angle, in the right third of the frame. A narrow beam of window light falls only on the folder; everything else falls off into deep shadow. The left 50% of the frame is a smooth, dark, out-of-focus wall and shadowed desk: no visible wood grain, no light patches, no lines, no objects. Keep the folder inside the central horizontal band, away from the top and bottom edges.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula2-6.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Image 2 is the object reference: the same kraft-brown cardboard case folder, here shown open; in this photograph it is closed. Image 3 is the composition reference: keep its camera angle, dark wall, dark desk, beam of light and the folder's position and size in the right part of the frame.\nFull-bleed title-slide photograph, low-key, no borders, no letterbox bars, no frame. A thin, closed kraft-brown cardboard legal case folder, like a court case file cover: two flat cardboard covers only about one centimetre apart, no book spine, no hardcover binding, no stitched pages. One thin dark rubber band wraps around it. The edges of a few loose A4 sheets peek out unevenly along the open side. No label, no writing. The folder lies flat on a dark desk near the back wall, seen from a low three-quarter angle, in the right third of the frame. A narrow beam of window light falls only on the folder; everything else falls off into deep shadow. The left 50% of the frame is a smooth, dark, out-of-focus wall and shadowed desk: no visible wood grain, no light patches, no lines, no objects. Keep the folder inside the central horizontal band, away from the top and bottom edges. Let the back edge of the desk fade softly into the shadow on the left half.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/pasta-aberta.png",
+   "decks/previa-curso-ia/midia/originais/heroi-aula2.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "nota": "tentativa de pasta de processo mais fina para a heroica da Aula 2; não aprovada (ainda lembra caderno, e a 7 tem quina de mesa na zona do título)"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula2-7.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Image 2 is the object reference: the same kraft-brown cardboard case folder with its thin rubber band, shown open; in this photograph it is closed and lying flat.\nFull-bleed title-slide photograph, low-key, no borders, no letterbox bars, no frame. A thin, closed cardboard legal case folder: two flat kraft covers lying almost flush, the whole folder barely as thick as a finger, a soft fold on the left side and no book spine, no hardcover binding, no ring binder, no notebook. One thin dark rubber band crosses it near the right edge. A few loose A4 sheets peek out unevenly along the right and bottom edges. No label, no writing. The folder lies flat on a dark desk near the back wall, seen from a low three-quarter angle, in the right third of the frame. A narrow beam of window light falls only on the folder; everything else falls off into deep shadow. The left 50% of the frame is a smooth, dark, out-of-focus wall and shadowed desk: no visible wood grain, no light patches, no lines, no objects. Keep the folder inside the central horizontal band, away from the top and bottom edges. Let the back edge of the desk fade softly into the shadow on the left half.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/pasta-aberta.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "nota": "tentativa de pasta de processo mais fina para a heroica da Aula 2; não aprovada (ainda lembra caderno, e a 7 tem quina de mesa na zona do título)"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula2-v5.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Image 2 is the object reference. Full-bleed title-slide photograph, low-key, no borders, no frame. The exact same thin kraft cardboard case folder as Image 2, now closed and lying flat on a dark table: two flat cardboard covers about one centimetre apart, no book spine, no hardcover binding, no rounded corners. Elastic band across the front, a few loose sheet edges showing unevenly at the open side. Low raking light from the right falls only on the folder. The folder sits in the right third of the frame, inside the central horizontal band. Empty dark wall and shadowed table on the left half: no lines, no objects, no light patches. No text, no labels.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/pasta-aberta.png"
+  ],
+  "nota": "pasta fina vista de cima, a partir da pasta aberta; não aprovada (veio do carvalho do estilo um veio de madeira na zona do título); serviu de rascunho para a v6"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/heroi-aula2-v5g.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "azure-gpt-image (gpt-image-2.5-sunburst, 1536x1024, quality medium)",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light, tonal range, grain and lens look; do not copy its objects. Image 2 is the object reference. Full-bleed title-slide photograph, low-key, no borders, no frame. The exact same thin kraft cardboard case folder as Image 2, now closed and lying flat on a dark table: two flat cardboard covers about one centimetre apart, no book spine, no hardcover binding, no rounded corners. Elastic band across the front, a few loose sheet edges showing unevenly at the open side. Low raking light from the right falls only on the folder. The folder sits in the right third of the frame, inside the central horizontal band. Empty dark wall and shadowed table on the left half: no lines, no objects, no light patches. No text, no labels.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/pasta-aberta.png"
+  ],
+  "custo_nota": "[CONFERIR] preço do sunburst sem fonte documentada",
+  "nota": "alternativa no GPT Image; não aprovada (ainda tem lombada de fichário e saiu em 3:2 de 1536 px)"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/mestra-1.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nMaster style plate for a photo series. A single sheet of plain A4 paper, a rubber stamp and a ballpoint pen on a light oak desk, seen from straight above. Objects grouped in the right 40% of the frame; the left 60% is empty desk surface.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/mestra-2.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nMaster style plate for a photo series. A single sheet of plain A4 paper, a rubber stamp and a ballpoint pen on a light oak desk, seen from straight above. Objects grouped in the right 40% of the frame; the left 60% is empty desk surface. The sheet is slightly rotated; the pen lies diagonally across its lower corner; the stamp stands upright beside the sheet.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/mestra-3.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nMaster style plate for a photo series. A single sheet of plain A4 paper, a rubber stamp and a ballpoint pen on a light oak desk, seen from straight above. Objects grouped in the right 40% of the frame; the left 60% is empty desk surface. The pen lies parallel to the right edge of the sheet; the stamp lies on its side just above the sheet.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/mestra-4.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nMaster style plate for a photo series. A single sheet of plain A4 paper, a rubber stamp and a ballpoint pen on a light oak desk, seen from straight above. Objects grouped in the right 40% of the frame; the left 60% is empty desk surface. The sheet sits square to the frame; the stamp and the pen rest side by side just below it.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/mestra-5.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nMaster style plate for a photo series. A single sheet of plain A4 paper, a rubber stamp and a ballpoint pen on a light oak desk, seen from straight above. Objects grouped in the right 40% of the frame; the left 60% is empty desk surface. The sheet runs slightly off the right edge of the frame; the stamp stands upright on the desk just left of the sheet; the pen rests on the paper.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/mestra-6.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nMaster style plate for a photo series. A single sheet of plain A4 paper, a rubber stamp and a ballpoint pen on a light oak desk, seen from straight above. Objects grouped in the right 40% of the frame; the left 60% is empty desk surface. Low-angle window light gives long, soft shadows; the upright stamp casts a clear shadow toward the lower right; the pen lies at a gentle angle on the paper.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/pasta-aberta-1.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, color, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, grain and lens look; do not copy its objects. The folder lies open, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. Inside, a few blank pages are fanned out. All pages blank.",
+  "parametros": {
+   "aspecto": "4:3",
+   "resolucao": "1K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/pasta-aberta-2.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, color, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, grain and lens look; do not copy its objects. The folder lies open, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. Inside, a few blank pages are fanned out. All pages blank.",
+  "parametros": {
+   "aspecto": "4:3",
+   "resolucao": "1K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/pasta-aberta-final2.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, color, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, grain and lens look; do not copy its objects. The folder lies open, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. Inside, a few blank pages are fanned out. All pages blank.\nImage 3 is the approved draft of this photograph: keep its composition, the open folder's exact design and color, the fanned pages and the loose rubber band. Lighting exception for this isolated product shot: the backdrop is lit perfectly evenly, with exactly the same brightness and color in all four corners and at the center; no light falloff, no vignette, no gradient on the backdrop. Only the folder and the pages show soft modelling from the upper left.",
+  "parametros": {
+   "aspecto": "4:3",
+   "resolucao": "2K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/pasta-aberta.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/pasta-aberta-final3.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, color, cardboard texture and rubber band of the case folder. Image 2 is the approved draft of this photograph: keep its composition, the open folder's exact design and color, the fanned blank pages and the loose rubber band. The folder lies open, seen from straight above, isolated on a perfectly flat warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. Lighting exception for this isolated product shot: two large overhead softboxes give flat, shadowless, perfectly even light, so the backdrop has exactly the same brightness and color in all four corners and at the center; no light falloff, no vignette, no gradient. All pages blank.",
+  "parametros": {
+   "aspecto": "4:3",
+   "resolucao": "2K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/pasta-aberta.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/pasta-folha-1.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Product model sheet on a perfectly flat, evenly lit warm off-white seamless backdrop: the same kraft cardboard legal case folder shown three times in a row, evenly spaced, at the same scale: front view (closed), three-quarter view, side view showing its thickness. Plain kraft cardboard, about 3 cm thick, closed with one thin dark rubber band, a few blank pages slightly peeking out of one edge. No labels, no stickers. Soft even studio light, soft contact shadows.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/originais/rascunhos/pasta-folha-2.png",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Product model sheet on a perfectly flat, evenly lit warm off-white seamless backdrop: the same kraft cardboard legal case folder shown three times in a row, evenly spaced, at the same scale: front view (closed), three-quarter view, side view showing its thickness. Plain kraft cardboard, about 3 cm thick, closed with one thin dark rubber band, a few blank pages slightly peeking out of one edge. No labels, no stickers. Soft even studio light, soft contact shadows.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "1K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png"
+  ],
+  "custo_usd": 0.0336,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado"
+ },
+ {
+  "arquivo": "midia/pasta-aberta.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, color, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, grain and lens look; do not copy its objects. The folder lies open, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. Inside, a few blank pages are fanned out. All pages blank.\nImage 3 is the approved draft of this photograph: keep its composition, the open folder's exact design, the fanned pages and the loose rubber band; render it at full fidelity with visible cardboard fibers. The backdrop is one uniform tone edge to edge, with no vignette and no gradient.",
+  "parametros": {
+   "aspecto": "4:3",
+   "resolucao": "2K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/pasta-aberta-1.png"
+  ],
+  "custo_usd": 0.0504,
+  "custo_nota": "estimado pela tabela do plano (seção 7), não é valor faturado",
+  "original": "midia/originais/pasta-aberta.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "tritone",
+   "intensidade": 0.8,
+   "largura": 1400,
+   "alfa": true,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "fundo",
+   "gama": 1.0,
+   "limiar": [
+    6.2,
+    12.5
+   ],
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  }
+ }
+]

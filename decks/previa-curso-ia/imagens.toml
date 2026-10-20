@@ -1,0 +1,81 @@
+# Imagens da prévia do curso de IA, geradas na Fase 1 (19/10/2026). ./ap imagens decks/previa-curso-ia mostra a
+# situação; --tratar refaz os WebP a partir de midia/originais/, que fica fora do git (sem ela, os WebP do git valem
+# como finais e nada precisa ser gerado de novo). O prompt é só o objeto e a cena: o estilo do tema
+# (temas/cojuris/imagem/estilo.txt) e a frase da mestra entram sozinhos. Os prompts exatos de cada geração, com as
+# correções feitas a partir do rascunho aprovado, estão em midia/creditos.json.
+# O tratamento parte de temas/cojuris/imagem/padroes.toml; aqui só o que foge dele.
+
+[[imagem]]
+nome = "heroi-aula1"
+slide = "aula1"
+papel = "heroica"
+prompt = """Title-slide photograph, low-key. Subject: an open wooden index-card drawer full of blank cards, seen from \
+a low three-quarter angle; one blank card is lifted slightly above the others and catches the light. Subject in the \
+right third of the frame. Background: smooth, dark, out-of-focus wall, slightly lighter behind the subject. Keep the \
+left 50% of the frame completely empty: only the smooth dark background, no objects, no lines, no texture. Keep all \
+important content inside the central horizontal band; the top and bottom 8% are plain background. All cards blank."""
+resolucao = "4K"
+zona_texto = [0, 0, 0.42, 1]   # título "O que é IA" à esquerda; a quina da mesa entra a partir de 45%
+
+[[imagem]]
+nome = "heroi-aula2"
+slide = "aula2"
+papel = "heroica"
+prompt = """The same thin kraft cardboard case folder as the object reference, here closed, with the camera pointing \
+straight down: vertical elastic band, sheet edges showing at the open right side. The folder sits in the right part \
+of the frame, about 75% of the frame height, centred vertically, with dark space above and below it. It lies on a \
+smooth, dark, matte, almost black surface with no visible wood grain, no lines and no texture; the left half of the \
+frame is one even dark tone. Low raking light from the right falls only on the folder. Full-bleed, no borders, no \
+frame. No text, no labels."""
+refs = ["midia/originais/pasta-aberta.png"]   # a mesma pasta do slide pasta, para ser o fio da aula
+zona_texto = [0, 0, 0.5, 1]
+tratamento = { gama = 1.4 }   # receita da crítica (rodada 1); o tritone deixava a parede oliva
+
+[[imagem]]
+nome = "pasta-aberta"
+slide = "pasta"
+papel = "objeto"
+prompt = """The case folder lies open, seen from straight above, isolated on a perfectly flat, evenly lit warm \
+off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. Inside, a few blank pages \
+are fanned out. All pages blank. The backdrop is one uniform tone edge to edge, with no vignette and no gradient."""
+aspect = "4:3"
+refs = ["midia/originais/pasta-folha.png"]   # folha de modelo da pasta (frente, três quartos, lado)
+tratamento = { tom = "tritone", largura = 1400, niveis = "fundo", gama = 1.0 }   # kraft em dourado; sombra sem halo
+
+[[imagem]]
+nome = "doc-peticao"
+slide = "prompt"   # também em skill
+papel = "objeto"
+prompt = """A stapled multi-page A4 document, slightly fanned at one corner, seen from straight above, isolated on a \
+perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact \
+shadow. The pages show only faint grey lines, never legible text; the faint lines are plain solid grey bars, never \
+letters or glyphs. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, \
+clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit \
+evenly, with the same brightness in all four corners; no vignette, no gradient."""
+aspect = "3:4"
+refs = [{ arquivo = "midia/originais/doc-contrato.png", uso = "a backdrop and lighting reference: match its uniform warm off-white backdrop, flat even light and soft contact shadow exactly; do not copy its page or stamp." }]
+
+[[imagem]]
+nome = "doc-contrato"
+slide = "prompt"   # também em skill
+papel = "objeto"
+prompt = """A single A4 page with a faded round ink stamp made only of concentric rings, no letters, seen from \
+straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, \
+only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in \
+the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white \
+backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all \
+four corners; no vignette, no gradient."""
+aspect = "3:4"
+
+[[imagem]]
+nome = "doc-modelo"
+slide = "prompt"   # também em skill
+papel = "objeto"
+prompt = """A short bundle of A4 pages held by one metal paper clip, filling about 75% of the frame height, centered, \
+seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, \
+no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this \
+document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the \
+warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same \
+brightness in all four corners; no vignette, no gradient."""
+aspect = "3:4"
+tratamento = { gama = 2.6 }   # leva o papel ao mesmo L* ~90 dos outros dois documentos (fundo: 98)
