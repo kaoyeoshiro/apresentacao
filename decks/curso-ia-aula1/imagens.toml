@@ -1,0 +1,17 @@
+# Imagens da Aula 1 do curso de IA. ./ap imagens decks/curso-ia-aula1 mostra a situação; --rascunhos gera os
+# candidatos e --final, com a escolha do usuário na folha storyboard/candidatos.png, o arquivo tratado. O prompt é só
+# o objeto e a cena: o estilo do tema (temas/cojuris/imagem/estilo.txt) e a frase da mestra entram sozinhos.
+# heroi-aula1 e os recortes doc-* vêm prontos da prévia (crédito copiado em midia/creditos.json) e não entram aqui.
+
+[[imagem]]
+nome = "mesa"
+slide = "mesa"
+papel = "objeto"
+prompt = """A light oak desk top seen from straight above, filling about 80% of the frame, isolated on a perfectly \
+flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow under \
+the desk. On the desk, a few blank A4 pages and one closed kraft cardboard case folder are laid out side by side, \
+covering most of the wood. Two more blank pages lie on the backdrop just outside the desk's right edge, as if they \
+did not fit. All pages blank: at most faint grey lines, never legible text. No pen, no stamp, no other objects. \
+The backdrop is one uniform tone edge to edge, with no vignette and no gradient."""
+aspect = "4:3"
+tratamento = { tom = "tritone", largura = 1400, niveis = "fundo", gama = 1.0 }   # como a pasta da prévia: madeira e kraft em dourado

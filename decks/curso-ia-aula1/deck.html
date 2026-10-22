@@ -1,210 +1,437 @@
 <!doctype html>
-<!-- Catálogo de cenas: molde do plano contínuo. Um slide por arquétipo de motor/cenas.js, falando do próprio método
-     (nenhum fato de fora). Contrato da biblioteca em docs/cenas.md; briefing e mídia em briefing.md e midia/.
-     Ao vivo: ./ap abrir decks/catalogo   ·   ./ap sondar decks/catalogo   ·   ./ap paradas decks/catalogo
-
-     Como usar este molde:
-     - TROCAR o conteúdo: escreva o texto nas sections (o oráculo mede o HTML) e os dados nos atributos data-*; a mídia
-       vai em midia/ com crédito em midia/creditos.json (a daqui é marcador, copiada da prévia do curso).
-     - APAGAR um slide: apague a <section data-slide="x"> e a linha {id: 'x', ...} da lista no fim. Posições, trilha,
-       zonas noite, passos e cenas se recalculam. O mergulho some junto com a demonstração (apague os dois).
-     - REORDENAR: mude a ordem das linhas da lista (a das sections não importa). A abertura pede o vizinho na mesma
-       altura e 1100 px de vão, o que o cenas.js já faz.
-     - NOVO slide: copie uma section do mesmo arquétipo, troque data-slide e ponha a linha na lista.
-     - NOITE: class="noite" na section põe o slide na zona marinha (aberturas e momentos fortes); o resto fica no claro. -->
+<!-- Curso de IA da co.juris, dia 1, Aula 1: "O que é IA e qual usar". Plano contínuo de 23 slides, um clique cada,
+     montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md) a partir do catálogo. Blocos: abertura (1 a 3),
+     como a IA escreve (4 a 9), detetive de alucinação (10 a 13), qual a melhor IA (14 a 21, com o placar da prova da
+     PGE-MS como cena própria, o S.T.A.R. da aula) e onde fica o dado (22 e 23). Roteiro, fontes, mídia e crítica em
+     briefing.md; créditos em midia/creditos.json.
+     Ao vivo: ./ap abrir decks/curso-ia-aula1   ·   ./ap sondar decks/curso-ia-aula1   ·   ./ap paradas decks/curso-ia-aula1 -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Catálogo de cenas</title>
+<title>Curso de IA: Aula 1</title>
 <link rel="stylesheet" href="../../temas/cojuris/tema.css">
 <link rel="stylesheet" href="../../motor/cenas.css">
+<style>
+  /* abertura: o subtítulo em duas linhas equilibradas, à esquerda da foto */
+  [data-slide="aula1"] .ab-sub { width: 880px; text-wrap: balance; }
+
+  /* receio: as quatro respostas da enquete embaixo da frase */
+  .opcoes { position: absolute; left: 120px; top: 800px; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* pergunta: o contrato que não foi enviado, esmaecido no lugar dele */
+  .objeto.ausente { filter: grayscale(1) opacity(.15); }
+  [data-slide="pergunta"] .objetos { left: 1180px; top: 340px; }
+  [data-slide="pergunta"] .doc-leg { left: -120px; top: 420px; width: 540px; font-size: var(--esc-2); }
+  [data-slide="pergunta"] .etiqueta ~ .etiqueta { left: 1180px; top: 292px; }
+
+  /* data: o outro desfecho, à esquerda do leque */
+  .desfecho { position: absolute; left: 120px; top: 640px; width: 820px; font-size: var(--esc-2); line-height: 1.3; color: var(--suave-sobre-noite); }
+  .desfecho b { display: block; margin-bottom: 14px; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; }
+
+  /* mesa: os papéis saem do vão antes do slide e o que não cabe fica dito embaixo da árvore */
+  .fora-mesa { position: absolute; left: 960px; top: 720px; width: 840px; font-size: var(--esc-2); line-height: 1.3; font-style: italic; color: var(--cor-tinta-suave); }
+
+  /* detetive: o lugar do QR do material, embaixo do pedido */
+  [data-slide="detetive"] .entrada { height: 250px; }
+  .qr-leg { position: absolute; left: 120px; top: 760px; font-size: 36px; color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* erro: o veredito de cada trecho, embaixo dele */
+  .veredito { display: block; margin-top: 2px; font-size: 36px; font-style: italic; color: var(--cor-tinta-suave); }
+
+  /* fronteira e arena: a palavra ou a letra de cada coluna maior que o texto dela */
+  [data-slide="fronteira"] .janela .letra { font-size: 140px; }
+  [data-slide="arena"] .janela .letra { top: 20px; font-size: var(--esc-5); }
+  [data-slide="arena"] .janela .etiqueta { top: 210px; }
+  [data-slide="arena"] .janela .janela-txt { top: 262px; }
+
+  /* erro: a minuta sobe para os vereditos caberem acima da pílula */
+  [data-slide="erro"] .minuta { top: 340px; }
+
+  /* arena: o critério do voto, dito antes */
+  .criterio { position: absolute; left: 120px; top: 884px; font-size: 36px; color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* prova: o total grande à esquerda, a composição à direita e quem corrigiu embaixo */
+  [data-slide="prova"] .numero { left: 112px; top: 370px; font-size: var(--esc-6); }
+  [data-slide="prova"] .numero-leg { left: 120px; top: 700px; }
+  .prova-det { position: absolute; left: 1100px; font-size: var(--esc-2); white-space: nowrap; }
+  .prova-det.prova-juiz { left: 120px; top: 800px; font-size: 36px; color: var(--cor-tinta-suave); }
+
+  /* local: o número real, grande, sem grade */
+  [data-slide="local"] .numero { left: 112px; top: 380px; font-size: var(--esc-6); }
+  [data-slide="local"] .numero-leg { left: 120px; top: 720px; }
+
+  /* placar (cena própria): onze barras verticais, o modelo local com outra cor, o topo marcado em dourado */
+  .placar-col { position: absolute; top: 0; width: 112px; height: 872px; }
+  .placar-barra { position: absolute; left: 0; bottom: 0; width: 112px; border-radius: 10px 10px 0 0; background: color-mix(in srgb, var(--sobre-noite) 26%, var(--noite)); transform-origin: 50% 100%; }
+  .placar-col.local .placar-barra { background: color-mix(in srgb, var(--sobre-noite) 58%, var(--noite)); }
+  .placar-col.local .placar-nome { color: var(--noite); }
+  .placar-nome { position: absolute; left: 50%; bottom: 14px; writing-mode: vertical-rl; transform: translateX(-50%) rotate(180deg); font: 700 var(--esc-1)/1.4 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+  .placar-val { position: absolute; left: -20px; width: 152px; text-align: center; font: 700 36px/1.2 var(--fonte-titulo); font-variant-numeric: tabular-nums; }
+  .placar-topo { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .placar-topo path { fill: none; stroke: var(--cor-destaque); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .placar-rodape { position: absolute; left: 120px; top: 898px; font: 500 36px/1.3 var(--fonte-titulo); color: var(--suave-sobre-noite); white-space: nowrap; }
+</style>
 </head>
 <body>
 <div id="palco"><div id="mundo">
 
-  <!-- abertura: rótulo, linhas .ab-linha (a .sinal é a palavra-chave, que cresce até caber), subtítulo e foto -->
-  <section data-slide="abertura" data-arquetipo="abertura" class="noite">
+  <!-- ===== Abertura ===== -->
+  <section data-slide="aula1" data-arquetipo="abertura" class="noite">
     <div class="heroi-caixa"><img class="heroi" src="midia/heroi-aula1.webp" alt=""><div class="veu"></div></div>
-    <p class="rotulo">Biblioteca de cenas · molde</p>
-    <div class="display ab-linha">Doze cenas,</div>
-    <div class="display ab-linha">um só</div>
-    <div class="display ab-linha sinal">plano</div>
-    <p class="ab-sub">Cada slide é um arquétipo que se troca, se apaga ou muda de lugar sem refazer a trilha.</p>
+    <p class="rotulo">Curso de IA · Aula 1</p>
+    <div class="display ab-linha">O que é</div>
+    <div class="display ab-linha sinal">IA</div>
+    <div class="display ab-linha">e qual usar</div>
+    <p class="ab-sub">Como ela escreve, como se mede e onde fica o seu dado.</p>
     <p class="selo-ia">imagem gerada por IA</p>
   </section>
 
-  <!-- escolha: a frase e uma .leque por rodada (data-alvo é a palavra que a vencedora ocupa; li.vence, ou a primeira) -->
-  <section data-slide="escolha" data-arquetipo="escolha">
-    <p class="rotulo">Escolha</p>
-    <h2 class="manchete">Cada palavra sai de um leque</h2>
-    <div class="frase"><span>O leque escolhe a</span> <span id="es-w1">próxima</span> <span id="es-w2">palavra</span></div>
-    <ol class="leque" data-alvo="es-w1"><li data-pct="52">próxima</li><li data-pct="21">melhor</li><li data-pct="9">única</li></ol>
-    <ol class="leque" data-alvo="es-w2"><li data-pct="46">palavra</li><li data-pct="38">resposta</li><li data-pct="9">frase</li></ol>
+  <section data-slide="receio" data-arquetipo="respiro">
+    <p class="rotulo">Para começar</p>
+    <p class="respiro"><span>Seu maior receio</span><span>com a IA</span></p>
+    <p class="opcoes" data-entra="0.7">sigilo · erro · tempo · não sei usar</p>
+  </section>
+
+  <section data-slide="pergunta" data-arquetipo="objetos">
+    <p class="rotulo">Para começar</p>
+    <h2 class="manchete">Pergunte a data sem dar o contrato</h2>
+    <p class="etiqueta">Pedido</p>
+    <div class="entrada"></div>
+    <p class="pedido">Em que data o contrato do caso foi assinado?</p>
+    <p class="etiqueta">Material</p>
+    <div class="objetos">
+      <figure><img class="objeto ausente" src="midia/doc-contrato.webp" alt=""><figcaption class="doc-leg">contrato: não enviado</figcaption></figure>
+    </div>
+    <p class="selo-ia">imagem gerada por IA</p>
+    <p class="pilula">caso fictício</p>
+  </section>
+
+  <!-- ===== Como a IA escreve ===== -->
+  <section data-slide="dados" data-arquetipo="ramos">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">De regras fixas a padrões de dados</h2>
+    <div class="ramo" data-y="450">
+      <div class="estacao"><b>filtro</b><small>de spam</small></div>
+      <div class="estacao"><b>radar</b><small>de trânsito</small></div>
+      <p class="caixa-txt">uma única<br>tarefa</p>
+    </div>
+    <div class="ramo" data-y="720">
+      <div class="estacao"><b>ChatGPT</b><small>OpenAI</small></div>
+      <div class="estacao"><b>Claude</b><small>Anthropic</small></div>
+      <div class="estacao"><b>Gemini</b><small>Google</small></div>
+      <p class="caixa-txt">tarefa geral,<br>em conversa</p>
+    </div>
+    <p class="ramos-leg">Antes, regras escritas à mão; hoje, padrões tirados de dados.</p>
+  </section>
+
+  <section data-slide="palavra" data-arquetipo="escolha">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">A IA escreve uma palavra por vez</h2>
+    <div class="frase"><span>O juiz julgou o</span> <span id="pl-w1">pedido</span> <span id="pl-w2">procedente</span></div>
+    <ol class="leque" data-alvo="pl-w1"><li data-pct="52">pedido</li><li data-pct="21">caso</li><li data-pct="9">recurso</li></ol>
+    <ol class="leque" data-alvo="pl-w2"><li data-pct="46">procedente</li><li data-pct="38">improcedente</li><li data-pct="9">extinto</li></ol>
     <p class="pilula">valores ilustrativos</p>
   </section>
 
-  <!-- numero: data-marcas (1 certo, 0 errado) e o placar; .conta conta os certos -->
-  <section data-slide="numero" data-arquetipo="numero">
-    <p class="rotulo">Número</p>
-    <h2 class="manchete">A grade se corrige e o placar sobe</h2>
+  <section data-slide="probabilidade" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Como funciona</p>
+    <p class="respiro"><span><span class="sinal">Probabilidade,</span></span><span>não consulta</span></p>
+  </section>
+
+  <!-- as candidatas não coincidem com a data do contrato fictício (12/03/2019), que só aparece na Aula 2 -->
+  <section data-slide="data" data-arquetipo="escolha" class="noite">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Sem fonte, a data não se sustenta</h2>
+    <div class="frase"><span>O contrato foi firmado em</span> <span id="dt-w1">05/08/2020</span></div>
+    <ol class="leque" data-alvo="dt-w1" data-sorteio><li data-pct="8">17/11/2019</li><li class="vence" data-pct="7">05/08/2020</li><li data-pct="6">02/01/2018</li><li data-pct="6">30/09/2021</li></ol>
+    <p class="frase-leg">plausível e sem fonte</p>
+    <p class="desfecho" data-entra="0.25"><b>ou ela recusa</b>“Sem o contrato, não sei a data.”</p>
+    <p class="pilula">datas e valores ilustrativos</p>
+  </section>
+
+  <section data-slide="mesa" data-arquetipo="viagem">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">A janela de contexto é a mesa</h2>
+    <img class="viagem-foto" src="midia/pasta-aberta.webp" alt="">
+    <div class="arvore">
+      <p class="no" data-nivel="0">a mesa</p>
+      <p class="no" data-nivel="1" data-arquivo data-de="ms-p1">sua pergunta</p>
+      <p class="no" data-nivel="1" data-arquivo>conversa anterior</p>
+      <p class="no" data-nivel="1" data-arquivo data-de="ms-p2">arquivos anexados</p>
+    </div>
+    <p class="fora-mesa" data-entra="1.5">O que não cabe fica fora da mesa.</p>
+    <p class="selo-ia">imagem gerada por IA</p>
+    <!-- papéis que viajam: ficam no vão antes do slide (fora de quadro na parada anterior) e entram na árvore -->
+    <img class="objeto" id="ms-p1" src="midia/doc-peticao.webp" alt="" style="left: -330px; top: 60px; width: 220px; height: 295px">
+    <img class="objeto" id="ms-p2" src="midia/doc-modelo.webp" alt="" style="left: -330px; top: 380px; width: 220px; height: 295px">
+  </section>
+
+  <section data-slide="conviccao" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Como funciona</p>
+    <p class="respiro"><span>Ela erra com a</span><span>mesma <span class="sinal">convicção</span></span></p>
+  </section>
+
+  <!-- ===== Detetive de alucinação ===== -->
+  <section data-slide="fronteira" data-arquetipo="comparacao">
+    <p class="rotulo">Detetive de alucinação</p>
+    <h2 class="manchete">A fronteira da IA é irregular</h2>
+    <div class="janela"><p class="display letra">Fácil</p><p class="etiqueta">para nós, difícil para ela</p>
+      <p class="janela-txt">Contar quantos “i” tem a palavra “inconstitucionalidade”.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra">Difícil</p><p class="etiqueta">para nós, fácil para ela</p>
+      <p class="janela-txt">Resumir cem páginas de autos em poucos minutos.</p></div>
+    <p class="pilula">exemplos ilustrativos · [CONFERIR] Dell'Acqua et al.</p>
+  </section>
+
+  <section data-slide="detetive" data-arquetipo="objetos">
+    <p class="rotulo">Detetive de alucinação</p>
+    <h2 class="manchete">Três trechos para conferir na fonte</h2>
+    <p class="etiqueta">Em duplas</p>
+    <div class="entrada"></div>
+    <p class="pedido">Marque cada trecho: sustentado, contradito ou não localizado.</p>
+    <p class="qr-leg" data-entra="1.1">trechos e fontes por QR [CONFERIR]</p>
+    <p class="etiqueta">Trechos</p>
+    <div class="objetos">
+      <figure><img class="objeto" src="midia/doc-peticao.webp" alt=""><figcaption class="doc-leg">trecho 1</figcaption></figure>
+      <figure><img class="objeto" src="midia/doc-contrato.webp" alt=""><figcaption class="doc-leg">trecho 2</figcaption></figure>
+      <figure><img class="objeto" src="midia/doc-modelo.webp" alt=""><figcaption class="doc-leg">trecho 3</figcaption></figure>
+    </div>
+    <p class="selo-ia">imagens geradas por IA</p>
+    <p class="pilula">[CONFERIR] trecho do professor</p>
+  </section>
+
+  <!-- trechos de marcador, neutros e fictícios, até o professor mandar os reais (anonimizados) -->
+  <section data-slide="erro" data-arquetipo="fios">
+    <p class="rotulo">Detetive de alucinação</p>
+    <h2 class="manchete">Onde estava o erro</h2>
+    <div class="fontes">
+      <p class="no" data-arquivo id="er-contrato">contrato.pdf</p>
+      <p class="no" data-arquivo id="er-sentenca">sentenca.pdf</p>
+    </div>
+    <div class="minuta">
+      <p class="cab">resposta da IA</p>
+      <p class="linha" data-fonte="er-contrato"><span>A cláusula 4 fixa multa de 2%.<span class="veredito" data-entra="1.55">sustentado</span></span></p>
+      <p class="linha" data-fonte="er-sentenca"><span>A sentença julgou o pedido procedente.<span class="veredito" data-entra="1.75">contradito</span></span></p>
+      <p class="linha"><span>Há precedente idêntico do tribunal.</span></p>
+      <p class="sem-fonte">não localizado na fonte</p>
+    </div>
+    <p class="pilula">[CONFERIR] trecho do professor</p>
+  </section>
+
+  <section data-slide="humana" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Detetive de alucinação</p>
+    <p class="respiro"><span>A verificação</span><span>continua <span class="sinal">humana</span></span></p>
+  </section>
+
+  <!-- ===== Qual a melhor IA ===== -->
+  <section data-slide="medir" data-arquetipo="ramos">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">Há duas formas de medir uma IA</h2>
+    <div class="ramo" data-y="450">
+      <div class="estacao"><b>benchmark</b><small>gabarito</small></div>
+      <p class="caixa-txt">a mesma prova<br>para todos</p>
+    </div>
+    <div class="ramo" data-y="720">
+      <div class="estacao"><b>arena</b><small>voto cego</small></div>
+      <p class="caixa-txt">pessoas<br>votam</p>
+    </div>
+  </section>
+
+  <section data-slide="benchmark" data-arquetipo="numero">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">O benchmark aplica a mesma prova</h2>
     <div class="grade" data-marcas="1101111011"></div>
     <p class="display numero"><span class="conta">0</span> de 10</p>
     <div class="numero-trilho"><div class="numero-barra"></div></div>
-    <p class="numero-leg">itens aprovados na revisão</p>
+    <p class="numero-leg">acertos na prova</p>
     <p class="pilula">ilustrativo</p>
   </section>
 
-  <!-- comparacao: duas .janela sem nome; data-linhas são as larguras das linhas em %; .escolhida ganha o círculo -->
-  <section data-slide="comparacao" data-arquetipo="comparacao">
-    <p class="rotulo">Comparação</p>
-    <h2 class="manchete">Duas versões sem nome, uma escolhida</h2>
-    <div class="janela" data-linhas="92 80 88 64 40"><p class="display letra">A</p><p class="etiqueta">versão sem nome</p></div>
+  <!-- respostas ilustrativas ao caso fictício; nenhuma afirma a data do contrato (12/03/2019, Aula 2) -->
+  <section data-slide="arena" data-arquetipo="comparacao">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">Vote antes de saber qual é qual</h2>
+    <div class="janela"><p class="display letra">A</p><p class="etiqueta">modelo oculto</p>
+      <p class="janela-txt">Não tenho o contrato. Envie o documento e eu localizo a data.</p></div>
     <div class="fio-v"></div>
-    <div class="janela escolhida" data-linhas="86 94 72 90 58"><p class="display letra">B</p><p class="etiqueta">versão sem nome</p></div>
+    <div class="janela"><p class="display letra">B</p><p class="etiqueta">modelo oculto</p>
+      <p class="janela-txt">O contrato foi assinado em 05/08/2020.</p></div>
+    <p class="criterio" data-entra="0">Vote na resposta que você usaria no caso.</p>
+    <p class="pilula">ilustrativo</p>
   </section>
 
-  <!-- ramos: cada .ramo (data-y) leva estações e uma caixa de destino; os ramos saem do pad da trilha -->
-  <section data-slide="ramos" data-arquetipo="ramos">
-    <p class="rotulo">Ramos</p>
-    <h2 class="manchete">A trilha se divide com o assunto</h2>
+  <section data-slide="pge" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Qual a melhor IA</p>
+    <p class="respiro"><span>Demos a prova</span><span>da PGE às <span class="sinal">IAs</span></span></p>
+  </section>
+
+  <section data-slide="prova" data-arquetipo="numero">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">A prova tem 14 questões e 180 pontos</h2>
+    <p class="display numero">180</p>
+    <p class="numero-leg">pontos em 14 questões</p>
+    <p class="prova-det" style="top: 400px" data-entra="0.7">12 curtas de 10 pontos</p>
+    <p class="prova-det" style="top: 470px" data-entra="0.85">1 parecer de 30</p>
+    <p class="prova-det" style="top: 540px" data-entra="1.0">1 peça de 30</p>
+    <p class="prova-det prova-juiz" data-entra="1.3">corrigida por dois modelos Gemma 4 locais</p>
+  </section>
+
+  <!-- S.T.A.R. da aula: percentuais do gráfico do professor (briefing, Fontes); cena própria, sem data-arquetipo -->
+  <section data-slide="placar" class="noite">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">Nesta prova, o topo ficou próximo</h2>
+    <svg class="placar-topo" viewBox="0 0 1920 1080"><path/></svg>
+    <div class="placar-col" data-v="91.7"><p class="placar-val">91,7</p><div class="placar-barra"><p class="placar-nome">Claude Opus 5.5</p></div></div>
+    <div class="placar-col" data-v="90.9"><p class="placar-val">90,9</p><div class="placar-barra"><p class="placar-nome">Gemini 4 Argon</p></div></div>
+    <div class="placar-col" data-v="88.7"><p class="placar-val">88,7</p><div class="placar-barra"><p class="placar-nome">Claude Sonnet 5.5</p></div></div>
+    <div class="placar-col" data-v="86.8"><p class="placar-val">86,8</p><div class="placar-barra"><p class="placar-nome">Muse Wonder</p></div></div>
+    <div class="placar-col" data-v="83.4"><p class="placar-val">83,4</p><div class="placar-barra"><p class="placar-nome">GPT-6.1 Sol</p></div></div>
+    <div class="placar-col" data-v="79.4"><p class="placar-val">79,4</p><div class="placar-barra"><p class="placar-nome">GPT-6 Luna</p></div></div>
+    <div class="placar-col" data-v="78.0"><p class="placar-val">78,0</p><div class="placar-barra"><p class="placar-nome">Muse Spark 1.3</p></div></div>
+    <div class="placar-col" data-v="77.8"><p class="placar-val">77,8</p><div class="placar-barra"><p class="placar-nome">Gemini 3.8 Flash</p></div></div>
+    <div class="placar-col" data-v="75.5"><p class="placar-val">75,5</p><div class="placar-barra"><p class="placar-nome">Claude Haiku 5.5</p></div></div>
+    <div class="placar-col local" data-v="68.7"><p class="placar-val">68,7</p><div class="placar-barra"><p class="placar-nome">Gemma 4 31B local</p></div></div>
+    <div class="placar-col" data-v="64.4"><p class="placar-val">64,4</p><div class="placar-barra"><p class="placar-nome">DeepSeek V4.1 Flash</p></div></div>
+    <p class="placar-rodape">correção por modelos; não mede trabalho jurídico</p>
+  </section>
+
+  <section data-slide="limites" data-arquetipo="comparacao">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">O que essa nota não prova</h2>
+    <div class="janela"><p class="display letra">Correção</p><p class="etiqueta">quem deu a nota</p>
+      <p class="janela-txt">Juízes Gemma, não uma banca; sem as respostas por questão.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra">Prova</p><p class="etiqueta">o que ela mede</p>
+      <p class="janela-txt">A prova de 2021 pode ter sido vista no treino; prova não é trabalho.</p></div>
+  </section>
+
+  <section data-slide="local" data-arquetipo="numero">
+    <p class="rotulo">Onde fica o dado</p>
+    <h2 class="manchete">Modelo local: 68,7% nesta prova</h2>
+    <p class="display numero">68,7%</p>
+    <p class="numero-leg">Gemma 4 31B, rodando via Ollama</p>
+  </section>
+
+  <section data-slide="sigilo" data-arquetipo="ramos">
+    <p class="rotulo">Onde fica o dado</p>
+    <h2 class="manchete">O sigilo depende de onde roda</h2>
     <div class="ramo" data-y="450">
-      <div class="estacao"><b>abertura</b><small>capítulo</small></div>
-      <div class="estacao"><b>respiro</b><small>pausa</small></div>
-      <div class="estacao"><b>fecho</b><small>pedido</small></div>
-      <p class="caixa-txt">dão ritmo<br>à fala</p>
+      <div class="estacao"><b>ChatGPT</b><small>OpenAI</small></div>
+      <div class="estacao"><b>Claude</b><small>Anthropic</small></div>
+      <div class="estacao"><b>Gemini</b><small>Google</small></div>
+      <p class="caixa-txt">roda no servidor<br>de quem vende</p>
     </div>
     <div class="ramo" data-y="720">
-      <div class="estacao"><b>escolha</b><small>decisão</small></div>
-      <div class="estacao"><b>número</b><small>placar</small></div>
-      <div class="estacao"><b>fios</b><small>fonte</small></div>
-      <p class="caixa-txt">provam<br>a ideia</p>
+      <div class="estacao"><b>Gemma</b><small>Google</small></div>
+      <div class="estacao"><b>Llama</b><small>Meta</small></div>
+      <div class="estacao"><b>gpt-oss</b><small>OpenAI</small></div>
+      <p class="caixa-txt">pode rodar no<br>seu computador</p>
     </div>
-    <p class="ramos-leg">O roteiro escolhe o arquétipo pela função do slide.</p>
+    <p class="ramos-leg">Verifique a configuração antes de usar dados do caso.</p>
+    <p class="pilula">[CONFERIR] exemplos, out/2026</p>
   </section>
 
-  <!-- respiro: uma frase curta, uma linha por span -->
-  <section data-slide="respiro" data-arquetipo="respiro" class="noite">
-    <p class="rotulo">Respiro</p>
-    <p class="respiro"><span>Uma ideia por tela.</span><span>O resto é <span class="sinal">fala</span>.</span></p>
-  </section>
-
-  <!-- tempo: agenda, cronograma ou etapas; cada li é um marco (<b> em cima da linha, texto embaixo), .agora em dourado -->
-  <section data-slide="tempo" data-arquetipo="tempo">
-    <p class="rotulo">Tempo</p>
-    <h2 class="manchete">O deck se faz em cinco etapas</h2>
-    <ol class="etapas">
-      <li><b>passo 4</b>roteiro aprovado</li>
-      <li><b>passo 5</b>montar do catálogo</li>
-      <li><b>passo 6</b>mídia em série</li>
-      <li class="agora"><b>passo 7</b>três rodadas de crítica</li>
-      <li><b>passo 8</b>ensaio ao vivo</li>
-    </ol>
-    <p class="tempo-leg">O dourado marca a etapa em que o deck está.</p>
-  </section>
-
-  <!-- objetos: o pedido que se digita e os objetos recortados com legenda (os ids levam os papéis à viagem) -->
-  <section data-slide="objetos" data-arquetipo="objetos">
-    <p class="rotulo">Objetos</p>
-    <h2 class="manchete">O pedido ao lado do material</h2>
-    <p class="etiqueta">Pedido</p>
-    <div class="entrada"></div>
-    <p class="pedido">Monte o deck a partir do roteiro aprovado.</p>
-    <p class="etiqueta">Material</p>
-    <div class="objetos">
-      <figure><img class="objeto" id="ob-roteiro" src="midia/doc-peticao.webp" alt=""><figcaption class="doc-leg">roteiro</figcaption></figure>
-      <figure><img class="objeto" id="ob-briefing" src="midia/doc-contrato.webp" alt=""><figcaption class="doc-leg">briefing</figcaption></figure>
-      <figure><img class="objeto" id="ob-midia" src="midia/doc-modelo.webp" alt=""><figcaption class="doc-leg">mídia</figcaption></figure>
-    </div>
-    <p class="selo-ia">imagens geradas por IA</p>
-  </section>
-
-  <!-- viagem: a árvore nasce pela raiz; cada .no com data-de recebe o objeto daquele id, que voa do slide anterior -->
-  <section data-slide="viagem" data-arquetipo="viagem">
-    <p class="rotulo">Viagem</p>
-    <h2 class="manchete">O material vai para a pasta do deck</h2>
-    <img class="viagem-foto" src="midia/pasta-aberta.webp" alt="">
-    <div class="arvore">
-      <p class="no" data-nivel="0">decks/meu-deck/</p>
-      <p class="no" data-nivel="1" data-arquivo data-de="ob-roteiro">deck.html</p>
-      <p class="no" data-nivel="1" data-arquivo data-de="ob-briefing">briefing.md</p>
-      <p class="no" data-nivel="1">midia/</p>
-      <p class="no" data-nivel="2" data-arquivo data-de="ob-midia">heroi.webp</p>
-      <p class="no" data-nivel="2" data-arquivo>creditos.json</p>
-    </div>
-    <p class="selo-ia">imagem gerada por IA</p>
-  </section>
-
-  <!-- fios: data-fonte liga a linha à fonte; a linha com .marca tem o fio dourado; a linha sem fonte é marcada -->
-  <section data-slide="fios" data-arquetipo="fios">
-    <p class="rotulo">Fios</p>
-    <h2 class="manchete">Cada linha aponta para a sua fonte</h2>
-    <div class="fontes">
-      <p class="no" data-arquivo id="fi-cenas">motor/cenas.js</p>
-      <p class="no" data-arquivo id="fi-tema">tema.css</p>
-      <p class="no" data-arquivo id="fi-briefing">briefing.md</p>
-    </div>
-    <div class="minuta">
-      <p class="cab">deck.html</p>
-      <p class="linha" data-fonte="fi-cenas"><span><span class="marca">Apagar um slide</span> refaz a trilha.</span></p>
-      <p class="linha" data-fonte="fi-tema"><span>Cor e fonte vêm do tema.</span></p>
-      <p class="linha"><span>Este slide prova uma ideia só.</span></p>
-      <p class="sem-fonte">sem fonte: conferir</p>
-      <p class="linha" data-fonte="fi-briefing"><span>Cada dado tem a fonte anotada.</span></p>
-    </div>
-  </section>
-
-  <!-- demonstracao: vídeo na moldura; as legendas dos mergulhos ficam na .tela (data-mergulho, data-x, data-y) -->
-  <section data-slide="demonstracao" data-arquetipo="demonstracao" class="noite">
-    <p class="rotulo">Demonstração</p>
-    <h2 class="manchete">O vídeo toca dentro do slide</h2>
-    <div class="moldura">
-      <div class="barra-nav"><i></i><i></i><i></i><u></u></div>
-      <div class="tela">
-        <video src="midia/demo.mp4" poster="midia/demo-capa.webp" muted playsinline preload="auto"></video>
-        <p class="legenda" data-mergulho="mergulho" data-x="0.2665" data-y="0.40">o holofote aponta, a legenda explica</p>
-      </div>
-    </div>
-    <p class="nota-lateral">Vídeo de exemplo feito por código. Troque pela gravação do seu caso.</p>
-  </section>
-
-  <!-- fecho: a mensagem em linhas e o que fazer agora; a trilha termina no anel -->
   <section data-slide="fecho" data-arquetipo="fecho" class="noite">
-    <p class="rotulo">Para usar o molde</p>
-    <h2 class="display fecho-msg"><span>Troque o texto,</span><span>mantenha a <span class="sinal">trilha</span></span></h2>
+    <p class="rotulo">Para levar</p>
+    <h2 class="display fecho-msg"><span>Escolha por tarefa</span><span>e teste <span class="sinal">você</span></span></h2>
     <ol class="fecho-passos">
-      <li><b>1</b>Escreva o texto e a mídia nas sections.</li>
-      <li><b>2</b>Apague a section e a linha da lista.</li>
-      <li><b>3</b>Rode <code>./ap sondar</code> e <code>./ap paradas</code>.</li>
+      <li><b>1</b>Teste com o seu próprio material.</li>
+      <li><b>2</b>Confira cada trecho na fonte.</li>
+      <li><b>3</b>A data segue sem fonte: Aula 2.</li>
     </ol>
   </section>
 
 </div></div>
 
 <script type="module">
-import {palco} from '../../motor/palco.js';
-import {mundo} from '../../motor/cenas.js';
+import {palco, revelar, surgir, tracar, contar, molaAR, faixa, saida} from '../../motor/palco.js';
+import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
 
-// Uma linha por slide, na ordem da apresentação. Passos, viagem e recuo saem do arquétipo e do vizinho (docs/cenas.md);
-// `andamento: 'corte' | 'curta' | 'media' | 'longa' | 'capitulo' | 'mergulho'` troca a viagem, e `passos: [s]` a duração.
+// Uma linha por slide, na ordem da aula; o titulo é a manchete aprovada no roteiro (briefing.md, tabela Slides).
 const slides = [
-  {id: 'abertura', titulo: 'Doze cenas, um só plano', segura: 3, notas: 'Molde do plano contínuo: cada slide é um arquétipo de motor/cenas.js. A foto é marcador (selo no canto).'},
-  {id: 'escolha', titulo: 'Escolha', notas: 'Leque de candidatas com barras; a vencedora voa para a frase. Duas rodadas. Valores ilustrativos.'},
-  {id: 'numero', titulo: 'Número', andamento: 'corte', notas: 'Corte seco: muda o assunto. A caneta corrige a grade e o placar sobe. Nota ilustrativa.'},
-  {id: 'comparacao', titulo: 'Comparação', notas: 'Duas versões sem nome; a escolhida é circulada no fim.'},
-  {id: 'ramos', titulo: 'Ramos', notas: 'A trilha se divide: em cima o que dá ritmo, embaixo o que prova a ideia.'},
-  {id: 'respiro', titulo: 'Respiro', andamento: 'capitulo', notas: 'Pausa entre capítulos: uma frase, e a fala carrega o resto.'},
-  {id: 'tempo', titulo: 'Tempo', notas: 'Etapas numa linha: a linha se traça, cada marco surge quando ela passa e o de agora fica dourado.'},
-  {id: 'objetos', titulo: 'Objetos', notas: 'O pedido se digita ao lado do material. Os papéis seguem para o próximo slide.'},
-  {id: 'viagem', titulo: 'Viagem', notas: 'Os papéis atravessam grandes e entram nos arquivos da pasta do deck; o nome acende depois.'},
-  {id: 'fios', titulo: 'Fios', notas: 'Cada linha aponta para a fonte; o dourado acende quando o fio chega. A linha sem fonte se confere ou sai.'},
-  {id: 'demonstracao', titulo: 'Demonstração', video: [0.9, 2.4], notas: 'Vídeo de exemplo (marcador). Toca no clique e para sozinho.'},
-  {id: 'mergulho', titulo: 'Demonstração: mergulho', video: [0, 1.6], notas: 'A câmera mergulha no vídeo; o holofote aponta e a legenda explica.',
-   mergulho: {em: 'demonstracao', x: 0, y: 0.03, f: 0.56, furos: [[0.03, 0.254, 0.208, 0.035], [0.273, 0.172, 0.145, 0.037]]}},
-  {id: 'fecho', titulo: 'Para usar o molde', segura: 4, notas: 'Trocar, apagar, conferir. A trilha termina aqui.'},
+  {id: 'aula1', titulo: 'O que é IA e qual usar', segura: 3,
+   notas: 'Aula 1 de 2. Hoje: como a IA escreve, como se mede e onde fica o dado. Foto gerada por IA (selo no canto).'},
+  {id: 'receio', titulo: 'Seu maior receio com a IA',
+   notas: 'Enquete de mão levantada: sigilo, erro, tempo ou não sei usar. Calibrar a linguagem pela resposta da sala.'},
+  {id: 'pergunta', titulo: 'Pergunte a data sem dar o contrato',
+   notas: 'Ao vivo, em qualquer IA: perguntar a data de assinatura do contrato do caso fictício, sem anexar nada. Não anunciar o resultado esperado; a sala observa.'},
+  {id: 'dados', titulo: 'De regras fixas a padrões de dados', andamento: 'corte',
+   notas: 'Antes, regras escritas à mão. Depois, sistemas que aprendem com exemplos: primeiro para uma tarefa só (spam, radar), hoje para tarefa geral, em conversa. Datas históricas só na fala.'},
+  {id: 'palavra', titulo: 'A IA escreve uma palavra por vez',
+   notas: 'Escolhe a próxima palavra pela probabilidade, uma por vez. Tokens só na fala: "inconstitucionalidade" se fatia em pedaços. Valores ilustrativos.'},
+  {id: 'probabilidade', titulo: 'Probabilidade, não consulta',
+   notas: 'Ela não consulta um banco de dados de fatos: calcula o que é provável depois do que já está escrito.'},
+  {id: 'data', titulo: 'Sem fonte, a data não se sustenta',
+   notas: 'Voltar ao teste do slide 3. Se a IA recusou e pediu o contrato, ótimo. Se respondeu, as barras eram rasas e ela sorteou uma data plausível. Datas ilustrativas. Erro real anonimizado de reserva.'},
+  {id: 'mesa', titulo: 'A janela de contexto é a mesa',
+   notas: 'A janela de contexto é a mesa de trabalho: a pergunta, a conversa e os anexos. O que não cabe fica de fora, e o que não foi dado (o contrato) nunca esteve lá.'},
+  {id: 'conviccao', titulo: 'Ela erra com a mesma convicção', andamento: 'capitulo',
+   notas: 'O tom da resposta não muda quando ela erra. A segurança do texto não é sinal de acerto.'},
+  {id: 'fronteira', titulo: 'A fronteira da IA é irregular',
+   notas: 'Fronteira irregular: Dell\'Acqua et al., HBS 2023 [CONFERIR]; expressão de Ethan Mollick. O fácil para nós pode ser difícil para ela, e o contrário. Exemplos ilustrativos.'},
+  {id: 'detetive', titulo: 'Três trechos para conferir na fonte',
+   notas: 'Duplas, com a fonte ao lado: cada trecho é sustentado, contradito ou não localizado. Trechos e fontes pelo QR ou em folha. [CONFERIR] trechos do professor.'},
+  {id: 'erro', titulo: 'Onde estava o erro',
+   notas: 'Correção: um trecho certo (controle), um que a fonte contradiz e um sem fonte. Trechos de marcador até chegarem os reais.'},
+  {id: 'humana', titulo: 'A verificação continua humana', andamento: 'capitulo',
+   notas: 'Quem confere antes de cada entrega? Combinar na equipe quem revisa e com qual fonte.'},
+  {id: 'medir', titulo: 'Há duas formas de medir uma IA',
+   notas: 'Duas formas: a mesma prova para todos (benchmark) e a votação de pessoas sem saber o modelo (arena). Uma mede acertos; a outra, preferência.'},
+  {id: 'benchmark', titulo: 'O benchmark aplica a mesma prova',
+   notas: 'Benchmark é prova padronizada com gabarito, como a primeira fase da OAB. Nota ilustrativa.'},
+  {id: 'arena', titulo: 'Vote antes de saber qual é qual',
+   notas: 'Na arena, pessoas votam às cegas entre duas respostas (LMArena; Chiang et al., arXiv:2403.04132). Anunciar o critério e votar com a mão antes de revelar. Respostas ilustrativas.'},
+  {id: 'pge', titulo: 'Demos a prova da PGE às IAs',
+   notas: 'Prova discursiva da PGE-MS de 2021, dada a onze modelos. Teste do professor, não da PGE-MS.'},
+  {id: 'prova', titulo: 'A prova tem 14 questões e 180 pontos',
+   notas: '12 dissertativas curtas de 10 pontos, um parecer de 30 e uma peça de 30. Nota ponderada. Juízes gemma4:26b e gemma4:31b, rodando localmente.'},
+  {id: 'placar', titulo: 'Nesta prova, o topo ficou próximo',
+   notas: 'Os três primeiros ficaram a 3 pontos um do outro. Não dizer "empate técnico". O local (Gemma 4 31B) em cor própria. Correção por modelos; não mede trabalho jurídico.'},
+  {id: 'limites', titulo: 'O que essa nota não prova',
+   notas: 'Sem respostas por questão; juízes Gemma, não banca; a prova de 2021 pode ter sido vista no treino; prova não é trabalho. Abrir a discussão.'},
+  {id: 'local', titulo: 'Modelo local: 68,7% nesta prova',
+   notas: 'O Gemma 4 31B rodou no computador do professor. Separar o teste do professor do computador de cada aluno: depende da máquina.'},
+  {id: 'sigilo', titulo: 'O sigilo depende de onde roda',
+   notas: 'Duas perguntas separadas: qual modelo e onde o dado é processado. Fechados rodam no servidor de quem vende (há versões em nuvens parceiras); abertos podem rodar no seu computador. [CONFERIR] exemplos de out/2026.'},
+  {id: 'fecho', titulo: 'Escolha por tarefa e teste você', segura: 4,
+   notas: 'Escolher por tarefa e testar com o próprio material. A data do contrato continua sem fonte: a resposta vem na Aula 2.'},
 ];
 
+// Placar: as barras crescem da linha de base, uma depois da outra; o dourado marca o topo próximo depois de todas.
+const BASE = 872, ALTURA = 570, PASSO = 1680 / 11;
 const m = mundo(slides);
-palco({slides: m.slides, cenas: m.cenas(), desenhar: m.desenhar});
+const secPlacar = m.secao('placar');
+const colunas = [...secPlacar.querySelectorAll('.placar-col')].map((col, i) => {
+  const v = Number(col.dataset.v), h = ALTURA * v / 100, barra = col.querySelector('.placar-barra');
+  const val = col.querySelector('.placar-val'), nome = col.querySelector('.placar-nome');
+  col.style.left = `${120 + PASSO * i + (PASSO - 112) / 2}px`;
+  barra.style.height = `${h}px`;
+  val.style.top = `${BASE - h - 56}px`;
+  return {barra, val, nome, v, h, x: 120 + PASSO * i + (PASSO - 112) / 2};
+});
+{ // colchete sobre os três primeiros, acima dos valores
+  const [a, , c] = colunas, y = BASE - a.h - 84;
+  secPlacar.querySelector('.placar-topo path').setAttribute('d', `M${a.x} ${y + 18}V${y}H${c.x + 112}V${y + 18}`);
+}
+const topo = secPlacar.querySelector('.placar-topo path'), rodape = secPlacar.querySelector('.placar-rodape');
+
+palco({slides: m.slides, desenhar: m.desenhar, cenas: m.cenas({
+  aula1: {largura: 340},   // três linhas e o subtítulo assentam acima da trilha
+  placar: (t, c) => {
+    const x = conteudo(c);
+    titulo(secPlacar, x, c);
+    revelar(rodape, molaAR(x - 0.1));
+    colunas.forEach(({barra, val, nome, v}, i) => {
+      const k = molaAR(x - 0.2 - i * 0.08);
+      barra.style.transform = `scaleY(${Math.max(0, k)})`;
+      surgir(nome, molaAR(x - 0.45 - i * 0.08), {dy: 0});
+      surgir(val, molaAR(x - 0.35 - i * 0.08), {dy: 0});
+      contar(val, Math.min(1, Math.max(0, k)), 0, v, {casas: 1});
+    });
+    tracar(topo, saida(faixa(x, 1.5, 1.85)));
+    fim(secPlacar, x, 1.9);
+  },
+})});
 </script>
 </body>
 </html>
