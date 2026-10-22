@@ -1,0 +1,17 @@
+1 · **MANTENHO** — Os “casos reais do professor” contrariam a restrição de não exibir dados de processo real. A prática deve usar apenas trechos integralmente fictícios, incluindo um trecho correto para que a turma não passe a tratar toda resposta como erro.
+
+2 · **REFINO** — A sequência expositiva de 35 minutos é longa, mas a redistribuição precisa preservar a explicação da virada. Texto novo: `15 min: limite do chat e conceito de agente, com uma ação curta na tela; 25 min: demonstração da pasta, explicando skill e memória quando aparecerem; 22 min: prática`. Os 20 minutos vêm dos quatro blocos hoje somados em 35.
+
+3 · **REFINO** — Entregar três PDFs por WhatsApp ou exigir três uploads ainda pode consumir a prática em suporte técnico. Texto novo: `Enviar antes da aula um link e QR Code para um único arquivo leve com o caso fictício; manter cópia projetada. Todos fazem a auditoria no chat, por upload ou texto copiado; quem já tiver agente configurado compara com a execução na pasta`. Não prometer Word a toda a turma.
+
+4 · **REFINO** — Uma data encontrada em um contrato não demonstra a vantagem da pasta; oito documentos, discussão de prescrição e `.docx` no padrão do gabinete tornam o clímax pesado demais. Texto novo: `O agente cruza três arquivos fictícios, produz uma cronologia com indicação da fonte de cada data e salva uma minuta na pasta; o chat recebe os mesmos arquivos para comparação`. A conclusão jurídica fica para revisão humana.
+
+5 · **MANTENHO** — Enxugar os 27 minutos iniciais abre espaço para a turma fazer algo antes do benchmark. O foco proposto — resposta plausível não é prova, e contexto tem limites — prepara tanto o exercício de alucinação quanto a Aula 2.
+
+6 · **MANTENHO** — Quinze minutos não comportam duas execuções completas e explicações de skill e memória. Uma execução principal, uma comparação breve na outra ferramenta e vídeo de reserva protegem o ponto alto sem transformar neutralidade em duas demonstrações redundantes.
+
+7 · **REFINO** — O gráfico precisa de interpretação, mas os “três achados” propostos extrapolam o que ele permite concluir: não há base para afirmar empate estatístico, efeito de plano/modelo rápido ou teto dos modelos locais. Texto novo: `Arena com respostas previamente preparadas e identificadas como exercício independente; depois, gráfico, método de correção e limites: prova possivelmente conhecida pelos modelos, correção por modelos locais e ausência das respostas por questão. Notas não equivalem a desempenho no trabalho`. Não vincular o voto da arena às notas sem usar as mesmas respostas.
+
+8 · **REFINO** — O cuidado deve vir antes de abrir a pasta, mas o semáforo sugerido dá falsa segurança: plano pago e treino desativado não autorizam, por si, inserir dados de clientes ou processos. Texto novo: `Nesta aula, só arquivos fictícios. No trabalho, verificar regras institucionais e condições da ferramenta antes de qualquer uso de dados; dar ao agente acesso apenas à subpasta necessária e revisar ações de edição ou exclusão`.
+
+9 · **REFINO** — Reduzir a digitação no celular é correto. Retirar, porém, a promessa de que persona, formato e exemplos serão salvos “de forma permanente”: isso depende da configuração. Texto novo: `Reescreva objetivo, contexto mínimo e regra de não inventar. Na demonstração, veja como instruções reutilizáveis podem reduzir repetição — e o que ainda precisa ser conferido a cada tarefa`.
