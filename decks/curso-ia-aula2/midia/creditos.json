@@ -1,0 +1,230 @@
+[
+ {
+  "arquivo": "midia/demo-capa.webp",
+  "data": "2026-10-19",
+  "ferramenta": "trazido",
+  "origem": "./cvm html, código próprio, caso fictício; a digitação do pedido (0 a 4,8 s) e a escrita da minuta (de 6,6 s do original em diante) aceleradas 2x com ffmpeg a partir de midia/originais/demo.mp4",
+  "quadro_de": "midia/demo.mp4",
+  "segundo": 0.0,
+  "copiado_de": "decks/previa-curso-ia/midia/demo-capa.webp",
+  "nota": "marcador: substitua por mídia do deck"
+ },
+ {
+  "arquivo": "midia/demo.mp4",
+  "data": "2026-10-19",
+  "ferramenta": "trazido",
+  "origem": "./cvm html, código próprio, caso fictício; a digitação do pedido (0 a 4,8 s) e a escrita da minuta (de 6,6 s do original em diante) aceleradas 2x com ffmpeg a partir de midia/originais/demo.mp4",
+  "original": "decks/previa-curso-ia/midia/originais/demo-pedido-2x.mp4",
+  "preparo": {
+   "perfil": "demo",
+   "ate": null,
+   "audio": false
+  },
+  "copiado_de": "decks/previa-curso-ia/midia/demo.mp4",
+  "nota": "marcador: substitua por mídia do deck"
+ },
+ {
+  "arquivo": "midia/doc-contrato.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A single A4 page with a faded round ink stamp made only of concentric rings, no letters, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.\nImage 2 is the approved draft: keep its composition, the page and the ring-only stamp exactly; render it at full fidelity.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/doc-contrato-1.png"
+  ],
+  "custo_usd": 0,
+  "custo_nota": "cópia da prévia, sem geração nova; o custo da geração está no creditos.json da prévia",
+  "original": "decks/previa-curso-ia/midia/originais/doc-contrato.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "duotone",
+   "intensidade": 0.8,
+   "largura": 900,
+   "alfa": true,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "auto",
+   "gama": 1.8,
+   "limiar": [
+    4.0,
+    8.0
+   ],
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  },
+  "copiado_de": "decks/previa-curso-ia/midia/doc-contrato.webp",
+  "nota": "marcador: substitua por mídia do deck"
+ },
+ {
+  "arquivo": "midia/doc-modelo.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A short bundle of A4 pages held by one metal paper clip, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.\nImage 2 is the approved draft: keep the bundle's exact design and the paper clip, but make the bundle larger, filling about 75% of the frame height, centered; render it at full fidelity.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/doc-modelo-1.png"
+  ],
+  "custo_usd": 0,
+  "custo_nota": "cópia da prévia, sem geração nova; o custo da geração está no creditos.json da prévia",
+  "original": "decks/previa-curso-ia/midia/originais/doc-modelo.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "duotone",
+   "intensidade": 0.8,
+   "largura": 900,
+   "alfa": true,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "auto",
+   "gama": 2.6,
+   "limiar": [
+    3.9,
+    7.8
+   ],
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  },
+  "copiado_de": "decks/previa-curso-ia/midia/doc-modelo.webp",
+  "nota": "marcador: substitua por mídia do deck"
+ },
+ {
+  "arquivo": "midia/doc-peticao.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. A stapled multi-page A4 document, slightly fanned at one corner, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. The pages show only faint grey lines, never legible text. Only this document is in the frame: no pen, no stamp, no other objects. The paper is bright white, clearly lighter than the warm off-white backdrop. Lighting exception for this isolated shot: the backdrop is lit evenly, with the same brightness in all four corners; no vignette, no gradient.\nImage 2 is a backdrop and lighting reference: match its uniform warm off-white backdrop, flat even light and soft contact shadow exactly; do not copy its page or stamp. The faint lines are plain solid grey bars, never letters or glyphs.",
+  "parametros": {
+   "aspecto": "3:4",
+   "resolucao": "2K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/doc-contrato.png"
+  ],
+  "custo_usd": 0,
+  "custo_nota": "cópia da prévia, sem geração nova; o custo da geração está no creditos.json da prévia",
+  "original": "decks/previa-curso-ia/midia/originais/doc-peticao.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "duotone",
+   "intensidade": 0.8,
+   "largura": 900,
+   "alfa": true,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "auto",
+   "gama": 1.8,
+   "limiar": [
+    4.1,
+    8.1
+   ],
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  },
+  "copiado_de": "decks/previa-curso-ia/midia/doc-peticao.webp",
+  "nota": "marcador: substitua por mídia do deck"
+ },
+ {
+  "arquivo": "midia/heroi-aula1.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Title-slide photograph, low-key. Subject: an open wooden index-card drawer full of blank cards, seen from a low three-quarter angle; one blank card is lifted slightly above the others and catches the light. Subject in the right third of the frame. Background: smooth, dark, out-of-focus wall, slightly lighter behind the subject. Keep the left 50% of the frame completely empty: only the smooth dark background, no objects, no lines, no texture. Keep all important content inside the central horizontal band; the top and bottom 8% are plain background. All cards blank.\nImage 2 is the approved draft of this photograph: keep its subject, camera angle, light, tonal range and dark smooth wall, but shift the drawer and the desk slightly to the right so that nothing, not even the desk edge, enters the left 50% of the frame. Render at full fidelity with fine wood grain and crisp card edges.",
+  "parametros": {
+   "aspecto": "16:9",
+   "resolucao": "4K"
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/heroi-aula1-3.png"
+  ],
+  "custo_usd": 0,
+  "custo_nota": "cópia da prévia, sem geração nova; o custo da geração está no creditos.json da prévia",
+  "original": "decks/previa-curso-ia/midia/originais/heroi-aula1.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "duotone",
+   "intensidade": 0.8,
+   "largura": 2048,
+   "alfa": false,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "auto",
+   "gama": 1.0,
+   "limiar": null,
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  },
+  "copiado_de": "decks/previa-curso-ia/midia/heroi-aula1.webp",
+  "nota": "marcador: substitua por mídia do deck"
+ },
+ {
+  "arquivo": "midia/pasta-aberta.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (python -m src.generate, chamada direta)",
+  "modelo": "gemini",
+  "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is the object reference: keep the exact shape, color, cardboard texture and rubber band of the case folder. Image 2 is a style reference only: match its light, grain and lens look; do not copy its objects. The folder lies open, seen from straight above, isolated on a perfectly flat, evenly lit warm off-white seamless backdrop, no floor line, no horizon, only a very soft contact shadow. Inside, a few blank pages are fanned out. All pages blank.\nImage 3 is the approved draft of this photograph: keep its composition, the open folder's exact design, the fanned pages and the loose rubber band; render it at full fidelity with visible cardboard fibers. The backdrop is one uniform tone edge to edge, with no vignette and no gradient.",
+  "parametros": {
+   "aspecto": "4:3",
+   "resolucao": "2K",
+   "temperature": 0.4
+  },
+  "licenca": "termos do provedor do modelo",
+  "refs": [
+   "decks/previa-curso-ia/midia/originais/pasta-folha.png",
+   "decks/previa-curso-ia/midia/originais/mestra.png",
+   "decks/previa-curso-ia/midia/originais/rascunhos/pasta-aberta-1.png"
+  ],
+  "custo_usd": 0,
+  "custo_nota": "cópia da prévia, sem geração nova; o custo da geração está no creditos.json da prévia",
+  "original": "decks/previa-curso-ia/midia/originais/pasta-aberta.png",
+  "tratamento": {
+   "ferramenta": "./ap tratar",
+   "tom": "tritone",
+   "intensidade": 0.8,
+   "largura": 1400,
+   "alfa": true,
+   "grao": 0.02,
+   "semente": 0,
+   "niveis": "fundo",
+   "gama": 1.0,
+   "limiar": [
+    6.2,
+    12.5
+   ],
+   "cores": {
+    "tinta": "#0F2641",
+    "destaque": "#D49D38",
+    "fundo": "#FCF9F4"
+   }
+  },
+  "copiado_de": "decks/previa-curso-ia/midia/pasta-aberta.webp",
+  "nota": "marcador: substitua por mídia do deck"
+ }
+]
