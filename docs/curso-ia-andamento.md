@@ -134,6 +134,19 @@ Para o professor decidir no ensaio: a manchete pedida virou "Os de ponta passam 
 linha; o Muse Spark Open (816 bilhões) fica abaixo do marco de 1 trilhão, como os números mostram;
 os 3 minutos da prática 5 foram para o bloco 5 e podem ir para outra parte, se ele preferir.
 
+## Pedido de 23/10/2026, depois da versão 6
+
+O slide "Pesos dizem quanto cada pista importa" (fios entre "juiz/julgou/pedido" e "procedente/improcedente") ficou
+confuso até para o professor.
+
+1. [a fazer] Retirar o slide "Pesos dizem quanto cada pista importa".
+2. [a fazer] Em "Os de ponta passam de 1 trilhão de pesos", trocar a primeira parada (rede com fios) por texto grande com a
+   analogia "Uma rede neural é feita de bilhões de botões de ajuste: os pesos, ou parâmetros. Treinar é girar esses
+   botões até as respostas ficarem boas.", com no máximo um desenho discreto de botões girando; a segunda parada
+   (barras e linha dos fechados) continua.
+3. [a fazer] Vizinhança de arquétipos, respiro, notas e transições dos vizinhos; soma dos blocos em 90 e determinismo
+   conferido.
+
 ## Pendência de motor (23/10/2026)
 
 - O teste de determinismo do `./ap sondar` falha por um pixel na barra de progresso da linha do dia conforme a
