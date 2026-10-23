@@ -11,7 +11,7 @@ deste briefing); o parecer fictício medido, em `apuracao-parecer-ficticio.md`.
 - Curso agnóstico: Claude e ChatGPT lado a lado, sem vender marca.
 - Mensagem em uma frase: a IA escreve bem por previsão, não por consulta, e por isso cada um escolhe a ferramenta pela
   tarefa e confere na fonte. A capa pergunta "Você confere como?" e o fecho responde.
-- Cinco práticas com celular ou mão levantada, cada uma com `pratica: N` (cronômetro na tela do apresentador).
+- Quatro práticas com celular ou mão levantada (a quinta, o duelo, saiu na versão 6), cada uma com `pratica: N` (cronômetro na tela do apresentador).
 - Tema `cojuris`, plano contínuo, mesma trilha dourada e acabamento da prévia (`decks/previa-curso-ia`). Os slides de
   definição, tamanho dos modelos e fronteira têm mais de um clique, um por parte.
 - S.T.A.R. de cada bloco, e só um: a classificação da sala (bloco 1, prática 1), os fios das pistas decidindo a palavra
@@ -27,16 +27,17 @@ A linha do dia mostra os cinco blocos embaixo da trilha; fica escondida na capa 
 | 16 | O que é IA (`o-que-e`) | 1 a 13 | 1, classificar seis sistemas (3 min) |
 | 30 | Como funciona (`funciona`) | 14 a 34 | 2, contar tokens (4 min); 3, o mesmo pedido três vezes (3 min) |
 | 14 | Onde tropeça (`tropeca`) | 35 a 41 | 4, conferir o acórdão (6 min) |
-| 20 | Qual a melhor (`melhor`) | 42 a 57 | 5, o duelo de preferência (3 min) |
-| 10 | Fechado e aberto (`abertos`) | 58 a 64 | |
+| 17 | Qual a melhor (`melhor`) | 42 a 55 | nenhuma (o duelo saiu na versão 6) |
+| 13 | Fechado e aberto (`abertos`) | 56 a 62 | |
 
-Soma: 90 minutos. O bloco 2 cresceu de 25 para 30 minutos com a sequência de pesos e a memória; a abertura (3 min)
+Soma: 90 minutos. Na versão 6, os 3 minutos da prática 5 passaram do bloco 4 (20 para 17) ao bloco 5 (10 para 13),
+que ganhou tempo para os modelos abertos e fechados. O bloco 2 cresceu de 25 para 30 minutos com a sequência de pesos e a memória; a abertura (3 min)
 entrou no bloco 1 e o bloco 5 caiu de 12 para 10.
 
 ## Slides
 
 Densidade pela parada final, nas faixas do oráculo: respiro (até 12 palavras ou texto de 200 px), leve (13 a 24),
-médio (25 a 45). Nenhuma imagem foi gerada; custo de mídia desta versão, US$ 0. "Novo" marca o que entrou na versão 4; "v5", o que mudou na versão 5 (64 slides, 74 paradas).
+médio (25 a 45). Nenhuma imagem foi gerada; custo de mídia desta versão, US$ 0. "Novo" marca o que entrou na versão 4; "v5", o que mudou na versão 5 (62 slides, 72 paradas desde a versão 6).
 
 | # | slide | manchete | o que a tela prova | clima e densidade | arquétipo | mídia e custo |
 |---|---|---|---|---|---|---|
@@ -91,24 +92,21 @@ médio (25 a 45). Nenhuma imagem foi gerada; custo de mídia desta versão, US$ 
 | 49 | arena | Na arena, pessoas votam às cegas | quatro passos da votação; legenda com o link arena.ai | claro, médio | tempo | código |
 | 50 | textarena | Na conversa, o Gemini 4 Argon lidera | v5: Text Arena, cinco primeiros com a margem, eixo a partir de 1490; Gemini preliminar | noite, mais de 45 | cena própria (ranking) | código |
 | 51 | agentes | Como agente, o Opus 5.5 abre vantagem | novo: o Top 10 de agentes escolhido pelo professor, com o que o percentual quer dizer | claro, mais de 45 | cena própria (ranking) | código |
-| 52 | pratica5 | Qual você mandaria ao cliente? | v5: duelo de preferência; A e B sem nome, respostas geradas de verdade (seção Duelo), 1 ou 2 dedos, um minuto | noite, mais de 45 | comparacao | código |
-| 53 | revelacao | A custa até 40 vezes menos que B | v5: A é o Claude Haiku 5.5, B o Claude Opus 5.5, com o preço de cada; a lição da preferência | claro, mais de 45 | cena própria (cartões) | código |
-| 54 | mede | Benchmark mede prova; arena, preferência | frase grande | noite, respiro | respiro | nenhuma |
-| 55 | prova | Demos a prova da PGE às IAs | 180 grande, composição da prova, correção por dois Gemma 4 | claro, respiro (320 px) | numero | código |
-| 56 | placar | Nesta prova, o topo ficou próximo | dez barras, colchete dourado nos dois primeiros (S.T.A.R. da aula) | noite, mais de 45 | cena própria (placar) | código |
-| 57 | limites | O que essa nota não diz | prova contra correção | claro, médio | comparacao | código |
-| 58 | aberto | Fechado ou aberto? | abertura do bloco 5 | noite, respiro | abertura | nenhuma |
-| 59 | pesos | Aberto é ter os pesos | fechado contra aberto | noite, médio | comparacao | código |
-| 60 | fechados | Os principais modelos fechados | seis cartões com logo; OpenAI "GPT-6"; "família mais recente" | claro, médio | cena própria (cartões) | logos, US$ 0 |
-| 61 | abertos | Os principais modelos abertos | oito cartões com logo; Mistral "Large 3" | claro, médio | cena própria (cartões) | logos, US$ 0 |
-| 62 | corrida | Na ponta, EUA e China disputam | EUA contra China; na Europa, a Mistral (S.T.A.R. do bloco 5) | noite, médio | comparacao | código |
-| 63 | fecho | Escolha por tarefa e teste você | três passos; Aula 2: como pedir bem | noite, leve | fecho | nenhuma |
-| 64 | encerramento | Obrigado | v5: fundo claro, logo oficial, "Obrigado" e o intervalo antes da Aula 2 | claro, respiro | cena própria (marca) | logo do tema, US$ 0 |
+| 52 | mede | Benchmark mede prova; arena, preferência | frase grande | noite, respiro | respiro | nenhuma |
+| 53 | prova | Demos a prova da PGE às IAs | 180 grande, composição da prova, correção por dois Gemma 4 | claro, respiro (320 px) | numero | código |
+| 54 | placar | Nesta prova, o topo ficou próximo | dez barras, colchete dourado nos dois primeiros (S.T.A.R. da aula) | noite, mais de 45 | cena própria (placar) | código |
+| 55 | limites | O que essa nota não diz | prova contra correção | claro, médio | comparacao | código |
+| 56 | aberto | Fechado ou aberto? | abertura do bloco 5 | noite, respiro | abertura | nenhuma |
+| 57 | pesos | Aberto é ter os pesos | fechado contra aberto | noite, médio | comparacao | código |
+| 58 | fechados | Os principais modelos fechados | seis cartões com logo; OpenAI "GPT-6"; "família mais recente" | claro, médio | cena própria (cartões) | logos, US$ 0 |
+| 59 | abertos | Os principais modelos abertos | oito cartões com logo; Mistral "Large 3" | claro, médio | cena própria (cartões) | logos, US$ 0 |
+| 60 | corrida | Na ponta, EUA e China disputam | EUA contra China; na Europa, a Mistral (S.T.A.R. do bloco 5) | noite, médio | comparacao | código |
+| 61 | fecho | Escolha por tarefa e teste você | três passos; Aula 2: como pedir bem | noite, leve | fecho | nenhuma |
+| 62 | encerramento | Obrigado | v5: fundo claro, logo oficial, "Obrigado" e o intervalo antes da Aula 2 | claro, respiro | cena própria (marca) | logo do tema, US$ 0 |
 
 ### O que mudou da versão 5 e por quê (pedidos de 23/10/2026)
 
-Numeração da folha de contato da versão 5. Os pedidos estão em `docs/curso-ia-andamento.md`; 64 slides e 74 paradas,
-como antes.
+Numeração da folha de contato da versão 5. Os pedidos estão em `docs/curso-ia-andamento.md`; 62 slides e 72 paradas.
 
 1. Paradas 23 a 25 ("A palavra vira uma lista de números" e as duas de "Um neurônio multiplica e soma") confundiam a
    turma e saíram. No lugar, duas cenas próprias sem aritmética. "Pesos dizem quanto cada pista importa" (uma parada,
@@ -123,10 +121,16 @@ como antes.
    Volume de treino: Kimi K3, Qwen3.8, Muse Spark Open e Mistral Large 4 não publicam os tokens de pré-treino nas
    fichas lidas, e o Gemma 4 também não; o DeepSeek V4 publica "more than 32T" tokens, e o slide do corpus passou a
    "+32 trilhões" com essa fonte. O cartão "Meta; também Llama 4" dos abertos ficou, porque não é exemplo de tamanho.
-3. Sem fonte: "estima-se que [os fechados] estejam nessa faixa" é frase do professor; nenhuma fonte lida estima o
-   tamanho de Claude, GPT ou Gemini, e a Anthropic não publica parâmetros (seção Duelo). Se o professor preferir, a
-   linha vira "Fechados (Claude, GPT, Gemini) não divulgam o tamanho."
-4. O Mistral Large 4 está em prévia desde 06/10/2026, com pesos prometidos para o fim do mês; o cartão dos abertos
+3. A linha dos fechados é "Claude, GPT e Gemini não divulgam o tamanho": nenhuma fonte lida estima o número, e a
+   Anthropic não publica parâmetros (apuração 2, item 11). Que devem ser dessa ordem de grandeza fica só na fala,
+   dito como opinião do professor.
+4. Prática 5 retirada: o duelo de preferência sobre precatório (parada 62 da versão 5) e a revelação "A custa até 40
+   vezes menos que B" (parada 63) saíram, com o CSS, a cena e as notas. A arena fica explicada pelos slides de ranking
+   (arena, Text Arena e agentes); a transição dos agentes passou a "Resumo das duas formas de medir.", que leva ao
+   respiro "Benchmark mede prova; arena, preferência". Vizinhança: agentes (ranking, claro) e mede (respiro, noite),
+   sem arquétipo repetido; o respiro continua a dois slides do anterior. Bloco "Qual a melhor" de 20 para 17 minutos e
+   "Fechado e aberto" de 10 para 13, para a soma ficar em 90. A seção Duelo ficou como registro, marcada como retirada.
+5. O Mistral Large 4 está em prévia desde 06/10/2026, com pesos prometidos para o fim do mês; o cartão dos abertos
    continua "Large 3". Se os pesos não saírem até a aula, a nota do slide já diz isso.
 
 ### O que mudou da versão 4 e por quê (pedidos do ensaio de 23/10/2026)
@@ -225,7 +229,7 @@ Todas lidas em 22/10/2026, salvo indicação; o trecho lido e a ressalva de cada
 | 5 | PL 2338/2023, art. 4º, I; Senado 10/12/2024; Câmara aguarda parecer | inteiro teor na Câmara e API de dados abertos, proposição 2487262 (apuração 2, item 6.2) |
 | 8 (v5) | linha do tempo: 1956, anos 80, anos 90, 2012, 2017, 2022; GPT-3 em 2020; GPT-6 em 07/10/2026 | apuração 2, item 10 (Wikipedia, NIPS 2012, arXiv, OpenAI), lidos em 23/10/2026 |
 | 51 (v5) | Text Arena: cinco primeiros, 8.946.356 votos | leitura do professor em 22/10/2026 (apuração 2, item 5.5) |
-| 53 e 54 (v5) | respostas do duelo; preço de US$ 4 e desde US$ 0,10 por milhão de tokens | seção Duelo; página de modelos da Anthropic, 23/10/2026 (apuração 2, item 11) |
+| (retirado na v6) | respostas do duelo; preço de US$ 4 e desde US$ 0,10 por milhão de tokens | seção Duelo; página de modelos da Anthropic, 23/10/2026 (apuração 2, item 11) |
 | 15 (v6) | mais de 32 trilhões de tokens no pré-treino do DeepSeek V4 | ficha do DeepSeek-V4-Pro no Hugging Face, lida em 23/10/2026 (apuração 2, item 12) |
 | 16 (v6) | pesos de 3, 1 e 6 (procedente) e 3, 1 e 2 (improcedente) como espessura dos fios | exemplo do professor; pílula "ilustrativo" |
 | 17 (v6) | Kimi K3 2,8 trilhões; Qwen3.8 Max 2,4 trilhões; Mistral Large 4 1 trilhão; Muse Spark Open 816 bilhões | fichas oficiais no Hugging Face e anúncio da Mistral de 06/10/2026, lidos em 23/10/2026 (apuração 2, item 12); a linha dos fechados é afirmação do professor (ver "O que mudou da versão 5") |
@@ -253,7 +257,9 @@ texto genérico; slide 52 (respostas do duelo) escrito pelo professor; slide 60 
 Reconferir na véspera: a ficha do PL 2338/2023, os três rankings, a grade de modelos e se os pesos do Mistral Large 4
 saíram.
 
-## Duelo (versão 5, prática 5)
+## Duelo (versão 5, prática 5; retirado na versão 6)
+
+Retirado do deck na versão 6, a pedido do professor; fica aqui só como registro do que foi feito.
 
 Pedido igual para os dois modelos, sem edição: "Explique a um cliente leigo, em até 25 palavras, o que é um precatório
 e por que demora." B foi escrita pela sessão principal (Claude Opus 5.5) antes de ler A; A saiu de um subagente com
@@ -298,9 +304,10 @@ gerada, por isso nenhum slide leva selo.
 
 ## Avisos aceitos
 
+- Versão 6: índice geral (61 palavras), índice jurídico (59), Text Arena (53), agentes (64) e placar (62), todos
+  AVISO, nenhum ERRO. Duelo e revelação saíram do deck.
 - Versão 5: índice geral (61 palavras), índice jurídico (59), Text Arena (53), agentes (64), duelo (69), revelação
-  (55) e placar (62), todos AVISO, nenhum ERRO. O duelo precisa das duas respostas inteiras na tela; a revelação
-  precisa do modelo e do preço de cada lado.
+  (55) e placar (62), todos AVISO, nenhum ERRO.
 - Versão 4: rankings 46 (57 palavras), 48 (57) e 51 (64), e o placar 56 (62): acima de 45 palavras. Os nomes e as notas são o
   dado que o professor pediu (item 9) e a fala conduz a leitura pela barra dourada do primeiro. Os três rankings usam o
   mesmo desenho, sem vizinhos entre si.
@@ -399,3 +406,12 @@ o texto. A linha do dia some na viagem como no motor atual.
 
 Viagens conferidas: corpus, pistas, ponta e parâmetros; nada cruza o texto. `./ap sondar`: 0 erro, os sete avisos de
 densidade aceitos das versões anteriores.
+
+### Rodada 8 (versão 6, depois de tirar a prática 5)
+
+| gravidade | slide | defeito e evidência | correção |
+|---|---|---|---|
+| alta | deck | com os blocos em 16, 30, 14, 17 e 10 minutos, `./ap sondar` deu "NÃO determinístico" em t=128,41 s e 176,06 s; a diferença era uma coluna de 1 px na ponta da barra da linha do dia (y 1033 a 1037), ruído de rasterização do motor que depende da largura do trecho | os 3 minutos foram para o bloco 5 (13 min), soma 90, e o determinismo voltou a "ok"; o motor não foi alterado |
+| baixa | 17 ponta | a legenda da rede só tinha a opacidade escrita no segundo clique (estado que dependia da ordem dos quadros) | opacidade escrita em todo quadro |
+
+Viagens conferidas: agentes para mede (a vizinhança nova) e ponta com a linha dos fechados nova.

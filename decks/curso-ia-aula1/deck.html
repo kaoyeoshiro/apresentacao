@@ -1,11 +1,11 @@
 <!doctype html>
 <!-- Curso de IA da co.juris, dia 1, Aula 1: "O que é IA e qual usar" (versão 6, cerca de 90 minutos). Plano contínuo de
-     64 slides, montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md), com abertura automática, linha do
+     62 slides, montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md), com abertura automática, linha do
      dia em cinco blocos e guia do apresentador em todos os slides (docs/palco.md, Blocos da aula). Capa e encerramento
      claros, com o logo oficial do tema. Blocos: o que é IA (capa a previsao, com a linha do tempo da IA), como funciona
      (funciona a passos, com as pistas e os pesos, o tamanho dos modelos de ponta, os tokens, a mesa e a memória), onde tropeça (linguagem a pior), qual a melhor
-     IA (melhor a limites, com os rankings, a Text Arena, o duelo de preferência e o placar da prova da PGE-MS) e fechado
-     e aberto (aberto a encerramento). Práticas com link clicável no lugar do QR.
+     IA (melhor a limites, com os rankings, a Text Arena e o placar da prova da PGE-MS) e fechado
+     e aberto (aberto a encerramento). Quatro práticas, com link clicável no lugar do QR.
      Roteiro, fontes, mídia e crítica em briefing.md; fatos em apuracao.md e apuracao-2.md; créditos em midia/creditos.json.
      Ao vivo: ./ap abrir decks/curso-ia-aula1   ·   ./ap sondar decks/curso-ia-aula1   ·   ./ap paradas decks/curso-ia-aula1 -->
 <html lang="pt-BR">
@@ -133,8 +133,6 @@
   [data-slide="fechados"] .cartoes, [data-slide="abertos"] .cartoes { top: 350px; }
   [data-slide="medidas"] .cartoes { top: 400px; gap: 48px 40px; }
   [data-slide="generativa"] .cartoes { top: 440px; }
-  [data-slide="revelacao"] .cartoes { top: 330px; }
-  .rv-licao { position: absolute; left: 120px; top: 600px; width: 1680px; font-size: var(--esc-2); line-height: 1.3; text-wrap: balance; }
   [data-slide="fechados"] .ct-cab { gap: 16px; }
   [data-slide="fechados"] img[alt="Grok"] { height: 44px; }
 
@@ -181,12 +179,6 @@
   .janela .letra.g { font-size: var(--esc-5); top: 0; }
   .janela .letra.m { font-size: 140px; top: 16px; }
   [data-arquetipo="comparacao"] .linha-top ~ .janela, [data-arquetipo="comparacao"] .linha-top ~ .fio-v { top: 400px; }
-  /* duelo: as duas respostas inteiras, legíveis, sem o desenho de linhas */
-  [data-slide="pratica5"] .janela .letra { font-size: var(--esc-5); top: 0; }
-  [data-slide="pratica5"] .janela .etiqueta { left: 170px; top: 70px; }
-  [data-slide="pratica5"] .janela .janela-txt { top: 200px; }
-  [data-slide="pratica5"] .janela, [data-slide="pratica5"] .fio-v { top: 330px; }
-
   [data-slide="historia"] .etapas li { font-size: 36px; }
   [data-slide="fecho"] .fecho-passos b { color: var(--suave-sobre-noite); }
   [data-slide="linguagem"] .respiro { top: 360px; }
@@ -435,7 +427,7 @@
       <div class="pn-l" data-v="1"><span class="pn-n">Mistral Large 4</span><span class="pn-v">1 trilhão</span><span class="pn-t"><span class="pn-b"></span><i class="pn-marco"></i></span></div>
       <div class="pn-l" data-v="0.816"><span class="pn-n">Muse Spark Open</span><span class="pn-v">816 bilhões</span><span class="pn-t"><span class="pn-b"></span><i class="pn-marco"></i></span></div>
     </div>
-    <p class="pn-fech">Fechados (Claude, GPT, Gemini) não divulgam; estima-se que estejam nessa faixa.</p>
+    <p class="pn-fech">Claude, GPT e Gemini não divulgam o tamanho.</p>
     <p class="rodape">Fichas oficiais, lidas em 23/10/2026.</p>
   </section>
 
@@ -833,30 +825,6 @@
     <p class="rodape">arena.ai, Top 10 Agents: 367.936.358 sessões, 22/10/2026.</p>
   </section>
 
-  <!-- duelo de preferência: as duas respostas foram geradas com o mesmo pedido, sem edição (briefing.md, Duelo);
-       A é o Claude Haiku 5.5, B o Claude Opus 5.5; a revelação vem no slide seguinte -->
-  <section data-slide="pratica5" data-arquetipo="comparacao" class="noite">
-    <p class="rotulo">Prática 5 · leia e vote, 1 min</p>
-    <h2 class="manchete">Qual você mandaria ao cliente?</h2>
-    <div class="janela"><p class="display letra">A</p><p class="etiqueta">1 dedo</p>
-      <p class="janela-txt">Precatório é a ordem de pagamento que o governo emite quando perde na Justiça. Demora porque o Estado paga pela fila, dentro do orçamento anual.</p></div>
-    <div class="fio-v"></div>
-    <div class="janela"><p class="display letra">B</p><p class="etiqueta">2 dedos</p>
-      <p class="janela-txt">Precatório é a ordem para o governo pagar uma dívida reconhecida na Justiça. Demora porque entra no orçamento do ano seguinte e espera na fila.</p></div>
-  </section>
-
-  <!-- revelação do duelo (cena própria, dois cartões): preço e descrição na página de modelos da Anthropic, lida em 23/10/2026 -->
-  <section data-slide="revelacao">
-    <p class="rotulo">Prática 5</p>
-    <h2 class="manchete">A custa até 40 vezes menos que B</h2>
-    <div class="cartoes c2">
-      <div class="cartao"><p class="ct-tit g">A · Claude Haiku 5.5</p><p class="ct-txt">desde US$ 0,10 por milhão de tokens</p></div>
-      <div class="cartao"><p class="ct-tit g">B · Claude Opus 5.5</p><p class="ct-txt">US$ 4 por milhão de tokens</p></div>
-    </div>
-    <p class="rv-licao">O voto segue a clareza, nem sempre o modelo mais caro; a arena soma milhões assim.</p>
-    <p class="rodape">Preço por token lido: Anthropic, 23/10/2026.</p>
-  </section>
-
   <section data-slide="mede" data-arquetipo="respiro" class="noite">
     <p class="rotulo">Qual a melhor IA</p>
     <p class="respiro"><span>Benchmark mede</span><span>prova; arena,</span><span><span class="sinal">preferência</span></span></p>
@@ -996,8 +964,8 @@ const blocos = [
   {id: 'o-que-e', rotulo: 'O que é IA', minutos: 16},
   {id: 'funciona', rotulo: 'Como funciona', minutos: 30},
   {id: 'tropeca', rotulo: 'Onde tropeça', minutos: 14},
-  {id: 'melhor', rotulo: 'Qual a melhor', minutos: 20},
-  {id: 'abertos', rotulo: 'Fechado e aberto', minutos: 10},
+  {id: 'melhor', rotulo: 'Qual a melhor', minutos: 17},
+  {id: 'abertos', rotulo: 'Fechado e aberto', minutos: 13},
 ];
 
 // Uma linha por slide, na ordem da aula; o titulo é a manchete do roteiro (briefing.md, tabela Slides). As notas são o
@@ -1069,8 +1037,8 @@ const slides = [
      faca: ['apontar o fio mais grosso, de pedido a procedente', 'pesos ilustrativos; num modelo real cada fio é um número, e não há conta para fazer de cabeça'],
      transicao: 'Quantos fios desses tem um modelo de verdade?'}},
   {id: 'ponta', titulo: 'Os de ponta passam de 1 trilhão de pesos', passos: [2.4, 2.6],
-   notas: {diga: 'Um modelo empilha camadas e camadas, e cada fio entre elas é um peso; peso e parâmetro são a mesma coisa. No segundo clique, o tamanho dos maiores modelos abertos, pelas fichas oficiais: Kimi K3, 2,8 trilhões; Qwen3.8 Max, 2,4 trilhões; Mistral Large 4, 1 trilhão; Muse Spark Open, da Meta, 816 bilhões. Os fechados, Claude, GPT e Gemini, não divulgam o tamanho; estima-se que estejam nessa faixa.',
-     faca: ['primeiro clique: a rede; apontar um fio e dizer que é um peso', 'segundo clique: os quatro números e o marco de 1 trilhão',
+   notas: {diga: 'Um modelo empilha camadas e camadas, e cada fio entre elas é um peso; peso e parâmetro são a mesma coisa. No segundo clique, o tamanho dos maiores modelos abertos, pelas fichas oficiais: Kimi K3, 2,8 trilhões; Qwen3.8 Max, 2,4 trilhões; Mistral Large 4, 1 trilhão; Muse Spark Open, da Meta, 816 bilhões. Os fechados, Claude, GPT e Gemini, não divulgam o tamanho. Minha opinião, sem número publicado: devem ser dessa ordem de grandeza.',
+     faca: ['primeiro clique: a rede; apontar um fio e dizer que é um peso', 'segundo clique: os quatro números e o marco de 1 trilhão', 'o tamanho dos fechados é opinião do professor; nenhuma fonte publica',
        'Mistral Large 4 em prévia desde 06/10/2026, com pesos prometidos para o fim do mês; Kimi K3 e os outros: fichas no Hugging Face',
        'nos três de cima só uma parte dos pesos trabalha em cada palavra (ativos): 104 bi, 95 bi, 52 bi e 42 bi; só se perguntarem'],
      transicao: 'E quem dá a espessura a cada fio? O treino.'}},
@@ -1198,14 +1166,6 @@ const slides = [
   {id: 'agentes', titulo: 'Como agente, o Opus 5.5 abre vantagem', passos: [2.6],
    notas: {diga: 'Este é o placar de agentes da arena.ai, da página inicial em 22/10/2026. O número é quanto cada modelo melhora o resultado de tarefas reais em relação ao modelo médio, em pontos percentuais. Resumo: no quadro de agentes, tarefas reais, o Claude lidera; na conversa, o Gemini; e no topo a margem é pequena.',
      faca: ['367.936.358 sessões é o total mostrado na página inicial; o placar de agentes mostra 2.731.078 sessões em 20/10/2026'],
-     transicao: 'Agora a sala vira arena.'}},
-  {id: 'pratica5', titulo: 'Qual você mandaria ao cliente?', pratica: 3,
-   notas: {diga: 'Agora a sala vira arena. Pedi a duas IAs a mesma coisa: explique a um cliente leigo, em até 25 palavras, o que é um precatório e por que demora. Leiam as duas. Em um minuto, um dedo para A, dois para B: qual vocês mandariam ao cliente? Não vale a resposta certa de prova; vale clareza e utilidade.',
-     faca: ['ler o pedido em voz alta', 'contar um minuto', 'pedir o voto e a justificativa de dois alunos', 'as respostas foram geradas sem edição (briefing, Duelo)'],
-     transicao: 'Vejam quem escreveu cada uma.'}},
-  {id: 'revelacao', titulo: 'A custa até 40 vezes menos que B',
-   notas: {diga: 'A é o Claude Haiku 5.5, o mais rápido da família, feito para volume; B é o Claude Opus 5.5, o que a Anthropic indica para a maioria dos usos. Pela tabela da Anthropic, A custa a partir de 10 centavos de dólar por milhão de tokens lidos, e B, 4 dólares. Se a sala ficou dividida, a lição é essa: a preferência nem sempre segue o modelo maior e mais caro. A arena junta milhões de votos como estes, e por isso o placar dela mede preferência.',
-     faca: ['perguntar quem votou em A e por quê', 'se alguém notar: em A, quem expede o precatório é o Judiciário, não o governo'],
      transicao: 'Resumo das duas formas de medir.'}},
   {id: 'mede', titulo: 'Benchmark mede prova; arena, preferência',
    notas: {diga: 'Benchmark mede prova; arena mede preferência. E preferência não é acerto: a resposta que agrada nem sempre é a mais precisa.',
@@ -1357,7 +1317,8 @@ const ponta = (() => {
     // a legenda da rede sai no segundo clique, quando entram os números
     const saiLeg = y > 0 ? saida(faixa(y, 0, 0.3)) : 0;
     revelar(leg, molaAR(x - 0.1));
-    if (saiLeg > 0) { leg.style.opacity = String(1 - saiLeg); vis(leg, saiLeg < 0.999); }
+    leg.style.opacity = String(1 - saiLeg);
+    if (saiLeg >= 0.999) vis(leg, false);
     ligacoes.forEach((lsg, l) => lsg.forEach((p) => tracar(p, saida(faixa(x, 0.2 + l * 0.2, 0.6 + l * 0.2)))));
     nos.forEach((col, l) => col.forEach((ci) => { const k = molaAR(x - 0.25 - l * 0.2); ci.style.transform = `scale(${clamp(k, 0, 1.1)})`; vis(ci, k > 0); }));
     // segundo clique
@@ -1560,14 +1521,12 @@ const tokens = (id) => {
 // Cartões: entram em onda, da esquerda para a direita e de cima para baixo.
 const cartoes = (id) => {
   const sec = m.secao(id), cs = [...sec.querySelectorAll('.cartao')], leg = sec.querySelector('.ct-leg'), rodape = sec.querySelector(':scope > .rodape');
-  const licao = sec.querySelector('.rv-licao');
   return (t, c) => {
     const x = conteudo(c);
     titulo(sec, x, c);
     if (leg) revelar(leg, molaAR(x - 0.1));
     cs.forEach((el, n) => surgir(el, molaAR(x - 0.2 - n * 0.09), {dy: 30}));
-    if (licao) revelar(licao, molaAR(x - 0.5 - cs.length * 0.09));
-    if (rodape) revelar(rodape, molaAR(x - 0.4 - cs.length * 0.09 - (licao ? 0.3 : 0)));
+    if (rodape) revelar(rodape, molaAR(x - 0.4 - cs.length * 0.09));
     fim(sec, x, 0.5 + cs.length * 0.09);
   };
 };
@@ -1578,7 +1537,6 @@ for (const a of document.querySelectorAll('#mundo a[href]')) a.addEventListener(
 palco({slides: m.slides, desenhar: m.desenhar, blocos, autoplay: true, cenas: m.cenas({
   capa: marca('capa'),
   encerramento: marca('encerramento'),
-  revelacao: cartoes('revelacao'),
   textarena: ranking('textarena'),
   ocde: partes('ocde'),
   pl: partes('pl'),

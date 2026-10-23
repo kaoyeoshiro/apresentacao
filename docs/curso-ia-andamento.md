@@ -10,7 +10,7 @@ Dia 1 de um curso pago de IA (turma mista: advogados, uma desembargadora, servid
 pago). Duas aulas de ~90 min na mesma tarde, tema `cojuris`, plano contínuo. Siga a skill
 `.claude/skills/apresentacao/SKILL.md`.
 
-- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 64 slides da versão 6, `apuracao.md` e
+- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 62 slides da versão 6, `apuracao.md` e
   `apuracao-2.md`).
 - Aula 2, "Do chat à pasta": `decks/curso-ia-aula2/briefing.md` aprovado em 22/10, mas ainda com o fio da data do
   contrato, que o professor rejeitou na Aula 1; rever antes de montar. O deck ainda é a cópia do catálogo.
@@ -111,7 +111,7 @@ contorna com `stopPropagation` nos links. Conserto proposto: ignorar cliques em 
 
 ## Pedidos de 23/10/2026, depois da versão 5
 
-Pedido do professor, feito na versão 6 de `decks/curso-ia-aula1/deck.html` (64 slides, 74 paradas); detalhe no
+Pedido do professor, feito na versão 6 de `decks/curso-ia-aula1/deck.html` (62 slides, 72 paradas); detalhe no
 `briefing.md`, seção "O que mudou da versão 5", e fontes em `apuracao-2.md`, item 12.
 
 1. [feito] Trocar "A palavra vira uma lista de números" e "Um neurônio multiplica e soma" (paradas 23 a 25 da folha da versão
@@ -123,6 +123,13 @@ Pedido do professor, feito na versão 6 de `decks/curso-ia-aula1/deck.html` (64 
 2. [feito] Tirar do deck o Llama 3.1 como exemplo de tamanho e de volume de treino, trocando por modelo recente com fonte; sem
    fonte oficial de tokens de treino, reformular o slide do corpus sem número de modelo antigo, e registrar no briefing.
 
-Para o professor decidir no ensaio: a linha "estima-se que [os fechados] estejam nessa faixa" não tem fonte lida (é
-frase dele); a manchete pedida virou "Os de ponta passam de 1 trilhão de pesos" para caber numa linha; o Muse Spark
-Open (816 bilhões) fica abaixo do marco de 1 trilhão, como os números mostram.
+3. [feito] Tirar a prática 5 inteira: o duelo de preferência sobre precatório e a revelação "A custa até 40 vezes
+   menos que B" (paradas 62 e 63 da folha da versão 5). A arena fica explicada pelos slides de ranking; o bloco "Qual
+   a melhor" caiu de 20 para 17 minutos e o "Fechado e aberto" subiu de 10 para 13 (soma 90); a seção Duelo do briefing ficou marcada como
+   retirada. O deck passa a 62 slides e 72 paradas.
+4. [feito] Linha dos fechados no slide "Os de ponta passam de 1 trilhão de pesos": "Claude, GPT e Gemini não divulgam
+   o tamanho", porque nenhuma fonte lida estima o número; a ordem de grandeza fica na fala, como opinião do professor.
+
+Para o professor decidir no ensaio: a manchete pedida virou "Os de ponta passam de 1 trilhão de pesos" para caber numa
+linha; o Muse Spark Open (816 bilhões) fica abaixo do marco de 1 trilhão, como os números mostram;
+os 3 minutos da prática 5 foram para o bloco 5 e podem ir para outra parte, se ele preferir.

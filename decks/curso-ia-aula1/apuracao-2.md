@@ -408,5 +408,5 @@ saiu do deck. "Ativos" é a parte dos pesos que trabalha em cada token (modelos 
 
 Sem número de tokens de pré-treino nas fichas lidas: Kimi K3, Qwen3.8, Muse Spark Open, Mistral Large 4 (o anúncio só
 fala em tokens por dia) e Gemma 4 (https://ai.google.dev/gemma/docs/core/model_card_4, atualizada em 30/07/2026).
-Fechados (Claude, GPT, Gemini): nenhum tamanho publicado nas páginas lidas; a frase "estima-se que estejam nessa
-faixa" é do professor, sem fonte.
+Fechados (Claude, GPT, Gemini): nenhum tamanho publicado nas páginas lidas, e nenhuma estimativa com fonte. A tela diz
+que não divulgam; a ordem de grandeza fica na fala, como opinião do professor.
