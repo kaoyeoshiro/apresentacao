@@ -108,3 +108,16 @@ rede da co.juris), se quiser um.
 
 Pendência do motor (não alterado): `palco.js` avança o slide em qualquer clique no palco, inclusive num link; o deck
 contorna com `stopPropagation` nos links. Conserto proposto: ignorar cliques em `a[href]` no `palcoEl`.
+
+## Pedidos de 23/10/2026, depois da versão 5
+
+Pedido do professor, em andamento na versão 6 de `decks/curso-ia-aula1/deck.html`.
+
+1. Trocar "A palavra vira uma lista de números" e "Um neurônio multiplica e soma" (paradas 23 a 25 da folha da versão
+   5) por dois slides visuais, sem conta: (a) "Pesos dizem quanto cada pista importa", a frase "O juiz julgou o
+   pedido…" com "juiz", "julgou" e "pedido" ligadas a "procedente" e "improcedente" por fios de espessuras diferentes,
+   a candidata com mais força entra na frase (pílula "ilustrativo"); (b) "Os modelos de ponta passam de 1 trilhão de
+   pesos", uma rede em camadas e os números oficiais dos abertos de ponta, com fonte e data, e a linha de que os
+   fechados não divulgam.
+2. Tirar do deck o Llama 3.1 como exemplo de tamanho e de volume de treino, trocando por modelo recente com fonte; sem
+   fonte oficial de tokens de treino, reformular o slide do corpus sem número de modelo antigo, e registrar no briefing.
