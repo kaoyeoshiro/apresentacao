@@ -3,7 +3,7 @@
 SLIDES.push(
   {id: 'papeis', titulo: 'Três papéis na pasta do caso', bloco: 'pasta',
    notas: {diga: 'Este é o caso fictício da aula. São três papéis: o contrato de manutenção predial entre o Município de Vila Serena e a Horizonte Manutenção Predial, o aditivo que prorroga o prazo e a notificação de multa. Tudo inventado; os nomes não existem. Os três vão para uma pasta, caso-ficticio. É essa pasta que o agente vai ler.',
-     faca: ['lembre que o material está no link do WhatsApp: o zip com os três PDFs e o PDF único', 'a foto da pasta é gerada por IA; os papéis são desenhados por código'],
+     faca: ['lembre que o material está no kit do GitHub, que a sala baixa na prática', 'a foto da pasta é gerada por IA; os papéis são desenhados por código'],
      transicao: 'Vejam o que mais tem na pasta.'}},
   {id: 'estrutura', titulo: 'O que está na pasta', passos: [2.9],
    notas: {diga: 'Na pasta estão os três PDFs, a memória do caso em Markdown e a skill da cronologia, que vimos há pouco, dentro de .claude/skills. Eu deixei tudo isso pronto antes da aula. Ao vivo, o agente cria um arquivo só, o cronologia.md, que aparece aqui tracejado porque ainda não existe.',

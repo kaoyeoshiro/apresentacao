@@ -5,6 +5,51 @@ primeira montagem (feita no Grok, 19 slides de rótulos soltos). O deck é um gu
 slide diz o que a sala vê, e o guia do apresentador (tecla P) diz o que falar, o que fazer e como passar ao próximo.
 O deck é montado por `montar.py` a partir de `fonte/`; edite `fonte/`, nunca o `deck.html`.
 
+## ESTADO ATUAL (24/10/2026): vale este bloco; onde as seções abaixo discordarem dele, estão superadas
+
+**Dinâmica da prática.** O professor faz ao vivo, na tela compartilhada do notebook; os alunos acompanham no app deles
+se quiserem. O material é o kit público https://github.com/kaoyeoshiro/kit-aula2-curso-ia (gerado por `material/kit.py`
+em `decks/curso-ia-aula2/kit/`): `casos/caso-1..6` (autos fictícios em PDF, anonimizados a partir de ações reais de
+medicamento contra o Estado de MS, geradores em `material/casos_gerar/`), `temas/` (Tema 6 e Tema 1234 do STF em
+Markdown, copiados do portal do STF em 23/10/2026; o texto do Tema 1234 na página termina cortado no item 5.1 e foi
+alterado em 19/02/2026 quanto aos oncológicos), `escritorio/` (logo do escritório fictício Dias & Moura, gerado por IA)
+e `gabarito/` (relatório em Word de cada caso, `gabarito.json`, e a skill `conferir-temas`). Prática 1: conferir o caso 2
+(Defensoria Pública, competência federal). Prática 2: rodar a skill no caso 6. Pedido da Prática 1 e da Prática 2: o
+texto exato está nos slides `pratica-caso` e `pratica2` e nas notas. Instalação da skill nas três ferramentas: pedir ao
+agente "instale a skill da pasta gabarito/skills/conferir-temas" (sem afirmar caminho de pasta por ferramenta; não
+verificado em cada app, ensaiar antes da aula). Os casos não têm nenhum autor que cumpra os seis requisitos; o (d)
+(evidência de alto nível) falta em todos.
+
+**Regras da skill** (em `kit/gabarito/skills/conferir-temas/SKILL.md`): situação atendido, nao_comprovado, nao_encontrado
+e dispensado (só para (f) com Defensoria Pública); protocolo de pedido sem resposta é nao_comprovado; (c) e (d) são
+conservadores; medicamento já nas listas do SUS recebe aviso. O teste com um agente "aluno" reproduziu o gabarito nos
+casos 2, 3 e 6.
+
+**Sub-agentes** (lido em 23/10/2026): Claude Code, até 20 simultâneos por padrão, cada um com janela de contexto própria,
+sem ver a conversa, contando no mesmo limite de uso; Codex, no app desktop, no terminal e na extensão do editor (na web
+só se acompanha), limite configurável; ChatGPT Work, em contas elegíveis, na maioria dos níveis é preciso pedir de forma
+explícita; chat comum do ChatGPT não despacha agentes independentes (a própria resposta do ChatGPT disse); Claude,
+depende da versão e da aba, e o professor testa com a pergunta "você consegue despachar subagents?". Fonte: documentação
+da Anthropic (code.claude.com, sub-agents) e da OpenAI (learn.chatgpt.com, subagents), mais a resposta do ChatGPT em
+23/10/2026. O Claude comum não foi confirmado.
+
+**PDF lido inteiro?** No chat, o conteúdo do PDF inteiro entra na conversa (no app do Claude, até 1000 páginas; até 100
+lê texto e imagens, acima disso só o texto). Na pasta, o agente escolhe o que abrir; PDF digitalizado exige
+reconhecimento de texto antes. Markdown serve ao que se reusa (leis, temas).
+
+**Slides (59) e linha do dia (90 min: pedir 22, escolhas 20, skills 8, pasta 10, mão na massa 27, fecho 3):**
+- a-pedir: capa, mapa, tentativas, colega, seis, objetivo, contexto, persona, personas, saida, exemplos, regras, junta, tce, pratica1, relato
+- b-escolhas: ponte, reenvio, agente, confere, varios, varios2, matriz, projeto, pasta, teste, lei, pdflido, mdpdf, converter, codigo, ferramentas, diferenca, escolher
+- c-skills: skills, skill, onde, liga
+- d-pasta: papeis, estrutura, memoria, agora, pedido, demo, fonte, trecho, limite
+- e-mao: codex, github, pratica-caso, sub, relatorio, skillconf, pratica2, travou, mostrar
+- f-fecho: levar, dia2, fecho
+
+As seções abaixo são o histórico das revisões anteriores. Onde falam de zip pelo WhatsApp, cronologia como prática,
+skill `parecer-no-padrao`, `modelo.docx`, `padrao-do-escritorio.md`, pasta `reserva`, slides `material`, `quem`,
+`registro`, `escritorio`, `desafio`, `alvo` e `pratica3`, ou de "sem plano pago, use o Codex" e Cowork como produto
+atual, estão superadas pelo bloco acima.
+
 ## Para quem, onde e o que fica
 
 - Curso pago, o primeiro do professor. Turma mista: advogados, uma desembargadora, servidores e assessores. Muitos sem

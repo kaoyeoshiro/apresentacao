@@ -293,6 +293,16 @@
   .b-sa-n { font: 800 44px/1.2 var(--fonte-titulo); }
   .b-sa-t { font: 400 38px/1.3 var(--fonte-texto); text-wrap: pretty; }
 
+  /* pdflido: a mesa do chat e a pasta do agente */
+  .b-pdfcol { position: absolute; top: 340px; width: 780px; }
+  .b-pdfe { left: 120px; } .b-pdfd { left: 1020px; }
+  .b-pdfcol .etiqueta { position: static; display: block; margin: 0 0 18px; }
+  .b-pdfcaixa { box-sizing: border-box; display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; padding: 28px; border: 4px solid var(--linha-sobre-noite); border-radius: 22px; }
+  .b-pg { display: block; height: 120px; border: 3px solid var(--suave-sobre-noite); border-radius: 8px; }
+  .b-pdfe .b-pg { background: color-mix(in srgb, var(--suave-sobre-noite) 35%, transparent); }
+  .b-pg.b-pg-on { background: var(--cor-destaque); border-color: var(--cor-destaque); }
+  .b-pdftx { margin: 26px 0 0; font: 400 40px/1.3 var(--fonte-texto); }
+
   /* ===== Bloco C: skills ===== */
   /* painel de arquivo (skill): um editor desenhado por código, com aba, números de linha (contador do CSS, marcação e
      não texto) e fonte monoespaçada do sistema; a vista corta e o texto rola dentro dela */
@@ -443,72 +453,84 @@
   /* ===== Bloco E, mão na massa ===== */
   /* codex: o nome de cada ferramenta grande na sua coluna */
   [data-slide="codex"] .janela .letra { font-size: 140px; top: 16px; }
-  /* material: os papéis do caso sem deformar (a página é um pouco mais alta que a caixa do objeto) */
-  [data-slide="material"] .objeto { object-fit: contain; }
-  [data-slide="material"] .entrada { height: 236px; }
-  [data-slide="material"] .doc-leg { top: 418px; }
-  /* o que mais vem no zip, embaixo do pedido, à esquerda dos papéis */
-  .e-zip { position: absolute; left: 120px; top: 730px; width: 720px; font-size: 40px; line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
 
-  /* pratica2: três colunas de passos (notebook, celular, nos dois) e o pedido exato embaixo, para copiar */
-  .e-cols { position: absolute; left: 120px; top: 316px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; }
-  .e-col-tit { font: 800 var(--esc-2)/1.2 var(--fonte-titulo); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
-  .e-passos { margin-top: 22px; counter-reset: e-p; }
-  .e-passos.e-depois { counter-reset: e-p 2; }
+  /* github: a janela do navegador à esquerda, com a página do repositório; a pasta extraída à direita */
+  .e-nav { position: absolute; left: 120px; top: 300px; width: 1100px; height: 600px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); overflow: hidden; }
+  .e-nav-barra { position: relative; height: 72px; box-sizing: border-box; border-bottom: 3px solid var(--cor-linha); }
+  .e-nav-barra i { position: absolute; top: 28px; width: 14px; height: 14px; border-radius: 7px; background: var(--cor-linha); }
+  .e-nav-barra i:nth-child(1) { left: 26px; } .e-nav-barra i:nth-child(2) { left: 50px; } .e-nav-barra i:nth-child(3) { left: 74px; }
+  .e-url { position: absolute; left: 110px; right: 30px; top: 11px; height: 48px; box-sizing: border-box; padding: 0 24px; border-radius: 24px; background: var(--cor-destaque-fraca); font-size: 32px; line-height: 48px; white-space: nowrap; }
+  .e-repo { position: absolute; left: 40px; top: 104px; font: 800 44px/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .e-code { position: absolute; left: 890px; top: 97px; width: 170px; height: 64px; border-radius: 12px; background: var(--cor-destaque); color: var(--sobre-destaque, var(--cor-tinta)); font: 800 34px/64px var(--fonte-titulo); text-align: center; }
+  .e-arqs { position: absolute; left: 40px; top: 196px; width: 1020px; }
+  .e-arqs li { height: 74px; box-sizing: border-box; border-top: 3px solid var(--cor-linha); display: flex; align-items: center; gap: 22px; font-size: 36px; white-space: nowrap; }
+  .e-pasta-ic { flex: 0 0 40px; width: 40px; height: 32px; overflow: visible; }
+  .e-pasta-ic path { fill: var(--cor-destaque-fraca); stroke: var(--cor-tinta-suave); stroke-width: 2.5; stroke-linejoin: round; }
+  .e-pasta-ic.e-arq-ic path { fill: none; }
+  .e-menu { position: absolute; left: 640px; top: 172px; width: 420px; box-sizing: border-box; padding: 12px; border: 3px solid var(--cor-linha); border-radius: 16px; background: var(--cor-papel); }
+  .e-menu-item { height: 84px; display: flex; align-items: center; gap: 18px; padding-left: 20px; font: 700 36px/1 var(--fonte-titulo); white-space: nowrap; }
+  .e-zip-ic { width: 32px; height: 32px; overflow: visible; }
+  .e-zip-ic path { fill: none; stroke: var(--cor-tinta); stroke-width: 2.5; stroke-linejoin: round; }
+  .e-aros { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .e-aros path { fill: none; stroke: var(--cor-destaque); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .e-aros path.e-seta { stroke: var(--cor-tinta-suave); stroke-width: 4; }
+  .e-et-zip { left: 1270px; top: 312px; }
+  .e-extraida { position: absolute; left: 1270px; top: 382px; width: 530px; }
+  .e-ex-raiz { height: 60px; font: 700 34px/60px var(--fonte-texto); white-space: nowrap; }
+  .e-ex-raiz .e-pasta-ic { vertical-align: -4px; margin-right: 14px; }
+  .e-extraida ul { margin-top: 14px; margin-left: 18px; padding-left: 38px; border-left: 3px solid var(--cor-linha); }
+  .e-extraida li { height: 68px; display: flex; align-items: center; gap: 16px; font-size: 36px; white-space: nowrap; }
+
+  /* pratica-caso e pratica2: os cinco passos à esquerda e a caixa do pedido à direita, grande, para copiar */
+  .e-cinco { position: absolute; left: 120px; top: 340px; width: 580px; counter-reset: e-p; }
   /* o número do passo vem de um contador do CSS: é marcação, não texto a ler */
-  .e-passos li, .e-cinco li { counter-increment: e-p; display: flex; align-items: center; gap: 22px; margin-bottom: 18px; font-size: 40px; line-height: 1.25; white-space: nowrap; }
-  .e-passos li::before, .e-cinco li::before { content: counter(e-p); flex: 0 0 58px; height: 58px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
-  .e-pedido { position: absolute; left: 120px; top: 596px; width: 1680px; box-sizing: border-box; padding: 30px 44px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
-  .e-pedido p { font-size: 46px; line-height: 1.3; text-wrap: pretty; }
+  .e-cinco li { counter-increment: e-p; display: flex; align-items: center; gap: 22px; margin-bottom: 30px; font-size: 40px; line-height: 1.25; white-space: nowrap; }
+  .e-cinco li::before { content: counter(e-p); flex: 0 0 58px; height: 58px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .noite .e-cinco li::before { border-color: var(--linha-sobre-noite); color: var(--suave-sobre-noite); }
+  .e-pedido { position: absolute; left: 740px; top: 320px; width: 1060px; height: 560px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-papel); }
+  .noite .e-pedido { border-color: var(--linha-sobre-noite); background: none; }
+  .e-pedido .e-ped-et { left: 44px; top: 34px; }
+  .e-ped-parte { position: absolute; left: 44px; right: 44px; top: 100px; font-size: 44px; line-height: 1.36; text-wrap: pretty; }
+  [data-slide="pratica-caso"] .e-pedido { height: 500px; }
+  [data-slide="pratica2"] .e-pedido { height: 420px; }
+  [data-slide="pratica2"] .e-ped-parte { top: 50px; }
+  [data-slide="pratica2"] .e-ped-parte { font-size: 52px; }
+  .e-ped-pontos { position: absolute; left: 44px; bottom: 34px; display: flex; gap: 14px; }
+  .e-ped-pontos i { width: 18px; height: 18px; border-radius: 9px; background: var(--linha-sobre-noite); }
+  .e-ped-pontos i.e-agora { background: var(--cor-destaque); }
 
-  /* escritorio: o logo em cima e as oito regras em duas fileiras de quatro, cada uma com o seu pictograma */
-  .e-logo-cx { position: absolute; left: 120px; top: 300px; box-sizing: border-box; padding: 6px 24px 6px 0; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); }
-  .e-logo { display: block; height: 150px; width: auto; }
-  .e-regras { position: absolute; left: 120px; top: 500px; width: 1680px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 40px; }
-  .e-regras li { display: flex; flex-direction: column; gap: 16px; padding-top: 22px; border-top: 4px solid var(--cor-linha); }
-  .e-regras p { font-size: 36px; line-height: 1.25; text-wrap: balance; }
-  [data-slide="escritorio"] .selo-ia { left: 760px; right: auto; top: 404px; }
-  .e-ic { width: 96px; height: 64px; overflow: visible; }
-  .e-ic path { fill: none; stroke: var(--cor-tinta); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-  .e-ic path.e-fino { stroke: var(--cor-tinta-suave); stroke-width: 3; }
-  .e-ic path.e-cheio { fill: var(--cor-tinta); stroke: none; }
-  .e-ic path.e-ouro { stroke: var(--cor-destaque); stroke-width: 7; }
+  /* relatorio: a página 1 do Word em 60% (crop da margem), a página 3 em miniatura e as legendas */
+  .e-pag1 { position: absolute; left: 140px; top: 300px; width: 525px; height: 630px; overflow: hidden; border: 3px solid var(--cor-linha); border-radius: 6px; background: var(--cor-papel);
+    mask-image: linear-gradient(to bottom, var(--cor-tinta) 94%, transparent); }
+  .e-pag1 img { display: block; width: 645px; height: auto; margin: -30px 0 0 -60px; }
+  .e-pag3 { position: absolute; left: 1290px; top: 470px; width: 500px; height: 394px; overflow: hidden; border-radius: 4px; background: var(--cor-papel); }
+  .e-pag3 img { display: block; width: 614px; height: auto; margin: -80px 0 0 -57px; }
+  .e-ligas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .e-ligas path { fill: none; stroke: var(--cor-tinta); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .e-ligas path.e-caixa { stroke: var(--cor-destaque); }
+  .e-leg { position: absolute; left: 720px; width: 520px; }
+  .e-leg.e-leg3 { left: 1290px; width: 510px; }
+  .e-leg-tit { font: 800 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .e-leg-txt { margin-top: 6px; font-size: 36px; line-height: 1.25; color: var(--cor-tinta-suave); white-space: nowrap; }
+  [data-slide="relatorio"] .selo-ia { left: 1290px; right: auto; top: 892px; }
 
-  /* desafio: a missão em três passos ligados por setas e, embaixo, uma janela de app por ferramenta */
-  .e-missao { position: absolute; left: 0; top: 330px; counter-reset: e-p; }
-  .e-missao li { position: absolute; top: 0; }
-  .e-missao li:nth-child(1) { left: 120px; } .e-missao li:nth-child(2) { left: 700px; } .e-missao li:nth-child(3) { left: 1320px; }
-  .e-missao li { counter-increment: e-p; display: flex; align-items: center; gap: 24px; font: 700 48px/1.2 var(--fonte-titulo); white-space: nowrap; }
-  .e-missao li::before { content: counter(e-p); flex: 0 0 76px; height: 76px; border-radius: 38px; display: grid; place-items: center; background: var(--sobre-noite); color: var(--noite); font: 800 40px/1 var(--fonte-titulo); }
-  .e-setas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
-  .e-setas path { fill: none; stroke: var(--suave-sobre-noite); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-  .e-et-criar { left: 120px; top: 488px; }
-  .e-jans { position: absolute; left: 120px; top: 546px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-  .e-jan { position: relative; height: 318px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; background: color-mix(in srgb, var(--sobre-noite) 6%, var(--noite)); overflow: hidden; }
+  /* skill: o SKILL.md numa janela à esquerda; as formas de instalar à direita, no clique */
+  .e-sk { position: absolute; left: 120px; top: 310px; width: 980px; height: 590px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; background: color-mix(in srgb, var(--sobre-noite) 6%, var(--noite)); overflow: hidden; }
   .e-jan-barra { position: relative; height: 62px; box-sizing: border-box; border-bottom: 3px solid var(--linha-sobre-noite); display: flex; align-items: center; padding-left: 112px; white-space: nowrap; }
   .e-jan-barra i { position: absolute; top: 24px; width: 14px; height: 14px; border-radius: 7px; background: var(--linha-sobre-noite); }
   .e-jan-barra i:nth-child(1) { left: 26px; } .e-jan-barra i:nth-child(2) { left: 50px; } .e-jan-barra i:nth-child(3) { left: 74px; }
   .e-jan-barra b { font: 700 32px/1 var(--fonte-titulo); color: var(--sobre-noite); }
-  .e-jan-leg { position: absolute; left: 32px; top: 96px; font-size: 34px; line-height: 1.2; color: var(--suave-sobre-noite); white-space: nowrap; }
-  .e-comp { position: absolute; left: 28px; right: 28px; bottom: 28px; height: 96px; box-sizing: border-box; padding: 0 28px; display: flex; align-items: center; border: 3px solid var(--linha-sobre-noite); border-radius: 20px; background: var(--noite); }
-  .e-cmd { font: 600 40px/1.2 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
-
-  /* alvo: a página do Word esperado em 115% (só a parte de cima, onde está o conteúdo) e as legendas à direita */
-  .e-folha { position: absolute; left: 140px; top: 305px; width: 913px; height: 621px; overflow: hidden; border: 3px solid var(--cor-linha); border-radius: 6px; background: var(--cor-papel);
-    mask-image: linear-gradient(to bottom, var(--cor-tinta) 94%, transparent); }
-  .e-folha img { display: block; width: 913px; height: auto; margin-top: -23px; }
-  .e-ligas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
-  .e-ligas path { fill: none; stroke: var(--cor-tinta); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-  .e-ligas path.e-caixa { stroke: var(--cor-destaque); }
-  .e-leg { position: absolute; left: 1130px; width: 670px; }
-  .e-leg-tit { font: 800 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
-  .e-leg-txt { margin-top: 6px; font-size: 36px; line-height: 1.25; color: var(--cor-tinta-suave); white-space: nowrap; }
-
-  /* pratica3: os cinco passos à esquerda e o pedido exato do desafio à direita, grande, para copiar */
-  .e-cinco { position: absolute; left: 120px; top: 340px; width: 560px; counter-reset: e-p; }
-  .e-cinco li { margin-bottom: 30px; }
-  .e-pedido2 { position: absolute; left: 740px; top: 320px; width: 1060px; box-sizing: border-box; padding: 34px 44px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
-  .e-pedido2 p { font-size: 44px; line-height: 1.34; text-wrap: pretty; }
+  .e-sk-nome { position: absolute; left: 44px; top: 92px; font: 800 52px/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .e-sk-desc { position: absolute; left: 44px; top: 166px; width: 892px; font-size: 38px; line-height: 1.3; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .e-sk-passos { position: absolute; left: 44px; top: 242px; width: 892px; counter-reset: e-s; }
+  .e-sk-passos li { position: relative; counter-increment: e-s; height: 54px; margin-bottom: 0; display: flex; align-items: center; gap: 20px; font-size: 36px; white-space: nowrap; }
+  .e-sk-passos li::before { content: counter(e-s); flex: 0 0 40px; font: 800 32px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
+  .e-sk-passos li i { position: absolute; left: 60px; top: 19px; height: 16px; border-radius: 8px; background: var(--linha-sobre-noite); opacity: 0; }
+  .e-inst { position: absolute; left: 1160px; top: 320px; width: 640px; }
+  .e-inst .e-inst-et { position: static; }
+  .e-inst-item { margin-top: 30px; padding-top: 24px; border-top: 3px solid var(--linha-sobre-noite); }
+  .e-inst-tit { font: 800 40px/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .e-inst-txt { margin-top: 10px; font-size: 38px; line-height: 1.3; text-wrap: pretty; }
 
   /* travou: quatro cartões em duas fileiras, texto maior, para ler de longe enquanto a sala trabalha */
   [data-slide="travou"] .cartoes { top: 330px; gap: 32px 40px; }
@@ -826,7 +848,7 @@
       <p class="b-sa-n">ChatGPT Work</p><p class="b-sa-t">Sim, em contas elegíveis. Peça de forma explícita.</p>
       <p class="b-sa-n">Chat comum</p><p class="b-sa-t">ChatGPT, não. Claude, teste.</p>
     </div>
-    <p class="rodape">Pergunte: você consegue despachar subagents?</p>
+    <p class="rodape">Pergunte à sua ferramenta se ela despacha agentes.</p>
   </section>
 
   <!-- matriz (cena própria): dois eixos independentes; as quatro casas enchem em onda e a do processo acende -->
@@ -927,6 +949,23 @@
       <p class="b-regra-et">para o agente</p>
       <p class="b-regra-txt">Lei alterada? Consulte o site oficial e diga a data.</p>
     </div>
+  </section>
+
+  <!-- pdflido (cena própria): o PDF inteiro entra no chat; na pasta o agente abre só o trecho -->
+  <section data-slide="pdflido" class="noite">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">O PDF é lido inteiro?</h2>
+    <div class="b-pdfcol b-pdfe">
+      <p class="etiqueta">No chat</p>
+      <div class="b-pdfcaixa"><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i></div>
+      <p class="b-pdftx">O PDF inteiro entra na conversa.</p>
+    </div>
+    <div class="b-pdfcol b-pdfd">
+      <p class="etiqueta">Na pasta</p>
+      <div class="b-pdfcaixa"><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg b-pg-on"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i></div>
+      <p class="b-pdftx">O agente abre só o trecho.</p>
+    </div>
+    <p class="rodape">Se o PDF for digitalizado, o texto precisa ser reconhecido antes.</p>
   </section>
 
   <!-- mdpdf (cena própria): a mesma página como PDF (a foto, com o rodapé repetido marcado) e como Markdown limpo;
@@ -1096,7 +1135,7 @@
     <div class="c-caixa c-skill"><span class="c-ic" data-ic="arquivo"></span><p class="c-cx-tit">Skill</p><p class="c-cx-sub">o jeito</p></div>
     <div class="c-caixa c-mcp"><span class="c-ic" data-ic="tomada"></span><p class="c-cx-tit">MCP</p><p class="c-cx-sub">a tomada para sistemas</p></div>
     <div class="c-caixa c-plugin"><span class="c-ic" data-ic="pacote"></span><p class="c-cx-tit">Plugin</p><p class="c-cx-sub">o pacote com os dois</p></div>
-    <p class="rodape">Prática de plugin e MCP: dia 2.</p>
+    <p class="rodape">Plugin e MCP na prática ficam para o dia 2.</p>
   </section>
 
   <!-- ===== Bloco D: na pasta (16 min) ===== -->
@@ -1253,8 +1292,9 @@
     <p class="respiro"><span>A conclusão jurídica</span><span>fica com <span class="sinal">você</span>.</span></p>
   </section>
 
-  <!-- ===== Bloco E: mão na massa (24 min). Duas práticas: a cronologia e a skill que entrega o Word no padrão do
-       escritório fictício Dias & Moura (briefing, Revisão 2, item 6). ===== -->
+  <!-- ===== Bloco E: mão na massa (27 min). O professor faz ao vivo, na tela do notebook, com o kit público do GitHub
+       (kit/README.md); quem tem app acompanha no seu. Prática 1: conferir o caso 2 pelos Temas 6 e 1234. Prática 2:
+       rodar a skill conferir-temas no caso 6. ===== -->
   <!-- codex: o mesmo pedido nas duas ferramentas; o Codex entra gravado pelo professor -->
   <section data-slide="codex" data-arquetipo="comparacao" class="noite">
     <p class="rotulo">Mão na massa</p>
@@ -1267,124 +1307,138 @@
     <p class="pilula">gravação do professor</p>
   </section>
 
-  <!-- material: o pedido curto, os três papéis do caso como chegaram no WhatsApp (papéis desenhados por código) e o
-       que mais vem no zip para a prática 2 -->
-  <section data-slide="material" data-arquetipo="objetos">
+  <!-- github (cena própria, claro): a página do repositório desenhada por código; o botão Code, o menu com Download
+       ZIP e, à direita, a pasta extraída (o GitHub acrescenta -main ao nome da pasta do zip) -->
+  <section data-slide="github">
     <p class="rotulo">Mão na massa</p>
-    <h2 class="manchete">O material está no link</h2>
-    <p class="etiqueta">Pedido</p>
-    <div class="entrada"></div>
-    <p class="pedido">Peça a cronologia com arquivo e trecho. Inclua o último pagamento.</p>
-    <p class="etiqueta">No WhatsApp</p>
-    <div class="objetos">
-      <figure><img class="objeto" src="midia/caso-contrato.webp" alt="Primeira página do contrato fictício"><figcaption class="doc-leg">contrato</figcaption></figure>
-      <figure><img class="objeto" src="midia/caso-aditivo.webp" alt="Primeira página do aditivo fictício"><figcaption class="doc-leg">aditivo</figcaption></figure>
-      <figure><img class="objeto" src="midia/caso-notificacao.webp" alt="Primeira página da notificação fictícia"><figcaption class="doc-leg">notificação</figcaption></figure>
+    <h2 class="manchete">O kit está no GitHub</h2>
+    <div class="e-nav">
+      <div class="e-nav-barra"><i></i><i></i><i></i><p class="e-url">github.com/kaoyeoshiro/kit-aula2-curso-ia</p></div>
+      <p class="e-repo">kit-aula2-curso-ia</p>
+      <p class="e-code">Code</p>
+      <ul class="e-arqs">
+        <li><svg class="e-pasta-ic" viewBox="0 0 40 32"><path d="M2 6V28H38V9H18L14 4H2Z"/></svg>casos</li>
+        <li><svg class="e-pasta-ic" viewBox="0 0 40 32"><path d="M2 6V28H38V9H18L14 4H2Z"/></svg>escritorio</li>
+        <li><svg class="e-pasta-ic" viewBox="0 0 40 32"><path d="M2 6V28H38V9H18L14 4H2Z"/></svg>gabarito</li>
+        <li><svg class="e-pasta-ic" viewBox="0 0 40 32"><path d="M2 6V28H38V9H18L14 4H2Z"/></svg>temas</li>
+        <li><svg class="e-pasta-ic e-arq-ic" viewBox="0 0 40 32"><path d="M8 2H26L33 9V30H8Z"/></svg>README.md</li>
+      </ul>
+      <div class="e-menu"><p class="e-menu-item"><svg class="e-zip-ic" viewBox="0 0 32 32"><path d="M6 2H20L27 9V30H6Z"/><path d="M14 6V8M14 11V13M14 16V18M12 21H16V26H12Z"/></svg>Download ZIP</p></div>
     </div>
-    <p class="e-zip" data-entra="1.3">No kit: padrão, logo, modelo.docx e gabarito</p>
-  </section>
-
-  <!-- pratica2 (cena própria, guia da prática 1): duas rotas, os passos comuns e o pedido exato para copiar -->
-  <section data-slide="pratica2" class="noite">
-    <p class="rotulo">Mão na massa</p>
-    <h2 class="manchete">Prática 1: a cronologia</h2>
-    <div class="e-cols">
-      <div class="e-col"><p class="e-col-tit">Notebook</p>
-        <ol class="e-passos"><li>Baixe e extraia.</li><li>Abra a pasta.</li></ol></div>
-      <div class="e-col"><p class="e-col-tit">Celular</p>
-        <ol class="e-passos"><li>Abra o PDF.</li><li>Suba no chat.</li></ol></div>
-      <div class="e-col"><p class="e-col-tit">Nos dois</p>
-        <ol class="e-passos e-depois"><li>Cole o pedido.</li><li>Confira um trecho.</li></ol></div>
-    </div>
-    <div class="e-pedido">
-      <p>Monte a cronologia do caso com a data de cada fato. Para cada data, cite o arquivo e o trecho. Inclua a data do último pagamento. O que não estiver nos documentos, <span class="sinal">diga que não encontrou</span>. Salve em cronologia.md.</p>
-    </div>
-  </section>
-
-  <!-- escritorio (cena própria, claro): o logo do escritório fictício e as oito regras do padrão, cada uma com um
-       pictograma desenhado por código (padrao-do-escritorio.md, em material/escritorio.py) -->
-  <section data-slide="escritorio">
-    <p class="rotulo">Mão na massa</p>
-    <h2 class="manchete">O padrão do escritório</h2>
-    <div class="e-logo-cx"><img class="e-logo" src="midia/logo-escritorio.webp" alt="Logo do escritório fictício Dias &amp; Moura Advocacia"></div>
-    <ol class="e-regras">
-      <li><svg class="e-ic" viewBox="0 0 96 64"><path d="M8 12H88M8 26H88M8 40H88M8 54H60"/></svg><p>Georgia, corpo 11</p></li>
-      <li><svg class="e-ic" viewBox="0 0 96 64"><path class="e-cheio" d="M8 10H64V24H8Z"/><path d="M8 38H88"/><path class="e-fino" d="M8 52H88"/></svg><p>Título verde, filete cobre</p></li>
-      <li><svg class="e-ic" viewBox="0 0 96 64"><path d="M16 4H80V60H16Z"/><path class="e-cheio" d="M24 12H40V26H24Z"/><path class="e-fino" d="M48 19H72M24 34H72"/></svg><p>Logo no cabeçalho</p></li>
-      <li><svg class="e-ic" viewBox="0 0 96 64"><path class="e-cheio" d="M22 14H74V28H22Z"/><path d="M38 40H58M8 54H88"/></svg><p>TÍTULO EM CAIXA ALTA</p></li>
-      <li><svg class="e-ic" viewBox="0 0 96 64"><path d="M14 12H82V58H14Z"/><path class="e-cheio" d="M14 12H82V24H14Z"/><path d="M30 4V18M66 4V18"/></svg><p>12/03/2019 e R$ 960,00</p></li>
-      <li><svg class="e-ic" viewBox="0 0 96 64"><path d="M8 6H88V58H8Z"/><path class="e-cheio" d="M8 6H88V20H8Z"/><path class="e-fino" d="M8 33H88M8 46H88"/></svg><p>Tabela de cabeçalho verde</p></li>
-      <li><svg class="e-ic" viewBox="0 0 96 64"><path d="M16 4H80V60H16Z"/><path class="e-fino" d="M24 16H72M24 26H72"/><path d="M24 48H58"/><path class="e-cheio" d="M66 44H72V52H66Z"/></svg><p>Rodapé com nome e página</p></li>
-      <li><svg class="e-ic" viewBox="0 0 96 64"><path d="M26 6H70V58H26Z"/><path class="e-ouro" d="M34 32L44 42L62 22"/></svg><p>Fecha na conferência humana</p></li>
-    </ol>
-    <p class="selo-ia">logo gerado por IA</p>
-  </section>
-
-  <!-- desafio (cena própria, noite): a missão em três passos e como criar a skill em cada ferramenta, em três janelas
-       de aplicativo desenhadas por código, cada uma com o comando que se digita -->
-  <section data-slide="desafio" class="noite">
-    <p class="rotulo">Desafio</p>
-    <h2 class="manchete">Uma skill que entrega o <span class="sinal">Word</span></h2>
-    <ol class="e-missao">
-      <li>Crie a skill.</li>
-      <li>Rode na pasta.</li>
-      <li>Salve o Word.</li>
-    </ol>
-    <svg class="e-setas" viewBox="0 0 1920 1080"><path d="M570 368H650M638 356L650 368L638 380"/><path d="M1200 368H1280M1268 356L1280 368L1268 380"/></svg>
-    <p class="etiqueta e-et-criar">Como criar a skill</p>
-    <div class="e-jans">
-      <div class="e-jan"><div class="e-jan-barra"><i></i><i></i><i></i><b>Claude</b></div>
-        <p class="e-jan-leg">peça no chat</p><div class="e-comp"><p class="e-cmd">crie uma skill</p></div></div>
-      <div class="e-jan"><div class="e-jan-barra"><i></i><i></i><i></i><b>ChatGPT Work</b></div>
-        <p class="e-jan-leg">chame o criador</p><div class="e-comp"><p class="e-cmd">@skill-creator</p></div></div>
-      <div class="e-jan"><div class="e-jan-barra"><i></i><i></i><i></i><b>Codex</b></div>
-        <p class="e-jan-leg">chame o criador</p><div class="e-comp"><p class="e-cmd">$skill-creator</p></div></div>
-    </div>
-  </section>
-
-  <!-- alvo (cena própria, claro): o Word esperado grande (midia/caso-parecer-exemplo-2x.webp: o mesmo HTML de
-       material/escritorio.py rasterizado em 2x) e três legendas ligadas por linhas ao que a skill tem de acertar -->
-  <section data-slide="alvo">
-    <p class="rotulo">Desafio</p>
-    <h2 class="manchete">O Word que a skill deve entregar</h2>
-    <div class="e-folha"><img src="midia/caso-parecer-exemplo-2x.webp" alt="Página do Word esperado: cronologia no padrão do escritório fictício"></div>
-    <svg class="e-ligas" viewBox="0 0 1920 1080">
-      <path class="e-caixa" d="M201 318H282V386H201Z"/><path d="M241 386V418H1100"/>
-      <path class="e-caixa" d="M199 569H997V785H199Z"/><path d="M997 677H1100"/>
-      <path class="e-caixa" d="M199 803H997V909H199Z"/><path d="M997 856H1100"/>
+    <svg class="e-aros" viewBox="0 0 1920 1080">
+      <path d="M996 386H1194V478H996Z"/>
+      <path d="M770 484H1170V574H770Z"/>
+      <path class="e-seta" d="M1180 530C1226 530 1214 412 1256 412M1242 400L1256 412L1242 424"/>
     </svg>
-    <div class="e-leg" style="top: 391px"><p class="e-leg-tit">Logo no cabeçalho</p><p class="e-leg-txt">e “Documento de trabalho”</p></div>
-    <div class="e-leg" style="top: 650px"><p class="e-leg-tit">Tabela no padrão</p><p class="e-leg-txt">cabeçalho verde, linhas alternadas</p></div>
-    <div class="e-leg" style="top: 829px"><p class="e-leg-tit">Seção de conferência</p><p class="e-leg-txt">o que a pessoa confere</p></div>
+    <p class="etiqueta e-et-zip">Depois de extrair</p>
+    <div class="e-extraida">
+      <p class="e-ex-raiz"><svg class="e-pasta-ic" viewBox="0 0 40 32"><path d="M2 6V28H38V9H18L14 4H2Z"/></svg>kit-aula2-curso-ia-main</p>
+      <ul>
+        <li><svg class="e-pasta-ic" viewBox="0 0 40 32"><path d="M2 6V28H38V9H18L14 4H2Z"/></svg>casos</li>
+        <li><svg class="e-pasta-ic" viewBox="0 0 40 32"><path d="M2 6V28H38V9H18L14 4H2Z"/></svg>temas</li>
+        <li><svg class="e-pasta-ic" viewBox="0 0 40 32"><path d="M2 6V28H38V9H18L14 4H2Z"/></svg>escritorio</li>
+        <li><svg class="e-pasta-ic" viewBox="0 0 40 32"><path d="M2 6V28H38V9H18L14 4H2Z"/></svg>gabarito</li>
+      </ul>
+    </div>
   </section>
 
-  <!-- pratica3 (cena própria, noite, guia da prática 2): cinco passos curtos e o pedido exato do desafio para copiar -->
-  <section data-slide="pratica3" class="noite">
+  <!-- pratica-caso (cena própria, noite): na chegada, os cinco passos e a caixa do pedido; no primeiro clique os passos
+       saem e a caixa mostra a primeira parte do pedido (persona, tarefa, material); no segundo, a segunda parte (a regra
+       de saída). O pedido inteiro tem 73 palavras e não cabe numa parada só; o texto completo está nas notas. -->
+  <section data-slide="pratica-caso" class="noite">
     <p class="rotulo">Mão na massa</p>
-    <h2 class="manchete">Prática 2: a skill em Word</h2>
+    <h2 class="manchete">Prática 1: confira o caso 2</h2>
     <ol class="e-cinco">
       <li>Abra a pasta.</li>
       <li>Cole o pedido.</li>
-      <li>Autorize o plano.</li>
-      <li>Abra o Word.</li>
-      <li>Confira o padrão.</li>
+      <li>Leia a tabela.</li>
+      <li>Abra a página citada.</li>
+      <li>Confira.</li>
     </ol>
-    <div class="e-pedido2">
-      <p>Crie uma skill chamada <span class="e-nq">parecer-no-padrao</span>. Ela lê o cronologia.md e o <span class="e-nq">padrao-do-escritorio.md</span> da pasta e gera o <span class="sinal">cronologia.docx</span> no padrão do escritório, com o logo no cabeçalho e a seção Pontos para conferência humana. Depois rode a skill e salve o Word na pasta.</p>
+    <div class="e-pedido">
+      <p class="etiqueta e-ped-et">O pedido</p>
+      <p class="e-ped-parte">Você é procurador do Estado de Mato Grosso do Sul. Confira, pelos Temas 6 e 1234 do STF (arquivos na pasta temas), se o autor do caso 2 cumpriu os requisitos (a) a (f). Os autos estão em <span class="e-nq">casos/caso-2</span>.</p>
+      <p class="e-ped-parte">Para cada requisito, diga se está atendido, alegado sem prova ou não encontrado, com arquivo e página. Se não achar no documento, <span class="sinal">diga que não achou</span>. No fim, diga a competência pelo Tema 1234.</p>
+      <div class="e-ped-pontos"><i></i><i></i></div>
     </div>
   </section>
 
-  <!-- travou (cena de cartões, da base): as quatro saídas mais comuns durante a prática 2 -->
+  <!-- sub (respiro, noite): a ideia dos vários agentes do bloco B aplicada ao kit; opcional, só nas notas -->
+  <section data-slide="sub" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Mão na massa</p>
+    <p class="respiro"><span>Processo grande?</span><span>Um <span class="sinal">agente</span> por PDF.</span></p>
+  </section>
+
+  <!-- relatorio (cena própria, claro): a página 1 do relatório em Word do caso 2 (kit/gabarito/caso-2, convertido e
+       rasterizado), a página 3 em miniatura e três legendas ligadas por linhas -->
+  <section data-slide="relatorio">
+    <p class="rotulo">Mão na massa</p>
+    <h2 class="manchete">O que a skill entrega</h2>
+    <div class="e-pag1"><img src="midia/relatorio-caso-2-p1.webp" alt="Página 1 do relatório em Word do caso 2: logo, conclusão e a tabela dos requisitos"></div>
+    <div class="e-pag3"><img src="midia/relatorio-caso-2-p3.webp" alt="Página 3 do relatório: competência pelo Tema 1234 e pontos para conferência humana"></div>
+    <svg class="e-ligas" viewBox="0 0 1920 1080">
+      <path class="e-caixa" d="M160 307H292V351H160Z"/><path d="M292 329H704"/>
+      <path class="e-caixa" d="M268 736H392V930H268Z"/><path d="M392 833H704"/>
+      <path class="e-caixa" d="M1284 464H1796V870H1284Z"/><path d="M1306 420V464"/>
+    </svg>
+    <div class="e-leg" style="top: 300px"><p class="e-leg-tit">Logo no cabeçalho</p><p class="e-leg-txt">o padrão do escritório</p></div>
+    <div class="e-leg" style="top: 804px"><p class="e-leg-tit">Situação em cor</p><p class="e-leg-txt">com arquivo e página</p></div>
+    <div class="e-leg e-leg3" style="top: 300px"><p class="e-leg-tit">Competência</p><p class="e-leg-txt">e conferência humana</p></div>
+    <p class="selo-ia">logo gerado por IA</p>
+  </section>
+
+  <!-- skill (cena própria, noite): o SKILL.md da conferir-temas desenhado por código, resumido do arquivo real
+       (kit/gabarito/skills/conferir-temas/SKILL.md); no clique, os passos viram linhas cinza e entram as três formas de
+       instalar -->
+  <section data-slide="skillconf" class="noite">
+    <p class="rotulo">Mão na massa</p>
+    <h2 class="manchete">A skill faz isso sozinha</h2>
+    <div class="e-sk">
+      <div class="e-jan-barra"><i></i><i></i><i></i><b>SKILL.md</b></div>
+      <p class="e-sk-nome">conferir-temas</p>
+      <p class="e-sk-desc">Confere os Temas 6 e 1234 e entrega um Word.</p>
+      <ol class="e-sk-passos">
+        <li><span>Lê os temas.</span><i style="width: 46%"></i></li>
+        <li><span>Lê os PDFs do caso.</span><i style="width: 62%"></i></li>
+        <li><span>Classifica de (a) a (f).</span><i style="width: 70%"></i></li>
+        <li><span>Aplica as regras fixas.</span><i style="width: 66%"></i></li>
+        <li><span>Gera o Word.</span><i style="width: 44%"></i></li>
+        <li><span>Lista o que conferir.</span><i style="width: 60%"></i></li>
+      </ol>
+    </div>
+    <div class="e-inst">
+      <p class="etiqueta e-inst-et">Como instalar</p>
+      <div class="e-inst-item"><p class="e-inst-tit">Claude, Work e Codex</p><p class="e-inst-txt">Peça ao agente: instale a skill da pasta <span class="sinal e-nq">gabarito/skills/conferir-temas</span>.</p></div>
+      <div class="e-inst-item"><p class="e-inst-tit">Não apareceu?</p><p class="e-inst-txt">Feche e abra o app de novo.</p></div>
+    </div>
+  </section>
+
+  <!-- pratica2 (cena própria, claro, guia da prática 2): cinco passos curtos e o pedido exato para copiar -->
+  <section data-slide="pratica2">
+    <p class="rotulo">Mão na massa</p>
+    <h2 class="manchete">Prática 2: rode a skill no caso 6</h2>
+    <ol class="e-cinco">
+      <li>Instale a skill.</li>
+      <li>Rode no caso 6.</li>
+      <li>Autorize o plano.</li>
+      <li>Abra o Word.</li>
+      <li>Confira o gabarito.</li>
+    </ol>
+    <div class="e-pedido">
+      <p class="e-ped-parte">Instale a skill <span class="e-nq">conferir-temas</span> que está em <span class="e-nq">gabarito/skills</span>. Depois use-a no caso 6 e grave o relatório em <span class="sinal e-nq">saida/caso-6</span>.</p>
+    </div>
+  </section>
+
+  <!-- travou (cena de cartões, da base): as quatro saídas mais comuns durante as práticas -->
   <section data-slide="travou">
     <p class="rotulo">Mão na massa</p>
     <h2 class="manchete">Travou? Quatro saídas</h2>
     <div class="cartoes c2">
-      <div class="cartao"><p class="ct-tit">Sem cronologia.md</p><p class="ct-txt">Use o gabarito/cronologia.md do kit.</p></div>
-      <div class="cartao"><p class="ct-tit">Saiu sem Word</p><p class="ct-txt">Peça o arquivo .docx.</p></div>
+      <div class="cartao"><p class="ct-tit">Sem plano ou sem app</p><p class="ct-txt">Acompanhe na tela do professor.</p></div>
+      <div class="cartao"><p class="ct-tit">PDF sem texto</p><p class="ct-txt">Se for digitalizado, reconhecer o texto antes demora.</p></div>
+      <div class="cartao"><p class="ct-tit">O Word não saiu</p><p class="ct-txt">Peça o .docx pelo nome ou abra o gabarito.</p></div>
       <div class="cartao"><p class="ct-tit">A skill não aparece</p><p class="ct-txt">Reinicie o app.</p></div>
-      <div class="cartao"><p class="ct-tit">No celular</p><p class="ct-txt">Cole o padrão no pedido e peça o Word.</p></div>
     </div>
-    <p class="rodape">Ainda travou? Levante a mão.</p>
   </section>
 
   <section data-slide="mostrar" data-arquetipo="respiro" class="noite">
@@ -1393,17 +1447,18 @@
   </section>
 
   <!-- ===== Bloco F: fecho (3 min). Revisão 2, item 7: levar, dia2 e o encerramento com o logo. ===== -->
-  <!-- levar: os seis hábitos da tarde numa linha; o marco de agora é conferir a fonte, a regra da aula -->
+  <!-- levar: os seis hábitos da tarde numa linha, na ordem em que a aula os mostrou; o marco de agora é conferir a fonte, a
+       regra da aula -->
   <section data-slide="levar" data-arquetipo="tempo">
     <p class="rotulo">Fecho</p>
     <h2 class="manchete">O que você leva hoje</h2>
     <ol class="etapas">
       <li><b>1</b>pedido com seis elementos</li>
-      <li><b>2</b>diga que não achou</li>
+      <li><b>2</b>se não souber, diga</li>
       <li><b>3</b>projeto com pasta</li>
       <li><b>4</b>skill escrita uma vez</li>
       <li class="agora"><b>5</b>confira a fonte</li>
-      <li><b>6</b>Word no padrão</li>
+      <li><b>6</b>baixe do GitHub</li>
     </ol>
     <p class="tempo-leg">Comece pelo próximo processo que chegar.</p>
   </section>
@@ -1443,10 +1498,10 @@ import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
 
 // Seis blocos da linha do dia, somando 90 minutos. Os ids são os de `bloco` nos slides.
 const blocos = [
-  {id: 'pedir', rotulo: 'Pedir bem', minutos: 23},
-  {id: 'escolhas', rotulo: 'Duas escolhas', minutos: 18},
+  {id: 'pedir', rotulo: 'Pedir bem', minutos: 22},
+  {id: 'escolhas', rotulo: 'Duas escolhas', minutos: 20},
   {id: 'skills', rotulo: 'Skills', minutos: 8},
-  {id: 'pasta', rotulo: 'Na pasta', minutos: 11},
+  {id: 'pasta', rotulo: 'Na pasta', minutos: 10},
   {id: 'mao', rotulo: 'Mão na massa', minutos: 27},
   {id: 'fecho', rotulo: 'Fecho', minutos: 3},
 ];
@@ -1461,7 +1516,7 @@ const SLIDES = [];
 SLIDES.push(
   {id: 'capa', titulo: 'Do chat à pasta', bloco: 'pedir', linhaDia: false, segura: 3,
    notas: {diga: 'Boa tarde de novo. Na primeira aula vimos o que a IA é por dentro. Agora vamos usar isso na prática: primeiro, como pedir bem; depois, como trabalhar direto nos documentos do caso, numa pasta.',
-     faca: ['a capa toca sozinha quando o deck abre', 'conferir se todos receberam pelo WhatsApp o link do material fictício'],
+     faca: ['a capa toca sozinha quando o deck abre', 'conferir se todos conseguem abrir o link do kit no GitHub (o passo a passo vem na prática)'],
      transicao: 'Primeiro, o caminho da tarde.'}},
   {id: 'mapa', titulo: 'A tarde em seis etapas',
    notas: {diga: 'São seis etapas. Pedir bem, que é onde estamos. Duas escolhas: Projeto e pasta. Skills. O trabalho na pasta, com uma demonstração. Mão na massa, no caso fictício. E o fecho. Cada etapa termina numa tarefa de vocês.',
@@ -1576,6 +1631,10 @@ SLIDES.push(
    notas: {diga: 'Guarde na pasta, em Markdown, as leis que você usa sempre e a jurisprudência favorável que você sempre cita, cada uma com a fonte e a data em que você conferiu. O que muda, você pesquisa: jurisprudência nova e alterações de lei. E escreva a regra para o agente: use o arquivo; se a lei pode ter mudado, consulte o site oficial e diga a data.',
      faca: ['segundo clique: a regra para o agente', 'sugerir que copiem a regra para as instruções do Projeto'],
      transicao: 'E em que formato guardar? PDF ou Markdown.'}},
+  {id: 'pdflido', titulo: 'O PDF é lido inteiro?', passos: [2.4, 2.0],
+   notas: {diga: 'A dúvida é comum: o modelo lê o PDF inteiro? Depende de onde você manda. No chat, o conteúdo do PDF inteiro entra na conversa. No app do Claude isso vale para até 1000 páginas; até 100 páginas ele lê texto e imagens, e acima disso só o texto. É como despejar o processo na mesa: ocupa espaço, gasta o limite de uso e, quanto maior o documento, pior a atenção. Na pasta, com um agente, ele escolhe o que abrir. Procura a data ou o termo e lê só o trecho, como no teste das 348 páginas. Só tem um porém: isso exige texto. Se o PDF for digitalizado, uma foto do papel, o agente precisa antes reconhecer o texto das imagens, e isso é lento e pode errar.',
+     faca: ['primeiro clique, o chat: as doze páginas entram na mesa', 'segundo clique, a pasta: uma página acende', 'perguntar quem tem PDF escaneado no dia a dia: é o caso da maioria das peças antigas'],
+     transicao: 'E o Markdown, onde entra? No que você usa sempre.'}},
   {id: 'mdpdf', titulo: 'PDF ou Markdown?', passos: [2.0, 2.0],
    notas: {diga: 'À esquerda, a página do contrato em PDF. Num PDF de até 100 páginas, o Claude lê cada página como texto e como imagem, com tudo o que está nela, inclusive o rodapé que se repete em toda página. À direita, a mesma cláusula em Markdown, um formato de texto simples em que o jogo da velha marca o título. Só o texto, com um título que o agente acha. Gasta menos, erra menos e acha o artigo certo.',
      faca: ['primeiro clique: o PDF, com o rodapé repetido marcado', 'segundo clique: o Markdown e as três vantagens', 'a página é do contrato fictício do caso'],
@@ -1627,7 +1686,7 @@ SLIDES.push(
 SLIDES.push(
   {id: 'papeis', titulo: 'Três papéis na pasta do caso', bloco: 'pasta',
    notas: {diga: 'Este é o caso fictício da aula. São três papéis: o contrato de manutenção predial entre o Município de Vila Serena e a Horizonte Manutenção Predial, o aditivo que prorroga o prazo e a notificação de multa. Tudo inventado; os nomes não existem. Os três vão para uma pasta, caso-ficticio. É essa pasta que o agente vai ler.',
-     faca: ['lembre que o material está no link do WhatsApp: o zip com os três PDFs e o PDF único', 'a foto da pasta é gerada por IA; os papéis são desenhados por código'],
+     faca: ['lembre que o material está no kit do GitHub, que a sala baixa na prática', 'a foto da pasta é gerada por IA; os papéis são desenhados por código'],
      transicao: 'Vejam o que mais tem na pasta.'}},
   {id: 'estrutura', titulo: 'O que está na pasta', passos: [2.9],
    notas: {diga: 'Na pasta estão os três PDFs, a memória do caso em Markdown e a skill da cronologia, que vimos há pouco, dentro de .claude/skills. Eu deixei tudo isso pronto antes da aula. Ao vivo, o agente cria um arquivo só, o cronologia.md, que aparece aqui tracejado porque ainda não existe.',
@@ -1663,58 +1722,72 @@ SLIDES.push(
      transicao: 'Agora o mesmo pedido em outra ferramenta: o Codex.'}},
 );
 
-// ===== Bloco E: mão na massa (24 min) =====
+// ===== Bloco E: mão na massa (27 min). O professor faz ao vivo na tela compartilhada; o kit é público no GitHub
+// (kit/README.md). Fatos dos casos: kit/gabarito/caso-N/gabarito.json; texto da skill: kit/gabarito/skills/conferir-temas.
 SLIDES.push(
   {id: 'codex', bloco: 'mao', titulo: 'O mesmo pedido no Codex',
    notas: {diga: 'Vocês viram o Claude trabalhar na pasta, ao vivo. Agora o mesmo pedido, na mesma pasta, no Codex. Esta parte eu gravei antes da aula. Reparem em duas coisas: se cada data vem com arquivo e trecho, e o que ele responde sobre o último pagamento.',
      faca: ['abrir o vídeo gravado do Codex', 'pausar no plano e depois na linha do último pagamento', 'sem a gravação: dizer que o pedido e a pasta são os mesmos e seguir'],
-     transicao: 'Agora é a vez de vocês. Abram o material que mandei no WhatsApp.'}},
-  {id: 'material', titulo: 'O material está no link',
-   notas: {diga: 'Mandei no WhatsApp, antes da aula, o link do kit: github.com/kaoyeoshiro/kit-aula2-curso-ia, com o botão Code e Download ZIP. Tem os três papéis do caso, o padrão do escritório, o logo, um modelo.docx já no padrão e uma pasta gabarito. Para quem está no celular, um PDF único com os três papéis. É tudo inventado: os nomes não existem. A pasta gabarito guarda a cronologia pronta e a skill pronta, para comparar depois ou para quem travar. O texto completo do pedido aparece no próximo slide.',
-     faca: ['perguntar quem ainda não recebeu o link', 'reenviar no grupo para quem levantar a mão', 'pedir que todos extraiam o zip agora, antes do cronômetro'],
-     transicao: 'Vou deixar os passos na tela enquanto vocês trabalham.'}},
-  {id: 'pratica2', titulo: 'Prática 1: a cronologia', pratica: 10,
-   notas: {diga: 'Dez minutos. Quem está de notebook extrai o zip e abre a pasta no app do Claude ou do ChatGPT. Quem está no celular abre o PDF único e sobe no chat. Nos dois casos, colem o pedido da tela inteiro, sem mudar nada. Quando a resposta vier, registrem três coisas: a resposta, o arquivo e o trecho de onde ela saiu, e o que ainda precisa de conferência humana, que no nosso caso é o prazo e a multa. Escolham uma data e confiram o trecho no papel.',
-     faca: ['disparar o cronômetro de 10 minutos (começa sozinho na tela do apresentador)', 'circular pela sala, ajudar quem travou no zip ou no upload', 'aos 5 minutos, avisar: escolham uma data e confiram no papel', 'ouvir duas pessoas: data, arquivo e trecho, e o que a IA disse do último pagamento', 'se alguém recebeu data inventada para o último pagamento, mostrar à sala como exemplo do que a regra evita'],
-     transicao: 'Quem não terminou, não se preocupe: o kit tem uma cronologia pronta na pasta gabarito. Agora o desafio, com o escritório.'}},
-  {id: 'escritorio', titulo: 'O padrão do escritório',
-   notas: {diga: 'O desafio usa um escritório inventado, o Dias & Moura Advocacia. O logo foi gerado por IA para a aula. Todo escritório tem um padrão de documento, e este tem oito regras: fonte Georgia corpo 11; títulos em verde com filete cobre; o logo e "Documento de trabalho" no cabeçalho; título em caixa alta, centralizado; datas dd/mm/aaaa e valores com duas casas; tabela com cabeçalho verde e linhas alternadas; rodapé com o nome e a página; e no fim a seção "Pontos para conferência humana". Está tudo no arquivo padrao-do-escritorio.md do zip.',
-     faca: ['abrir o padrao-do-escritorio.md do zip na tela, se der tempo', 'apontar a última regra: é a mesma conferência humana da prática 1'],
-     transicao: 'Em vez de pedir esse padrão toda vez, vocês vão escrever uma skill que já sabe.'}},
-  {id: 'desafio', titulo: 'Uma skill que entrega o Word', passos: [3.4],
-   notas: {diga: 'A missão tem três passos: criar a skill, rodar na pasta do caso e salvar o Word. Ninguém precisa escrever o SKILL.md à mão. No Claude, basta pedir "crie uma skill". No ChatGPT Work, chamem o @skill-creator. No Codex, o $skill-creator. O pedido é o mesmo nos três.',
-     faca: ['mostrar no seu app onde se cria a skill', 'perguntar quem vai de Claude, de ChatGPT Work e de Codex'],
-     transicao: 'Antes de começar, vejam como o Word tem de ficar.'}},
-  {id: 'alvo', titulo: 'O Word que a skill deve entregar', passos: [2.6],
-   notas: {diga: 'É assim que o Word deve sair. Confiram três coisas quando abrirem o de vocês: o logo no cabeçalho, a tabela no padrão, com cabeçalho verde e linhas alternadas, e a seção "Pontos para conferência humana" no fim. Se faltar uma delas, a skill não está pronta: corrijam a skill, não o Word.',
-     faca: ['apontar as três legendas, uma por uma'],
-     transicao: 'Quinze minutos. O pedido está na tela.'}},
-  {id: 'pratica3', titulo: 'Prática 2: a skill em Word', pratica: 15,
-   notas: {diga: 'Quinze minutos. Abram a pasta do caso com o cronologia.md da primeira prática; quem não tem, usa o gabarito/cronologia.md do kit. Colem o pedido inteiro. O agente vai mostrar um plano: leiam e autorizem. Abram o Word e confiram o padrão. Registrem de novo as três coisas: o Word que saiu, de quais arquivos ele tirou cada data, e o que vocês ainda precisam conferir.',
-     faca: ['disparar o cronômetro de 15 minutos (começa sozinho na tela do apresentador)', 'circular pela sala; quem travar, olha o próximo slide', 'aos 8 minutos, perguntar quem já tem a skill criada', 'aos 12 minutos, pedir que abram o Word e comparem com o exemplo'],
+     transicao: 'Agora é a vez de vocês. O material da prática está no GitHub.'}},
+  {id: 'github', titulo: 'O kit está no GitHub', passos: [1.6, 1.0, 1.2, 1.6],
+   notas: {diga: 'O material da prática está no GitHub, um site onde se guardam e se compartilham arquivos. Vale aprender a baixar de lá, porque muita coisa de IA chega assim. O endereço é github.com/kaoyeoshiro/kit-aula2-curso-ia. Na página, procurem o botão Code, que no site é verde. Ele abre um menu, e ali está Download ZIP. O arquivo chega compactado: extraiam, e aparece a pasta kit-aula2-curso-ia-main, com quatro pastas dentro. Em casos, seis ações de medicamento contra o Estado de Mato Grosso do Sul, todas fictícias, recriadas de casos reais sem nenhum dado verdadeiro. Em temas, os Temas 6 e 1234 do STF em Markdown. Em escritorio, o logo do nosso escritório inventado. E em gabarito, as respostas e a skill pronta. Eu faço tudo aqui, na minha tela. Quem tem o app acompanha no seu; quem não tem app ou plano só assiste, e aprende igual.',
+     faca: ['abrir o navegador na tela compartilhada e digitar o endereço devagar', 'ao chegar: a página do repositório e as pastas', 'primeiro clique: apontar o botão Code', 'segundo clique: o menu; clicar em Download ZIP de verdade', 'terceiro clique: extrair o zip (no Windows, botão direito e Extrair tudo; no Mac, dois cliques) e abrir a pasta', 'pedir que ninguém abra a pasta gabarito antes de tentar'],
+     transicao: 'Com a pasta aberta, a primeira prática: o caso 2.'}},
+  {id: 'pratica-caso', titulo: 'Prática 1: confira o caso 2', pratica: 12, passos: [1.8, 1.2, 1.0],
+   notas: {diga: 'Doze minutos. Eu faço aqui e quem quiser faz junto. Primeiro, o que estamos conferindo. O Tema 6 do STF traz seis requisitos, de (a) a (f), para o juiz conceder um medicamento que não está nas listas do SUS, e o ônus da prova é do autor. O Tema 1234 manda a ação para a Justiça Federal quando o tratamento custa por ano 210 salários mínimos ou mais. A pergunta do estudo de caso é uma só: o autor cumpriu os requisitos? Os passos estão na tela. Agora o pedido, em duas partes. Antes de eu colar, me digam: qual é a persona? E qual é a regra de saída? Quando a tabela vier, a gente escolhe um requisito e abre a página no PDF. O agente organiza; quem decide é você.',
+     faca: ['disparar o cronômetro de 12 minutos (começa sozinho na tela do apresentador)',
+       'ao chegar: os cinco passos; primeiro clique: a primeira parte do pedido; segundo clique: a segunda parte',
+       'perguntar à sala: qual é a persona? (procurador do Estado de MS) e qual é a regra de saída? (situação, arquivo e página, e diga que não achou)',
+       'pedido inteiro, para colar: Você é procurador do Estado de Mato Grosso do Sul. Confira, pelos Temas 6 e 1234 do STF (arquivos na pasta temas), se o autor do caso 2 cumpriu os requisitos (a) a (f). Os autos estão em casos/caso-2. Para cada requisito, diga se está atendido, alegado sem prova ou não encontrado, com arquivo e página. Se não achar no documento, diga que não achou. No fim, diga a competência pelo Tema 1234.',
+       'trocar para o app, abrir a pasta kit-aula2-curso-ia-main e colar o pedido',
+       'conferir um requisito no PDF com a sala: o (a), em 04-negativa-administrativa.pdf, p. 1, a declaração escrita do Município que nega o fornecimento',
+       'mostrar um não encontrei: o (b); a inicial não trata da Conitec, e o NATJus, em 05-nota-tecnica-natjus.pdf, p. 1, registra pedido de incorporação em análise',
+       'gabarito do caso 2: (a) e (e) atendidos; (f) dispensado, porque o autor é da Defensoria; (b) não encontrado; (c) e (d) alegados sem prova; competência na Justiça Federal, custo anual estimado em R$ 692.999,04',
+       'se a resposta divergir do gabarito: abrir a página citada e decidir com a sala'],
+     transicao: 'E se o processo tivesse trezentas páginas?'}},
+  {id: 'sub', titulo: 'Processo grande? Um agente por PDF.', linhaDia: false,
+   notas: {diga: 'O caso 2 tem oito PDFs, e um agente só dá conta. Num processo grande, lembrem do slide dos vários agentes: peçam um agente por PDF. Cada um lê o seu documento na própria janela de contexto e devolve só os requisitos que achou, com arquivo e página; o agente principal junta tudo na tabela. Aqui é opcional. Custa mais tokens, e o pedido de cada agente precisa dizer o caso, a regra e o formato, porque ele não viu a nossa conversa.',
+     faca: ['para quem usa Claude Code ou Codex: acrescentar ao pedido da prática 1 a frase use um agente por PDF', 'no ChatGPT Work, pedir de forma explícita: use um agente por documento', 'não insistir: quem não tem a função segue com um agente só'],
+     transicao: 'Agora vejam o que uma skill pronta entrega com esse mesmo caso.'}},
+  {id: 'relatorio', titulo: 'O que a skill entrega', passos: [2.6],
+   notas: {diga: 'Este é o relatório do caso 2, em Word, feito pela skill conferir-temas. Olhem três coisas. No cabeçalho, o logo do Dias & Moura, nosso escritório inventado; o logo foi gerado por IA para a aula. Na tabela, os seis requisitos, cada um com a situação em cor, o arquivo e a página. E na última página, a competência pelo Tema 1234 e os pontos para conferência humana. A conclusão diz que o autor não cumpriu todos os requisitos. Nos seis casos do kit, nenhum autor cumpre tudo, e a evidência de alto nível, o requisito (d), falta em todos. O relatório mostra o que falta e onde procurar.',
+     faca: ['apontar as três legendas, uma por uma', 'abrir o gabarito/caso-2/relatorio-caso-2.docx na tela, se der tempo', 'ler em voz alta um ponto de conferência: refazer o custo anual com o PMVG na alíquota zero da lista CMED'],
+     transicao: 'Quem fez esse Word foi uma skill. Vamos abrir ela.'}},
+  {id: 'skillconf', titulo: 'A skill faz isso sozinha', passos: [2.0, 1.4],
+   notas: {diga: 'A skill está no kit, em gabarito/skills/conferir-temas. Por dentro, é um arquivo de texto, o SKILL.md. Tem um nome, conferir-temas; uma descrição de uma linha, que diz ao agente quando usar; e seis passos: ler os temas, ler os PDFs do caso, classificar cada requisito, aplicar as regras fixas, gerar o Word e dizer o que conferir à mão. As regras fixas são o jeito de ler de quem conhece o tema. Um exemplo: protocolo de pedido sem resposta só prova que o pedido foi feito, e não prova a negativa. Para instalar, nas três ferramentas, peçam ao próprio agente: instale a skill da pasta gabarito/skills/conferir-temas.',
+     faca: ['ao chegar: o SKILL.md; abrir o arquivo de verdade na pasta, se der tempo', 'ler uma regra fixa em voz alta: a do protocolo sem resposta, no requisito (a)', 'clique: as formas de instalar', 'se a instalação não funcionar numa ferramenta, pedir ao agente que diga onde ele guarda skills; não prometer caminho de pasta'],
+     transicao: 'Agora a skill trabalha num caso que vocês ainda não viram: o 6.'}},
+  {id: 'pratica2', titulo: 'Prática 2: rode a skill no caso 6', pratica: 10,
+   notas: {diga: 'Dez minutos. Agora quem trabalha é a skill. O pedido é curto: instale a skill conferir-temas, que está em gabarito/skills, use no caso 6 e grave o relatório em saida/caso-6. O agente vai mostrar um plano: leiam e autorizem. Depois abram o Word e comparem com o gabarito do caso 6. Uma dica. O Word sai por uma biblioteca do Python chamada python-docx. Se o computador pedir para instalar, deixem o agente criar um ambiente virtual, uma pasta só para isso, e instalar lá.',
+     faca: ['disparar o cronômetro de 10 minutos (começa sozinho na tela do apresentador)',
+       'fazer na tela compartilhada: colar o pedido, mostrar o plano, autorizar, abrir o Word',
+       'se travar na instalação ou no Word: abrir gabarito/caso-6/relatorio-caso-6.docx e seguir com ele',
+       'gabarito do caso 6: (a) a (e) sem prova e (f) dispensado pela Defensoria; a negativa é só um protocolo no CEJUSC Saúde, sem resposta',
+       'avisar: em (c) e (d) a leitura é de juízo, e o gabarito é conservador; quem discordar, discorda com a página na mão',
+       'lembrar: nada se grava dentro de casos/; a saída vai em saida/'],
      transicao: 'Quem travou, olhe as quatro saídas.'}},
   {id: 'travou', titulo: 'Travou? Quatro saídas',
-   notas: {diga: 'Quatro tropeços comuns. Sem o cronologia.md da primeira prática, usem o gabarito/cronologia.md do kit, copiando para a raiz da pasta. Se o app respondeu em texto e não gerou o Word, peçam o arquivo .docx com essas letras, pelo nome. Se a skill não aparece na lista, reiniciem o app. No celular não há pasta: colem o padrão do escritório no pedido e peçam o Word.',
-     faca: ['deixar na tela enquanto os últimos terminam', 'ajudar uma pessoa a repetir o pedido do .docx, se alguém precisar'],
+   notas: {diga: 'Quatro tropeços comuns. Sem plano ou sem o app, acompanhem na minha tela: o exercício é o mesmo. PDF sem texto é PDF digitalizado, uma foto do papel; o agente precisa reconhecer o texto antes, e isso demora mais. Se o Word não saiu, peçam o arquivo .docx pelo nome, ou abram o relatório pronto no gabarito. E se a skill não aparece, reiniciem o app.',
+     faca: ['deixar na tela enquanto os últimos terminam', 'ajudar uma pessoa a pedir o .docx pelo nome, se alguém precisar'],
      transicao: 'Tempo. Quero ver os Words.'}},
   {id: 'mostrar', titulo: 'Mostre o seu Word.', linhaDia: false,
-   notas: {diga: 'Quero ver dois ou três. Mostrem o Word aberto e digam: o logo está no cabeçalho? A tabela está no padrão? A seção de conferência está lá, e o que ela pede para conferir? Quem fez no celular também mostra.',
-     faca: ['chamar duas ou três pessoas, uma de cada ferramenta se possível', 'comparar em voz alta com o exemplo do slide anterior', 'perguntar a quem acertou de primeira o que a skill tem de diferente do pedido solto'],
+   notas: {diga: 'Quero ver dois ou três. Mostrem o Word do caso 6 e digam: quantos requisitos ficaram de pé? Bateu com o gabarito? Onde vocês discordaram, e com que página na mão? Quem só assistiu também responde: no caso 2, o que faltou ao autor?',
+     faca: ['chamar duas ou três pessoas, uma de cada ferramenta se possível', 'comparar em voz alta com o gabarito do caso 6', 'perguntar a quem discordou em (c) ou (d) qual página sustenta a leitura', 'fechar com a frase da prática: o agente organiza, quem decide é você'],
      transicao: 'Então o que cada um leva desta tarde?'}},
 );
 
 // ===== Bloco F: fecho (3 min) =====
 SLIDES.push(
   {id: 'levar', bloco: 'fecho', titulo: 'O que você leva hoje',
-   notas: {diga: 'Seis coisas desta tarde. O pedido com os seis elementos, nem todos obrigatórios. A regra "se não souber, diga que não sabe". O projeto com pasta para o processo. A skill, escrita uma vez e usada sempre. Conferir a fonte de cada data, que é o que destaco. E o Word no padrão do escritório, entregue pelo agente.',
-     faca: ['apontar os marcos da esquerda para a direita', 'parar no marco dourado: conferir a fonte'],
+   notas: {diga: 'Seis coisas desta tarde. O pedido com os seis elementos, nem todos obrigatórios. A regra "se não souber, diga". O projeto com pasta para o processo. A skill, escrita uma vez e usada sempre, como a conferir-temas. Conferir a fonte, abrindo a página que o agente citou, que é o que eu destaco. E baixar material do GitHub, como fizemos hoje com o kit.',
+     faca: ['apontar os marcos da esquerda para a direita', 'parar no marco dourado: conferir a fonte', 'lembrar que o kit continua no GitHub, com os seis casos e o gabarito, para treinar em casa'],
      transicao: 'E o que vem no dia 2.'}},
   {id: 'dia2', titulo: 'O próximo encontro',
    notas: {diga: 'No dia 2: MCP e plugins, para ligar o agente aos sistemas; rotinas; raspagem de jurisprudência do TJMS e do STF; casos práticos; artefatos e apresentações; e a devolutiva.',
-     faca: ['ler a lista sem se demorar', 'lembrar a sala de guardar a pasta do caso e a skill para o dia 2'],
+     faca: ['ler a lista sem se demorar', 'lembrar a sala de guardar a pasta do kit e a skill conferir-temas para o dia 2'],
      transicao: 'Se tiverem de guardar uma frase desta tarde, é esta.'}},
   {id: 'fecho', titulo: 'Trabalhe no caso, não no chat', linhaDia: false, segura: 4,
-   notas: {diga: 'Trabalhem no caso, não no chat. Reescrevam o pedido como um briefing, abram a pasta do processo e confiram a fonte de cada data. Obrigado. Até o dia 2.',
+   notas: {diga: 'Trabalhem no caso, não no chat. Reescrevam o pedido como um briefing, abram a pasta do processo e confiram a página de cada requisito. Obrigado. Até o dia 2.',
      faca: ['deixar este slide na tela durante as perguntas'],
      transicao: 'Obrigado. Até o dia 2.'}},
 );
@@ -2171,6 +2244,24 @@ CENAS.codigo = cartoes('codigo');
   };
 }
 
+// PDF lido inteiro? As doze páginas entram na mesa do chat (primeiro clique); na pasta, entram esmaecidas e uma acende (segundo).
+{
+  const sec = m.secao('pdflido'), pe = $$(sec, '.b-pdfe .b-pg'), pd = $$(sec, '.b-pdfd .b-pg'), on = sec.querySelector('.b-pg-on');
+  const ets = $$(sec, '.etiqueta'), txs = $$(sec, '.b-pdftx'), caixas = $$(sec, '.b-pdfcaixa'), rod = sec.querySelector(':scope > .rodape');
+  CENAS.pdflido = (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    revelar(ets[0], molaAR(x - 0.1)); surgir(caixas[0], molaAR(x - 0.15), {dy: 0, escala: 0.9});
+    pe.forEach((el, n) => surgir(el, molaAR(x - 0.4 - n * 0.06), {dy: -30}));
+    revelar(txs[0], molaAR(x - 1.3));
+    revelar(ets[1], molaAR(y - 0.1)); surgir(caixas[1], molaAR(y - 0.15), {dy: 0, escala: 0.9});
+    pd.forEach((el, n) => { surgir(el, molaAR(y - 0.4 - n * 0.04), {dy: 0}); if (el !== on) el.style.opacity = String(0.35 * Number(el.style.opacity || 1)); });
+    on.style.transform = '';
+    revelar(txs[1], molaAR(y - 1.3));
+    revelar(rod, molaAR(y - 1.6));
+  };
+}
+
 // ===== Bloco C: skills =====
 // Ícones desenhados por código (caixas do diagrama "liga"): arquivo, tomada e pacote, em viewBox 64 x 76.
 const C_ICONES = {
@@ -2514,79 +2605,123 @@ CENAS.trecho = (() => {
 
 
 // ===== Bloco E: mão na massa =====
-// pratica2: os títulos das colunas entram em onda, cada passo logo depois do seu título, e por fim o pedido para copiar.
-CENAS.pratica2 = (() => {
-  const sec = m.secao('pratica2'), eCols = $$(sec, '.e-col'), ePedido = sec.querySelector('.e-pedido');
+// github: a janela do navegador sobe, o endereço se digita e os arquivos entram em onda; primeiro clique, o aro dourado
+// se traça em volta do botão Code; segundo, o menu abre e o aro cerca o Download ZIP; terceiro, a seta leva à pasta
+// extraída, que entra item a item.
+CENAS.github = (() => {
+  const sec = m.secao('github'), eNav = sec.querySelector('.e-nav'), eUrl = sec.querySelector('.e-url');
+  const eArqs = $$(sec, '.e-arqs li'), eMenu = sec.querySelector('.e-menu'), eAros = $$(sec, '.e-aros path');
+  const eEt = sec.querySelector('.e-et-zip'), eEx = sec.querySelector('.e-extraida'), eRaiz = sec.querySelector('.e-ex-raiz');
+  const eSub = $$(sec, '.e-extraida li'), eUl = sec.querySelector('.e-extraida ul');
   return (t, c) => {
-    const x = conteudo(c);
+    const x = conteudo(c), y1 = c.desde(1), y2 = c.desde(2), y3 = c.desde(3);
     titulo(sec, x, c);
-    eCols.forEach((col, n) => {
-      const t0 = 0.15 + n * 0.22;
-      surgir(col.querySelector('.e-col-tit'), molaAR(x - t0), {dy: 20});
-      $$(col, 'li').forEach((li, k) => surgir(li, molaAR(x - t0 - 0.12 - k * 0.1), {dx: -18, dy: 0}));
+    surgir(eNav, molaAR(x - 0.1), {dy: 30});
+    digitar(eUrl, faixa(x, 0.4, 1.0), {semente: 21});
+    eArqs.forEach((li, n) => surgir(li, molaAR(x - 0.6 - n * 0.08), {dx: -18, dy: 0}));
+    tracar(eAros[0], saida(faixa(y1, 0, 0.5)));
+    surgir(eMenu, molaAR(y2), {dy: -16});
+    vis(eMenu, y2 > 0);
+    tracar(eAros[1], saida(faixa(y2, 0.3, 0.8)));
+    tracar(eAros[2], saida(faixa(y3, 0, 0.45)));
+    revelar(eEt, molaAR(y3 - 0.3));
+    surgir(eRaiz, molaAR(y3 - 0.4), {dx: -18, dy: 0});
+    revelar(eUl, molaAR(y3 - 0.5));
+    eSub.forEach((li, n) => surgir(li, molaAR(y3 - 0.6 - n * 0.12), {dx: -18, dy: 0}));
+    [eEt, eEx].forEach((el) => vis(el, y3 > 0));
+    fim(sec, x, 1.4);
+  };
+})();
+
+// pratica-caso: na chegada, os passos em onda e a caixa vazia do pedido; no primeiro clique os passos saem, a caixa
+// desliza para o centro e mostra a primeira parte; no segundo, a primeira parte sai e a segunda entra no lugar.
+CENAS['pratica-caso'] = (() => {
+  const sec = m.secao('pratica-caso'), ePassos = $$(sec, '.e-cinco li'), eBox = sec.querySelector('.e-pedido');
+  const eEt = eBox.querySelector('.e-ped-et'), ePartes = $$(eBox, '.e-ped-parte'), ePontos = $$(eBox, '.e-ped-pontos i');
+  return (t, c) => {
+    const x = conteudo(c), y1 = c.desde(1), y2 = c.desde(2);
+    titulo(sec, x, c);
+    const sai1 = faixa(y1, 0, 0.35);
+    ePassos.forEach((li, n) => {
+      surgir(li, molaAR(x - 0.15 - n * 0.1) * (1 - sai1), {dx: -18, dy: 0});
+      vis(li, sai1 < 1);
     });
-    surgir(ePedido, molaAR(x - 1.0), {dy: 26});
-    fim(sec, x, 1.4);
+    surgir(eBox, molaAR(x - 0.7), {dy: 26});
+    eBox.style.left = `${(740 - 310 * molaAR(y1 - 0.2)).toFixed(1)}px`;
+    revelar(eEt, molaAR(x - 0.8) * (1 - sai1));
+    vis(eEt, sai1 < 1);
+    const sai2 = faixa(y2, 0, 0.3);
+    revelar(ePartes[0], molaAR(y1 - 0.5) * (1 - sai2));
+    vis(ePartes[0], y1 > 0 && sai2 < 1);
+    revelar(ePartes[1], molaAR(y2 - 0.35));
+    vis(ePartes[1], y2 > 0);
+    ePontos.forEach((p, n) => {
+      revelar(p, molaAR(y1 - 0.5));
+      vis(p, y1 > 0);
+      p.classList.toggle('e-agora', n === (y2 > 0 ? 1 : 0));
+    });
+    fim(sec, x, 1.2);
   };
 })();
 
-// escritorio: o logo sobe, e as oito regras entram em onda, da esquerda para a direita e de cima para baixo; o filete
-// de cada regra se traça antes do texto.
-CENAS.escritorio = (() => {
-  const sec = m.secao('escritorio'), eLogo = sec.querySelector('.e-logo-cx'), eRegras = $$(sec, '.e-regras li');
+// relatorio: a página 1 sobe, depois a miniatura da página 3; cada parte que importa ganha a moldura dourada e a linha
+// que a liga à legenda, uma de cada vez.
+CENAS.relatorio = (() => {
+  const sec = m.secao('relatorio'), eP1 = sec.querySelector('.e-pag1'), eP3 = sec.querySelector('.e-pag3');
+  const ePaths = $$(sec, '.e-ligas path'), eLegs = $$(sec, '.e-leg');
   return (t, c) => {
     const x = conteudo(c);
     titulo(sec, x, c);
-    surgir(eLogo, molaAR(x - 0.1), {dy: 24});
-    eRegras.forEach((li, n) => surgir(li, molaAR(x - 0.5 - n * 0.1), {dy: 24}));
-    fim(sec, x, 1.4);
-  };
-})();
-
-// desafio: os três passos da missão entram com as setas entre eles; depois as três janelas, uma por ferramenta, e o
-// comando de cada uma se digita na caixa, uma depois da outra.
-CENAS.desafio = (() => {
-  const sec = m.secao('desafio'), eMissao = $$(sec, '.e-missao li'), eSetas = $$(sec, '.e-setas path');
-  const eEt = sec.querySelector('.e-et-criar'), eJans = $$(sec, '.e-jan'), eCmds = $$(sec, '.e-cmd');
-  return (t, c) => {
-    const x = conteudo(c);
-    titulo(sec, x, c);
-    eMissao.forEach((li, n) => surgir(li, molaAR(x - 0.1 - n * 0.32), {dx: -18, dy: 0}));
-    eSetas.forEach((p, n) => tracar(p, saida(faixa(x, 0.3 + n * 0.32, 0.55 + n * 0.32))));
-    revelar(eEt, molaAR(x - 1.0));
-    eJans.forEach((j, n) => surgir(j, molaAR(x - 1.1 - n * 0.12), {dy: 30}));
-    eCmds.forEach((el, n) => digitar(el, faixa(x, 1.6 + n * 0.5, 2.05 + n * 0.5), {semente: 11 + n}));
-    fim(sec, x, 3.0);
-  };
-})();
-
-// alvo: a página do Word sobe; cada parte que importa ganha a moldura dourada e a linha que a liga à legenda, uma de
-// cada vez, de cima para baixo.
-CENAS.alvo = (() => {
-  const sec = m.secao('alvo'), eFolha = sec.querySelector('.e-folha'), ePaths = $$(sec, '.e-ligas path'), eLegs = $$(sec, '.e-leg');
-  return (t, c) => {
-    const x = conteudo(c);
-    titulo(sec, x, c);
-    surgir(eFolha, molaAR(x - 0.1), {dy: 30});
+    surgir(eP1, molaAR(x - 0.1), {dy: 30});
+    surgir(eP3, molaAR(x - 0.3), {dy: 30});
     eLegs.forEach((leg, n) => {
       const d = 0.6 + n * 0.45;
       tracar(ePaths[2 * n], saida(faixa(x, d, d + 0.3)));
       tracar(ePaths[2 * n + 1], saida(faixa(x, d + 0.2, d + 0.45)));
       surgir(leg, molaAR(x - d - 0.35), {dx: -18, dy: 0});
     });
-    fim(sec, x, 2.2);
+    fim(sec, x, 1.6);
   };
 })();
 
-// pratica3: os cinco passos em onda à esquerda e, por fim, o pedido exato do desafio na caixa da direita.
-CENAS.pratica3 = (() => {
-  const sec = m.secao('pratica3'), eCinco = $$(sec, '.e-cinco li'), ePed = sec.querySelector('.e-pedido2');
+// skill: a janela do SKILL.md sobe, o nome e a descrição entram, e os seis passos em onda; no clique, o texto dos
+// passos vira linhas cinza e as formas de instalar entram à direita.
+CENAS.skillconf = (() => {
+  const sec = m.secao('skillconf'), eJan = sec.querySelector('.e-sk'), eNome = sec.querySelector('.e-sk-nome');
+  const eDesc = sec.querySelector('.e-sk-desc'), ePassos = $$(sec, '.e-sk-passos li');
+  const eEt = sec.querySelector('.e-inst-et'), eItens = $$(sec, '.e-inst-item');
+  return (t, c) => {
+    const x = conteudo(c), y1 = c.desde(1);
+    titulo(sec, x, c);
+    surgir(eJan, molaAR(x - 0.1), {dy: 30});
+    revelar(eNome, molaAR(x - 0.4));
+    revelar(eDesc, molaAR(x - 0.55));
+    const cinza = faixa(y1, 0, 0.4);
+    ePassos.forEach((li, n) => {
+      surgir(li, molaAR(x - 0.7 - n * 0.1), {dx: -18, dy: 0});
+      const txt = li.querySelector('span'), barra = li.querySelector('i');
+      txt.style.opacity = (1 - cinza).toFixed(3);
+      vis(txt, cinza < 1);
+      barra.style.opacity = cinza.toFixed(3);
+    });
+    revelar(eEt, molaAR(y1 - 0.3));
+    eItens.forEach((it, n) => surgir(it, molaAR(y1 - 0.5 - n * 0.25), {dy: 24}));
+    [eEt, ...eItens].forEach((el) => vis(el, y1 > 0));
+    fim(sec, x, 1.6);
+  };
+})();
+
+// pratica2: os cinco passos em onda à esquerda e, por fim, o pedido exato na caixa da direita.
+CENAS.pratica2 = (() => {
+  const sec = m.secao('pratica2'), ePassos = $$(sec, '.e-cinco li'), eBox = sec.querySelector('.e-pedido');
+  const eParte = eBox.querySelector('.e-ped-parte');
   return (t, c) => {
     const x = conteudo(c);
     titulo(sec, x, c);
-    eCinco.forEach((li, n) => surgir(li, molaAR(x - 0.15 - n * 0.1), {dx: -18, dy: 0}));
-    surgir(ePed, molaAR(x - 0.8), {dy: 26});
-    fim(sec, x, 1.3);
+    ePassos.forEach((li, n) => surgir(li, molaAR(x - 0.15 - n * 0.1), {dx: -18, dy: 0}));
+    surgir(eBox, molaAR(x - 0.7), {dy: 26});
+    revelar(eParte, molaAR(x - 0.9));
+    fim(sec, x, 1.4);
   };
 })();
 

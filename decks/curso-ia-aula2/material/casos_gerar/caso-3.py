@@ -54,7 +54,7 @@ DPE_SA + """
 <p class='rec'>A requerente é pessoa com deficiência, com transtorno psiquiátrico crônico grave (CID 10: F20.0), conforme documentação médica anexa, e faz jus à prioridade do art. 9º, VII, da Lei nº 13.146/2015 e do art. 1.048, I, do CPC.</p>
 <h3>II. DOS FATOS</h3>
 <p><b>II.I. Do quadro clínico e da imprescindibilidade terapêutica</b></p>
-<p class='rec'>A requerente, com idade entre 60 e 65 anos, tem Esquizofrenia Paranoide (CID 10: F20.0), conforme laudo médico circunstanciado do Dr. Rodrigo Albuquerque Teles (CRM/MS 19876), do Centro de Atenção Psicossocial (CAPS) de Vila Boa Esperança/MS.</p>
+<p class='rec'>A requerente, com idade entre 60 e 65 anos, tem Esquizofrenia Paranoide (CID 10: F20.0), conforme laudo médico circunstanciado do Dr. Rodrigo Albuquerque Teles (CRM/MS 0000 (fictício)), do Centro de Atenção Psicossocial (CAPS) de Vila Boa Esperança/MS.</p>
 <p class='rec'>O quadro é grave: alucinações visuais e auditivas, irritabilidade e elevado risco de heteroagressividade. Pela cronicidade da doença, a autora está acamada e depende de terceiros para todas as atividades básicas da vida diária, conforme o questionário médico anexo.</p>
 <p class='rec'>Para controlar os sintomas psicóticos, a agitação psicomotora e a desorganização do pensamento, o médico prescreveu o uso contínuo de <b>RISPERIDONA 2 mg</b>, 01 (um) comprimido à noite. O laudo é categórico ao afirmar que a medicação é indispensável e insubstituível no momento, fundamental para a estabilidade clínica. A falta do fármaco traz risco iminente de descompensação psiquiátrica, agravamento do quadro e internação hospitalar, com perigo para a paciente e seus cuidadores.</p>
 """,
@@ -104,14 +104,14 @@ LAUDO = ["""
 <p>A ausência da medicação implica em grave risco à saúde da paciente, com possibilidade de descompensação significativa do quadro psiquiátrico.</p>
 <p>O presente laudo é emitido para fins de apresentação junto à Defensoria Pública, visando obtenção judicial da medicação pelo sistema público de saúde.</p>
 <p><b>CID:</b> F20, Esquizofrenia</p>
-<div class='ass'><span class='l'>Dr. Rodrigo Albuquerque Teles<br>Médico Clínico Geral, CRM/MS 19876<br>CAPS, ambulatório especializado em saúde mental</span></div>
+<div class='ass'><span class='l'>Dr. Rodrigo Albuquerque Teles<br>Médico Clínico Geral, CRM/MS 0000 (fictício)<br>CAPS, ambulatório especializado em saúde mental</span></div>
 <p class='peq' style='margin-top:14pt'>Documento gerado pelo sistema municipal de saúde por Rodrigo Albuquerque Teles em 18/11/2025, 14:21.</p>
 """]
 
 VIA = """
 <div class='cx' style='margin-bottom:14pt'>
 <p class='inst' style='font-size:11pt'>RECEITUÁRIO DE CONTROLE ESPECIAL</p><p class='sub' style='margin-bottom:8pt'>CAPS de Vila Boa Esperança · {via}</p>
-<p><b>Emitente:</b> Rodrigo Albuquerque Teles, médico clínico, CRM/MS 19876</p>
+<p><b>Emitente:</b> Rodrigo Albuquerque Teles, médico clínico, CRM/MS 0000 (fictício)</p>
 <p><b>Paciente:</b> Rosa Maria Andrade Lemes</p>
 <table><tr><th>Medicamento</th><th>Posologia</th><th>Qtd.</th></tr>
 <tr><td>1. RISPERIDONA, 2 mg, comprimido, uso contínuo</td><td>Tomar 01 comprimido à noite. Via oral. Duração: indeterminado. Recomendações: (em branco)</td><td>30</td></tr></table>
@@ -157,7 +157,7 @@ DPE_VBE + """
 <p class='q'><b>9. A disponibilização é urgente?</b> (X) Sim (&nbsp;&nbsp;) Não</p>
 <p class='q'><b>10. A não utilização imediata poderá ocasionar:</b> (&nbsp;&nbsp;) Risco de morte (&nbsp;&nbsp;) Perda irreversível de órgãos ou funções (X) Grave comprometimento do bem-estar (&nbsp;&nbsp;) Outras</p>
 <p class='q'><b>11. Especificar o quadro clínico e as peculiaridades da paciente e demais considerações finais:</b> <span class='mao'>Paciente em acompanhamento contínuo, a qual esteve estável quando fazia uso de todos os psicofármacos; a falta da risperidona pode acarretar deterioração do quadro da paciente.</span></p>
-<p class='q'>Local: <span class='mao'>Vila Boa Esperança</span>. Data: <span class='mao'>11/01/2026</span>. Profissional (CRM, carimbo e assinatura): carimbo "Rodrigo A. Teles, Médico, CRM/MS 19876".</p>
+<p class='q'>Local: <span class='mao'>Vila Boa Esperança</span>. Data: <span class='mao'>11/01/2026</span>. Profissional (CRM, carimbo e assinatura): carimbo "Rodrigo A. Teles, Médico, CRM/MS 0000 (fictício)".</p>
 <table>
 <tr><th colspan='2'>Para preenchimento pela paciente</th></tr>
 <tr><td colspan='2'>Possui convênio particular de saúde? (X) Não (&nbsp;&nbsp;) Sim</td></tr>
@@ -224,7 +224,7 @@ Assunto: Ofício n. 087/2026. Enviado em 19/01/2026, 18:16, pela assessoria da 2
 2. Não foram apresentados: exames complementares que comprovem a enfermidade; relatório periódico do tratamento, com evolução e datas; referência bibliográfica para a medicação e a enfermidade.<br>
 3. Falta de informações que justifiquem a indicação e preencham os critérios de elegibilidade. Não há "comprovação de eficácia e segurança da medicação por ensaios clínicos randomizados e revisões sistemáticas ou meta-análises", nem prova de benefício clínico comparativo superior ao disponibilizado pelo SUS.</p>
 <p><b>Conclusões:</b> I. Receita sem validade. II. A falta de informação não permite avaliar ou impede a paciente de receber o tratamento específico. III. Desfavorável à Risperidona 2 mg comprimido. Sugere-se enviar exames, relatório periódico com evolução e datas, e observar os critérios do PCDT quando a medicação for incorporada. Em nota, invoca a Súmula Vinculante nº 60 e o Tema 1.234 do STF (item 4.3).</p>
-<p>26/01/2026. Dr. Henrique Salles, assistente técnico, médico, CRM/MS 2219.</p>
+<p>26/01/2026. Dr. Henrique Salles, assistente técnico, médico, CRM/MS 0000 (fictício).</p>
 """,
 """
 <p class='inst'>SECRETARIA DE ESTADO DE SAÚDE DE MATO GROSSO DO SUL</p><p class='sub'>Farmácia Estadual de Medicamentos Especializados · Componente Especializado da Assistência Farmacêutica (CEAF)</p>

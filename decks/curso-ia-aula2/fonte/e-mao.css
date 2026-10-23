@@ -2,72 +2,84 @@
   /* ===== Bloco E, mão na massa ===== */
   /* codex: o nome de cada ferramenta grande na sua coluna */
   [data-slide="codex"] .janela .letra { font-size: 140px; top: 16px; }
-  /* material: os papéis do caso sem deformar (a página é um pouco mais alta que a caixa do objeto) */
-  [data-slide="material"] .objeto { object-fit: contain; }
-  [data-slide="material"] .entrada { height: 236px; }
-  [data-slide="material"] .doc-leg { top: 418px; }
-  /* o que mais vem no zip, embaixo do pedido, à esquerda dos papéis */
-  .e-zip { position: absolute; left: 120px; top: 730px; width: 720px; font-size: 40px; line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
 
-  /* pratica2: três colunas de passos (notebook, celular, nos dois) e o pedido exato embaixo, para copiar */
-  .e-cols { position: absolute; left: 120px; top: 316px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; }
-  .e-col-tit { font: 800 var(--esc-2)/1.2 var(--fonte-titulo); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
-  .e-passos { margin-top: 22px; counter-reset: e-p; }
-  .e-passos.e-depois { counter-reset: e-p 2; }
+  /* github: a janela do navegador à esquerda, com a página do repositório; a pasta extraída à direita */
+  .e-nav { position: absolute; left: 120px; top: 300px; width: 1100px; height: 600px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); overflow: hidden; }
+  .e-nav-barra { position: relative; height: 72px; box-sizing: border-box; border-bottom: 3px solid var(--cor-linha); }
+  .e-nav-barra i { position: absolute; top: 28px; width: 14px; height: 14px; border-radius: 7px; background: var(--cor-linha); }
+  .e-nav-barra i:nth-child(1) { left: 26px; } .e-nav-barra i:nth-child(2) { left: 50px; } .e-nav-barra i:nth-child(3) { left: 74px; }
+  .e-url { position: absolute; left: 110px; right: 30px; top: 11px; height: 48px; box-sizing: border-box; padding: 0 24px; border-radius: 24px; background: var(--cor-destaque-fraca); font-size: 32px; line-height: 48px; white-space: nowrap; }
+  .e-repo { position: absolute; left: 40px; top: 104px; font: 800 44px/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .e-code { position: absolute; left: 890px; top: 97px; width: 170px; height: 64px; border-radius: 12px; background: var(--cor-destaque); color: var(--sobre-destaque, var(--cor-tinta)); font: 800 34px/64px var(--fonte-titulo); text-align: center; }
+  .e-arqs { position: absolute; left: 40px; top: 196px; width: 1020px; }
+  .e-arqs li { height: 74px; box-sizing: border-box; border-top: 3px solid var(--cor-linha); display: flex; align-items: center; gap: 22px; font-size: 36px; white-space: nowrap; }
+  .e-pasta-ic { flex: 0 0 40px; width: 40px; height: 32px; overflow: visible; }
+  .e-pasta-ic path { fill: var(--cor-destaque-fraca); stroke: var(--cor-tinta-suave); stroke-width: 2.5; stroke-linejoin: round; }
+  .e-pasta-ic.e-arq-ic path { fill: none; }
+  .e-menu { position: absolute; left: 640px; top: 172px; width: 420px; box-sizing: border-box; padding: 12px; border: 3px solid var(--cor-linha); border-radius: 16px; background: var(--cor-papel); }
+  .e-menu-item { height: 84px; display: flex; align-items: center; gap: 18px; padding-left: 20px; font: 700 36px/1 var(--fonte-titulo); white-space: nowrap; }
+  .e-zip-ic { width: 32px; height: 32px; overflow: visible; }
+  .e-zip-ic path { fill: none; stroke: var(--cor-tinta); stroke-width: 2.5; stroke-linejoin: round; }
+  .e-aros { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .e-aros path { fill: none; stroke: var(--cor-destaque); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .e-aros path.e-seta { stroke: var(--cor-tinta-suave); stroke-width: 4; }
+  .e-et-zip { left: 1270px; top: 312px; }
+  .e-extraida { position: absolute; left: 1270px; top: 382px; width: 530px; }
+  .e-ex-raiz { height: 60px; font: 700 34px/60px var(--fonte-texto); white-space: nowrap; }
+  .e-ex-raiz .e-pasta-ic { vertical-align: -4px; margin-right: 14px; }
+  .e-extraida ul { margin-top: 14px; margin-left: 18px; padding-left: 38px; border-left: 3px solid var(--cor-linha); }
+  .e-extraida li { height: 68px; display: flex; align-items: center; gap: 16px; font-size: 36px; white-space: nowrap; }
+
+  /* pratica-caso e pratica2: os cinco passos à esquerda e a caixa do pedido à direita, grande, para copiar */
+  .e-cinco { position: absolute; left: 120px; top: 340px; width: 580px; counter-reset: e-p; }
   /* o número do passo vem de um contador do CSS: é marcação, não texto a ler */
-  .e-passos li, .e-cinco li { counter-increment: e-p; display: flex; align-items: center; gap: 22px; margin-bottom: 18px; font-size: 40px; line-height: 1.25; white-space: nowrap; }
-  .e-passos li::before, .e-cinco li::before { content: counter(e-p); flex: 0 0 58px; height: 58px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
-  .e-pedido { position: absolute; left: 120px; top: 596px; width: 1680px; box-sizing: border-box; padding: 30px 44px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
-  .e-pedido p { font-size: 46px; line-height: 1.3; text-wrap: pretty; }
+  .e-cinco li { counter-increment: e-p; display: flex; align-items: center; gap: 22px; margin-bottom: 30px; font-size: 40px; line-height: 1.25; white-space: nowrap; }
+  .e-cinco li::before { content: counter(e-p); flex: 0 0 58px; height: 58px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .noite .e-cinco li::before { border-color: var(--linha-sobre-noite); color: var(--suave-sobre-noite); }
+  .e-pedido { position: absolute; left: 740px; top: 320px; width: 1060px; height: 560px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-papel); }
+  .noite .e-pedido { border-color: var(--linha-sobre-noite); background: none; }
+  .e-pedido .e-ped-et { left: 44px; top: 34px; }
+  .e-ped-parte { position: absolute; left: 44px; right: 44px; top: 100px; font-size: 44px; line-height: 1.36; text-wrap: pretty; }
+  [data-slide="pratica-caso"] .e-pedido { height: 500px; }
+  [data-slide="pratica2"] .e-pedido { height: 420px; }
+  [data-slide="pratica2"] .e-ped-parte { top: 50px; }
+  [data-slide="pratica2"] .e-ped-parte { font-size: 52px; }
+  .e-ped-pontos { position: absolute; left: 44px; bottom: 34px; display: flex; gap: 14px; }
+  .e-ped-pontos i { width: 18px; height: 18px; border-radius: 9px; background: var(--linha-sobre-noite); }
+  .e-ped-pontos i.e-agora { background: var(--cor-destaque); }
 
-  /* escritorio: o logo em cima e as oito regras em duas fileiras de quatro, cada uma com o seu pictograma */
-  .e-logo-cx { position: absolute; left: 120px; top: 300px; box-sizing: border-box; padding: 6px 24px 6px 0; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); }
-  .e-logo { display: block; height: 150px; width: auto; }
-  .e-regras { position: absolute; left: 120px; top: 500px; width: 1680px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 40px; }
-  .e-regras li { display: flex; flex-direction: column; gap: 16px; padding-top: 22px; border-top: 4px solid var(--cor-linha); }
-  .e-regras p { font-size: 36px; line-height: 1.25; text-wrap: balance; }
-  [data-slide="escritorio"] .selo-ia { left: 760px; right: auto; top: 404px; }
-  .e-ic { width: 96px; height: 64px; overflow: visible; }
-  .e-ic path { fill: none; stroke: var(--cor-tinta); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-  .e-ic path.e-fino { stroke: var(--cor-tinta-suave); stroke-width: 3; }
-  .e-ic path.e-cheio { fill: var(--cor-tinta); stroke: none; }
-  .e-ic path.e-ouro { stroke: var(--cor-destaque); stroke-width: 7; }
+  /* relatorio: a página 1 do Word em 60% (crop da margem), a página 3 em miniatura e as legendas */
+  .e-pag1 { position: absolute; left: 140px; top: 300px; width: 525px; height: 630px; overflow: hidden; border: 3px solid var(--cor-linha); border-radius: 6px; background: var(--cor-papel);
+    mask-image: linear-gradient(to bottom, var(--cor-tinta) 94%, transparent); }
+  .e-pag1 img { display: block; width: 645px; height: auto; margin: -30px 0 0 -60px; }
+  .e-pag3 { position: absolute; left: 1290px; top: 470px; width: 500px; height: 394px; overflow: hidden; border-radius: 4px; background: var(--cor-papel); }
+  .e-pag3 img { display: block; width: 614px; height: auto; margin: -80px 0 0 -57px; }
+  .e-ligas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .e-ligas path { fill: none; stroke: var(--cor-tinta); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .e-ligas path.e-caixa { stroke: var(--cor-destaque); }
+  .e-leg { position: absolute; left: 720px; width: 520px; }
+  .e-leg.e-leg3 { left: 1290px; width: 510px; }
+  .e-leg-tit { font: 800 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .e-leg-txt { margin-top: 6px; font-size: 36px; line-height: 1.25; color: var(--cor-tinta-suave); white-space: nowrap; }
+  [data-slide="relatorio"] .selo-ia { left: 1290px; right: auto; top: 892px; }
 
-  /* desafio: a missão em três passos ligados por setas e, embaixo, uma janela de app por ferramenta */
-  .e-missao { position: absolute; left: 0; top: 330px; counter-reset: e-p; }
-  .e-missao li { position: absolute; top: 0; }
-  .e-missao li:nth-child(1) { left: 120px; } .e-missao li:nth-child(2) { left: 700px; } .e-missao li:nth-child(3) { left: 1320px; }
-  .e-missao li { counter-increment: e-p; display: flex; align-items: center; gap: 24px; font: 700 48px/1.2 var(--fonte-titulo); white-space: nowrap; }
-  .e-missao li::before { content: counter(e-p); flex: 0 0 76px; height: 76px; border-radius: 38px; display: grid; place-items: center; background: var(--sobre-noite); color: var(--noite); font: 800 40px/1 var(--fonte-titulo); }
-  .e-setas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
-  .e-setas path { fill: none; stroke: var(--suave-sobre-noite); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-  .e-et-criar { left: 120px; top: 488px; }
-  .e-jans { position: absolute; left: 120px; top: 546px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-  .e-jan { position: relative; height: 318px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; background: color-mix(in srgb, var(--sobre-noite) 6%, var(--noite)); overflow: hidden; }
+  /* skill: o SKILL.md numa janela à esquerda; as formas de instalar à direita, no clique */
+  .e-sk { position: absolute; left: 120px; top: 310px; width: 980px; height: 590px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; background: color-mix(in srgb, var(--sobre-noite) 6%, var(--noite)); overflow: hidden; }
   .e-jan-barra { position: relative; height: 62px; box-sizing: border-box; border-bottom: 3px solid var(--linha-sobre-noite); display: flex; align-items: center; padding-left: 112px; white-space: nowrap; }
   .e-jan-barra i { position: absolute; top: 24px; width: 14px; height: 14px; border-radius: 7px; background: var(--linha-sobre-noite); }
   .e-jan-barra i:nth-child(1) { left: 26px; } .e-jan-barra i:nth-child(2) { left: 50px; } .e-jan-barra i:nth-child(3) { left: 74px; }
   .e-jan-barra b { font: 700 32px/1 var(--fonte-titulo); color: var(--sobre-noite); }
-  .e-jan-leg { position: absolute; left: 32px; top: 96px; font-size: 34px; line-height: 1.2; color: var(--suave-sobre-noite); white-space: nowrap; }
-  .e-comp { position: absolute; left: 28px; right: 28px; bottom: 28px; height: 96px; box-sizing: border-box; padding: 0 28px; display: flex; align-items: center; border: 3px solid var(--linha-sobre-noite); border-radius: 20px; background: var(--noite); }
-  .e-cmd { font: 600 40px/1.2 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
-
-  /* alvo: a página do Word esperado em 115% (só a parte de cima, onde está o conteúdo) e as legendas à direita */
-  .e-folha { position: absolute; left: 140px; top: 305px; width: 913px; height: 621px; overflow: hidden; border: 3px solid var(--cor-linha); border-radius: 6px; background: var(--cor-papel);
-    mask-image: linear-gradient(to bottom, var(--cor-tinta) 94%, transparent); }
-  .e-folha img { display: block; width: 913px; height: auto; margin-top: -23px; }
-  .e-ligas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
-  .e-ligas path { fill: none; stroke: var(--cor-tinta); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-  .e-ligas path.e-caixa { stroke: var(--cor-destaque); }
-  .e-leg { position: absolute; left: 1130px; width: 670px; }
-  .e-leg-tit { font: 800 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
-  .e-leg-txt { margin-top: 6px; font-size: 36px; line-height: 1.25; color: var(--cor-tinta-suave); white-space: nowrap; }
-
-  /* pratica3: os cinco passos à esquerda e o pedido exato do desafio à direita, grande, para copiar */
-  .e-cinco { position: absolute; left: 120px; top: 340px; width: 560px; counter-reset: e-p; }
-  .e-cinco li { margin-bottom: 30px; }
-  .e-pedido2 { position: absolute; left: 740px; top: 320px; width: 1060px; box-sizing: border-box; padding: 34px 44px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
-  .e-pedido2 p { font-size: 44px; line-height: 1.34; text-wrap: pretty; }
+  .e-sk-nome { position: absolute; left: 44px; top: 92px; font: 800 52px/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .e-sk-desc { position: absolute; left: 44px; top: 166px; width: 892px; font-size: 38px; line-height: 1.3; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .e-sk-passos { position: absolute; left: 44px; top: 242px; width: 892px; counter-reset: e-s; }
+  .e-sk-passos li { position: relative; counter-increment: e-s; height: 54px; margin-bottom: 0; display: flex; align-items: center; gap: 20px; font-size: 36px; white-space: nowrap; }
+  .e-sk-passos li::before { content: counter(e-s); flex: 0 0 40px; font: 800 32px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
+  .e-sk-passos li i { position: absolute; left: 60px; top: 19px; height: 16px; border-radius: 8px; background: var(--linha-sobre-noite); opacity: 0; }
+  .e-inst { position: absolute; left: 1160px; top: 320px; width: 640px; }
+  .e-inst .e-inst-et { position: static; }
+  .e-inst-item { margin-top: 30px; padding-top: 24px; border-top: 3px solid var(--linha-sobre-noite); }
+  .e-inst-tit { font: 800 40px/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .e-inst-txt { margin-top: 10px; font-size: 38px; line-height: 1.3; text-wrap: pretty; }
 
   /* travou: quatro cartões em duas fileiras, texto maior, para ler de longe enquanto a sala trabalha */
   [data-slide="travou"] .cartoes { top: 330px; gap: 32px 40px; }

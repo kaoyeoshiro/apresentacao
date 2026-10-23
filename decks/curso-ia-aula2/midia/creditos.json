@@ -279,31 +279,17 @@
   "nota": "marcador: substitua por mídia do deck"
  },
  {
-  "arquivo": "midia/emblema-a.png",
-  "data": "2026-10-23",
-  "ferramenta": "GPT Image (./ap imagem)",
-  "origem": "emblema do escritório fictício Dias & Moura, gerado por IA; qualidade baixa, custo de centavos",
-  "custo": 0.02
- },
- {
-  "arquivo": "midia/logo-escritorio.webp",
+  "arquivo": "midia/relatorio-caso-2-p1.webp",
   "data": "2026-10-23",
   "ferramenta": "código próprio",
-  "origem": "decks/curso-ia-aula2/material/escritorio.py (emblema gerado por IA mais nome composto em texto); escritório fictício",
+  "origem": "kit/gabarito/caso-2/relatorio-caso-2.docx convertido em PDF pelo LibreOffice (soffice.py da skill docx), página 1 rasterizada com pdftoppm -r 130 e gravada em WebP com Pillow; caso e escritório fictícios, logo gerado por IA (midia/emblema-a.png)",
   "custo": 0
  },
  {
-  "arquivo": "midia/caso-parecer-exemplo.webp",
+  "arquivo": "midia/relatorio-caso-2-p3.webp",
   "data": "2026-10-23",
   "ferramenta": "código próprio",
-  "origem": "decks/curso-ia-aula2/material/escritorio.py (HTML rasterizado pelo Chrome); exemplo do Word no padrão do escritório fictício, sem IA",
-  "custo": 0
- },
- {
-  "arquivo": "midia/caso-parecer-exemplo-2x.webp",
-  "data": "2026-10-23",
-  "ferramenta": "código próprio",
-  "origem": "material/escritorio.py (mesmo HTML, rasterizado em 2x pelo Chrome); sem IA",
+  "origem": "kit/gabarito/caso-2/relatorio-caso-2.docx convertido em PDF pelo LibreOffice (soffice.py da skill docx), página 3 rasterizada com pdftoppm -r 130 e gravada em WebP com Pillow; caso e escritório fictícios, logo gerado por IA (midia/emblema-a.png)",
   "custo": 0
  }
 ]

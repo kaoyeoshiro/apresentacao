@@ -4,7 +4,7 @@
 SLIDES.push(
   {id: 'capa', titulo: 'Do chat à pasta', bloco: 'pedir', linhaDia: false, segura: 3,
    notas: {diga: 'Boa tarde de novo. Na primeira aula vimos o que a IA é por dentro. Agora vamos usar isso na prática: primeiro, como pedir bem; depois, como trabalhar direto nos documentos do caso, numa pasta.',
-     faca: ['a capa toca sozinha quando o deck abre', 'conferir se todos receberam pelo WhatsApp o link do material fictício'],
+     faca: ['a capa toca sozinha quando o deck abre', 'conferir se todos conseguem abrir o link do kit no GitHub (o passo a passo vem na prática)'],
      transicao: 'Primeiro, o caminho da tarde.'}},
   {id: 'mapa', titulo: 'A tarde em seis etapas',
    notas: {diga: 'São seis etapas. Pedir bem, que é onde estamos. Duas escolhas: Projeto e pasta. Skills. O trabalho na pasta, com uma demonstração. Mão na massa, no caso fictício. E o fecho. Cada etapa termina numa tarefa de vocês.',
