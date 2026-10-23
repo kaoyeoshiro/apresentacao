@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Curso de IA da co.juris, dia 1, Aula 1: "O que é IA e qual usar" (versão 7, cerca de 90 minutos). Plano contínuo de
-     63 slides, montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md), com abertura automática, linha do
+     64 slides, montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md), com abertura automática, linha do
      dia em cinco blocos e guia do apresentador em todos os slides (docs/palco.md, Blocos da aula). Capa e encerramento
      claros, com o logo oficial do tema. Blocos: o que é IA (capa a previsao, com a linha do tempo da IA), como funciona
      (funciona a passos, com os pesos como botões de ajuste e o tamanho dos modelos de ponta, os tokens, a mesa e a memória), onde tropeça (linguagem a pior), qual a melhor
@@ -201,6 +201,18 @@
   .em-pt.ouro { width: 40px; height: 40px; margin: -20px 0 0 -20px; background: var(--cor-destaque); }
   .em-pl { position: absolute; transform: translate(22px, -50%); font: 400 34px/1 var(--fonte-texto); color: var(--cor-tinta-suave); white-space: nowrap; }
   .em-pg { position: absolute; transform: translate(-50%, -50%); font: 700 40px/1 var(--fonte-titulo); color: var(--cor-destaque-texto); white-space: nowrap; }
+
+  /* evolucao (cena própria): escada do melhor resultado ao longo dos anos, com marcos nomeados */
+  .ev-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .ev-svg .ev-eixo { stroke: var(--cor-linha); stroke-width: 2; }
+  .ev-svg .ev-linha { fill: none; stroke: var(--cor-tinta); stroke-width: 8; stroke-linejoin: round; stroke-linecap: round; }
+  .ev-svg .ev-ponto { fill: var(--cor-tinta); }
+  .ev-svg .ev-ponto.ouro { fill: var(--cor-destaque); }
+  .ev-svg text { font-family: var(--fonte-texto); fill: var(--cor-tinta-suave); }
+  .ev-svg .ev-nome { font: 700 36px var(--fonte-titulo); fill: var(--cor-tinta); }
+  .ev-svg .ev-nota { font: 400 32px var(--fonte-texto); fill: var(--cor-tinta-suave); }
+  .ev-svg .ev-nome.ouro { fill: var(--cor-destaque-texto); }
+  .ev-svg .ev-eixo-t { font: 400 32px var(--fonte-texto); }
 
   /* comparação: a palavra de cada coluna maior que o texto dela, no tamanho que cabe em 768 px */
   .janela .letra.g { font-size: var(--esc-5); top: 0; }
@@ -758,6 +770,17 @@
     <p class="respiro"><span>Hoje é a <span class="sinal">pior</span> IA</span><span>que você usará</span></p>
   </section>
 
+  <!-- evolucao (cena própria, um clique): a escada do melhor resultado no Intelligence Index, de nov/2022 a set/2026. Marcos com
+       nome e nota lidos das páginas dos modelos na Artificial Analysis em 23/10/2026; os degraus entre eles, lidos do gráfico
+       "Frontier Language Model Intelligence, Over Time" (aproximados). Pedido do professor em 23/10/2026. -->
+  <section data-slide="evolucao">
+    <p class="rotulo">Tendência</p>
+    <h2 class="manchete">O topo foi de 5 a 58 em 4 anos</h2>
+    <p class="linha-top" data-entra="0.1">Nota de 0 a 100 em dez provas: o melhor modelo de cada época.</p>
+    <svg class="ev-svg" viewBox="0 0 1920 1080"></svg>
+    <p class="rodape">Artificial Analysis, Intelligence Index v4.3.2, 23/10/2026; a escada é aproximada.</p>
+  </section>
+
   <!-- ===== Bloco 4: qual a melhor IA ===== -->
   <section data-slide="melhor" data-arquetipo="abertura" class="noite">
     <p class="rotulo">Qual a melhor IA</p>
@@ -1210,7 +1233,13 @@ const slides = [
      faca: [], transicao: 'Uma provocação para fechar o bloco.'}},
   {id: 'pior', titulo: 'Hoje é a pior IA que você usará', andamento: 'capitulo',
    notas: {diga: 'A IA de hoje é a pior que vocês vão usar daqui para a frente. É uma tendência, não uma previsão com número.',
-     faca: [], transicao: 'Então, qual é a melhor?'}},
+     faca: [], transicao: 'Veja a escada dos últimos quatro anos.'}},
+  {id: 'evolucao', titulo: 'O topo foi de 5 a 58 em 4 anos', passos: [3.5],
+   notas: {diga: 'Este é o melhor resultado disponível em cada época, no índice da Artificial Analysis, que junta dez provas numa nota de 0 a 100. Em novembro de 2022, perto de 5. O GPT-4 chegou em março de 2023 com 7; o Claude 3 Opus, em março de 2024, com 9; o o1, da OpenAI, em dezembro de 2024, com 15; o o3, em abril de 2025, com 20; o GPT-5, em agosto de 2025, com 23. Em setembro de 2026, o Claude Opus 5.5 marca 58. São mais de dez vezes a nota de 2022, e é por isso que a IA de hoje é a pior que vocês vão usar.',
+     faca: ['um clique: a escada se desenha da esquerda para a direita e os marcos aparecem', 'notas e datas dos seis marcos: páginas dos modelos na Artificial Analysis, lidas em 23/10/2026 (GPT-4, 14/03/2023, 7; Claude 3 Opus, 04/03/2024, 9; o1, 05/12/2024, 15; o3, 16/04/2025, 20; GPT-5 High, 07/08/2025, 23; Claude Opus 5.5, 22/09/2026, 58); as páginas marcam as notas antigas como estimativas',
+       'os degraus entre os marcos e o ponto de 5 em nov/2022 foram lidos do gráfico da Artificial Analysis, aproximados; o índice é refeito a cada versão, então notas antigas mudam um pouco',
+       'a linha é o melhor de qualquer empresa; não é a evolução de uma só'],
+     transicao: 'Então, qual é a melhor?'}},
 
   // Bloco 4, qual a melhor IA (20 min)
   {id: 'melhor', titulo: 'Qual é a melhor IA?', bloco: 'melhor', linhaDia: false,
@@ -1546,6 +1575,45 @@ const embedding = (() => {
   };
 })();
 
+// Evolução: a escada do melhor resultado se desenha da esquerda para a direita, por uma máscara que avança em x, e cada
+// marco (nome e nota) aparece quando a escada passa por ele.
+const evolucao = (() => {
+  const sec = m.secao('evolucao'), svg = sec.querySelector('.ev-svg'), rod = sec.querySelector('.rodape');
+  const X0 = 240, X1 = 1800, YB = 790, YT = 400, T0 = 2022.8, T1 = 2026.95, V1 = 60;
+  const px = (t) => X0 + ((t - T0) / (T1 - T0)) * (X1 - X0), py = (v) => YB - (v / V1) * (YB - YT);
+  const PTS = [[2022.85, 5], [2023.2, 7], [2024.17, 9], [2024.7, 11], [2024.92, 15], [2025.29, 20], [2025.6, 23], [2025.8, 25], [2025.95, 30], [2026.1, 33], [2026.2, 39], [2026.3, 41], [2026.5, 50], [2026.67, 53], [2026.72, 58]];
+  const MARCOS = [[2022.85, 5, '', '', 'start'], [2023.2, 7, 'GPT-4', 'nota 7', 'middle'], [2024.17, 9, 'Claude 3 Opus', 'nota 9', 'middle'],
+    [2024.92, 15, 'o1', 'nota 15', 'middle'], [2025.29, 20, 'o3', 'nota 20', 'middle'], [2025.6, 23, 'GPT-5', 'nota 23', 'middle'], [2026.72, 58, 'Claude Opus 5.5', 'nota 58', 'end']];
+  const el = (n, a, pai) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); (pai || svg).appendChild(e); return e; };
+  const eixo = el('g', {});
+  for (const v of [0, 20, 40, 60]) {
+    el('line', {class: 'ev-eixo', x1: X0, x2: X1, y1: py(v), y2: py(v)}, eixo);
+    const t = el('text', {class: 'ev-eixo-t', x: X0 - 24, y: py(v) + 11, 'text-anchor': 'end'}, eixo); t.textContent = v;
+  }
+  for (const a of [2023, 2024, 2025, 2026]) { const t = el('text', {class: 'ev-eixo-t', x: px(a), y: YB + 52, 'text-anchor': 'middle'}, eixo); t.textContent = a; }
+  const defs = el('defs', {}), cp = el('clipPath', {id: 'ev-mask'}, defs), rect = el('rect', {x: 0, y: 0, width: 0, height: 1080}, cp);
+  const d = PTS.map((p, i) => (i ? `H${px(p[0]).toFixed(1)}V${py(p[1]).toFixed(1)}` : `M${px(p[0]).toFixed(1)} ${py(p[1]).toFixed(1)}`)).join('');
+  el('path', {class: 'ev-linha', d, 'clip-path': 'url(#ev-mask)'});
+  const marcos = MARCOS.map(([t, v, nome, nota, ancora]) => {
+    const g = el('g', {}), ouro = nome === 'Claude Opus 5.5', x = px(t), y = py(v);
+    el('circle', {class: 'ev-ponto' + (ouro ? ' ouro' : ''), cx: x, cy: y, r: ouro ? 16 : 11}, g);
+    const lx = ancora === 'end' ? x - 34 : (ancora === 'start' ? x + 4 : x), ly = ancora === 'end' ? y - 4 : y - 74;
+    if (nome) { const a = el('text', {class: 'ev-nome' + (ouro ? ' ouro' : ''), x: lx, y: ly, 'text-anchor': ancora}, g); a.textContent = nome; }
+    if (nota) { const b = el('text', {class: 'ev-nota', x: lx, y: ly + 38, 'text-anchor': ancora}, g); b.textContent = nota; }
+    return {g, x};
+  });
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    eixo.style.opacity = String(clamp(molaAR(x - 0.2), 0, 1));
+    const varre = X0 - 20 + saida(faixa(x, 0.7, 3.0)) * (X1 - X0 + 40);
+    rect.setAttribute('width', varre.toFixed(1));
+    marcos.forEach(({g, x: mx}) => { const k = saida(faixa(varre, mx - 6, mx + 60)); g.style.opacity = String(k); vis(g, k > 0.01); });
+    revelar(rod, molaAR(x - 2.2)); vis(rod, x > 2.1);
+    fim(sec, x, 0.6);
+  };
+})();
+
 // Mesa: o retângulo aparece, os blocos caem dentro dele de baixo para cima, e o anexo que não cabe para do lado de fora.
 const mesa = (() => {
   const sec = m.secao('mesa'), caixaMesa = sec.querySelector('.ms-mesa'), bls = $$(sec, '.ms-bl:not(.ms-fora)'), fora = sec.querySelector('.ms-fora');
@@ -1753,6 +1821,7 @@ palco({slides: m.slides, desenhar: m.desenhar, blocos, autoplay: true, cenas: m.
   parametros,
   reforco,
   embedding,
+  evolucao,
   tokens: tokens('tokens'),
   mesa,
   queda,
