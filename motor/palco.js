@@ -459,7 +459,9 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 		linhaDia = (t, s) => {
 			const ant = S[s.i - 1], p0 = s.passos[0];
 			const k = ant ? faixa(t, p0.t0, p0.t0 + Math.min(0.4, p0.dur)) : 1;
-			const op = lerp(mostra(ant) ? 1 : 0, mostra(s) ? 1 : 0, k);
+			// Durante a viagem a trilha cruza os nomes: a linha some no meio da câmera e volta ao assentar.
+			const kc = ant ? Math.min(1, Math.max(0, kCamera(t, s))) : 1;
+			const op = lerp(mostra(ant) ? 1 : 0, mostra(s) ? 1 : 0, k) * (1 - Math.sin(Math.PI * kc));
 			el.style.opacity = String(op);
 			el.style.visibility = op > 0 ? '' : 'hidden';
 			el.classList.toggle('noite', noite[kCamera(t, s) < 0.5 && ant ? ant.i : s.i]);
