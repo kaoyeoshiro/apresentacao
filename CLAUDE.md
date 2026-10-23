@@ -16,6 +16,7 @@ parada por clique. Para qualquer pedido de apresentação, siga a skill `.claude
   `creditos.json`). Moldes: `decks/catalogo/` (plano contínuo, um slide por arquétipo) e `decks/demo/` (slides com
   transições). `decks/previa-curso-ia/` é a régua de qualidade.
 - `ferramentas/`: CLIs Python, sempre chamadas por `./ap`.
+- Site da co.juris: `/Users/kgo/Library/CloudStorage/OneDrive-Pessoal/co.juris/site` (Cloudflare Pages, deploy com `npm run deploy` lá). As apresentações ficam em `https://www.cojuris.com.br/apresentacao/`, com a regra de cabeçalhos própria de `public/_headers`; a Aula 1 está em `/apresentacao/aula-1/`.
 - `docs/decisao.md`: por que motor próprio e não Slidev ou reveal.js; `docs/pesquisa/`: os relatórios de origem.
 
 ## Comandos
@@ -29,6 +30,7 @@ parada por clique. Para qualquer pedido de apresentação, siga a skill `.claude
 ./ap lint decks/<slug> | motor/cenas.css    # regras do deck; recusa cor literal na folha do motor (só var() do tema)
 ./ap imagens decks/<slug> [--rascunhos|--final|--tratar]   # imagens da série do tema: situação, rascunhos, final tratado
 ./ap pdf | video | empacotar decks/<slug>   # PDF, MP4, pasta que abre sem internet
+./ap publicar decks/<slug> --site <pasta do site> --pasta aula-2 --titulo "..." --descricao "..."   # copia o pacote para o site da co.juris (/apresentacao/<pasta>/) e atualiza a página de entrada; commit e npm run deploy ficam no site
 ./ap imagem | video-ia | trazer | midia conferir ...   # matéria-prima avulsa e vídeo (docs/palco.md, seção Mídia)
 ./ap teste                                  # todos os testes
 ```
