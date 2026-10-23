@@ -1,6 +1,6 @@
 # Curso de IA da co.juris: andamento (passagem para o próximo agente)
 
-Atualizado em 22/10/2026. Branch `claude/briefing-dia-1`, no worktree
+Atualizado em 23/10/2026. Branch `claude/briefing-dia-1`, no worktree
 `/Volumes/Projetos/apresentacao/.claude/worktrees/ia-course-presentations-c2018d`. Nada foi juntado ao `main` nem
 publicado. Ideias para depois ficam em `docs/curso-ia-ideias.md`.
 
@@ -10,7 +10,8 @@ Dia 1 de um curso pago de IA (turma mista: advogados, uma desembargadora, servid
 pago). Duas aulas de ~90 min na mesma tarde, tema `cojuris`, plano contínuo. Siga a skill
 `.claude/skills/apresentacao/SKILL.md`.
 
-- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 52 slides da versão 3, `apuracao.md`).
+- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 63 slides da versão 4, `apuracao.md` e
+  `apuracao-2.md`).
 - Aula 2, "Do chat à pasta": `decks/curso-ia-aula2/briefing.md` aprovado em 22/10, mas ainda com o fio da data do
   contrato, que o professor rejeitou na Aula 1; rever antes de montar. O deck ainda é a cópia do catálogo.
 
@@ -24,44 +25,40 @@ pago). Duas aulas de ~90 min na mesma tarde, tema `cojuris`, plano contínuo. Si
 - Conselhos (`/council`): rodar direto, sem pedir sim, só com Gemini 4 Argon e GPT-6 Sol; juiz Opus.
 - Imagens só pelo `./ap imagens`, teto US$ 2,00; quem escolhe o rascunho é o professor. Gasto até aqui: US$ 0,25.
 
-## Pedidos do ensaio da versão 3 (22/10), ainda por fazer na Aula 1
+## Pedidos do ensaio da versão 3 (22/10): feitos na versão 4 (23/10)
 
-1. Animação explicativa de pesos e multiplicação de matrizes (por código, sequência de slides).
-2. Capa mais impactante, que abre sozinha ao carregar (sem tecla).
-3. Tirar todos os `[CONFERIR]`.
-4. Trocar a foto da janela de contexto (ruim) por desenho; o "meio se perde" (Liu et al., 2023) só fica com estudo
-   recente que sustente, senão sai.
-5. Guiar o apresentador: notas estruturadas (diga, faça, transição), tempo por bloco, cronômetro nas práticas.
-6. Linha do dia fixa embaixo, com os blocos da aula e o atual destacado.
-7. Conceito de IA mais longo e claro: OCDE e PL 2338/2023 decompostos em partes.
-8. Fronteira irregular com desenho e exemplos jurídicos bons.
-9. "Qual a melhor IA": mostrar o ranking atual da Artificial Analysis (índice geral e jurídico) e da arena.ai;
-   refazer o slide 39 (pesos do Legal Index), que ninguém entenderia.
-10. Refazer a prática do duelo (slide 42) com instrução clara e duas respostas reais de IAs diferentes; o professor
-    ainda não respondeu se as gero eu (Claude + Gemini, < US$ 0,05) ou ele.
-11. Slides de memória (ChatGPT e Claude) logo depois de "Conversa nova, mesa limpa".
+Todos os 11 entraram em `decks/curso-ia-aula1/deck.html` (63 slides); o que mudou em cada um está no `briefing.md`
+do deck, seção "O que mudou da versão 3".
 
-## Trabalho em andamento quando esta nota foi escrita
+1. [feito] Pesos e matrizes: slides 16 a 18 (vetor, conta em dois cliques, filtro e camadas) e 19 (o treino ajusta).
+2. [feito] Capa por código, com `autoplay: true`: a frase em 150 px, o leque grande e o título no fim.
+3. [feito] Zero `[CONFERIR]` no deck e no briefing, pela seção 0 de `apuracao-2.md`.
+4. [feito] Mesa desenhada por código; "meio se perde" trocado por "Quanto maior o texto, mais o acerto cai" (NoLiMa,
+   Chroma, Anthropic). `mesa.webp` e os `doc-*.webp` saíram do deck e do crédito.
+5. [feito] Notas `{diga, faca, transicao}` nos 63 slides; `pratica` nas cinco práticas.
+6. [feito] Linha do dia com cinco blocos (16, 30, 14, 20 e 10 minutos).
+7. [feito] OCDE e PL 2338/2023 em cinco partes cada, um clique por parte.
+8. [feito] Fronteira serrilhada desenhada, seis exemplos do professor e o número do estudo publicado.
+9. [feito] Índice geral, Legal Index refeito (barra única), ranking jurídico e ranking de agentes da arena.ai.
+10. [feito] Duelo do prazo de contestação do Estado, com revelação pelo CPC; respostas escritas pelo professor (proposta
+    de `apuracao-2.md`, item 0.1), sem gerar respostas por IA.
+11. [feito] Três slides de memória depois de "Conversa nova, mesa limpa".
 
-- Pesquisa para os itens 3, 4, 7, 8, 9 e 11 e o roteiro de pesos e matrizes: vai para
-  `decks/curso-ia-aula1/apuracao-2.md`. A parte de memória já voltou (páginas oficiais de 21 e 22/10/2026): apagar
-  a conversa não apaga a memória criada dela, nos dois produtos; conversa temporária ou anônima não cria memória,
-  mas fica guardada até 30 dias.
-- Motor (itens 2, 5 e 6): PRONTO no commit `9f41c10` (`./ap teste`: 99 passed). O deck liga com `autoplay: true`,
-  `blocos: [{id, rotulo, minutos}]`, `bloco:` por slide (herdado pelos seguintes), `linhaDia: false` para esconder,
-  `pratica: N` (cronômetro) e `notas: {diga, faca: [...], transicao}`. Contrato em `docs/palco.md`, seção "Blocos da
-  aula"; o catálogo já usa os três.
-- Pesquisa: os subagentes devolveram memória, rankings (Artificial Analysis geral e jurídico, arena.ai), contexto
-  longo (trocar "o meio se perde" por "quanto maior o texto, mais cai a capacidade de cruzar e inferir", NoLiMa 2025,
-  Chroma 2025, Anthropic 2026; Liu et al. 2023 sai) e fronteira irregular (seis exemplos jurídicos ilustrativos). O
-  consolidado vai para `decks/curso-ia-aula1/apuracao-2.md`; se o arquivo não existir ou estiver incompleto, os
-  relatórios estão resumidos nas mensagens desta sessão e precisam ser refeitos.
+Pontos para o professor decidir no ensaio: o índice geral mostra 7 modelos (os distintos entre as 10 primeiras linhas
+da tabela, que repete variantes do mesmo modelo); o rodapé dos agentes usa as 367.936.358 sessões da captura, enquanto
+o placar de agentes mostra 2.731.078 sessões em 20/10/2026 (a nota do slide diz isso).
+
+Pendência do motor, achada na crítica e fora do escopo do deck: durante as viagens de câmera, a trilha passa por
+cima dos nomes da linha do dia por cerca de 0,3 s. Conserto proposto em `motor/palco.js`: esmaecer a linha do dia
+durante a viagem ou descer os nomes para y ≥ 1015.
 
 ## Próximo passo
 
-Com `apuracao-2.md` e o motor prontos, remontar a Aula 1 com os 11 itens, rodar lint, sondar, mídia e três rodadas de
-crítica (passos 5 a 7 da skill), commitar e abrir `./ap abrir decks/curso-ia-aula1` para o professor ensaiar. Depois,
-a Aula 2. Antes de juntar ao `main`: bateria completa (`./ap teste`), autorrevisão por subagente e o "posso juntar?".
+1. Ensaio do professor com `./ap abrir decks/curso-ia-aula1` (tela do apresentador com P); pedidos voltam ao passo 5
+   da skill.
+2. Depois, a Aula 2 (`decks/curso-ia-aula2`): rever o briefing (tirar o fio da data do contrato) e montar com os
+   mesmos recursos (blocos, guia, práticas).
+3. Antes de juntar ao `main`: bateria completa (`./ap teste`), autorrevisão por subagente e o "posso juntar?".
 
 ## Decisão de 22/10/2026: ranking da arena na Aula 1
 
