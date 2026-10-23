@@ -75,16 +75,27 @@
   .noite .a-extra { color: var(--suave-sobre-noite); }
   .noite .a-extra.sinal { color: var(--sinal-noite); }
 
-  /* tentativas (cena própria): três cartões, cada um com a barra da distância */
+  /* capa (cena própria, fundo claro, como a da Aula 1): o logo oficial à esquerda, o texto à direita de um fio */
+  .a-logo-cj { position: absolute; left: 120px; top: 300px; height: 480px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+  .a-cp-fio { position: absolute; left: 740px; top: 290px; width: 4px; height: 500px; background: var(--cor-linha); transform-origin: 50% 0; }
+  .a-cp-txt { position: absolute; left: 800px; top: 300px; width: 1000px; }
+  .a-cp-txt .rotulo { position: static; }
+  .a-cp-tit { margin-top: 26px; font-size: 124px; line-height: 1.04; color: var(--cor-tinta); }
+  .a-cp-tit > span { display: block; white-space: nowrap; }
+  .a-cp-sub { margin-top: 44px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
+
+  /* tentativas (cena própria): uma linha por tentativa, com o pedido, o veredito e a barra da distância */
   .a-tn-et { left: 120px; top: 300px; }
-  .a-tn { position: absolute; top: 360px; width: 520px; height: 400px; box-sizing: border-box; padding: 30px 34px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
-  .a-tn:nth-of-type(1) { left: 120px; } .a-tn:nth-of-type(2) { left: 700px; } .a-tn:nth-of-type(3) { left: 1280px; }
-  .a-tn-n { font: 800 140px/1 var(--fonte-titulo); letter-spacing: -0.03em; color: var(--suave-sobre-noite); }
-  .a-tn-p { margin-top: 18px; font-size: var(--esc-2); line-height: 1.3; text-wrap: pretty; }
-  .a-tn-t { position: absolute; left: 34px; right: 34px; bottom: 40px; height: 22px; border-radius: 11px; background: var(--linha-sobre-noite); }
+  .a-tn { position: absolute; left: 120px; width: 1680px; box-sizing: border-box; padding-top: 22px; border-top: 4px solid var(--linha-sobre-noite); }
+  .a-tn:nth-of-type(1) { top: 350px; height: 150px; } .a-tn:nth-of-type(2) { top: 500px; height: 150px; } .a-tn:nth-of-type(3) { top: 650px; height: 200px; }
+  .a-tn-n { position: absolute; left: 0; top: 14px; font: 800 96px/1 var(--fonte-titulo); letter-spacing: -0.03em; color: var(--suave-sobre-noite); }
+  .a-tn-p { position: absolute; left: 190px; top: 24px; width: 950px; font-size: 42px; line-height: 1.3; text-wrap: pretty; }
+  .a-tn-v { position: absolute; left: 1210px; top: 28px; width: 470px; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); text-transform: uppercase; letter-spacing: .06em; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .a-tn-t { position: absolute; left: 1210px; top: 84px; width: 470px; height: 22px; border-radius: 11px; background: var(--linha-sobre-noite); }
   .a-tn-b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 11px; background: color-mix(in srgb, var(--sobre-noite) 50%, var(--noite)); transform-origin: 0 50%; }
   .a-tn:nth-of-type(3) .a-tn-b { background: var(--cor-destaque); }
-  .a-tn-fim { position: absolute; left: 120px; top: 812px; font: 800 52px/1.2 var(--fonte-titulo); text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; }
+  .a-tn:nth-of-type(3) .a-tn-v { color: var(--sinal-noite); }
+  .a-tn-fim { position: absolute; left: 120px; top: 872px; font-size: var(--esc-2); line-height: 1.3; color: var(--sobre-noite); white-space: nowrap; }
 
   /* personas (cena própria): a pergunta em cima, um papel por coluna */
   .a-pg { position: absolute; left: 120px; top: 300px; font: italic 400 var(--esc-3)/1.2 var(--fonte-texto); white-space: nowrap; }
@@ -453,25 +464,26 @@
 
   <!-- ===== Bloco A: pedir bem (slides 1 a 16). Exemplos da apresentação de engenharia de prompt do professor
        (17/03/2026), com as palavras dele, encurtados só para caber. ===== -->
-  <section data-slide="capa" data-arquetipo="abertura" class="noite">
-    <div class="heroi-caixa"><img class="heroi" src="midia/heroi-aula2.webp" alt=""><div class="veu"></div></div>
-    <p class="rotulo">Curso de IA · Aula 2</p>
-    <div class="display ab-linha">Do chat à</div>
-    <div class="display ab-linha sinal">pasta</div>
-    <p class="ab-sub">Como pedir bem e trabalhar nos documentos do caso.</p>
-    <p class="selo-ia">imagem gerada por IA</p>
+  <section data-slide="capa">
+    <div class="a-logo-cj" role="img" aria-label="co.juris"></div>
+    <i class="a-cp-fio"></i>
+    <div class="a-cp-txt">
+      <p class="rotulo">Curso de IA · Aula 2</p>
+      <h1 class="display a-cp-tit"><span>Do chat</span><span>à pasta</span></h1>
+      <p class="a-cp-sub">Como pedir bem e trabalhar nos documentos do caso.</p>
+    </div>
   </section>
 
   <section data-slide="mapa" data-arquetipo="tempo">
     <p class="rotulo">Roteiro</p>
     <h2 class="manchete">A tarde em seis etapas</h2>
     <ol class="etapas">
-      <li class="agora"><b>25 min</b>pedir bem</li>
-      <li><b>22 min</b>duas escolhas</li>
-      <li><b>8 min</b>skills</li>
-      <li><b>16 min</b>na pasta</li>
-      <li><b>15 min</b>mão na massa</li>
-      <li><b>4 min</b>fecho</li>
+      <li class="agora"><b>1</b>pedir bem</li>
+      <li><b>2</b>duas escolhas</li>
+      <li><b>3</b>skills</li>
+      <li><b>4</b>na pasta</li>
+      <li><b>5</b>mão na massa</li>
+      <li><b>6</b>fecho</li>
     </ol>
     <p class="tempo-leg">Cada etapa termina numa tarefa sua.</p>
   </section>
@@ -479,12 +491,12 @@
   <!-- tentativas (cena própria, noite, um clique por tentativa): a barra da distância encolhe a cada pedido -->
   <section data-slide="tentativas" class="noite">
     <p class="rotulo">Pedir bem</p>
-    <h2 class="manchete">Na terceira tentativa chega perto</h2>
+    <h2 class="manchete">Você reescreve até chegar lá</h2>
     <p class="etiqueta a-tn-et">distância do que você queria</p>
-    <div class="a-tn" data-v="92"><p class="a-tn-n">1ª</p><p class="a-tn-p">“Resume esse parecer.”</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
-    <div class="a-tn" data-v="58"><p class="a-tn-n">2ª</p><p class="a-tn-p">“Resume em 10 linhas.”</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
-    <div class="a-tn" data-v="18"><p class="a-tn-n">3ª</p><p class="a-tn-p">“Resume só o que muda o prazo.”</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
-    <p class="a-tn-fim">O problema não é a IA. É o pedido.</p>
+    <div class="a-tn" data-v="92"><p class="a-tn-n">1</p><p class="a-tn-p">“Resume esse parecer.”</p><p class="a-tn-v">longo e genérico</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
+    <div class="a-tn" data-v="58"><p class="a-tn-n">2</p><p class="a-tn-p">“Resume em 10 linhas.”</p><p class="a-tn-v">curto, sem foco</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
+    <div class="a-tn" data-v="18"><p class="a-tn-n">3</p><p class="a-tn-p">“Resuma o parecer em 10 linhas para o procurador-chefe, só com o que muda o prazo. Se não houver, diga.”</p><p class="a-tn-v">o que você queria</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
+    <p class="a-tn-fim">A terceira diz o objetivo, para quem e o que fazer se faltar.</p>
   </section>
 
   <section data-slide="colega" data-arquetipo="comparacao">
@@ -525,7 +537,7 @@
     <h2 class="manchete">Contexto: o que a IA precisa saber</h2>
     <div class="a-err"><p>“Me ajuda a redigir um parecer.”</p></div>
     <div class="a-cer"><p>“<mark class="a-mk">Sou procurador do Estado</mark>. Preciso de parecer sobre a legalidade de convênio entre o Estado de MS e um município, <mark class="a-mk">repasse de R$ 2 milhões</mark>, à luz da Lei 14.133/2021 e da LC 101/2000.”</p></div>
-    <p class="a-extra">O essencial vai no começo ou no fim.</p>
+    <p class="a-extra">O que você anexa também é prompt. O essencial vai no começo ou no fim.</p>
   </section>
 
   <section data-slide="persona" class="a-par noite">
@@ -1245,10 +1257,10 @@ SLIDES.push(
    notas: {diga: 'São seis etapas. Pedir bem, que é onde estamos. Duas escolhas: Projeto e pasta. Skills. O trabalho na pasta, com uma demonstração. Mão na massa, no caso fictício. E o fecho. Cada etapa termina numa tarefa de vocês.',
      faca: ['mostrar a linha embaixo da tela: ela marca a etapa em que estamos'],
      transicao: 'Começo por uma cena que todo mundo conhece.'}},
-  {id: 'tentativas', titulo: 'Na terceira tentativa chega perto', passos: [1.7, 1.3, 2.1],
-   notas: {diga: 'Você pede para a IA resumir um parecer. Vem genérico, longo, sem os pontos que importam. Você reformula: dez linhas. Melhora, mas ainda não é o que você queria. Na terceira tentativa, quando diz o que importa, chega perto. Isso acontece com todo mundo. O problema não é a IA. É o pedido.',
-     faca: ['um clique por tentativa, três no total', 'perguntar: quem aqui já passou por isso? Esperar as mãos'],
-     transicao: 'Hoje a gente resolve isso. E resolve com uma ideia simples.'}},
+  {id: 'tentativas', titulo: 'Você reescreve até chegar lá', passos: [1.7, 1.3, 2.1],
+   notas: {diga: 'Você pede para a IA resumir um parecer. Vem genérico e longo. Você reformula: dez linhas. Fica curto, mas sem foco. Na terceira, você diz para quem é, o que importa e o que fazer se não houver. Aí chega. Isso acontece com todo mundo: o primeiro pedido costuma ser o mais fraco. Reparem no que a terceira tem e as outras não: o objetivo, para quem, e uma regra para quando faltar informação.',
+     faca: ['um clique por tentativa, três no total', 'perguntar: quem aqui já reescreveu um pedido três vezes? Esperar as mãos'],
+     transicao: 'Hoje a gente chega na terceira de primeira. E resolve com uma ideia simples.'}},
   {id: 'colega', titulo: 'Prompt é briefing para colega novo',
    notas: {diga: 'Prompt é o pedido que vocês escrevem. Pensem nele como o briefing para um colega competente que acabou de chegar e não conhece o caso. Se esse colega responderia “mas o que exatamente você quer?”, o pedido precisa de mais contexto. Circulam dicas de dizer “por favor” ou oferecer gorjeta. Não funcionam: o modelo processa texto, não sentimento. Gastem os tokens com informação útil.',
      faca: ['ler o pedido vago e perguntar à sala o que o colega novo perguntaria de volta'],
@@ -1262,8 +1274,8 @@ SLIDES.push(
      faca: ['primeiro clique: o pedido vago', 'pausa de 10 a 15 segundos: “o que vocês mudariam?”', 'segundo clique: o pedido bom; apontar as duas marcas'],
      transicao: 'Segundo elemento: o que a IA precisa saber.'}},
   {id: 'contexto', titulo: 'Contexto: o que a IA precisa saber', passos: [1.5, 2.9],
-   notas: {diga: 'O modelo não sabe nada sobre você. Sem contexto, ele dá a resposta mais provável, que não é a mais útil para você. É a diferença entre pedir “me ajuda com um problema” e explicar a situação inteira: quem você é, o convênio, o valor, as leis. E uma dica: o que é mais importante vai no começo ou no fim do pedido, porque os modelos aproveitam menos o que fica no meio.',
-     faca: ['primeiro clique: o pedido sem contexto', 'segundo clique: o pedido com contexto e a dica embaixo'],
+   notas: {diga: 'O modelo não sabe nada sobre você. Sem contexto, ele dá a resposta mais provável, que não é a mais útil para você. É a diferença entre pedir “me ajuda com um problema” e explicar a situação inteira: quem você é, o convênio, o valor, as leis. Normalmente o contexto vem de documentos que vocês anexam: o parecer, o contrato, a planilha. E atenção: para a IA, o anexo também faz parte do prompt. Ele não fica ao lado do pedido, entra no mesmo espaço que ela lê, aquela mesa da primeira aula. O que vocês anexam pesa tanto quanto o que escrevem. E uma dica: o que é mais importante vai no começo ou no fim, porque os modelos aproveitam menos o que fica no meio.',
+     faca: ['primeiro clique: o pedido sem contexto', 'segundo clique: o pedido com contexto e, embaixo, a frase sobre anexos e a dica'],
      transicao: 'Terceiro: quem a IA deve ser.'}},
   {id: 'persona', titulo: 'Persona: quem a IA deve ser', passos: [1.5, 2.2],
    notas: {diga: 'A persona é o papel que vocês dão à IA. Ela orienta o vocabulário, a profundidade e o estilo. Um professor simplifica; um consultor sênior aprofunda. Aqui, o professor de direito financeiro fala para servidores que não são da área. Por isso pedimos sem jargão.',
@@ -1618,6 +1630,25 @@ CENAS.pratica1 = (() => {
     ps.forEach((el, n) => surgir(el, molaAR(x - 0.2 - n * 0.25), {dx: -22, dy: 0}));
     revelar(et, molaAR(x - 0.9));
     ck.forEach((el, n) => surgir(el, molaAR(x - 1.0 - n * 0.08), {dx: 18, dy: 0}));
+  };
+})();
+
+// Capa (fundo claro, como a da Aula 1): o logo sobe, o fio se traça de cima para baixo e o texto entra linha a linha.
+CENAS.capa = (() => {
+  const sec = m.secao('capa'), logo = sec.querySelector('.a-logo-cj'), fio = sec.querySelector('.a-cp-fio');
+  const linhas = [sec.querySelector('.rotulo'), ...$$(sec, '.a-cp-tit > span'), sec.querySelector('.a-cp-sub')];
+  let pronto = false;
+  return (t, c) => {
+    if (!pronto) {
+      pronto = true;
+      const tit = sec.querySelector('.a-cp-tit'), largura = Math.max(...$$(sec, '.a-cp-tit > span').map((el) => el.offsetWidth));
+      if (largura > 1000) tit.style.fontSize = `${Math.floor(124 * 1000 / largura)}px`;
+    }
+    const x = c.desde(0);
+    surgir(logo, molaAR(x - 0.15, {resposta: 0.7, amortecimento: 0.9}), {dy: 24});
+    fio.style.transform = `scaleY(${saida(faixa(x, 0.55, 1.1)).toFixed(4)})`;
+    linhas.forEach((el, n) => revelar(el, molaAR(x - 0.8 - n * 0.16)));
+    fim(sec, x, 1.6);
   };
 })();
 
