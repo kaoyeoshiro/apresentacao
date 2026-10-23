@@ -133,3 +133,11 @@ Pedido do professor, feito na versão 6 de `decks/curso-ia-aula1/deck.html` (62 
 Para o professor decidir no ensaio: a manchete pedida virou "Os de ponta passam de 1 trilhão de pesos" para caber numa
 linha; o Muse Spark Open (816 bilhões) fica abaixo do marco de 1 trilhão, como os números mostram;
 os 3 minutos da prática 5 foram para o bloco 5 e podem ir para outra parte, se ele preferir.
+
+## Pendência de motor (23/10/2026)
+
+- O teste de determinismo do `./ap sondar` falha por um pixel na barra de progresso da linha do dia conforme a
+  divisão de minutos dos blocos (ex.: 16/30/14/17/10). Contornado na Aula 1 com 16/30/14/17/13. Corrigir em
+  `motor/palco.js` (arredondar o `scaleX` da barra ou o `faixa` do bloco) e cobrir com teste.
+- `palco.js` avança o slide em qualquer clique, inclusive em link; a Aula 1 contorna nos próprios links. Corrigir no
+  motor ignorando cliques em `<a>`.
