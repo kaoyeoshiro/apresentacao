@@ -250,3 +250,31 @@ CENAS.codigo = cartoes('codigo');
     });
   };
 }
+
+// Vários: os sete agentes entram em onda (primeiro clique); no segundo, as linhas se traçam até o integrador, que acende.
+{
+  const sec = m.secao('varios'), et = sec.querySelector('.b-v-et'), cs = $$(sec, '.b-vc'), camada = sec.querySelector('.b-vlinhas');
+  const integ = sec.querySelector('.b-vint'), rod = sec.querySelector(':scope > .rodape');
+  const linhas = cs.map((_, i) => traco(camada, `M${258 + 234 * i} 540 L${700 + 87 * i} 735`));
+  CENAS.varios = (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    revelar(et, molaAR(x - 0.1));
+    cs.forEach((el, n) => surgir(el, molaAR(x - 0.35 - n * 0.14), {dy: 24}));
+    linhas.forEach((p, n) => tracar(p, saida(faixa(y, 0.05 + n * 0.05, 0.5 + n * 0.05))));
+    surgir(integ, molaAR(y - 0.6), {dy: 0, escala: 0.2});
+    vis(integ, y > 0.55);
+    revelar(rod, molaAR(y - 1.1));
+  };
+}
+
+// Quem despacha: uma linha por vez, em onda.
+{
+  const sec = m.secao('varios2'), ps = $$(sec, '.b-sa p'), rod = sec.querySelector(':scope > .rodape');
+  CENAS.varios2 = (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    ps.forEach((p, n) => revelar(p, molaAR(x - 0.2 - Math.floor(n / 2) * 0.35 - (n % 2) * 0.08)));
+    revelar(rod, molaAR(x - 1.2));
+  };
+}
