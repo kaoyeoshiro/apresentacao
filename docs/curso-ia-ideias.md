@@ -3,8 +3,8 @@
 Lista viva do que o professor pediu para entrar depois do dia 1. Cada item diz onde deve entrar e o que falta
 apurar; ao virar slide, sai daqui e passa para o `briefing.md` do deck.
 
-Revisão do briefing da Aula 2 em 23/10/2026: o harness do quatilex e os assistentes pessoais ficam no dia 2. Se o
-professor puxar o harness para a Aula 2, ele entra depois de "o que é agente" e a demonstração encurta.
+Revisão do briefing da Aula 2 em 23/10/2026: o harness do quatilex e os assistentes pessoais ficam no dia 2. Plugin e MCP
+aparecem na Aula 2 em um slide só (`liga`); a prática fica para o dia 2.
 
 ## Dia 2 (temas já previstos desde 22/10/2026)
 

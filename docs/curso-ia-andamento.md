@@ -10,11 +10,13 @@ Dia 1 de um curso pago de IA (turma mista: advogados, uma desembargadora, servid
 pago). Duas aulas de ~90 min na mesma tarde, tema `cojuris`, plano contínuo. Siga a skill
 `.claude/skills/apresentacao/SKILL.md`.
 
-- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 63 slides da versão 4, `apuracao.md` e
+- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 61 slides da versão 7, `apuracao.md` e
   `apuracao-2.md`).
-- Aula 2, "Do chat à pasta": deck de 19 slides em `decks/curso-ia-aula2/deck.html`, na branch
-  `cursor/briefing-aula2` (worktree `.claude/worktrees/briefing-aula2`), montado em 23/10/2026. Sem sigilo. O vídeo
-  de reserva ainda é o marcador da prévia; a gravação do Codex e o link do material entram no ensaio.
+- Aula 2, "Do chat à pasta": `decks/curso-ia-aula2/` refeita em 23/10/2026 (51 slides, 90 minutos). O `deck.html` é
+  gerado por `decks/curso-ia-aula2/montar.py` a partir de `fonte/` (um arquivo por bloco; leia `fonte/LEIA-ME.md`);
+  o roteiro, o caso fictício e os fatos sobre as ferramentas estão no `briefing.md`; o material do aluno (contrato,
+  aditivo, notificação em PDF e zip) sai de `material/gerar.py`. A demonstração é uma simulação por código; a gravação
+  real e a do Codex dependem do professor.
 
 ## Decisões do professor que valem
 
@@ -55,54 +57,7 @@ durante a viagem ou descer os nomes para y ≥ 1015.
 
 ## Próximo passo
 
-1. Ensaio do professor com `./ap abrir decks/curso-ia-aula1` (tela do apresentador com P); pedidos voltam ao passo 5
-   da skill.
-2. Aula 2 está montada em `decks/curso-ia-aula2` (19 slides, sem sigilo). Ensaio com `./ap abrir decks/curso-ia-aula2`.
-3. Antes de juntar ao `main`: bateria completa (`./ap teste`), autorrevisão por subagente e o "posso juntar?".
-
-## Decisão de 22/10/2026: ranking da arena na Aula 1
-
-O professor mandou captura da página inicial da arena.ai, quadro "Top 10 Agents · Best Overall" (367.936.358 sessões
-no total), e pediu para usar esse ranking geral, em que o Claude lidera:
-
-| # | modelo | valor mostrado |
-|---|---|---|
-| 1 | Claude Opus 5.5 (Max) | 20,92% |
-| 2 | GPT-6 Astra (Max) | 14,70% |
-| 3 | Claude Fable 5.1 (Max) | 14,17% |
-| 4 | GPT-6.1 Sol (Max) | 13,55% |
-| 5 | Claude Sonnet 5.5 (Max) | 12,67% |
-| 6 | Gemini 4 Argon (High) | 12,03% |
-| 7 | Muse Wonder Full (Max) | 11,26% |
-| 8 | GPT-6 Sol (Max) | 9,36% |
-| 9 | Claude Fable 5 (High) | 8,31% |
-| 10 | Claude Opus 5 (Max) | 8,09% |
-
-Fonte: arena.ai, página inicial, captura do professor de 22/10/2026. Antes de pôr o percentual na tela, abrir a
-página e ler o que ele significa (a captura não diz); se não houver explicação, mostrar só a ordem e escrever na tela
-"ranking de agentes, arena.ai, 22/10/2026". É um ranking de agentes (tarefas reais), diferente da Text Arena de
-conversa, em que o Gemini 4 Argon lidera; o slide deve dizer qual quadro é.
-
-## Pedidos do ensaio da versão 4 (23/10/2026)
-
-Versão 4 da Aula 1: commit `37a7245` mais a correção do motor `effee7c` (linha do dia some na viagem). Ajustes pedidos
-pelo professor, em execução por um subagente quando esta nota foi escrita (versão 5); se o commit da versão 5 não
-estiver no branch, refazer a partir daqui, pela numeração da folha `decks/curso-ia-aula1/storyboard/folha.png` da v4:
-
-1. Slide 16 (ramos simbólica/máquina/profundo/transformers): virar linha do tempo com períodos e marcos até os LLMs
-   (Dartmouth 1956, sistemas especialistas, aprendizado de máquina, AlexNet 2012, transformers 2017, GPT-3 2020,
-   ChatGPT 30/11/2022), cada data com fonte.
-2. Slides 25 e 26 (conta da matriz): difíceis; trocar por um neurônio com três entradas, três pesos e a soma, com
-   analogia do cotidiano (nota ponderada), sem tabela.
-3. Slide 33: sem folha impressa; QR vira link clicável (o professor testa ao vivo). Idem nas outras práticas.
-4. Slides 57 e 59 (Artificial Analysis geral e jurídico): escala aproximada, não 0 a 100, com o início do eixo escrito,
-   para a vantagem do Claude aparecer.
-5. Slide 61: acrescentar a Text Arena, em que o Gemini 4 Argon lidera (captura do professor de arena.ai/leaderboard/text,
-   22/10/2026, 8.946.356 votos, 418 modelos: Gemini 4 Argon 1517 ±7 preliminar; Claude Opus 5.5 1509 ±7; Muse Wonder
-   1509 ±8; Claude Fable 5 1503 ±4; Claude Fable 5.1 1503 ±6). Agentes: Claude lidera; conversa: Gemini.
-6. Slide 63 (duelo do prazo em dobro): a plateia sabe de cor. Trocar por duelo de preferência (explicar precatório a um
-   leigo), com respostas reais do Claude Opus 5.5 e do Claude Haiku 5.5, sem nome, e revelação no slide seguinte.
-7. Capa mais simples, com o logo da co.juris (`temas/cojuris/marca/`, só sobre fundo claro), abrindo sozinha.
-8. Slide de encerramento com o logo da co.juris.
-
-Depois da versão 5 da Aula 1: novo ensaio. A Aula 2 já tem briefing sem o fio da data (23/10/2026); o deck espera o sim.
+1. Ensaio da versão 5 com `./ap abrir decks/curso-ia-aula1` (tela do apresentador com P); conferir os links com
+   internet; pedidos voltam ao passo 5 da skill.
+2. Ensaio da Aula 2 com `./ap abrir decks/curso-ia-aula2` (tela do apresentador com P); gravar o mesmo pedido no Codex e
+   mandar o link do material no WhatsApp.

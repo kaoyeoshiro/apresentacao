@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Curso de IA da co.juris, dia 1, Aula 1: "O que é IA e qual usar" (versão 7, cerca de 90 minutos). Plano contínuo de
-     61 slides, montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md), com abertura automática, linha do
+     63 slides, montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md), com abertura automática, linha do
      dia em cinco blocos e guia do apresentador em todos os slides (docs/palco.md, Blocos da aula). Capa e encerramento
      claros, com o logo oficial do tema. Blocos: o que é IA (capa a previsao, com a linha do tempo da IA), como funciona
      (funciona a passos, com os pesos como botões de ajuste e o tamanho dos modelos de ponta, os tokens, a mesa e a memória), onde tropeça (linguagem a pior), qual a melhor
@@ -164,6 +164,43 @@
   [data-slide^="pratica"] .pedido { top: 380px; }
   [data-slide^="pratica"] .passos-p { top: 346px; }
   [data-slide="pratica4"] .entrada { height: 290px; }
+
+  /* parametros e reforco (cenas próprias): o diagrama dos pesos como botões de ajuste, com texto real, palpite e nota */
+  .ap-et { position: absolute; margin: 0; font: 700 30px/1.2 var(--fonte-titulo); letter-spacing: .06em; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .ap-centro { text-align: center; }
+  .ap-pal { position: absolute; left: 120px; top: 410px; display: flex; gap: 14px; }
+  .ap-w { position: relative; padding: 14px 30px; border: 4px solid var(--cor-linha); border-radius: 18px; background: var(--cor-papel); font: 700 var(--esc-2)/1.2 var(--fonte-titulo); color: var(--cor-tinta); }
+  .ap-a { font-style: normal; }
+  .ap-m { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-style: normal; color: var(--cor-destaque-texto); }
+  .ap-caixa { position: absolute; left: 760px; top: 540px; width: 400px; height: 240px; box-sizing: border-box; border: 5px solid var(--cor-tinta); border-radius: 24px; background: var(--cor-papel); }
+  .ap-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .ap-svg circle { fill: none; stroke: var(--cor-tinta); stroke-width: 5; }
+  .ap-svg .ap-ponteiro { stroke: var(--cor-tinta); stroke-width: 8; stroke-linecap: round; fill: none; }
+  .ap-svg .ap-seta { stroke: var(--cor-tinta-suave); stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .ap-svg .ap-volta-tr { stroke: var(--cor-destaque); stroke-width: 6; fill: none; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; }
+  .ap-ch { position: absolute; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 4px solid var(--cor-linha); border-radius: 18px; background: var(--cor-papel); font: 700 52px/1.1 var(--fonte-titulo); color: var(--cor-tinta); }
+  .ap-resp { position: absolute; display: block; padding: 22px 120px 0 32px; text-align: left; }
+  .ap-resp b { display: block; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); }
+  .ap-resp span { display: block; font: 400 36px/1.3 var(--fonte-texto); color: var(--cor-tinta-suave); }
+  .ap-nota { position: absolute; right: 32px; top: 50%; margin-top: -40px; font: 800 80px/80px var(--fonte-titulo); font-style: normal; font-variant-numeric: lining-nums; }
+  .ap-erro { position: absolute; margin: 0; font: 700 40px/1.2 var(--fonte-titulo); color: var(--cor-destaque-texto); white-space: nowrap; }
+  .ap-volta { position: absolute; margin: 0; transform: translateX(-50%); font: 400 40px/1.2 var(--fonte-texto); color: var(--cor-destaque-texto); white-space: nowrap; }
+
+  /* embedding (cena própria): token, lista de números e o mapa em que dois "banco" caem longe um do outro */
+  .em-tok { left: 120px; top: 400px; width: 330px; height: 120px; font-size: 64px; }
+  .em-seta { position: absolute; left: 470px; top: 410px; margin: 0; font: 400 80px/100px var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .em-vet { position: absolute; left: 600px; top: 400px; display: flex; gap: 10px; }
+  .em-vet span { box-sizing: border-box; width: 125px; height: 120px; display: flex; align-items: center; justify-content: center; border: 4px solid var(--cor-linha); border-radius: 14px; background: var(--cor-papel); font: 700 38px/1 var(--fonte-titulo); font-variant-numeric: lining-nums tabular-nums; color: var(--cor-tinta); }
+  .em-vet span.em-mais { width: 70px; border: none; background: none; color: var(--cor-tinta-suave); }
+  .em-leg { position: absolute; left: 120px; top: 600px; margin: 0; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .em-fr { position: absolute; left: 120px; margin: 0; width: 820px; font: 400 var(--esc-2)/1.3 var(--fonte-texto); color: var(--cor-tinta); }
+  .em-fr mark { background: none; color: inherit; font-weight: 700; text-decoration: underline 5px var(--cor-destaque); text-underline-offset: 8px; }
+  .em-mt { left: 1000px; top: 292px; }
+  .em-mapa { position: absolute; left: 1000px; top: 340px; width: 800px; height: 520px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); }
+  .em-pt { position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%; background: var(--cor-tinta-suave); }
+  .em-pt.ouro { width: 40px; height: 40px; margin: -20px 0 0 -20px; background: var(--cor-destaque); }
+  .em-pl { position: absolute; transform: translate(22px, -50%); font: 400 34px/1 var(--fonte-texto); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .em-pg { position: absolute; transform: translate(-50%, -50%); font: 700 40px/1 var(--fonte-titulo); color: var(--cor-destaque-texto); white-space: nowrap; }
 
   /* comparação: a palavra de cada coluna maior que o texto dela, no tamanho que cabe em 768 px */
   .janela .letra.g { font-size: var(--esc-5); top: 0; }
@@ -411,15 +448,39 @@
     <p class="rodape">Fichas oficiais, lidas em 23/10/2026.</p>
   </section>
 
-  <section data-slide="parametros" data-arquetipo="comparacao">
+  <!-- parametros (cena própria, quatro cliques): o pré-treino, em que a última palavra de um texto real é escondida e
+       adivinhada; os pesos giram depois do erro. Desenho aprovado pelo professor em 23/10/2026. -->
+  <section data-slide="parametros">
     <p class="rotulo">Como funciona</p>
     <h2 class="manchete">O treino ajusta os pesos</h2>
-    <p class="linha-top" data-entra="0.1">Pesos, ou parâmetros: números ajustados no treino, não textos salvos.</p>
-    <div class="janela"><p class="display letra g">Treino</p><p class="etiqueta">antes</p>
-      <p class="janela-txt">Compara a previsão com o texto real e corrige os pesos.</p></div>
-    <div class="fio-v"></div>
-    <div class="janela"><p class="display letra g">Uso</p><p class="etiqueta">agora</p>
-      <p class="janela-txt">Sua mensagem passa pelos pesos e vira a resposta.</p></div>
+    <p class="linha-top">Pesos, ou parâmetros: números ajustados no treino, não textos salvos.</p>
+    <p class="ap-et" style="left: 120px; top: 366px">Texto real, inteiro</p>
+    <div class="ap-pal"><span class="ap-w">O</span><span class="ap-w">céu</span><span class="ap-w">é</span><span class="ap-w ap-alvo"><i class="ap-a">azul</i><i class="ap-m">?</i></span></div>
+    <p class="ap-et ap-centro" style="left: 760px; top: 496px; width: 400px">Os pesos</p>
+    <div class="ap-caixa"></div>
+    <svg class="ap-svg" viewBox="0 0 1920 1080"></svg>
+    <p class="ap-et ap-veso" style="left: 330px; top: 560px">O modelo vê só isto</p>
+    <p class="ap-et ap-palp" style="left: 1360px; top: 556px">Palpite da palavra</p>
+    <div class="ap-ch ap-sai" style="left: 1360px; top: 600px; width: 440px; height: 100px">verde</div>
+    <p class="ap-erro" style="left: 1360px; top: 716px">errou</p>
+    <p class="ap-volta" style="left: 960px; top: 826px">corrige os botões</p>
+    <p class="rodape">No uso, os botões ficam parados: sua mensagem passa por eles e vira a resposta.</p>
+  </section>
+
+  <!-- reforco (cena própria, três cliques): depois do pré-treino, o modelo escreve duas respostas, recebe notas e os
+       pesos giram a favor da de nota alta -->
+  <section data-slide="reforco">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Depois, o reforço: notas, não gabarito</h2>
+    <p class="linha-top">Aqui não há texto certo para copiar; há uma nota para cada resposta.</p>
+    <p class="ap-et ap-centro" style="left: 760px; top: 496px; width: 400px">Os pesos</p>
+    <div class="ap-caixa"></div>
+    <svg class="ap-svg" viewBox="0 0 1920 1080"></svg>
+    <div class="ap-ch ap-perg" style="left: 120px; top: 600px; width: 440px; height: 100px">Uma pergunta</div>
+    <div class="ap-ch ap-resp ap-ra" style="left: 1330px; top: 440px; width: 470px; height: 130px"><b>Resposta A</b><span>clara e correta</span><em class="ap-nota">9</em></div>
+    <div class="ap-ch ap-resp ap-rb" style="left: 1330px; top: 640px; width: 470px; height: 130px"><b>Resposta B</b><span>confusa</span><em class="ap-nota">2</em></div>
+    <p class="ap-volta" style="left: 960px; top: 826px">favorece respostas como a A</p>
+    <p class="rodape">A nota vem de pessoas que comparam respostas ou de uma conferência automática.</p>
   </section>
 
   <section data-slide="calcula" data-arquetipo="respiro" class="noite">
@@ -457,6 +518,36 @@
       <li data-entra="0.8"><b>2</b><span>Conte os blocos coloridos.</span></li>
     </ol>
     <a class="link-p" data-entra="0.9" href="https://platform.openai.com/tokenizer" target="_blank" rel="noopener">platform.openai.com/tokenizer</a>
+  </section>
+
+  <!-- embedding (cena própria, dois cliques): cada token vira uma lista de números (valores ilustrativos, pedido do professor em
+       23/10/2026); no segundo clique, "banco" de sentar e "banco" do dinheiro caem em lugares diferentes do mapa -->
+  <section data-slide="embedding">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Cada token vira uma lista de números</h2>
+    <div class="em-a">
+      <div class="ap-ch em-tok">banco</div>
+      <p class="em-seta">→</p>
+      <div class="em-vet"><span>0,21</span><span>−0,87</span><span>0,05</span><span>0,63</span><span>0,34</span><span>−0,12</span><span>0,78</span><span>−0,45</span><span class="em-mais">…</span></div>
+      <p class="em-leg">Ponto de partida: o mesmo vetor para "banco" em qualquer frase.</p>
+    </div>
+    <div class="em-b">
+      <p class="em-fr" style="top: 400px">Sentei no <mark>banco</mark> da praça.</p>
+      <p class="em-fr" style="top: 580px">Abri conta no <mark>banco</mark>.</p>
+      <p class="em-fr" style="top: 740px; font-size: 36px; color: var(--cor-tinta-suave)">A atenção lê a frase toda e ajusta o vetor de cada token.</p>
+      <p class="ap-et em-mt">Depois das camadas de atenção</p>
+      <div class="em-mapa">
+        <i class="em-pt" style="left: 120px; top: 80px"></i><span class="em-pl" style="left: 120px; top: 80px">cadeira</span>
+        <i class="em-pt" style="left: 330px; top: 160px"></i><span class="em-pl" style="left: 330px; top: 160px">praça</span>
+        <i class="em-pt" style="left: 110px; top: 280px"></i><span class="em-pl" style="left: 110px; top: 280px">sentar</span>
+        <i class="em-pt" style="left: 430px; top: 260px"></i><span class="em-pl" style="left: 430px; top: 260px">juros</span>
+        <i class="em-pt" style="left: 660px; top: 440px"></i><span class="em-pl" style="left: 660px; top: 440px">conta</span>
+        <i class="em-pt" style="left: 430px; top: 440px"></i><span class="em-pl" style="left: 430px; top: 440px">dinheiro</span>
+        <i class="em-pt ouro" style="left: 200px; top: 175px"></i><span class="em-pg" style="left: 200px; top: 117px">banco</span>
+        <i class="em-pt ouro" style="left: 560px; top: 390px"></i><span class="em-pg" style="left: 560px; top: 332px">banco</span>
+      </div>
+    </div>
+    <p class="rodape">Valores ilustrativos; na prática são milhares de números por token.</p>
   </section>
 
   <section data-slide="previsto" data-arquetipo="escolha">
@@ -1018,9 +1109,16 @@ const slides = [
        'Mistral Large 4 em prévia desde 06/10/2026, com pesos prometidos para o fim do mês; Kimi K3 e os outros: fichas no Hugging Face',
        'nos três de cima só uma parte dos pesos trabalha em cada palavra (ativos): 104 bi, 95 bi, 52 bi e 42 bi; só se perguntarem'],
      transicao: 'E como o treino sabe para que lado girar?'}},
-  {id: 'parametros', titulo: 'O treino ajusta os pesos',
-   notas: {diga: 'No começo do treino os pesos são aleatórios. O treino compara a previsão com o texto real e corrige cada peso um pouco, repetidas vezes, até a previsão melhorar. No uso, a mensagem de vocês passa por esses pesos e vira resposta; o texto do treino não fica guardado como arquivo.',
-     faca: [], transicao: 'Daí vem a consequência mais importante.'}},
+  {id: 'parametros', titulo: 'O treino ajusta os pesos', passos: [2.4, 2.0, 1.8, 2.6],
+   notas: {diga: 'Antes de conversar com alguém, o modelo faz um exercício simples, bilhões de vezes. Pega um texto real inteiro, como "o céu é azul", esconde o que vem depois e tenta adivinhar. No começo os pesos estão quase aleatórios e ele chuta "verde". Aí o treino revela a palavra certa, vê que errou e gira cada botão um pouquinho, para errar menos na próxima. É o mesmo exercício com trilhões de palavras. No uso, os botões ficam parados: a mensagem de vocês passa por eles e vira resposta, e o texto do treino não fica guardado como arquivo.',
+     faca: ['primeiro clique: o texto inteiro e os botões', 'segundo: a palavra "azul" é escondida e o modelo chuta "verde"', 'terceiro: a palavra é revelada, o modelo errou', 'quarto: os botões giram e ele acerta; ler a frase do rodapé sobre o uso',
+       'o exemplo é só para explicar; o "verde" é inventado', 'modelos de conversa escondem a próxima palavra; o "mascarado" no meio da frase é de outra família (BERT), só se perguntarem'],
+     transicao: 'Só esse exercício não ensina a conversar. Falta a segunda fase.'}},
+  {id: 'reforco', titulo: 'Depois, o reforço: notas, não gabarito', passos: [2.4, 1.8, 2.0, 2.6],
+   notas: {diga: 'Depois do pré-treino, o modelo sabe prever texto, mas ainda não conversa bem. Na fase seguinte ele recebe uma pergunta e escreve duas respostas. Alguém dá nota: pessoas que comparam as respostas, ou uma conferência automática, como a conta que bateu ou o código que rodou. Aqui não há texto certo para copiar, só a nota. Os botões giram para as respostas de nota alta ficarem mais prováveis e as de nota baixa, menos. É essa fase que ensina o modelo a seguir instruções, conversar e recusar certos pedidos.',
+     faca: ['primeiro clique: a pergunta e os botões', 'segundo: as duas respostas', 'terceiro: as notas; 9 e 2 são inventadas', 'quarto: os botões giram a favor da A',
+       'nome técnico, só se perguntarem: aprendizado por reforço (com feedback humano, RLHF)'],
+     transicao: 'Daí vem a consequência mais importante.'}},
   {id: 'calcula', titulo: 'Sem busca, ela calcula; não consulta',
    notas: {diga: 'Sozinho, o modelo não abre um banco de fatos: ele calcula. Quando o app tem a busca ligada, é o app que procura as fontes e entrega ao modelo.',
      faca: ['perguntar quem já viu o app mostrar links de fonte'],
@@ -1035,7 +1133,12 @@ const slides = [
   {id: 'pratica2', titulo: 'Palavras viram blocos na tela', pratica: 4,
    notas: {diga: 'Vou fazer ao vivo: abro o tokenizador da OpenAI, colo só a frase da tela e contamos juntos os blocos coloridos. Quem tiver o celular à mão pode abrir o mesmo endereço. Nunca colem texto de processo.',
      faca: ['clicar no endereço da tela: abre em nova aba', 'colar a frase e contar os blocos com a sala', 'não prometer os mesmos blocos em outro tokenizador'],
-     transicao: 'Com os tokens, a IA faz uma coisa só: prevê o próximo.'}},
+     transicao: 'Cada bloco desses ainda vira outra coisa por dentro: números.'}},
+  {id: 'embedding', titulo: 'Cada token vira uma lista de números', passos: [2.6, 3.4],
+   notas: {diga: 'Dentro do modelo, nenhum token fica como texto: cada um vira uma longa lista de números, o embedding. Na tela, oito números de um exemplo, mas na prática são milhares por token. No começo, a palavra "banco" tem um vetor só, o mesmo em qualquer frase, como numa tabela de consulta. Depois vêm as camadas do transformer, que usam a atenção: cada token olha para os outros da frase e o vetor dele se ajusta. Por isso, ao fim das camadas, o "banco" de "sentei no banco da praça" fica perto de cadeira e sentar, e o "banco" de "abri conta no banco" fica perto de juros e dinheiro. O vetor de partida é um só; o que muda com a frase é o vetor depois da atenção.',
+     faca: ['primeiro clique: o token e o vetor de partida, igual em qualquer frase', 'segundo clique: as duas frases e o mapa depois das camadas de atenção', 'os números e o mapa são ilustrativos, inventados para explicar; o rodapé avisa',
+       'se perguntarem se o banco tem dois embeddings: um de entrada, fixo, e um por frase, depois das camadas de atenção; o mapa tem milhares de dimensões, não duas'],
+     transicao: 'Com os tokens já em números, a IA faz uma coisa só: prevê o próximo.'}},
   {id: 'previsto', titulo: 'A IA prevê um token por vez',
    notas: {diga: 'A IA recebe o texto, calcula as candidatas para o próximo token, cada uma com uma probabilidade, escolhe uma e repete. Aqui cada palavra é um token, para simplificar, e as probabilidades são inventadas para explicar.',
      faca: [], transicao: 'Se é escolha com peso, o mesmo pedido pode mudar. Vamos ver.'}},
@@ -1140,8 +1243,9 @@ const slides = [
      faca: ['dizer que o eixo não começa em zero', 'Text Arena na versão lida pelo professor; a apuração de 22/10 tinha outra leitura (apuracao-2.md, itens 5.2 e 5.5)'],
      transicao: 'A arena tem também um placar de agentes, em tarefas reais.'}},
   {id: 'agentes', titulo: 'Como agente, o Opus 5.5 abre vantagem', passos: [2.6],
-   notas: {diga: 'Este é o placar de agentes da arena.ai, da página inicial em 22/10/2026. O número é quanto cada modelo melhora o resultado de tarefas reais em relação ao modelo médio, em pontos percentuais. Resumo: no quadro de agentes, tarefas reais, o Claude lidera; na conversa, o Gemini; e no topo a margem é pequena.',
-     faca: ['367.936.358 sessões é o total mostrado na página inicial; o placar de agentes mostra 2.731.078 sessões em 20/10/2026'],
+   notas: {diga: 'Agente, por enquanto, é uma IA que usa ferramentas para cumprir uma tarefa; na Aula 2 vemos a diferença entre chat e agente com calma. Este é o placar de agentes da arena.ai, da página inicial em 22/10/2026. O número é quanto cada modelo melhora o resultado de tarefas reais em relação ao modelo médio, em pontos percentuais. Resumo: no quadro de agentes, tarefas reais, o Claude lidera; na conversa, o Gemini; e no topo a margem é pequena.',
+     faca: ['367.936.358 sessões é o total mostrado na página inicial; o placar de agentes mostra 2.731.078 sessões em 20/10/2026',
+       'se perguntarem o que é isso: não é prova fixa, é uso real. Pessoas usam um agente (IA que escolhe ferramentas e executa passos) sem saber qual modelo está por trás; cada sessão cai num modelo sorteado. A nota é a diferença, em pontos percentuais, entre o modelo e a média de todos, em sinais como: o usuário confirmou que deu certo, elogiou ou reclamou, a IA obedeceu às correções, os comandos funcionaram, ela não inventou ferramentas (FAQ da arena.ai, lido em 23/10/2026; a página de metodologia não foi lida)'],
      transicao: 'Resumo das duas formas de medir.'}},
   {id: 'mede', titulo: 'Benchmark mede prova; arena, preferência',
    notas: {diga: 'Benchmark mede prova; arena mede preferência. E preferência não é acerto: a resposta que agrada nem sempre é a mais precisa.',
@@ -1279,6 +1383,165 @@ const ponta = (() => {
     vis(fech, y > 0);
     revelar(rod, molaAR(y - 1.6));
     vis(rod, y > 0);
+    fim(sec, x, 1.4);
+  };
+})();
+
+// Parametros e reforço: o diagrama dos botões. Os cliques acendem as etapas; o ângulo de cada botão é fixo, sem aleatório.
+const diagramaPesos = (id, etapas) => {
+  const sec = m.secao(id), svg = sec.querySelector('.ap-svg');
+  const caixa = sec.querySelector('.ap-caixa'), etCx = sec.querySelector('.ap-centro');
+  const ANTES = [25, -50, 70, -15, 40, -70], DEPOIS = [-30, 35, -40, 30, -25, 20];
+  const cx = [860, 960, 1060], cy = [620, 710];
+  const botoes = ANTES.map((a, i) => {
+    const x0 = cx[i % 3], y0 = cy[Math.floor(i / 3)], g = document.createElementNS(NS, 'g');
+    const ci = document.createElementNS(NS, 'circle');
+    ci.setAttribute('cx', x0); ci.setAttribute('cy', y0); ci.setAttribute('r', 34);
+    g.appendChild(ci);
+    const p = traco(g, `M${x0} ${y0}L${x0} ${y0 - 26}`, 'ap-ponteiro');
+    p.style.transformOrigin = `${x0}px ${y0}px`;
+    svg.appendChild(g);
+    return {g, p};
+  });
+  const seta = (d, pontas, cls) => {
+    const g = document.createElementNS(NS, 'g'), linha = traco(g, d, cls || 'ap-seta');
+    const ponta = traco(g, pontas, cls || 'ap-seta');
+    svg.appendChild(g);
+    return {linha, ponta};
+  };
+  const ponta = (x, y, dir) => (dir === 'dir' ? `M${x - 16} ${y - 14}L${x} ${y}L${x - 16} ${y + 14}` : `M${x - 14} ${y + 16}L${x} ${y}L${x + 14} ${y + 16}`);
+  const api = {sec, botoes, ANTES, DEPOIS, nova: seta, ponta};
+  api.gira = (k) => botoes.forEach(({p}, i) => { p.style.transform = `rotate(${lerp(ANTES[i], DEPOIS[i], k).toFixed(2)}deg)`; });
+  api.entra = (x) => {
+    titulo(sec, x, api.c);
+    surgir(caixa, molaAR(x - 0.1), {dy: 0, escala: 0.04});
+    revelar(etCx, molaAR(x - 0.2));
+    botoes.forEach(({g}, i) => { const k = molaAR(x - 0.3 - i * 0.07); g.style.opacity = String(clamp(k, 0, 1)); vis(g, k > 0); });
+  };
+  api.traca = (s, k) => { tracar(s.linha, k); vis(s.ponta, k > 0.92); };
+  return api;
+};
+
+// Parametros: o texto real inteiro; no segundo clique "azul" é escondida e o modelo chuta "verde"; no terceiro a palavra
+// é revelada e o modelo errou; no quarto os botões giram, a seta de correção se desenha e ele acerta.
+const parametros = (() => {
+  const d = diagramaPesos('parametros'), sec = d.sec;
+  const pal = sec.querySelector('.ap-pal'), ws = $$(sec, '.ap-w'), alvo = sec.querySelector('.ap-alvo');
+  const ta = sec.querySelector('.ap-a'), tm = sec.querySelector('.ap-m'), sai = sec.querySelector('.ap-sai');
+  const et = $$(sec, '.ap-et').filter((e) => !e.classList.contains('ap-centro'));
+  const [etReal, etVeso, etPalp] = et, erro = sec.querySelector('.ap-erro'), volta = sec.querySelector('.ap-volta'), rod = sec.querySelector('.rodape');
+  let s1, s2, s3;
+  const montar = () => {
+    if (s1) return;
+    const base = pal.offsetLeft, w3 = ws[2], xs = base + ws[0].offsetLeft + (w3.offsetLeft + w3.offsetWidth - ws[0].offsetLeft) / 2;
+    const yb = pal.offsetTop + pal.offsetHeight;
+    s1 = d.nova(`M${xs} ${yb + 8}V650H750`, d.ponta(752, 650, 'dir'));
+    s2 = d.nova('M1164 650H1350', d.ponta(1352, 650, 'dir'));
+    s3 = d.nova('M1580 706V812H960V788', d.ponta(960, 786, 'cima'), 'ap-volta-tr');
+    etVeso.style.left = `${xs + 20}px`;
+  };
+  return (t, c) => {
+    d.c = c;
+    montar();
+    const x = conteudo(c), y1 = c.desde(1), y2 = c.desde(2), y3 = c.desde(3);
+    d.entra(x);
+    revelar(etReal, molaAR(x - 0.1));
+    ws.forEach((w, n) => surgir(w, molaAR(x - 0.2 - n * 0.14), {dy: 22}));
+    // clique 2: azul é escondida (vira "?") e o modelo vê só o começo
+    const mas = saida(faixa(y1, 0, 0.5)), rev = saida(faixa(y2, 0, 0.5));
+    const escondida = mas * (1 - rev);
+    ta.style.opacity = String(1 - mas + rev);
+    tm.style.opacity = String(escondida);
+    alvo.style.borderColor = escondida > 0.5 ? 'var(--cor-destaque)' : (rev > 0.5 ? 'var(--cor-tinta)' : '');
+    alvo.style.background = escondida > 0.5 ? 'var(--cor-destaque-fraca)' : (rev > 0.5 ? 'var(--cor-tinta)' : '');
+    alvo.style.color = rev > 0.5 ? 'var(--cor-sobre-tinta)' : '';
+    d.traca(s1, saida(faixa(y1, 0.1, 0.7)));
+    revelar(etVeso, molaAR(y1 - 0.4)); vis(etVeso, y1 > 0.3);
+    d.traca(s2, saida(faixa(y1, 0.8, 1.3)));
+    surgir(sai, molaAR(y1 - 1.1), {dy: 18}); vis(sai, y1 > 1.05);
+    revelar(etPalp, molaAR(y1 - 1.0)); vis(etPalp, y1 > 0.95);
+    // clique 3: o modelo errou (palpite tachado)
+    const errou = saida(faixa(y2, 0.3, 0.8)) * (1 - saida(faixa(y3, 0, 0.4)));
+    sai.style.textDecoration = errou > 0.5 ? 'line-through' : 'none';
+    sai.style.borderStyle = errou > 0.5 ? 'dashed' : 'solid';
+    revelar(erro, molaAR(y2 - 0.4) * (1 - saida(faixa(y3, 0, 0.3)))); vis(erro, y2 > 0.35 && y3 < 0.3);
+    // clique 4: os botões giram, a seta de correção se desenha e o palpite passa a ser "azul"
+    d.gira(saida(faixa(y3, 0, 1.4)));
+    d.traca(s3, saida(faixa(y3, 0.1, 1.0)));
+    revelar(volta, molaAR(y3 - 0.9)); vis(volta, y3 > 0.85);
+    const certo = y3 > 1.3;
+    if (sai.textContent !== (certo ? 'azul' : 'verde')) sai.textContent = certo ? 'azul' : 'verde';
+    sai.style.background = certo ? 'var(--cor-tinta)' : '';
+    sai.style.color = certo ? 'var(--cor-sobre-tinta)' : '';
+    sai.style.borderColor = certo ? 'var(--cor-tinta)' : '';
+    revelar(rod, molaAR(y3 - 1.7)); vis(rod, y3 > 1.65);
+    fim(sec, x, 0.6);
+  };
+})();
+
+// Reforço: a pergunta entra no modelo; no segundo clique saem duas respostas; no terceiro, as notas; no quarto, os botões
+// giram a favor da resposta de nota alta.
+const reforco = (() => {
+  const d = diagramaPesos('reforco'), sec = d.sec;
+  const perg = sec.querySelector('.ap-perg'), ra = sec.querySelector('.ap-ra'), rb = sec.querySelector('.ap-rb');
+  const notas = $$(sec, '.ap-nota'), volta = sec.querySelector('.ap-volta'), rod = sec.querySelector('.rodape');
+  let s1, sa, sb, s4;
+  const montar = () => {
+    if (s1) return;
+    s1 = d.nova('M564 650H750', d.ponta(752, 650, 'dir'));
+    sa = d.nova('M1164 630L1318 520', d.ponta(1322, 516, 'dir'));
+    sb = d.nova('M1164 670L1318 700', d.ponta(1322, 702, 'dir'));
+    s4 = d.nova('M1565 776V812H960V788', d.ponta(960, 786, 'cima'), 'ap-volta-tr');
+  };
+  return (t, c) => {
+    d.c = c;
+    montar();
+    const x = conteudo(c), y1 = c.desde(1), y2 = c.desde(2), y3 = c.desde(3);
+    d.entra(x);
+    surgir(perg, molaAR(x - 0.3), {dx: -30, dy: 0});
+    d.traca(s1, saida(faixa(x, 0.6, 1.1)));
+    d.traca(sa, saida(faixa(y1, 0, 0.5))); d.traca(sb, saida(faixa(y1, 0.1, 0.6)));
+    surgir(ra, molaAR(y1 - 0.4), {dx: 30, dy: 0}); vis(ra, y1 > 0.35);
+    surgir(rb, molaAR(y1 - 0.55), {dx: 30, dy: 0}); vis(rb, y1 > 0.5);
+    // clique 3: as notas aparecem; a A (nota alta) fica cheia, a B (nota baixa) fica tracejada e mais fraca
+    notas.forEach((n, i) => { const k = molaAR(y2 - 0.2 - i * 0.2); surgir(n, k, {dy: 0, escala: 0.4}); vis(n, y2 > 0.15 + i * 0.2); });
+    const nota = saida(faixa(y2, 0.2, 0.8));
+    ra.style.background = nota > 0.5 ? 'var(--cor-tinta)' : ''; ra.style.color = nota > 0.5 ? 'var(--cor-sobre-tinta)' : ''; ra.style.borderColor = nota > 0.5 ? 'var(--cor-tinta)' : '';
+    ra.querySelector('span').style.color = nota > 0.5 ? 'var(--cor-suave-sobre-tinta)' : '';
+    rb.style.borderStyle = nota > 0.5 ? 'dashed' : 'solid'; rb.style.color = nota > 0.5 ? 'var(--cor-tinta-suave)' : '';
+    // clique 4: os botões giram e a seta de correção se desenha
+    d.gira(saida(faixa(y3, 0, 1.4)));
+    d.traca(s4, saida(faixa(y3, 0.1, 1.0)));
+    revelar(volta, molaAR(y3 - 0.9)); vis(volta, y3 > 0.85);
+    revelar(rod, molaAR(y3 - 1.4)); vis(rod, y3 > 1.35);
+    fim(sec, x, 0.6);
+  };
+})();
+
+// Embedding: o token vira a lista de números; no segundo clique a lista sai e entram as duas frases com o mapa, em que os
+// dois "banco" caem junto de vizinhos diferentes.
+const embedding = (() => {
+  const sec = m.secao('embedding'), A = sec.querySelector('.em-a'), B = sec.querySelector('.em-b');
+  const tok = sec.querySelector('.em-tok'), seta = sec.querySelector('.em-seta'), cel = $$(sec, '.em-vet span'), leg = sec.querySelector('.em-leg');
+  const frs = $$(sec, '.em-fr'), mt = sec.querySelector('.em-mt'), mapa = sec.querySelector('.em-mapa'), rod = sec.querySelector('.rodape');
+  const pts = $$(sec, '.em-pt'), rots = $$(sec, '.em-pl, .em-pg');
+  return (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    const sai = saida(faixa(y, 0, 0.4));
+    A.style.opacity = String(1 - sai); vis(A, sai < 0.999);
+    surgir(tok, molaAR(x - 0.1), {dx: -30, dy: 0});
+    surgir(seta, molaAR(x - 0.6), {dx: -20, dy: 0});
+    cel.forEach((el, n) => surgir(el, molaAR(x - 0.8 - n * 0.09), {dy: 22}));
+    revelar(leg, molaAR(x - 1.8));
+    B.style.opacity = y > 0.3 ? '1' : '0'; vis(B, y > 0.3);
+    frs.forEach((el, n) => revelar(el, molaAR(y - 0.4 - n * 0.9)));
+    revelar(mt, molaAR(y - 0.6)); surgir(mapa, molaAR(y - 0.6), {dy: 0, escala: 0.04});
+    // pontos: vizinhos primeiro, "banco" por último (A depois da frase 1, B depois da frase 2)
+    const quando = [1.2, 1.3, 1.4, 2.1, 2.2, 2.3, 1.9, 2.9];
+    pts.forEach((el, n) => { const k = molaAR(y - quando[n]); surgir(el, k, {dy: 0, escala: 0.6}); vis(el, y > quando[n] - 0.05); });
+    rots.forEach((el, n) => { const k = molaAR(y - quando[n] - 0.1); el.style.opacity = String(clamp(k * 1.6, 0, 1)); vis(el, y > quando[n]); });
+    revelar(rod, molaAR(x - 1.0)); 
     fim(sec, x, 1.4);
   };
 })();
@@ -1487,6 +1750,9 @@ palco({slides: m.slides, desenhar: m.desenhar, blocos, autoplay: true, cenas: m.
   pl: partes('pl'),
   funciona: {largura: 900},
   ponta,
+  parametros,
+  reforco,
+  embedding,
   tokens: tokens('tokens'),
   mesa,
   queda,
