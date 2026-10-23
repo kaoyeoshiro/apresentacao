@@ -85,8 +85,15 @@ def campo(par, instr):
 
 
 def titulo_secao(doc, texto):
-    p = doc.add_paragraph(); p.paragraph_format.space_before = Pt(16); p.paragraph_format.space_after = Pt(6)
-    run(p, texto, 12.5, True, VERDE); filete(p)
+    p = doc.add_paragraph(); p.paragraph_format.space_before = Pt(18); p.paragraph_format.space_after = Pt(6)
+    run(p, texto, 12, True, VERDE)
+
+
+def linha_fina(par, lado="bottom", cor="BFBFBF", tam=4, espaco=4):
+    pr = par._p.get_or_add_pPr(); b = OxmlElement("w:pBdr"); e = OxmlElement(f"w:{lado}")
+    for k, v in (("val", "single"), ("sz", str(tam)), ("space", str(espaco)), ("color", cor)):
+        e.set(qn(f"w:{k}"), v)
+    b.append(e); pr.append(b)
 
 
 def main(caso_json, logo, saida):
@@ -97,82 +104,64 @@ def main(caso_json, logo, saida):
     d.styles["Normal"].font.name = "Georgia"; d.styles["Normal"].font.size = Pt(11)
     L = sec.page_width - sec.left_margin - sec.right_margin
     h = sec.header.paragraphs[0]; h.paragraph_format.tab_stops.add_tab_stop(L, WD_TAB_ALIGNMENT.RIGHT)
-    h.add_run().add_picture(logo, height=Cm(1.4)); run(h, "\t\tDocumento de trabalho", 9.5, cor=CINZA); filete(h)
+    h.add_run().add_picture(logo, height=Cm(1.3)); run(h, "\t\tDocumento de trabalho", 9, cor=CINZA); linha_fina(h, cor=COBRE, tam=6, espaco=6)
     f = sec.footer.paragraphs[0]; f.paragraph_format.tab_stops.add_tab_stop(L, WD_TAB_ALIGNMENT.RIGHT)
     run(f, f"{NOME} Advocacia · documento fictício\t\tPágina ", 8.5, cor=CINZA); campo(f, "PAGE")
 
-    # faixa de título
-    t = d.add_table(rows=1, cols=1); t.alignment = WD_TABLE_ALIGNMENT.CENTER; larguras(t, [16.5])
-    cel = t.rows[0].cells[0]; fundo(cel, VERDE); margens(cel, 220, 280); bordas(cel, bottom=(COBRE, 36))
-    run(cel.paragraphs[0], "RELATÓRIO DE CONFORMIDADE", 9.5, True, "E8C9A8")
-    run(cel.add_paragraph(), "Temas 6 e 1234 do STF", 22, True, "FFFFFF")
-    run(cel.add_paragraph(), f"Fornecimento de {c['medicamento']}", 11.5, False, "FFFFFF", italico=True)
+    # título
+    p = d.add_paragraph(); p.paragraph_format.space_before = Pt(6); p.paragraph_format.space_after = Pt(2)
+    run(p, "Relatório de conformidade", 20, True, VERDE)
+    p = d.add_paragraph(); p.paragraph_format.space_after = Pt(10)
+    run(p, f"Temas 6 e 1234 do STF · fornecimento de {c['medicamento']}", 11, False, CINZA, italico=True); linha_fina(p, cor=COBRE, tam=8, espaco=8)
 
     # ficha do caso
-    d.add_paragraph().paragraph_format.space_after = Pt(0)
-    ficha = d.add_table(rows=2, cols=3); larguras(ficha, [5.5, 5.5, 5.5])
+    ficha = d.add_table(rows=3, cols=2); larguras(ficha, [5.0, 11.5])
     for i, (k, v) in enumerate([("Processo", c["processo"]), ("Autor representado por", c["representacao"]),
                                 ("Data da análise", c["data_analise"])]):
-        a, b = ficha.rows[0].cells[i], ficha.rows[1].cells[i]
-        run(a.paragraphs[0], k.upper(), 8, True, COBRE); run(b.paragraphs[0], v, 11, True, VERDE)
-        for x in (a, b): margens(x, 30, 60); bordas(x)
+        a, b = ficha.rows[i].cells
+        for x in (a, b): margens(x, 50, 0); bordas(x, bottom=("D9D9D9", 4))
+        run(a.paragraphs[0], k, 10, False, CINZA); run(b.paragraphs[0], v, 10.5, True)
 
-    # veredito
+    # conclusão
     ok = sum(1 for r in c["requisitos"] if r["situacao"] in ("atendido", "dispensado"))
     total = len(c["requisitos"]); cumpriu = ok == total
-    d.add_paragraph().paragraph_format.space_after = Pt(0)
-    v = d.add_table(rows=1, cols=2); larguras(v, [4.2, 12.3])
-    a, b = v.rows[0].cells; cor = "2E7D5B" if cumpriu else "B3402F"
-    fundo(a, cor); a.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER; margens(a, 140, 120)
-    pa = a.paragraphs[0]; pa.alignment = WD_ALIGN_PARAGRAPH.CENTER; run(pa, f"{ok}/{total}", 30, True, "FFFFFF")
-    pa2 = a.add_paragraph(); pa2.alignment = WD_ALIGN_PARAGRAPH.CENTER; run(pa2, "requisitos", 9.5, False, "FFFFFF")
-    fundo(b, "F6EFE8"); margens(b, 140, 220); bordas(b, left=(cor, 36)); b.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-    run(b.paragraphs[0], "O autor cumpriu os requisitos." if cumpriu else "O autor não cumpriu todos os requisitos.", 14, True, VERDE)
-    run(b.add_paragraph(), c["resumo"], 10.5, False, "333333")
+    titulo_secao(d, "Conclusão")
+    p = d.add_paragraph(); p.paragraph_format.space_after = Pt(4)
+    run(p, "O autor cumpriu os requisitos do Tema 6. " if cumpriu else "O autor não cumpriu todos os requisitos do Tema 6. ", 11, True)
+    run(p, f"Estão atendidos ou dispensados {ok} de {total}. ", 11)
+    run(p, c["resumo"], 11)
 
-    # semáforo
-    titulo_secao(d, "Tema 6: os seis requisitos")
-    s = d.add_table(rows=2, cols=total); larguras(s, [16.5 / total] * total); s.alignment = WD_TABLE_ALIGNMENT.CENTER
-    for i, r in enumerate(c["requisitos"]):
-        rot, cor = SITUACAO[r["situacao"]]
-        a, b = s.rows[0].cells[i], s.rows[1].cells[i]
-        fundo(a, cor); bordas(a, left=("FFFFFF", 24), right=("FFFFFF", 24)); margens(a, 90, 40)
-        pa = a.paragraphs[0]; pa.alignment = WD_ALIGN_PARAGRAPH.CENTER; run(pa, r["id"], 20, True, "FFFFFF")
-        bordas(b); margens(b, 40, 30)
-        pb = b.paragraphs[0]; pb.alignment = WD_ALIGN_PARAGRAPH.CENTER; run(pb, rot, 8, False, "444444")
-
-    # matriz detalhada
-    d.add_paragraph().paragraph_format.space_after = Pt(0)
+    # matriz
+    titulo_secao(d, "Tema 6: requisitos")
     m = d.add_table(rows=1, cols=4)
     for cel, txt in zip(m.rows[0].cells, ("Requisito", "Situação", "Onde nos autos", "Observação")):
-        fundo(cel, VERDE); margens(cel, 70, 100); run(cel.paragraphs[0], txt, 9.5, True, "FFFFFF")
-    for i, r in enumerate(c["requisitos"]):
+        margens(cel, 60, 80); bordas(cel, bottom=(VERDE, 10)); run(cel.paragraphs[0], txt, 9, True, VERDE)
+    for r in c["requisitos"]:
         lin = m.add_row().cells; rot, cor = SITUACAO[r["situacao"]]
-        for cel in lin: margens(cel, 70, 100); bordas(cel, bottom=("D9D9D9", 4)); fundo(cel, "F4F4F4" if i % 2 else "FFFFFF")
-        run(lin[0].paragraphs[0], f"({r['id']}) {r['nome']}", 9.5, True, VERDE)
-        fundo(lin[1], cor); pl = lin[1].paragraphs[0]; pl.alignment = WD_ALIGN_PARAGRAPH.CENTER; run(pl, rot, 8.5, True, "FFFFFF")
-        lin[1].vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+        for cel in lin: margens(cel, 70, 80); bordas(cel, bottom=("D9D9D9", 4))
+        run(lin[0].paragraphs[0], f"({r['id']}) {r['nome']}", 9.5)
+        run(lin[1].paragraphs[0], "● ", 9.5, False, cor); run(lin[1].paragraphs[0], rot, 9.5, True, cor)
         run(lin[2].paragraphs[0], r["onde"], 9.5); run(lin[3].paragraphs[0], r["obs"], 9.5)
-    larguras(m, [4.5, 2.8, 3.7, 5.5])
+    larguras(m, [4.6, 3.1, 2.9, 5.9])
+    p = d.add_paragraph(); p.paragraph_format.space_before = Pt(4)
+    for rot, cor in SITUACAO.values():
+        run(p, "●", 8, False, cor); run(p, f" {rot}    ", 8, False, CINZA)
 
     # competência
-    titulo_secao(d, "Tema 1234: competência e custeio")
-    cp = c["competencia"]; k = d.add_table(rows=1, cols=3); larguras(k, [5.2, 5.2, 6.1])
+    titulo_secao(d, "Tema 1234: competência")
+    cp = c["competencia"]; k = d.add_table(rows=3, cols=2); larguras(k, [7.0, 9.5])
     for i, (rot, val) in enumerate([("Valor anual do tratamento", cp["valor_anual"]), ("210 salários mínimos", cp["limite"]),
                                     ("Onde tramita", cp["resultado"])]):
-        cel = k.rows[0].cells[i]; fundo(cel, "F6EFE8" if i < 2 else VERDE); margens(cel, 140, 160)
-        bordas(cel, left=("FFFFFF", 36), right=("FFFFFF", 36), top=(COBRE, 24))
-        run(cel.paragraphs[0], rot.upper(), 8, True, "E8C9A8" if i == 2 else COBRE)
-        run(cel.add_paragraph(), val, 14, True, "FFFFFF" if i == 2 else VERDE)
-    p = d.add_paragraph(); p.paragraph_format.space_before = Pt(6); run(p, cp["nota"], 9.5, italico=True, cor=CINZA)
+        a, b = k.rows[i].cells
+        for x in (a, b): margens(x, 50, 0); bordas(x, bottom=("D9D9D9", 4))
+        run(a.paragraphs[0], rot, 10, False, CINZA); run(b.paragraphs[0], val, 10.5, True)
+    p = d.add_paragraph(); p.paragraph_format.space_before = Pt(6); run(p, cp["nota"], 9, italico=True, cor=CINZA)
 
     # conferência humana
     titulo_secao(d, "Pontos para conferência humana")
-    cf = d.add_table(rows=1, cols=1); larguras(cf, [16.5]); cel = cf.rows[0].cells[0]
-    fundo(cel, "FBF3E4"); margens(cel, 140, 220); bordas(cel, left=("C98A0B", 36))
-    run(cel.paragraphs[0], "Antes de usar este relatório", 10.5, True, "8A5A00")
     for item in c["conferencia"]:
-        run(cel.add_paragraph(), "▪  " + item, 10)
+        p = d.add_paragraph(); p.paragraph_format.space_after = Pt(3); p.paragraph_format.left_indent = Cm(0.5)
+        p.paragraph_format.first_line_indent = Cm(-0.5); run(p, "–  " + item, 10)
     d.save(saida)
 
 
