@@ -101,6 +101,10 @@ tema escuro que queira outro tom define `--cor-noite` no `tema.css`.
 
 ## Peças comuns
 
+A linha do dia (`blocos` no `palco()` e `bloco` nos slides, contrato em `docs/palco.md`, Blocos da aula) corre numa
+faixa fina logo abaixo da trilha, sem cruzar com ela nem com a pílula e o selo, e passa à cor da noite junto com a
+zona; nas aberturas e no respiro, `linhaDia: false`.
+
 A escala é `--esc-1` a `--esc-6` (30, 44, 68, 110, 180 e 320 px), com margem de 120 px. `.rotulo` (em cima, caixa
 alta) e `.manchete` entram juntos; a manchete é uma linha só, de até uns 36 caracteres a 68 px, e se passar disso o
 corpo desce até 56 px e, abaixo disso, ela quebra em duas linhas, aperta o conteúdo e o console avisa para encurtar.

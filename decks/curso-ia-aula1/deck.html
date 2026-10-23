@@ -1,0 +1,1786 @@
+<!doctype html>
+<!-- Curso de IA da co.juris, dia 1, Aula 1: "O que é IA e qual usar" (versão 7, cerca de 90 minutos). Plano contínuo de
+     63 slides, montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md), com abertura automática, linha do
+     dia em cinco blocos e guia do apresentador em todos os slides (docs/palco.md, Blocos da aula). Capa e encerramento
+     claros, com o logo oficial do tema. Blocos: o que é IA (capa a previsao, com a linha do tempo da IA), como funciona
+     (funciona a passos, com os pesos como botões de ajuste e o tamanho dos modelos de ponta, os tokens, a mesa e a memória), onde tropeça (linguagem a pior), qual a melhor
+     IA (melhor a limites, com os rankings, a Text Arena e o placar da prova da PGE-MS) e fechado
+     e aberto (aberto a encerramento). Quatro práticas, com link clicável no lugar do QR.
+     Roteiro, fontes, mídia e crítica em briefing.md; fatos em apuracao.md e apuracao-2.md; créditos em midia/creditos.json.
+     Ao vivo: ./ap abrir decks/curso-ia-aula1   ·   ./ap sondar decks/curso-ia-aula1   ·   ./ap paradas decks/curso-ia-aula1 -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Curso de IA: Aula 1, O que é IA e qual usar</title>
+<link rel="stylesheet" href="../../temas/cojuris/tema.css">
+<link rel="stylesheet" href="../../motor/cenas.css">
+<style>
+  /* peças comuns do deck: linha logo abaixo da manchete, rodapé de fonte e a frase menor de um respiro */
+  .linha-top { position: absolute; left: 120px; top: 292px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .rodape { position: absolute; left: 120px; top: 892px; font-size: 36px; line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .respiro-sub { position: absolute; left: 120px; top: 850px; font-size: var(--esc-2); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .noite .linha-top, .noite .rodape, .noite .respiro-sub { color: var(--suave-sobre-noite); }
+
+  /* capa e encerramento (cenas próprias, fundo claro): o logo oficial à esquerda, o texto à direita de um fio */
+  .logo-cj { position: absolute; left: 120px; top: 300px; height: 480px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+  .cp-fio { position: absolute; left: 740px; top: 290px; width: 4px; height: 500px; background: var(--cor-linha); transform-origin: 50% 0; }
+  .cp-txt { position: absolute; left: 800px; top: 300px; width: 1000px; }
+  .cp-txt .rotulo { position: static; }
+  .cp-tit { margin-top: 26px; font-size: 124px; line-height: 1.04; color: var(--cor-tinta); }
+  .cp-tit > span { display: block; white-space: nowrap; }
+  .cp-sub { margin-top: 44px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
+
+  /* definições em partes (cena própria): os trechos à esquerda, um por clique; a explicação do trecho atual à direita */
+  .partes { position: absolute; left: 120px; top: 330px; width: 900px; }
+  /* o número de cada parte vem de um contador do CSS: é marcação, não texto a ler */
+  .partes { counter-reset: parte; }
+  .partes li { counter-increment: parte; display: flex; align-items: flex-start; gap: 26px; margin-bottom: 26px; font-size: 40px; line-height: 1.25; color: var(--cor-tinta-suave); }
+  .partes li::before { content: counter(parte); flex: 0 0 58px; height: 58px; margin-top: -4px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); }
+  .partes li.ativa { color: var(--cor-tinta); }
+  .partes li.ativa::before { background: var(--cor-destaque); border-color: var(--cor-destaque); color: var(--sobre-destaque); }
+  .noite .partes li { color: var(--suave-sobre-noite); }
+  .noite .partes li.ativa { color: var(--sobre-noite); }
+  .noite .partes li::before { border-color: var(--linha-sobre-noite); }
+  .noite .partes li.ativa::before { border-color: var(--cor-destaque); }
+  .explica { position: absolute; left: 1100px; top: 330px; width: 700px; height: 520px; }
+  .explica p { position: absolute; left: 0; top: 0; width: 700px; font: 400 60px/1.25 var(--fonte-texto); text-wrap: pretty; }
+
+  /* seta tracejada da memória */
+  .seta { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .seta path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ponta (cena própria): no primeiro clique, a analogia dos botões em texto grande e uma fileira discreta de botões
+     que giram; no segundo, uma barra por modelo na largura toda e o marco de 1 trilhão */
+  .pn-frase { position: absolute; left: 120px; top: 320px; width: 1680px; }
+  .pn-frase p { margin: 0 0 36px; font: 400 var(--esc-3)/1.25 var(--fonte-texto); color: var(--sobre-noite); text-wrap: balance; }
+  .pn-botoes { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .pn-botoes circle { fill: none; stroke: var(--linha-sobre-noite); stroke-width: 5; }
+  .pn-botoes path { fill: none; stroke: var(--suave-sobre-noite); stroke-width: 6; stroke-linecap: round; }
+  .pn-tab { position: absolute; left: 120px; top: 330px; width: 1680px; }
+  .pn-l { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; height: 112px; white-space: nowrap; }
+  .pn-n { font-size: var(--esc-2); color: var(--sobre-noite); }
+  .pn-v { font: 800 52px/1.1 var(--fonte-titulo); color: var(--sobre-noite); font-variant-numeric: lining-nums tabular-nums; }
+  .pn-t { position: relative; flex: 0 0 100%; height: 16px; border-radius: 8px; background: var(--linha-sobre-noite); }
+  .pn-b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 8px; background: color-mix(in srgb, var(--sobre-noite) 55%, var(--noite)); transform-origin: 0 50%; }
+  .pn-marco { position: absolute; top: -12px; height: 40px; width: 6px; margin-left: -3px; border-radius: 3px; background: var(--cor-destaque); transform-origin: 50% 50%; }
+  .pn-fech { position: absolute; left: 120px; top: 820px; font-size: 36px; color: var(--suave-sobre-noite); white-space: nowrap; }
+
+  /* mesa (cena própria): a janela de contexto como um retângulo que enche de blocos; o que não cabe fica de fora */
+  .ms-mesa { position: absolute; left: 120px; top: 334px; width: 1020px; height: 566px; box-sizing: border-box; border: 6px solid var(--cor-tinta); border-radius: 26px; }
+  .ms-bl { position: absolute; left: 140px; width: 980px; box-sizing: border-box; padding-left: 30px; border-radius: 16px; display: flex; align-items: center; font-size: 40px; background: color-mix(in srgb, var(--cor-tinta) 11%, var(--cor-fundo)); white-space: nowrap; }
+  .ms-bl.ms-resp { background: none; border: 4px dashed var(--cor-tinta-suave); color: var(--cor-tinta-suave); }
+  .ms-bl.ms-fora { left: 1260px; top: 462px; width: 540px; height: 186px; border: 6px dashed var(--cor-destaque); }
+  [data-slide="mesa"] .ms-et { left: 120px; top: 286px; }
+  [data-slide="mesa"] .ms-et2 { left: 1260px; top: 410px; }
+
+  /* queda (cena própria): duas barras, texto curto e texto longo, e a perda marcada */
+  .qd { position: absolute; left: 120px; height: 160px; display: flex; align-items: center; white-space: nowrap; }
+  .qd-n { width: 400px; font-size: var(--esc-2); }
+  .qd-t { position: relative; width: 740px; height: 44px; margin: 0 30px; border-radius: 22px; background: var(--cor-linha); }
+  .qd-b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 22px; background: color-mix(in srgb, var(--cor-tinta) 40%, var(--cor-fundo)); transform-origin: 0 50%; }
+  .qd-perda { position: absolute; top: -8px; bottom: -8px; box-sizing: border-box; border: 5px dashed var(--cor-destaque); border-radius: 22px; }
+  .qd-v { width: 480px; text-align: right; font: 800 130px/1.2 var(--fonte-titulo); font-variant-numeric: tabular-nums; }
+  .qd-achado { position: absolute; left: 120px; top: 690px; width: 1500px; font-size: var(--esc-2); line-height: 1.3; text-wrap: pretty; }
+
+  /* memória (cena própria): o caderno passa uma nota para a mesa da conversa nova */
+  .mm-cad { position: absolute; left: 120px; top: 340px; width: 520px; height: 360px; box-sizing: border-box; border: 5px solid var(--sobre-noite); border-left-width: 22px; border-radius: 18px; }
+  .mm-cad i, .mm-nota i { position: absolute; left: 40px; height: 22px; border-radius: 11px; background: color-mix(in srgb, var(--sobre-noite) 35%, var(--noite)); }
+  .mm-mesa { position: absolute; left: 1160px; top: 340px; width: 640px; height: 360px; box-sizing: border-box; border: 5px dashed var(--linha-sobre-noite); border-radius: 22px; }
+  .mm-nota { position: absolute; left: 1220px; top: 400px; width: 340px; height: 110px; box-sizing: border-box; border: 5px solid var(--cor-destaque); border-radius: 14px; background: var(--noite); }
+  [data-slide="memoria"] .mm-et1 { left: 120px; top: 290px; }
+  [data-slide="memoria"] .mm-et2 { left: 1160px; top: 290px; }
+  [data-slide="sigilo"] .minuta { left: 900px; width: 900px; }
+  .mm-seta path { stroke: var(--linha-sobre-noite); stroke-dasharray: 14 14; }
+  .mm-leg { position: absolute; left: 120px; top: 760px; font-size: var(--esc-2); white-space: nowrap; }
+
+  /* fronteira (cena própria): o contorno serrilhado, as tarefas dentro e fora e o número do estudo */
+  .fr-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .fr-svg .fr-area { fill: var(--cor-destaque-fraca); stroke: var(--cor-tinta); stroke-width: 6; stroke-linejoin: round; }
+  .fr-ponto { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 15px; background: var(--cor-tinta); }
+  .fr-ponto.fora { background: var(--cor-fundo); box-sizing: border-box; border: 6px solid var(--cor-tinta); }
+  .fr-tx { position: absolute; font-size: 36px; line-height: 1.1; white-space: nowrap; }
+  [data-slide="fronteira"] .etiqueta { white-space: nowrap; }
+  [data-slide="fronteira"] .fr-et-dentro { left: 820px; top: 545px; }
+  [data-slide="fronteira"] .fr-et-fora { left: 1240px; top: 360px; }
+  .fr-num { position: absolute; left: 120px; top: 812px; font-size: var(--esc-2); white-space: nowrap; }
+  .fr-num b { font: 800 var(--esc-2)/1 var(--fonte-titulo); }
+  [data-slide="fronteira"] .rodape { top: 880px; }
+
+  /* cartões (cena própria): grade de 3 ou 4 colunas; nas grades de modelos, o logo oficial em cima */
+  .cartoes { position: absolute; left: 120px; top: 380px; width: 1680px; display: grid; gap: 36px 40px; }
+  .cartoes.c2 { grid-template-columns: repeat(2, 1fr); }
+  .cartoes.c3 { grid-template-columns: repeat(3, 1fr); }
+  .cartoes.c4 { grid-template-columns: repeat(4, 1fr); }
+  .cartao { box-sizing: border-box; padding: 26px 32px; border: 4px solid var(--cor-linha); border-radius: 26px; }
+  .ct-tit { font: 800 var(--esc-2)/1.15 var(--fonte-titulo); white-space: nowrap; }
+  .ct-tit.g { font-size: var(--esc-3); }
+  .ct-txt { margin-top: 12px; font-size: 36px; line-height: 1.3; text-wrap: pretty; }
+  .ct-sub { margin-top: 6px; font-size: 32px; line-height: 1.3; color: var(--cor-tinta-suave); }
+  .ct-cab { display: flex; align-items: center; gap: 22px; height: 64px; }
+  .ct-logo { display: block; height: 56px; width: auto; max-width: 240px; object-fit: contain; object-position: left center; }
+  .ct-col .ct-logo { height: 48px; margin-bottom: 18px; }
+  .ct-leg { position: absolute; left: 120px; top: 300px; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
+  [data-slide="fechados"] .cartoes, [data-slide="abertos"] .cartoes { top: 350px; }
+  [data-slide="medidas"] .cartoes { top: 400px; gap: 48px 40px; }
+  [data-slide="generativa"] .cartoes { top: 440px; }
+  [data-slide="fechados"] .ct-cab { gap: 16px; }
+  [data-slide="fechados"] img[alt="Grok"] { height: 44px; }
+
+  /* rankings (cena própria): uma linha por modelo, barra proporcional à nota, a primeira em dourado */
+  .rk { position: absolute; left: 120px; top: 366px; width: 1680px; }
+  .rk-l { display: flex; align-items: center; height: 50px; white-space: nowrap; }
+  .rk.sete .rk-l { height: 66px; }
+  .rk-n { width: 470px; font: 700 36px/1.1 var(--fonte-titulo); }
+  .rk-t { position: relative; flex: 1; height: 22px; margin: 0 28px; border-radius: 11px; background: var(--cor-linha); }
+  .rk-b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 11px; background: color-mix(in srgb, var(--cor-tinta) 34%, var(--cor-fundo)); transform-origin: 0 50%; }
+  .rk-l:first-child .rk-b { background: var(--cor-destaque); }
+  .rk.arena .rk-v { width: 250px; }
+  .noite .rk-t { background: var(--linha-sobre-noite); }
+  .noite .rk-b { background: color-mix(in srgb, var(--sobre-noite) 40%, var(--noite)); }
+  .rk-v { width: 190px; text-align: right; font: 800 40px/1 var(--fonte-titulo); font-variant-numeric: tabular-nums; }
+
+  /* Legal Index (cena própria): uma barra só, dividida nas seis fatias de peso, rótulos em cima e embaixo */
+  .lg-barra { position: absolute; left: 120px; top: 560px; width: 1680px; height: 110px; }
+  .lg-fatia { position: absolute; top: 0; height: 110px; box-sizing: border-box; border-right: 6px solid var(--noite); background: color-mix(in srgb, var(--sobre-noite) 40%, var(--noite)); transform-origin: 0 50%; }
+  .lg-fatia:nth-child(even) { background: color-mix(in srgb, var(--sobre-noite) 24%, var(--noite)); }
+  .lg-fatia:first-child { background: var(--cor-destaque); border-radius: 18px 0 0 18px; }
+  .lg-fatia:last-child { border-right: 0; border-radius: 0 18px 18px 0; }
+  .lg-rot { position: absolute; white-space: nowrap; font-size: 36px; line-height: 1.15; }
+  .lg-rot b { display: block; font: 800 var(--esc-3)/1 var(--fonte-titulo); }
+  .lg-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .lg-svg path { fill: none; stroke: var(--linha-sobre-noite); stroke-width: 3; }
+
+  /* práticas: passos à direita do pedido, QR embaixo dele */
+  .passos-p { position: absolute; left: 906px; top: 452px; width: 894px; }
+  .passos-p li { display: flex; font-size: 40px; line-height: 1.3; margin-bottom: 20px; }
+  .passos-p b { flex: 0 0 64px; font: 800 40px/1.3 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .noite .passos-p b { color: var(--suave-sobre-noite); }
+  .pratica-nota { position: absolute; left: 120px; top: 600px; width: 700px; font-size: 40px; line-height: 1.3; color: var(--suave-sobre-noite); text-wrap: pretty; }
+  /* link clicável (abre em nova aba): o professor faz o teste ao vivo */
+  .link-p { position: absolute; left: 120px; top: 760px; font: 700 var(--esc-2)/1.3 var(--fonte-titulo); color: var(--sobre-noite); text-decoration: underline; text-decoration-color: var(--cor-destaque); text-decoration-thickness: 4px; text-underline-offset: 10px; white-space: nowrap; }
+  .tempo-leg a { color: inherit; text-decoration: underline; text-underline-offset: 6px; }
+  [data-slide^="pratica"] > .etiqueta { top: 296px; }
+  [data-slide^="pratica"] .entrada { top: 346px; }
+  [data-slide^="pratica"] .pedido { top: 380px; }
+  [data-slide^="pratica"] .passos-p { top: 346px; }
+  [data-slide="pratica4"] .entrada { height: 290px; }
+
+  /* parametros e reforco (cenas próprias): o diagrama dos pesos como botões de ajuste, com texto real, palpite e nota */
+  .ap-et { position: absolute; margin: 0; font: 700 30px/1.2 var(--fonte-titulo); letter-spacing: .06em; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .ap-centro { text-align: center; }
+  .ap-pal { position: absolute; left: 120px; top: 410px; display: flex; gap: 14px; }
+  .ap-w { position: relative; padding: 14px 30px; border: 4px solid var(--cor-linha); border-radius: 18px; background: var(--cor-papel); font: 700 var(--esc-2)/1.2 var(--fonte-titulo); color: var(--cor-tinta); }
+  .ap-a { font-style: normal; }
+  .ap-m { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-style: normal; color: var(--cor-destaque-texto); }
+  .ap-caixa { position: absolute; left: 760px; top: 540px; width: 400px; height: 240px; box-sizing: border-box; border: 5px solid var(--cor-tinta); border-radius: 24px; background: var(--cor-papel); }
+  .ap-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .ap-svg circle { fill: none; stroke: var(--cor-tinta); stroke-width: 5; }
+  .ap-svg .ap-ponteiro { stroke: var(--cor-tinta); stroke-width: 8; stroke-linecap: round; fill: none; }
+  .ap-svg .ap-seta { stroke: var(--cor-tinta-suave); stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .ap-svg .ap-volta-tr { stroke: var(--cor-destaque); stroke-width: 6; fill: none; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; }
+  .ap-ch { position: absolute; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 4px solid var(--cor-linha); border-radius: 18px; background: var(--cor-papel); font: 700 52px/1.1 var(--fonte-titulo); color: var(--cor-tinta); }
+  .ap-resp { position: absolute; display: block; padding: 22px 120px 0 32px; text-align: left; }
+  .ap-resp b { display: block; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); }
+  .ap-resp span { display: block; font: 400 36px/1.3 var(--fonte-texto); color: var(--cor-tinta-suave); }
+  .ap-nota { position: absolute; right: 32px; top: 50%; margin-top: -40px; font: 800 80px/80px var(--fonte-titulo); font-style: normal; font-variant-numeric: lining-nums; }
+  .ap-erro { position: absolute; margin: 0; font: 700 40px/1.2 var(--fonte-titulo); color: var(--cor-destaque-texto); white-space: nowrap; }
+  .ap-volta { position: absolute; margin: 0; transform: translateX(-50%); font: 400 40px/1.2 var(--fonte-texto); color: var(--cor-destaque-texto); white-space: nowrap; }
+
+  /* embedding (cena própria): token, lista de números e o mapa em que dois "banco" caem longe um do outro */
+  .em-tok { left: 120px; top: 400px; width: 330px; height: 120px; font-size: 64px; }
+  .em-seta { position: absolute; left: 470px; top: 410px; margin: 0; font: 400 80px/100px var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .em-vet { position: absolute; left: 600px; top: 400px; display: flex; gap: 10px; }
+  .em-vet span { box-sizing: border-box; width: 125px; height: 120px; display: flex; align-items: center; justify-content: center; border: 4px solid var(--cor-linha); border-radius: 14px; background: var(--cor-papel); font: 700 38px/1 var(--fonte-titulo); font-variant-numeric: lining-nums tabular-nums; color: var(--cor-tinta); }
+  .em-vet span.em-mais { width: 70px; border: none; background: none; color: var(--cor-tinta-suave); }
+  .em-leg { position: absolute; left: 120px; top: 600px; margin: 0; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .em-fr { position: absolute; left: 120px; margin: 0; width: 820px; font: 400 var(--esc-2)/1.3 var(--fonte-texto); color: var(--cor-tinta); }
+  .em-fr mark { background: none; color: inherit; font-weight: 700; text-decoration: underline 5px var(--cor-destaque); text-underline-offset: 8px; }
+  .em-mt { left: 1000px; top: 292px; }
+  .em-mapa { position: absolute; left: 1000px; top: 340px; width: 800px; height: 520px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); }
+  .em-pt { position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%; background: var(--cor-tinta-suave); }
+  .em-pt.ouro { width: 40px; height: 40px; margin: -20px 0 0 -20px; background: var(--cor-destaque); }
+  .em-pl { position: absolute; transform: translate(22px, -50%); font: 400 34px/1 var(--fonte-texto); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .em-pg { position: absolute; transform: translate(-50%, -50%); font: 700 40px/1 var(--fonte-titulo); color: var(--cor-destaque-texto); white-space: nowrap; }
+
+  /* comparação: a palavra de cada coluna maior que o texto dela, no tamanho que cabe em 768 px */
+  .janela .letra.g { font-size: var(--esc-5); top: 0; }
+  .janela .letra.m { font-size: 140px; top: 16px; }
+  [data-arquetipo="comparacao"] .linha-top ~ .janela, [data-arquetipo="comparacao"] .linha-top ~ .fio-v { top: 400px; }
+  [data-slide="historia"] .etapas li { font-size: 36px; }
+  [data-slide="fecho"] .fecho-passos b { color: var(--suave-sobre-noite); }
+  [data-slide="linguagem"] .respiro { top: 360px; }
+
+  /* tokens (cena própria): a palavra inteira se parte em blocos alternados */
+  .tk-linha { position: absolute; left: 120px; font-size: 96px; line-height: 1.15; white-space: nowrap; }
+  .tk { display: inline-block; padding: 0 6px; border-radius: 12px; white-space: pre; }
+  .tk-conta { position: absolute; left: 1600px; font: 800 var(--esc-5)/.9 var(--fonte-titulo); white-space: nowrap; }
+  .tk-conta small { display: block; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta-suave); }
+
+  /* número: o valor grande à esquerda, legenda e fonte embaixo */
+  [data-slide="corpus"] .numero, [data-slide="tamanho"] .numero { left: 112px; top: 360px; font-size: 230px; }
+  [data-slide="parecer"] .numero, [data-slide="prova"] .numero { left: 112px; top: 340px; font-size: var(--esc-6); }
+  [data-slide="corpus"] .numero-leg, [data-slide="tamanho"] .numero-leg { left: 120px; top: 620px; }
+  [data-slide="parecer"] .numero-leg, [data-slide="prova"] .numero-leg { left: 120px; top: 680px; }
+  [data-slide="benchmark"] .numero { font-size: 140px; top: 410px; }
+  .prova-det { position: absolute; left: 1100px; font-size: var(--esc-2); white-space: nowrap; }
+
+  /* sorteio: o que a sala viu, à esquerda do leque */
+  .no-app { position: absolute; left: 120px; top: 610px; width: 760px; text-wrap: balance; font-size: var(--esc-2); line-height: 1.3; }
+  .no-app b { display: block; margin-bottom: 14px; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta-suave); }
+
+  /* respiro "conferiram": as três respostas possíveis embaixo da pergunta */
+  .cats { position: absolute; left: 120px; top: 830px; display: flex; gap: 28px; }
+  .cats span { padding: 4px 26px; border: 3px solid var(--linha-sobre-noite); border-radius: 999px; font: 700 var(--esc-2)/1.3 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+
+  /* placar (cena própria): dez barras verticais, o colchete dourado sobre os dois primeiros */
+  .placar-col { position: absolute; top: 0; width: 112px; height: 872px; }
+  .placar-barra { position: absolute; left: 0; bottom: 0; width: 112px; border-radius: 10px 10px 0 0; background: color-mix(in srgb, var(--sobre-noite) 26%, var(--noite)); transform-origin: 50% 100%; }
+  .placar-nome { position: absolute; left: 50%; bottom: 14px; writing-mode: vertical-rl; transform: translateX(-50%) rotate(180deg); font: 700 var(--esc-1)/1.4 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+  .placar-val { position: absolute; left: -20px; width: 152px; text-align: center; font: 700 36px/1.2 var(--fonte-titulo); font-variant-numeric: tabular-nums; }
+  .placar-topo { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .placar-topo path { fill: none; stroke: var(--cor-destaque); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .placar-rodape { position: absolute; left: 120px; top: 898px; font: 500 36px/1.3 var(--fonte-titulo); color: var(--suave-sobre-noite); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div id="palco"><div id="mundo">
+
+  <!-- ===== Bloco 1: o que é IA ===== -->
+  <!-- capa (cena própria, abre sozinha, fundo claro por causa do logo): o logo oficial entra, o fio se traça e o título
+       sobe linha a linha -->
+  <section data-slide="capa">
+    <div class="logo-cj" role="img" aria-label="co.juris"></div>
+    <i class="cp-fio"></i>
+    <div class="cp-txt">
+      <p class="rotulo">Curso de IA · Aula 1</p>
+      <h1 class="display cp-tit"><span>O que é IA</span><span>e qual usar</span></h1>
+      <p class="cp-sub">A IA escreve bem. Você confere como?</p>
+    </div>
+  </section>
+
+  <section data-slide="mapa" data-arquetipo="tempo">
+    <p class="rotulo">Roteiro</p>
+    <h2 class="manchete">Entender vem antes de escolher</h2>
+    <ol class="etapas">
+      <li class="agora"><b>1</b>o que é</li>
+      <li><b>2</b>como funciona</li>
+      <li><b>3</b>onde tropeça</li>
+      <li><b>4</b>qual usar</li>
+      <li><b>5</b>aberto ou fechado</li>
+    </ol>
+  </section>
+
+  <section data-slide="definicao" data-arquetipo="comparacao">
+    <p class="rotulo">O que é IA</p>
+    <h2 class="manchete">IA imita capacidades humanas</h2>
+    <p class="linha-top" data-entra="0.1">Sistema que recebe dados, acha padrões e gera previsões ou conteúdo.</p>
+    <div class="janela"><p class="display letra m">Entrada</p><p class="etiqueta">dados</p>
+      <p class="janela-txt">Foto da placa de um carro.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra m">Saída</p><p class="etiqueta">previsão ou conteúdo</p>
+      <p class="janela-txt">O texto da placa.</p></div>
+  </section>
+
+  <!-- definições em partes (cena própria, um clique por parte): OCDE no claro, PL na noite (apuracao-2.md, item 6) -->
+  <section data-slide="ocde">
+    <p class="rotulo">O que é IA</p>
+    <h2 class="manchete">A OCDE define IA em cinco partes</h2>
+    <ol class="partes">
+      <li><span>“baseado em máquina”</span></li>
+      <li><span>“objetivos explícitos ou implícitos”</span></li>
+      <li><span>“infere, do que recebe, como gerar saídas”</span></li>
+      <li><span>“previsões, conteúdos, recomendações, decisões”</span></li>
+      <li><span>“autonomia e adaptação variam”</span></li>
+    </ol>
+    <div class="explica">
+      <p>É programa de computador, não pessoa nem regra no papel.</p>
+      <p>Persegue um alvo, dado por alguém ou embutido no treino.</p>
+      <p>Não segue receita fixa: deduz a resposta do que recebe.</p>
+      <p>O que sai tem efeito no mundo, físico ou virtual.</p>
+      <p>Uns agem sozinhos, outros não; uns mudam com o uso.</p>
+    </div>
+    <p class="pilula">tradução livre</p>
+  </section>
+
+  <section data-slide="pl" class="noite">
+    <p class="rotulo">O que é IA</p>
+    <h2 class="manchete">O PL 2338 ajusta a OCDE</h2>
+    <ol class="partes">
+      <li><span>“baseado em máquina”</span></li>
+      <li><span>“graus diferentes de autonomia”</span></li>
+      <li><span>“objetivos explícitos ou implícitos”</span></li>
+      <li><span>“infere, dos dados que recebe, resultados”</span></li>
+      <li><span>“ambiente virtual, físico ou real”</span></li>
+    </ol>
+    <div class="explica">
+      <p>Como na OCDE: programa de computador.</p>
+      <p>Novo: a autonomia entra na definição.</p>
+      <p>Como na OCDE: persegue um alvo.</p>
+      <p>Deduz a resposta do que recebe.</p>
+      <p>Novo: acrescenta o ambiente real.</p>
+    </div>
+    <p class="rodape">Senado aprovou em 10/12/2024; Câmara aguarda parecer.</p>
+  </section>
+
+  <section data-slide="cotidiano" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Cotidiano</p>
+    <p class="respiro"><span>Você já usa</span><span><span class="sinal">IA</span> todo dia</span></p>
+    <p class="respiro-sub" data-entra="0.5">Waze, Netflix, spam, rosto, teclado.</p>
+  </section>
+
+  <section data-slide="regras" data-arquetipo="comparacao">
+    <p class="rotulo">O que é IA</p>
+    <h2 class="manchete">Regras escritas ou padrões aprendidos</h2>
+    <div class="janela"><p class="display letra m">Regras</p><p class="etiqueta">IA simbólica</p>
+      <p class="janela-txt">Pessoas escrevem: palavra suspeita no e-mail, então é spam.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra m">Padrões</p><p class="etiqueta">aprendizado de máquina</p>
+      <p class="janela-txt">O sistema vê milhares de e-mails marcados e aprende sozinho.</p></div>
+  </section>
+
+  <!-- linha do tempo da IA (apuracao-2.md, item 10): cada data com fonte lida em 23/10/2026 -->
+  <section data-slide="historia" data-arquetipo="tempo">
+    <p class="rotulo">O que é IA</p>
+    <h2 class="manchete">A IA tem 70 anos; o ChatGPT, quase 4</h2>
+    <ol class="etapas">
+      <li><b>1956</b>IA simbólica</li>
+      <li><b>anos 80</b>sistemas especialistas</li>
+      <li><b>anos 90</b>aprendizado de máquina</li>
+      <li><b>2012</b>aprendizado profundo</li>
+      <li><b>2017</b>transformers</li>
+      <li class="agora"><b>2022</b>ChatGPT</li>
+    </ol>
+    <p class="tempo-leg">No caminho, GPT-3 em 2020; GPT-6 em 07/10/2026.</p>
+  </section>
+
+  <section data-slide="tipos" data-arquetipo="respiro">
+    <p class="respiro"><span>Específica faz uma;</span><span><span class="sinal">generalista</span>, várias</span></p>
+    <p class="respiro-sub" data-entra="0.5">Uso geral, não IA geral (AGI).</p>
+  </section>
+
+  <section data-slide="pratica1" data-arquetipo="objetos" class="noite">
+    <p class="rotulo">Prática 1, 3 min</p>
+    <h2 class="manchete">Você classifica seis sistemas</h2>
+    <p class="etiqueta">Ao sinal</p>
+    <div class="entrada"></div>
+    <p class="pedido">1 dedo: específica. 2 dedos: generalista.</p>
+    <ol class="passos-p">
+      <li data-entra="0.45"><b>1</b><span>radar de placas</span></li>
+      <li data-entra="0.55"><b>2</b><span>ChatGPT</span></li>
+      <li data-entra="0.65"><b>3</b><span>filtro de spam</span></li>
+      <li data-entra="0.75"><b>4</b><span>recomendação de loja</span></li>
+      <li data-entra="0.85"><b>5</b><span>Gemini</span></li>
+      <li data-entra="0.95"><b>6</b><span>detector de fraude no cartão</span></li>
+    </ol>
+    <p class="pratica-nota" data-entra="1.3">Voluntário: tarefa do filtro e da recomendação.</p>
+  </section>
+
+  <section data-slide="gabarito" data-arquetipo="ramos">
+    <p class="rotulo">Prática 1</p>
+    <h2 class="manchete">Quatro específicas, duas generalistas</h2>
+    <div class="ramo" data-y="450">
+      <div class="estacao"><b>radar</b><small>placas</small></div>
+      <div class="estacao"><b>spam</b><small>filtro</small></div>
+      <div class="estacao"><b>loja</b><small>recomendação</small></div>
+      <div class="estacao"><b>fraude</b><small>cartão</small></div>
+      <p class="caixa-txt">específica:<br>uma tarefa</p>
+    </div>
+    <div class="ramo" data-y="720">
+      <div class="estacao"><b>ChatGPT</b><small>OpenAI</small></div>
+      <div class="estacao"><b>Gemini</b><small>Google</small></div>
+      <p class="caixa-txt">generalista:<br>várias tarefas</p>
+    </div>
+    <p class="ramos-leg">Vale o sistema descrito, não o nome do produto.</p>
+  </section>
+
+  <!-- cena própria: quatro cartões (nenhum arquétipo mostra quatro itens sem ordem nem imagem) -->
+  <section data-slide="generativa">
+    <p class="rotulo">O que é IA</p>
+    <h2 class="manchete">A generativa cria, não só classifica</h2>
+    <div class="cartoes c4">
+      <div class="cartao"><p class="ct-tit g">Texto</p><p class="ct-txt">minuta de ofício</p></div>
+      <div class="cartao"><p class="ct-tit g">Imagem</p><p class="ct-txt">fluxograma do rito</p></div>
+      <div class="cartao"><p class="ct-tit g">Áudio</p><p class="ct-txt">ementa lida em voz</p></div>
+      <div class="cartao"><p class="ct-tit g">Código</p><p class="ct-txt">fórmula de prazo na planilha</p></div>
+    </div>
+    <p class="pilula">exemplos ilustrativos</p>
+  </section>
+
+  <section data-slide="previsao" data-arquetipo="respiro">
+    <p class="rotulo">O que é IA</p>
+    <p class="respiro"><span>Parece</span><span>criatividade;</span><span>é <span class="sinal">previsão</span></span></p>
+  </section>
+
+  <!-- ===== Bloco 2: como funciona ===== -->
+  <section data-slide="funciona" data-arquetipo="abertura" class="noite">
+    <p class="rotulo">Como funciona</p>
+    <div class="display ab-linha">Como</div>
+    <div class="display ab-linha sinal">funciona</div>
+    <div class="display ab-linha">por dentro</div>
+    <p class="ab-sub">Pesos, tokens, previsão e a mesa.</p>
+  </section>
+
+  <section data-slide="corpus" data-arquetipo="numero">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Ela treinou com trilhões de pedaços</h2>
+    <p class="display numero">+32 trilhões</p>
+    <p class="numero-leg">de tokens (pedaços de texto)</p>
+    <p class="rodape" data-entra="0.7">DeepSeek V4, 2026: mais de 32 trilhões (ficha oficial, Hugging Face).</p>
+  </section>
+
+  <!-- ponta (cena própria, dois cliques): a analogia dos botões de ajuste, frase pedida pelo professor em 23/10/2026; no
+       segundo clique, o tamanho oficial dos abertos de ponta, com o marco de 1 trilhão (apuracao-2.md, item 12) -->
+  <section data-slide="ponta" class="noite">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Os de ponta passam de 1 trilhão de pesos</h2>
+    <div class="pn-frase">
+      <p>Uma rede neural é feita de bilhões de botões de ajuste: os <span class="sinal">pesos</span>, ou parâmetros.</p>
+      <p>Treinar é girar esses botões até as respostas ficarem boas.</p>
+    </div>
+    <svg class="pn-botoes" viewBox="0 0 1920 1080"></svg>
+    <div class="pn-tab">
+      <div class="pn-l" data-v="2.8"><span class="pn-n">Kimi K3</span><span class="pn-v">2,8 trilhões</span><span class="pn-t"><span class="pn-b"></span><i class="pn-marco"></i></span></div>
+      <div class="pn-l" data-v="2.4"><span class="pn-n">Qwen3.8 Max</span><span class="pn-v">2,4 trilhões</span><span class="pn-t"><span class="pn-b"></span><i class="pn-marco"></i></span></div>
+      <div class="pn-l" data-v="1"><span class="pn-n">Mistral Large 4</span><span class="pn-v">1 trilhão</span><span class="pn-t"><span class="pn-b"></span><i class="pn-marco"></i></span></div>
+      <div class="pn-l" data-v="0.816"><span class="pn-n">Muse Spark Open</span><span class="pn-v">816 bilhões</span><span class="pn-t"><span class="pn-b"></span><i class="pn-marco"></i></span></div>
+    </div>
+    <p class="pn-fech">Claude, GPT e Gemini não divulgam o tamanho.</p>
+    <p class="rodape">Fichas oficiais, lidas em 23/10/2026.</p>
+  </section>
+
+  <!-- parametros (cena própria, quatro cliques): o pré-treino, em que a última palavra de um texto real é escondida e
+       adivinhada; os pesos giram depois do erro. Desenho aprovado pelo professor em 23/10/2026. -->
+  <section data-slide="parametros">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">O treino ajusta os pesos</h2>
+    <p class="linha-top">Pesos, ou parâmetros: números ajustados no treino, não textos salvos.</p>
+    <p class="ap-et" style="left: 120px; top: 366px">Texto real, inteiro</p>
+    <div class="ap-pal"><span class="ap-w">O</span><span class="ap-w">céu</span><span class="ap-w">é</span><span class="ap-w ap-alvo"><i class="ap-a">azul</i><i class="ap-m">?</i></span></div>
+    <p class="ap-et ap-centro" style="left: 760px; top: 496px; width: 400px">Os pesos</p>
+    <div class="ap-caixa"></div>
+    <svg class="ap-svg" viewBox="0 0 1920 1080"></svg>
+    <p class="ap-et ap-veso" style="left: 330px; top: 560px">O modelo vê só isto</p>
+    <p class="ap-et ap-palp" style="left: 1360px; top: 556px">Palpite da palavra</p>
+    <div class="ap-ch ap-sai" style="left: 1360px; top: 600px; width: 440px; height: 100px">verde</div>
+    <p class="ap-erro" style="left: 1360px; top: 716px">errou</p>
+    <p class="ap-volta" style="left: 960px; top: 826px">corrige os botões</p>
+    <p class="rodape">No uso, os botões ficam parados: sua mensagem passa por eles e vira a resposta.</p>
+  </section>
+
+  <!-- reforco (cena própria, três cliques): depois do pré-treino, o modelo escreve duas respostas, recebe notas e os
+       pesos giram a favor da de nota alta -->
+  <section data-slide="reforco">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Depois, o reforço: notas, não gabarito</h2>
+    <p class="linha-top">Aqui não há texto certo para copiar; há uma nota para cada resposta.</p>
+    <p class="ap-et ap-centro" style="left: 760px; top: 496px; width: 400px">Os pesos</p>
+    <div class="ap-caixa"></div>
+    <svg class="ap-svg" viewBox="0 0 1920 1080"></svg>
+    <div class="ap-ch ap-perg" style="left: 120px; top: 600px; width: 440px; height: 100px">Uma pergunta</div>
+    <div class="ap-ch ap-resp ap-ra" style="left: 1330px; top: 440px; width: 470px; height: 130px"><b>Resposta A</b><span>clara e correta</span><em class="ap-nota">9</em></div>
+    <div class="ap-ch ap-resp ap-rb" style="left: 1330px; top: 640px; width: 470px; height: 130px"><b>Resposta B</b><span>confusa</span><em class="ap-nota">2</em></div>
+    <p class="ap-volta" style="left: 960px; top: 826px">favorece respostas como a A</p>
+    <p class="rodape">A nota vem de pessoas que comparam respostas ou de uma conferência automática.</p>
+  </section>
+
+  <section data-slide="calcula" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Como funciona</p>
+    <p class="respiro"><span>Sem busca,</span><span>ela calcula;</span><span>não <span class="sinal">consulta</span></span></p>
+  </section>
+
+  <!-- cena própria: a palavra se parte nos tokens medidos (apuracao.md, item 5) -->
+  <section data-slide="tokens">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Ela lê pedaços, não palavras</h2>
+    <div class="tk-linha" style="top: 350px"><span class="tk">in</span><span class="tk">constit</span><span class="tk">ucional</span><span class="tk">idade</span></div>
+    <p class="tk-conta" style="top: 318px">4<small>tokens</small></p>
+    <div class="tk-linha" style="top: 580px"><span class="tk">O</span><span class="tk"> ré</span><span class="tk">u</span><span class="tk"> agrav</span><span class="tk">ou</span><span class="tk"> da</span><span class="tk"> decisão</span><span class="tk">.</span></div>
+    <p class="tk-conta" style="top: 548px">8<small>tokens</small></p>
+    <p class="rodape">Tokenizador da OpenAI (o200k_base), medido em 22/10/2026.</p>
+  </section>
+
+  <section data-slide="parecer" data-arquetipo="numero">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Parecer de 3 páginas: 2.056 tokens</h2>
+    <p class="display numero">2.056</p>
+    <p class="numero-leg">tokens em 1.486 palavras: 1,38 por palavra</p>
+    <p class="rodape" data-entra="0.7">Parecer fictício; tokenizador da OpenAI (o200k_base), 22/10/2026.</p>
+  </section>
+
+  <section data-slide="pratica2" data-arquetipo="objetos" class="noite">
+    <p class="rotulo">Prática 2, 4 min</p>
+    <h2 class="manchete">Palavras viram blocos na tela</h2>
+    <p class="etiqueta">Cole só esta frase</p>
+    <div class="entrada"></div>
+    <p class="pedido">O réu agravou da decisão.</p>
+    <ol class="passos-p">
+      <li data-entra="0.6"><b>1</b><span>Abra o tokenizador e cole a frase.</span></li>
+      <li data-entra="0.8"><b>2</b><span>Conte os blocos coloridos.</span></li>
+    </ol>
+    <a class="link-p" data-entra="0.9" href="https://platform.openai.com/tokenizer" target="_blank" rel="noopener">platform.openai.com/tokenizer</a>
+  </section>
+
+  <!-- embedding (cena própria, dois cliques): cada token vira uma lista de números (valores ilustrativos, pedido do professor em
+       23/10/2026); no segundo clique, "banco" de sentar e "banco" do dinheiro caem em lugares diferentes do mapa -->
+  <section data-slide="embedding">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Cada token vira uma lista de números</h2>
+    <div class="em-a">
+      <div class="ap-ch em-tok">banco</div>
+      <p class="em-seta">→</p>
+      <div class="em-vet"><span>0,21</span><span>−0,87</span><span>0,05</span><span>0,63</span><span>0,34</span><span>−0,12</span><span>0,78</span><span>−0,45</span><span class="em-mais">…</span></div>
+      <p class="em-leg">Ponto de partida: o mesmo vetor para "banco" em qualquer frase.</p>
+    </div>
+    <div class="em-b">
+      <p class="em-fr" style="top: 400px">Sentei no <mark>banco</mark> da praça.</p>
+      <p class="em-fr" style="top: 580px">Abri conta no <mark>banco</mark>.</p>
+      <p class="em-fr" style="top: 740px; font-size: 36px; color: var(--cor-tinta-suave)">A atenção lê a frase toda e ajusta o vetor de cada token.</p>
+      <p class="ap-et em-mt">Depois das camadas de atenção</p>
+      <div class="em-mapa">
+        <i class="em-pt" style="left: 120px; top: 80px"></i><span class="em-pl" style="left: 120px; top: 80px">cadeira</span>
+        <i class="em-pt" style="left: 330px; top: 160px"></i><span class="em-pl" style="left: 330px; top: 160px">praça</span>
+        <i class="em-pt" style="left: 110px; top: 280px"></i><span class="em-pl" style="left: 110px; top: 280px">sentar</span>
+        <i class="em-pt" style="left: 430px; top: 260px"></i><span class="em-pl" style="left: 430px; top: 260px">juros</span>
+        <i class="em-pt" style="left: 660px; top: 440px"></i><span class="em-pl" style="left: 660px; top: 440px">conta</span>
+        <i class="em-pt" style="left: 430px; top: 440px"></i><span class="em-pl" style="left: 430px; top: 440px">dinheiro</span>
+        <i class="em-pt ouro" style="left: 200px; top: 175px"></i><span class="em-pg" style="left: 200px; top: 117px">banco</span>
+        <i class="em-pt ouro" style="left: 560px; top: 390px"></i><span class="em-pg" style="left: 560px; top: 332px">banco</span>
+      </div>
+    </div>
+    <p class="rodape">Valores ilustrativos; na prática são milhares de números por token.</p>
+  </section>
+
+  <section data-slide="previsto" data-arquetipo="escolha">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">A IA prevê um token por vez</h2>
+    <div class="frase"><span>A sentença foi</span> <span id="pv-w1">publicada</span> <span id="pv-w2">ontem</span></div>
+    <ol class="leque" data-alvo="pv-w1"><li data-pct="44">publicada</li><li data-pct="31">proferida</li><li data-pct="8">anulada</li></ol>
+    <ol class="leque" data-alvo="pv-w2"><li data-pct="39">ontem</li><li data-pct="28">hoje</li><li data-pct="17">em</li></ol>
+    <p class="pilula">probabilidades inventadas para explicar</p>
+  </section>
+
+  <section data-slide="pratica3" data-arquetipo="objetos" class="noite">
+    <p class="rotulo">Prática 3, 3 min</p>
+    <h2 class="manchete">O mesmo pedido pode variar</h2>
+    <p class="etiqueta">Pedido</p>
+    <div class="entrada"></div>
+    <p class="pedido">Complete com uma frase: O juiz julgou o pedido</p>
+    <ol class="passos-p">
+      <li data-entra="0.6"><b>1</b><span>Envie no Claude ou no ChatGPT.</span></li>
+      <li data-entra="0.75"><b>2</b><span>Nova conversa; repita duas vezes.</span></li>
+      <li data-entra="0.9"><b>3</b><span>Anote: igual ou diferente?</span></li>
+    </ol>
+    <p class="pratica-nota" data-entra="1.2">Sem botão: veja as tentativas projetadas.</p>
+  </section>
+
+  <section data-slide="sorteio" data-arquetipo="escolha">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Cada resposta é um sorteio com pesos</h2>
+    <div class="frase"><span>O juiz julgou o pedido</span> <span id="st-w">improcedente</span></div>
+    <ol class="leque" data-alvo="st-w" data-sorteio><li data-pct="46">procedente</li><li class="vence" data-pct="38">improcedente</li><li data-pct="9">parcialmente</li><li data-pct="5">prejudicado</li></ol>
+    <p class="frase-leg">sorteada, não a mais provável</p>
+    <p class="no-app" data-entra="0.25"><b>O que vimos no app</b>Finais diferentes para o mesmo pedido.</p>
+    <p class="pilula">mecanismo ilustrado, valores inventados</p>
+  </section>
+
+  <!-- mesa (cena própria, desenhada por código): o retângulo enche de blocos; o anexo que não cabe fica de fora -->
+  <section data-slide="mesa">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">A janela de contexto é a mesa</h2>
+    <p class="etiqueta ms-et">a mesa: o que a IA vê agora</p>
+    <div class="ms-mesa"></div>
+    <div class="ms-bl" style="top: 806px; height: 80px">instrução</div>
+    <div class="ms-bl" style="top: 662px; height: 130px">conversa</div>
+    <div class="ms-bl" style="top: 462px; height: 186px">anexos</div>
+    <div class="ms-bl ms-resp" style="top: 348px; height: 100px">espaço da resposta</div>
+    <p class="etiqueta ms-et2">não coube: fica de fora</p>
+    <div class="ms-bl ms-fora">outro anexo</div>
+  </section>
+
+  <section data-slide="tamanho" data-arquetipo="numero">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">A mesa tem tamanho</h2>
+    <p class="display numero">1 milhão</p>
+    <p class="numero-leg">de tokens: mais de mil páginas</p>
+    <p class="rodape" data-entra="0.7">Claude Opus 5.5, planos pagos (ajuda da Anthropic, out/2026).</p>
+  </section>
+
+  <section data-slide="limite" data-arquetipo="comparacao" class="noite">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Passou do limite, algo fica de fora</h2>
+    <div class="janela"><p class="display letra m">Cabe</p><p class="etiqueta">histórico dentro da mesa</p>
+      <p class="janela-txt">Tudo entra na mesa.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra m">Não cabe</p><p class="etiqueta">histórico maior que a mesa</p>
+      <p class="janela-txt">O começo é resumido ou deixado de fora.</p></div>
+  </section>
+
+  <!-- queda (cena própria): o acerto cai com o tamanho do texto (apuracao-2.md, itens 2.3 a 2.6) -->
+  <section data-slide="queda">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Quanto maior o texto, mais o acerto cai</h2>
+    <div class="qd" style="top: 330px" data-v="99.3"><span class="qd-n">texto curto</span><span class="qd-t"><span class="qd-b"></span></span><span class="qd-v">99,3%</span></div>
+    <div class="qd" style="top: 500px" data-v="69.7"><span class="qd-n">32 mil tokens</span><span class="qd-t"><span class="qd-b"></span><span class="qd-perda"></span></span><span class="qd-v">69,7%</span></div>
+    <p class="qd-achado">Achar uma frase solta é fácil; ligar dados espalhados num texto longo ainda falha.</p>
+    <p class="rodape">GPT-4o no teste NoLiMa (2025); ver também Chroma (2025) e Anthropic (2026).</p>
+  </section>
+
+  <section data-slide="conversa" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Contexto</p>
+    <p class="respiro"><span>Conversa nova,</span><span>mesa <span class="sinal">limpa</span></span></p>
+    <p class="respiro-sub" data-entra="0.5">Salvo memória ligada: veja as configurações.</p>
+  </section>
+
+  <!-- memória (apuracao-2.md, item 3): o que é (cena própria), como controlar (comparação), sigilo (fios) -->
+  <section data-slide="memoria" class="noite">
+    <p class="rotulo">Memória</p>
+    <h2 class="manchete">A memória leva notas à conversa nova</h2>
+    <p class="etiqueta mm-et1">memória: notas sobre você</p>
+    <div class="mm-cad"><i style="top: 70px; width: 380px"></i><i style="top: 150px; width: 420px"></i><i style="top: 230px; width: 320px"></i></div>
+    <p class="etiqueta mm-et2">conversa nova</p>
+    <div class="mm-mesa"></div>
+    <svg class="seta mm-seta" viewBox="0 0 1920 1080"><path d="M690 520H1110"/><path d="M1084 494L1112 520L1084 546"/></svg>
+    <div class="mm-nota"><i style="top: 26px; width: 240px"></i><i style="top: 62px; width: 180px"></i></div>
+    <p class="mm-leg">O app escolhe o que parece útil e põe na mesa.</p>
+    <p class="rodape">ChatGPT: memórias salvas e conversas anteriores. Claude: tópicos e busca.</p>
+  </section>
+
+  <section data-slide="controle" data-arquetipo="comparacao" class="noite">
+    <p class="rotulo">Memória</p>
+    <h2 class="manchete">Você vê, corrige e apaga a memória</h2>
+    <div class="janela"><p class="display letra m">ChatGPT</p><p class="etiqueta">configurações, personalização</p>
+      <p class="janela-txt">Conversa temporária: não cria memória nem fica no histórico.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra m">Claude</p><p class="etiqueta">configurações, memória</p>
+      <p class="janela-txt">Conversa anônima: não cria memória nem fica no histórico.</p></div>
+  </section>
+
+  <section data-slide="sigilo" data-arquetipo="fios">
+    <p class="rotulo">Memória e sigilo</p>
+    <h2 class="manchete">Apagar a conversa não apaga a memória</h2>
+    <div class="fontes">
+      <p class="no" data-arquivo id="fn-oai">ajuda da OpenAI</p>
+      <p class="no" data-arquivo id="fn-ant">ajuda da Anthropic</p>
+    </div>
+    <div class="minuta">
+      <p class="linha" data-fonte="fn-oai"><span>Dado de processo pode virar memória.</span></p>
+      <p class="linha" data-fonte="fn-oai"><span>Temporária guarda cópia por até <span style="white-space: nowrap">30 dias.</span></span></p>
+      <p class="linha" data-fonte="fn-ant"><span><span class="marca">Apagar a conversa</span> não apaga a memória.</span></p>
+    </div>
+  </section>
+
+  <section data-slide="passos" data-arquetipo="tempo">
+    <p class="rotulo">Como funciona</p>
+    <h2 class="manchete">Do corpus à resposta, em cinco passos</h2>
+    <ol class="etapas">
+      <li><b>1</b>corpus treina</li>
+      <li><b>2</b>treino ajusta os pesos</li>
+      <li><b>3</b>pedido vira tokens</li>
+      <li><b>4</b>tudo entra na mesa</li>
+      <li class="agora"><b>5</b>previsão gera a resposta</li>
+    </ol>
+  </section>
+
+  <!-- ===== Bloco 3: onde tropeça ===== -->
+  <section data-slide="linguagem" data-arquetipo="respiro">
+    <p class="rotulo">Onde brilha</p>
+    <h2 class="manchete">Ela vai bem em linguagem</h2>
+    <p class="respiro"><span>Resumir, rascunhar,</span><span>traduzir, explicar,</span><span><span class="sinal">classificar</span></span></p>
+  </section>
+
+  <section data-slide="avianca" data-arquetipo="fios">
+    <p class="rotulo">Onde tropeça</p>
+    <h2 class="manchete">Ela inventa com a mesma confiança</h2>
+    <div class="fontes">
+      <p class="no" data-arquivo id="fn-ordem">ordem de sanção</p>
+    </div>
+    <div class="minuta">
+      <p class="cab">Mata v. Avianca, Nova York, 2023</p>
+      <p class="linha" data-fonte="fn-ordem"><span><span class="marca">Seis decisões</span> citadas não existiam.</span></p>
+      <p class="linha" data-fonte="fn-ordem"><span>Mantiveram as citações após o alerta.</span></p>
+      <p class="linha" data-fonte="fn-ordem"><span>Multa de US$ 5.000, em 22/06/2023.</span></p>
+      <p class="linha"><span>“Varghese”, “Shaboon”, “Martinez”</span></p>
+      <p class="sem-fonte">inventadas pelo ChatGPT</p>
+    </div>
+  </section>
+
+  <section data-slide="pratica4" data-arquetipo="objetos" class="noite">
+    <p class="rotulo">Prática 4, 6 min</p>
+    <h2 class="manchete">Você confere se o acórdão existe</h2>
+    <div class="entrada"></div>
+    <p class="pedido">Cite 3 acórdãos do STJ, com número, sobre responsabilidade civil do Estado por omissão</p>
+    <ol class="passos-p">
+      <li data-entra="1.0"><b>1</b><span>Busca desligada, se der.</span></li>
+      <li data-entra="1.15"><b>2</b><span>Confira na pesquisa do STJ.</span></li>
+      <li data-entra="1.3"><b>3</b><span>Diga: confere, não encontrei, <span style="white-space: nowrap">tema diferente.</span></span></li>
+    </ol>
+    <a class="link-p" data-entra="1.4" href="https://processo.stj.jus.br/SCON/" target="_blank" rel="noopener">processo.stj.jus.br/SCON</a>
+  </section>
+
+  <section data-slide="conferiram" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Prática 4</p>
+    <p class="respiro"><span>Os números</span><span><span class="sinal">conferiram?</span></span></p>
+    <p class="cats"><span data-entra="0.5">não encontrei</span><span data-entra="0.6">tema diferente</span><span data-entra="0.7">confere</span></p>
+  </section>
+
+  <!-- fronteira irregular (cena própria, dois cliques): contorno serrilhado; exemplos jurídicos do professor
+       (apuracao-2.md, item 7.3); número do estudo publicado (item 7.1) -->
+  <section data-slide="fronteira">
+    <p class="rotulo">Onde tropeça</p>
+    <h2 class="manchete">A fronteira da IA é irregular</h2>
+    <svg class="fr-svg" viewBox="0 0 1920 1080"><path class="fr-area"/></svg>
+    <p class="etiqueta fr-et-dentro">dentro</p>
+    <i class="fr-ponto" style="left: 400px; top: 470px"></i><p class="fr-tx" style="left: 436px; top: 450px">minutar ofício</p>
+    <i class="fr-ponto" style="left: 400px; top: 560px"></i><p class="fr-tx" style="left: 436px; top: 540px">resumir petição</p>
+    <i class="fr-ponto" style="left: 400px; top: 650px"></i><p class="fr-tx" style="left: 436px; top: 630px">listar argumentos</p>
+    <p class="etiqueta fr-et-fora">fora</p>
+    <i class="fr-ponto fora" data-fora style="left: 1240px; top: 440px"></i><p class="fr-tx" data-fora style="left: 1276px; top: 420px">conferir precedente</p>
+    <i class="fr-ponto fora" data-fora style="left: 1290px; top: 570px"></i><p class="fr-tx" data-fora style="left: 1326px; top: 550px">prazo com feriado local</p>
+    <i class="fr-ponto fora" data-fora style="left: 1240px; top: 700px"></i><p class="fr-tx" data-fora style="left: 1276px; top: 680px">cruzar documentos dos autos</p>
+    <p class="fr-num" data-fora>Fora dela, o acerto caiu de <b>84,5%</b> para <b>60–70%</b>.</p>
+    <p class="rodape" data-fora>Dell'Acqua et al., 2023 e 2026.</p>
+    <p class="pilula">exemplos do professor</p>
+  </section>
+
+  <section data-slide="responde" data-arquetipo="tempo">
+    <p class="rotulo">Onde tropeça</p>
+    <h2 class="manchete">Quem usa responde pelo que entrega</h2>
+    <ol class="etapas">
+      <li><b>1</b>dar contexto</li>
+      <li><b>2</b>supervisionar</li>
+      <li class="agora"><b>3</b>validar</li>
+      <li><b>4</b>corrigir</li>
+    </ol>
+  </section>
+
+  <section data-slide="pior" data-arquetipo="respiro">
+    <p class="rotulo">Tendência</p>
+    <p class="respiro"><span>Hoje é a <span class="sinal">pior</span> IA</span><span>que você usará</span></p>
+  </section>
+
+  <!-- ===== Bloco 4: qual a melhor IA ===== -->
+  <section data-slide="melhor" data-arquetipo="abertura" class="noite">
+    <p class="rotulo">Qual a melhor IA</p>
+    <div class="display ab-linha">Qual é a</div>
+    <div class="display ab-linha sinal">melhor</div>
+    <div class="display ab-linha">IA?</div>
+    <p class="ab-sub">Melhor para quê?</p>
+  </section>
+
+  <section data-slide="benchmark" data-arquetipo="numero">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">Benchmark é o ENEM da IA</h2>
+    <div class="grade" data-marcas="1101111011"></div>
+    <p class="display numero"><span class="conta">0</span> de 10</p>
+    <div class="numero-trilho"><div class="numero-barra"></div></div>
+    <p class="pilula">ilustrativo</p>
+  </section>
+
+  <!-- cena própria: seis cartões, como em generativa -->
+  <section data-slide="medidas">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">Seis coisas que os benchmarks medem</h2>
+    <div class="cartoes c3">
+      <div class="cartao"><p class="ct-tit">Raciocínio</p><p class="ct-sub">problemas em etapas</p></div>
+      <div class="cartao"><p class="ct-tit">Programação</p><p class="ct-sub">escrever e corrigir código</p></div>
+      <div class="cartao"><p class="ct-tit">Agentes</p><p class="ct-sub">tarefas com ferramentas</p></div>
+      <div class="cartao"><p class="ct-tit">Contexto longo</p><p class="ct-sub">documentos enormes</p></div>
+      <div class="cartao"><p class="ct-tit">Instruções</p><p class="ct-sub">seguir o formato pedido</p></div>
+      <div class="cartao"><p class="ct-tit">Confiabilidade</p><p class="ct-sub">não inventar</p></div>
+    </div>
+  </section>
+
+  <!-- rankings (cena própria): Artificial Analysis geral e jurídico, arena.ai de agentes (apuracao-2.md, itens 4 e 5) -->
+  <section data-slide="aageral">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">No índice geral, o Opus 5.5 vai à frente</h2>
+    <p class="linha-top">Nota de 0 a 100 em dez provas; o eixo começa em 50.</p>
+    <div class="rk sete" data-inicio="50" data-escala="60">
+      <div class="rk-l" data-v="58"><span class="rk-n">Claude Opus 5.5</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">58</span></div>
+      <div class="rk-l" data-v="56"><span class="rk-n">Claude Sonnet 5.5</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">56</span></div>
+      <div class="rk-l" data-v="56"><span class="rk-n">Muse Wonder Full</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">56</span></div>
+      <div class="rk-l" data-v="53"><span class="rk-n">Claude Fable 5.1</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">53</span></div>
+      <div class="rk-l" data-v="53"><span class="rk-n">GPT-6 Astra</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">53</span></div>
+      <div class="rk-l" data-v="53"><span class="rk-n">Gemini 4 Argon</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">53</span></div>
+      <div class="rk-l" data-v="52"><span class="rk-n">Muse Wonder</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">52</span></div>
+    </div>
+    <p class="rodape">Intelligence Index v4.3.2, 22/10/2026; melhor variante de cada modelo.</p>
+  </section>
+
+  <!-- Legal Index (cena própria): o que é, numa frase, e os pesos numa barra só (apuracao-2.md, item 4.2) -->
+  <section data-slide="legal" class="noite">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">O índice jurídico pesa seis habilidades</h2>
+    <p class="linha-top">Nota de 0 a 100 em tarefas jurídicas, quase todas estrangeiras.</p>
+    <div class="lg-barra">
+      <div class="lg-fatia" data-v="35"></div><div class="lg-fatia" data-v="25"></div><div class="lg-fatia" data-v="15"></div>
+      <div class="lg-fatia" data-v="10"></div><div class="lg-fatia" data-v="10"></div><div class="lg-fatia" data-v="5"></div>
+    </div>
+    <svg class="lg-svg" viewBox="0 0 1920 1080"></svg>
+    <p class="lg-rot" data-i="0" data-lado="cima"><b>35%</b>conhecimento jurídico</p>
+    <p class="lg-rot" data-i="1" data-lado="baixo"><b>25%</b>trabalho de agente</p>
+    <p class="lg-rot" data-i="2" data-lado="cima"><b>15%</b>raciocínio</p>
+    <p class="lg-rot" data-i="3" data-lado="baixo"><b>10%</b>textos longos</p>
+    <p class="lg-rot" data-i="4" data-lado="cima"><b>10%</b>não inventar</p>
+    <p class="lg-rot" data-i="5" data-lado="baixo"><b>5%</b>ferramentas</p>
+    <p class="rodape">Artificial Analysis, metodologia lida em 22/10/2026.</p>
+  </section>
+
+  <section data-slide="aalegal">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">No índice jurídico, o Opus 5.5 lidera</h2>
+    <div class="rk" style="top: 320px" data-inicio="50" data-escala="65">
+      <div class="rk-l" data-v="63"><span class="rk-n">Claude Opus 5.5</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">63</span></div>
+      <div class="rk-l" data-v="60"><span class="rk-n">Claude Fable 5.1</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">60</span></div>
+      <div class="rk-l" data-v="60"><span class="rk-n">Gemini 4 Argon</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">60</span></div>
+      <div class="rk-l" data-v="59"><span class="rk-n">GPT-6 Astra</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">59</span></div>
+      <div class="rk-l" data-v="58"><span class="rk-n">GPT-6.1 Sol</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">58</span></div>
+      <div class="rk-l" data-v="56"><span class="rk-n">Claude Sonnet 5.5</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">56</span></div>
+      <div class="rk-l" data-v="55"><span class="rk-n">Muse Wonder Full</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">55</span></div>
+      <div class="rk-l" data-v="54"><span class="rk-n">Grok 4.7</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">54</span></div>
+      <div class="rk-l" data-v="52"><span class="rk-n">Muse Wonder</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">52</span></div>
+      <div class="rk-l" data-v="52"><span class="rk-n">Gemini 3.8 Flash</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">52</span></div>
+    </div>
+    <p class="rodape">Legal Index, 22/10/2026; uma variante por modelo; eixo a partir de 50.</p>
+  </section>
+
+  <section data-slide="processo" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Limite</p>
+    <p class="respiro"><span>Prova não é</span><span><span class="sinal">processo</span></span></p>
+    <p class="respiro-sub" data-entra="0.5">No caso real, nada vem limpo.</p>
+  </section>
+
+  <section data-slide="arena" data-arquetipo="tempo">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">Na arena, pessoas votam às cegas</h2>
+    <ol class="etapas">
+      <li><b>1</b>uma pergunta</li>
+      <li><b>2</b>duas respostas sem nome</li>
+      <li><b>3</b>a pessoa vota</li>
+      <li class="agora"><b>4</b>os nomes aparecem</li>
+    </ol>
+    <p class="tempo-leg">Os votos formam o placar: <a href="https://arena.ai" target="_blank" rel="noopener">arena.ai</a></p>
+  </section>
+
+  <!-- Text Arena (conversa), dados lidos pelo professor em 22/10/2026 (apuracao-2.md, item 5.5); eixo aproximado -->
+  <section data-slide="textarena" class="noite">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">Na conversa, o Gemini 4 Argon lidera</h2>
+    <p class="linha-top">Pontos dos votos às cegas; o eixo começa em 1490.</p>
+    <div class="rk sete arena" data-inicio="1490" data-escala="1520">
+      <div class="rk-l" data-v="1517"><span class="rk-n">Gemini 4 Argon</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">1517 ±7</span></div>
+      <div class="rk-l" data-v="1509"><span class="rk-n">Claude Opus 5.5</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">1509 ±7</span></div>
+      <div class="rk-l" data-v="1509"><span class="rk-n">Muse Wonder</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">1509 ±8</span></div>
+      <div class="rk-l" data-v="1503"><span class="rk-n">Claude Fable 5</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">1503 ±4</span></div>
+      <div class="rk-l" data-v="1503"><span class="rk-n">Claude Fable 5.1</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">1503 ±6</span></div>
+    </div>
+    <p class="rodape">arena.ai, Text Arena: 8.946.356 votos, 22/10/2026; Gemini, preliminar.</p>
+  </section>
+
+  <section data-slide="agentes">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">Como agente, o Opus 5.5 abre vantagem</h2>
+    <p class="linha-top">Pontos percentuais acima do modelo médio, em tarefas reais.</p>
+    <div class="rk">
+      <div class="rk-l" data-v="20.92"><span class="rk-n">Claude Opus 5.5</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">20,92%</span></div>
+      <div class="rk-l" data-v="14.70"><span class="rk-n">GPT-6 Astra</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">14,70%</span></div>
+      <div class="rk-l" data-v="14.17"><span class="rk-n">Claude Fable 5.1</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">14,17%</span></div>
+      <div class="rk-l" data-v="13.55"><span class="rk-n">GPT-6.1 Sol</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">13,55%</span></div>
+      <div class="rk-l" data-v="12.67"><span class="rk-n">Claude Sonnet 5.5</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">12,67%</span></div>
+      <div class="rk-l" data-v="12.03"><span class="rk-n">Gemini 4 Argon</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">12,03%</span></div>
+      <div class="rk-l" data-v="11.26"><span class="rk-n">Muse Wonder Full</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">11,26%</span></div>
+      <div class="rk-l" data-v="9.36"><span class="rk-n">GPT-6 Sol</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">9,36%</span></div>
+      <div class="rk-l" data-v="8.31"><span class="rk-n">Claude Fable 5</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">8,31%</span></div>
+      <div class="rk-l" data-v="8.09"><span class="rk-n">Claude Opus 5</span><span class="rk-t"><span class="rk-b"></span></span><span class="rk-v">8,09%</span></div>
+    </div>
+    <p class="rodape">arena.ai, Top 10 Agents: 367.936.358 sessões, 22/10/2026.</p>
+  </section>
+
+  <section data-slide="mede" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Qual a melhor IA</p>
+    <p class="respiro"><span>Benchmark mede</span><span>prova; arena,</span><span><span class="sinal">preferência</span></span></p>
+  </section>
+
+  <section data-slide="prova" data-arquetipo="numero">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">Demos a prova da PGE às IAs</h2>
+    <p class="display numero">180</p>
+    <p class="numero-leg">pontos: prova discursiva da PGE-MS, 2021</p>
+    <p class="prova-det" style="top: 400px" data-entra="0.7">12 dissertativas de 10</p>
+    <p class="prova-det" style="top: 470px" data-entra="0.85">1 parecer de 30</p>
+    <p class="prova-det" style="top: 540px" data-entra="1.0">1 peça de 30</p>
+    <p class="rodape" data-entra="1.3">Correção: dois modelos Gemma 4, com gabarito e espelho.</p>
+  </section>
+
+  <!-- S.T.A.R. da aula: percentuais do gráfico do professor (briefing, Fontes); cena própria, sem data-arquetipo -->
+  <section data-slide="placar" class="noite">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">Nesta prova, o topo ficou próximo</h2>
+    <svg class="placar-topo" viewBox="0 0 1920 1080"><path/></svg>
+    <div class="placar-col" data-v="91.7"><p class="placar-val">91,7</p><div class="placar-barra"><p class="placar-nome">Claude Opus 5.5</p></div></div>
+    <div class="placar-col" data-v="90.9"><p class="placar-val">90,9</p><div class="placar-barra"><p class="placar-nome">Gemini 4 Argon</p></div></div>
+    <div class="placar-col" data-v="88.7"><p class="placar-val">88,7</p><div class="placar-barra"><p class="placar-nome">Claude Sonnet 5.5</p></div></div>
+    <div class="placar-col" data-v="86.8"><p class="placar-val">86,8</p><div class="placar-barra"><p class="placar-nome">Muse Wonder</p></div></div>
+    <div class="placar-col" data-v="83.4"><p class="placar-val">83,4</p><div class="placar-barra"><p class="placar-nome">GPT-6.1 Sol</p></div></div>
+    <div class="placar-col" data-v="79.4"><p class="placar-val">79,4</p><div class="placar-barra"><p class="placar-nome">GPT-6 Luna</p></div></div>
+    <div class="placar-col" data-v="78.0"><p class="placar-val">78,0</p><div class="placar-barra"><p class="placar-nome">Muse Spark 1.3</p></div></div>
+    <div class="placar-col" data-v="77.8"><p class="placar-val">77,8</p><div class="placar-barra"><p class="placar-nome">Gemini 3.8 Flash</p></div></div>
+    <div class="placar-col" data-v="75.5"><p class="placar-val">75,5</p><div class="placar-barra"><p class="placar-nome">Claude Haiku 5.5</p></div></div>
+    <div class="placar-col" data-v="64.4"><p class="placar-val">64,4</p><div class="placar-barra"><p class="placar-nome">DeepSeek V4.1 Flash</p></div></div>
+    <p class="placar-rodape">% dos 180 pontos; 1 prova (PGE-MS 2021), correção por IA, não é ranking geral</p>
+  </section>
+
+  <section data-slide="limites" data-arquetipo="comparacao">
+    <p class="rotulo">Qual a melhor IA</p>
+    <h2 class="manchete">O que essa nota não diz</h2>
+    <div class="janela"><p class="display letra m">Prova</p><p class="etiqueta">o que ela mede</p>
+      <p class="janela-txt">Uma prova só; a de 2021 pode ter sido vista no treino.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra">Correção</p><p class="etiqueta">quem deu a nota</p>
+      <p class="janela-txt">Feita por modelo, não por banca; prova não é trabalho.</p></div>
+  </section>
+
+  <!-- ===== Bloco 5: fechado e aberto ===== -->
+  <section data-slide="aberto" data-arquetipo="abertura" class="noite">
+    <p class="rotulo">Fechados e abertos</p>
+    <div class="display ab-linha">Fechado ou</div>
+    <div class="display ab-linha sinal">aberto?</div>
+    <p class="ab-sub">Onde o modelo roda.</p>
+  </section>
+
+  <section data-slide="pesos" data-arquetipo="comparacao" class="noite">
+    <p class="rotulo">Fechados e abertos</p>
+    <h2 class="manchete">Aberto é ter os pesos</h2>
+    <div class="janela"><p class="display letra m">Fechado</p><p class="etiqueta">só pelo serviço</p>
+      <p class="janela-txt">Você usa pelo app ou sistema de quem vende.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra m">Aberto</p><p class="etiqueta">pesos: os parâmetros</p>
+      <p class="janela-txt">Baixados e rodados em servidor próprio, conforme licença, configuração e controles do órgão.</p></div>
+  </section>
+
+  <!-- cena própria: grade com o logo oficial de cada produto (midia/logos, sem alteração; créditos em midia/creditos.json) -->
+  <section data-slide="fechados">
+    <p class="rotulo">Mercado</p>
+    <h2 class="manchete">Os principais modelos fechados</h2>
+    <p class="ct-leg">empresa, família e produto</p>
+    <div class="cartoes c3">
+      <div class="cartao"><div class="ct-cab"><img class="ct-logo" src="midia/logos/openai.svg" alt="OpenAI"><p class="ct-tit">OpenAI</p></div><p class="ct-txt">GPT-6</p><p class="ct-sub">ChatGPT</p></div>
+      <div class="cartao"><div class="ct-cab"><img class="ct-logo" src="midia/logos/claude.svg" alt="Claude"><p class="ct-tit">Anthropic</p></div><p class="ct-txt">Claude 5.5</p><p class="ct-sub">Claude</p></div>
+      <div class="cartao"><div class="ct-cab"><img class="ct-logo" src="midia/logos/gemini.svg" alt="Gemini"><p class="ct-tit">Google</p></div><p class="ct-txt">Gemini 4</p><p class="ct-sub">Gemini</p></div>
+      <div class="cartao"><div class="ct-cab"><img class="ct-logo" src="midia/logos/grok.svg" alt="Grok"><p class="ct-tit">xAI (SpaceXSI)</p></div><p class="ct-txt">Grok 4.7</p><p class="ct-sub">Grok</p></div>
+      <div class="cartao"><div class="ct-cab"><img class="ct-logo" src="midia/logos/meta-ai.svg" alt="Meta AI"><p class="ct-tit">Meta</p></div><p class="ct-txt">Muse Spark</p><p class="ct-sub">Meta AI</p></div>
+      <div class="cartao"><div class="ct-cab"><img class="ct-logo" src="midia/logos/copilot.svg" alt="Copilot"><p class="ct-tit">Microsoft</p></div><p class="ct-txt">GPT e Claude</p><p class="ct-sub">Copilot</p></div>
+    </div>
+    <p class="rodape">Família mais recente em 22/10/2026; o modelo varia por plano.</p>
+  </section>
+
+  <section data-slide="abertos">
+    <p class="rotulo">Mercado</p>
+    <h2 class="manchete">Os principais modelos abertos</h2>
+    <p class="ct-leg">família e empresa</p>
+    <div class="cartoes c4">
+      <div class="cartao ct-col"><img class="ct-logo" src="midia/logos/meta.svg" alt="Meta"><p class="ct-tit">Muse Spark Open</p><p class="ct-sub">Meta; também Llama 4</p></div>
+      <div class="cartao ct-col"><img class="ct-logo" src="midia/logos/gemma.png" alt="Gemma"><p class="ct-tit">Gemma 4</p><p class="ct-sub">Google</p></div>
+      <div class="cartao ct-col"><img class="ct-logo" src="midia/logos/openai.svg" alt="OpenAI"><p class="ct-tit">gpt-oss</p><p class="ct-sub">OpenAI</p></div>
+      <div class="cartao ct-col"><img class="ct-logo" src="midia/logos/deepseek.svg" alt="DeepSeek"><p class="ct-tit">DeepSeek V4</p><p class="ct-sub">DeepSeek</p></div>
+      <div class="cartao ct-col"><img class="ct-logo" src="midia/logos/qwen.svg" alt="Qwen"><p class="ct-tit">Qwen3.8</p><p class="ct-sub">Alibaba</p></div>
+      <div class="cartao ct-col"><img class="ct-logo" src="midia/logos/mistral.svg" alt="Mistral"><p class="ct-tit">Large 3</p><p class="ct-sub">Mistral</p></div>
+      <div class="cartao ct-col"><img class="ct-logo" src="midia/logos/kimi.png" alt="Kimi"><p class="ct-tit">Kimi K3</p><p class="ct-sub">Moonshot</p></div>
+      <div class="cartao ct-col"><img class="ct-logo" src="midia/logos/zai.svg" alt="Z.ai"><p class="ct-tit">GLM-5.3</p><p class="ct-sub">Z.ai</p></div>
+    </div>
+    <p class="rodape">Seleção verificada em 22/10/2026.</p>
+  </section>
+
+  <section data-slide="corrida" data-arquetipo="comparacao" class="noite">
+    <p class="rotulo">Mercado</p>
+    <h2 class="manchete">Na ponta, EUA e China disputam</h2>
+    <div class="janela"><p class="display letra g">EUA</p><p class="etiqueta">fechados do topo e abertos</p>
+      <p class="janela-txt">OpenAI, Anthropic, Google, xAI, Meta, Microsoft</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra g">China</p><p class="etiqueta">abertos fortes</p>
+      <p class="janela-txt">DeepSeek, Alibaba, Moonshot, Z.ai</p></div>
+    <p class="rodape" data-entra="1.5">Na Europa, a francesa Mistral.</p>
+  </section>
+
+  <section data-slide="fecho" data-arquetipo="fecho" class="noite">
+    <p class="rotulo">Para levar</p>
+    <h2 class="display fecho-msg"><span>Escolha por tarefa</span><span>e teste <span class="sinal">você</span></span></h2>
+    <ol class="fecho-passos">
+      <li><b>1</b>Teste com o seu material.</li>
+      <li><b>2</b>Use mais de uma IA.</li>
+      <li><b>3</b>Confira na fonte, sempre.</li>
+    </ol>
+    <p class="rodape" data-entra="1.4">Aula 2: como pedir bem.</p>
+  </section>
+
+  <!-- encerramento (cena própria, fundo claro por causa do logo), no espírito da capa -->
+  <section data-slide="encerramento">
+    <div class="logo-cj" role="img" aria-label="co.juris"></div>
+    <i class="cp-fio"></i>
+    <div class="cp-txt">
+      <p class="rotulo">Curso de IA</p>
+      <h2 class="display cp-tit"><span>Obrigado</span></h2>
+      <p class="cp-sub">Intervalo agora; depois, a Aula 2.</p>
+    </div>
+  </section>
+
+</div></div>
+
+<script type="module">
+import {palco, revelar, surgir, tracar, contar, digitar, voar, molaAR, faixa, saida, clamp, lerp} from '../../motor/palco.js';
+import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
+
+// Cinco blocos da linha do dia, somando 90 minutos (briefing.md, Mapa).
+const blocos = [
+  {id: 'o-que-e', rotulo: 'O que é IA', minutos: 16},
+  {id: 'funciona', rotulo: 'Como funciona', minutos: 29},
+  {id: 'tropeca', rotulo: 'Onde tropeça', minutos: 14},
+  {id: 'melhor', rotulo: 'Qual a melhor', minutos: 18},
+  {id: 'abertos', rotulo: 'Fechado e aberto', minutos: 13},
+];
+
+// Uma linha por slide, na ordem da aula; o titulo é a manchete do roteiro (briefing.md, tabela Slides). As notas são o
+// guia do apresentador: diga (a fala), faca (o que fazer) e transicao (a ponte para o próximo slide).
+const slides = [
+  // Bloco 1, o que é IA (16 min)
+  {id: 'capa', titulo: 'O que é IA e qual usar', bloco: 'o-que-e', linhaDia: false, segura: 3, passos: [2.6],
+   notas: {diga: 'Boa tarde. Eu sou o professor desta tarde, pela co.juris. A aula de hoje responde a duas perguntas: o que é IA e qual usar. E deixa uma terceira no ar, que está na tela: a IA escreve bem; você confere como?',
+     faca: ['a capa toca sozinha quando o deck abre; esperar a sala sentar', 'apresentar-se e apresentar o curso em um minuto'],
+     transicao: 'Primeiro, o caminho da tarde.'}},
+  {id: 'mapa', titulo: 'Entender vem antes de escolher',
+   notas: {diga: 'São cinco paradas: o que é IA, como funciona, onde tropeça, qual é a melhor e a diferença entre modelo fechado e aberto. Os dados de mercado foram verificados em 22/10/2026.',
+     faca: ['mostrar a linha embaixo da tela: ela marca o bloco em que estamos'],
+     transicao: 'Começo pela pergunta mais simples: o que é IA?'}},
+  {id: 'definicao', titulo: 'IA imita capacidades humanas',
+   notas: {diga: 'IA imita capacidades humanas: reconhecer imagem, entender e gerar texto, prever. Uma definição de trabalho: recebe dados, acha padrões e devolve previsão ou conteúdo. A foto da placa vira o texto da placa.',
+     faca: ['pedir à sala outro exemplo de entrada e saída'],
+     transicao: 'A OCDE escreveu isso com mais cuidado; vamos ler parte por parte.'}},
+  {id: 'ocde', titulo: 'A OCDE define IA em cinco partes', passos: [2.0, 1.3, 1.3, 1.3, 1.3],
+   notas: {diga: 'Esta é a definição da OCDE, revista em 2023, em tradução livre. Leio um trecho por clique e explico com palavras do dia a dia. O verbo central é inferir: a IA deduz a resposta, não segue receita.',
+     faca: ['um clique por parte, cinco no total', 'ler o trecho da esquerda e a explicação da direita',
+       'texto inteiro, se pedirem: sistema baseado em máquina que, para objetivos explícitos ou implícitos, infere, a partir da entrada que recebe, como gerar saídas, como previsões, conteúdos, recomendações ou decisões, que podem influenciar ambientes físicos ou virtuais; os sistemas variam em autonomia e adaptação depois de implantados (OECD/LEGAL/0449)'],
+     transicao: 'O projeto de lei brasileiro copia quase tudo, com três ajustes.'}},
+  {id: 'pl', titulo: 'O PL 2338 ajusta a OCDE', passos: [2.0, 1.3, 1.3, 1.3, 1.3],
+   notas: {diga: 'O PL 2338/2023 tem a mesma base: máquina que infere, do que recebe, como gerar resultados. Muda três coisas: põe a autonomia dentro da definição, fala em dados ou informações no lugar de entrada e acrescenta o ambiente real; a adaptação depois de implantado não aparece. É projeto: o Senado aprovou em 10/12/2024 e a Câmara ainda não deu parecer.',
+     faca: ['um clique por parte, cinco no total', 'situação conferida em 22/10/2026; reconferir a ficha da Câmara na véspera'],
+     transicao: 'Definição no papel; agora, onde vocês já encontram IA.'}},
+  {id: 'cotidiano', titulo: 'Você já usa IA todo dia',
+   notas: {diga: 'O Waze escolhe a rota, a Netflix recomenda, o e-mail separa o spam, o celular reconhece o rosto e o teclado sugere a palavra. Tudo isso é IA.',
+     faca: ['perguntar quem usou um desses hoje, com a mão levantada'],
+     transicao: 'Essas IAs funcionam de dois jeitos diferentes.'}},
+  {id: 'regras', titulo: 'Regras escritas ou padrões aprendidos',
+   notas: {diga: 'No primeiro jeito, pessoas escrevem as regras: se o e-mail tem certa palavra, é spam. No segundo, o sistema vê milhares de e-mails já marcados e aprende o padrão sozinho.',
+     faca: ['pedir um exemplo de regra escrita do próprio trabalho'],
+     transicao: 'Do segundo jeito nascem os modelos de linguagem.'}},
+  {id: 'historia', titulo: 'A IA tem 70 anos; o ChatGPT, quase 4',
+   notas: {diga: 'A IA nasceu como campo em 1956, num encontro de verão em Dartmouth, nos Estados Unidos: era a IA simbólica, de regras escritas. Nos anos 80, empresas do mundo todo adotaram os sistemas especialistas, também de regras. Nos anos 90 e 2000, o aprendizado de máquina tomou a frente: aprender o padrão com dados. Em 2012, a rede AlexNet venceu a competição ImageNet com folga e abriu a era do aprendizado profundo. Em 2017, o artigo Attention Is All You Need trouxe os transformers, a base dos LLMs. O GPT-3 veio em 2020, e o ChatGPT foi lançado em 30/11/2022: um produto novo sobre uma técnica que já existia. O GPT-6 chegou ao ChatGPT em 07/10/2026.',
+     faca: ['seguir a linha com a mão, da esquerda para a direita', 'ChatGPT foi o lançamento, não a origem dos LLMs', 'fontes: apuracao-2.md, item 10'],
+     transicao: 'Outra divisão útil: quantas tarefas a IA faz.'}},
+  {id: 'tipos', titulo: 'Específica faz uma; generalista, várias',
+   notas: {diga: 'A IA específica faz uma tarefa, como ler placas. A generalista faz muitas: texto, código, imagem. Generalista quer dizer uso geral; não é a tal IA geral, a AGI.',
+     faca: [], transicao: 'Vamos testar se ficou claro.'}},
+  {id: 'pratica1', titulo: 'Você classifica seis sistemas', pratica: 3,
+   notas: {diga: 'Leio os seis sistemas. Ao meu sinal, cada um levanta um dedo para específica ou dois para generalista, um item por vez.',
+     faca: ['ler os seis em voz alta', 'dar o sinal item por item e observar a divisão da sala', 'pedir a um voluntário a tarefa do filtro de spam e a da recomendação'],
+     transicao: 'Vejam o gabarito.'}},
+  {id: 'gabarito', titulo: 'Quatro específicas, duas generalistas',
+   notas: {diga: 'Radar, spam, recomendação e fraude fazem uma tarefa cada: são específicas. ChatGPT e Gemini fazem várias: são generalistas. Vale o sistema descrito, não a fama do nome.',
+     faca: ['comparar com a divisão que a sala mostrou'],
+     transicao: 'As generalistas de hoje também criam conteúdo.'}},
+  {id: 'generativa', titulo: 'A generativa cria, não só classifica',
+   notas: {diga: 'A IA generativa produz algo novo: texto, imagem, áudio e código. Os exemplos da tela são ilustrativos, tirados do dia a dia jurídico.',
+     faca: ['pedir à sala um uso real de um dos quatro tipos'],
+     transicao: 'Agora, a frase que resume a aula.'}},
+  {id: 'previsao', titulo: 'Parece criatividade; é previsão',
+   notas: {diga: 'O que parece criatividade é previsão: a IA calcula qual pedaço de texto vem depois. O próximo bloco mostra como essa conta é feita.',
+     faca: [], transicao: 'Vamos abrir a máquina.'}},
+
+  // Bloco 2, como funciona (30 min)
+  {id: 'funciona', titulo: 'Como funciona por dentro', bloco: 'funciona', linhaDia: false,
+   notas: {diga: 'Segundo bloco: o que acontece por dentro. São quatro peças: pesos, tokens, previsão e a mesa, que é a janela de contexto.',
+     faca: [], transicao: 'Primeiro, de onde ela aprendeu.'}},
+  {id: 'corpus', titulo: 'Ela treinou com trilhões de pedaços',
+   notas: {diga: 'Antes de conversar com alguém, o modelo é treinado com uma quantidade enorme de texto: livros, sites, artigos e código. O DeepSeek V4, modelo aberto chinês de 2026, foi treinado com mais de 32 trilhões de tokens, pela ficha oficial. Token é um pedaço de texto, e daqui a pouco vocês veem um.',
+     faca: ['fonte: ficha do DeepSeek-V4-Pro no Hugging Face, lida em 23/10/2026', 'os fechados não publicam esse número'],
+     transicao: 'Com esse texto todo, o modelo ajusta os seus pesos. O que é um peso?'}},
+  {id: 'ponta', titulo: 'Os de ponta passam de 1 trilhão de pesos', passos: [2.4, 2.6],
+   notas: {diga: 'Pensem numa mesa de som com bilhões de botões de ajuste. Cada botão é um peso; peso e parâmetro são a mesma coisa. Treinar é girar esses botões, um pouco de cada vez, até as respostas ficarem boas. No segundo clique, o tamanho dos maiores modelos abertos, pelas fichas oficiais: Kimi K3, 2,8 trilhões; Qwen3.8 Max, 2,4 trilhões; Mistral Large 4, 1 trilhão; Muse Spark Open, da Meta, 816 bilhões. Os fechados, Claude, GPT e Gemini, não divulgam o tamanho. Minha opinião, sem número publicado: devem ser dessa ordem de grandeza.',
+     faca: ['primeiro clique: ler a frase; os botões da fileira são só imagem, sem número', 'segundo clique: os quatro números e o marco de 1 trilhão', 'o tamanho dos fechados é opinião do professor; nenhuma fonte publica',
+       'Mistral Large 4 em prévia desde 06/10/2026, com pesos prometidos para o fim do mês; Kimi K3 e os outros: fichas no Hugging Face',
+       'nos três de cima só uma parte dos pesos trabalha em cada palavra (ativos): 104 bi, 95 bi, 52 bi e 42 bi; só se perguntarem'],
+     transicao: 'E como o treino sabe para que lado girar?'}},
+  {id: 'parametros', titulo: 'O treino ajusta os pesos', passos: [2.4, 2.0, 1.8, 2.6],
+   notas: {diga: 'Antes de conversar com alguém, o modelo faz um exercício simples, bilhões de vezes. Pega um texto real inteiro, como "o céu é azul", esconde o que vem depois e tenta adivinhar. No começo os pesos estão quase aleatórios e ele chuta "verde". Aí o treino revela a palavra certa, vê que errou e gira cada botão um pouquinho, para errar menos na próxima. É o mesmo exercício com trilhões de palavras. No uso, os botões ficam parados: a mensagem de vocês passa por eles e vira resposta, e o texto do treino não fica guardado como arquivo.',
+     faca: ['primeiro clique: o texto inteiro e os botões', 'segundo: a palavra "azul" é escondida e o modelo chuta "verde"', 'terceiro: a palavra é revelada, o modelo errou', 'quarto: os botões giram e ele acerta; ler a frase do rodapé sobre o uso',
+       'o exemplo é só para explicar; o "verde" é inventado', 'modelos de conversa escondem a próxima palavra; o "mascarado" no meio da frase é de outra família (BERT), só se perguntarem'],
+     transicao: 'Só esse exercício não ensina a conversar. Falta a segunda fase.'}},
+  {id: 'reforco', titulo: 'Depois, o reforço: notas, não gabarito', passos: [2.4, 1.8, 2.0, 2.6],
+   notas: {diga: 'Depois do pré-treino, o modelo sabe prever texto, mas ainda não conversa bem. Na fase seguinte ele recebe uma pergunta e escreve duas respostas. Alguém dá nota: pessoas que comparam as respostas, ou uma conferência automática, como a conta que bateu ou o código que rodou. Aqui não há texto certo para copiar, só a nota. Os botões giram para as respostas de nota alta ficarem mais prováveis e as de nota baixa, menos. É essa fase que ensina o modelo a seguir instruções, conversar e recusar certos pedidos.',
+     faca: ['primeiro clique: a pergunta e os botões', 'segundo: as duas respostas', 'terceiro: as notas; 9 e 2 são inventadas', 'quarto: os botões giram a favor da A',
+       'nome técnico, só se perguntarem: aprendizado por reforço (com feedback humano, RLHF)'],
+     transicao: 'Daí vem a consequência mais importante.'}},
+  {id: 'calcula', titulo: 'Sem busca, ela calcula; não consulta',
+   notas: {diga: 'Sozinho, o modelo não abre um banco de fatos: ele calcula. Quando o app tem a busca ligada, é o app que procura as fontes e entrega ao modelo.',
+     faca: ['perguntar quem já viu o app mostrar links de fonte'],
+     transicao: 'Volto à entrada: o que é esse pedaço de texto, o token?'}},
+  {id: 'tokens', titulo: 'Ela lê pedaços, não palavras',
+   notas: {diga: 'O modelo lê pedaços, não palavras. No tokenizador da OpenAI, inconstitucionalidade vira 4 pedaços, e O réu agravou da decisão vira 8; o espaço vai colado à palavra seguinte e o ponto é um pedaço. Cada fabricante tem o seu tokenizador.',
+     faca: ['medido em 22/10/2026, codificação o200k_base'],
+     transicao: 'Quanto isso dá num texto de verdade?'}},
+  {id: 'parecer', titulo: 'Parecer de 3 páginas: 2.056 tokens',
+   notas: {diga: 'Um parecer fictício de três páginas, com 1.486 palavras, deu 2.056 tokens: 1,38 token por palavra. A ordem de grandeza ajuda: mil palavras dão uns 1.400 tokens.',
+     faca: ['o parecer é fictício, sem dado real'], transicao: 'Agora vocês contam.'}},
+  {id: 'pratica2', titulo: 'Palavras viram blocos na tela', pratica: 4,
+   notas: {diga: 'Vou fazer ao vivo: abro o tokenizador da OpenAI, colo só a frase da tela e contamos juntos os blocos coloridos. Quem tiver o celular à mão pode abrir o mesmo endereço. Nunca colem texto de processo.',
+     faca: ['clicar no endereço da tela: abre em nova aba', 'colar a frase e contar os blocos com a sala', 'não prometer os mesmos blocos em outro tokenizador'],
+     transicao: 'Cada bloco desses ainda vira outra coisa por dentro: números.'}},
+  {id: 'embedding', titulo: 'Cada token vira uma lista de números', passos: [2.6, 3.4],
+   notas: {diga: 'Dentro do modelo, nenhum token fica como texto: cada um vira uma longa lista de números, o embedding. Na tela, oito números de um exemplo, mas na prática são milhares por token. No começo, a palavra "banco" tem um vetor só, o mesmo em qualquer frase, como numa tabela de consulta. Depois vêm as camadas do transformer, que usam a atenção: cada token olha para os outros da frase e o vetor dele se ajusta. Por isso, ao fim das camadas, o "banco" de "sentei no banco da praça" fica perto de cadeira e sentar, e o "banco" de "abri conta no banco" fica perto de juros e dinheiro. O vetor de partida é um só; o que muda com a frase é o vetor depois da atenção.',
+     faca: ['primeiro clique: o token e o vetor de partida, igual em qualquer frase', 'segundo clique: as duas frases e o mapa depois das camadas de atenção', 'os números e o mapa são ilustrativos, inventados para explicar; o rodapé avisa',
+       'se perguntarem se o banco tem dois embeddings: um de entrada, fixo, e um por frase, depois das camadas de atenção; o mapa tem milhares de dimensões, não duas'],
+     transicao: 'Com os tokens já em números, a IA faz uma coisa só: prevê o próximo.'}},
+  {id: 'previsto', titulo: 'A IA prevê um token por vez',
+   notas: {diga: 'A IA recebe o texto, calcula as candidatas para o próximo token, cada uma com uma probabilidade, escolhe uma e repete. Aqui cada palavra é um token, para simplificar, e as probabilidades são inventadas para explicar.',
+     faca: [], transicao: 'Se é escolha com peso, o mesmo pedido pode mudar. Vamos ver.'}},
+  {id: 'pratica3', titulo: 'O mesmo pedido pode variar', pratica: 3,
+   notas: {diga: 'Mandem o pedido da tela no Claude ou no ChatGPT. Abram uma conversa nova e mandem de novo, duas vezes. Anotem: saiu igual ou diferente?',
+     faca: ['sem botão de conversa nova: projetar as três tentativas gravadas antes', 'pedir que comparem com o vizinho'],
+     transicao: 'Por que mudou?'}},
+  {id: 'sorteio', titulo: 'Cada resposta é um sorteio com pesos',
+   notas: {diga: 'O app sorteia entre as candidatas, de acordo com o peso de cada uma, e nem sempre sai a mais provável. Por isso o mesmo pedido varia. Repetir a mesma resposta é sinal de peso alto, não de falha.',
+     faca: ['pedir duas respostas da sala, uma igual e uma diferente', 'valores do leque inventados'],
+     transicao: 'Último conceito: o que o modelo enxerga enquanto responde.'}},
+  {id: 'mesa', titulo: 'A janela de contexto é a mesa', passos: [3.0],
+   notas: {diga: 'A janela de contexto é a mesa de trabalho: tudo o que a IA considera numa resposta está ali. A instrução, a conversa até agora, os anexos e o espaço da própria resposta. O que não cabe fica de fora, e a IA simplesmente não vê.',
+     faca: ['apontar o bloco dourado, fora da mesa'], transicao: 'E qual é o tamanho dessa mesa?'}},
+  {id: 'tamanho', titulo: 'A mesa tem tamanho',
+   notas: {diga: 'No Claude Opus 5.5, nos planos pagos, a mesa tem 1 milhão de tokens, também no app. Pela conta do parecer, são mais de mil páginas. No ChatGPT o limite depende do plano e do modo; no Gemini, vai de 32 mil tokens sem plano a 1 milhão no Pro e no Ultra.',
+     faca: ['fontes: central de ajuda da Anthropic e ajuda do app Gemini, lidas em 22/10/2026'],
+     transicao: 'E quando a conversa passa desse tamanho?'}},
+  {id: 'limite', titulo: 'Passou do limite, algo fica de fora',
+   notas: {diga: 'Enquanto o histórico cabe, tudo entra na mesa. Quando passa do limite, o começo é resumido ou deixado de fora. O Claude resume as mensagens antigas quando a conversa chega perto do limite, segundo a central de ajuda da Anthropic; os outros produtos não documentam o método.',
+     faca: ['conselho prático: em tarefa longa, pedir um resumo e abrir conversa nova'],
+     transicao: 'Mesmo dentro do limite, há um custo.'}},
+  {id: 'queda', titulo: 'Quanto maior o texto, mais o acerto cai', passos: [2.9],
+   notas: {diga: 'Quanto maior o texto, mais o acerto cai, sobretudo quando a resposta exige ligar informações espalhadas. No teste NoLiMa, de 2025, o GPT-4o caiu de 99,3% para 69,7% com 32 mil tokens. A Chroma viu a mesma queda em 18 modelos, em 2025, e a Anthropic mostrou em 2026 que cada modelo cai num ritmo muito diferente.',
+     faca: ['se perguntarem do meio que se perde: é de um estudo de 2023 (Liu et al.) e não vale mais como regra geral'],
+     transicao: 'Por isso vale uma regra simples.'}},
+  {id: 'conversa', titulo: 'Conversa nova, mesa limpa',
+   notas: {diga: 'Conversa nova começa com a mesa limpa. A exceção é a memória do app, quando está ligada.',
+     faca: [], transicao: 'Vamos ver o que é essa memória.'}},
+  {id: 'memoria', titulo: 'A memória leva notas à conversa nova', passos: [3.0],
+   notas: {diga: 'A memória é um caderno de anotações sobre você. Numa conversa nova, o app consulta esse caderno e põe na mesa o que achar útil. No ChatGPT entram memórias salvas e conversas anteriores; no Claude, memória por tópicos e, nos planos pagos, a busca nas conversas passadas.',
+     faca: ['perguntar quem já viu o app lembrar algo de outra conversa'],
+     transicao: 'Dá para controlar esse caderno.'}},
+  {id: 'controle', titulo: 'Você vê, corrige e apaga a memória',
+   notas: {diga: 'No ChatGPT, a memória fica em Configurações, Personalização; no Claude, em Configurações, Memória. Ali se vê, corrige, apaga ou desliga. Para não deixar rastro, a conversa temporária do ChatGPT e a anônima do Claude não criam memória nem entram no histórico.',
+     faca: ['se quiser, mostrar a tela de memória no celular, sem dado real'],
+     transicao: 'E aqui mora o cuidado com sigilo.'}},
+  {id: 'sigilo', titulo: 'Apagar a conversa não apaga a memória',
+   notas: {diga: 'Dado de processo digitado numa conversa comum pode virar memória e voltar em outra conversa. Apagar a conversa não apaga a memória que saiu dela, nos dois produtos: é preciso apagar a memória também. E a conversa temporária não é sigilo absoluto, porque a cópia fica guardada até 30 dias.',
+     faca: ['fontes: páginas de ajuda da OpenAI e da Anthropic, lidas em 22/10/2026'],
+     transicao: 'Fecho o bloco juntando as peças.'}},
+  {id: 'passos', titulo: 'Do corpus à resposta, em cinco passos',
+   notas: {diga: 'O corpus treina; o treino ajusta os pesos; o pedido vira tokens; tudo entra na mesa; e a previsão gera a resposta, um token por vez.',
+     faca: [], transicao: 'Sabendo como funciona, fica fácil ver onde ela brilha e onde tropeça.'}},
+
+  // Bloco 3, onde tropeça (14 min)
+  {id: 'linguagem', titulo: 'Ela vai bem em linguagem', bloco: 'tropeca', andamento: 'corte',
+   notas: {diga: 'Ela vai muito bem em linguagem: resumir, rascunhar, traduzir, explicar em níveis diferentes e classificar.',
+     faca: ['pedir à sala uma tarefa de linguagem do próprio trabalho'],
+     transicao: 'E inventa com a mesma segurança com que acerta.'}},
+  {id: 'avianca', titulo: 'Ela inventa com a mesma confiança',
+   notas: {diga: 'Mata v. Avianca, em Nova York: em 22/06/2023 o juiz sancionou advogados que citaram seis decisões inventadas pelo ChatGPT. Pesou também que eles mantiveram as citações depois do alerta. A multa foi de US$ 5.000.',
+     faca: ['não citar o nome dos advogados', 'fonte: ordem de sanção, 22-cv-1461, S.D.N.Y.'],
+     transicao: 'Será que isso ainda acontece? Vamos testar.'}},
+  {id: 'pratica4', titulo: 'Você confere se o acórdão existe', pratica: 6,
+   notas: {diga: 'Em dupla. Mandem o pedido da tela. Se o app tiver busca, desliguem. Depois eu confiro ao vivo cada número na pesquisa do STJ, e vocês dizem se confere, se não encontraram ou se o tema é diferente.',
+     faca: ['formar as duplas', 'clicar no endereço da tela: abre a pesquisa do STJ em nova aba', 'conferir na tela dois ou três números que a sala ditar'],
+     transicao: 'O que vocês encontraram?'}},
+  {id: 'conferiram', titulo: 'Os números conferiram?',
+   notas: {diga: 'Quero um relato de cada categoria que apareceu: não encontrei, tema diferente, confere. Conferir na fonte continua sendo a regra.',
+     faca: ['ouvir dois ou três relatos'],
+     transicao: 'Por que a mesma IA acerta uma coisa e erra outra parecida?'}},
+  {id: 'fronteira', titulo: 'A fronteira da IA é irregular', passos: [2.6, 2.4],
+   notas: {diga: 'A fronteira do que a IA faz bem é irregular. Dentro dela ficam minutar, resumir o texto entregue e listar argumentos. Fora ficam tarefas que parecem fáceis: conferir precedente, contar prazo com feriado local, cruzar documentos dos autos. No estudo com 758 consultores do BCG, fora da fronteira o acerto caiu de 84,5% para 60 a 70% com a IA.',
+     faca: ['primeiro clique: o contorno e o que fica dentro', 'segundo clique: o que fica fora e o número do estudo', 'os seis exemplos jurídicos são do professor, não do estudo'],
+     transicao: 'Por isso a responsabilidade não muda.'}},
+  {id: 'responde', titulo: 'Quem usa responde pelo que entrega',
+   notas: {diga: 'Quem usa responde pelo que entrega: dar contexto, supervisionar, validar e corrigir. A peça é de quem assina, não da ferramenta.',
+     faca: [], transicao: 'Uma provocação para fechar o bloco.'}},
+  {id: 'pior', titulo: 'Hoje é a pior IA que você usará', andamento: 'capitulo',
+   notas: {diga: 'A IA de hoje é a pior que vocês vão usar daqui para a frente. É uma tendência, não uma previsão com número.',
+     faca: [], transicao: 'Então, qual é a melhor?'}},
+
+  // Bloco 4, qual a melhor IA (20 min)
+  {id: 'melhor', titulo: 'Qual é a melhor IA?', bloco: 'melhor', linhaDia: false,
+   notas: {diga: 'A pergunta que todo mundo faz. A resposta começa com outra pergunta: melhor para quê?',
+     faca: [], transicao: 'Primeiro, como se mede.'}},
+  {id: 'benchmark', titulo: 'Benchmark é o ENEM da IA',
+   notas: {diga: 'Benchmark é uma prova padronizada, como o ENEM: as mesmas questões, com gabarito, que dá para repetir e comparar. Mas prova não é veredito. A nota da tela é ilustrativa.',
+     faca: [], transicao: 'O que essas provas medem?'}},
+  {id: 'medidas', titulo: 'Seis coisas que os benchmarks medem',
+   notas: {diga: 'Seis coisas: raciocínio, programação, agentes, contexto longo, seguir instruções e não inventar. Um modelo pode ser ótimo numa e mediano em outra.',
+     faca: [], transicao: 'A Artificial Analysis junta dez provas num índice só.'}},
+  {id: 'aageral', titulo: 'No índice geral, o Opus 5.5 vai à frente', passos: [2.6],
+   notas: {diga: 'Este é o índice geral da Artificial Analysis, lido em 22/10/2026: nota de 0 a 100 em dez provas, quase todas em inglês. Mostro a melhor versão de cada modelo. O eixo começa em 50, para a diferença aparecer: o Opus 5.5 tem 58, e o sétimo, 52.',
+     faca: ['dizer que o eixo começa em 50, não em zero', 'reconferir na véspera em artificialanalysis.ai'],
+     transicao: 'Existe também um índice só para o jurídico.'}},
+  {id: 'legal', titulo: 'O índice jurídico pesa seis habilidades', passos: [2.6],
+   notas: {diga: 'O Legal Index é uma média ponderada de provas de trabalho jurídico. Mais de um terço do peso é conhecimento jurídico e um quarto é trabalho de agente; não inventar vale 10%. As tarefas são de direito americano e europeu, não brasileiro.',
+     faca: ['apontar a fatia dourada, a maior'], transicao: 'E quem lidera esse índice?'}},
+  {id: 'aalegal', titulo: 'No índice jurídico, o Opus 5.5 lidera', passos: [2.6],
+   notas: {diga: 'No índice jurídico, o Claude Opus 5.5 lidera com 63; Claude Fable 5.1 e Gemini 4 Argon vêm com 60. Uma versão por modelo, como no gráfico da página, lido em 22/10/2026. O eixo começa em 50.',
+     faca: ['dizer que o eixo começa em 50, não em zero'], transicao: 'Mas prova tem limite.'}},
+  {id: 'processo', titulo: 'Prova não é processo',
+   notas: {diga: 'Na prova os dados vêm limpos e a pergunta é clara; no caso real, nada vem limpo.',
+     faca: [], transicao: 'Outra forma de medir: pôr pessoas para votar.'}},
+  {id: 'arena', titulo: 'Na arena, pessoas votam às cegas',
+   notas: {diga: 'Na arena, a pessoa faz uma pergunta, recebe duas respostas sem nome e vota na melhor; só depois os nomes aparecem. Os votos viram um placar. O site hoje se chama arena.ai, e o endereço na tela abre o site.',
+     faca: ['se quiser mostrar, clicar em arena.ai: abre em nova aba'], transicao: 'Na conversa, quem a sala prefere?'}},
+  {id: 'textarena', titulo: 'Na conversa, o Gemini 4 Argon lidera', passos: [2.6],
+   notas: {diga: 'Este é o placar de conversa da arena, a Text Arena, lido em 22/10/2026: quase 9 milhões de votos e 418 modelos. O Gemini 4 Argon lidera com 1517 pontos, nota ainda preliminar; o Claude Opus 5.5 e o Muse Wonder vêm com 1509. O mais-ou-menos é a margem de erro: com 7 ou 8 pontos para cada lado, o topo quase se encosta. O eixo começa em 1490 para a diferença aparecer.',
+     faca: ['dizer que o eixo não começa em zero', 'Text Arena na versão lida pelo professor; a apuração de 22/10 tinha outra leitura (apuracao-2.md, itens 5.2 e 5.5)'],
+     transicao: 'A arena tem também um placar de agentes, em tarefas reais.'}},
+  {id: 'agentes', titulo: 'Como agente, o Opus 5.5 abre vantagem', passos: [2.6],
+   notas: {diga: 'Agente, por enquanto, é uma IA que usa ferramentas para cumprir uma tarefa; na Aula 2 vemos a diferença entre chat e agente com calma. Este é o placar de agentes da arena.ai, da página inicial em 22/10/2026. O número é quanto cada modelo melhora o resultado de tarefas reais em relação ao modelo médio, em pontos percentuais. Resumo: no quadro de agentes, tarefas reais, o Claude lidera; na conversa, o Gemini; e no topo a margem é pequena.',
+     faca: ['367.936.358 sessões é o total mostrado na página inicial; o placar de agentes mostra 2.731.078 sessões em 20/10/2026',
+       'se perguntarem o que é isso: não é prova fixa, é uso real. Pessoas usam um agente (IA que escolhe ferramentas e executa passos) sem saber qual modelo está por trás; cada sessão cai num modelo sorteado. A nota é a diferença, em pontos percentuais, entre o modelo e a média de todos, em sinais como: o usuário confirmou que deu certo, elogiou ou reclamou, a IA obedeceu às correções, os comandos funcionaram, ela não inventou ferramentas (FAQ da arena.ai, lido em 23/10/2026; a página de metodologia não foi lida)'],
+     transicao: 'Resumo das duas formas de medir.'}},
+  {id: 'mede', titulo: 'Benchmark mede prova; arena, preferência',
+   notas: {diga: 'Benchmark mede prova; arena mede preferência. E preferência não é acerto: a resposta que agrada nem sempre é a mais precisa.',
+     faca: [], transicao: 'Por isso fiz a minha própria prova.'}},
+  {id: 'prova', titulo: 'Demos a prova da PGE às IAs',
+   notas: {diga: 'Dei às IAs a prova discursiva da PGE-MS de 2021: 12 questões de 10 pontos, um parecer de 30 e uma peça de 30, 180 pontos no total. A correção foi feita por dois modelos Gemma 4, com gabarito e espelho. É teste meu, não da PGE-MS.',
+     faca: [], transicao: 'O resultado.'}},
+  {id: 'placar', titulo: 'Nesta prova, o topo ficou próximo',
+   notas: {diga: 'Os dois primeiros ficaram a 0,8 ponto um do outro. É uma prova só, corrigida por IA: não é ranking geral.',
+     faca: ['não dizer empate técnico'], transicao: 'O que essa nota não diz.'}},
+  {id: 'limites', titulo: 'O que essa nota não diz',
+   notas: {diga: 'É uma prova só, e a de 2021 pode ter sido vista no treino. A correção foi feita por modelo, não por banca. E prova não é trabalho.',
+     faca: [], transicao: 'Falta a última pergunta: onde o modelo roda.'}},
+
+  // Bloco 5, fechado e aberto (10 min)
+  {id: 'aberto', titulo: 'Fechado ou aberto?', bloco: 'abertos', linhaDia: false,
+   notas: {diga: 'Último bloco: modelo fechado ou aberto. A diferença está em quem tem os pesos, aqueles números da conta.',
+     faca: [], transicao: 'Vamos à diferença.'}},
+  {id: 'pesos', titulo: 'Aberto é ter os pesos',
+   notas: {diga: 'Fechado só se usa pelo app ou pelo sistema de quem vende. Aberto tem os pesos disponíveis para baixar e rodar em servidor próprio, conforme a licença. Aberto não garante sigilo sozinho: depende da configuração e dos controles do órgão.',
+     faca: [], transicao: 'Quem são os fechados.'}},
+  {id: 'fechados', titulo: 'Os principais modelos fechados',
+   notas: {diga: 'OpenAI: GPT-6, em Sol e Luna, no ChatGPT desde 07/10/2026. Anthropic: Claude 5.5 e Fable 5.1. Google: Gemini 4 Argon. xAI, hoje SpaceXSI: Grok 4.7. Meta: Muse Spark no Meta AI, com o Muse Wonder em prévia. Microsoft: Copilot com GPT-6 Sol, GPT-6.1 Sol, Claude Opus 5.5 e Sonnet 5.5, além do modo automático.',
+     faca: ['o modelo exato varia por plano e por licença'], transicao: 'E os abertos.'}},
+  {id: 'abertos', titulo: 'Os principais modelos abertos',
+   notas: {diga: 'Aberto aqui quer dizer peso disponível para baixar, não necessariamente código aberto: a licença muda de família para família. Da Mistral, o Large 4 está em prévia desde 06/10/2026, com pesos prometidos para o fim do mês; por isso o cartão mostra o Large 3.',
+     faca: ['se os pesos do Large 4 saírem antes da aula, trocar o cartão e conferir a licença'],
+     transicao: 'Olhando por país.'}},
+  {id: 'corrida', titulo: 'Na ponta, EUA e China disputam',
+   notas: {diga: 'A ponta fechada é americana; entre os abertos fortes há americanos e chineses; na Europa, a francesa Mistral. O tema volta no fim do curso.',
+     faca: [], transicao: 'Para levar.'}},
+  {id: 'fecho', titulo: 'Escolha por tarefa e teste você', segura: 4,
+   notas: {diga: 'Escolham a IA pela tarefa e testem vocês mesmos: com o seu material, em mais de uma IA, conferindo na fonte. É a resposta à pergunta da capa. Na Aula 2: como pedir bem.',
+     faca: ['voltar à pergunta da capa: você confere na fonte'], transicao: 'Obrigado.'}},
+  {id: 'encerramento', titulo: 'Obrigado', linhaDia: false, segura: 4,
+   notas: {diga: 'Obrigado. Agora o intervalo; depois, a Aula 2.',
+     faca: ['deixar este slide na tela durante o intervalo'], transicao: 'Aula 2.'}},
+];
+
+const m = mundo(slides);
+const $$ = (sec, sel) => [...sec.querySelectorAll(sel)];
+const vis = (el, sim) => { el.style.visibility = sim ? '' : 'hidden'; };
+const NS = 'http://www.w3.org/2000/svg';
+const traco = (pai, d, cls) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); if (cls) p.setAttribute('class', cls); pai.appendChild(p); return p; };
+
+// Capa e encerramento: o logo sobe e aparece, o fio se traça de cima para baixo e o texto entra linha a linha.
+const marca = (id) => {
+  const sec = m.secao(id), logo = sec.querySelector('.logo-cj'), fio = sec.querySelector('.cp-fio');
+  const linhas = [sec.querySelector('.rotulo'), ...$$(sec, '.cp-tit > span'), sec.querySelector('.cp-sub')];
+  let pronto = false;
+  return (t, c) => {
+    if (!pronto) {
+      pronto = true;
+      const tit = sec.querySelector('.cp-tit'), largura = Math.max(...$$(sec, '.cp-tit > span').map((el) => el.offsetWidth));
+      if (largura > 1000) tit.style.fontSize = `${Math.floor(124 * 1000 / largura)}px`;
+    }
+    const x = c.desde(0);
+    surgir(logo, molaAR(x - 0.15, {resposta: 0.7, amortecimento: 0.9}), {dy: 24});
+    fio.style.transform = `scaleY(${saida(faixa(x, 0.55, 1.1)).toFixed(4)})`;
+    linhas.forEach((el, n) => revelar(el, molaAR(x - 0.8 - n * 0.16)));
+    fim(sec, x, 1.6);
+  };
+};
+
+// Definição em partes: um trecho por clique, o atual em destaque, e a explicação dele à direita.
+const partes = (id) => {
+  const sec = m.secao(id), itens = $$(sec, '.partes li'), expl = $$(sec, '.explica p'), rod = sec.querySelector(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c), d = (n) => (n === 0 ? x - 0.1 : c.desde(n));
+    titulo(sec, x, c);
+    let ativo = 0;
+    for (let n = 1; n < itens.length; n++) if (c.desde(n) > 0) ativo = n;
+    itens.forEach((li, n) => {
+      const k = molaAR(d(n));
+      surgir(li, k, {dx: -20, dy: 0});
+      vis(li, k > 0);
+      li.classList.toggle('ativa', n === ativo);
+    });
+    expl.forEach((p, n) => {
+      const sai = n + 1 < expl.length ? faixa(c.desde(n + 1), 0, 0.2) : 0;
+      const k = sai > 0 ? 1 - sai : molaAR(d(n) - 0.2);
+      surgir(p, k, {dy: 18});
+      vis(p, k > 0.001);
+    });
+    if (rod) revelar(rod, molaAR(x - 0.8));
+    fim(sec, x, 1.0);
+  };
+};
+
+// Ponta: a frase dos botões entra e a fileira de botões gira até a posição de cada um (primeiro clique); no segundo,
+// frase e botões saem e as barras dos quatro modelos crescem até o tamanho oficial, com o marco dourado de 1 trilhão em
+// cada uma, a linha dos fechados e a fonte.
+const ponta = (() => {
+  const sec = m.secao('ponta'), frase = $$(sec, '.pn-frase p'), svg = sec.querySelector('.pn-botoes');
+  const ls = $$(sec, '.pn-l').map((el) => ({el, v: Number(el.dataset.v), b: el.querySelector('.pn-b')}));
+  const marcos = $$(sec, '.pn-marco'), fech = sec.querySelector('.pn-fech'), rod = sec.querySelector('.rodape');
+  const MAX = 3;
+  for (const l of ls) l.b.style.width = `${(100 * l.v) / MAX}%`;
+  for (const mc of marcos) mc.style.left = `${(100 / MAX).toFixed(3)}%`;
+  // nove botões numa fileira; cada um gira de -135° até um ângulo próprio (fixo, sem aleatório)
+  const ALVO = [40, -60, 95, 10, -110, 70, -20, 120, -80];
+  const botoes = ALVO.map((a, i) => {
+    const cx = 200 + i * 190, cy = 820, g = document.createElementNS(NS, 'g');
+    const ci = document.createElementNS(NS, 'circle');
+    ci.setAttribute('cx', cx); ci.setAttribute('cy', cy); ci.setAttribute('r', 46);
+    g.appendChild(ci);
+    const p = traco(g, `M${cx} ${cy}L${cx} ${cy - 34}`);
+    p.style.transformOrigin = `${cx}px ${cy}px`;
+    svg.appendChild(g);
+    return {g, p, a};
+  });
+  return (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    // frase e botões saem no segundo clique, quando entram os números
+    const sai = y > 0 ? saida(faixa(y, 0, 0.3)) : 0;
+    frase.forEach((p, n) => { surgir(p, molaAR(x - 0.1 - n * 0.5), {dy: 18}); p.style.opacity = String((1 - sai) * Number(p.style.opacity || 1)); vis(p, sai < 0.999 && x > 0.1 + n * 0.5); });
+    botoes.forEach(({g, p, a}, i) => {
+      const k = molaAR(x - 0.4 - i * 0.06);
+      g.style.opacity = String(clamp(k, 0, 1) * (1 - sai));
+      vis(g, k > 0 && sai < 0.999);
+      const gira = saida(faixa(x, 0.7 + i * 0.04, 1.5 + i * 0.04));
+      p.style.transform = `rotate(${lerp(-135, a, gira).toFixed(2)}deg)`;
+    });
+    // segundo clique
+    ls.forEach(({el, b}, n) => {
+      const k = molaAR(y - 0.1 - n * 0.15);
+      surgir(el, k, {dx: -16, dy: 0});
+      vis(el, y > 0);
+      b.style.transform = `scaleX(${clamp(molaAR(y - 0.3 - n * 0.15), 0, 1.03)})`;
+    });
+    // o marco dourado de 1 trilhão em cada barra, depois de todas crescerem
+    marcos.forEach((mc, n) => { mc.style.transform = `scaleY(${clamp(molaAR(y - 1.1 - n * 0.05), 0, 1)})`; vis(mc, y > 1.05); });
+    revelar(fech, molaAR(y - 1.4));
+    vis(fech, y > 0);
+    revelar(rod, molaAR(y - 1.6));
+    vis(rod, y > 0);
+    fim(sec, x, 1.4);
+  };
+})();
+
+// Parametros e reforço: o diagrama dos botões. Os cliques acendem as etapas; o ângulo de cada botão é fixo, sem aleatório.
+const diagramaPesos = (id, etapas) => {
+  const sec = m.secao(id), svg = sec.querySelector('.ap-svg');
+  const caixa = sec.querySelector('.ap-caixa'), etCx = sec.querySelector('.ap-centro');
+  const ANTES = [25, -50, 70, -15, 40, -70], DEPOIS = [-30, 35, -40, 30, -25, 20];
+  const cx = [860, 960, 1060], cy = [620, 710];
+  const botoes = ANTES.map((a, i) => {
+    const x0 = cx[i % 3], y0 = cy[Math.floor(i / 3)], g = document.createElementNS(NS, 'g');
+    const ci = document.createElementNS(NS, 'circle');
+    ci.setAttribute('cx', x0); ci.setAttribute('cy', y0); ci.setAttribute('r', 34);
+    g.appendChild(ci);
+    const p = traco(g, `M${x0} ${y0}L${x0} ${y0 - 26}`, 'ap-ponteiro');
+    p.style.transformOrigin = `${x0}px ${y0}px`;
+    svg.appendChild(g);
+    return {g, p};
+  });
+  const seta = (d, pontas, cls) => {
+    const g = document.createElementNS(NS, 'g'), linha = traco(g, d, cls || 'ap-seta');
+    const ponta = traco(g, pontas, cls || 'ap-seta');
+    svg.appendChild(g);
+    return {linha, ponta};
+  };
+  const ponta = (x, y, dir) => (dir === 'dir' ? `M${x - 16} ${y - 14}L${x} ${y}L${x - 16} ${y + 14}` : `M${x - 14} ${y + 16}L${x} ${y}L${x + 14} ${y + 16}`);
+  const api = {sec, botoes, ANTES, DEPOIS, nova: seta, ponta};
+  api.gira = (k) => botoes.forEach(({p}, i) => { p.style.transform = `rotate(${lerp(ANTES[i], DEPOIS[i], k).toFixed(2)}deg)`; });
+  api.entra = (x) => {
+    titulo(sec, x, api.c);
+    surgir(caixa, molaAR(x - 0.1), {dy: 0, escala: 0.04});
+    revelar(etCx, molaAR(x - 0.2));
+    botoes.forEach(({g}, i) => { const k = molaAR(x - 0.3 - i * 0.07); g.style.opacity = String(clamp(k, 0, 1)); vis(g, k > 0); });
+  };
+  api.traca = (s, k) => { tracar(s.linha, k); vis(s.ponta, k > 0.92); };
+  return api;
+};
+
+// Parametros: o texto real inteiro; no segundo clique "azul" é escondida e o modelo chuta "verde"; no terceiro a palavra
+// é revelada e o modelo errou; no quarto os botões giram, a seta de correção se desenha e ele acerta.
+const parametros = (() => {
+  const d = diagramaPesos('parametros'), sec = d.sec;
+  const pal = sec.querySelector('.ap-pal'), ws = $$(sec, '.ap-w'), alvo = sec.querySelector('.ap-alvo');
+  const ta = sec.querySelector('.ap-a'), tm = sec.querySelector('.ap-m'), sai = sec.querySelector('.ap-sai');
+  const et = $$(sec, '.ap-et').filter((e) => !e.classList.contains('ap-centro'));
+  const [etReal, etVeso, etPalp] = et, erro = sec.querySelector('.ap-erro'), volta = sec.querySelector('.ap-volta'), rod = sec.querySelector('.rodape');
+  let s1, s2, s3;
+  const montar = () => {
+    if (s1) return;
+    const base = pal.offsetLeft, w3 = ws[2], xs = base + ws[0].offsetLeft + (w3.offsetLeft + w3.offsetWidth - ws[0].offsetLeft) / 2;
+    const yb = pal.offsetTop + pal.offsetHeight;
+    s1 = d.nova(`M${xs} ${yb + 8}V650H750`, d.ponta(752, 650, 'dir'));
+    s2 = d.nova('M1164 650H1350', d.ponta(1352, 650, 'dir'));
+    s3 = d.nova('M1580 706V812H960V788', d.ponta(960, 786, 'cima'), 'ap-volta-tr');
+    etVeso.style.left = `${xs + 20}px`;
+  };
+  return (t, c) => {
+    d.c = c;
+    montar();
+    const x = conteudo(c), y1 = c.desde(1), y2 = c.desde(2), y3 = c.desde(3);
+    d.entra(x);
+    revelar(etReal, molaAR(x - 0.1));
+    ws.forEach((w, n) => surgir(w, molaAR(x - 0.2 - n * 0.14), {dy: 22}));
+    // clique 2: azul é escondida (vira "?") e o modelo vê só o começo
+    const mas = saida(faixa(y1, 0, 0.5)), rev = saida(faixa(y2, 0, 0.5));
+    const escondida = mas * (1 - rev);
+    ta.style.opacity = String(1 - mas + rev);
+    tm.style.opacity = String(escondida);
+    alvo.style.borderColor = escondida > 0.5 ? 'var(--cor-destaque)' : (rev > 0.5 ? 'var(--cor-tinta)' : '');
+    alvo.style.background = escondida > 0.5 ? 'var(--cor-destaque-fraca)' : (rev > 0.5 ? 'var(--cor-tinta)' : '');
+    alvo.style.color = rev > 0.5 ? 'var(--cor-sobre-tinta)' : '';
+    d.traca(s1, saida(faixa(y1, 0.1, 0.7)));
+    revelar(etVeso, molaAR(y1 - 0.4)); vis(etVeso, y1 > 0.3);
+    d.traca(s2, saida(faixa(y1, 0.8, 1.3)));
+    surgir(sai, molaAR(y1 - 1.1), {dy: 18}); vis(sai, y1 > 1.05);
+    revelar(etPalp, molaAR(y1 - 1.0)); vis(etPalp, y1 > 0.95);
+    // clique 3: o modelo errou (palpite tachado)
+    const errou = saida(faixa(y2, 0.3, 0.8)) * (1 - saida(faixa(y3, 0, 0.4)));
+    sai.style.textDecoration = errou > 0.5 ? 'line-through' : 'none';
+    sai.style.borderStyle = errou > 0.5 ? 'dashed' : 'solid';
+    revelar(erro, molaAR(y2 - 0.4) * (1 - saida(faixa(y3, 0, 0.3)))); vis(erro, y2 > 0.35 && y3 < 0.3);
+    // clique 4: os botões giram, a seta de correção se desenha e o palpite passa a ser "azul"
+    d.gira(saida(faixa(y3, 0, 1.4)));
+    d.traca(s3, saida(faixa(y3, 0.1, 1.0)));
+    revelar(volta, molaAR(y3 - 0.9)); vis(volta, y3 > 0.85);
+    const certo = y3 > 1.3;
+    if (sai.textContent !== (certo ? 'azul' : 'verde')) sai.textContent = certo ? 'azul' : 'verde';
+    sai.style.background = certo ? 'var(--cor-tinta)' : '';
+    sai.style.color = certo ? 'var(--cor-sobre-tinta)' : '';
+    sai.style.borderColor = certo ? 'var(--cor-tinta)' : '';
+    revelar(rod, molaAR(y3 - 1.7)); vis(rod, y3 > 1.65);
+    fim(sec, x, 0.6);
+  };
+})();
+
+// Reforço: a pergunta entra no modelo; no segundo clique saem duas respostas; no terceiro, as notas; no quarto, os botões
+// giram a favor da resposta de nota alta.
+const reforco = (() => {
+  const d = diagramaPesos('reforco'), sec = d.sec;
+  const perg = sec.querySelector('.ap-perg'), ra = sec.querySelector('.ap-ra'), rb = sec.querySelector('.ap-rb');
+  const notas = $$(sec, '.ap-nota'), volta = sec.querySelector('.ap-volta'), rod = sec.querySelector('.rodape');
+  let s1, sa, sb, s4;
+  const montar = () => {
+    if (s1) return;
+    s1 = d.nova('M564 650H750', d.ponta(752, 650, 'dir'));
+    sa = d.nova('M1164 630L1318 520', d.ponta(1322, 516, 'dir'));
+    sb = d.nova('M1164 670L1318 700', d.ponta(1322, 702, 'dir'));
+    s4 = d.nova('M1565 776V812H960V788', d.ponta(960, 786, 'cima'), 'ap-volta-tr');
+  };
+  return (t, c) => {
+    d.c = c;
+    montar();
+    const x = conteudo(c), y1 = c.desde(1), y2 = c.desde(2), y3 = c.desde(3);
+    d.entra(x);
+    surgir(perg, molaAR(x - 0.3), {dx: -30, dy: 0});
+    d.traca(s1, saida(faixa(x, 0.6, 1.1)));
+    d.traca(sa, saida(faixa(y1, 0, 0.5))); d.traca(sb, saida(faixa(y1, 0.1, 0.6)));
+    surgir(ra, molaAR(y1 - 0.4), {dx: 30, dy: 0}); vis(ra, y1 > 0.35);
+    surgir(rb, molaAR(y1 - 0.55), {dx: 30, dy: 0}); vis(rb, y1 > 0.5);
+    // clique 3: as notas aparecem; a A (nota alta) fica cheia, a B (nota baixa) fica tracejada e mais fraca
+    notas.forEach((n, i) => { const k = molaAR(y2 - 0.2 - i * 0.2); surgir(n, k, {dy: 0, escala: 0.4}); vis(n, y2 > 0.15 + i * 0.2); });
+    const nota = saida(faixa(y2, 0.2, 0.8));
+    ra.style.background = nota > 0.5 ? 'var(--cor-tinta)' : ''; ra.style.color = nota > 0.5 ? 'var(--cor-sobre-tinta)' : ''; ra.style.borderColor = nota > 0.5 ? 'var(--cor-tinta)' : '';
+    ra.querySelector('span').style.color = nota > 0.5 ? 'var(--cor-suave-sobre-tinta)' : '';
+    rb.style.borderStyle = nota > 0.5 ? 'dashed' : 'solid'; rb.style.color = nota > 0.5 ? 'var(--cor-tinta-suave)' : '';
+    // clique 4: os botões giram e a seta de correção se desenha
+    d.gira(saida(faixa(y3, 0, 1.4)));
+    d.traca(s4, saida(faixa(y3, 0.1, 1.0)));
+    revelar(volta, molaAR(y3 - 0.9)); vis(volta, y3 > 0.85);
+    revelar(rod, molaAR(y3 - 1.4)); vis(rod, y3 > 1.35);
+    fim(sec, x, 0.6);
+  };
+})();
+
+// Embedding: o token vira a lista de números; no segundo clique a lista sai e entram as duas frases com o mapa, em que os
+// dois "banco" caem junto de vizinhos diferentes.
+const embedding = (() => {
+  const sec = m.secao('embedding'), A = sec.querySelector('.em-a'), B = sec.querySelector('.em-b');
+  const tok = sec.querySelector('.em-tok'), seta = sec.querySelector('.em-seta'), cel = $$(sec, '.em-vet span'), leg = sec.querySelector('.em-leg');
+  const frs = $$(sec, '.em-fr'), mt = sec.querySelector('.em-mt'), mapa = sec.querySelector('.em-mapa'), rod = sec.querySelector('.rodape');
+  const pts = $$(sec, '.em-pt'), rots = $$(sec, '.em-pl, .em-pg');
+  return (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    const sai = saida(faixa(y, 0, 0.4));
+    A.style.opacity = String(1 - sai); vis(A, sai < 0.999);
+    surgir(tok, molaAR(x - 0.1), {dx: -30, dy: 0});
+    surgir(seta, molaAR(x - 0.6), {dx: -20, dy: 0});
+    cel.forEach((el, n) => surgir(el, molaAR(x - 0.8 - n * 0.09), {dy: 22}));
+    revelar(leg, molaAR(x - 1.8));
+    B.style.opacity = y > 0.3 ? '1' : '0'; vis(B, y > 0.3);
+    frs.forEach((el, n) => revelar(el, molaAR(y - 0.4 - n * 0.9)));
+    revelar(mt, molaAR(y - 0.6)); surgir(mapa, molaAR(y - 0.6), {dy: 0, escala: 0.04});
+    // pontos: vizinhos primeiro, "banco" por último (A depois da frase 1, B depois da frase 2)
+    const quando = [1.2, 1.3, 1.4, 2.1, 2.2, 2.3, 1.9, 2.9];
+    pts.forEach((el, n) => { const k = molaAR(y - quando[n]); surgir(el, k, {dy: 0, escala: 0.6}); vis(el, y > quando[n] - 0.05); });
+    rots.forEach((el, n) => { const k = molaAR(y - quando[n] - 0.1); el.style.opacity = String(clamp(k * 1.6, 0, 1)); vis(el, y > quando[n]); });
+    revelar(rod, molaAR(x - 1.0)); 
+    fim(sec, x, 1.4);
+  };
+})();
+
+// Mesa: o retângulo aparece, os blocos caem dentro dele de baixo para cima, e o anexo que não cabe para do lado de fora.
+const mesa = (() => {
+  const sec = m.secao('mesa'), caixaMesa = sec.querySelector('.ms-mesa'), bls = $$(sec, '.ms-bl:not(.ms-fora)'), fora = sec.querySelector('.ms-fora');
+  const et = sec.querySelector('.ms-et'), et2 = sec.querySelector('.ms-et2');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    revelar(et, molaAR(x - 0.1));
+    surgir(caixaMesa, molaAR(x + 0.1), {dy: 0, escala: 0.03});
+    bls.forEach((b, n) => surgir(b, molaAR(x - 0.1 - n * 0.22), {dy: b.classList.contains('ms-resp') ? 0 : -60}));
+    surgir(fora, molaAR(x - 1.4, {resposta: 0.55, amortecimento: 0.8}), {dx: 260, dy: 0});
+    revelar(et2, molaAR(x - 1.75));
+    fim(sec, x, 1.9);
+  };
+})();
+
+// Queda: as duas barras crescem; a perda da segunda fica marcada em dourado depois de ela parar.
+const queda = (() => {
+  const sec = m.secao('queda'), ls = $$(sec, '.qd').map((el) => ({el, v: Number(el.dataset.v), b: el.querySelector('.qd-b'), val: el.querySelector('.qd-v')}));
+  const perda = sec.querySelector('.qd-perda'), achado = sec.querySelector('.qd-achado'), rod = sec.querySelector('.rodape');
+  for (const l of ls) l.b.style.width = `${l.v}%`;
+  Object.assign(perda.style, {left: `calc(${ls[1].v}% - 6px)`, width: `calc(${ls[0].v - ls[1].v}% + 12px)`});
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    const k0 = molaAR(x - 0.3), cai = molaAR(x - 0.95, {resposta: 0.6, amortecimento: 0.9});
+    ls.forEach(({el, v, b, val}, n) => {
+      surgir(el, molaAR(x - 0.15 - n * 0.2), {dx: -16, dy: 0});
+      // a primeira cresce até 99,3; a segunda cresce junto e depois encolhe até 69,7
+      const pct = n === 0 ? v * k0 : lerp(ls[0].v * k0, v, clamp(cai, 0, 1.03));
+      b.style.transform = `scaleX(${Math.max(0, pct / v).toFixed(4)})`;
+      contar(val, 1, 0, pct, {casas: 1, sufixo: '%'});
+      val.style.opacity = String(clamp(k0 * 3));
+    });
+    surgir(perda, molaAR(x - 1.5), {dy: 0});
+    revelar(achado, molaAR(x - 1.55));
+    revelar(rod, molaAR(x - 1.75));
+  };
+})();
+
+// Memória: o caderno e a mesa da conversa nova aparecem; uma nota sai do caderno e pousa na mesa.
+const memoria = (() => {
+  const sec = m.secao('memoria'), cad = sec.querySelector('.mm-cad'), mm = sec.querySelector('.mm-mesa'), nota = sec.querySelector('.mm-nota');
+  const e1 = sec.querySelector('.mm-et1'), e2 = sec.querySelector('.mm-et2'), leg = sec.querySelector('.mm-leg'), rod = sec.querySelector('.rodape');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    revelar(e1, molaAR(x - 0.1));
+    surgir(cad, molaAR(x - 0.1), {dy: 20});
+    revelar(e2, molaAR(x - 0.3));
+    surgir(mm, molaAR(x - 0.3), {dy: 20});
+    for (const p of sec.querySelectorAll('.mm-seta path')) p.style.opacity = String(saida(faixa(x, 0.5, 0.8)));
+    const k = clamp(molaAR(x - 0.9, {resposta: 0.6, amortecimento: 0.85}), 0, 1.02);
+    vis(nota, x > 0.8);
+    nota.style.opacity = String(clamp((x - 0.8) * 5));
+    nota.style.transform = k >= 1 ? '' : `translate(${(-1040 * (1 - k)).toFixed(1)}px, ${(70 * (1 - k) - 90 * Math.sin(Math.PI * k)).toFixed(1)}px)`;
+    revelar(leg, molaAR(x - 1.6));
+    revelar(rod, molaAR(x - 1.8));
+  };
+})();
+
+// Fronteira: o contorno serrilhado se desenha com as tarefas de dentro (primeiro clique); as de fora e o número do
+// estudo entram no segundo. O contorno sai de uma lista fixa de raios (sem aleatório).
+const fronteira = (() => {
+  const sec = m.secao('fronteira'), area = sec.querySelector('.fr-area');
+  const RAIOS = [1.02, 0.84, 1.1, 0.9, 1.06, 0.8, 0.98, 1.12, 0.86, 1.04, 0.82, 1.08, 0.92, 1.0, 0.8, 1.1, 0.88, 1.04, 0.84, 1.1, 0.9, 1.0, 0.82, 1.06];
+  const pts = RAIOS.map((f, i) => { const a = (2 * Math.PI * i) / RAIOS.length; return [660 + 480 * f * Math.cos(a), 560 + 205 * f * Math.sin(a)]; });
+  area.setAttribute('d', `M${pts.map(([px, py]) => `${px.toFixed(1)} ${py.toFixed(1)}`).join('L')}Z`);
+  const dentro = [...sec.querySelectorAll('.fr-ponto:not([data-fora]), .fr-tx:not([data-fora])')], fora = $$(sec, '.fr-ponto[data-fora], .fr-tx[data-fora]');
+  const etD = sec.querySelector('.fr-et-dentro'), etF = sec.querySelector('.fr-et-fora'), num = sec.querySelector('.fr-num'), rod = sec.querySelector('.rodape');
+  return (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    tracar(area, saida(faixa(x, 0.1, 1.0)));
+    area.style.fillOpacity = String(saida(faixa(x, 0.7, 1.1)));
+    revelar(etD, molaAR(x - 0.9));
+    dentro.forEach((el, n) => surgir(el, molaAR(x - 1.0 - Math.floor(n / 2) * 0.15), {dx: -14, dy: 0}));
+    revelar(etF, molaAR(y - 0.1));
+    fora.forEach((el, n) => { const k = molaAR(y - 0.25 - Math.floor(n / 2) * 0.15); surgir(el, k, {dx: 20, dy: 0}); vis(el, k > 0); });
+    revelar(num, molaAR(y - 0.9));
+    revelar(rod, molaAR(y - 1.1));
+    fim(sec, x, 1.5);
+  };
+})();
+
+// Ranking: uma linha por modelo; a barra cresce na proporção da nota, a primeira em dourado.
+const ranking = (id) => {
+  const sec = m.secao(id), ls = $$(sec, '.rk-l').map((el) => ({el, v: Number(el.dataset.v), b: el.querySelector('.rk-b'), val: el.querySelector('.rk-v')}));
+  // data-inicio: o eixo começa ali (escrito na tela, na linha de cima); data-escala: o valor que enche o trilho
+  const rk = sec.querySelector('.rk'), ini = Number(rk.dataset.inicio) || 0;
+  const max = Number(rk.dataset.escala) || Math.max(...ls.map((l) => l.v)), topo = sec.querySelector(':scope > .linha-top'), rod = sec.querySelector(':scope > .rodape');
+  for (const l of ls) l.b.style.width = `${(100 * (l.v - ini)) / (max - ini)}%`;
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    if (topo) revelar(topo, molaAR(x - 0.1));
+    ls.forEach(({el, b, val}, n) => {
+      surgir(el, molaAR(x - 0.02 - n * 0.06), {dx: -16, dy: 0});
+      const k = molaAR(x - 0.12 - n * 0.06);
+      b.style.transform = `scaleX(${clamp(k, 0, 1.03)})`;
+      val.style.opacity = String(clamp((k - 0.75) * 5));
+    });
+    if (rod) revelar(rod, molaAR(x - 1.2));
+    fim(sec, x, 1.3);
+  };
+};
+
+// Legal Index: a barra única se divide nas seis fatias, da maior para a menor; cada rótulo liga-se à fatia por um fio.
+const legal = (() => {
+  const sec = m.secao('legal'), fs = $$(sec, '.lg-fatia'), rots = $$(sec, '.lg-rot'), camada = sec.querySelector('.lg-svg');
+  const topo = sec.querySelector('.linha-top'), rod = sec.querySelector('.rodape');
+  const Y0 = 560, Y1 = 670, centros = [];
+  let x0 = 0;
+  for (const f of fs) { const w = (1680 * Number(f.dataset.v)) / 100; Object.assign(f.style, {left: `${x0}px`, width: `${w}px`}); centros.push(120 + x0 + w / 2); x0 += w; }
+  let fios = null;
+  const montar = () => {
+    if (fios) return;
+    for (const lado of ['cima', 'baixo']) {
+      const grupo = rots.filter((r) => r.dataset.lado === lado);
+      let limite = 1800;
+      for (const r of [...grupo].reverse()) {
+        const w = r.offsetWidth, cx = centros[Number(r.dataset.i)];
+        const esq = Math.max(120, Math.min(cx - w / 2, limite - w));
+        r.style.left = `${esq}px`;
+        r.style.top = `${lado === 'cima' ? Y0 - 26 - r.offsetHeight : Y1 + 26}px`;
+        limite = esq - 40;
+      }
+    }
+    fios = rots.map((r) => { const cx = centros[Number(r.dataset.i)], cima = r.dataset.lado === 'cima'; return traco(camada, cima ? `M${cx} ${Y0 - 4}V${Y0 - 22}` : `M${cx} ${Y1 + 4}V${Y1 + 22}`); });
+  };
+  return (t, c) => {
+    montar();
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    revelar(topo, molaAR(x - 0.1));
+    fs.forEach((f, n) => { f.style.transform = `scaleX(${clamp(molaAR(x - 0.3 - n * 0.12), 0, 1)})`; });
+    rots.forEach((r, n) => { surgir(r, molaAR(x - 0.55 - n * 0.12), {dy: r.dataset.lado === 'cima' ? 16 : -16}); tracar(fios[n], saida(faixa(x, 0.5 + n * 0.12, 0.75 + n * 0.12))); });
+    revelar(rod, molaAR(x - 1.4));
+  };
+})();
+
+// Placar: as barras crescem da linha de base, uma depois da outra; o dourado marca os dois primeiros depois de todas.
+const BASE = 872, ALTURA = 570, PASSO = 1680 / 10;
+const secPlacar = m.secao('placar');
+const colunas = [...secPlacar.querySelectorAll('.placar-col')].map((col, i) => {
+  const v = Number(col.dataset.v), h = ALTURA * v / 100, barra = col.querySelector('.placar-barra');
+  const val = col.querySelector('.placar-val'), nome = col.querySelector('.placar-nome');
+  const x = 120 + PASSO * i + (PASSO - 112) / 2;
+  col.style.left = `${x}px`;
+  barra.style.height = `${h}px`;
+  val.style.top = `${BASE - h - 56}px`;
+  return {barra, val, nome, v, h, x};
+});
+{ // colchete sobre os dois primeiros, acima dos valores
+  const [a, b] = colunas, y = BASE - a.h - 84;
+  secPlacar.querySelector('.placar-topo path').setAttribute('d', `M${a.x} ${y + 18}V${y}H${b.x + 112}V${y + 18}`);
+}
+const topo = secPlacar.querySelector('.placar-topo path'), rodapePlacar = secPlacar.querySelector('.placar-rodape');
+
+// Tokens: cada palavra aparece inteira e se parte nos blocos medidos, com fundo alternado.
+const tokens = (id) => {
+  const sec = m.secao(id), linhas = [...sec.querySelectorAll('.tk-linha')], contas = [...sec.querySelectorAll('.tk-conta')];
+  const rodape = sec.querySelector('.rodape');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    linhas.forEach((ln, n) => {
+      const t0 = 0.1 + n * 0.35, k = saida(faixa(x, t0 + 0.45, t0 + 0.95));
+      revelar(ln, molaAR(x - t0));
+      [...ln.children].forEach((tk, j) => {
+        tk.style.transform = `translateX(${(j * 16 * k).toFixed(1)}px)`;
+        tk.style.background = `color-mix(in srgb, var(--cor-tinta) ${((j % 2 ? 18 : 8) * k).toFixed(1)}%, transparent)`;
+      });
+      surgir(contas[n], molaAR(x - t0 - 1.0), {dy: 0});
+    });
+    if (rodape) revelar(rodape, molaAR(x - 1.5));
+    fim(sec, x, 1.6);
+  };
+};
+
+// Cartões: entram em onda, da esquerda para a direita e de cima para baixo.
+const cartoes = (id) => {
+  const sec = m.secao(id), cs = [...sec.querySelectorAll('.cartao')], leg = sec.querySelector('.ct-leg'), rodape = sec.querySelector(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    if (leg) revelar(leg, molaAR(x - 0.1));
+    cs.forEach((el, n) => surgir(el, molaAR(x - 0.2 - n * 0.09), {dy: 30}));
+    if (rodape) revelar(rodape, molaAR(x - 0.4 - cs.length * 0.09));
+    fim(sec, x, 0.5 + cs.length * 0.09);
+  };
+};
+
+// Links das práticas: o clique abre a página em nova aba e não avança o slide.
+for (const a of document.querySelectorAll('#mundo a[href]')) a.addEventListener('click', (e) => e.stopPropagation());
+
+palco({slides: m.slides, desenhar: m.desenhar, blocos, autoplay: true, cenas: m.cenas({
+  capa: marca('capa'),
+  encerramento: marca('encerramento'),
+  textarena: ranking('textarena'),
+  ocde: partes('ocde'),
+  pl: partes('pl'),
+  funciona: {largura: 900},
+  ponta,
+  parametros,
+  reforco,
+  embedding,
+  tokens: tokens('tokens'),
+  mesa,
+  queda,
+  memoria,
+  fronteira,
+  generativa: cartoes('generativa'),
+  medidas: cartoes('medidas'),
+  aageral: ranking('aageral'),
+  legal,
+  aalegal: ranking('aalegal'),
+  agentes: ranking('agentes'),
+  fechados: cartoes('fechados'),
+  abertos: cartoes('abertos'),
+  placar: (t, c) => {
+    const x = conteudo(c);
+    titulo(secPlacar, x, c);
+    revelar(rodapePlacar, molaAR(x - 0.1));
+    colunas.forEach(({barra, val, nome, v}, i) => {
+      const k = molaAR(x + 0.15 - i * 0.08);
+      barra.style.transform = `scaleY(${Math.max(0, k)})`;
+      surgir(nome, molaAR(x - 0.1 - i * 0.08), {dy: 0});
+      surgir(val, molaAR(x - 0.0 - i * 0.08), {dy: 0});
+      contar(val, Math.min(1, Math.max(0, k)), 0, v, {casas: 1});
+    });
+    tracar(topo, saida(faixa(x, 1.4, 1.75)));
+    fim(secPlacar, x, 1.8);
+  },
+})});
+</script>
+</body>
+</html>

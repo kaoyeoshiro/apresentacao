@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- Abertura automática, linha do dia e guia do apresentador (tests/test_guia.py). A capa fica sem a linha; "a" abre o
+     bloco "um" e "b" o herda; "c" abre o bloco "dois", é prática de 1 minuto e traz notas estruturadas; o bloco
+     "tres" não tem slide neste deck (é da aula seguinte) e aparece como futuro. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Guia</title>
+<link rel="stylesheet" href="../../../temas/cojuris/tema.css">
+<style>
+  #palco { background: var(--cor-fundo); color: var(--cor-tinta); font-family: var(--fonte-titulo); }
+  #palco h1 { margin: 0; position: absolute; left: 160px; top: 200px; font-size: 120px; line-height: 1.1; }
+  #palco p { margin: 0; position: absolute; left: 160px; top: 420px; font-size: 44px; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <section data-slide="capa"><h1>Capa</h1></section>
+  <section data-slide="a"><h1>Slide A</h1><p>primeiro do bloco um</p></section>
+  <section data-slide="b"><h1>Slide B</h1><p>segundo do bloco um</p></section>
+  <section data-slide="c"><h1>Prática</h1><p>escreva o pedido</p></section>
+</div>
+<script type="module">
+import {palco, surgir, entrar} from '../../../motor/palco.js';
+const $ = (s) => document.querySelector(s);
+palco({
+  autoplay: true,
+  blocos: [
+    {id: 'um', rotulo: 'Primeiro bloco', minutos: 5},
+    {id: 'dois', rotulo: 'Segundo bloco', minutos: 3},
+    {id: 'tres', rotulo: 'Terceiro bloco', minutos: 2},
+  ],
+  slides: [
+    {id: 'capa', titulo: 'Capa', passos: [1], linhaDia: false, notas: 'Boas-vindas.'},
+    {id: 'a', titulo: 'Slide A', bloco: 'um', passos: [1, 1]},
+    {id: 'b', titulo: 'Slide B', passos: [1]},
+    {id: 'c', titulo: 'Prática do pedido', bloco: 'dois', passos: [1], pratica: 1,
+     notas: {diga: 'Agora é com vocês.', faca: ['abrir o app', 'pedir mão levantada'], transicao: 'Quem terminou mostra.'}},
+  ],
+  cenas: Object.fromEntries(['capa', 'a', 'b', 'c'].map((id) => [id, (t, c) => {
+    for (const el of $(`[data-slide="${id}"]`).children) surgir(el, entrar(c.desde(0)));
+  }])),
+});
+</script>
+</body>
+</html>

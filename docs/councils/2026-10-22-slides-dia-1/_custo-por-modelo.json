@@ -1,0 +1,20 @@
+{
+  "gerado_em": "2026-10-22 17:10:33",
+  "por_modelo": [
+    {
+      "provedor": "bedrock",
+      "modelo": "openai.gpt-6-sol",
+      "input_tokens": 10214,
+      "output_tokens": 3619
+    },
+    {
+      "provedor": "gemini",
+      "modelo": "gemini-4-argon",
+      "input_tokens": 10187,
+      "output_tokens": 3783
+    }
+  ],
+  "total_input_tokens": 20401,
+  "total_output_tokens": 7402,
+  "custo_usd_estimado": 0.0
+}

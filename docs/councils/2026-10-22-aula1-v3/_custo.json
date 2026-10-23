@@ -1,0 +1,32 @@
+{
+  "gerado_em": "2026-10-22 18:42:22",
+  "entradas": [
+    {
+      "letra": "a",
+      "rodada": 1,
+      "input_tokens": 4788,
+      "output_tokens": 2484
+    },
+    {
+      "letra": "b",
+      "rodada": 1,
+      "input_tokens": 4627,
+      "output_tokens": 2467
+    },
+    {
+      "letra": "a",
+      "rodada": 2,
+      "input_tokens": 6223,
+      "output_tokens": 1488
+    },
+    {
+      "letra": "b",
+      "rodada": 2,
+      "input_tokens": 7034,
+      "output_tokens": 1397
+    }
+  ],
+  "total_input_tokens": 22672,
+  "total_output_tokens": 7836,
+  "custo_usd_estimado": 0.0
+}
