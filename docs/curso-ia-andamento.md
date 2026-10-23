@@ -174,3 +174,9 @@ da crítica.
   (projetos passam a buscar só os trechos quando o conhecimento chega perto do limite). A ideia do post, "o PDF entra
   inteiro", é verdadeira em parte: vale para o anexo direto; apps com busca já recuperam trechos. ChatGPT: página de
   ajuda deu 403, comportamento com PDF [CONFERIR]. Aula 1 fica com 63 slides.
+
+- Slide "O topo foi de 5 a 58 em 4 anos" (depois de "Hoje é a pior IA que você usará"): escada do melhor resultado no Intelligence
+  Index. Marcos com nome e nota lidos nas páginas dos modelos da Artificial Analysis em 23/10/2026 (GPT-4, 14/03/2023, 7; Claude 3 Opus,
+  04/03/2024, 9; o1, 05/12/2024, 15; o3, 16/04/2025, 20; GPT-5 High, 07/08/2025, 23; Claude Opus 5.5, 22/09/2026, 58; as páginas
+  marcam as notas antigas como estimativas). Degraus entre os marcos e o ponto de 5 em nov/2022 lidos do gráfico, aproximados
+  (rodapé avisa). Aula 1 fica com 64 slides.
