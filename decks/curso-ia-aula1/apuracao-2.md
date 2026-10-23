@@ -237,6 +237,15 @@ Divergência a resolver antes de projetar: o professor anotou 367.936.358 sessõ
 
 Metodologia detalhada, não lida nesta sessão: https://arena.ai/blog/agent-arena-methodology/.
 
+### 5.5. Text Arena lida pelo professor (versão 5, slide "textarena")
+
+O professor leu https://arena.ai/leaderboard/text em 22/10/2026 e mandou os cinco primeiros: 8.946.356 votos, 418
+modelos. 1 Gemini 4 Argon (High) 1517 ±7 (preliminar); 2 Claude Opus 5.5 (High) 1509 ±7; 3 Muse Wonder (Max)
+1509 ±8; 4 Claude Fable 5 (High) 1503 ±4; 5 Claude Fable 5.1 (Max) 1503 ±6. A leitura do item 5.2 (data mostrada
+20/10/2026, 8.900.458 votos) tem outros números; o deck usa a do professor, mais recente. O "±" vai na fala como
+margem de erro, sem dizer o nível de confiança, que nenhuma página lida informa para a arena de texto. Eixo do slide
+a partir de 1490, escrito na tela.
+
 ## 6. Definição de IA: OCDE e PL 2338/2023 (slide 4)
 
 ### 6.1. OCDE
@@ -353,3 +362,33 @@ Referências de estilo, para consulta e não para cópia:
 - Números de contexto longo do GPT-5.5 (página da OpenAI com 403): não usados.
 - Página inicial da arena.ai: o bloco "Top 10 Agents" e o total de 367.936.358 sessões não apareceram no navegador desta sessão; os percentuais foram conferidos no placar de agentes, cujo total é 2.731.078 sessões.
 - PDF completo de Dell'Acqua et al. (HBS exige verificação humana) e metodologia do placar de agentes (https://arena.ai/blog/agent-arena-methodology/): não lidos; nada do deck depende deles.
+
+## 10. Linha do tempo da IA (versão 5, slide "historia")
+
+Fontes lidas em 23/10/2026; sem fonte, a data não entrou.
+
+| marco na tela | fonte e trecho |
+|---|---|
+| 1956, IA simbólica | Wikipedia, "Dartmouth workshop" (https://en.wikipedia.org/wiki/Dartmouth_workshop): "a 1956 summer workshop widely considered to be the founding event of artificial intelligence as a field"; notas de Solomonoff: "from about June 18 to August 17". |
+| anos 80, sistemas especialistas | Wikipedia, "History of artificial intelligence" (https://en.wikipedia.org/wiki/History_of_artificial_intelligence), seção "Boom (1980–1987)": sistemas especialistas "adopted by corporations around the world"; a indústria cresceu "from a few million dollars in 1980 to billions of dollars in 1988". |
+| anos 90, aprendizado de máquina | Wikipedia, "Machine learning" (https://en.wikipedia.org/wiki/Machine_learning): "Machine learning (ML), reorganised and recognised as its own field, started to flourish in the 1990s", afastando-se das abordagens simbólicas rumo a métodos da estatística. A mesma página de história registra o uso amplo no começo dos anos 2000. |
+| 2012, aprendizado profundo | Krizhevsky, Sutskever e Hinton, "ImageNet Classification with Deep Convolutional Neural Networks", NIPS 2012 (https://papers.nips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html); a página de história: AlexNet venceu o ILSVRC "with significantly fewer errors than the second-place winner". |
+| 2017, transformers | Vaswani et al., "Attention Is All You Need", arXiv 1706.03762, v1 de 12/06/2017 (https://arxiv.org/abs/1706.03762). |
+| 2020, GPT-3 (legenda) | Brown et al., "Language Models are Few-Shot Learners", arXiv 2005.14165, v1 de 28/05/2020, "175 billion parameters" (https://arxiv.org/abs/2005.14165). |
+| 2022, ChatGPT | Item 1.1 (post da OpenAI de 30/11/2022, lido em 22/10/2026) e, nesta sessão, a página de história: lançado em 30/11/2022, "gaining over 100 million users in two months". A página da OpenAI deu 403 e o Internet Archive não abriu nesta sessão. |
+| 07/10/2026, GPT-6 (legenda) | OpenAI, system card (https://deploymentsafety.openai.com/gpt-6-october), "Published October 7, 2026": "We're launching GPT-6 to everyone in ChatGPT, across free and paid plans globally." |
+
+Manchete "A IA tem 70 anos; o ChatGPT, quase 4": 1956 a 2026 são 70 anos; de 30/11/2022 a 23/10/2026, três anos e
+onze meses.
+
+## 11. Duelo de preferência (versão 5, slides "pratica5" e "revelacao")
+
+Página de modelos da Anthropic (https://platform.claude.com/docs/en/about-claude/models/overview), lida em 23/10/2026:
+Claude Opus 5.5, "$4 / input MTok, $20 / output MTok", e a página manda começar por ele "for most workloads"; Claude
+Haiku 5.5, "From $0.10 / input MTok, From $0.50 / output MTok", latência "Fastest", "For high-volume,
+latency-sensitive tasks". Daí a manchete "A custa até 40 vezes menos que B" (4 / 0,10). A página não informa o número
+de parâmetros: "maior" e "menor" ficam na fala, como posição na família, e a tela fala em preço.
+
+As respostas e o pedido estão no `briefing.md`, seção "Duelo". Em A, "ordem de pagamento que o governo emite" é
+impreciso: quem expede o precatório é o Judiciário (CF, art. 100); a nota do slide diz isso, se alguém notar.
+

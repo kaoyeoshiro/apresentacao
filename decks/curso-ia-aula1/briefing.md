@@ -1,4 +1,4 @@
-# Briefing: curso de IA da co.juris, dia 1, Aula 1. O que é IA e qual usar (versão 4)
+# Briefing: curso de IA da co.juris, dia 1, Aula 1. O que é IA e qual usar (versão 5)
 
 Primeira de duas aulas de cerca de 90 minutos, dadas na mesma tarde; a segunda está em `decks/curso-ia-aula2`. A
 versão 4 atende aos 11 pedidos do ensaio da versão 3 (22/10/2026), listados em `docs/curso-ia-andamento.md`, e usa os
@@ -25,10 +25,10 @@ A linha do dia mostra os cinco blocos embaixo da trilha; fica escondida na capa 
 | min | bloco (`blocos`) | slides | práticas |
 |---|---|---|---|
 | 16 | O que é IA (`o-que-e`) | 1 a 13 | 1, classificar seis sistemas (3 min) |
-| 30 | Como funciona (`funciona`) | 14 a 35 | 2, contar tokens (4 min); 3, o mesmo pedido três vezes (3 min) |
-| 14 | Onde tropeça (`tropeca`) | 36 a 42 | 4, conferir o acórdão (6 min) |
-| 20 | Qual a melhor (`melhor`) | 43 a 57 | 5, o duelo do prazo (3 min) |
-| 10 | Fechado e aberto (`abertos`) | 58 a 63 | |
+| 30 | Como funciona (`funciona`) | 14 a 34 | 2, contar tokens (4 min); 3, o mesmo pedido três vezes (3 min) |
+| 14 | Onde tropeça (`tropeca`) | 35 a 41 | 4, conferir o acórdão (6 min) |
+| 20 | Qual a melhor (`melhor`) | 42 a 57 | 5, o duelo de preferência (3 min) |
+| 10 | Fechado e aberto (`abertos`) | 58 a 64 | |
 
 Soma: 90 minutos. O bloco 2 cresceu de 25 para 30 minutos com a sequência de pesos e a memória; a abertura (3 min)
 entrou no bloco 1 e o bloco 5 caiu de 12 para 10.
@@ -36,18 +36,18 @@ entrou no bloco 1 e o bloco 5 caiu de 12 para 10.
 ## Slides
 
 Densidade pela parada final, nas faixas do oráculo: respiro (até 12 palavras ou texto de 200 px), leve (13 a 24),
-médio (25 a 45). Nenhuma imagem foi gerada; custo de mídia desta versão, US$ 0. "Novo" marca o que entrou na versão 4.
+médio (25 a 45). Nenhuma imagem foi gerada; custo de mídia desta versão, US$ 0. "Novo" marca o que entrou na versão 4; "v5", o que mudou na versão 5 (64 slides, 74 paradas).
 
 | # | slide | manchete | o que a tela prova | clima e densidade | arquétipo | mídia e custo |
 |---|---|---|---|---|---|---|
-| 1 | capa | O que é IA e qual usar | novo: abre sozinha; "O juiz julgou o pedido" se escreve a 150 px, o leque grande escolhe "procedente" e o título entra no fim | noite, leve | cena própria (capa) | código; valores ilustrativos (pílula) |
+| 1 | capa | O que é IA e qual usar | v5: fundo claro, logo oficial da co.juris (variável do tema), fio que se traça e o título em duas linhas a 124 px; abre sozinha | claro, leve | cena própria (marca) | logo do tema, US$ 0 |
 | 2 | mapa | Entender vem antes de escolher | cinco paradas, as mesmas da linha do dia | claro, leve | tempo | código |
 | 3 | definicao | IA imita capacidades humanas | definição de trabalho; placa como entrada e saída | claro, médio | comparacao | código |
 | 4 | ocde | A OCDE define IA em cinco partes | novo: cinco trechos, um por clique, e a explicação para leigo à direita | claro, médio | cena própria (partes), 5 cliques | código; tradução livre (pílula) |
 | 5 | pl | O PL 2338 ajusta a OCDE | novo: cinco trechos do art. 4º, I, com o que é igual e o que é novo; Senado 10/12/2024, Câmara aguarda parecer | noite, médio | cena própria (partes), 5 cliques | código |
 | 6 | cotidiano | Você já usa IA todo dia | frase grande | noite, respiro | respiro | nenhuma |
 | 7 | regras | Regras escritas ou padrões aprendidos | simbólica contra aprendizado de máquina | claro, médio | comparacao | código |
-| 8 | llms | LLMs nascem dos transformers | a trilha se divide até os LLMs; ChatGPT em 30/11/2022 | claro, médio | ramos | código |
+| 8 | historia | A IA tem 70 anos; o ChatGPT, quase 4 | v5: seis marcos (1956, anos 80, anos 90, 2012, 2017, 2022) e a legenda com GPT-3 e GPT-6, cada data com fonte (apuracao-2.md, item 10) | claro, médio | tempo | código |
 | 9 | tipos | Específica faz uma; generalista, várias | frase grande; uso geral, não AGI | claro, respiro | respiro | nenhuma |
 | 10 | pratica1 | Você classifica seis sistemas | seis sistemas e a regra dos dedos (S.T.A.R. do bloco 1) | noite, médio | objetos | código |
 | 11 | gabarito | Quatro específicas, duas generalistas | quatro e duas estações | claro, médio | ramos | código |
@@ -56,43 +56,43 @@ médio (25 a 45). Nenhuma imagem foi gerada; custo de mídia desta versão, US$ 
 | 14 | funciona | Como funciona por dentro | abertura do bloco 2: pesos, tokens, previsão e a mesa | noite, respiro | abertura | nenhuma |
 | 15 | corpus | Ela treinou com trilhões de pedaços | "15 trilhões" de tokens (Llama 3.1 405B) | claro, leve | numero | código |
 | 16 | vetor | A palavra vira uma lista de números | novo: "prazo" vira [2, 1, 3] em caixas de 200 px | claro, leve | cena própria (vetor) | código; ilustrativos (pílula) |
-| 17 | conta | Cada número multiplica um peso e soma | novo: coluna A no primeiro clique (2×1 + 1×0 + 3×1 = 5), coluna B no segundo (soma −1); a saída [5, −1] (S.T.A.R. do bloco 2) | noite, médio | cena própria (conta), 2 cliques | código; ilustrativos (pílula) |
-| 18 | camadas | Negativo vira zero, e a conta segue | novo: [5, −1] vira [5, 0]; depois a rede de cinco camadas; 405 bilhões de pesos são os parâmetros | claro, médio | cena própria (camadas), 2 cliques | código |
-| 19 | parametros | O treino ajusta os pesos | treino contra uso; pesos são parâmetros, não textos salvos | claro, médio | comparacao | código |
-| 20 | calcula | Sem busca, ela calcula; não consulta | frase grande | noite, respiro | respiro | nenhuma |
-| 21 | tokens | Ela lê pedaços, não palavras | a palavra se parte em 4 e a frase em 8 tokens | claro, médio | cena própria (tokens) | código |
-| 22 | parecer | Parecer de 3 páginas: 2.056 tokens | 2.056 grande | claro, respiro (320 px) | numero | código |
-| 23 | pratica2 | Palavras viram blocos na tela | a frase, duas rotas, QR do tokenizador | noite, médio | objetos | QR por código |
-| 24 | previsto | A IA prevê um token por vez | dois ciclos de leque | claro, médio | escolha | código; inventadas (pílula) |
-| 25 | pratica3 | O mesmo pedido pode variar | o pedido e três passos | noite, médio | objetos | código |
-| 26 | sorteio | Cada resposta é um sorteio com pesos | leque raso e sorteio | claro, médio | escolha com `data-sorteio` | código; inventados (pílula) |
-| 27 | mesa | A janela de contexto é a mesa | novo, desenhado: o retângulo enche de instrução, conversa, anexos e espaço da resposta; o anexo que não coube fica de fora, em dourado | claro, leve | cena própria (mesa) | código (a foto `mesa.webp` saiu) |
-| 28 | tamanho | A mesa tem tamanho | "1 milhão" de tokens, Claude Opus 5.5 nos planos pagos | claro, leve | numero | código |
-| 29 | limite | Passou do limite, algo fica de fora | cabe contra não cabe: "O começo é resumido ou deixado de fora." | noite, médio | comparacao | código |
-| 30 | queda | Quanto maior o texto, mais o acerto cai | novo: GPT-4o de 99,3% para 69,7% com 32 mil tokens (NoLiMa); a perda marcada em dourado | claro, médio | cena própria (queda) | código |
-| 31 | conversa | Conversa nova, mesa limpa | frase grande; salvo memória ligada | noite, respiro | respiro | nenhuma |
-| 32 | memoria | A memória leva notas à conversa nova | novo: uma nota sai do caderno e pousa na mesa da conversa nova | noite, médio | cena própria (memória) | código |
-| 33 | controle | Você vê, corrige e apaga a memória | novo: ChatGPT e Claude, onde fica e a conversa temporária ou anônima | noite, médio | comparacao | código |
-| 34 | sigilo | Apagar a conversa não apaga a memória | novo: três linhas ligadas às páginas de ajuda da OpenAI e da Anthropic | claro, médio | fios | código |
-| 35 | passos | Do corpus à resposta, em cinco passos | cinco marcos | claro, médio | tempo | código |
-| 36 | linguagem | Ela vai bem em linguagem | frase grande | claro, respiro | respiro | nenhuma |
-| 37 | avianca | Ela inventa com a mesma confiança | fios da ordem de sanção | claro, médio | fios | código |
-| 38 | pratica4 | Você confere se o acórdão existe | pedido, três passos, QR do STJ (S.T.A.R. do bloco 3) | noite, médio | objetos | QR por código |
-| 39 | conferiram | Os números conferiram? | frase grande e as três respostas | noite, respiro | respiro | nenhuma |
-| 40 | fronteira | A fronteira da IA é irregular | novo, desenhado: contorno serrilhado, três tarefas dentro (1º clique), três fora e o número do estudo (2º clique) | claro, médio | cena própria (fronteira), 2 cliques | código; exemplos do professor (pílula) |
-| 41 | responde | Quem usa responde pelo que entrega | quatro marcos | claro, leve | tempo | código |
-| 42 | pior | Hoje é a pior IA que você usará | frase grande | claro, respiro | respiro | nenhuma |
-| 43 | melhor | Qual é a melhor IA? | abertura do bloco 4 | noite, respiro | abertura | nenhuma |
-| 44 | benchmark | Benchmark é o ENEM da IA | a caneta corrige dez itens, 8 de 10 a 140 px | claro, respiro | numero | código; ilustrativo (pílula) |
-| 45 | medidas | Seis coisas que os benchmarks medem | seis cartões | claro, médio | cena própria (cartões) | código |
-| 46 | aageral | No índice geral, o topo é apertado | novo: sete modelos, melhor variante de cada, notas 58 a 52 | claro, mais de 45 | cena própria (ranking) | código |
-| 47 | legal | O índice jurídico pesa seis habilidades | refeito: o que é, numa frase, e uma barra só dividida em 35, 25, 15, 10, 10 e 5% com rótulos grandes | noite, médio | cena própria (Legal Index) | código |
-| 48 | aalegal | No índice jurídico, o Opus 5.5 lidera | novo: dez modelos, 63 a 52 | claro, mais de 45 | cena própria (ranking) | código |
-| 49 | processo | Prova não é processo | frase grande | noite, respiro | respiro | nenhuma |
-| 50 | arena | Na arena, pessoas votam às cegas | quatro passos da votação | claro, médio | tempo | código |
+| 17 | neuronio | Um neurônio multiplica e soma | v5: três entradas × três pesos, a soma 13 num círculo dourado e a média ponderada (1º clique); a rede de camadas e os 405 bilhões de parâmetros (2º clique) (S.T.A.R. do bloco 2) | noite, médio | cena própria (neurônio), 2 cliques | código; ilustrativos (pílula) |
+| 18 | parametros | O treino ajusta os pesos | treino contra uso; pesos são parâmetros, não textos salvos | claro, médio | comparacao | código |
+| 19 | calcula | Sem busca, ela calcula; não consulta | frase grande | noite, respiro | respiro | nenhuma |
+| 20 | tokens | Ela lê pedaços, não palavras | a palavra se parte em 4 e a frase em 8 tokens | claro, médio | cena própria (tokens) | código |
+| 21 | parecer | Parecer de 3 páginas: 2.056 tokens | 2.056 grande | claro, respiro (320 px) | numero | código |
+| 22 | pratica2 | Palavras viram blocos na tela | v5: a frase, dois passos e o link clicável do tokenizador; sem folha impressa | noite, médio | objetos | link, código |
+| 23 | previsto | A IA prevê um token por vez | dois ciclos de leque | claro, médio | escolha | código; inventadas (pílula) |
+| 24 | pratica3 | O mesmo pedido pode variar | o pedido e três passos | noite, médio | objetos | código |
+| 25 | sorteio | Cada resposta é um sorteio com pesos | leque raso e sorteio | claro, médio | escolha com `data-sorteio` | código; inventados (pílula) |
+| 26 | mesa | A janela de contexto é a mesa | novo, desenhado: o retângulo enche de instrução, conversa, anexos e espaço da resposta; o anexo que não coube fica de fora, em dourado | claro, leve | cena própria (mesa) | código (a foto `mesa.webp` saiu) |
+| 27 | tamanho | A mesa tem tamanho | "1 milhão" de tokens, Claude Opus 5.5 nos planos pagos | claro, leve | numero | código |
+| 28 | limite | Passou do limite, algo fica de fora | cabe contra não cabe: "O começo é resumido ou deixado de fora." | noite, médio | comparacao | código |
+| 29 | queda | Quanto maior o texto, mais o acerto cai | novo: GPT-4o de 99,3% para 69,7% com 32 mil tokens (NoLiMa); a perda marcada em dourado | claro, médio | cena própria (queda) | código |
+| 30 | conversa | Conversa nova, mesa limpa | frase grande; salvo memória ligada | noite, respiro | respiro | nenhuma |
+| 31 | memoria | A memória leva notas à conversa nova | novo: uma nota sai do caderno e pousa na mesa da conversa nova | noite, médio | cena própria (memória) | código |
+| 32 | controle | Você vê, corrige e apaga a memória | novo: ChatGPT e Claude, onde fica e a conversa temporária ou anônima | noite, médio | comparacao | código |
+| 33 | sigilo | Apagar a conversa não apaga a memória | novo: três linhas ligadas às páginas de ajuda da OpenAI e da Anthropic | claro, médio | fios | código |
+| 34 | passos | Do corpus à resposta, em cinco passos | cinco marcos | claro, médio | tempo | código |
+| 35 | linguagem | Ela vai bem em linguagem | frase grande | claro, respiro | respiro | nenhuma |
+| 36 | avianca | Ela inventa com a mesma confiança | fios da ordem de sanção | claro, médio | fios | código |
+| 37 | pratica4 | Você confere se o acórdão existe | v5: pedido, três passos e o link clicável da pesquisa do STJ (S.T.A.R. do bloco 3) | noite, médio | objetos | link, código |
+| 38 | conferiram | Os números conferiram? | frase grande e as três respostas | noite, respiro | respiro | nenhuma |
+| 39 | fronteira | A fronteira da IA é irregular | novo, desenhado: contorno serrilhado, três tarefas dentro (1º clique), três fora e o número do estudo (2º clique) | claro, médio | cena própria (fronteira), 2 cliques | código; exemplos do professor (pílula) |
+| 40 | responde | Quem usa responde pelo que entrega | quatro marcos | claro, leve | tempo | código |
+| 41 | pior | Hoje é a pior IA que você usará | frase grande | claro, respiro | respiro | nenhuma |
+| 42 | melhor | Qual é a melhor IA? | abertura do bloco 4 | noite, respiro | abertura | nenhuma |
+| 43 | benchmark | Benchmark é o ENEM da IA | a caneta corrige dez itens, 8 de 10 a 140 px | claro, respiro | numero | código; ilustrativo (pílula) |
+| 44 | medidas | Seis coisas que os benchmarks medem | seis cartões | claro, médio | cena própria (cartões) | código |
+| 45 | aageral | No índice geral, o Opus 5.5 vai à frente | v5: eixo de 50 a 60, escrito na tela; sete modelos, 58 a 52 | claro, mais de 45 | cena própria (ranking) | código |
+| 46 | legal | O índice jurídico pesa seis habilidades | refeito: o que é, numa frase, e uma barra só dividida em 35, 25, 15, 10, 10 e 5% com rótulos grandes | noite, médio | cena própria (Legal Index) | código |
+| 47 | aalegal | No índice jurídico, o Opus 5.5 lidera | v5: eixo de 50 a 65, escrito no rodapé; dez modelos, 63 a 52 | claro, mais de 45 | cena própria (ranking) | código |
+| 48 | processo | Prova não é processo | frase grande | noite, respiro | respiro | nenhuma |
+| 49 | arena | Na arena, pessoas votam às cegas | quatro passos da votação; legenda com o link arena.ai | claro, médio | tempo | código |
+| 50 | textarena | Na conversa, o Gemini 4 Argon lidera | v5: Text Arena, cinco primeiros com a margem, eixo a partir de 1490; Gemini preliminar | noite, mais de 45 | cena própria (ranking) | código |
 | 51 | agentes | Como agente, o Opus 5.5 abre vantagem | novo: o Top 10 de agentes escolhido pelo professor, com o que o percentual quer dizer | claro, mais de 45 | cena própria (ranking) | código |
-| 52 | pratica5 | Qual o prazo do Estado para contestar? | refeito: as duas respostas legíveis, 1 ou 2 dedos, um minuto | noite, médio | comparacao | código; respostas preparadas (pílula) |
-| 53 | revelacao | A resposta B esquece o prazo em dobro | novo: fios dos arts. 335, 183 e 219 do CPC; "em dobro" acende | claro, médio | fios | código; respostas preparadas (pílula) |
+| 52 | pratica5 | Qual você mandaria ao cliente? | v5: duelo de preferência; A e B sem nome, respostas geradas de verdade (seção Duelo), 1 ou 2 dedos, um minuto | noite, mais de 45 | comparacao | código |
+| 53 | revelacao | A custa até 40 vezes menos que B | v5: A é o Claude Haiku 5.5, B o Claude Opus 5.5, com o preço de cada; a lição da preferência | claro, mais de 45 | cena própria (cartões) | código |
 | 54 | mede | Benchmark mede prova; arena, preferência | frase grande | noite, respiro | respiro | nenhuma |
 | 55 | prova | Demos a prova da PGE às IAs | 180 grande, composição da prova, correção por dois Gemma 4 | claro, respiro (320 px) | numero | código |
 | 56 | placar | Nesta prova, o topo ficou próximo | dez barras, colchete dourado nos dois primeiros (S.T.A.R. da aula) | noite, mais de 45 | cena própria (placar) | código |
@@ -103,6 +103,36 @@ médio (25 a 45). Nenhuma imagem foi gerada; custo de mídia desta versão, US$ 
 | 61 | abertos | Os principais modelos abertos | oito cartões com logo; Mistral "Large 3" | claro, médio | cena própria (cartões) | logos, US$ 0 |
 | 62 | corrida | Na ponta, EUA e China disputam | EUA contra China; na Europa, a Mistral (S.T.A.R. do bloco 5) | noite, médio | comparacao | código |
 | 63 | fecho | Escolha por tarefa e teste você | três passos; Aula 2: como pedir bem | noite, leve | fecho | nenhuma |
+| 64 | encerramento | Obrigado | v5: fundo claro, logo oficial, "Obrigado" e o intervalo antes da Aula 2 | claro, respiro | cena própria (marca) | logo do tema, US$ 0 |
+
+### O que mudou da versão 4 e por quê (pedidos do ensaio de 23/10/2026)
+
+Numeração da folha de contato da versão 4. Os oito pedidos estão em `docs/curso-ia-andamento.md`.
+
+1. Slide 16, "LLMs nascem dos transformers": virou a linha do tempo "A IA tem 70 anos; o ChatGPT, quase 4" (tempo),
+   com seis marcos e a legenda com GPT-3 (2020) e GPT-6 (07/10/2026). O arquétipo cabe seis marcos; GPT-3 e o marco
+   recente foram para a legenda. Fontes em `apuracao-2.md`, item 10; o corpo dos marcos desce a 36 px para
+   "especialistas" caber na coluna.
+2. Slides 25 a 28 (conta e camadas, quatro paradas): viraram um slide de duas paradas, "Um neurônio multiplica e
+   soma". As entradas são o [2, 1, 3] do vetor, os pesos 3, 1 e 2, a soma 13 a 180 px e a média ponderada como
+   analogia; no segundo clique o neurônio sai e a rede de camadas entra com os 405 bilhões de parâmetros do Llama 3.1.
+   Sem tabela, sem negativo, sem ReLU. O slide seguinte continua "O treino ajusta os pesos".
+3. Práticas 2 e 4: o QR saiu e entrou o endereço clicável (`<a target="_blank">`, 44 px, sublinhado dourado), que abre
+   em nova aba sem avançar o slide (o deck interrompe a propagação do clique). Sem rota impressa. O link da arena foi
+   para a legenda do slide da arena, porque nenhuma prática tinha QR da arena.
+4. Índices da Artificial Analysis: eixo a partir de 50, escrito na tela ("o eixo começa em 50" e "eixo a partir de
+   50"); a manchete do geral passou a "No índice geral, o Opus 5.5 vai à frente", porque "o topo é apertado" contradizia
+   o gráfico aproximado.
+5. Text Arena: slide novo depois da arena, na noite, com os cinco primeiros lidos pelo professor e o eixo a partir de
+   1490. As notas do placar de agentes resumem: nos agentes o Claude lidera; na conversa, o Gemini; margem pequena.
+6. Duelo: preferência, não decoreba. Pedido "Explique a um cliente leigo, em até 25 palavras, o que é um precatório e
+   por que demora", respostas geradas de verdade e sem edição (seção Duelo). O limite caiu de 80 para 25 palavras
+   porque duas respostas de 80 palavras dão mais de 150 palavras na parada, e o oráculo dá ERRO acima de 70. A
+   revelação mostra modelo e preço; "maior" e "menor" ficam na fala, porque a Anthropic não publica parâmetros.
+7. Capa: fundo claro, logo oficial pela variável `--logo-marca` do tema (recorte, sem redesenho), fio fino e o título em
+   duas linhas a 124 px; o logo sobe, o fio se traça e o texto entra linha a linha em 1,6 s. Sem leque, sem pílula.
+8. Encerramento novo depois do fecho, no mesmo desenho da capa: "Obrigado" e "Intervalo agora; depois, a Aula 2."
+   Nenhum contato da co.juris (site, e-mail, rede) foi achado nos repositórios lidos; o slide não inventa um.
 
 ### O que mudou da versão 3 e por quê (os 11 pedidos)
 
@@ -169,9 +199,11 @@ Todas lidas em 22/10/2026, salvo indicação; o trecho lido e a ressalva de cada
 |---|---|---|
 | 4 | definição da OCDE, tradução livre | OCDE, OECD/LEGAL/0449, PDF oficial (apuração 2, item 6.1); decomposição e explicações do professor |
 | 5 | PL 2338/2023, art. 4º, I; Senado 10/12/2024; Câmara aguarda parecer | inteiro teor na Câmara e API de dados abertos, proposição 2487262 (apuração 2, item 6.2) |
-| 8 | transformers, 2017; ChatGPT, 30/11/2022 | Vaswani et al., arXiv:1706.03762; post oficial da OpenAI no Internet Archive (apuração 2, item 1.1) |
+| 8 (v5) | linha do tempo: 1956, anos 80, anos 90, 2012, 2017, 2022; GPT-3 em 2020; GPT-6 em 07/10/2026 | apuração 2, item 10 (Wikipedia, NIPS 2012, arXiv, OpenAI), lidos em 23/10/2026 |
+| 51 (v5) | Text Arena: cinco primeiros, 8.946.356 votos | leitura do professor em 22/10/2026 (apuração 2, item 5.5) |
+| 53 e 54 (v5) | respostas do duelo; preço de US$ 4 e desde US$ 0,10 por milhão de tokens | seção Duelo; página de modelos da Anthropic, 23/10/2026 (apuração 2, item 11) |
 | 15, 18 | Llama 3.1 405B: cerca de 15 trilhões de tokens; 405 bilhões de parâmetros | model card do Llama 3.1, Meta (apuração, item 3) |
-| 16 a 18 | [2, 1, 3] × pesos = [5, −1] → [5, 0] | exemplo do professor, conta refeita em Python (apuração 2, item 8); pílula "números ilustrativos" |
+| 16 e 17 (v5) | [2, 1, 3] × pesos [3, 1, 2] = 13 | exemplo desta versão (2×3 + 1×1 + 3×2 = 13); pílula "números ilustrativos" |
 | 21, 22 | tokens medidos; 2.056 tokens no parecer fictício | `tiktoken`, o200k_base (apuração, item 5; `apuracao-parecer-ficticio.md`) |
 | 28 | 1 milhão de tokens no Claude Opus 5.5, planos pagos, também no app | central de ajuda da Anthropic, artigo 8606394 (apuração 2, item 1.2) |
 | 29 | o começo é resumido ou deixado de fora | texto genérico; nas notas, só o caso documentado do Claude, artigo 11647753 (apuração 2, item 1.3) |
@@ -196,6 +228,37 @@ texto genérico; slide 52 (respostas do duelo) escrito pelo professor; slide 60 
 Reconferir na véspera: a ficha do PL 2338/2023, os três rankings, a grade de modelos e se os pesos do Mistral Large 4
 saíram.
 
+## Duelo (versão 5, prática 5)
+
+Pedido igual para os dois modelos, sem edição: "Explique a um cliente leigo, em até 25 palavras, o que é um precatório
+e por que demora." B foi escrita pela sessão principal (Claude Opus 5.5) antes de ler A; A saiu de um subagente com
+`model: "haiku"` (Claude Haiku 5.5), que recebeu só o pedido. Respostas na íntegra:
+
+- A, Claude Haiku 5.5: "Precatório é a ordem de pagamento que o governo emite quando perde na Justiça. Demora porque o
+  Estado paga pela fila, dentro do orçamento anual."
+- B, Claude Opus 5.5: "Precatório é a ordem para o governo pagar uma dívida reconhecida na Justiça. Demora porque
+  entra no orçamento do ano seguinte e espera na fila."
+
+Rodadas descartadas, pelo limite de palavras da tela (o pedido era o mesmo, com 80 e depois 30 palavras):
+
+- 80 palavras, Haiku (a primeira linha é a declaração de modo que o ambiente do subagente impõe, não faz parte da
+  resposta): "Modo Prosa: skills de código desabilitadas. Precatório é a ordem de pagamento que o juiz envia ao governo
+  (União, estado ou município) quando ele perde uma ação sem possibilidade de recurso. Os precatórios entram numa
+  fila, em geral pela data do processo. O governo não paga na hora: o valor entra no orçamento do ano seguinte, e a
+  fila anda conforme o dinheiro disponível. Por isso a espera costuma passar de anos. Idosos, doentes graves e valores
+  pequenos (que seguem outra regra) têm prioridade ou pagamento mais rápido."
+- 80 palavras, Opus: "Precatório é a ordem de pagamento que o juiz expede quando o governo perde um processo e precisa
+  pagar uma dívida. O dinheiro não sai na hora: a Constituição manda o valor entrar no orçamento do ano seguinte e
+  obedecer a uma fila, por ordem de chegada. Se o precatório for apresentado até 2 de abril, deve ser pago até o fim
+  do ano seguinte. Na prática, muitos estados e municípios atrasam, e a espera pode levar anos."
+- 30 palavras, Haiku: "Precatório é a ordem de pagamento que o governo emite após perder uma ação judicial. Demora
+  porque entra numa fila e só é paga conforme o orçamento anual permite."
+- 30 palavras, Opus: "Precatório é a ordem para o governo pagar uma dívida reconhecida na Justiça. Demora porque o
+  valor entra no orçamento do ano seguinte e espera numa fila de credores."
+
+A resposta A diz que o governo "emite" o precatório; quem o expede é o Judiciário. A tela não corrige (a resposta é
+mostrada como saiu), e a nota do slide de revelação traz a correção para o caso de alguém notar.
+
 ## Mídia e custo
 
 | arquivo | uso | origem | custo |
@@ -210,12 +273,15 @@ gerada, por isso nenhum slide leva selo.
 
 ## Avisos aceitos
 
-- Rankings 46 (57 palavras), 48 (57) e 51 (64), e o placar 56 (62): acima de 45 palavras. Os nomes e as notas são o
+- Versão 5: índice geral (61 palavras), índice jurídico (59), Text Arena (53), agentes (64), duelo (69), revelação
+  (55) e placar (62), todos AVISO, nenhum ERRO. O duelo precisa das duas respostas inteiras na tela; a revelação
+  precisa do modelo e do preço de cada lado.
+- Versão 4: rankings 46 (57 palavras), 48 (57) e 51 (64), e o placar 56 (62): acima de 45 palavras. Os nomes e as notas são o
   dado que o professor pediu (item 9) e a fala conduz a leitura pela barra dourada do primeiro. Os três rankings usam o
   mesmo desenho, sem vizinhos entre si.
 - Slides 4 e 5 (OCDE e PL): mesmo desenho em vizinhos, justificado no item 7 acima. O oráculo não avisa, porque são
   cenas próprias.
-- Capa: a entrada tem 3,5 s, no limite do passo; toca sozinha ao abrir, enquanto a sala se acomoda.
+- Capa (v5): a entrada tem 1,6 s num passo de 2,6 s; toca sozinha ao abrir.
 
 ## Crítica
 
@@ -274,3 +340,26 @@ Stills e quadros regerados depois da rodada 3: `viagem-56-placar-70.png` já mos
 `parada-57-aageral.png` tem a barra do líder em 58% do trilho; `viagem-27-mesa-pouso.png` sem texto sobre o rótulo;
 `parada-28-camadas.png` com a pílula junto das caixas. `./ap sondar` termina com 0 erro e os quatro avisos aceitos.
 Nenhum defeito alto ou médio do deck; resta só a pendência do motor da rodada 3, fora do escopo do deck.
+
+### Rodada 5 (versão 5, a própria sessão: sondar, folha, stills dos slides alterados e viagens)
+
+| gravidade | slide | defeito e evidência | correção |
+|---|---|---|---|
+| alta | 62 pratica5 | as respostas de 80 palavras davam mais de 150 palavras na parada; com 30 palavras, 84 (ERRO acima de 70) | pedido refeito com 25 palavras para os dois modelos; pílula tirada (a revelação já diz que são IAs); 69 palavras, AVISO |
+| alta | 63 revelacao | 72 palavras (ERRO) | descrições dos cartões e rodapé encurtados; 55 palavras |
+| média | deck | hierarquia: 33 de 64 slides sem nada acima de 120 px, porque a capa nova perdeu a frase de 150 px | título da capa a 124 px e "Obrigado" a 124 px |
+| média | 69 a 74 | seis slides sem respiro até o encerramento | rótulo do encerramento encurtado: a parada tem 10 palavras e conta como respiro |
+| média | 57 aalegal | 67 palavras com a linha do eixo | o início do eixo foi para o rodapé |
+
+### Rodada 6 (versão 5, conferência)
+
+| gravidade | slide | defeito e evidência | correção |
+|---|---|---|---|
+| média | 55 aageral | com o eixo aproximado, "o topo é apertado" contradiz a barra do Opus (`parada-55-aageral.png`) | manchete "No índice geral, o Opus 5.5 vai à frente" |
+| média | 63 revelacao | "nem sempre o modelo maior" afirma tamanho que a fonte não publica; a lição flutuava longe dos cartões | "nem sempre o modelo mais caro" (preço lido); lição sobe para y 600 |
+| baixa | 31 e 46 práticas | vão entre os passos e o link | aceito: o link fica na altura em que ficava o QR, e é o que o professor clica |
+| baixa | 60 textarena | vão entre a quinta linha e o rodapé | aceito: cinco linhas de dado, como pedido |
+
+Viagens conferidas: mapa (saída da capa clara), neurônio, parâmetros, Text Arena, revelação e encerramento; nada cruza
+o texto. A linha do dia some na viagem como no motor atual.
+
