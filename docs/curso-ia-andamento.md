@@ -47,8 +47,15 @@ pago). Duas aulas de ~90 min na mesma tarde, tema `cojuris`, plano contínuo. Si
   `decks/curso-ia-aula1/apuracao-2.md`. A parte de memória já voltou (páginas oficiais de 21 e 22/10/2026): apagar
   a conversa não apaga a memória criada dela, nos dois produtos; conversa temporária ou anônima não cria memória,
   mas fica guardada até 30 dias.
-- Motor (itens 2, 5 e 6): capa automática, linha do dia e guia do apresentador em `motor/`, com testes e docs.
-  Se o commit dele não estiver no branch, refazer a partir do pedido acima.
+- Motor (itens 2, 5 e 6): PRONTO no commit `9f41c10` (`./ap teste`: 99 passed). O deck liga com `autoplay: true`,
+  `blocos: [{id, rotulo, minutos}]`, `bloco:` por slide (herdado pelos seguintes), `linhaDia: false` para esconder,
+  `pratica: N` (cronômetro) e `notas: {diga, faca: [...], transicao}`. Contrato em `docs/palco.md`, seção "Blocos da
+  aula"; o catálogo já usa os três.
+- Pesquisa: os subagentes devolveram memória, rankings (Artificial Analysis geral e jurídico, arena.ai), contexto
+  longo (trocar "o meio se perde" por "quanto maior o texto, mais cai a capacidade de cruzar e inferir", NoLiMa 2025,
+  Chroma 2025, Anthropic 2026; Liu et al. 2023 sai) e fronteira irregular (seis exemplos jurídicos ilustrativos). O
+  consolidado vai para `decks/curso-ia-aula1/apuracao-2.md`; se o arquivo não existir ou estiver incompleto, os
+  relatórios estão resumidos nas mensagens desta sessão e precisam ser refeitos.
 
 ## Próximo passo
 
