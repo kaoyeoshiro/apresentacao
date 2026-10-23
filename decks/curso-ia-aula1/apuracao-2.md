@@ -392,3 +392,21 @@ de parâmetros: "maior" e "menor" ficam na fala, como posição na família, e a
 As respostas e o pedido estão no `briefing.md`, seção "Duelo". Em A, "ordem de pagamento que o governo emite" é
 impreciso: quem expede o precatório é o Judiciário (CF, art. 100); a nota do slide diz isso, se alguém notar.
 
+
+## 12. Tamanho e treino dos modelos de ponta (versão 6, slides "corpus" e "ponta")
+
+Lido pelo coordenador em 23/10/2026, nas páginas oficiais. Substitui o Llama 3.1 405B (apuração anterior, item 3), que
+saiu do deck. "Ativos" é a parte dos pesos que trabalha em cada token (modelos de mistura de especialistas).
+
+| modelo | na tela | trecho lido | fonte |
+|---|---|---|---|
+| Kimi K3 (Moonshot) | 2,8 trilhões | "a 2.8T-parameter model"; ativos "104B" | https://huggingface.co/moonshotai/Kimi-K3 |
+| Qwen3.8 Max (Alibaba) | 2,4 trilhões | "2.4T in total and 95B activated"; o repositório se chama Qwen3.8-2.4T-A95B e a versão da API, "Qwen3.8-Max"; licença "qwen3.8-max"; agosto de 2026 | https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B |
+| Mistral Large 4 | 1 trilhão | "1 trillion-parameter natively multimodal model with 52 billion active parameters"; pesos "by the end of the month" | https://mistral.ai/news/mistral-large-4, 06/10/2026 (também item 1.5) |
+| Muse Spark Open (Meta) | 816 bilhões | "816B total / 42B active"; lançamento "October 15th, 2026"; Muse Model License | https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B |
+| DeepSeek V4 | +32 trilhões de tokens (corpus) | "We pre-train both models on more than 32T diverse and high-quality tokens"; V4-Pro com 1,6T parâmetros | https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro |
+
+Sem número de tokens de pré-treino nas fichas lidas: Kimi K3, Qwen3.8, Muse Spark Open, Mistral Large 4 (o anúncio só
+fala em tokens por dia) e Gemma 4 (https://ai.google.dev/gemma/docs/core/model_card_4, atualizada em 30/07/2026).
+Fechados (Claude, GPT, Gemini): nenhum tamanho publicado nas páginas lidas; a frase "estima-se que estejam nessa
+faixa" é do professor, sem fonte.

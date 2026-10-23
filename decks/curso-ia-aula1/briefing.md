@@ -1,4 +1,4 @@
-# Briefing: curso de IA da co.juris, dia 1, Aula 1. O que é IA e qual usar (versão 5)
+# Briefing: curso de IA da co.juris, dia 1, Aula 1. O que é IA e qual usar (versão 6)
 
 Primeira de duas aulas de cerca de 90 minutos, dadas na mesma tarde; a segunda está em `decks/curso-ia-aula2`. A
 versão 4 atende aos 11 pedidos do ensaio da versão 3 (22/10/2026), listados em `docs/curso-ia-andamento.md`, e usa os
@@ -13,9 +13,9 @@ deste briefing); o parecer fictício medido, em `apuracao-parecer-ficticio.md`.
   tarefa e confere na fonte. A capa pergunta "Você confere como?" e o fecho responde.
 - Cinco práticas com celular ou mão levantada, cada uma com `pratica: N` (cronômetro na tela do apresentador).
 - Tema `cojuris`, plano contínuo, mesma trilha dourada e acabamento da prévia (`decks/previa-curso-ia`). Os slides de
-  definição, conta, camadas e fronteira têm mais de um clique, um por parte.
-- S.T.A.R. de cada bloco, e só um: a classificação da sala (bloco 1, prática 1), a conta dos pesos acontecendo na tela
-  (bloco 2, slide 17), a busca do acórdão (bloco 3, prática 4), o placar da prova da PGE-MS (bloco 4, slide 56, que
+  definição, tamanho dos modelos e fronteira têm mais de um clique, um por parte.
+- S.T.A.R. de cada bloco, e só um: a classificação da sala (bloco 1, prática 1), os fios das pistas decidindo a palavra
+  (bloco 2, slide 16), a busca do acórdão (bloco 3, prática 4), o placar da prova da PGE-MS (bloco 4, slide 56, que
   continua sendo o da aula) e a corrida EUA e China (bloco 5).
 
 ## Mapa
@@ -54,9 +54,9 @@ médio (25 a 45). Nenhuma imagem foi gerada; custo de mídia desta versão, US$ 
 | 12 | generativa | A generativa cria, não só classifica | quatro cartões | claro, médio | cena própria (cartões) | código; ilustrativos (pílula) |
 | 13 | previsao | Parece criatividade; é previsão | frase grande | claro, respiro | respiro | nenhuma |
 | 14 | funciona | Como funciona por dentro | abertura do bloco 2: pesos, tokens, previsão e a mesa | noite, respiro | abertura | nenhuma |
-| 15 | corpus | Ela treinou com trilhões de pedaços | "15 trilhões" de tokens (Llama 3.1 405B) | claro, leve | numero | código |
-| 16 | vetor | A palavra vira uma lista de números | novo: "prazo" vira [2, 1, 3] em caixas de 200 px | claro, leve | cena própria (vetor) | código; ilustrativos (pílula) |
-| 17 | neuronio | Um neurônio multiplica e soma | v5: três entradas × três pesos, a soma 13 num círculo dourado e a média ponderada (1º clique); a rede de camadas e os 405 bilhões de parâmetros (2º clique) (S.T.A.R. do bloco 2) | noite, médio | cena própria (neurônio), 2 cliques | código; ilustrativos (pílula) |
+| 15 | corpus | Ela treinou com trilhões de pedaços | v6: "+32 trilhões" de tokens (DeepSeek V4, 2026) | claro, leve | numero | código |
+| 16 | pistas | Pesos dizem quanto cada pista importa | v6: "juiz", "julgou" e "pedido" ligadas a "procedente" e "improcedente" por fios de espessura igual ao peso; a vencedora acende e entra na frase, sem conta (S.T.A.R. do bloco 2) | claro, leve | cena própria (pistas) | código; ilustrativo (pílula) |
+| 17 | ponta | Os de ponta passam de 1 trilhão de pesos | v6: a rede em camadas, "cada fio é um peso" (1º clique); Kimi K3, Qwen3.8 Max, Mistral Large 4 e Muse Spark Open em barras com o marco dourado de 1 trilhão, a linha dos fechados e a fonte (2º clique) | noite, médio | cena própria (ponta), 2 cliques | código |
 | 18 | parametros | O treino ajusta os pesos | treino contra uso; pesos são parâmetros, não textos salvos | claro, médio | comparacao | código |
 | 19 | calcula | Sem busca, ela calcula; não consulta | frase grande | noite, respiro | respiro | nenhuma |
 | 20 | tokens | Ela lê pedaços, não palavras | a palavra se parte em 4 e a frase em 8 tokens | claro, médio | cena própria (tokens) | código |
@@ -104,6 +104,30 @@ médio (25 a 45). Nenhuma imagem foi gerada; custo de mídia desta versão, US$ 
 | 62 | corrida | Na ponta, EUA e China disputam | EUA contra China; na Europa, a Mistral (S.T.A.R. do bloco 5) | noite, médio | comparacao | código |
 | 63 | fecho | Escolha por tarefa e teste você | três passos; Aula 2: como pedir bem | noite, leve | fecho | nenhuma |
 | 64 | encerramento | Obrigado | v5: fundo claro, logo oficial, "Obrigado" e o intervalo antes da Aula 2 | claro, respiro | cena própria (marca) | logo do tema, US$ 0 |
+
+### O que mudou da versão 5 e por quê (pedidos de 23/10/2026)
+
+Numeração da folha de contato da versão 5. Os pedidos estão em `docs/curso-ia-andamento.md`; 64 slides e 74 paradas,
+como antes.
+
+1. Paradas 23 a 25 ("A palavra vira uma lista de números" e as duas de "Um neurônio multiplica e soma") confundiam a
+   turma e saíram. No lugar, duas cenas próprias sem aritmética. "Pesos dizem quanto cada pista importa" (uma parada,
+   3 s): a frase "O juiz julgou o pedido", cada pista ligada às duas candidatas por um fio de espessura igual ao peso
+   (4 px por unidade), a vencedora acende em dourado e voa para a vaga; liga-se ao leque de "A IA prevê um token por
+   vez" e ao sorteio, que também usam "procedente" e "improcedente". "Os de ponta passam de 1 trilhão de pesos" (duas
+   paradas): a rede em camadas com espessuras fixas e "Cada fio é um peso, ou parâmetro"; no segundo clique, quatro
+   barras na escala de 0 a 3 trilhões com o marco dourado de 1 trilhão em cada uma. A manchete pedida, "Os modelos de
+   ponta passam de 1 trilhão de pesos", quebrava em duas linhas e encostava nas barras; ficou "Os de ponta". A
+   legenda da rede sai no segundo clique e o rodapé encurtou, para a parada ficar em 45 palavras.
+2. Llama 3.1 saiu do deck (0 ocorrência). Tamanho: os quatro abertos de ponta com número oficial (apuração 2, item 12).
+   Volume de treino: Kimi K3, Qwen3.8, Muse Spark Open e Mistral Large 4 não publicam os tokens de pré-treino nas
+   fichas lidas, e o Gemma 4 também não; o DeepSeek V4 publica "more than 32T" tokens, e o slide do corpus passou a
+   "+32 trilhões" com essa fonte. O cartão "Meta; também Llama 4" dos abertos ficou, porque não é exemplo de tamanho.
+3. Sem fonte: "estima-se que [os fechados] estejam nessa faixa" é frase do professor; nenhuma fonte lida estima o
+   tamanho de Claude, GPT ou Gemini, e a Anthropic não publica parâmetros (seção Duelo). Se o professor preferir, a
+   linha vira "Fechados (Claude, GPT, Gemini) não divulgam o tamanho."
+4. O Mistral Large 4 está em prévia desde 06/10/2026, com pesos prometidos para o fim do mês; o cartão dos abertos
+   continua "Large 3". Se os pesos não saírem até a aula, a nota do slide já diz isso.
 
 ### O que mudou da versão 4 e por quê (pedidos do ensaio de 23/10/2026)
 
@@ -202,8 +226,9 @@ Todas lidas em 22/10/2026, salvo indicação; o trecho lido e a ressalva de cada
 | 8 (v5) | linha do tempo: 1956, anos 80, anos 90, 2012, 2017, 2022; GPT-3 em 2020; GPT-6 em 07/10/2026 | apuração 2, item 10 (Wikipedia, NIPS 2012, arXiv, OpenAI), lidos em 23/10/2026 |
 | 51 (v5) | Text Arena: cinco primeiros, 8.946.356 votos | leitura do professor em 22/10/2026 (apuração 2, item 5.5) |
 | 53 e 54 (v5) | respostas do duelo; preço de US$ 4 e desde US$ 0,10 por milhão de tokens | seção Duelo; página de modelos da Anthropic, 23/10/2026 (apuração 2, item 11) |
-| 15, 18 | Llama 3.1 405B: cerca de 15 trilhões de tokens; 405 bilhões de parâmetros | model card do Llama 3.1, Meta (apuração, item 3) |
-| 16 e 17 (v5) | [2, 1, 3] × pesos [3, 1, 2] = 13 | exemplo desta versão (2×3 + 1×1 + 3×2 = 13); pílula "números ilustrativos" |
+| 15 (v6) | mais de 32 trilhões de tokens no pré-treino do DeepSeek V4 | ficha do DeepSeek-V4-Pro no Hugging Face, lida em 23/10/2026 (apuração 2, item 12) |
+| 16 (v6) | pesos de 3, 1 e 6 (procedente) e 3, 1 e 2 (improcedente) como espessura dos fios | exemplo do professor; pílula "ilustrativo" |
+| 17 (v6) | Kimi K3 2,8 trilhões; Qwen3.8 Max 2,4 trilhões; Mistral Large 4 1 trilhão; Muse Spark Open 816 bilhões | fichas oficiais no Hugging Face e anúncio da Mistral de 06/10/2026, lidos em 23/10/2026 (apuração 2, item 12); a linha dos fechados é afirmação do professor (ver "O que mudou da versão 5") |
 | 21, 22 | tokens medidos; 2.056 tokens no parecer fictício | `tiktoken`, o200k_base (apuração, item 5; `apuracao-parecer-ficticio.md`) |
 | 28 | 1 milhão de tokens no Claude Opus 5.5, planos pagos, também no app | central de ajuda da Anthropic, artigo 8606394 (apuração 2, item 1.2) |
 | 29 | o começo é resumido ou deixado de fora | texto genérico; nas notas, só o caso documentado do Claude, artigo 11647753 (apuração 2, item 1.3) |
@@ -363,3 +388,14 @@ Nenhum defeito alto ou médio do deck; resta só a pendência do motor da rodada
 Viagens conferidas: mapa (saída da capa clara), neurônio, parâmetros, Text Arena, revelação e encerramento; nada cruza
 o texto. A linha do dia some na viagem como no motor atual.
 
+### Rodada 7 (versão 6, a própria sessão: sondar, stills das paradas 23 a 27 e viagens 15 a 18)
+
+| gravidade | slide | defeito e evidência | correção |
+|---|---|---|---|
+| alta | 16 pistas | ERRO de contraste: "improcedente" esmaecida a 45% dava 2,7:1 | a caixa perdedora fica cheia; só os fios dela esmaecem |
+| média | 17 ponta | manchete de 47 caracteres em duas linhas, a 30 px das barras (`parada-26-ponta.png`) | "Os de ponta passam de 1 trilhão de pesos", uma linha |
+| média | 17 ponta | o marco de 1 trilhão, uma linha tracejada única, cortava "Max", "Large 4" e "Open" | marco curto e dourado sobre cada barra, abaixo dos nomes |
+| média | 17 ponta | 58 palavras na segunda parada (AVISO) | legenda da rede sai no 2º clique, rodapé curto: 45 palavras |
+
+Viagens conferidas: corpus, pistas, ponta e parâmetros; nada cruza o texto. `./ap sondar`: 0 erro, os sete avisos de
+densidade aceitos das versões anteriores.

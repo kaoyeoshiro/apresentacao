@@ -32,6 +32,7 @@ Situação em 22/10/2026, para a tela: "PL 2338/2023: aprovado no Senado em 10/1
 Para a tela: "Llama 3.1 405B (Meta, 2024): cerca de 15 trilhões de tokens no pré-treino e 405 bilhões de parâmetros."
 
 - Fonte: Meta, Model Card do Llama 3.1, repositório oficial meta-llama/llama-models, https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/MODEL_CARD.md. Trechos lidos: "Llama 3.1 was pretrained on ~15 trillion tokens of data from publicly available sources"; tamanhos "8B, 70B and 405B"; data de lançamento 23/07/2024; corte dos dados de pré-treino em dezembro de 2023.
+- Na versão 6 o Llama 3.1 saiu do deck; os números atuais estão em `apuracao-2.md`, item 12.
 - Ressalva: é um modelo de 2024, escolhido porque o fabricante publicou os dois números; modelos mais recentes não foram buscados para este dado. "Token" não é palavra: 15 trilhões de tokens equivalem a menos palavras (ver item 5).
 
 ## 4. Janela de contexto de um modelo atual (slide 23)

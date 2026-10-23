@@ -1,9 +1,9 @@
 <!doctype html>
-<!-- Curso de IA da co.juris, dia 1, Aula 1: "O que é IA e qual usar" (versão 5, cerca de 90 minutos). Plano contínuo de
+<!-- Curso de IA da co.juris, dia 1, Aula 1: "O que é IA e qual usar" (versão 6, cerca de 90 minutos). Plano contínuo de
      64 slides, montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md), com abertura automática, linha do
      dia em cinco blocos e guia do apresentador em todos os slides (docs/palco.md, Blocos da aula). Capa e encerramento
      claros, com o logo oficial do tema. Blocos: o que é IA (capa a previsao, com a linha do tempo da IA), como funciona
-     (funciona a passos, com o neurônio, os tokens, a mesa e a memória), onde tropeça (linguagem a pior), qual a melhor
+     (funciona a passos, com as pistas e os pesos, o tamanho dos modelos de ponta, os tokens, a mesa e a memória), onde tropeça (linguagem a pior), qual a melhor
      IA (melhor a limites, com os rankings, a Text Arena, o duelo de preferência e o placar da prova da PGE-MS) e fechado
      e aberto (aberto a encerramento). Práticas com link clicável no lugar do QR.
      Roteiro, fontes, mídia e crítica em briefing.md; fatos em apuracao.md e apuracao-2.md; créditos em midia/creditos.json.
@@ -45,23 +45,35 @@
   .explica { position: absolute; left: 1100px; top: 330px; width: 700px; height: 520px; }
   .explica p { position: absolute; left: 0; top: 0; width: 700px; font: 400 60px/1.25 var(--fonte-texto); text-wrap: pretty; }
 
-  /* vetor e neurônio (cenas próprias): caixas de número, a soma num círculo e, no segundo clique, a rede */
-  .cx { position: absolute; width: 200px; height: 120px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 18px; display: grid; place-items: center; font: 800 72px/1 var(--fonte-titulo); font-variant-numeric: lining-nums tabular-nums; }
-  .cx.g { width: 240px; height: 240px; border-radius: 26px; font-size: 200px; }
-  .noite .cx { border-color: var(--linha-sobre-noite); }
-  .vt-pal { position: absolute; left: 116px; top: 430px; font: 400 200px/240px var(--fonte-texto); white-space: nowrap; }
-  .vt-leg { position: absolute; left: 120px; top: 760px; font-size: var(--esc-2); color: var(--cor-tinta-suave); white-space: nowrap; }
+  /* seta tracejada da memória */
   .seta { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
   .seta path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-  .nr-h { position: absolute; top: 300px; width: 200px; text-align: center; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .1em; text-transform: uppercase; color: var(--suave-sobre-noite); white-space: nowrap; }
-  .nr-op { position: absolute; width: 80px; text-align: center; font: 800 72px/120px var(--fonte-titulo); color: var(--suave-sobre-noite); }
-  .nr-pr { position: absolute; left: 720px; font: 800 72px/120px var(--fonte-titulo); white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .nr-liga path { stroke: var(--linha-sobre-noite); }
-  .nr-soma { position: absolute; left: 1250px; top: 400px; width: 340px; height: 340px; box-sizing: border-box; border: 6px solid var(--cor-destaque); border-radius: 50%; display: grid; place-items: center; font: 800 180px/1 var(--fonte-titulo); color: var(--sinal-noite); }
-  .nr-leg { position: absolute; left: 120px; top: 812px; font-size: var(--esc-2); color: var(--sobre-noite); white-space: nowrap; }
-  .nr-rede { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
-  .nr-rede path { fill: none; stroke: var(--linha-sobre-noite); stroke-width: 2.5; }
-  .nr-rede circle { fill: var(--noite); stroke: var(--suave-sobre-noite); stroke-width: 4; }
+
+  /* pistas (cena própria): a frase com as pistas sublinhadas, a vaga no fim, as candidatas embaixo e os fios */
+  .pt-frase { position: absolute; left: 120px; top: 330px; font: 400 96px/1.2 var(--fonte-texto); white-space: nowrap; }
+  .pt-pista { display: inline-block; border-bottom: 6px solid transparent; line-height: 1.05; }
+  .pt-vaga { display: inline-block; min-width: 560px; border-bottom: 6px dashed var(--cor-linha); line-height: 1.05; }
+  .pt-voa { display: inline-block; color: var(--cor-destaque-texto, var(--cor-destaque)); }
+  .pt-fios { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .pt-fios path { fill: none; stroke: color-mix(in srgb, var(--cor-tinta) 45%, var(--cor-fundo)); stroke-linecap: round; }
+  .pt-fios path.vence { stroke: var(--cor-tinta); }
+  .pt-cand { position: absolute; top: 690px; padding: 18px 44px; box-sizing: border-box; border: 5px solid var(--cor-linha); border-radius: 26px; font: 700 var(--esc-3)/1.1 var(--fonte-titulo); white-space: nowrap; }
+  .pt-cand.acesa { border-color: var(--cor-destaque); }
+  .pt-leg { position: absolute; left: 120px; top: 868px; font-size: var(--esc-2); color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* ponta (cena própria): a rede de camadas à esquerda; à direita, uma barra por modelo e o marco de 1 trilhão */
+  .pn-leg { position: absolute; left: 120px; top: 292px; font-size: var(--esc-2); color: var(--suave-sobre-noite); white-space: nowrap; }
+  .pn-rede { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .pn-rede path { fill: none; stroke: var(--linha-sobre-noite); }
+  .pn-rede circle { fill: var(--noite); stroke: var(--suave-sobre-noite); stroke-width: 4; }
+  .pn-tab { position: absolute; left: 1000px; top: 340px; width: 800px; }
+  .pn-l { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; height: 112px; white-space: nowrap; }
+  .pn-n { font-size: var(--esc-2); color: var(--sobre-noite); }
+  .pn-v { font: 800 52px/1.1 var(--fonte-titulo); color: var(--sobre-noite); font-variant-numeric: lining-nums tabular-nums; }
+  .pn-t { position: relative; flex: 0 0 100%; height: 16px; border-radius: 8px; background: var(--linha-sobre-noite); }
+  .pn-b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 8px; background: color-mix(in srgb, var(--sobre-noite) 55%, var(--noite)); transform-origin: 0 50%; }
+  .pn-marco { position: absolute; top: -12px; height: 40px; width: 6px; margin-left: -3px; border-radius: 3px; background: var(--cor-destaque); transform-origin: 50% 50%; }
+  .pn-fech { position: absolute; left: 120px; top: 820px; font-size: 36px; color: var(--suave-sobre-noite); white-space: nowrap; }
 
   /* mesa (cena própria): a janela de contexto como um retângulo que enche de blocos; o que não cabe fica de fora */
   .ms-mesa { position: absolute; left: 120px; top: 334px; width: 1020px; height: 566px; box-sizing: border-box; border: 6px solid var(--cor-tinta); border-radius: 26px; }
@@ -392,51 +404,39 @@
   <section data-slide="corpus" data-arquetipo="numero">
     <p class="rotulo">Como funciona</p>
     <h2 class="manchete">Ela treinou com trilhões de pedaços</h2>
-    <p class="display numero">15 trilhões</p>
-    <p class="numero-leg">de tokens (pedaços de texto), aproximadamente</p>
-    <p class="rodape" data-entra="0.7">Llama 3.1 405B, Meta, 2024; dados de fontes públicas.</p>
+    <p class="display numero">+32 trilhões</p>
+    <p class="numero-leg">de tokens (pedaços de texto)</p>
+    <p class="rodape" data-entra="0.7">DeepSeek V4, 2026: mais de 32 trilhões (ficha oficial, Hugging Face).</p>
   </section>
 
-  <!-- pesos e matrizes (cenas próprias, apuracao-2.md, item 8): vetor, conta, camadas -->
-  <section data-slide="vetor">
+  <!-- pistas (cena própria, sem conta): cada palavra da frase liga-se às duas candidatas por fios de espessura igual ao
+       peso; a candidata que junta mais força acende e entra na frase -->
+  <section data-slide="pistas">
     <p class="rotulo">Como funciona</p>
-    <h2 class="manchete">A palavra vira uma lista de números</h2>
-    <p class="vt-pal">prazo</p>
-    <svg class="seta" viewBox="0 0 1920 1080"><path d="M720 560H864"/><path d="M836 532L866 560L836 588"/></svg>
-    <div class="cx g vt-n" style="left: 920px; top: 440px">2</div>
-    <div class="cx g vt-n" style="left: 1190px; top: 440px">1</div>
-    <div class="cx g vt-n" style="left: 1460px; top: 440px">3</div>
-    <p class="vt-leg">Nos modelos reais, a lista tem milhares de números.</p>
-    <p class="pilula">números ilustrativos</p>
+    <h2 class="manchete">Pesos dizem quanto cada pista importa</h2>
+    <p class="pt-frase">O <span class="pt-pista">juiz</span> <span class="pt-pista">julgou</span> o <span class="pt-pista">pedido</span> <span class="pt-vaga"><span class="pt-voa">procedente</span></span></p>
+    <svg class="pt-fios" viewBox="0 0 1920 1080"></svg>
+    <p class="pt-cand vence" style="left: 300px" data-pesos="3 1 6">procedente</p>
+    <p class="pt-cand" style="left: 1060px" data-pesos="3 1 2">improcedente</p>
+    <p class="pt-leg">Fio grosso, peso alto: a pista conta mais.</p>
+    <p class="pilula">ilustrativo</p>
   </section>
 
-  <!-- S.T.A.R. do bloco 2 (cena própria, dois cliques): um neurônio com três entradas, três pesos e a soma; no segundo
-       clique, a rede de neurônios e o número de parâmetros -->
-  <section data-slide="neuronio" class="noite">
+  <!-- ponta (cena própria, dois cliques): a rede em camadas com fios de espessuras diferentes; no segundo clique, o
+       tamanho oficial dos abertos de ponta, com o marco de 1 trilhão (apuracao-2.md, item 12) -->
+  <section data-slide="ponta" class="noite">
     <p class="rotulo">Como funciona</p>
-    <h2 class="manchete">Um neurônio multiplica e soma</h2>
-    <p class="nr-h" style="left: 120px">entrada</p>
-    <p class="nr-h" style="left: 420px">peso</p>
-    <p class="nr-h" style="left: 1320px">soma</p>
-    <div class="cx nr-e" style="left: 120px; top: 360px">2</div>
-    <div class="cx nr-e" style="left: 120px; top: 510px">1</div>
-    <div class="cx nr-e" style="left: 120px; top: 660px">3</div>
-    <p class="nr-op" style="left: 330px; top: 360px">×</p>
-    <p class="nr-op" style="left: 330px; top: 510px">×</p>
-    <p class="nr-op" style="left: 330px; top: 660px">×</p>
-    <div class="cx nr-p" style="left: 420px; top: 360px">3</div>
-    <div class="cx nr-p" style="left: 420px; top: 510px">1</div>
-    <div class="cx nr-p" style="left: 420px; top: 660px">2</div>
-    <p class="nr-pr" style="top: 360px">= 6</p>
-    <p class="nr-pr" style="top: 510px">= 1</p>
-    <p class="nr-pr" style="top: 660px">= 6</p>
-    <svg class="seta nr-liga" viewBox="0 0 1920 1080"><path d="M930 420L1252 540"/><path d="M930 570H1250"/><path d="M930 720L1252 600"/></svg>
-    <p class="nr-soma">13</p>
-    <p class="nr-leg nr-leg1">Como a média ponderada: a prova de peso 2 conta em dobro.</p>
-    <svg class="nr-rede" viewBox="0 0 1920 1080"></svg>
-    <p class="nr-leg nr-leg2">Cada linha é um peso; um modelo tem bilhões deles.</p>
-    <p class="rodape">Llama 3.1 405B: 405 bilhões de pesos, os parâmetros (Meta, 2024).</p>
-    <p class="pilula">números ilustrativos</p>
+    <h2 class="manchete">Os de ponta passam de 1 trilhão de pesos</h2>
+    <p class="pn-leg">Cada fio é um peso, ou parâmetro.</p>
+    <svg class="pn-rede" viewBox="0 0 1920 1080"></svg>
+    <div class="pn-tab">
+      <div class="pn-l" data-v="2.8"><span class="pn-n">Kimi K3</span><span class="pn-v">2,8 trilhões</span><span class="pn-t"><span class="pn-b"></span><i class="pn-marco"></i></span></div>
+      <div class="pn-l" data-v="2.4"><span class="pn-n">Qwen3.8 Max</span><span class="pn-v">2,4 trilhões</span><span class="pn-t"><span class="pn-b"></span><i class="pn-marco"></i></span></div>
+      <div class="pn-l" data-v="1"><span class="pn-n">Mistral Large 4</span><span class="pn-v">1 trilhão</span><span class="pn-t"><span class="pn-b"></span><i class="pn-marco"></i></span></div>
+      <div class="pn-l" data-v="0.816"><span class="pn-n">Muse Spark Open</span><span class="pn-v">816 bilhões</span><span class="pn-t"><span class="pn-b"></span><i class="pn-marco"></i></span></div>
+    </div>
+    <p class="pn-fech">Fechados (Claude, GPT, Gemini) não divulgam; estima-se que estejam nessa faixa.</p>
+    <p class="rodape">Fichas oficiais, lidas em 23/10/2026.</p>
   </section>
 
   <section data-slide="parametros" data-arquetipo="comparacao">
@@ -1061,17 +1061,19 @@ const slides = [
    notas: {diga: 'Segundo bloco: o que acontece por dentro. São quatro peças: pesos, tokens, previsão e a mesa, que é a janela de contexto.',
      faca: [], transicao: 'Primeiro, de onde ela aprendeu.'}},
   {id: 'corpus', titulo: 'Ela treinou com trilhões de pedaços',
-   notas: {diga: 'Antes de conversar com alguém, o modelo é treinado com uma quantidade enorme de texto: livros, sites, artigos e código. O Llama 3.1 405B, da Meta, viu cerca de 15 trilhões de tokens de fontes públicas. Token é um pedaço de texto, e daqui a pouco vocês veem um.',
-     faca: ['fonte: model card do Llama 3.1, Meta, 2024'],
-     transicao: 'Mas máquina não lê palavra; ela transforma palavra em número.'}},
-  {id: 'vetor', titulo: 'A palavra vira uma lista de números', passos: [2.8],
-   notas: {diga: 'Cada palavra, ou pedaço de palavra, entra no modelo como uma lista fixa de números. No exemplo, três números: 2, 1 e 3. Nos modelos reais a lista tem milhares de números, e estes valores foram escolhidos só para a conta caber na tela.',
-     faca: ['apontar a palavra e depois os três números'],
-     transicao: 'O que o modelo faz com esses números? Multiplica cada um por um peso e soma.'}},
-  {id: 'neuronio', titulo: 'Um neurônio multiplica e soma', passos: [3.0, 2.6],
-   notas: {diga: 'Esta é a peça mínima da rede, o neurônio. Os três números da palavra entram à esquerda, e cada um é multiplicado pelo seu peso: 2 vezes 3 dá 6, 1 vezes 1 dá 1, 3 vezes 2 dá 6. A soma é 13. É a média ponderada de concurso: a prova de peso 2 conta em dobro. No segundo clique: o modelo empilha muitos neurônios em camadas, e cada linha do desenho é um peso. O Llama 3.1 405B tem 405 bilhões de pesos; são eles os parâmetros.',
-     faca: ['primeiro clique: ler a conta linha por linha, devagar', 'segundo clique: a rede', 'números ilustrativos; nome técnico, só se perguntarem: multiplicação de vetor por matriz'],
-     transicao: 'De onde vêm os valores dos pesos? Do treino.'}},
+   notas: {diga: 'Antes de conversar com alguém, o modelo é treinado com uma quantidade enorme de texto: livros, sites, artigos e código. O DeepSeek V4, modelo aberto chinês de 2026, foi treinado com mais de 32 trilhões de tokens, pela ficha oficial. Token é um pedaço de texto, e daqui a pouco vocês veem um.',
+     faca: ['fonte: ficha do DeepSeek-V4-Pro no Hugging Face, lida em 23/10/2026', 'os fechados não publicam esse número'],
+     transicao: 'Com esse texto todo, o modelo aprende quanto cada palavra pesa na seguinte.'}},
+  {id: 'pistas', titulo: 'Pesos dizem quanto cada pista importa', passos: [3.0],
+   notas: {diga: 'Pensem na frase: o juiz julgou o pedido. Cada palavra é uma pista para a próxima. Os fios ligam as pistas às candidatas, e a espessura do fio é o peso: quanto aquela pista empurra aquela candidata. Pedido empurra muito procedente; julgou quase não decide nada. A candidata que junta mais força vence e entra na frase. É o mesmo leque que vamos ver daqui a pouco, palavra por palavra.',
+     faca: ['apontar o fio mais grosso, de pedido a procedente', 'pesos ilustrativos; num modelo real cada fio é um número, e não há conta para fazer de cabeça'],
+     transicao: 'Quantos fios desses tem um modelo de verdade?'}},
+  {id: 'ponta', titulo: 'Os de ponta passam de 1 trilhão de pesos', passos: [2.4, 2.6],
+   notas: {diga: 'Um modelo empilha camadas e camadas, e cada fio entre elas é um peso; peso e parâmetro são a mesma coisa. No segundo clique, o tamanho dos maiores modelos abertos, pelas fichas oficiais: Kimi K3, 2,8 trilhões; Qwen3.8 Max, 2,4 trilhões; Mistral Large 4, 1 trilhão; Muse Spark Open, da Meta, 816 bilhões. Os fechados, Claude, GPT e Gemini, não divulgam o tamanho; estima-se que estejam nessa faixa.',
+     faca: ['primeiro clique: a rede; apontar um fio e dizer que é um peso', 'segundo clique: os quatro números e o marco de 1 trilhão',
+       'Mistral Large 4 em prévia desde 06/10/2026, com pesos prometidos para o fim do mês; Kimi K3 e os outros: fichas no Hugging Face',
+       'nos três de cima só uma parte dos pesos trabalha em cada palavra (ativos): 104 bi, 95 bi, 52 bi e 42 bi; só se perguntarem'],
+     transicao: 'E quem dá a espessura a cada fio? O treino.'}},
   {id: 'parametros', titulo: 'O treino ajusta os pesos',
    notas: {diga: 'No começo do treino os pesos são aleatórios. O treino compara a previsão com o texto real e corrige cada peso um pouco, repetidas vezes, até a previsão melhorar. No uso, a mensagem de vocês passa por esses pesos e vira resposta; o texto do treino não fica guardado como arquivo.',
      faca: [], transicao: 'Daí vem a consequência mais importante.'}},
@@ -1293,57 +1295,85 @@ const partes = (id) => {
   };
 };
 
-// Vetor: a palavra, a seta e os três números da lista.
-const vetor = (() => {
-  const sec = m.secao('vetor'), pal = sec.querySelector('.vt-pal'), seta = $$(sec, '.seta path'), ns = $$(sec, '.vt-n'), leg = sec.querySelector('.vt-leg');
+// Pistas: a frase entra, as candidatas surgem, os fios se traçam com a espessura do peso, a candidata com mais força
+// acende e voa para a vaga no fim da frase. Posições medidas a cada quadro (o texto não muda de lugar).
+const pistas = (() => {
+  const sec = m.secao('pistas'), frase = sec.querySelector('.pt-frase'), pis = $$(sec, '.pt-pista'), cands = $$(sec, '.pt-cand');
+  const vaga = sec.querySelector('.pt-vaga'), voa = sec.querySelector('.pt-voa'), leg = sec.querySelector('.pt-leg'), svg = sec.querySelector('.pt-fios');
+  const vence = cands.find((cd) => cd.classList.contains('vence')) || cands[0];
+  const fios = cands.flatMap((cd, j) => cd.dataset.pesos.trim().split(/\s+/).map((p, i) => {
+    const f = traco(svg, '', cd === vence ? 'pt-fio vence' : 'pt-fio');
+    f.style.strokeWidth = `${Number(p) * 4}px`;
+    return {f, i, j, cd};
+  }));
   return (t, c) => {
     const x = conteudo(c);
     titulo(sec, x, c);
-    revelar(pal, molaAR(x - 0.1));
-    tracar(seta[0], saida(faixa(x, 0.5, 0.8)));
-    tracar(seta[1], saida(faixa(x, 0.75, 0.9)));
-    ns.forEach((el, n) => surgir(el, molaAR(x - 0.85 - n * 0.15), {dy: 0, escala: 0.15}));
-    revelar(leg, molaAR(x - 1.4));
-    fim(sec, x, 1.5);
+    revelar(frase, molaAR(x - 0.1));
+    pis.forEach((el, n) => { el.style.borderBottomColor = `color-mix(in srgb, var(--cor-tinta-suave) ${(100 * saida(faixa(x, 0.35 + n * 0.1, 0.6 + n * 0.1))).toFixed(1)}%, transparent)`; });
+    cands.forEach((cd, j) => surgir(cd, molaAR(x - 0.45 - j * 0.1), {dy: 24}));
+    for (const {f, i, cd} of fios) {
+      const p = pis[i], x1 = frase.offsetLeft + p.offsetLeft + p.offsetWidth / 2, y1 = frase.offsetTop + p.offsetTop + p.offsetHeight + 8;
+      const x2 = cd.offsetLeft + cd.offsetWidth / 2, y2 = cd.offsetTop - 8, my = (y1 + y2) / 2;
+      f.setAttribute('d', `M${x1.toFixed(1)} ${y1.toFixed(1)}C${x1.toFixed(1)} ${my.toFixed(1)} ${x2.toFixed(1)} ${my.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`);
+      tracar(f, saida(faixa(x, 0.75 + i * 0.12, 1.25 + i * 0.12)));
+    }
+    // a vencedora acende; os fios da outra esmaecem
+    const acende = saida(faixa(x, 1.55, 1.8));
+    vence.classList.toggle('acesa', acende > 0.5);
+    for (const {f, cd} of fios) if (cd !== vence) f.style.opacity = String(1 - 0.6 * acende);
+    // a palavra sai da caixa da vencedora e pousa na vaga
+    const k = clamp(molaAR(x - 1.85, {resposta: 0.6, amortecimento: 0.85}), 0, 1.02);
+    const ox = vence.offsetLeft + vence.offsetWidth / 2 - (frase.offsetLeft + vaga.offsetLeft + voa.offsetLeft + voa.offsetWidth / 2);
+    const oy = vence.offsetTop + vence.offsetHeight / 2 - (frase.offsetTop + vaga.offsetTop + voa.offsetTop + voa.offsetHeight / 2);
+    vis(voa, x > 1.8);
+    voa.style.transform = k >= 1 ? '' : `translate(${(ox * (1 - k)).toFixed(1)}px, ${(oy * (1 - k) - 60 * Math.sin(Math.PI * k)).toFixed(1)}px) scale(${(0.62 + 0.38 * k).toFixed(4)})`;
+    revelar(leg, molaAR(x - 2.2));
+    fim(sec, x, 2.3);
   };
 })();
 
-// Neurônio: as entradas e os pesos entram, cada linha mostra o produto, as ligações levam à soma (primeiro clique);
-// no segundo, o neurônio sai e a rede de camadas se desenha, com a legenda dos parâmetros.
-const neuronio = (() => {
-  const sec = m.secao('neuronio'), q = (s) => $$(sec, s);
-  const hs = q('.nr-h'), es = q('.nr-e'), ops = q('.nr-op'), ps = q('.nr-p'), prs = q('.nr-pr'), liga = q('.nr-liga path');
-  const soma = sec.querySelector('.nr-soma'), leg1 = sec.querySelector('.nr-leg1'), leg2 = sec.querySelector('.nr-leg2');
-  const rod = sec.querySelector('.rodape'), rede = sec.querySelector('.nr-rede');
-  const neuronioTodo = [...hs, ...es, ...ops, ...ps, ...prs, soma, leg1, sec.querySelector('.nr-liga')];
-  const XS = [420, 760, 1100, 1440, 1780], NS2 = [3, 5, 5, 5, 2];
-  const ys = NS2.map((n) => Array.from({length: n}, (_, i) => 560 + (i - (n - 1) / 2) * 92));
+// Ponta: a rede de camadas se desenha com fios de espessuras fixas (primeiro clique); no segundo, as barras dos
+// quatro modelos crescem até o tamanho oficial, com o marco dourado de 1 trilhão em cada uma, a linha dos fechados e a fonte.
+const ponta = (() => {
+  const sec = m.secao('ponta'), rede = sec.querySelector('.pn-rede'), leg = sec.querySelector('.pn-leg');
+  const ls = $$(sec, '.pn-l').map((el) => ({el, v: Number(el.dataset.v), b: el.querySelector('.pn-b')}));
+  const marcos = $$(sec, '.pn-marco'), fech = sec.querySelector('.pn-fech'), rod = sec.querySelector('.rodape');
+  const MAX = 3, XS = [160, 330, 500, 670, 840], NN = [5, 7, 7, 7, 4];
+  for (const l of ls) l.b.style.width = `${(100 * l.v) / MAX}%`;
+  for (const mc of marcos) mc.style.left = `${(100 / MAX).toFixed(3)}%`;
+  const ys = NN.map((n) => Array.from({length: n}, (_, i) => 580 + (i - (n - 1) / 2) * 64));
   const ligacoes = [];
-  for (let l = 0; l < XS.length - 1; l++) ligacoes.push(ys[l].flatMap((y1) => ys[l + 1].map((y2) => traco(rede, `M${XS[l]} ${y1}L${XS[l + 1]} ${y2}`))));
-  const nos = ys.map((col, l) => col.map((y) => { const ci = document.createElementNS(NS, 'circle'); ci.setAttribute('cx', XS[l]); ci.setAttribute('cy', y); ci.setAttribute('r', 18); ci.style.transformOrigin = `${XS[l]}px ${y}px`; rede.appendChild(ci); return ci; }));
+  let q = 0;
+  for (let l = 0; l < XS.length - 1; l++) ligacoes.push(ys[l].flatMap((y1) => ys[l + 1].map((y2) => {
+    const f = traco(rede, `M${XS[l]} ${y1}L${XS[l + 1]} ${y2}`);
+    f.style.strokeWidth = `${[1, 2.5, 1.5, 4, 1, 2, 6, 1.5, 3][q++ % 9]}px`; // espessuras fixas, sem aleatório
+    return f;
+  })));
+  const nos = ys.map((col, l) => col.map((y) => { const ci = document.createElementNS(NS, 'circle'); ci.setAttribute('cx', XS[l]); ci.setAttribute('cy', y); ci.setAttribute('r', 14); ci.style.transformOrigin = `${XS[l]}px ${y}px`; rede.appendChild(ci); return ci; }));
   return (t, c) => {
     const x = conteudo(c), y = c.desde(1);
     titulo(sec, x, c);
-    hs.forEach((h, n) => revelar(h, molaAR(x - 0.1 - n * 0.05)));
-    es.forEach((el, r) => surgir(el, molaAR(x - 0.15 - r * 0.08), {dy: 16}));
-    ps.forEach((el, r) => surgir(el, molaAR(x - 0.35 - r * 0.08), {dy: 16}));
-    ops.forEach((el, r) => surgir(el, molaAR(x - 0.3 - r * 0.08), {dy: 0}));
-    prs.forEach((el, r) => surgir(el, molaAR(x - 0.75 - r * 0.3), {dx: -24, dy: 0}));
-    liga.forEach((p, r) => tracar(p, saida(faixa(x, 1.0 + r * 0.3, 1.35 + r * 0.3))));
-    surgir(soma, molaAR(x - 1.75), {dy: 0, escala: 0.4});
-    revelar(leg1, molaAR(x - 2.1));
-    // segundo clique: o neurônio sai inteiro e a rede entra
-    const sai = y > 0 ? saida(faixa(y, 0, 0.35)) : 0;
-    for (const el of neuronioTodo) { el.style.opacity = sai > 0 ? String(1 - sai) : ''; if (sai > 0) vis(el, sai < 0.999); }
-    ligacoes.forEach((ls, l) => ls.forEach((p) => tracar(p, saida(faixa(y, 0.3 + l * 0.2, 0.65 + l * 0.2)))));
-    nos.forEach((col, l) => col.forEach((ci) => { const k = molaAR(y - 0.35 - l * 0.2); ci.style.transform = `scale(${clamp(k, 0, 1.1)})`; vis(ci, k > 0); }));
-    const k2 = molaAR(y - 1.3);
-    revelar(leg2, k2);
-    vis(leg2, y > 0);
-    const kr = molaAR(y - 1.45);
-    revelar(rod, kr);
+    // a legenda da rede sai no segundo clique, quando entram os números
+    const saiLeg = y > 0 ? saida(faixa(y, 0, 0.3)) : 0;
+    revelar(leg, molaAR(x - 0.1));
+    if (saiLeg > 0) { leg.style.opacity = String(1 - saiLeg); vis(leg, saiLeg < 0.999); }
+    ligacoes.forEach((lsg, l) => lsg.forEach((p) => tracar(p, saida(faixa(x, 0.2 + l * 0.2, 0.6 + l * 0.2)))));
+    nos.forEach((col, l) => col.forEach((ci) => { const k = molaAR(x - 0.25 - l * 0.2); ci.style.transform = `scale(${clamp(k, 0, 1.1)})`; vis(ci, k > 0); }));
+    // segundo clique
+    ls.forEach(({el, b}, n) => {
+      const k = molaAR(y - 0.1 - n * 0.15);
+      surgir(el, k, {dx: -16, dy: 0});
+      vis(el, y > 0);
+      b.style.transform = `scaleX(${clamp(molaAR(y - 0.3 - n * 0.15), 0, 1.03)})`;
+    });
+    // o marco dourado de 1 trilhão em cada barra, depois de todas crescerem
+    marcos.forEach((mc, n) => { mc.style.transform = `scaleY(${clamp(molaAR(y - 1.1 - n * 0.05), 0, 1)})`; vis(mc, y > 1.05); });
+    revelar(fech, molaAR(y - 1.4));
+    vis(fech, y > 0);
+    revelar(rod, molaAR(y - 1.6));
     vis(rod, y > 0);
-    fim(sec, x, 2.3);
+    fim(sec, x, 1.4);
   };
 })();
 
@@ -1553,8 +1583,8 @@ palco({slides: m.slides, desenhar: m.desenhar, blocos, autoplay: true, cenas: m.
   ocde: partes('ocde'),
   pl: partes('pl'),
   funciona: {largura: 900},
-  vetor,
-  neuronio,
+  pistas,
+  ponta,
   tokens: tokens('tokens'),
   mesa,
   queda,

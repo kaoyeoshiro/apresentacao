@@ -10,7 +10,7 @@ Dia 1 de um curso pago de IA (turma mista: advogados, uma desembargadora, servid
 pago). Duas aulas de ~90 min na mesma tarde, tema `cojuris`, plano contínuo. Siga a skill
 `.claude/skills/apresentacao/SKILL.md`.
 
-- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 64 slides da versão 5, `apuracao.md` e
+- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 64 slides da versão 6, `apuracao.md` e
   `apuracao-2.md`).
 - Aula 2, "Do chat à pasta": `decks/curso-ia-aula2/briefing.md` aprovado em 22/10, mas ainda com o fio da data do
   contrato, que o professor rejeitou na Aula 1; rever antes de montar. O deck ainda é a cópia do catálogo.
@@ -111,13 +111,18 @@ contorna com `stopPropagation` nos links. Conserto proposto: ignorar cliques em 
 
 ## Pedidos de 23/10/2026, depois da versão 5
 
-Pedido do professor, em andamento na versão 6 de `decks/curso-ia-aula1/deck.html`.
+Pedido do professor, feito na versão 6 de `decks/curso-ia-aula1/deck.html` (64 slides, 74 paradas); detalhe no
+`briefing.md`, seção "O que mudou da versão 5", e fontes em `apuracao-2.md`, item 12.
 
-1. Trocar "A palavra vira uma lista de números" e "Um neurônio multiplica e soma" (paradas 23 a 25 da folha da versão
+1. [feito] Trocar "A palavra vira uma lista de números" e "Um neurônio multiplica e soma" (paradas 23 a 25 da folha da versão
    5) por dois slides visuais, sem conta: (a) "Pesos dizem quanto cada pista importa", a frase "O juiz julgou o
    pedido…" com "juiz", "julgou" e "pedido" ligadas a "procedente" e "improcedente" por fios de espessuras diferentes,
    a candidata com mais força entra na frase (pílula "ilustrativo"); (b) "Os modelos de ponta passam de 1 trilhão de
    pesos", uma rede em camadas e os números oficiais dos abertos de ponta, com fonte e data, e a linha de que os
    fechados não divulgam.
-2. Tirar do deck o Llama 3.1 como exemplo de tamanho e de volume de treino, trocando por modelo recente com fonte; sem
+2. [feito] Tirar do deck o Llama 3.1 como exemplo de tamanho e de volume de treino, trocando por modelo recente com fonte; sem
    fonte oficial de tokens de treino, reformular o slide do corpus sem número de modelo antigo, e registrar no briefing.
+
+Para o professor decidir no ensaio: a linha "estima-se que [os fechados] estejam nessa faixa" não tem fonte lida (é
+frase dele); a manchete pedida virou "Os de ponta passam de 1 trilhão de pesos" para caber numa linha; o Muse Spark
+Open (816 bilhões) fica abaixo do marco de 1 trilhão, como os números mostram.
