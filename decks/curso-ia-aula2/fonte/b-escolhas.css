@@ -1,0 +1,151 @@
+
+  /* ===== BLOCO B, duas escolhas: classes b- e seletores [data-slide]. Cor só por var() do tema. ===== */
+  .b-camada { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; pointer-events: none; }
+  .b-camada path { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ponte (noite): a frase grande à esquerda; a caixa do pedido e os papéis que não cabem nela, à direita */
+  .b-pt-frase { position: absolute; left: 116px; top: 300px; font-size: 104px; line-height: 1.04; color: var(--sobre-noite); }
+  .b-pt-frase > span { display: block; }
+  .b-pt-caixa { position: absolute; z-index: 1; left: 1380px; top: 600px; width: 280px; height: 120px; box-sizing: border-box; border: 5px dashed var(--linha-sobre-noite); border-radius: 18px; display: grid; place-items: center; background: var(--noite); }
+  .b-pt-caixa p { font: 700 var(--esc-2)/1 var(--fonte-titulo); color: var(--sobre-noite); }
+  .b-pt-papel { position: absolute; width: 170px; height: 240px; object-fit: cover; object-position: top; border-radius: 6px; box-shadow: 0 10px 30px color-mix(in srgb, var(--cor-tinta) 60%, transparent); }
+
+  /* agente: duas faixas, o chat que termina e o agente com plano, ações, autorização e laço de ajuste */
+  .b-ag-rot { position: absolute; left: 120px; font: 800 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .b-ag-no { position: absolute; top: 620px; width: 170px; height: 100px; box-sizing: border-box; padding: 0 14px; border: 4px solid var(--cor-linha); border-radius: 18px; background: var(--cor-papel); display: grid; place-items: center; text-align: center; font: 700 32px/1.15 var(--fonte-titulo); text-wrap: balance; }
+  .b-ag-div { position: absolute; left: 120px; top: 500px; width: 1680px; border-top: 3px solid var(--cor-linha); }
+  .b-ag-svg path { stroke: var(--cor-tinta-suave); stroke-width: 5; }
+  .b-ag-svg .b-ag-fim { stroke: var(--cor-tinta); stroke-width: 10; }
+  .b-ag-svg .b-ag-ok { stroke: var(--cor-destaque); stroke-width: 5; }
+  .b-ag-svg .b-ag-laco { stroke-dasharray: 14 12; }
+  .b-ag-autoriza { position: absolute; z-index: 1; left: 700px; top: 548px; padding: 2px 20px; border: 4px solid var(--cor-destaque); border-radius: 999px; background: var(--cor-fundo); font: 700 30px/1.3 var(--fonte-titulo); white-space: nowrap; }
+  .b-ag-ajusta { position: absolute; z-index: 1; left: 1080px; top: 790px; padding: 0 18px; background: var(--cor-fundo); font: 700 32px/1.3 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* reenvio: três conversas, cada uma com o campo de envio embaixo e os papéis no balão */
+  .b-conv { position: absolute; top: 320px; width: 520px; height: 520px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-papel); }
+  .b-conv-cab { position: absolute; left: 28px; top: 24px; font: 700 30px/1.2 var(--fonte-titulo); letter-spacing: .1em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .b-conv::before { content: ''; position: absolute; left: 0; right: 0; top: 84px; border-top: 3px solid var(--cor-linha); }
+  .b-tag { position: absolute; right: 28px; top: 18px; font: 800 40px/1.2 var(--fonte-titulo); color: var(--cor-destaque-texto); white-space: nowrap; }
+  .b-tag.b-primeira { font-weight: 700; font-size: 30px; top: 24px; color: var(--cor-tinta-suave); }
+  .b-anexos { position: absolute; right: 28px; top: 106px; display: flex; gap: 12px; }
+  .b-anexos img { display: block; width: 140px; height: 198px; object-fit: cover; object-position: top; border-radius: 6px; border: 2px solid var(--cor-linha); box-shadow: 0 4px 14px color-mix(in srgb, var(--cor-tinta) 16%, transparent); }
+  .b-conv-msg { position: absolute; right: 28px; top: 322px; padding: 8px 22px; border-radius: 22px; background: color-mix(in srgb, var(--cor-tinta) 8%, var(--cor-papel)); font: 400 34px/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-campo { position: absolute; left: 28px; right: 28px; bottom: 28px; height: 68px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 34px; }
+  .b-campo svg { position: absolute; left: 12px; top: 9px; width: 44px; height: 44px; }
+  .b-campo svg circle, .b-campo svg path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* matriz: dois eixos e quatro casas; a casa do processo acende no segundo clique */
+  [data-slide="matriz"] .b-mx-ey { left: 120px; top: 410px; }
+  [data-slide="matriz"] .b-mx-ex { left: 640px; top: 292px; }
+  .b-mx-col { position: absolute; top: 338px; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .b-mx-lin { position: absolute; left: 120px; margin-top: 18px; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .b-cel { position: absolute; width: 555px; height: 150px; box-sizing: border-box; padding: 0 30px; border: 4px solid var(--cor-linha); border-radius: 24px; display: flex; flex-direction: column; justify-content: center; }
+  .b-cel-nome { position: relative; font: 800 46px/1.1 var(--fonte-titulo); white-space: nowrap; }
+  .b-cel-nota { position: relative; margin-top: 6px; font: 700 34px/1.25 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .b-luz { position: absolute; inset: 0; border-radius: 20px; background: var(--cor-destaque-fraca); }
+  .b-aro { position: absolute; left: 1237px; top: 582px; width: 571px; height: 166px; box-sizing: border-box; border: 6px solid var(--cor-destaque); border-radius: 30px; }
+  .b-alem-fio { position: absolute; left: 120px; top: 792px; width: 1680px; border-top: 3px solid var(--cor-linha); }
+  .b-alem { position: absolute; left: 120px; top: 816px; font: 400 var(--esc-2)/1.3 var(--fonte-texto); white-space: nowrap; }
+
+  /* projeto (noite): a janela clara do app, com as conversas à esquerda e o painel do Projeto à direita */
+  .b-app { position: absolute; left: 120px; top: 290px; width: 1160px; height: 600px; box-sizing: border-box; border-radius: 22px; background: var(--cor-papel); color: var(--cor-tinta); }
+  .b-app-barra { height: 48px; box-sizing: border-box; padding-left: 24px; display: flex; gap: 12px; align-items: center; border-bottom: 3px solid var(--cor-linha); }
+  .b-app-barra i { width: 16px; height: 16px; border-radius: 8px; background: color-mix(in srgb, var(--cor-tinta) 20%, var(--cor-papel)); }
+  .b-app-esq { position: absolute; left: 40px; top: 80px; width: 500px; }
+  .b-app-tipo { font: 700 30px/1.2 var(--fonte-titulo); letter-spacing: .1em; text-transform: uppercase; color: var(--cor-tinta-suave); }
+  .b-app-nome { margin-top: 8px; font: 800 var(--esc-2)/1.15 var(--fonte-titulo); white-space: nowrap; }
+  .b-app-conv { margin-top: 44px; }
+  .b-app-conv i { display: block; height: 26px; margin-bottom: 34px; border-radius: 13px; background: color-mix(in srgb, var(--cor-tinta) 10%, var(--cor-papel)); }
+  .b-app-campo { position: absolute; left: 0; top: 400px; width: 500px; height: 72px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 36px; }
+  .b-app-lado { position: absolute; left: 580px; top: 48px; right: 0; bottom: 0; box-sizing: border-box; padding: 18px 36px; border-left: 3px solid var(--cor-linha); background: color-mix(in srgb, var(--cor-tinta) 3%, var(--cor-papel)); border-radius: 0 0 22px 0; }
+  .b-pc { position: relative; padding: 11px 0; border-bottom: 2px solid var(--cor-linha); }
+  .b-pc:last-child { border-bottom: 0; }
+  .b-pc-tit { font: 700 30px/1.15 var(--fonte-titulo); letter-spacing: .08em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .b-pc-txt { margin-top: 4px; font: 400 32px/1.25 var(--fonte-texto); white-space: nowrap; }
+  .b-lapis { position: absolute; right: 0; top: 14px; width: 40px; height: 40px; }
+  .b-lapis path { fill: none; stroke: var(--cor-tinta); stroke-width: 3; stroke-linejoin: round; }
+  .b-seta-p path { stroke: var(--cor-destaque); stroke-width: 6; }
+  .b-anota { position: absolute; left: 1350px; top: 380px; width: 450px; font: 700 var(--esc-2)/1.25 var(--fonte-titulo); color: var(--sobre-noite); text-wrap: balance; }
+  .b-chatgpt { position: absolute; left: 1350px; top: 660px; width: 450px; font: 400 36px/1.3 var(--fonte-texto); color: var(--suave-sobre-noite); text-wrap: pretty; }
+
+  /* teste (noite): as páginas, os pedidos do chat, a busca e a barra do processo */
+  .b-348 { position: absolute; left: 108px; top: 290px; font-size: 230px; }
+  .b-348-leg { position: absolute; left: 120px; top: 510px; font: 400 var(--esc-2)/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-348-leg b { font: 800 var(--esc-2)/1.3 var(--fonte-titulo); }
+  .b-ped-leg { position: absolute; left: 900px; top: 300px; font: 400 40px/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-ped { position: absolute; left: 900px; top: 380px; width: 900px; height: 170px; }
+  .b-ped i { position: absolute; bottom: 0; width: 200px; border-radius: 10px; background: color-mix(in srgb, var(--sobre-noite) 30%, var(--noite)); transform-origin: 50% 100%; }
+  .b-busca { position: absolute; left: 120px; top: 640px; width: 560px; height: 96px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 48px; display: flex; align-items: center; gap: 18px; padding-left: 26px; }
+  .b-busca svg { width: 44px; height: 44px; flex: 0 0 44px; }
+  .b-busca svg circle, .b-busca svg path { fill: none; stroke: var(--sobre-noite); stroke-width: 4; stroke-linecap: round; }
+  .b-busca-txt { font: 700 var(--esc-2)/1.2 var(--fonte-titulo); white-space: pre; }
+  .b-busca-res { position: absolute; left: 120px; top: 770px; font: 400 40px/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-busca-res b { font: 800 40px/1.3 var(--fonte-titulo); }
+  .b-proc-leg { position: absolute; left: 900px; top: 620px; font: 400 var(--esc-2)/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-proc-leg b { font: 800 var(--esc-3)/1 var(--fonte-titulo); font-variant-numeric: tabular-nums; }
+  .b-proc { position: absolute; left: 900px; top: 730px; width: 900px; height: 56px; border-radius: 28px; background: var(--linha-sobre-noite); }
+  .b-lido { position: absolute; left: 0; top: -10px; bottom: -10px; border-radius: 8px; background: var(--cor-destaque); transform-origin: 0 50%; }
+  .b-proc-sub { position: absolute; left: 900px; top: 808px; font: 400 36px/1.3 var(--fonte-texto); color: var(--suave-sobre-noite); white-space: nowrap; }
+
+  /* lei: duas colunas com ícone, e a regra para o agente na faixa de baixo */
+  .b-lado { position: absolute; top: 300px; width: 760px; }
+  .b-lado-tit { font-size: 124px; line-height: 1; }
+  .b-lado ul { margin: 40px 0 0; padding: 0; list-style: none; }
+  .b-lado li { position: relative; padding-left: 40px; margin-bottom: 16px; font: 400 40px/1.3 var(--fonte-texto); text-wrap: pretty; }
+  .b-lado li::before { content: ''; position: absolute; left: 4px; top: 20px; width: 14px; height: 14px; border-radius: 3px; background: var(--cor-tinta-suave); }
+  .b-lado-fio { position: absolute; left: 960px; top: 310px; height: 390px; border-left: 4px solid var(--cor-linha); }
+  .b-regra { position: absolute; left: 120px; top: 738px; width: 1680px; box-sizing: border-box; padding: 16px 36px 18px; border-left: 10px solid var(--cor-destaque); border-radius: 0 20px 20px 0; background: var(--cor-destaque-fraca); }
+  .b-regra-et { font: 700 30px/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta-suave); }
+  .b-regra-txt { margin-top: 6px; font: 400 38px/1.3 var(--fonte-texto); white-space: nowrap; }
+
+  /* mdpdf: a página como imagem à esquerda (o rodapé repetido marcado), o Markdown limpo à direita */
+  [data-slide="mdpdf"] .b-et-pdf { left: 120px; top: 290px; }
+  [data-slide="mdpdf"] .b-et-md { left: 860px; top: 290px; }
+  .b-pdf { position: absolute; left: 120px; top: 346px; width: 353px; height: 500px; }
+  .b-pdf img { display: block; width: 353px; height: 500px; border-radius: 6px; box-shadow: 0 6px 24px color-mix(in srgb, var(--cor-tinta) 20%, transparent); }
+  .b-ruido { position: absolute; left: 14%; width: 72%; top: 91.4%; height: 4.4%; box-sizing: border-box; border: 4px dashed var(--cor-destaque); border-radius: 8px; }
+  .b-clausula { position: absolute; left: 7%; width: 86%; top: 50.6%; height: 5.6%; box-sizing: border-box; border: 3px solid var(--cor-tinta-suave); border-radius: 6px; }
+  .b-ruido-leg { position: absolute; left: 510px; top: 782px; width: 300px; font: 700 34px/1.25 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .b-md { position: absolute; left: 860px; top: 346px; width: 940px; box-sizing: border-box; padding: 32px 40px 36px; border: 4px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); }
+  .b-md-h { font: 700 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .b-md-hash { color: var(--cor-tinta-suave); }
+  .b-md-p { margin-top: 18px; font: 400 38px/1.35 var(--fonte-texto); text-wrap: pretty; }
+  .b-ganhos { position: absolute; left: 860px; top: 700px; margin: 0; padding: 0; list-style: none; display: flex; gap: 20px; }
+  .b-ganhos li { padding: 4px 24px; border: 3px solid var(--cor-linha); border-radius: 999px; font: 700 32px/1.3 var(--fonte-titulo); white-space: nowrap; }
+  .b-md-fio path { stroke: var(--cor-tinta-suave); stroke-width: 4; stroke-dasharray: 12 12; }
+
+  /* converter (noite): o "não" grande e as três regras empilhadas */
+  .b-nao { position: absolute; left: 110px; top: 330px; font-size: 270px; }
+  [data-slide="converter"] .cartoes { left: 780px; top: 300px; width: 1020px; grid-template-columns: 1fr; gap: 24px; }
+  [data-slide="converter"] .cartao { border-color: var(--linha-sobre-noite); padding: 22px 34px; }
+  [data-slide="converter"] .ct-txt { margin-top: 6px; }
+
+  /* codigo: o número de cada cartão, discreto, acima do título */
+  [data-slide="codigo"] .cartoes { top: 330px; counter-reset: b-ct; }
+  /* o número de cada cartão vem de um contador do CSS: é marcação, não texto a ler */
+  [data-slide="codigo"] .cartao { counter-increment: b-ct; min-height: 470px; }
+  [data-slide="codigo"] .cartao::before { content: counter(b-ct); display: block; margin-bottom: 18px; font: 800 140px/1 var(--fonte-titulo); color: color-mix(in srgb, var(--cor-tinta) 22%, var(--cor-fundo)); }
+
+  /* ferramentas (noite): dois pares em colunas, a empresa em cada linha; a faixa do Cowork em dourado */
+  .b-par-cab { position: absolute; top: 296px; width: 615px; font: 700 40px/1.2 var(--fonte-titulo); color: var(--sobre-noite); text-wrap: balance; }
+  .b-emp { position: absolute; left: 120px; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); color: var(--suave-sobre-noite); white-space: nowrap; }
+  .b-ferr { position: absolute; width: 615px; height: 150px; box-sizing: border-box; padding: 0 36px; border: 4px solid var(--linha-sobre-noite); border-radius: 24px; display: flex; flex-direction: column; justify-content: center; }
+  .b-ferr-nome { font: 800 60px/1.1 var(--fonte-titulo); white-space: nowrap; }
+  .b-ferr-sub { margin-top: 4px; font: 400 34px/1.25 var(--fonte-texto); color: var(--suave-sobre-noite); white-space: nowrap; }
+  .b-cowork { position: absolute; left: 120px; top: 790px; width: 1680px; height: 84px; box-sizing: border-box; padding: 0 36px; border-radius: 20px; display: flex; align-items: center; background: var(--cor-destaque); color: var(--sobre-destaque); font: 700 40px/1.2 var(--fonte-titulo); white-space: nowrap; }
+
+  /* diferenca: grade de 4 colunas e 3 linhas, a de cima com os pares mesclados */
+  .b-grade { position: absolute; left: 120px; top: 300px; width: 1680px; display: grid; grid-template-columns: 330px repeat(4, 1fr); }
+  .b-g { box-sizing: border-box; padding: 18px 22px; border-top: 3px solid var(--cor-linha); font: 400 34px/1.3 var(--fonte-texto); text-wrap: pretty; }
+  .b-g-cab { border-top: 0; padding-top: 0; font: 800 40px/1.15 var(--fonte-titulo); }
+  .b-g-rot { padding-left: 0; font: 700 30px/1.3 var(--fonte-titulo); letter-spacing: .08em; text-transform: uppercase; color: var(--cor-tinta-suave); }
+  .b-g-par { grid-column: span 2; margin: 10px 12px 10px 0; border-top: 0; border-radius: 16px; background: color-mix(in srgb, var(--cor-tinta) 7%, var(--cor-fundo)); font: 700 36px/1.3 var(--fonte-titulo); }
+  .b-g { padding-top: 22px; padding-bottom: 22px; }
+  [data-slide="diferenca"] [data-l="1"] { padding-top: 22px; padding-bottom: 22px; }
+
+  /* escolher (noite): pergunta, seta e rota em cada linha */
+  .b-esc { position: absolute; left: 120px; width: 1680px; height: 80px; }
+  .b-esc-q { position: absolute; left: 0; top: 10px; font: 400 40px/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-esc-r { position: absolute; left: 1120px; top: 0; padding: 8px 30px; border: 4px solid var(--linha-sobre-noite); border-radius: 999px; font: 800 40px/1.3 var(--fonte-titulo); white-space: nowrap; }
+  .b-esc-r.b-esc-proc { border-color: var(--cor-destaque); }
+  .b-esc-setas path { stroke: var(--suave-sobre-noite); stroke-width: 4; }

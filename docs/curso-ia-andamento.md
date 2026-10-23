@@ -10,10 +10,11 @@ Dia 1 de um curso pago de IA (turma mista: advogados, uma desembargadora, servid
 pago). Duas aulas de ~90 min na mesma tarde, tema `cojuris`, plano contínuo. Siga a skill
 `.claude/skills/apresentacao/SKILL.md`.
 
-- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 61 slides da versão 7, `apuracao.md` e
+- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 63 slides da versão 4, `apuracao.md` e
   `apuracao-2.md`).
-- Aula 2, "Do chat à pasta": `decks/curso-ia-aula2/briefing.md` aprovado em 22/10, mas ainda com o fio da data do
-  contrato, que o professor rejeitou na Aula 1; rever antes de montar. O deck ainda é a cópia do catálogo.
+- Aula 2, "Do chat à pasta": deck de 19 slides em `decks/curso-ia-aula2/deck.html`, na branch
+  `cursor/briefing-aula2` (worktree `.claude/worktrees/briefing-aula2`), montado em 23/10/2026. Sem sigilo. O vídeo
+  de reserva ainda é o marcador da prévia; a gravação do Codex e o link do material entram no ensaio.
 
 ## Decisões do professor que valem
 
@@ -54,10 +55,9 @@ durante a viagem ou descer os nomes para y ≥ 1015.
 
 ## Próximo passo
 
-1. Ensaio da versão 5 com `./ap abrir decks/curso-ia-aula1` (tela do apresentador com P); conferir os links com
-   internet; pedidos voltam ao passo 5 da skill.
-2. Depois, a Aula 2 (`decks/curso-ia-aula2`): rever o briefing (tirar o fio da data do contrato) e montar com os
-   mesmos recursos (blocos, guia, práticas).
+1. Ensaio do professor com `./ap abrir decks/curso-ia-aula1` (tela do apresentador com P); pedidos voltam ao passo 5
+   da skill.
+2. Aula 2 está montada em `decks/curso-ia-aula2` (19 slides, sem sigilo). Ensaio com `./ap abrir decks/curso-ia-aula2`.
 3. Antes de juntar ao `main`: bateria completa (`./ap teste`), autorrevisão por subagente e o "posso juntar?".
 
 ## Decisão de 22/10/2026: ranking da arena na Aula 1
@@ -83,79 +83,26 @@ página e ler o que ele significa (a captura não diz); se não houver explicaç
 "ranking de agentes, arena.ai, 22/10/2026". É um ranking de agentes (tarefas reais), diferente da Text Arena de
 conversa, em que o Gemini 4 Argon lidera; o slide deve dizer qual quadro é.
 
-## Pedidos do ensaio da versão 4 (23/10/2026): feitos na versão 5 (23/10)
+## Pedidos do ensaio da versão 4 (23/10/2026)
 
-Todos os 8 entraram em `decks/curso-ia-aula1/deck.html` (64 slides, 74 paradas); o detalhe de cada um está no
-`briefing.md`, seção "O que mudou da versão 4", e as fontes novas em `apuracao-2.md`, itens 5.5, 10 e 11.
+Versão 4 da Aula 1: commit `37a7245` mais a correção do motor `effee7c` (linha do dia some na viagem). Ajustes pedidos
+pelo professor, em execução por um subagente quando esta nota foi escrita (versão 5); se o commit da versão 5 não
+estiver no branch, refazer a partir daqui, pela numeração da folha `decks/curso-ia-aula1/storyboard/folha.png` da v4:
 
-1. [feito] Slide 16 virou a linha do tempo "A IA tem 70 anos; o ChatGPT, quase 4" (seis marcos; GPT-3 e GPT-6 na
-   legenda, porque o arquétipo tempo cabe seis).
-2. [feito] Conta e camadas (quatro paradas) viraram "Um neurônio multiplica e soma" (duas paradas): 2×3 + 1×1 + 3×2
-   = 13, média ponderada, e no segundo clique a rede com os 405 bilhões de parâmetros.
-3. [feito] Práticas 2 e 4 com link clicável (nova aba, sem avançar o slide); sem rota impressa; arena.ai clicável na
-   legenda do slide da arena.
-4. [feito] Índice geral e jurídico com eixo a partir de 50, escrito na tela; manchete do geral trocada para "o Opus
-   5.5 vai à frente".
-5. [feito] Slide novo "Na conversa, o Gemini 4 Argon lidera" (Text Arena, eixo a partir de 1490).
-6. [feito] Duelo de preferência sobre precatório, respostas reais do Claude Haiku 5.5 (A) e do Claude Opus 5.5 (B), em
-   até 25 palavras (com 80, a parada passava de 150 palavras e o oráculo dá ERRO acima de 70); revelação com modelo e
-   preço.
-7. [feito] Capa clara com o logo do tema, título em duas linhas e entrada discreta, abrindo sozinha.
-8. [feito] Encerramento "Obrigado" com o logo; sem contato, porque nenhum foi achado nos repositórios.
+1. Slide 16 (ramos simbólica/máquina/profundo/transformers): virar linha do tempo com períodos e marcos até os LLMs
+   (Dartmouth 1956, sistemas especialistas, aprendizado de máquina, AlexNet 2012, transformers 2017, GPT-3 2020,
+   ChatGPT 30/11/2022), cada data com fonte.
+2. Slides 25 e 26 (conta da matriz): difíceis; trocar por um neurônio com três entradas, três pesos e a soma, com
+   analogia do cotidiano (nota ponderada), sem tabela.
+3. Slide 33: sem folha impressa; QR vira link clicável (o professor testa ao vivo). Idem nas outras práticas.
+4. Slides 57 e 59 (Artificial Analysis geral e jurídico): escala aproximada, não 0 a 100, com o início do eixo escrito,
+   para a vantagem do Claude aparecer.
+5. Slide 61: acrescentar a Text Arena, em que o Gemini 4 Argon lidera (captura do professor de arena.ai/leaderboard/text,
+   22/10/2026, 8.946.356 votos, 418 modelos: Gemini 4 Argon 1517 ±7 preliminar; Claude Opus 5.5 1509 ±7; Muse Wonder
+   1509 ±8; Claude Fable 5 1503 ±4; Claude Fable 5.1 1503 ±6). Agentes: Claude lidera; conversa: Gemini.
+6. Slide 63 (duelo do prazo em dobro): a plateia sabe de cor. Trocar por duelo de preferência (explicar precatório a um
+   leigo), com respostas reais do Claude Opus 5.5 e do Claude Haiku 5.5, sem nome, e revelação no slide seguinte.
+7. Capa mais simples, com o logo da co.juris (`temas/cojuris/marca/`, só sobre fundo claro), abrindo sozinha.
+8. Slide de encerramento com o logo da co.juris.
 
-Para o professor decidir no ensaio: o limite de 25 palavras do duelo; o contato a pôr no encerramento (site, e-mail ou
-rede da co.juris), se quiser um.
-
-Pendência do motor (não alterado): `palco.js` avança o slide em qualquer clique no palco, inclusive num link; o deck
-contorna com `stopPropagation` nos links. Conserto proposto: ignorar cliques em `a[href]` no `palcoEl`.
-
-## Pedidos de 23/10/2026, depois da versão 5
-
-Pedido do professor, feito na versão 6 de `decks/curso-ia-aula1/deck.html` (62 slides, 72 paradas); detalhe no
-`briefing.md`, seção "O que mudou da versão 5", e fontes em `apuracao-2.md`, item 12.
-
-1. [feito] Trocar "A palavra vira uma lista de números" e "Um neurônio multiplica e soma" (paradas 23 a 25 da folha da versão
-   5) por dois slides visuais, sem conta: (a) "Pesos dizem quanto cada pista importa", a frase "O juiz julgou o
-   pedido…" com "juiz", "julgou" e "pedido" ligadas a "procedente" e "improcedente" por fios de espessuras diferentes,
-   a candidata com mais força entra na frase (pílula "ilustrativo"); (b) "Os modelos de ponta passam de 1 trilhão de
-   pesos", uma rede em camadas e os números oficiais dos abertos de ponta, com fonte e data, e a linha de que os
-   fechados não divulgam.
-2. [feito] Tirar do deck o Llama 3.1 como exemplo de tamanho e de volume de treino, trocando por modelo recente com fonte; sem
-   fonte oficial de tokens de treino, reformular o slide do corpus sem número de modelo antigo, e registrar no briefing.
-
-3. [feito] Tirar a prática 5 inteira: o duelo de preferência sobre precatório e a revelação "A custa até 40 vezes
-   menos que B" (paradas 62 e 63 da folha da versão 5). A arena fica explicada pelos slides de ranking; o bloco "Qual
-   a melhor" caiu de 20 para 17 minutos e o "Fechado e aberto" subiu de 10 para 13 (soma 90); a seção Duelo do briefing ficou marcada como
-   retirada. O deck passa a 62 slides e 72 paradas.
-4. [feito] Linha dos fechados no slide "Os de ponta passam de 1 trilhão de pesos": "Claude, GPT e Gemini não divulgam
-   o tamanho", porque nenhuma fonte lida estima o número; a ordem de grandeza fica na fala, como opinião do professor.
-
-Para o professor decidir no ensaio: a manchete pedida virou "Os de ponta passam de 1 trilhão de pesos" para caber numa
-linha; o Muse Spark Open (816 bilhões) fica abaixo do marco de 1 trilhão, como os números mostram;
-os 3 minutos da prática 5 foram para o bloco 5 e podem ir para outra parte, se ele preferir.
-
-## Pedido de 23/10/2026, depois da versão 6
-
-O slide "Pesos dizem quanto cada pista importa" (fios entre "juiz/julgou/pedido" e "procedente/improcedente") ficou
-confuso até para o professor.
-
-Feito na versão 7 (61 slides, 71 paradas); detalhe no `briefing.md`, seção "O que mudou da versão 6", e na rodada 9
-da crítica.
-
-1. [feito] Retirar o slide "Pesos dizem quanto cada pista importa".
-2. [feito] Em "Os de ponta passam de 1 trilhão de pesos", trocar a primeira parada (rede com fios) por texto grande com a
-   analogia "Uma rede neural é feita de bilhões de botões de ajuste: os pesos, ou parâmetros. Treinar é girar esses
-   botões até as respostas ficarem boas.", com no máximo um desenho discreto de botões girando; a segunda parada
-   (barras e linha dos fechados) continua. Ficou com nove botões discretos que giram; no segundo clique, frase e
-   botões saem e as barras ocupam a largura toda.
-3. [feito] Vizinhança de arquétipos, respiro, notas e transições dos vizinhos; soma dos blocos em 90 e determinismo
-   conferido. Blocos em 16/29/14/18/13: o minuto do slide retirado saiu do bloco 2 e foi para o 4, porque
-   16/30/14/17/13 com 61 slides reprovou o determinismo (o mesmo pixel da linha do dia).
-
-## Pendência de motor (23/10/2026)
-
-- O teste de determinismo do `./ap sondar` falha por um pixel na barra de progresso da linha do dia conforme a
-  divisão de minutos dos blocos (ex.: 16/30/14/17/10). Contornado na Aula 1 com 16/30/14/17/13 (versão 6) e 16/29/14/18/13 (versão 7). Corrigir em
-  `motor/palco.js` (arredondar o `scaleX` da barra ou o `faixa` do bloco) e cobrir com teste.
-- `palco.js` avança o slide em qualquer clique, inclusive em link; a Aula 1 contorna nos próprios links. Corrigir no
-  motor ignorando cliques em `<a>`.
+Depois da versão 5 da Aula 1: novo ensaio. A Aula 2 já tem briefing sem o fio da data (23/10/2026); o deck espera o sim.

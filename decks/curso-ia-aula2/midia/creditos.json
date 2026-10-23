@@ -226,5 +226,44 @@
   },
   "copiado_de": "decks/previa-curso-ia/midia/pasta-aberta.webp",
   "nota": "marcador: substitua por mídia do deck"
+ },
+ {
+  "arquivo": "midia/heroi-aula2.webp",
+  "data": "2026-10-19",
+  "ferramenta": "image-video-api (./cvm imagem)",
+  "modelo": "gemini",
+  "licenca": "termos do provedor do modelo",
+  "custo_usd": 0,
+  "custo_nota": "cópia da prévia, sem geração nova; o custo da geração está no creditos.json da prévia",
+  "copiado_de": "decks/previa-curso-ia/midia/heroi-aula2.webp",
+  "nota": "pasta kraft fechada, capa da Aula 2; prompt e tratamento na ficha da prévia"
+ },
+ {
+  "arquivo": "midia/caso-contrato.webp",
+  "data": "2026-10-23",
+  "ferramenta": "código próprio",
+  "origem": "decks/curso-ia-aula2/material/gerar.py (HTML impresso em PDF pelo Chrome e rasterizado); documento fictício, sem IA",
+  "custo": 0
+ },
+ {
+  "arquivo": "midia/caso-aditivo.webp",
+  "data": "2026-10-23",
+  "ferramenta": "código próprio",
+  "origem": "decks/curso-ia-aula2/material/gerar.py (HTML impresso em PDF pelo Chrome e rasterizado); documento fictício, sem IA",
+  "custo": 0
+ },
+ {
+  "arquivo": "midia/caso-notificacao.webp",
+  "data": "2026-10-23",
+  "ferramenta": "código próprio",
+  "origem": "decks/curso-ia-aula2/material/gerar.py (HTML impresso em PDF pelo Chrome e rasterizado); documento fictício, sem IA",
+  "custo": 0
+ },
+ {
+  "arquivo": "midia/caso-contrato-trecho.webp",
+  "data": "2026-10-23",
+  "ferramenta": "código próprio",
+  "origem": "decks/curso-ia-aula2/material/gerar.py (HTML impresso em PDF pelo Chrome e rasterizado); documento fictício, sem IA",
+  "custo": 0
  }
 ]

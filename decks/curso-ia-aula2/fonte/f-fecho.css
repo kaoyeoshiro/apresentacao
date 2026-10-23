@@ -1,0 +1,6 @@
+
+  /* ===== Bloco F, fecho ===== */
+  /* registro: três marcos só, então o texto de cada um cresce */
+  [data-slide="registro"] .etapas li { font-size: 56px; }
+  /* fecho em fundo claro, por causa do logo: o logo oficial do tema embaixo, à direita dos passos */
+  .f-logo { position: absolute; left: 1340px; top: 520px; height: 380px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }

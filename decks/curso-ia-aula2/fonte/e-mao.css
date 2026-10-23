@@ -1,0 +1,23 @@
+
+  /* ===== Bloco E, mão na massa ===== */
+  /* codex: o nome de cada ferramenta grande na sua coluna */
+  [data-slide="codex"] .janela .letra { font-size: 140px; top: 16px; }
+  /* material: os papéis do caso sem deformar (a página é um pouco mais alta que a caixa do objeto) */
+  [data-slide="material"] .objeto { object-fit: contain; }
+  [data-slide="material"] .entrada { height: 236px; }
+  [data-slide="material"] .doc-leg { top: 418px; }
+  /* travou: cartões mais altos e texto maior, para ler de longe enquanto a sala trabalha */
+  [data-slide="travou"] .cartoes { top: 400px; }
+  [data-slide="travou"] .cartao { min-height: 300px; padding: 36px 40px; }
+  [data-slide="travou"] .ct-txt { margin-top: 22px; font-size: var(--esc-2); }
+
+  /* pratica2: três colunas de passos (notebook, celular, nos dois) e o pedido exato embaixo, para copiar */
+  .e-cols { position: absolute; left: 120px; top: 316px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; }
+  .e-col-tit { font: 800 var(--esc-2)/1.2 var(--fonte-titulo); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+  .e-passos { margin-top: 22px; counter-reset: e-p; }
+  .e-passos.e-depois { counter-reset: e-p 2; }
+  /* o número do passo vem de um contador do CSS: é marcação, não texto a ler */
+  .e-passos li { counter-increment: e-p; display: flex; align-items: center; gap: 22px; margin-bottom: 18px; font-size: 40px; line-height: 1.25; white-space: nowrap; }
+  .e-passos li::before { content: counter(e-p); flex: 0 0 58px; height: 58px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
+  .e-pedido { position: absolute; left: 120px; top: 596px; width: 1680px; box-sizing: border-box; padding: 30px 44px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
+  .e-pedido p { font-size: 46px; line-height: 1.3; text-wrap: pretty; }

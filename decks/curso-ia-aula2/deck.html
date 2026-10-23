@@ -1,210 +1,2249 @@
 <!doctype html>
-<!-- Catálogo de cenas: molde do plano contínuo. Um slide por arquétipo de motor/cenas.js, falando do próprio método
-     (nenhum fato de fora). Contrato da biblioteca em docs/cenas.md; briefing e mídia em briefing.md e midia/.
-     Ao vivo: ./ap abrir decks/catalogo   ·   ./ap sondar decks/catalogo   ·   ./ap paradas decks/catalogo
-
-     Como usar este molde:
-     - TROCAR o conteúdo: escreva o texto nas sections (o oráculo mede o HTML) e os dados nos atributos data-*; a mídia
-       vai em midia/ com crédito em midia/creditos.json (a daqui é marcador, copiada da prévia do curso).
-     - APAGAR um slide: apague a <section data-slide="x"> e a linha {id: 'x', ...} da lista no fim. Posições, trilha,
-       zonas noite, passos e cenas se recalculam. O mergulho some junto com a demonstração (apague os dois).
-     - REORDENAR: mude a ordem das linhas da lista (a das sections não importa). A abertura pede o vizinho na mesma
-       altura e 1100 px de vão, o que o cenas.js já faz.
-     - NOVO slide: copie uma section do mesmo arquétipo, troque data-slide e ponha a linha na lista.
-     - NOITE: class="noite" na section põe o slide na zona marinha (aberturas e momentos fortes); o resto fica no claro. -->
+<!-- GERADO por montar.py a partir de fonte/. Edite os arquivos de fonte/, nunca este deck.html.
+     Aula 2 do curso de IA da co.juris, dia 1: "Do chat à pasta" (cerca de 90 minutos). Plano contínuo pela biblioteca
+     (docs/cenas.md). Briefing, roteiro, fontes e o caso fictício em briefing.md. Ao vivo: ./ap abrir decks/curso-ia-aula2 -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Catálogo de cenas</title>
+<title>Do chat à pasta · Aula 2</title>
 <link rel="stylesheet" href="../../temas/cojuris/tema.css">
 <link rel="stylesheet" href="../../motor/cenas.css">
+<style>
+  /* BASE: peças comuns a todos os blocos. Cada bloco escreve só classes com o prefixo dele (a-, b-, c-, d-, e-, f-). */
+  .linha-top { position: absolute; left: 120px; top: 292px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .rodape { position: absolute; left: 120px; top: 892px; font-size: 36px; line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .respiro-sub { position: absolute; left: 120px; top: 850px; font-size: var(--esc-2); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .noite .linha-top, .noite .rodape, .noite .respiro-sub { color: var(--suave-sobre-noite); }
+
+  /* cartões (cena própria): grade de 3 ou 4 colunas; nas grades de modelos, o logo oficial em cima */
+  .cartoes { position: absolute; left: 120px; top: 380px; width: 1680px; display: grid; gap: 36px 40px; }
+  .cartoes.c2 { grid-template-columns: repeat(2, 1fr); }
+  .cartoes.c3 { grid-template-columns: repeat(3, 1fr); }
+  .cartoes.c4 { grid-template-columns: repeat(4, 1fr); }
+  .cartao { box-sizing: border-box; padding: 26px 32px; border: 4px solid var(--cor-linha); border-radius: 26px; }
+  .ct-tit { font: 800 var(--esc-2)/1.15 var(--fonte-titulo); white-space: nowrap; }
+  .ct-tit.g { font-size: var(--esc-3); }
+  .ct-txt { margin-top: 12px; font-size: 36px; line-height: 1.3; text-wrap: pretty; }
+  .ct-sub { margin-top: 6px; font-size: 32px; line-height: 1.3; color: var(--cor-tinta-suave); }
+  .ct-cab { display: flex; align-items: center; gap: 22px; height: 64px; }
+  .ct-logo { display: block; height: 56px; width: auto; max-width: 240px; object-fit: contain; object-position: left center; }
+  .ct-col .ct-logo { height: 48px; margin-bottom: 18px; }
+  .ct-leg { position: absolute; left: 120px; top: 300px; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* definições em partes: os itens à esquerda, um por clique; a explicação do item atual à direita */
+  .partes { position: absolute; left: 120px; top: 330px; width: 900px; }
+  /* o número de cada parte vem de um contador do CSS: é marcação, não texto a ler */
+  .partes { counter-reset: parte; }
+  .partes li { counter-increment: parte; display: flex; align-items: flex-start; gap: 26px; margin-bottom: 26px; font-size: 40px; line-height: 1.25; color: var(--cor-tinta-suave); }
+  .partes li::before { content: counter(parte); flex: 0 0 58px; height: 58px; margin-top: -4px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); }
+  .partes li.ativa { color: var(--cor-tinta); }
+  .partes li.ativa::before { background: var(--cor-destaque); border-color: var(--cor-destaque); color: var(--sobre-destaque); }
+  .noite .partes li { color: var(--suave-sobre-noite); }
+  .noite .partes li.ativa { color: var(--sobre-noite); }
+  .noite .partes li::before { border-color: var(--linha-sobre-noite); }
+  .noite .partes li.ativa::before { border-color: var(--cor-destaque); }
+  .explica { position: absolute; left: 1100px; top: 330px; width: 700px; height: 520px; }
+  .explica p { position: absolute; left: 0; top: 0; width: 700px; font: 400 60px/1.25 var(--fonte-texto); text-wrap: pretty; }
+
+  /* ===== BLOCO A, pedir bem: classes a-* ===== */
+
+  /* par (cena própria): o pedido vago numa caixa tracejada, o pedido bom numa caixa cheia embaixo; os ícones ✗ e ✓
+     são desenhados pelo a-pedir.cenas.js */
+  .a-err { position: absolute; left: 120px; top: 318px; display: flex; align-items: center; gap: 30px; box-sizing: border-box; padding: 20px 40px 20px 26px; border: 4px dashed var(--cor-linha); border-radius: 26px; }
+  .a-err p { font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .a-cer { position: absolute; left: 120px; top: 470px; width: 1680px; display: flex; align-items: flex-start; gap: 30px; box-sizing: border-box; padding: 32px 48px 36px 26px; border: 5px solid var(--cor-tinta); border-radius: 26px; }
+  .a-cer p { flex: 1; font-size: var(--esc-2); line-height: 1.36; text-wrap: pretty; }
+  .a-ic { flex: 0 0 64px; width: 64px; height: 64px; overflow: visible; }
+  .a-cer .a-ic { margin-top: -2px; }
+  .a-ic circle { fill: none; stroke: var(--cor-linha); stroke-width: 4; }
+  .a-ic path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .a-cer .a-ic circle { stroke: var(--cor-tinta); }
+  .a-cer .a-ic path { stroke: var(--cor-tinta); }
+  /* marca-texto: a faixa cresce da esquerda (background-size animado pela cena) */
+  .a-mk { color: inherit; font-weight: 600; white-space: nowrap; background: linear-gradient(transparent 58%, color-mix(in srgb, var(--cor-destaque) 55%, transparent) 58%) no-repeat 0 0 / 0% 100%; padding: 0 2px; }
+  .a-extra { position: absolute; left: 120px; top: 800px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .a-fmt { display: flex; gap: 22px; }
+  .a-fmt span { padding: 4px 26px; border: 3px solid var(--cor-linha); border-radius: 999px; font: 600 36px/1.3 var(--fonte-titulo); color: var(--cor-tinta); }
+  .a-ouro { top: 790px; font: 800 60px/1.1 var(--fonte-titulo); text-transform: uppercase; letter-spacing: -0.01em; }
+  .noite .a-err { border-color: var(--linha-sobre-noite); }
+  .noite .a-err p { color: var(--suave-sobre-noite); }
+  .noite .a-cer { border-color: var(--sobre-noite); }
+  .noite .a-ic circle { stroke: var(--linha-sobre-noite); }
+  .noite .a-ic path { stroke: var(--suave-sobre-noite); }
+  .noite .a-cer .a-ic circle, .noite .a-cer .a-ic path { stroke: var(--sobre-noite); }
+  .noite .a-mk { background-image: linear-gradient(transparent 62%, color-mix(in srgb, var(--cor-destaque) 60%, var(--noite)) 62%); }
+  .noite .a-extra { color: var(--suave-sobre-noite); }
+  .noite .a-extra.sinal { color: var(--sinal-noite); }
+
+  /* tentativas (cena própria): três cartões, cada um com a barra da distância */
+  .a-tn-et { left: 120px; top: 300px; }
+  .a-tn { position: absolute; top: 360px; width: 520px; height: 400px; box-sizing: border-box; padding: 30px 34px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
+  .a-tn:nth-of-type(1) { left: 120px; } .a-tn:nth-of-type(2) { left: 700px; } .a-tn:nth-of-type(3) { left: 1280px; }
+  .a-tn-n { font: 800 140px/1 var(--fonte-titulo); letter-spacing: -0.03em; color: var(--suave-sobre-noite); }
+  .a-tn-p { margin-top: 18px; font-size: var(--esc-2); line-height: 1.3; text-wrap: pretty; }
+  .a-tn-t { position: absolute; left: 34px; right: 34px; bottom: 40px; height: 22px; border-radius: 11px; background: var(--linha-sobre-noite); }
+  .a-tn-b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 11px; background: color-mix(in srgb, var(--sobre-noite) 50%, var(--noite)); transform-origin: 0 50%; }
+  .a-tn:nth-of-type(3) .a-tn-b { background: var(--cor-destaque); }
+  .a-tn-fim { position: absolute; left: 120px; top: 812px; font: 800 52px/1.2 var(--fonte-titulo); text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; }
+
+  /* personas (cena própria): a pergunta em cima, um papel por coluna */
+  .a-pg { position: absolute; left: 120px; top: 300px; font: italic 400 var(--esc-3)/1.2 var(--fonte-texto); white-space: nowrap; }
+  .a-col { position: absolute; top: 450px; width: 520px; box-sizing: border-box; padding-top: 26px; border-top: 5px solid var(--linha-sobre-noite); }
+  .a-col:nth-of-type(1) { left: 120px; } .a-col:nth-of-type(2) { left: 700px; } .a-col:nth-of-type(3) { left: 1280px; }
+  .a-col-t { font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .06em; text-transform: uppercase; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .a-col-r { margin-top: 22px; font-size: 42px; line-height: 1.3; text-wrap: pretty; }
+  .a-pg-fim { position: absolute; left: 120px; top: 812px; font-size: var(--esc-2); color: var(--sobre-noite); white-space: nowrap; }
+
+  /* exemplos (cartões): quadrados que contam os exemplos do pedido */
+  [data-slide="exemplos"] .cartoes { top: 350px; }
+  [data-slide="exemplos"] .cartao { padding: 34px 36px 38px; }
+  .a-ex { display: flex; gap: 14px; height: 54px; margin-bottom: 26px; }
+  .a-ex i { width: 54px; height: 54px; box-sizing: border-box; border-radius: 10px; background: var(--cor-tinta); }
+  .a-ex i.vazio { background: none; border: 4px dashed var(--cor-tinta-suave); }
+  .ct-tit i { font-style: italic; }
+
+  /* junta (cena própria): o rótulo do elemento à esquerda, o trecho do pedido à direita */
+  .a-jt { position: absolute; left: 120px; top: 318px; width: 1680px; }
+  .a-jl { position: relative; display: flex; align-items: center; height: 82px; white-space: nowrap; }
+  .a-jl b { position: relative; flex: 0 0 300px; font: 700 var(--esc-1)/1 var(--fonte-titulo); letter-spacing: .12em; text-transform: uppercase; color: var(--cor-tinta); }
+  .a-jl b::before { content: ''; position: absolute; left: -18px; top: -14px; width: 250px; height: 58px; border-radius: 12px; background: var(--cor-destaque-fraca); transform: scaleX(var(--a-acende, 0)); transform-origin: 0 50%; z-index: -1; }
+  .a-jl b { margin-left: 18px; isolation: isolate; }
+  .a-jl span { font-size: 42px; line-height: 1.2; }
+  [data-slide="junta"] .rodape { top: 860px; font-size: var(--esc-2); color: var(--cor-tinta); }
+
+  /* prática 1 (cena guia): passos à esquerda, checklist à direita */
+  .a-ps { position: absolute; left: 120px; top: 340px; width: 1100px; }
+  .a-ps li { display: flex; align-items: flex-start; gap: 30px; margin-bottom: 44px; font-size: var(--esc-2); line-height: 1.3; }
+  .a-ps b { flex: 0 0 76px; height: 76px; margin-top: -10px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 38px; display: grid; place-items: center; font: 800 40px/1 var(--fonte-titulo); color: var(--sobre-noite); }
+  .a-ck-et { left: 1260px; top: 300px; }
+  .a-ck { position: absolute; left: 1260px; top: 356px; width: 540px; }
+  .a-ck li { display: flex; align-items: center; gap: 24px; height: 74px; font: 600 40px/1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+  .a-ck i { flex: 0 0 40px; height: 40px; box-sizing: border-box; border: 4px solid var(--suave-sobre-noite); border-radius: 8px; }
+
+  /* ===== BLOCO B, duas escolhas: classes b- e seletores [data-slide]. Cor só por var() do tema. ===== */
+  .b-camada { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; pointer-events: none; }
+  .b-camada path { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ponte (noite): a frase grande à esquerda; a caixa do pedido e os papéis que não cabem nela, à direita */
+  .b-pt-frase { position: absolute; left: 116px; top: 300px; font-size: 104px; line-height: 1.04; color: var(--sobre-noite); }
+  .b-pt-frase > span { display: block; }
+  .b-pt-caixa { position: absolute; z-index: 1; left: 1380px; top: 600px; width: 280px; height: 120px; box-sizing: border-box; border: 5px dashed var(--linha-sobre-noite); border-radius: 18px; display: grid; place-items: center; background: var(--noite); }
+  .b-pt-caixa p { font: 700 var(--esc-2)/1 var(--fonte-titulo); color: var(--sobre-noite); }
+  .b-pt-papel { position: absolute; width: 170px; height: 240px; object-fit: cover; object-position: top; border-radius: 6px; box-shadow: 0 10px 30px color-mix(in srgb, var(--cor-tinta) 60%, transparent); }
+
+  /* agente: duas faixas, o chat que termina e o agente com plano, ações, autorização e laço de ajuste */
+  .b-ag-rot { position: absolute; left: 120px; font: 800 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .b-ag-no { position: absolute; top: 620px; width: 170px; height: 100px; box-sizing: border-box; padding: 0 14px; border: 4px solid var(--cor-linha); border-radius: 18px; background: var(--cor-papel); display: grid; place-items: center; text-align: center; font: 700 32px/1.15 var(--fonte-titulo); text-wrap: balance; }
+  .b-ag-div { position: absolute; left: 120px; top: 500px; width: 1680px; border-top: 3px solid var(--cor-linha); }
+  .b-ag-svg path { stroke: var(--cor-tinta-suave); stroke-width: 5; }
+  .b-ag-svg .b-ag-fim { stroke: var(--cor-tinta); stroke-width: 10; }
+  .b-ag-svg .b-ag-ok { stroke: var(--cor-destaque); stroke-width: 5; }
+  .b-ag-svg .b-ag-laco { stroke-dasharray: 14 12; }
+  .b-ag-autoriza { position: absolute; z-index: 1; left: 700px; top: 548px; padding: 2px 20px; border: 4px solid var(--cor-destaque); border-radius: 999px; background: var(--cor-fundo); font: 700 30px/1.3 var(--fonte-titulo); white-space: nowrap; }
+  .b-ag-ajusta { position: absolute; z-index: 1; left: 1080px; top: 790px; padding: 0 18px; background: var(--cor-fundo); font: 700 32px/1.3 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* reenvio: três conversas, cada uma com o campo de envio embaixo e os papéis no balão */
+  .b-conv { position: absolute; top: 320px; width: 520px; height: 520px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-papel); }
+  .b-conv-cab { position: absolute; left: 28px; top: 24px; font: 700 30px/1.2 var(--fonte-titulo); letter-spacing: .1em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .b-conv::before { content: ''; position: absolute; left: 0; right: 0; top: 84px; border-top: 3px solid var(--cor-linha); }
+  .b-tag { position: absolute; right: 28px; top: 18px; font: 800 40px/1.2 var(--fonte-titulo); color: var(--cor-destaque-texto); white-space: nowrap; }
+  .b-tag.b-primeira { font-weight: 700; font-size: 30px; top: 24px; color: var(--cor-tinta-suave); }
+  .b-anexos { position: absolute; right: 28px; top: 106px; display: flex; gap: 12px; }
+  .b-anexos img { display: block; width: 140px; height: 198px; object-fit: cover; object-position: top; border-radius: 6px; border: 2px solid var(--cor-linha); box-shadow: 0 4px 14px color-mix(in srgb, var(--cor-tinta) 16%, transparent); }
+  .b-conv-msg { position: absolute; right: 28px; top: 322px; padding: 8px 22px; border-radius: 22px; background: color-mix(in srgb, var(--cor-tinta) 8%, var(--cor-papel)); font: 400 34px/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-campo { position: absolute; left: 28px; right: 28px; bottom: 28px; height: 68px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 34px; }
+  .b-campo svg { position: absolute; left: 12px; top: 9px; width: 44px; height: 44px; }
+  .b-campo svg circle, .b-campo svg path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* matriz: dois eixos e quatro casas; a casa do processo acende no segundo clique */
+  [data-slide="matriz"] .b-mx-ey { left: 120px; top: 410px; }
+  [data-slide="matriz"] .b-mx-ex { left: 640px; top: 292px; }
+  .b-mx-col { position: absolute; top: 338px; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .b-mx-lin { position: absolute; left: 120px; margin-top: 18px; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .b-cel { position: absolute; width: 555px; height: 150px; box-sizing: border-box; padding: 0 30px; border: 4px solid var(--cor-linha); border-radius: 24px; display: flex; flex-direction: column; justify-content: center; }
+  .b-cel-nome { position: relative; font: 800 46px/1.1 var(--fonte-titulo); white-space: nowrap; }
+  .b-cel-nota { position: relative; margin-top: 6px; font: 700 34px/1.25 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .b-luz { position: absolute; inset: 0; border-radius: 20px; background: var(--cor-destaque-fraca); }
+  .b-aro { position: absolute; left: 1237px; top: 582px; width: 571px; height: 166px; box-sizing: border-box; border: 6px solid var(--cor-destaque); border-radius: 30px; }
+  .b-alem-fio { position: absolute; left: 120px; top: 792px; width: 1680px; border-top: 3px solid var(--cor-linha); }
+  .b-alem { position: absolute; left: 120px; top: 816px; font: 400 var(--esc-2)/1.3 var(--fonte-texto); white-space: nowrap; }
+
+  /* projeto (noite): a janela clara do app, com as conversas à esquerda e o painel do Projeto à direita */
+  .b-app { position: absolute; left: 120px; top: 290px; width: 1160px; height: 600px; box-sizing: border-box; border-radius: 22px; background: var(--cor-papel); color: var(--cor-tinta); }
+  .b-app-barra { height: 48px; box-sizing: border-box; padding-left: 24px; display: flex; gap: 12px; align-items: center; border-bottom: 3px solid var(--cor-linha); }
+  .b-app-barra i { width: 16px; height: 16px; border-radius: 8px; background: color-mix(in srgb, var(--cor-tinta) 20%, var(--cor-papel)); }
+  .b-app-esq { position: absolute; left: 40px; top: 80px; width: 500px; }
+  .b-app-tipo { font: 700 30px/1.2 var(--fonte-titulo); letter-spacing: .1em; text-transform: uppercase; color: var(--cor-tinta-suave); }
+  .b-app-nome { margin-top: 8px; font: 800 var(--esc-2)/1.15 var(--fonte-titulo); white-space: nowrap; }
+  .b-app-conv { margin-top: 44px; }
+  .b-app-conv i { display: block; height: 26px; margin-bottom: 34px; border-radius: 13px; background: color-mix(in srgb, var(--cor-tinta) 10%, var(--cor-papel)); }
+  .b-app-campo { position: absolute; left: 0; top: 400px; width: 500px; height: 72px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 36px; }
+  .b-app-lado { position: absolute; left: 580px; top: 48px; right: 0; bottom: 0; box-sizing: border-box; padding: 18px 36px; border-left: 3px solid var(--cor-linha); background: color-mix(in srgb, var(--cor-tinta) 3%, var(--cor-papel)); border-radius: 0 0 22px 0; }
+  .b-pc { position: relative; padding: 11px 0; border-bottom: 2px solid var(--cor-linha); }
+  .b-pc:last-child { border-bottom: 0; }
+  .b-pc-tit { font: 700 30px/1.15 var(--fonte-titulo); letter-spacing: .08em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .b-pc-txt { margin-top: 4px; font: 400 32px/1.25 var(--fonte-texto); white-space: nowrap; }
+  .b-lapis { position: absolute; right: 0; top: 14px; width: 40px; height: 40px; }
+  .b-lapis path { fill: none; stroke: var(--cor-tinta); stroke-width: 3; stroke-linejoin: round; }
+  .b-seta-p path { stroke: var(--cor-destaque); stroke-width: 6; }
+  .b-anota { position: absolute; left: 1350px; top: 380px; width: 450px; font: 700 var(--esc-2)/1.25 var(--fonte-titulo); color: var(--sobre-noite); text-wrap: balance; }
+  .b-chatgpt { position: absolute; left: 1350px; top: 660px; width: 450px; font: 400 36px/1.3 var(--fonte-texto); color: var(--suave-sobre-noite); text-wrap: pretty; }
+
+  /* teste (noite): as páginas, os pedidos do chat, a busca e a barra do processo */
+  .b-348 { position: absolute; left: 108px; top: 290px; font-size: 230px; }
+  .b-348-leg { position: absolute; left: 120px; top: 510px; font: 400 var(--esc-2)/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-348-leg b { font: 800 var(--esc-2)/1.3 var(--fonte-titulo); }
+  .b-ped-leg { position: absolute; left: 900px; top: 300px; font: 400 40px/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-ped { position: absolute; left: 900px; top: 380px; width: 900px; height: 170px; }
+  .b-ped i { position: absolute; bottom: 0; width: 200px; border-radius: 10px; background: color-mix(in srgb, var(--sobre-noite) 30%, var(--noite)); transform-origin: 50% 100%; }
+  .b-busca { position: absolute; left: 120px; top: 640px; width: 560px; height: 96px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 48px; display: flex; align-items: center; gap: 18px; padding-left: 26px; }
+  .b-busca svg { width: 44px; height: 44px; flex: 0 0 44px; }
+  .b-busca svg circle, .b-busca svg path { fill: none; stroke: var(--sobre-noite); stroke-width: 4; stroke-linecap: round; }
+  .b-busca-txt { font: 700 var(--esc-2)/1.2 var(--fonte-titulo); white-space: pre; }
+  .b-busca-res { position: absolute; left: 120px; top: 770px; font: 400 40px/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-busca-res b { font: 800 40px/1.3 var(--fonte-titulo); }
+  .b-proc-leg { position: absolute; left: 900px; top: 620px; font: 400 var(--esc-2)/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-proc-leg b { font: 800 var(--esc-3)/1 var(--fonte-titulo); font-variant-numeric: tabular-nums; }
+  .b-proc { position: absolute; left: 900px; top: 730px; width: 900px; height: 56px; border-radius: 28px; background: var(--linha-sobre-noite); }
+  .b-lido { position: absolute; left: 0; top: -10px; bottom: -10px; border-radius: 8px; background: var(--cor-destaque); transform-origin: 0 50%; }
+  .b-proc-sub { position: absolute; left: 900px; top: 808px; font: 400 36px/1.3 var(--fonte-texto); color: var(--suave-sobre-noite); white-space: nowrap; }
+
+  /* lei: duas colunas com ícone, e a regra para o agente na faixa de baixo */
+  .b-lado { position: absolute; top: 300px; width: 760px; }
+  .b-lado-tit { font-size: 124px; line-height: 1; }
+  .b-lado ul { margin: 40px 0 0; padding: 0; list-style: none; }
+  .b-lado li { position: relative; padding-left: 40px; margin-bottom: 16px; font: 400 40px/1.3 var(--fonte-texto); text-wrap: pretty; }
+  .b-lado li::before { content: ''; position: absolute; left: 4px; top: 20px; width: 14px; height: 14px; border-radius: 3px; background: var(--cor-tinta-suave); }
+  .b-lado-fio { position: absolute; left: 960px; top: 310px; height: 390px; border-left: 4px solid var(--cor-linha); }
+  .b-regra { position: absolute; left: 120px; top: 738px; width: 1680px; box-sizing: border-box; padding: 16px 36px 18px; border-left: 10px solid var(--cor-destaque); border-radius: 0 20px 20px 0; background: var(--cor-destaque-fraca); }
+  .b-regra-et { font: 700 30px/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta-suave); }
+  .b-regra-txt { margin-top: 6px; font: 400 38px/1.3 var(--fonte-texto); white-space: nowrap; }
+
+  /* mdpdf: a página como imagem à esquerda (o rodapé repetido marcado), o Markdown limpo à direita */
+  [data-slide="mdpdf"] .b-et-pdf { left: 120px; top: 290px; }
+  [data-slide="mdpdf"] .b-et-md { left: 860px; top: 290px; }
+  .b-pdf { position: absolute; left: 120px; top: 346px; width: 353px; height: 500px; }
+  .b-pdf img { display: block; width: 353px; height: 500px; border-radius: 6px; box-shadow: 0 6px 24px color-mix(in srgb, var(--cor-tinta) 20%, transparent); }
+  .b-ruido { position: absolute; left: 14%; width: 72%; top: 91.4%; height: 4.4%; box-sizing: border-box; border: 4px dashed var(--cor-destaque); border-radius: 8px; }
+  .b-clausula { position: absolute; left: 7%; width: 86%; top: 50.6%; height: 5.6%; box-sizing: border-box; border: 3px solid var(--cor-tinta-suave); border-radius: 6px; }
+  .b-ruido-leg { position: absolute; left: 510px; top: 782px; width: 300px; font: 700 34px/1.25 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .b-md { position: absolute; left: 860px; top: 346px; width: 940px; box-sizing: border-box; padding: 32px 40px 36px; border: 4px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); }
+  .b-md-h { font: 700 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .b-md-hash { color: var(--cor-tinta-suave); }
+  .b-md-p { margin-top: 18px; font: 400 38px/1.35 var(--fonte-texto); text-wrap: pretty; }
+  .b-ganhos { position: absolute; left: 860px; top: 700px; margin: 0; padding: 0; list-style: none; display: flex; gap: 20px; }
+  .b-ganhos li { padding: 4px 24px; border: 3px solid var(--cor-linha); border-radius: 999px; font: 700 32px/1.3 var(--fonte-titulo); white-space: nowrap; }
+  .b-md-fio path { stroke: var(--cor-tinta-suave); stroke-width: 4; stroke-dasharray: 12 12; }
+
+  /* converter (noite): o "não" grande e as três regras empilhadas */
+  .b-nao { position: absolute; left: 110px; top: 330px; font-size: 270px; }
+  [data-slide="converter"] .cartoes { left: 780px; top: 300px; width: 1020px; grid-template-columns: 1fr; gap: 24px; }
+  [data-slide="converter"] .cartao { border-color: var(--linha-sobre-noite); padding: 22px 34px; }
+  [data-slide="converter"] .ct-txt { margin-top: 6px; }
+
+  /* codigo: o número de cada cartão, discreto, acima do título */
+  [data-slide="codigo"] .cartoes { top: 330px; counter-reset: b-ct; }
+  /* o número de cada cartão vem de um contador do CSS: é marcação, não texto a ler */
+  [data-slide="codigo"] .cartao { counter-increment: b-ct; min-height: 470px; }
+  [data-slide="codigo"] .cartao::before { content: counter(b-ct); display: block; margin-bottom: 18px; font: 800 140px/1 var(--fonte-titulo); color: color-mix(in srgb, var(--cor-tinta) 22%, var(--cor-fundo)); }
+
+  /* ferramentas (noite): dois pares em colunas, a empresa em cada linha; a faixa do Cowork em dourado */
+  .b-par-cab { position: absolute; top: 296px; width: 615px; font: 700 40px/1.2 var(--fonte-titulo); color: var(--sobre-noite); text-wrap: balance; }
+  .b-emp { position: absolute; left: 120px; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); color: var(--suave-sobre-noite); white-space: nowrap; }
+  .b-ferr { position: absolute; width: 615px; height: 150px; box-sizing: border-box; padding: 0 36px; border: 4px solid var(--linha-sobre-noite); border-radius: 24px; display: flex; flex-direction: column; justify-content: center; }
+  .b-ferr-nome { font: 800 60px/1.1 var(--fonte-titulo); white-space: nowrap; }
+  .b-ferr-sub { margin-top: 4px; font: 400 34px/1.25 var(--fonte-texto); color: var(--suave-sobre-noite); white-space: nowrap; }
+  .b-cowork { position: absolute; left: 120px; top: 790px; width: 1680px; height: 84px; box-sizing: border-box; padding: 0 36px; border-radius: 20px; display: flex; align-items: center; background: var(--cor-destaque); color: var(--sobre-destaque); font: 700 40px/1.2 var(--fonte-titulo); white-space: nowrap; }
+
+  /* diferenca: grade de 4 colunas e 3 linhas, a de cima com os pares mesclados */
+  .b-grade { position: absolute; left: 120px; top: 300px; width: 1680px; display: grid; grid-template-columns: 330px repeat(4, 1fr); }
+  .b-g { box-sizing: border-box; padding: 18px 22px; border-top: 3px solid var(--cor-linha); font: 400 34px/1.3 var(--fonte-texto); text-wrap: pretty; }
+  .b-g-cab { border-top: 0; padding-top: 0; font: 800 40px/1.15 var(--fonte-titulo); }
+  .b-g-rot { padding-left: 0; font: 700 30px/1.3 var(--fonte-titulo); letter-spacing: .08em; text-transform: uppercase; color: var(--cor-tinta-suave); }
+  .b-g-par { grid-column: span 2; margin: 10px 12px 10px 0; border-top: 0; border-radius: 16px; background: color-mix(in srgb, var(--cor-tinta) 7%, var(--cor-fundo)); font: 700 36px/1.3 var(--fonte-titulo); }
+  .b-g { padding-top: 22px; padding-bottom: 22px; }
+  [data-slide="diferenca"] [data-l="1"] { padding-top: 22px; padding-bottom: 22px; }
+
+  /* escolher (noite): pergunta, seta e rota em cada linha */
+  .b-esc { position: absolute; left: 120px; width: 1680px; height: 80px; }
+  .b-esc-q { position: absolute; left: 0; top: 10px; font: 400 40px/1.3 var(--fonte-texto); white-space: nowrap; }
+  .b-esc-r { position: absolute; left: 1120px; top: 0; padding: 8px 30px; border: 4px solid var(--linha-sobre-noite); border-radius: 999px; font: 800 40px/1.3 var(--fonte-titulo); white-space: nowrap; }
+  .b-esc-r.b-esc-proc { border-color: var(--cor-destaque); }
+  .b-esc-setas path { stroke: var(--suave-sobre-noite); stroke-width: 4; }
+
+  /* ===== Bloco C: skills ===== */
+  /* painel de arquivo (skill): um editor desenhado por código, com aba, números de linha (contador do CSS, marcação e
+     não texto) e fonte monoespaçada do sistema; a vista corta e o texto rola dentro dela */
+  .c-arq { position: absolute; left: 120px; top: 318px; width: 1260px; height: 472px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 24px; background: var(--cor-papel); overflow: hidden; }
+  .c-arq-cab { height: 64px; box-sizing: border-box; padding: 15px 30px 0; border-bottom: 4px solid var(--cor-linha); font: 500 30px/1.15 var(--fonte-mono, ui-monospace, monospace); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .c-arq-vista { position: absolute; left: 0; top: 68px; right: 0; bottom: 0; overflow: hidden; }
+  .c-arq-txt { position: absolute; left: 0; top: 20px; width: 100%; counter-reset: c-ln; }
+  .c-ln { position: relative; padding: 0 34px 0 100px; font: 400 34px/1.42 var(--fonte-mono, ui-monospace, monospace); color: var(--cor-tinta); counter-increment: c-ln; }
+  .c-ln::before { content: counter(c-ln); position: absolute; left: 0; top: 3px; width: 70px; text-align: right; font-size: 30px; color: var(--cor-tinta-suave); }
+  .c-ln.c-dim, .c-k { color: var(--cor-tinta-suave); }
+  .c-k { font-weight: 700; }
+  .c-regra { white-space: nowrap; }
+  .c-sub { position: absolute; }
+  /* anotações à direita do painel, ligadas à linha por um traço neutro */
+  .c-ligas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .c-ligas path { fill: none; stroke: color-mix(in srgb, var(--cor-tinta) 35%, var(--cor-fundo)); stroke-width: 4; stroke-linecap: round; }
+  .c-nota { position: absolute; left: 1440px; width: 380px; font: 800 var(--esc-2)/1.15 var(--fonte-titulo); white-space: nowrap; }
+  .c-nota small { display: block; margin-top: 6px; font: 400 36px/1.25 var(--fonte-texto); color: var(--cor-tinta-suave); }
+
+  /* onde (grade): coluna dos rótulos de linha e duas colunas, uma por app */
+  .c-grade { position: absolute; left: 120px; top: 330px; width: 1680px; display: grid; grid-template-columns: 300px 1fr 1fr; grid-template-rows: 96px 150px 230px; column-gap: 40px;
+             grid-template-areas: ". ta tb" "la a1 b1" "lb a2 b2"; align-items: center; }
+  .c-col-tit { align-self: end; padding-bottom: 18px; font: 800 var(--esc-3)/1.05 var(--fonte-titulo); white-space: nowrap; }
+  .c-lin-tit { font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .c-cel { white-space: nowrap; }
+  .c-cam { font: 400 38px/1.2 var(--fonte-mono, ui-monospace, monospace); color: var(--suave-sobre-noite); }
+  .c-cam b { font-weight: 700; color: var(--sobre-noite); }
+  .c-cha code, .c-cha2 code { font-family: var(--fonte-mono, ui-monospace, monospace); font-weight: 700; }
+  .c-cha { font-size: 150px; line-height: 1; }
+  .c-cha2 p { font-size: var(--esc-2); line-height: 1.3; color: var(--suave-sobre-noite); }
+  .c-cha2 p + p { margin-top: 18px; }
+  .c-cha2 code { font-size: var(--esc-3); color: var(--sobre-noite); display: inline-block; width: 250px; }
+  .c-traco { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .c-traco path { fill: none; stroke: var(--linha-sobre-noite); stroke-width: 3; }
+
+  /* liga (diagrama): caixas com ícone desenhado por código; o traço dourado tracejado é o pacote do plugin */
+  .c-diag { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .c-diag path { fill: none; stroke: color-mix(in srgb, var(--cor-tinta) 40%, var(--cor-fundo)); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .c-diag .c-d-pl { stroke: var(--cor-destaque); stroke-dasharray: 18 14; }
+  .c-caixa { position: absolute; box-sizing: border-box; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 26px; align-content: center;
+             padding: 0 34px; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-fundo); }
+  .c-skill { left: 120px; top: 556px; width: 470px; height: 200px; }
+  .c-mcp { left: 1330px; top: 556px; width: 470px; height: 200px; }
+  .c-mcp .c-cx-sub { white-space: normal; line-height: 1.15; }
+  .c-plugin { left: 640px; top: 318px; width: 640px; height: 152px; }
+  .c-agente { left: 745px; top: 575px; width: 430px; height: 150px; grid-template-columns: 1fr; justify-items: center; background: var(--cor-tinta); border-color: var(--cor-tinta); color: var(--cor-fundo); }
+  .c-ic { grid-row: 1 / 3; width: 64px; height: 76px; }
+  .c-ic svg { display: block; width: 64px; height: 76px; overflow: visible; }
+  .c-ic path, .c-ic rect, .c-ic circle { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+  .c-cx-tit { font: 800 var(--esc-3)/1.05 var(--fonte-titulo); white-space: nowrap; }
+  .c-cx-sub { margin-top: 8px; font: 400 36px/1.2 var(--fonte-texto); color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* ===== Bloco D: na pasta ===== */
+  /* papeis (viagem): as páginas do caso têm proporção A4 (900 x 1274), mais altas que o recorte padrão */
+  .d-ob { width: 280px; height: 396px; }
+
+  /* estrutura: árvore desenhada por código, com ícone de pasta e de arquivo e anotações à direita */
+  .d-arv { position: absolute; left: 120px; top: 318px; }
+  .d-no { position: absolute; display: flex; align-items: center; gap: 16px; height: 56px; font: 700 40px/1 var(--fonte-titulo); white-space: nowrap; color: var(--sobre-noite); }
+  .d-ic { display: inline-block; width: 40px; height: 44px; flex: 0 0 40px; }
+  .d-ic svg { display: block; width: 40px; height: 44px; overflow: visible; }
+  .d-ic path { fill: none; stroke: var(--suave-sobre-noite); stroke-width: 3.5; stroke-linejoin: round; }
+  .d-novo .d-nome { padding: 6px 16px; margin: -6px -16px; border: 4px dashed var(--cor-destaque); border-radius: 12px; color: var(--suave-sobre-noite); }
+  .d-novo .d-ic path { stroke-dasharray: 6 6; }
+  .d-arv-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .d-arv-svg path { fill: none; stroke: var(--linha-sobre-noite); stroke-width: 3; }
+  .d-arv-svg path.d-guia { stroke-dasharray: 3 10; stroke-linecap: round; }
+  .d-ext { position: absolute; left: 1320px; font: 400 40px/1.2 var(--fonte-texto); color: var(--suave-sobre-noite); white-space: nowrap; }
+  .d-ext-novo { color: var(--sobre-noite); }
+
+  /* memoria: painel de arquivo Markdown; # e - são marcação do editor (CSS), o número da linha também */
+  .d-arq { position: absolute; left: 120px; top: 318px; width: 1680px; height: 452px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 24px; background: var(--cor-papel); overflow: hidden; }
+  .d-arq-cab { height: 64px; box-sizing: border-box; padding: 15px 30px 0; border-bottom: 4px solid var(--cor-linha); font: 500 30px/1.15 var(--fonte-mono, ui-monospace, monospace); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .d-arq-txt { position: absolute; left: 0; top: 92px; width: 100%; counter-reset: d-ln; }
+  .d-ln { position: relative; padding: 0 40px 0 100px; margin-bottom: 4px; font: 400 36px/1.42 var(--fonte-mono, ui-monospace, monospace); color: var(--cor-tinta); counter-increment: d-ln; }
+  .d-ln::after { content: counter(d-ln); position: absolute; left: 0; top: 4px; width: 70px; text-align: right; font-size: 30px; color: var(--cor-tinta-suave); }
+  .d-h1 { font-weight: 700; }
+  .d-h1::before { content: '# '; color: var(--cor-tinta-suave); }
+  .d-li::before { content: '- '; color: var(--cor-tinta-suave); }
+  .d-sub { position: absolute; }
+
+  /* pedido: a caixa do pedido à esquerda, os cinco passos numerados à direita */
+  [data-slide="pedido"] .etiqueta { top: 300px; }
+  .d-et-ped { left: 120px; }
+  .d-entrada { position: absolute; left: 120px; top: 348px; width: 960px; height: 486px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-papel); }
+  .d-pedido { position: absolute; left: 164px; top: 384px; width: 872px; font: 400 44px/1.36 var(--fonte-texto); text-wrap: pretty; }
+  .d-passos { position: absolute; left: 1180px; top: 348px; width: 640px; counter-reset: d-passo; }
+  .d-passos li { counter-increment: d-passo; display: flex; align-items: center; gap: 24px; height: 98px; font: 400 40px/1.2 var(--fonte-texto); white-space: nowrap; }
+  .d-passos li::before { content: counter(d-passo); flex: 0 0 62px; height: 62px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 31px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+
+  /* demo: janela de app desenhada por código (barra, conversa que rola, caixa de digitar), na noite */
+  .d-jan { position: absolute; left: 120px; top: 300px; width: 1680px; height: 570px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; background: color-mix(in srgb, var(--sobre-noite) 6%, var(--noite)); overflow: hidden; }
+  .d-jan-barra { position: relative; height: 62px; box-sizing: border-box; border-bottom: 3px solid var(--linha-sobre-noite); display: flex; align-items: center; gap: 22px; padding-left: 112px; white-space: nowrap; }
+  .d-jan-barra i { position: absolute; top: 24px; width: 14px; height: 14px; border-radius: 7px; background: var(--linha-sobre-noite); }
+  .d-jan-barra i:nth-child(1) { left: 26px; } .d-jan-barra i:nth-child(2) { left: 50px; } .d-jan-barra i:nth-child(3) { left: 74px; }
+  .d-jan-barra b { font: 700 30px/1 var(--fonte-titulo); color: var(--sobre-noite); }
+  .d-chip-pasta { padding: 4px 16px; border: 2px solid var(--linha-sobre-noite); border-radius: 10px; font: 500 30px/1.2 var(--fonte-mono, ui-monospace, monospace); color: var(--suave-sobre-noite); }
+  .d-fio { position: absolute; left: 0; top: 62px; right: 0; height: 390px; overflow: hidden; }
+  .d-rolo { position: absolute; left: 60px; right: 60px; top: 0; padding-top: 22px; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .d-msg { font: 400 34px/1.35 var(--fonte-texto); color: var(--sobre-noite); }
+  .d-eu { align-self: flex-end; max-width: 1180px; box-sizing: border-box; padding: 16px 28px; border-radius: 22px; background: color-mix(in srgb, var(--sobre-noite) 13%, var(--noite)); }
+  .d-lendo, .d-escr { display: flex; align-items: center; gap: 18px; white-space: nowrap; }
+  .d-roda { flex: 0 0 30px; width: 30px; height: 30px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-top-color: var(--sobre-noite); border-radius: 15px; }
+  .d-roda { position: relative; }
+  .d-roda.pronta { border-color: var(--suave-sobre-noite); }
+  .d-roda.pronta::after { content: ''; position: absolute; left: 7px; top: 2px; width: 6px; height: 12px; border: solid var(--sobre-noite); border-width: 0 4px 4px 0; transform: rotate(45deg); }
+  .d-arqchip { padding: 2px 14px; border: 2px solid var(--linha-sobre-noite); border-radius: 10px; font: 500 30px/1.25 var(--fonte-mono, ui-monospace, monospace); color: var(--suave-sobre-noite); white-space: nowrap; }
+  .d-plano { padding-left: 26px; border-left: 6px solid var(--linha-sobre-noite); }
+  .d-plano-tit { font: 700 var(--esc-1)/1.3 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--suave-sobre-noite); }
+  .d-plano ol { counter-reset: d-pl; }
+  .d-plano li { counter-increment: d-pl; }
+  .d-plano li::before { content: counter(d-pl) '.'; display: inline-block; width: 44px; color: var(--suave-sobre-noite); }
+  .d-perm { display: flex; align-items: center; gap: 22px; padding: 16px 22px 16px 28px; border: 3px solid var(--linha-sobre-noite); border-radius: 18px; white-space: nowrap; }
+  .d-perm p { margin-right: 28px; }
+  .d-bt { padding: 6px 24px; border: 3px solid var(--linha-sobre-noite); border-radius: 12px; font: 700 30px/1.25 var(--fonte-titulo); color: var(--sobre-noite); }
+  .d-bt.apertado { background: var(--sobre-noite); border-color: var(--sobre-noite); color: var(--noite); }
+  .d-barra { position: relative; width: 360px; height: 12px; border-radius: 6px; background: var(--linha-sobre-noite); }
+  .d-barra i { position: absolute; inset: 0; border-radius: 6px; background: var(--suave-sobre-noite); transform-origin: 0 50%; }
+  .d-resp p + p { margin-top: 6px; }
+  .d-novo-chip { display: inline-block; margin-top: 16px; border-color: var(--cor-destaque); color: var(--sobre-noite); }
+  .d-comp { position: absolute; left: 60px; right: 60px; bottom: 24px; box-sizing: border-box; padding: 18px 110px 18px 28px; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; background: var(--noite); overflow: hidden; }
+  .d-comp-txt { font: 400 34px/1.35 var(--fonte-texto); color: var(--sobre-noite); }
+  .d-enviar { position: absolute; right: 22px; bottom: 16px; width: 52px; height: 52px; border-radius: 26px; background: var(--linha-sobre-noite); }
+
+  /* trecho: a linha da cronologia à esquerda, a página do contrato em tamanho natural à direita, o fio entre as duas */
+  .d-lin { position: absolute; left: 120px; top: 420px; width: 700px; }
+  .d-lin-cab { font: 500 30px/1.2 var(--fonte-mono, ui-monospace, monospace); color: var(--cor-tinta-suave); }
+  .d-lin-data { margin-top: 14px; font: 800 96px/1 var(--fonte-titulo); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+  .d-lin-fato { margin-top: 18px; font: 400 40px/1.3 var(--fonte-texto); }
+  .d-lin-fonte { margin-top: 18px; display: inline-block; font: 700 34px/1.3 var(--fonte-mono, ui-monospace, monospace); white-space: nowrap; }
+  .d-pag { position: absolute; left: 880px; top: 300px; width: 900px; height: 560px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 18px; overflow: hidden; background: var(--cor-papel); }
+  .d-pag-img { position: absolute; left: -3px; top: -383px; width: 900px; height: 1274px; }
+  /* a página continua acima e abaixo da janela: as bordas se dissolvem no papel em vez de cortar a linha */
+  .d-pag::before, .d-pag::after { content: ''; position: absolute; left: 0; right: 0; height: 70px; z-index: 1; }
+  .d-pag::before { top: 0; background: linear-gradient(var(--cor-papel), transparent); }
+  .d-pag::after { bottom: 0; background: linear-gradient(transparent, var(--cor-papel)); }
+  .d-lin-data { font-size: 108px; }
+  [data-slide="trecho"] .d-pag-leg { left: 880px; top: 880px; }
+  .d-tr-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; z-index: 2; }
+  .d-tr-svg path { fill: none; stroke: var(--cor-destaque); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+  .d-tr-svg circle { fill: var(--cor-destaque); }
+  [data-slide="limite"] .cartoes { top: 430px; }
+  [data-slide="limite"] .cartao { padding: 44px 44px 52px; }
+  [data-slide="limite"] .ct-tit.g { font-size: 84px; }
+  [data-slide="limite"] .ct-txt { margin-top: 26px; font-size: var(--esc-2); }
+  .d-enviar.cheio { background: var(--sobre-noite); }
+
+  /* ===== Bloco E, mão na massa ===== */
+  /* codex: o nome de cada ferramenta grande na sua coluna */
+  [data-slide="codex"] .janela .letra { font-size: 140px; top: 16px; }
+  /* material: os papéis do caso sem deformar (a página é um pouco mais alta que a caixa do objeto) */
+  [data-slide="material"] .objeto { object-fit: contain; }
+  [data-slide="material"] .entrada { height: 236px; }
+  [data-slide="material"] .doc-leg { top: 418px; }
+  /* travou: cartões mais altos e texto maior, para ler de longe enquanto a sala trabalha */
+  [data-slide="travou"] .cartoes { top: 400px; }
+  [data-slide="travou"] .cartao { min-height: 300px; padding: 36px 40px; }
+  [data-slide="travou"] .ct-txt { margin-top: 22px; font-size: var(--esc-2); }
+
+  /* pratica2: três colunas de passos (notebook, celular, nos dois) e o pedido exato embaixo, para copiar */
+  .e-cols { position: absolute; left: 120px; top: 316px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; }
+  .e-col-tit { font: 800 var(--esc-2)/1.2 var(--fonte-titulo); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+  .e-passos { margin-top: 22px; counter-reset: e-p; }
+  .e-passos.e-depois { counter-reset: e-p 2; }
+  /* o número do passo vem de um contador do CSS: é marcação, não texto a ler */
+  .e-passos li { counter-increment: e-p; display: flex; align-items: center; gap: 22px; margin-bottom: 18px; font-size: 40px; line-height: 1.25; white-space: nowrap; }
+  .e-passos li::before { content: counter(e-p); flex: 0 0 58px; height: 58px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
+  .e-pedido { position: absolute; left: 120px; top: 596px; width: 1680px; box-sizing: border-box; padding: 30px 44px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
+  .e-pedido p { font-size: 46px; line-height: 1.3; text-wrap: pretty; }
+
+  /* ===== Bloco F, fecho ===== */
+  /* registro: três marcos só, então o texto de cada um cresce */
+  [data-slide="registro"] .etapas li { font-size: 56px; }
+  /* fecho em fundo claro, por causa do logo: o logo oficial do tema embaixo, à direita dos passos */
+  .f-logo { position: absolute; left: 1340px; top: 520px; height: 380px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+</style>
 </head>
 <body>
 <div id="palco"><div id="mundo">
 
-  <!-- abertura: rótulo, linhas .ab-linha (a .sinal é a palavra-chave, que cresce até caber), subtítulo e foto -->
-  <section data-slide="abertura" data-arquetipo="abertura" class="noite">
-    <div class="heroi-caixa"><img class="heroi" src="midia/heroi-aula1.webp" alt=""><div class="veu"></div></div>
-    <p class="rotulo">Biblioteca de cenas · molde</p>
-    <div class="display ab-linha">Doze cenas,</div>
-    <div class="display ab-linha">um só</div>
-    <div class="display ab-linha sinal">plano</div>
-    <p class="ab-sub">Cada slide é um arquétipo que se troca, se apaga ou muda de lugar sem refazer a trilha.</p>
+  <!-- ===== Bloco A: pedir bem (slides 1 a 16). Exemplos da apresentação de engenharia de prompt do professor
+       (17/03/2026), com as palavras dele, encurtados só para caber. ===== -->
+  <section data-slide="capa" data-arquetipo="abertura" class="noite">
+    <div class="heroi-caixa"><img class="heroi" src="midia/heroi-aula2.webp" alt=""><div class="veu"></div></div>
+    <p class="rotulo">Curso de IA · Aula 2</p>
+    <div class="display ab-linha">Do chat à</div>
+    <div class="display ab-linha sinal">pasta</div>
+    <p class="ab-sub">Como pedir bem e trabalhar nos documentos do caso.</p>
     <p class="selo-ia">imagem gerada por IA</p>
   </section>
 
-  <!-- escolha: a frase e uma .leque por rodada (data-alvo é a palavra que a vencedora ocupa; li.vence, ou a primeira) -->
-  <section data-slide="escolha" data-arquetipo="escolha">
-    <p class="rotulo">Escolha</p>
-    <h2 class="manchete">Cada palavra sai de um leque</h2>
-    <div class="frase"><span>O leque escolhe a</span> <span id="es-w1">próxima</span> <span id="es-w2">palavra</span></div>
-    <ol class="leque" data-alvo="es-w1"><li data-pct="52">próxima</li><li data-pct="21">melhor</li><li data-pct="9">única</li></ol>
-    <ol class="leque" data-alvo="es-w2"><li data-pct="46">palavra</li><li data-pct="38">resposta</li><li data-pct="9">frase</li></ol>
-    <p class="pilula">valores ilustrativos</p>
-  </section>
-
-  <!-- numero: data-marcas (1 certo, 0 errado) e o placar; .conta conta os certos -->
-  <section data-slide="numero" data-arquetipo="numero">
-    <p class="rotulo">Número</p>
-    <h2 class="manchete">A grade se corrige e o placar sobe</h2>
-    <div class="grade" data-marcas="1101111011"></div>
-    <p class="display numero"><span class="conta">0</span> de 10</p>
-    <div class="numero-trilho"><div class="numero-barra"></div></div>
-    <p class="numero-leg">itens aprovados na revisão</p>
-    <p class="pilula">ilustrativo</p>
-  </section>
-
-  <!-- comparacao: duas .janela sem nome; data-linhas são as larguras das linhas em %; .escolhida ganha o círculo -->
-  <section data-slide="comparacao" data-arquetipo="comparacao">
-    <p class="rotulo">Comparação</p>
-    <h2 class="manchete">Duas versões sem nome, uma escolhida</h2>
-    <div class="janela" data-linhas="92 80 88 64 40"><p class="display letra">A</p><p class="etiqueta">versão sem nome</p></div>
-    <div class="fio-v"></div>
-    <div class="janela escolhida" data-linhas="86 94 72 90 58"><p class="display letra">B</p><p class="etiqueta">versão sem nome</p></div>
-  </section>
-
-  <!-- ramos: cada .ramo (data-y) leva estações e uma caixa de destino; os ramos saem do pad da trilha -->
-  <section data-slide="ramos" data-arquetipo="ramos">
-    <p class="rotulo">Ramos</p>
-    <h2 class="manchete">A trilha se divide com o assunto</h2>
-    <div class="ramo" data-y="450">
-      <div class="estacao"><b>abertura</b><small>capítulo</small></div>
-      <div class="estacao"><b>respiro</b><small>pausa</small></div>
-      <div class="estacao"><b>fecho</b><small>pedido</small></div>
-      <p class="caixa-txt">dão ritmo<br>à fala</p>
-    </div>
-    <div class="ramo" data-y="720">
-      <div class="estacao"><b>escolha</b><small>decisão</small></div>
-      <div class="estacao"><b>número</b><small>placar</small></div>
-      <div class="estacao"><b>fios</b><small>fonte</small></div>
-      <p class="caixa-txt">provam<br>a ideia</p>
-    </div>
-    <p class="ramos-leg">O roteiro escolhe o arquétipo pela função do slide.</p>
-  </section>
-
-  <!-- respiro: uma frase curta, uma linha por span -->
-  <section data-slide="respiro" data-arquetipo="respiro" class="noite">
-    <p class="rotulo">Respiro</p>
-    <p class="respiro"><span>Uma ideia por tela.</span><span>O resto é <span class="sinal">fala</span>.</span></p>
-  </section>
-
-  <!-- tempo: agenda, cronograma ou etapas; cada li é um marco (<b> em cima da linha, texto embaixo), .agora em dourado -->
-  <section data-slide="tempo" data-arquetipo="tempo">
-    <p class="rotulo">Tempo</p>
-    <h2 class="manchete">O deck se faz em cinco etapas</h2>
+  <section data-slide="mapa" data-arquetipo="tempo">
+    <p class="rotulo">Roteiro</p>
+    <h2 class="manchete">A tarde em seis etapas</h2>
     <ol class="etapas">
-      <li><b>passo 4</b>roteiro aprovado</li>
-      <li><b>passo 5</b>montar do catálogo</li>
-      <li><b>passo 6</b>mídia em série</li>
-      <li class="agora"><b>passo 7</b>três rodadas de crítica</li>
-      <li><b>passo 8</b>ensaio ao vivo</li>
+      <li class="agora"><b>25 min</b>pedir bem</li>
+      <li><b>22 min</b>duas escolhas</li>
+      <li><b>8 min</b>skills</li>
+      <li><b>16 min</b>na pasta</li>
+      <li><b>15 min</b>mão na massa</li>
+      <li><b>4 min</b>fecho</li>
     </ol>
-    <p class="tempo-leg">O dourado marca a etapa em que o deck está.</p>
+    <p class="tempo-leg">Cada etapa termina numa tarefa sua.</p>
   </section>
 
-  <!-- objetos: o pedido que se digita e os objetos recortados com legenda (os ids levam os papéis à viagem) -->
-  <section data-slide="objetos" data-arquetipo="objetos">
-    <p class="rotulo">Objetos</p>
-    <h2 class="manchete">O pedido ao lado do material</h2>
-    <p class="etiqueta">Pedido</p>
-    <div class="entrada"></div>
-    <p class="pedido">Monte o deck a partir do roteiro aprovado.</p>
-    <p class="etiqueta">Material</p>
-    <div class="objetos">
-      <figure><img class="objeto" id="ob-roteiro" src="midia/doc-peticao.webp" alt=""><figcaption class="doc-leg">roteiro</figcaption></figure>
-      <figure><img class="objeto" id="ob-briefing" src="midia/doc-contrato.webp" alt=""><figcaption class="doc-leg">briefing</figcaption></figure>
-      <figure><img class="objeto" id="ob-midia" src="midia/doc-modelo.webp" alt=""><figcaption class="doc-leg">mídia</figcaption></figure>
-    </div>
-    <p class="selo-ia">imagens geradas por IA</p>
+  <!-- tentativas (cena própria, noite, um clique por tentativa): a barra da distância encolhe a cada pedido -->
+  <section data-slide="tentativas" class="noite">
+    <p class="rotulo">Pedir bem</p>
+    <h2 class="manchete">Na terceira tentativa chega perto</h2>
+    <p class="etiqueta a-tn-et">distância do que você queria</p>
+    <div class="a-tn" data-v="92"><p class="a-tn-n">1ª</p><p class="a-tn-p">“Resume esse parecer.”</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
+    <div class="a-tn" data-v="58"><p class="a-tn-n">2ª</p><p class="a-tn-p">“Resume em 10 linhas.”</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
+    <div class="a-tn" data-v="18"><p class="a-tn-n">3ª</p><p class="a-tn-p">“Resume só o que muda o prazo.”</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
+    <p class="a-tn-fim">O problema não é a IA. É o pedido.</p>
   </section>
 
-  <!-- viagem: a árvore nasce pela raiz; cada .no com data-de recebe o objeto daquele id, que voa do slide anterior -->
-  <section data-slide="viagem" data-arquetipo="viagem">
-    <p class="rotulo">Viagem</p>
-    <h2 class="manchete">O material vai para a pasta do deck</h2>
-    <img class="viagem-foto" src="midia/pasta-aberta.webp" alt="">
-    <div class="arvore">
-      <p class="no" data-nivel="0">decks/meu-deck/</p>
-      <p class="no" data-nivel="1" data-arquivo data-de="ob-roteiro">deck.html</p>
-      <p class="no" data-nivel="1" data-arquivo data-de="ob-briefing">briefing.md</p>
-      <p class="no" data-nivel="1">midia/</p>
-      <p class="no" data-nivel="2" data-arquivo data-de="ob-midia">heroi.webp</p>
-      <p class="no" data-nivel="2" data-arquivo>creditos.json</p>
-    </div>
-    <p class="selo-ia">imagem gerada por IA</p>
+  <section data-slide="colega" data-arquetipo="comparacao">
+    <p class="rotulo">Pedir bem</p>
+    <h2 class="manchete">Prompt é briefing para colega novo</h2>
+    <div class="janela"><p class="display letra m">Vago</p><p class="etiqueta">o que costuma sair</p>
+      <p class="janela-txt">“Resume esse acórdão.”</p></div>
+    <div class="fio-v"></div>
+    <div class="janela escolhida"><p class="display letra m">Briefing</p><p class="etiqueta">o que o colega precisa</p>
+      <p class="janela-txt">“Objetivo: o que muda o prazo. Contexto: o contrato e o aditivo. Regra: cite o trecho.”</p></div>
+    <p class="pilula">exemplo de pedido</p>
   </section>
 
-  <!-- fios: data-fonte liga a linha à fonte; a linha com .marca tem o fio dourado; a linha sem fonte é marcada -->
-  <section data-slide="fios" data-arquetipo="fios">
-    <p class="rotulo">Fios</p>
-    <h2 class="manchete">Cada linha aponta para a sua fonte</h2>
-    <div class="fontes">
-      <p class="no" data-arquivo id="fi-cenas">motor/cenas.js</p>
-      <p class="no" data-arquivo id="fi-tema">tema.css</p>
-      <p class="no" data-arquivo id="fi-briefing">briefing.md</p>
-    </div>
-    <div class="minuta">
-      <p class="cab">deck.html</p>
-      <p class="linha" data-fonte="fi-cenas"><span><span class="marca">Apagar um slide</span> refaz a trilha.</span></p>
-      <p class="linha" data-fonte="fi-tema"><span>Cor e fonte vêm do tema.</span></p>
-      <p class="linha"><span>Este slide prova uma ideia só.</span></p>
-      <p class="sem-fonte">sem fonte: conferir</p>
-      <p class="linha" data-fonte="fi-briefing"><span>Cada dado tem a fonte anotada.</span></p>
-    </div>
+  <section data-slide="seis" data-arquetipo="tempo">
+    <h2 class="manchete">Seis elementos, nem todos obrigatórios</h2>
+    <ol class="etapas">
+      <li class="agora"><b>1</b>objetivo</li>
+      <li><b>2</b>contexto</li>
+      <li><b>3</b>persona</li>
+      <li><b>4</b>saída</li>
+      <li><b>5</b>exemplos</li>
+      <li><b>6</b>regras</li>
+    </ol>
+    <p class="tempo-leg">Pergunta simples pede só o objetivo.</p>
   </section>
 
-  <!-- demonstracao: vídeo na moldura; as legendas dos mergulhos ficam na .tela (data-mergulho, data-x, data-y) -->
-  <section data-slide="demonstracao" data-arquetipo="demonstracao" class="noite">
-    <p class="rotulo">Demonstração</p>
-    <h2 class="manchete">O vídeo toca dentro do slide</h2>
-    <div class="moldura">
-      <div class="barra-nav"><i></i><i></i><i></i><u></u></div>
-      <div class="tela">
-        <video src="midia/demo.mp4" poster="midia/demo-capa.webp" muted playsinline preload="auto"></video>
-        <p class="legenda" data-mergulho="mergulho" data-x="0.2665" data-y="0.40">o holofote aponta, a legenda explica</p>
+  <!-- par (cena própria, dois cliques): o pedido vago primeiro; no segundo clique, o pedido com o elemento, com os
+       trechos que fazem a diferença marcados -->
+  <section data-slide="objetivo" class="a-par">
+    <p class="rotulo">Elemento 1</p>
+    <h2 class="manchete">Objetivo: o que você quer</h2>
+    <div class="a-err"><p>“Escreve sobre inteligência artificial.”</p></div>
+    <div class="a-cer"><p>“Escreva um parágrafo de <mark class="a-mk">100 palavras</mark> sobre como a IA é usada no Judiciário brasileiro, com <mark class="a-mk">2 aplicações concretas</mark>.”</p></div>
+  </section>
+
+  <section data-slide="contexto" class="a-par">
+    <p class="rotulo">Elemento 2</p>
+    <h2 class="manchete">Contexto: o que a IA precisa saber</h2>
+    <div class="a-err"><p>“Me ajuda a redigir um parecer.”</p></div>
+    <div class="a-cer"><p>“<mark class="a-mk">Sou procurador do Estado</mark>. Preciso de parecer sobre a legalidade de convênio entre o Estado de MS e um município, <mark class="a-mk">repasse de R$ 2 milhões</mark>, à luz da Lei 14.133/2021 e da LC 101/2000.”</p></div>
+    <p class="a-extra">O essencial vai no começo ou no fim.</p>
+  </section>
+
+  <section data-slide="persona" class="a-par noite">
+    <p class="rotulo">Elemento 3</p>
+    <h2 class="manchete">Persona: quem a IA deve ser</h2>
+    <div class="a-err"><p>“Me explica o que é precatório.”</p></div>
+    <div class="a-cer"><p>“Você é <mark class="a-mk">professor de direito financeiro</mark> explicando a <mark class="a-mk">servidores que não são da área jurídica</mark>. Explique o que é precatório, como o pagamento funciona e por que demora. Sem jargão.”</p></div>
+  </section>
+
+  <!-- personas (cena própria, noite, um clique por papel): a mesma pergunta em três registros; respostas escritas para a aula -->
+  <section data-slide="personas" class="noite">
+    <h2 class="manchete">A mesma pergunta, três papéis</h2>
+    <p class="a-pg">“O que é precatório?”</p>
+    <div class="a-col"><p class="a-col-t">Professor para leigos</p><p class="a-col-r">Dívida do governo que a Justiça mandou pagar. Entra numa fila.</p></div>
+    <div class="a-col"><p class="a-col-t">Consultor sênior</p><p class="a-col-r">Requisição de pagamento de condenação da Fazenda, em ordem cronológica.</p></div>
+    <div class="a-col"><p class="a-col-t">Procurador do Estado</p><p class="a-col-r">Débito judicial da Fazenda: confira cálculo, ordem e orçamento.</p></div>
+    <p class="a-pg-fim">A persona muda o registro da resposta inteira.</p>
+    <p class="pilula">respostas ilustrativas, escritas para a aula</p>
+  </section>
+
+  <section data-slide="saida" class="a-par">
+    <p class="rotulo">Elemento 4</p>
+    <h2 class="manchete">Estrutura de saída: o formato da resposta</h2>
+    <div class="a-err"><p>“Me dá argumentos para contestar essa tese.”</p></div>
+    <div class="a-cer"><p>“Liste <mark class="a-mk">5 argumentos</mark> para contestar a prescrição intercorrente. <mark class="a-mk">Para cada um</mark>, o fundamento legal, a explicação em 2 frases e um precedente do STJ ou STF, se houver.”</p></div>
+    <p class="a-extra a-fmt"><span>tabela</span><span>lista numerada</span><span>passo a passo</span><span>prós e contras</span></p>
+  </section>
+
+  <!-- exemplos (cartões): a fileira de quadrados mostra quantos exemplos vão no pedido -->
+  <section data-slide="exemplos">
+    <p class="rotulo">Elemento 5</p>
+    <h2 class="manchete">Exemplos: mostre o que você quer</h2>
+    <div class="cartoes c3">
+      <div class="cartao"><p class="a-ex"><i class="vazio"></i></p><p class="ct-tit g"><i>Zero-shot</i></p><p class="ct-txt">tarefa simples e clara</p><p class="ct-sub">só a instrução</p></div>
+      <div class="cartao"><p class="a-ex"><i></i></p><p class="ct-tit g"><i>One-shot</i></p><p class="ct-txt">tom ou formato específico</p><p class="ct-sub">1 exemplo resolvido</p></div>
+      <div class="cartao"><p class="a-ex"><i></i><i></i><i></i></p><p class="ct-tit g"><i>Few-shot</i></p><p class="ct-txt">tarefa ambígua ou subjetiva</p><p class="ct-sub">2 a 5 exemplos</p></div>
+    </div>
+    <p class="rodape">Exemplos continuam muito poderosos.</p>
+  </section>
+
+  <section data-slide="regras" class="a-par noite">
+    <p class="rotulo">Elemento 6</p>
+    <h2 class="manchete">Regras: o que a IA não faz</h2>
+    <div class="a-err"><p>“Analisa essa cláusula.”</p></div>
+    <div class="a-cer"><p>“Analise a cláusula 7ª. Só legalidade, não conveniência. Aponte o que for ambíguo. Cite os artigos. Sem jurisprudência clara, diga.”</p></div>
+    <p class="a-extra a-ouro sinal">Se não souber, diga que não sabe.</p>
+  </section>
+
+  <!-- junta (cena própria, um clique em onda): o prompt do edital, um elemento por linha -->
+  <section data-slide="junta">
+    <h2 class="manchete">Juntando tudo</h2>
+    <div class="a-jt">
+      <p class="a-jl"><b>Persona</b><span>Procurador do Estado, experiente em licitações.</span></p>
+      <p class="a-jl"><b>Objetivo</b><span>Analise o edital e aponte irregularidades jurídicas.</span></p>
+      <p class="a-jl"><b>Contexto</b><span>Escola estadual, R$ 5 milhões, impugnação em 5 dias úteis.</span></p>
+      <p class="a-jl"><b>Saída</b><span>Tabela: cláusula, irregularidade, fundamento legal, risco.</span></p>
+      <p class="a-jl"><b>Exemplo</b><span>Atestado de obra idêntica: art. 67, §1º, Lei 14.133/2021, risco alto.</span></p>
+      <p class="a-jl"><b>Regras</b><span>Não invente artigos. Na dúvida, “verificar manualmente”.</span></p>
+    </div>
+    <p class="rodape">Prompt bom traz a informação certa.</p>
+  </section>
+
+  <section data-slide="tce" class="a-par">
+    <p class="rotulo">Caso</p>
+    <h2 class="manchete">O contexto muda tudo</h2>
+    <div class="a-err"><p>“Escreve uma resposta para o Tribunal de Contas.”</p></div>
+    <div class="a-cer"><p>“Responda ao ofício do TCE-MS sobre o convênio de pavimentação. O TCE diz que falta o plano de trabalho. <mark class="a-mk">O plano existe e foi juntado em apenso.</mark> Tom formal, não defensivo, até 250 palavras.”</p></div>
+  </section>
+
+  <!-- prática 1 (cena guia, noite): três passos à esquerda, o checklist dos seis elementos à direita -->
+  <section data-slide="pratica1" class="noite">
+    <p class="rotulo">Prática 1, 4 min</p>
+    <h2 class="manchete">Sua vez: reescreva um pedido seu</h2>
+    <ol class="a-ps">
+      <li><b>1</b><span>Pegue um pedido que você faz hoje.</span></li>
+      <li><b>2</b><span>Reescreva com objetivo, contexto e uma regra.</span></li>
+      <li><b>3</b><span>Cole no seu app e compare.</span></li>
+    </ol>
+    <p class="etiqueta a-ck-et">Antes de enviar</p>
+    <ul class="a-ck">
+      <li><i></i>objetivo</li>
+      <li><i></i>contexto</li>
+      <li><i></i>persona</li>
+      <li><i></i>saída</li>
+      <li><i></i>exemplos</li>
+      <li><i></i>regras</li>
+    </ul>
+  </section>
+
+  <section data-slide="relato" data-arquetipo="respiro" class="noite">
+    <p class="respiro"><span>O que mudou</span><span>na <span class="sinal">resposta?</span></span></p>
+    <p class="respiro-sub" data-entra="0.5">Duas pessoas leem em voz alta.</p>
+  </section>
+
+  <!-- ===== Bloco B, duas escolhas (22 min): ponte a escolher. Fatos das ferramentas: briefing.md, "Fatos sobre as
+       ferramentas"; números do teste: briefing.md, "O teste do processo fictício". ===== -->
+  <!-- ponte (cena própria, noite): a frase à esquerda; à direita, a caixa pequena do pedido e os três papéis do caso
+       chegando por cima dela, maiores que ela -->
+  <section data-slide="ponte" class="noite">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="display b-pt-frase"><span>O contexto</span><span>não cabe mais</span><span>no <span class="sinal">pedido</span></span></h2>
+    <div class="b-pt-caixa"><p>pedido</p></div>
+    <img class="b-pt-papel" src="midia/caso-contrato.webp" alt="" style="left: 1236px; top: 420px" data-rot="-9">
+    <img class="b-pt-papel" src="midia/caso-aditivo.webp" alt="" style="left: 1420px; top: 400px" data-rot="4">
+    <img class="b-pt-papel" src="midia/caso-notificacao.webp" alt="" style="left: 1596px; top: 450px" data-rot="11">
+    <p class="respiro-sub">A engenharia de contexto cuida do que vem junto com o pedido.</p>
+  </section>
+
+  <!-- reenvio (cena própria): três conversas, e em cada uma os mesmos três papéis sobem de novo pelo campo -->
+  <section data-slide="reenvio">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">No chat, você sobe tudo de novo</h2>
+    <div class="b-conv" style="left: 120px">
+      <p class="b-conv-cab">Conversa 1</p><p class="b-tag b-primeira">primeira vez</p>
+      <div class="b-anexos"><img src="midia/caso-contrato.webp" alt=""><img src="midia/caso-aditivo.webp" alt=""><img src="midia/caso-notificacao.webp" alt=""></div>
+      <p class="b-conv-msg">Seguem os três papéis.</p>
+      <div class="b-campo"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><path d="M22 31V13M14 20l8-8 8 8"/></svg></div>
+    </div>
+    <div class="b-conv" style="left: 700px">
+      <p class="b-conv-cab">Conversa 2</p><p class="b-tag">de novo</p>
+      <div class="b-anexos"><img src="midia/caso-contrato.webp" alt=""><img src="midia/caso-aditivo.webp" alt=""><img src="midia/caso-notificacao.webp" alt=""></div>
+      <p class="b-conv-msg">Seguem os três papéis.</p>
+      <div class="b-campo"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><path d="M22 31V13M14 20l8-8 8 8"/></svg></div>
+    </div>
+    <div class="b-conv" style="left: 1280px">
+      <p class="b-conv-cab">Conversa 3</p><p class="b-tag">de novo</p>
+      <div class="b-anexos"><img src="midia/caso-contrato.webp" alt=""><img src="midia/caso-aditivo.webp" alt=""><img src="midia/caso-notificacao.webp" alt=""></div>
+      <p class="b-conv-msg">Seguem os três papéis.</p>
+      <div class="b-campo"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><path d="M22 31V13M14 20l8-8 8 8"/></svg></div>
+    </div>
+    <p class="rodape">Conversa nova, upload novo.</p>
+  </section>
+
+  <!-- agente (cena própria): o chat responde e termina; o agente faz plano, lê, altera e mostra, com o laço de ajuste
+       e a autorização antes das ações. Fatos: briefing.md, Fatos sobre as ferramentas -->
+  <section data-slide="agente">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">O chat responde. O agente age.</h2>
+    <p class="b-ag-rot" style="top: 362px">Chat</p>
+    <div class="b-ag-no b-ag-chat" style="left: 420px; top: 340px; width: 150px">pedido</div>
+    <div class="b-ag-no b-ag-chat" style="left: 610px; top: 340px; width: 220px">resposta</div>
+    <i class="b-ag-div"></i>
+    <p class="b-ag-rot" style="top: 642px">Agente</p>
+    <div class="b-ag-no b-ag-ag" style="left: 420px; width: 150px">pedido</div>
+    <div class="b-ag-no b-ag-ag" style="left: 610px; width: 150px">plano</div>
+    <div class="b-ag-no b-ag-ag" style="left: 860px; width: 250px">lê os arquivos</div>
+    <div class="b-ag-no b-ag-ag" style="left: 1150px; width: 300px">cria ou altera arquivos</div>
+    <div class="b-ag-no b-ag-ag" style="left: 1500px; width: 300px">mostra o que mudou</div>
+    <p class="b-ag-autoriza">você autoriza</p>
+    <p class="b-ag-ajusta">você ajusta</p>
+    <svg class="b-camada b-ag-svg" viewBox="0 0 1920 1080">
+      <path class="b-ag-c" d="M574 390H604M590 378L604 390L590 402"/>
+      <path class="b-ag-c" d="M834 390H880"/>
+      <path class="b-ag-fim" d="M884 358V422"/>
+      <path class="b-ag-a" d="M574 670H604M590 658L604 670L590 682"/>
+      <path class="b-ag-a" d="M764 670H854M840 658L854 670L840 682"/>
+      <path class="b-ag-a" d="M1114 670H1144M1130 658L1144 670L1130 682"/>
+      <path class="b-ag-a" d="M1454 670H1494M1480 658L1494 670L1480 682"/>
+      <path class="b-ag-ok" d="M810 598V664"/>
+      <path class="b-ag-laco" d="M1650 724C1650 800 1580 812 1480 812H860C760 812 685 800 685 724M673 740L685 724L697 740"/>
+    </svg>
+    <p class="rodape">O agente usa ferramentas: ler, buscar, criar, rodar.</p>
+  </section>
+
+  <section data-slide="confere" data-arquetipo="tempo" class="noite">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">O agente propõe; você confere</h2>
+    <ol class="etapas">
+      <li><b>plano</b>peça o plano</li>
+      <li><b>acessos</b>veja o que ele abre</li>
+      <li><b>autoriza</b>autorize a ação</li>
+      <li class="agora"><b>revisa</b>leia o que mudou</li>
+    </ol>
+    <p class="tempo-leg">Cada passo para antes do próximo.</p>
+  </section>
+
+  <!-- matriz (cena própria): dois eixos independentes; as quatro casas enchem em onda e a do processo acende -->
+  <section data-slide="matriz">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">Duas escolhas independentes</h2>
+    <p class="etiqueta b-mx-cab b-mx-ey">Instruções e memória</p>
+    <p class="etiqueta b-mx-cab b-mx-ex">Documentos</p>
+    <p class="b-mx-cab b-mx-col" style="left: 640px">anexados</p>
+    <p class="b-mx-cab b-mx-col" style="left: 1245px">numa pasta</p>
+    <p class="b-mx-cab b-mx-lin" style="top: 458px">na conversa</p>
+    <p class="b-mx-cab b-mx-lin" style="top: 638px">no Projeto</p>
+    <div class="b-cel" data-ordem="0" style="left: 640px; top: 410px"><p class="b-cel-nome">Chat</p></div>
+    <div class="b-cel" data-ordem="2" style="left: 1245px; top: 410px"><p class="b-cel-nome">Tarefa com pasta</p></div>
+    <div class="b-cel" data-ordem="1" style="left: 640px; top: 590px"><p class="b-cel-nome">Projeto</p></div>
+    <div class="b-cel b-cel-proc" data-ordem="3" style="left: 1245px; top: 590px"><i class="b-luz"></i><p class="b-cel-nome">Projeto com pasta</p><p class="b-cel-nota">processo: sempre aqui</p></div>
+    <i class="b-aro"></i>
+    <i class="b-alem-fio"></i>
+    <p class="b-alem">Para mais controle e volume, Claude Code e Codex.</p>
+  </section>
+
+  <!-- projeto (cena própria, noite): a tela de um Projeto do Claude desenhada por código, com o caso fictício; nunca o
+       print do professor, que tem número de processo real -->
+  <section data-slide="projeto" class="noite">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">O Projeto guarda o seu jeito</h2>
+    <div class="b-app">
+      <div class="b-app-barra"><i></i><i></i><i></i></div>
+      <div class="b-app-esq">
+        <p class="b-app-tipo">Projeto</p>
+        <p class="b-app-nome">Caso Vila Serena</p>
+        <div class="b-app-conv"><i style="width: 420px"></i><i style="width: 360px"></i><i style="width: 400px"></i></div>
+        <div class="b-app-campo"></div>
+      </div>
+      <div class="b-app-lado">
+        <div class="b-pc"><p class="b-pc-tit">Instruções</p><p class="b-pc-txt">Cite arquivo e trecho.</p>
+          <svg class="b-lapis" viewBox="0 0 40 40"><path d="M8 32l4-12L26 6l8 8-14 14z M12 20l8 8"/></svg></div>
+        <div class="b-pc"><p class="b-pc-tit">Memória</p><p class="b-pc-txt">Contrato 07/2019, Vila Serena</p></div>
+        <div class="b-pc"><p class="b-pc-tit">Contexto</p><p class="b-pc-txt">contrato, aditivo, notificação</p></div>
+        <div class="b-pc"><p class="b-pc-tit">Pasta</p><p class="b-pc-txt">caso-ficticio/</p></div>
+        <div class="b-pc"><p class="b-pc-tit">Programado</p><p class="b-pc-txt">nenhuma rotina</p></div>
       </div>
     </div>
-    <p class="nota-lateral">Vídeo de exemplo feito por código. Troque pela gravação do seu caso.</p>
+    <svg class="b-camada b-seta-p" viewBox="0 0 1920 1080"><path d="M1330 420C1300 400 1290 392 1262 384"/><path d="M1282 370L1260 384L1284 398"/></svg>
+    <p class="b-anota">Visível e editável com um clique.</p>
+    <p class="b-chatgpt">No ChatGPT, Projeto também guarda instruções e arquivos.</p>
   </section>
 
-  <!-- fecho: a mensagem em linhas e o que fazer agora; a trilha termina no anel -->
-  <section data-slide="fecho" data-arquetipo="fecho" class="noite">
-    <p class="rotulo">Para usar o molde</p>
-    <h2 class="display fecho-msg"><span>Troque o texto,</span><span>mantenha a <span class="sinal">trilha</span></span></h2>
-    <ol class="fecho-passos">
-      <li><b>1</b>Escreva o texto e a mídia nas sections.</li>
-      <li><b>2</b>Apague a section e a linha da lista.</li>
-      <li><b>3</b>Rode <code>./ap sondar</code> e <code>./ap paradas</code>.</li>
+  <!-- pasta (cena em partes): cinco motivos, um por clique; a explicação do atual à direita -->
+  <section data-slide="pasta">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">Processo? Trabalhe com pasta</h2>
+    <ol class="partes">
+      <li><span>Volume</span></li>
+      <li><span>Lê só o trecho</span></li>
+      <li><span>Sem reenviar</span></li>
+      <li><span>A entrega fica ao lado da fonte</span></li>
+      <li><span>Você libera só a pasta</span></li>
     </ol>
+    <div class="explica">
+      <p>Um processo passa de 300 páginas; o Claude aceita 100 por pedido.</p>
+      <p>O agente busca a data e abre só o trecho de que precisa.</p>
+      <p>Os papéis ficam na pasta, e a conversa nova não pede upload.</p>
+      <p>A cronologia nasce na mesma pasta dos papéis que ela cita.</p>
+      <p>Você escolhe a pasta; o agente trabalha dentro dela.</p>
+    </div>
+  </section>
+
+  <!-- teste (cena de números, noite): o processo fictício medido em 23/10/2026 (briefing.md) -->
+  <section data-slide="teste" class="noite">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">O agente leu 0,2% do processo</h2>
+    <p class="display b-348">348</p>
+    <p class="b-348-leg">páginas e <b class="b-129">129 mil</b> palavras</p>
+    <p class="b-ped-leg">No chat, 4 pedidos de 100 páginas.</p>
+    <div class="b-ped"><i style="left: 0; height: 170px"></i><i style="left: 230px; height: 170px"></i><i style="left: 460px; height: 170px"></i><i style="left: 690px; height: 82px"></i></div>
+    <div class="b-busca"><svg viewBox="0 0 44 44"><circle cx="18" cy="18" r="12"/><path d="M27 27l11 11"/></svg><span class="b-busca-txt">12/03/2019</span></div>
+    <p class="b-busca-res">achou a data em <b>6 milissegundos</b></p>
+    <p class="b-proc-leg"><b class="b-pct">0,2%</b> do processo lido</p>
+    <div class="b-proc"><i class="b-lido"></i></div>
+    <p class="b-proc-sub">cerca de 300 palavras</p>
+    <p class="pilula">teste com processo fictício</p>
+  </section>
+
+  <!-- lei (cena própria): o que guardar na pasta e o que pesquisar; embaixo, a regra para o agente -->
+  <section data-slide="lei">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">Guardar a lei ou pesquisar?</h2>
+    <div class="b-lado" style="left: 120px">
+      <p class="display b-lado-tit">Guarde</p>
+      <ul><li>leis que você usa sempre</li><li>com fonte oficial e data da conferência</li></ul>
+    </div>
+    <i class="b-lado-fio"></i>
+    <div class="b-lado" style="left: 1040px">
+      <p class="display b-lado-tit">Pesquise</p>
+      <ul><li>jurisprudência</li><li>alteração recente</li><li>“esta lei mudou?”</li></ul>
+    </div>
+    <div class="b-regra">
+      <p class="b-regra-et">regra para o agente</p>
+      <p class="b-regra-txt">Use o arquivo. Para confirmar alteração, consulte o site oficial e diga a data.</p>
+    </div>
+  </section>
+
+  <!-- mdpdf (cena própria): a mesma página como PDF (a foto, com o rodapé repetido marcado) e como Markdown limpo;
+       texto real do contrato.pdf do caso fictício (cláusula terceira). O contrato não tem cabeçalho repetido, só o
+       rodapé, e só ele é marcado. -->
+  <section data-slide="mdpdf">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">PDF ou Markdown?</h2>
+    <p class="etiqueta b-et-pdf">PDF, foto da página</p>
+    <div class="b-pdf"><img src="midia/caso-contrato.webp" alt=""><i class="b-clausula"></i><i class="b-ruido"></i></div>
+    <p class="b-ruido-leg">rodapé repetido</p>
+    <p class="etiqueta b-et-md">Markdown, só texto</p>
+    <div class="b-md">
+      <p class="b-md-h"><span class="b-md-hash">##</span> Cláusula terceira, do prazo</p>
+      <p class="b-md-p">As partes firmam este contrato em 12/03/2019, com vigência de 36 (trinta e seis) meses, contados da assinatura.</p>
+    </div>
+    <ul class="b-ganhos"><li>gasta menos</li><li>erra menos</li><li>acha o artigo certo</li></ul>
+    <svg class="b-camada b-md-fio" viewBox="0 0 1920 1080"><path d="M450 606C620 606 700 420 850 420"/></svg>
+  </section>
+
+  <!-- converter (cartões, noite): o "não" grande à esquerda, as três regras empilhadas à direita -->
+  <section data-slide="converter" class="noite">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">Converter tudo?</h2>
+    <p class="display b-nao"><span class="sinal">Não</span></p>
+    <div class="cartoes c3">
+      <div class="cartao"><p class="ct-tit">Vai reusar</p><p class="ct-txt">Converta para Markdown.</p></div>
+      <div class="cartao"><p class="ct-tit">Pergunta única</p><p class="ct-txt">Suba o PDF como está.</p></div>
+      <div class="cartao"><p class="ct-tit">Escaneado</p><p class="ct-txt">Precisa de reconhecimento de texto antes.</p></div>
+    </div>
+    <p class="rodape">Guarde o PDF como prova e o Markdown como cópia de trabalho.</p>
+  </section>
+
+  <section data-slide="codigo">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">Quando usar Claude Code e Codex</h2>
+    <div class="cartoes c4">
+      <div class="cartao"><p class="ct-tit">Plano</p><p class="ct-txt">O plano e o que mudou, arquivo por arquivo.</p></div>
+      <div class="cartao"><p class="ct-tit">Volume</p><p class="ct-txt">Dezenas de arquivos, a mesma tarefa de novo.</p></div>
+      <div class="cartao"><p class="ct-tit">Conexões</p><p class="ct-txt">Liga a outros sistemas (MCP, dia 2).</p></div>
+      <div class="cartao"><p class="ct-tit">Custo</p><p class="ct-txt">Codex até no plano gratuito, no app desktop.</p></div>
+    </div>
+  </section>
+
+  <!-- ferramentas (cena própria, noite): quatro nomes em dois pares (para que serve x empresa); o aviso do Cowork -->
+  <section data-slide="ferramentas" class="noite">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">Quatro nomes, dois pares</h2>
+    <p class="b-par-cab" style="left: 520px">Pedir uma entrega</p>
+    <p class="b-par-cab" style="left: 1185px">Trabalhar na pasta como um desenvolvedor</p>
+    <p class="b-emp" style="top: 470px">Anthropic</p>
+    <p class="b-emp" style="top: 650px">OpenAI</p>
+    <div class="b-ferr" data-col="0" style="left: 520px; top: 420px"><p class="b-ferr-nome">Claude</p><p class="b-ferr-sub">o antigo Cowork</p></div>
+    <div class="b-ferr" data-col="1" style="left: 1185px; top: 420px"><p class="b-ferr-nome">Claude Code</p></div>
+    <div class="b-ferr" data-col="0" style="left: 520px; top: 600px"><p class="b-ferr-nome">ChatGPT Work</p></div>
+    <div class="b-ferr" data-col="1" style="left: 1185px; top: 600px"><p class="b-ferr-nome">Codex</p></div>
+    <p class="b-cowork">O Cowork não existe mais. Virou o próprio Claude em 16/09/2026.</p>
+  </section>
+
+  <!-- diferenca (grade): para que serve, onde roda, quem tem; uma linha por clique. Fatos lidos em 23/10/2026 -->
+  <section data-slide="diferenca">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">O que muda entre os quatro</h2>
+    <div class="b-grade">
+      <p class="b-g b-g-cab" data-l="0" data-c="0"></p>
+      <p class="b-g b-g-cab" data-l="0" data-c="1">Claude</p>
+      <p class="b-g b-g-cab" data-l="0" data-c="2">ChatGPT Work</p>
+      <p class="b-g b-g-cab" data-l="0" data-c="3">Claude Code</p>
+      <p class="b-g b-g-cab" data-l="0" data-c="4">Codex</p>
+
+      <p class="b-g b-g-rot" data-l="1" data-c="0">para que serve</p>
+      <p class="b-g b-g-par" data-l="1" data-c="1">pedir uma entrega</p>
+      <p class="b-g b-g-par" data-l="1" data-c="3">trabalhar como desenvolvedor</p>
+
+      <p class="b-g b-g-rot" data-l="2" data-c="0">onde roda</p>
+      <p class="b-g" data-l="2" data-c="1">nuvem; pasta no app desktop</p>
+      <p class="b-g" data-l="2" data-c="2">nuvem; arquivos no app desktop</p>
+      <p class="b-g" data-l="2" data-c="3">terminal, editor, desktop e web</p>
+      <p class="b-g" data-l="2" data-c="4">app desktop e nuvem</p>
+
+      <p class="b-g b-g-rot" data-l="3" data-c="0">quem tem</p>
+      <p class="b-g" data-l="3" data-c="1">Pro e Max; Team e Free depois</p>
+      <p class="b-g" data-l="3" data-c="2">planos pagos elegíveis</p>
+      <p class="b-g" data-l="3" data-c="3">pagos; Pro, US$&nbsp;20/mês</p>
+      <p class="b-g" data-l="3" data-c="4">até o gratuito, no desktop</p>
+    </div>
+  </section>
+
+  <!-- escolher (cena própria, noite): quatro perguntas, uma por clique, cada uma com a rota ao lado -->
+  <section data-slide="escolher" class="noite">
+    <p class="rotulo">Duas escolhas</p>
+    <h2 class="manchete">Como escolher em 10 segundos</h2>
+    <div class="b-esc" style="top: 318px"><p class="b-esc-q">Um arquivo só?</p><p class="b-esc-r">chat com anexo</p></div>
+    <div class="b-esc" style="top: 458px"><p class="b-esc-q">É processo, ou vai reusar?</p><p class="b-esc-r b-esc-proc">Projeto com pasta</p></div>
+    <div class="b-esc" style="top: 598px"><p class="b-esc-q">Precisa ver o plano e o que mudou, ou tem volume?</p><p class="b-esc-r">Claude Code ou Codex</p></div>
+    <div class="b-esc" style="top: 738px"><p class="b-esc-q">Sem plano pago?</p><p class="b-esc-r">Codex no app desktop</p></div>
+    <svg class="b-camada b-esc-setas" viewBox="0 0 1920 1080">
+      <path d="M1124 357H1206M1190 343L1208 357L1190 371"/>
+      <path d="M1124 497H1206M1190 483L1208 497L1190 511"/>
+      <path d="M1124 637H1206M1190 623L1208 637L1190 651"/>
+      <path d="M1124 777H1206M1190 763L1208 777L1190 791"/>
+    </svg>
+  </section>
+  <section data-slide="skills" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Skills</p>
+    <p class="respiro"><span>Escreva o seu jeito</span><span><span class="sinal">uma vez</span>.</span></p>
+  </section>
+
+
+  <!-- ===== Bloco C: skills (6 min) ===== -->
+  <!-- skill (cena própria, dois cliques): o SKILL.md da demonstração, texto exato do briefing, num painel de editor.
+       Clique 1: o cabeçalho (nome e descrição). Clique 2: o editor rola até as instruções. -->
+  <section data-slide="skill">
+    <p class="rotulo">Skills</p>
+    <h2 class="manchete">Skill é o seu jeito de fazer, escrito uma vez</h2>
+    <div class="c-arq">
+      <p class="c-arq-cab">cronologia-com-fonte/SKILL.md</p>
+      <div class="c-arq-vista">
+        <div class="c-arq-txt">
+          <p class="c-ln c-cab c-dim">---</p>
+          <p class="c-ln c-cab c-alvo-nome"><span class="c-k">name:</span> cronologia-com-fonte</p>
+          <p class="c-ln c-cab c-alvo-desc"><span class="c-k">description:</span> Monta a cronologia de um caso com a data de cada fato e a fonte de cada data. Use quando o pedido for cronologia, datas ou prazos dos documentos da pasta.</p>
+          <p class="c-ln c-cab c-dim">---</p>
+          <p class="c-ln c-ins">Leia todos os documentos da pasta do caso.</p>
+          <p class="c-ln c-ins">Liste cada data com o fato correspondente, em ordem.</p>
+          <p class="c-ln c-ins">Para cada data, cite o arquivo e o trecho exato.</p>
+          <p class="c-ln c-ins">Se a informação não estiver nos documentos, escreva <span class="c-regra">"não encontrei nos documentos"</span>. Não deduza.</p>
+          <p class="c-ln c-ins">Salve o resultado em cronologia.md.</p>
+        </div>
+      </div>
+    </div>
+    <svg class="c-ligas" viewBox="0 0 1920 1080"><path class="c-l-nome"/><path class="c-l-desc"/><path class="c-l-ins"/></svg>
+    <p class="c-nota c-n-nome">nome</p>
+    <p class="c-nota c-n-desc">descrição<small>diz quando usar</small></p>
+    <p class="c-nota c-n-ins">instruções</p>
+    <p class="rodape c-rod">O modelo só lê o nome e a descrição até decidir usar.</p>
+  </section>
+
+  <!-- onde (cena própria, grade): o mesmo arquivo nos dois apps; fatos do briefing, "Fatos sobre as ferramentas" -->
+  <section data-slide="onde" class="noite">
+    <p class="rotulo">Skills</p>
+    <h2 class="manchete">O mesmo arquivo nos dois</h2>
+    <div class="c-grade">
+      <p class="c-col-tit" style="grid-area: ta">Claude</p>
+      <p class="c-col-tit" style="grid-area: tb">ChatGPT e Codex</p>
+      <p class="c-lin-tit" style="grid-area: la">onde mora</p>
+      <p class="c-cel c-cam" style="grid-area: a1">.claude/skills/nome/<b>SKILL.md</b></p>
+      <p class="c-cel c-cam" style="grid-area: b1">.agents/skills/nome/<b>SKILL.md</b></p>
+      <p class="c-lin-tit" style="grid-area: lb">como chamar</p>
+      <p class="c-cel c-cha" style="grid-area: a2"><code>/nome</code></p>
+      <div class="c-cel c-cha2" style="grid-area: b2"><p><code>$nome</code> no Codex</p><p><code>@nome</code> no ChatGPT</p></div>
+    </div>
+    <p class="rodape">Escreva uma vez, use nas duas ferramentas.</p>
+  </section>
+
+  <!-- liga (cena própria, diagrama, três cliques): agente no centro; skill, MCP e o plugin que junta os dois -->
+  <section data-slide="liga">
+    <p class="rotulo">Skills</p>
+    <h2 class="manchete">O que liga o agente ao mundo</h2>
+    <svg class="c-diag" viewBox="0 0 1920 1080">
+      <path class="c-d-sk" d="M590 650H745"/>
+      <path class="c-d-mc" d="M1175 650H1330"/>
+      <path class="c-d-pl" d="M960 470V512H355V556M960 512H1565V556"/>
+    </svg>
+    <div class="c-caixa c-agente"><p class="c-cx-tit">Agente</p></div>
+    <div class="c-caixa c-skill"><span class="c-ic" data-ic="arquivo"></span><p class="c-cx-tit">Skill</p><p class="c-cx-sub">o jeito</p></div>
+    <div class="c-caixa c-mcp"><span class="c-ic" data-ic="tomada"></span><p class="c-cx-tit">MCP</p><p class="c-cx-sub">a tomada para sistemas</p></div>
+    <div class="c-caixa c-plugin"><span class="c-ic" data-ic="pacote"></span><p class="c-cx-tit">Plugin</p><p class="c-cx-sub">o pacote com os dois</p></div>
+    <p class="rodape">Prática de plugin e MCP: dia 2.</p>
+  </section>
+
+  <!-- ===== Bloco D: na pasta (16 min) ===== -->
+  <!-- papeis (viagem): os três papéis do caso fictício esperam no vão antes do slide, atravessam grandes e entram nos
+       arquivos da pasta. Primeira página de cada papel, desenhada por código (material/gerar.py). -->
+  <section data-slide="papeis" data-arquetipo="viagem">
+    <p class="rotulo">Na pasta</p>
+    <h2 class="manchete">Três papéis na pasta do caso</h2>
+    <img class="objeto d-ob" id="ob-contrato" src="midia/caso-contrato.webp" alt="" style="left: -360px; top: 330px">
+    <img class="objeto d-ob" id="ob-aditivo" src="midia/caso-aditivo.webp" alt="" style="left: -330px; top: 390px">
+    <img class="objeto d-ob" id="ob-notificacao" src="midia/caso-notificacao.webp" alt="" style="left: -300px; top: 450px">
+    <img class="viagem-foto" src="midia/pasta-aberta.webp" alt="">
+    <div class="arvore">
+      <p class="no" data-nivel="0">caso-ficticio/</p>
+      <p class="no" data-nivel="1" data-arquivo data-de="ob-contrato">contrato.pdf</p>
+      <p class="no" data-nivel="1" data-arquivo data-de="ob-aditivo">aditivo.pdf</p>
+      <p class="no" data-nivel="1" data-arquivo data-de="ob-notificacao">notificacao.pdf</p>
+    </div>
+    <p class="selo-ia">imagem gerada por IA</p>
+  </section>
+
+  <!-- estrutura (cena própria, árvore): o que está pronto na pasta antes da aula; o cronologia.md ainda não existe -->
+  <section data-slide="estrutura" class="noite">
+    <p class="rotulo">Na pasta</p>
+    <h2 class="manchete">O que está na pasta</h2>
+    <div class="d-arv">
+      <p class="d-no" data-nivel="0" data-tipo="pasta">caso-ficticio/</p>
+      <p class="d-no d-papel" data-nivel="1" data-tipo="arquivo">contrato.pdf</p>
+      <p class="d-no d-papel" data-nivel="1" data-tipo="arquivo">aditivo.pdf</p>
+      <p class="d-no d-papel" data-nivel="1" data-tipo="arquivo">notificacao.pdf</p>
+      <p class="d-no" data-nivel="1" data-tipo="arquivo" id="d-no-memoria">memoria.md</p>
+      <p class="d-no d-novo" data-nivel="1" data-tipo="arquivo" id="d-no-crono">cronologia.md</p>
+      <p class="d-no" data-nivel="1" data-tipo="pasta">.claude/skills/cronologia-com-fonte/</p>
+      <p class="d-no" data-nivel="2" data-tipo="arquivo" id="d-no-skill">SKILL.md</p>
+    </div>
+    <svg class="d-arv-svg" viewBox="0 0 1920 1080"></svg>
+    <p class="d-ext" data-de="d-papel">os três papéis</p>
+    <p class="d-ext" data-de="d-no-memoria">o contexto do caso</p>
+    <p class="d-ext d-ext-novo" data-de="d-no-crono">o agente vai criar</p>
+    <p class="d-ext" data-de="d-no-skill">o jeito de fazer</p>
+    <p class="rodape">Pronto antes da aula. Nada é criado ao vivo, só a cronologia.</p>
+  </section>
+
+  <!-- memoria (cena própria): o memoria.md da pasta, texto exato do briefing; # e - vêm do CSS, como no editor -->
+  <section data-slide="memoria">
+    <p class="rotulo">Na pasta</p>
+    <h2 class="manchete">A memória do caso, em Markdown</h2>
+    <div class="d-arq">
+      <p class="d-arq-cab">caso-ficticio/memoria.md</p>
+      <div class="d-arq-txt">
+        <p class="d-ln d-h1">Memória do caso</p>
+        <p class="d-ln d-li">Contrato nº 07/2019, manutenção predial: Município de Vila Serena e Horizonte Manutenção Predial Ltda.</p>
+        <p class="d-ln d-li">Os três documentos são fictícios, para a aula.</p>
+        <p class="d-ln d-li"><span class="d-mm-regra">Trate prazo e multa como pontos de conferência humana.</span></p>
+        <p class="d-ln d-li">Responda em português, em frases curtas.</p>
+      </div>
+    </div>
+    <p class="rodape">Texto limpo, que qualquer agente lê e que fica de um dia para o outro.</p>
+  </section>
+
+  <section data-slide="agora" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Demonstração</p>
+    <p class="respiro"><span>Agora,</span><span><span class="sinal">funcionando.</span></span></p>
+  </section>
+
+  <!-- pedido (cena guia, dois cliques): o pedido exato do briefing se digita; depois, os cinco passos da demonstração -->
+  <section data-slide="pedido">
+    <p class="rotulo">Demonstração</p>
+    <h2 class="manchete">O pedido e os cinco passos</h2>
+    <p class="etiqueta d-et-ped">pedido</p>
+    <div class="d-entrada"></div>
+    <p class="d-pedido">Monte a cronologia do caso com a data de cada fato. Para cada data, cite o arquivo e o trecho. Inclua a data do último pagamento. O que não estiver nos documentos, diga que não encontrou. Salve em cronologia.md.</p>
+    <ol class="d-passos">
+      <li>Abra a pasta.</li>
+      <li>Cole o pedido.</li>
+      <li>Leia o plano e autorize.</li>
+      <li>Abra o cronologia.md.</li>
+      <li>Confira um trecho no papel.</li>
+    </ol>
+  </section>
+
+  <!-- demo (cena própria, noite, quatro cliques): simulação por código de uma sessão de agente na pasta. Reserva da
+       demonstração ao vivo: o pedido se digita, o agente lê os três papéis, mostra o plano, pede autorização e escreve
+       o cronologia.md. Textos do pedido e da resposta saem do briefing ("O caso fictício"). -->
+  <section data-slide="demo" class="noite">
+    <p class="rotulo">Demonstração</p>
+    <h2 class="manchete">Ao vivo no Claude, na pasta</h2>
+    <div class="d-jan">
+      <div class="d-jan-barra"><i></i><i></i><i></i><b>Claude</b><span class="d-chip-pasta">caso-ficticio/</span></div>
+      <div class="d-fio">
+        <div class="d-rolo">
+          <div class="d-msg d-eu"><p>Monte a cronologia do caso com a data de cada fato. Para cada data, cite o arquivo e o trecho. Inclua a data do último pagamento. O que não estiver nos documentos, diga que não encontrou. Salve em cronologia.md.</p></div>
+          <div class="d-msg d-lendo"><span class="d-roda"></span><p>Lendo</p><span class="d-arqchip">contrato.pdf</span><span class="d-arqchip">aditivo.pdf</span><span class="d-arqchip">notificacao.pdf</span></div>
+          <div class="d-msg d-plano">
+            <p class="d-plano-tit">Plano</p>
+            <ol>
+              <li>Ler os três documentos.</li>
+              <li>Listar cada data com arquivo e trecho.</li>
+              <li>Marcar o que não estiver nos papéis.</li>
+              <li>Salvar cronologia.md.</li>
+            </ol>
+          </div>
+          <div class="d-msg d-perm"><p>Criar cronologia.md nesta pasta?</p><span class="d-bt d-bt-sim">Permitir</span><span class="d-bt">Recusar</span></div>
+          <div class="d-msg d-escr"><span class="d-roda"></span><p>Escrevendo cronologia.md</p><span class="d-barra"><i></i></span></div>
+          <div class="d-msg d-resp">
+            <p class="d-resp-1">Salvei cronologia.md com as datas, cada uma com arquivo e trecho.</p>
+            <p class="d-resp-2">Data do último pagamento: não encontrei nos documentos.</p>
+            <span class="d-arqchip d-novo-chip">cronologia.md</span>
+          </div>
+        </div>
+      </div>
+      <div class="d-comp"><p class="d-comp-txt">Monte a cronologia do caso com a data de cada fato. Para cada data, cite o arquivo e o trecho. Inclua a data do último pagamento. O que não estiver nos documentos, diga que não encontrou. Salve em cronologia.md.</p><span class="d-enviar"></span></div>
+    </div>
+    <p class="pilula">simulação por código; a gravação da aula substitui</p>
+  </section>
+
+  <!-- fonte (fios, noite): o S.T.A.R. da aula. Cronologia do briefing; o fio do contrato chega e a data acende; o
+       último pagamento fica sem fonte (a regra "se não souber, diga") -->
+  <section data-slide="fonte" data-arquetipo="fios" class="noite">
+    <p class="rotulo">Conferência</p>
+    <h2 class="manchete">Cada data aponta para o papel</h2>
+    <div class="fontes">
+      <p class="no" data-arquivo id="d-fn-contrato">contrato.pdf</p>
+      <p class="no" data-arquivo id="d-fn-aditivo">aditivo.pdf</p>
+      <p class="no" data-arquivo id="d-fn-notificacao">notificacao.pdf</p>
+    </div>
+    <div class="minuta">
+      <p class="cab">cronologia.md</p>
+      <p class="linha" data-fonte="d-fn-contrato"><span><span class="marca">12/03/2019</span>: contrato assinado</span></p>
+      <p class="linha" data-fonte="d-fn-aditivo"><span>01/04/2021: aditivo prorroga 12 meses</span></p>
+      <p class="linha" data-fonte="d-fn-notificacao"><span>20/02/2023: multa de 2% notificada</span></p>
+      <p class="linha"><span>Último pagamento</span></p>
+      <p class="sem-fonte">não encontrei nos documentos</p>
+    </div>
+  </section>
+
+  <!-- trecho (cena própria): a linha da cronologia e o trecho marcado no contrato (o amarelo é do papel, não do tema) -->
+  <section data-slide="trecho">
+    <p class="rotulo">Conferência</p>
+    <h2 class="manchete">Confira o trecho no papel</h2>
+    <div class="d-lin">
+      <p class="d-lin-cab">cronologia.md</p>
+      <p class="d-lin-data">12/03/2019</p>
+      <p class="d-lin-fato">contrato assinado,<br>vigência de 36 meses</p>
+      <p class="d-lin-fonte">contrato.pdf, cláusula terceira</p>
+    </div>
+    <div class="d-pag"><img class="d-pag-img" src="midia/caso-contrato-trecho.webp" alt="Página do contrato fictício com a cláusula terceira marcada"></div>
+    <p class="etiqueta d-pag-leg">contrato.pdf</p>
+    <svg class="d-tr-svg" viewBox="0 0 1920 1080"><path class="d-tr-fio"/><circle class="d-tr-a" r="9"/><circle class="d-tr-b" r="9"/></svg>
+  </section>
+
+  <section data-slide="limite" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Conferência</p>
+    <p class="respiro"><span>A conclusão jurídica</span><span>fica com <span class="sinal">você</span>.</span></p>
+  </section>
+
+  <!-- ===== Bloco E: mão na massa ===== -->
+  <!-- codex: o mesmo pedido nas duas ferramentas; o Codex entra gravado pelo professor -->
+  <section data-slide="codex" data-arquetipo="comparacao" class="noite">
+    <p class="rotulo">Mão na massa</p>
+    <h2 class="manchete">O mesmo pedido no Codex</h2>
+    <div class="janela"><p class="display letra">Claude</p><p class="etiqueta">ao vivo</p>
+      <p class="janela-txt">Na pasta do caso, agora, com a sala.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra">Codex</p><p class="etiqueta">gravado no ensaio</p>
+      <p class="janela-txt">O mesmo pedido, na mesma pasta.</p></div>
+    <p class="pilula">gravação do professor</p>
+  </section>
+
+  <!-- material: o pedido curto e os três papéis do caso, como chegaram no WhatsApp (papéis desenhados por código) -->
+  <section data-slide="material" data-arquetipo="objetos">
+    <p class="rotulo">Mão na massa</p>
+    <h2 class="manchete">O material está no link</h2>
+    <p class="etiqueta">Pedido</p>
+    <div class="entrada"></div>
+    <p class="pedido">Peça a cronologia com arquivo e trecho. Inclua o último pagamento.</p>
+    <p class="etiqueta">No WhatsApp</p>
+    <div class="objetos">
+      <figure><img class="objeto" src="midia/caso-contrato.webp" alt="Primeira página do contrato fictício"><figcaption class="doc-leg">contrato</figcaption></figure>
+      <figure><img class="objeto" src="midia/caso-aditivo.webp" alt="Primeira página do aditivo fictício"><figcaption class="doc-leg">aditivo</figcaption></figure>
+      <figure><img class="objeto" src="midia/caso-notificacao.webp" alt="Primeira página da notificação fictícia"><figcaption class="doc-leg">notificação</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- pratica2 (cena própria, guia da prática): duas rotas, os passos comuns e o pedido exato para copiar -->
+  <section data-slide="pratica2" class="noite">
+    <p class="rotulo">Prática</p>
+    <h2 class="manchete">Sua vez no caso</h2>
+    <div class="e-cols">
+      <div class="e-col"><p class="e-col-tit">Notebook</p>
+        <ol class="e-passos"><li>Extraia o zip.</li><li>Abra a pasta.</li></ol></div>
+      <div class="e-col"><p class="e-col-tit">Celular</p>
+        <ol class="e-passos"><li>Abra o PDF.</li><li>Suba no chat.</li></ol></div>
+      <div class="e-col"><p class="e-col-tit">Nos dois</p>
+        <ol class="e-passos e-depois"><li>Cole o pedido.</li><li>Confira um trecho.</li></ol></div>
+    </div>
+    <div class="e-pedido">
+      <p>Monte a cronologia do caso com a data de cada fato. Para cada data, cite o arquivo e o trecho. Inclua a data do último pagamento. O que não estiver nos documentos, <span class="sinal">diga que não encontrou</span>. Salve em cronologia.md.</p>
+    </div>
+  </section>
+
+  <!-- travou (cena de cartões, da base): as três saídas mais comuns durante a prática -->
+  <section data-slide="travou">
+    <p class="rotulo">Mão na massa</p>
+    <h2 class="manchete">Travou? Três saídas</h2>
+    <div class="cartoes c3">
+      <div class="cartao"><p class="ct-tit">Sem plano pago</p><p class="ct-txt">Use o Codex no app desktop.</p></div>
+      <div class="cartao"><p class="ct-tit">Sem notebook</p><p class="ct-txt">Suba o PDF no celular.</p></div>
+      <div class="cartao"><p class="ct-tit">Sem fonte</p><p class="ct-txt">Peça arquivo e trecho de novo.</p></div>
+    </div>
+    <p class="rodape">Ainda travou? Levante a mão.</p>
+  </section>
+
+  <section data-slide="quem" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Mão na massa</p>
+    <p class="respiro"><span>Quem trouxe</span><span>a <span class="sinal">fonte</span>?</span></p>
+  </section>
+
+  <!-- ===== Bloco F: fecho ===== -->
+  <!-- registro: as três coisas que cada um anota no fim, a mesma entrega no notebook e no celular -->
+  <section data-slide="registro" data-arquetipo="tempo">
+    <p class="rotulo">Fecho</p>
+    <h2 class="manchete">Resposta, fonte e o que conferir</h2>
+    <ol class="etapas">
+      <li><b>1</b>a resposta</li>
+      <li><b>2</b>arquivo e trecho</li>
+      <li class="agora"><b>3</b>o que conferir</li>
+    </ol>
+    <p class="tempo-leg">A mesma entrega nas duas rotas.</p>
+  </section>
+
+  <!-- fecho (arquétipo, fundo claro por causa do logo): a mensagem, os três passos e o logo oficial do tema -->
+  <section data-slide="fecho" data-arquetipo="fecho">
+    <p class="rotulo">Para levar</p>
+    <h2 class="display fecho-msg"><span>Trabalhe no <span class="sinal">caso</span>,</span><span>não no chat</span></h2>
+    <ol class="fecho-passos">
+      <li><b>1</b>Reescreva o pedido.</li>
+      <li><b>2</b>Abra a pasta.</li>
+      <li><b>3</b>Confira a fonte.</li>
+    </ol>
+    <div class="f-logo" role="img" aria-label="co.juris" data-entra="1.1"></div>
   </section>
 
 </div></div>
 
 <script type="module">
-import {palco} from '../../motor/palco.js';
-import {mundo} from '../../motor/cenas.js';
+import {palco, revelar, surgir, tracar, contar, digitar, voar, anotar, caixa, kenburns, escalonar, molaAR, faixa, saida, entradaSaida, clamp, lerp} from '../../motor/palco.js';
+import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
 
-// Uma linha por slide, na ordem da apresentação. Passos, viagem e recuo saem do arquétipo e do vizinho (docs/cenas.md);
-// `andamento: 'corte' | 'curta' | 'media' | 'longa' | 'capitulo' | 'mergulho'` troca a viagem, e `passos: [s]` a duração.
-const slides = [
-  {id: 'abertura', titulo: 'Doze cenas, um só plano', segura: 3, notas: 'Molde do plano contínuo: cada slide é um arquétipo de motor/cenas.js. A foto é marcador (selo no canto).'},
-  {id: 'escolha', titulo: 'Escolha', notas: 'Leque de candidatas com barras; a vencedora voa para a frase. Duas rodadas. Valores ilustrativos.'},
-  {id: 'numero', titulo: 'Número', andamento: 'corte', notas: 'Corte seco: muda o assunto. A caneta corrige a grade e o placar sobe. Nota ilustrativa.'},
-  {id: 'comparacao', titulo: 'Comparação', notas: 'Duas versões sem nome; a escolhida é circulada no fim.'},
-  {id: 'ramos', titulo: 'Ramos', notas: 'A trilha se divide: em cima o que dá ritmo, embaixo o que prova a ideia.'},
-  {id: 'respiro', titulo: 'Respiro', andamento: 'capitulo', notas: 'Pausa entre capítulos: uma frase, e a fala carrega o resto.'},
-  {id: 'tempo', titulo: 'Tempo', notas: 'Etapas numa linha: a linha se traça, cada marco surge quando ela passa e o de agora fica dourado.'},
-  {id: 'objetos', titulo: 'Objetos', notas: 'O pedido se digita ao lado do material. Os papéis seguem para o próximo slide.'},
-  {id: 'viagem', titulo: 'Viagem', notas: 'Os papéis atravessam grandes e entram nos arquivos da pasta do deck; o nome acende depois.'},
-  {id: 'fios', titulo: 'Fios', notas: 'Cada linha aponta para a fonte; o dourado acende quando o fio chega. A linha sem fonte se confere ou sai.'},
-  {id: 'demonstracao', titulo: 'Demonstração', video: [0.9, 2.4], notas: 'Vídeo de exemplo (marcador). Toca no clique e para sozinho.'},
-  {id: 'mergulho', titulo: 'Demonstração: mergulho', video: [0, 1.6], notas: 'A câmera mergulha no vídeo; o holofote aponta e a legenda explica.',
-   mergulho: {em: 'demonstracao', x: 0, y: 0.03, f: 0.56, furos: [[0.03, 0.254, 0.208, 0.035], [0.273, 0.172, 0.145, 0.037]]}},
-  {id: 'fecho', titulo: 'Para usar o molde', segura: 4, notas: 'Trocar, apagar, conferir. A trilha termina aqui.'},
+// Seis blocos da linha do dia, somando 90 minutos. Os ids são os de `bloco` nos slides.
+const blocos = [
+  {id: 'pedir', rotulo: 'Pedir bem', minutos: 25},
+  {id: 'escolhas', rotulo: 'Duas escolhas', minutos: 22},
+  {id: 'skills', rotulo: 'Skills', minutos: 8},
+  {id: 'pasta', rotulo: 'Na pasta', minutos: 16},
+  {id: 'mao', rotulo: 'Mão na massa', minutos: 15},
+  {id: 'fecho', rotulo: 'Fecho', minutos: 4},
 ];
 
-const m = mundo(slides);
-palco({slides: m.slides, cenas: m.cenas(), desenhar: m.desenhar});
+// Uma linha por slide, na ordem da aula. Cada bloco de fonte/ acrescenta as suas com SLIDES.push(...).
+// `notas` é o guia do apresentador: {diga, faca, transicao}.
+const SLIDES = [];
+
+
+// Bloco A, pedir bem (25 min): capa a relato. Falas a partir das notas da apresentação de engenharia de prompt do
+// professor (17/03/2026); fatos só do briefing.md.
+SLIDES.push(
+  {id: 'capa', titulo: 'Do chat à pasta', bloco: 'pedir', linhaDia: false, segura: 3,
+   notas: {diga: 'Boa tarde de novo. Na primeira aula vimos o que a IA é por dentro. Agora vamos usar isso na prática: primeiro, como pedir bem; depois, como trabalhar direto nos documentos do caso, numa pasta.',
+     faca: ['a capa toca sozinha quando o deck abre', 'conferir se todos receberam pelo WhatsApp o link do material fictício'],
+     transicao: 'Primeiro, o caminho da tarde.'}},
+  {id: 'mapa', titulo: 'A tarde em seis etapas',
+   notas: {diga: 'São seis etapas. Pedir bem, que é onde estamos. Duas escolhas: Projeto e pasta. Skills. O trabalho na pasta, com uma demonstração. Mão na massa, no caso fictício. E o fecho. Cada etapa termina numa tarefa de vocês.',
+     faca: ['mostrar a linha embaixo da tela: ela marca a etapa em que estamos'],
+     transicao: 'Começo por uma cena que todo mundo conhece.'}},
+  {id: 'tentativas', titulo: 'Na terceira tentativa chega perto', passos: [1.7, 1.3, 2.1],
+   notas: {diga: 'Você pede para a IA resumir um parecer. Vem genérico, longo, sem os pontos que importam. Você reformula: dez linhas. Melhora, mas ainda não é o que você queria. Na terceira tentativa, quando diz o que importa, chega perto. Isso acontece com todo mundo. O problema não é a IA. É o pedido.',
+     faca: ['um clique por tentativa, três no total', 'perguntar: quem aqui já passou por isso? Esperar as mãos'],
+     transicao: 'Hoje a gente resolve isso. E resolve com uma ideia simples.'}},
+  {id: 'colega', titulo: 'Prompt é briefing para colega novo',
+   notas: {diga: 'Prompt é o pedido que vocês escrevem. Pensem nele como o briefing para um colega competente que acabou de chegar e não conhece o caso. Se esse colega responderia “mas o que exatamente você quer?”, o pedido precisa de mais contexto. Circulam dicas de dizer “por favor” ou oferecer gorjeta. Não funcionam: o modelo processa texto, não sentimento. Gastem os tokens com informação útil.',
+     faca: ['ler o pedido vago e perguntar à sala o que o colega novo perguntaria de volta'],
+     transicao: 'O que vai num bom briefing? Seis coisas.'}},
+  {id: 'seis', titulo: 'Seis elementos, nem todos obrigatórios',
+   notas: {diga: 'Seis elementos: objetivo, contexto, persona, saída, exemplos e regras. Não precisa usar todos em todo pedido. Pergunta simples pede só um objetivo claro. Os modelos prontos que circulam na internet, com siglas, são combinações destes mesmos seis, com outros nomes. Entender os seis vale mais do que decorar sigla.',
+     faca: ['apontar o primeiro marco: é por ele que começamos'],
+     transicao: 'Um por um, começando pelo objetivo.'}},
+  {id: 'objetivo', titulo: 'Objetivo: o que você quer', passos: [1.5, 2.2],
+   notas: {diga: 'O objetivo é o mais fundamental. A causa mais comum de resposta ruim é a vagueza. Vejam o pedido vago. Como vocês melhorariam? … Agora o pedido com objetivo: diz o tamanho, o tema, o recorte e quantas aplicações. A IA não precisa adivinhar.',
+     faca: ['primeiro clique: o pedido vago', 'pausa de 10 a 15 segundos: “o que vocês mudariam?”', 'segundo clique: o pedido bom; apontar as duas marcas'],
+     transicao: 'Segundo elemento: o que a IA precisa saber.'}},
+  {id: 'contexto', titulo: 'Contexto: o que a IA precisa saber', passos: [1.5, 2.9],
+   notas: {diga: 'O modelo não sabe nada sobre você. Sem contexto, ele dá a resposta mais provável, que não é a mais útil para você. É a diferença entre pedir “me ajuda com um problema” e explicar a situação inteira: quem você é, o convênio, o valor, as leis. E uma dica: o que é mais importante vai no começo ou no fim do pedido, porque os modelos aproveitam menos o que fica no meio.',
+     faca: ['primeiro clique: o pedido sem contexto', 'segundo clique: o pedido com contexto e a dica embaixo'],
+     transicao: 'Terceiro: quem a IA deve ser.'}},
+  {id: 'persona', titulo: 'Persona: quem a IA deve ser', passos: [1.5, 2.2],
+   notas: {diga: 'A persona é o papel que vocês dão à IA. Ela orienta o vocabulário, a profundidade e o estilo. Um professor simplifica; um consultor sênior aprofunda. Aqui, o professor de direito financeiro fala para servidores que não são da área. Por isso pedimos sem jargão.',
+     faca: ['primeiro clique: o pedido sem persona', 'segundo clique: o pedido com persona'],
+     transicao: 'Vejam a diferença que isso faz na mesma pergunta.'}},
+  {id: 'personas', titulo: 'A mesma pergunta, três papéis', passos: [1.8, 1.2, 2.1],
+   notas: {diga: 'A pergunta é a mesma: o que é precatório? Para leigos, vira uma dívida na fila. Para o consultor sênior, vira requisição de pagamento em ordem cronológica. Para o procurador, vira o que conferir. As respostas foram escritas para a aula, só para mostrar o registro. A persona muda o registro da resposta inteira, não só o conteúdo.',
+     faca: ['um clique por papel, três no total', 'ler cada resposta em voz alta, no tom de quem fala'],
+     transicao: 'Quarto elemento: o formato da resposta.'}},
+  {id: 'saida', titulo: 'Estrutura de saída: o formato da resposta', passos: [1.5, 2.9],
+   notas: {diga: 'Se vocês não dizem o formato, o modelo escolhe um, e quase nunca é o que vocês queriam. Pensem no tempo que já perderam reformatando resposta de IA. Aqui o pedido diz quantos argumentos e o que vem em cada um. Tabela, lista numerada, passo a passo, prós e contras: digam qual.',
+     faca: ['primeiro clique: o pedido sem estrutura', 'segundo clique: o pedido com estrutura e os formatos embaixo'],
+     transicao: 'Quinto: mostrar em vez de explicar.'}},
+  {id: 'exemplos', titulo: 'Exemplos: mostre o que você quer',
+   notas: {diga: 'Mostrar exemplos do resultado é uma das técnicas mais simples e mais poderosas. Tarefa simples e clara: só a instrução, zero exemplo. Tom ou formato específico: um exemplo resolvido antes do pedido. Tarefa ambígua ou subjetiva: de dois a cinco exemplos, para ensinar o padrão. Pedir “pense passo a passo” já não faz falta, porque os modelos atuais raciocinam em etapas sozinhos. Exemplos continuam muito poderosos.',
+     faca: ['apontar os quadrados de cada cartão: são os exemplos do pedido'],
+     transicao: 'Sexto e último: o que a IA não deve fazer.'}},
+  {id: 'regras', titulo: 'Regras: o que a IA não faz', passos: [1.5, 2.6],
+   notas: {diga: 'Regras delimitam o que a IA não deve fazer, e isso reduz resposta genérica e invenção. No direito, uma regra é especialmente crítica: se não souber, diga que não sabe. A IA inventa jurisprudência com total confiança. As regras são a linha de defesa de vocês. Guardem esta frase: ela volta na demonstração, na pasta do caso.',
+     faca: ['primeiro clique: o pedido sem regras', 'segundo clique: o pedido com regras e a frase dourada', 'marcar a frase como o fio da aula'],
+     transicao: 'Agora, os seis juntos num pedido só.'}},
+  {id: 'junta', titulo: 'Juntando tudo', passos: [3.3],
+   notas: {diga: 'Este é um pedido para analisar um edital de licitação. Cada linha é um elemento: persona, objetivo, contexto, saída, um exemplo e as regras. Cada um torna a resposta mais precisa. Notem a regra: não invente artigos; na dúvida, escreva “verificar manualmente”. Não é prompt longo. É a informação certa.',
+     faca: ['as linhas acendem sozinhas, de cima para baixo', 'ler o rótulo e o trecho de cada linha'],
+     transicao: 'Um caso real do dia a dia mostra o peso do contexto.'}},
+  {id: 'tce', titulo: 'O contexto muda tudo', passos: [1.5, 2.4],
+   notas: {diga: 'Um ofício do Tribunal de Contas sobre um convênio de pavimentação. O pedido vago dá um e-mail genérico, sem nada do caso. No pedido bom, a frase que muda tudo é esta: o plano existe e foi juntado em apenso. Sem essa informação, a IA não tem como produzir uma resposta útil. Só quem conhece o caso sabe disso; a IA só sabe se vocês disserem.',
+     faca: ['primeiro clique: o pedido vago', 'perguntar: qual destes dois vocês usariam?', 'segundo clique: o pedido bom; apontar a frase marcada'],
+     transicao: 'Agora é com vocês.'}},
+  {id: 'pratica1', titulo: 'Sua vez: reescreva um pedido seu', pratica: 4, passos: [2.8],
+   notas: {diga: 'Peguem um pedido que vocês fazem hoje no trabalho. Reescrevam com pelo menos objetivo, contexto e uma regra. Colem no app de vocês, Claude ou ChatGPT, e comparem com a resposta de antes. Vocês têm quatro minutos. O checklist da direita é para consultar antes de enviar; nas primeiras semanas, usem sempre que o pedido for importante.',
+     faca: ['cronômetro de 4 minutos: começa sozinho na tela do apresentador', 'circular pela sala e ajudar quem travar no objetivo', 'escolher duas pessoas para ler em voz alta'],
+     transicao: 'Tempo. Quem mostra o antes e o depois?'}},
+  {id: 'relato', titulo: 'O que mudou na resposta?', linhaDia: false, andamento: 'capitulo',
+   notas: {diga: 'Duas pessoas, se toparem: leiam o pedido antigo, o novo e digam o que mudou na resposta. Qual elemento pesou mais? Em geral é o contexto ou o objetivo. A regra de ouro: eu daria este briefing para um colega que não me conhece?',
+     faca: ['pedir consentimento antes de ler o pedido de alguém', 'perguntar à sala qual elemento mais pesou'],
+     transicao: 'O contexto, porém, logo deixa de caber no pedido.'}},
+);
+
+// Bloco B, duas escolhas (22 min): ponte a escolher. Fatos das ferramentas lidos em 23/10/2026 (briefing.md).
+SLIDES.push(
+  {id: 'ponte', titulo: 'O contexto não cabe mais no pedido', bloco: 'escolhas', linhaDia: false, passos: [2.7],
+   notas: {diga: 'Até aqui, tudo coube no pedido. Num processo, não cabe: são contrato, aditivo, notificação, centenas de páginas. No fecho da minha apresentação de prompt, 2025 e 2026 são os anos da engenharia de contexto: cuidar de tudo o que vai junto com o pedido, os arquivos, as instruções e a memória. Este bloco mostra duas escolhas sobre esse contexto.',
+     faca: ['deixar a frase na tela uns segundos antes de falar'],
+     transicao: 'Primeiro, o que acontece hoje no chat.'}},
+  {id: 'reenvio', titulo: 'No chat, você sobe tudo de novo', passos: [2.3, 2.7],
+   notas: {diga: 'No chat, cada conversa começa vazia. Abro uma conversa e subo o contrato, o aditivo e a notificação. Amanhã, conversa nova: subo os três de novo. Na terceira, de novo. Conversa nova, upload novo.',
+     faca: ['primeiro clique: a conversa 1', 'segundo clique: as conversas 2 e 3', 'perguntar quem já subiu o mesmo arquivo duas vezes, com a mão levantada'],
+     transicao: 'Antes das escolhas, a diferença que muda tudo: chat e agente.'}},
+  {id: 'agente', titulo: 'O chat responde. O agente age.', passos: [1.8, 3.1],
+   notas: {diga: 'No chat, você pede e ele responde; acabou ali. O agente faz mais: monta um plano, lê os arquivos da pasta, cria ou altera arquivos e mostra o que mudou. Se não ficou bom, você ajusta e ele refaz. Entre o plano e as ações, quem autoriza é você. Para isso o agente usa ferramentas: ler, buscar, criar, rodar comandos. No Claude, no app desktop, ele lê, organiza e cria arquivos numa pasta que você libera; o Claude Code e o Codex fazem o mesmo com mais controle.',
+     faca: ['primeiro clique: a faixa do chat, que termina na resposta', 'segundo clique: a faixa do agente, passo a passo', 'apontar o marcador dourado: a autorização é sua'],
+     transicao: 'Daí sai o hábito que eu quero que vocês levem.'}},
+  {id: 'confere', titulo: 'O agente propõe; você confere',
+   notas: {diga: 'Este é o hábito da tarde. Peça o plano antes de qualquer ação. Veja o que ele vai abrir. Autorize a ação. E leia o que mudou, que é o passo mais esquecido. Cada passo para antes do próximo. Vale igual para o Claude, o ChatGPT Work, o Claude Code e o Codex.',
+     faca: ['ler os quatro marcos em voz alta', 'pedir que anotem os quatro verbos: pedir, ver, autorizar, ler'],
+     transicao: 'Agora, as duas escolhas sobre o contexto, e uma não depende da outra.'}},
+  {id: 'matriz', titulo: 'Duas escolhas independentes', passos: [2.4, 1.5],
+   notas: {diga: 'São duas perguntas separadas. Primeira: onde moram as instruções e a memória, na conversa solta ou num Projeto. Segunda: onde moram os documentos, anexados ou numa pasta do computador. Dá quatro combinações, e nenhuma é degrau da outra. Para processo, a resposta é sempre a casa de baixo, à direita: Projeto com pasta. Quem precisa de mais controle e volume vai ao Claude Code e ao Codex, que vemos no fim do bloco.',
+     faca: ['primeiro clique: os eixos e as quatro casas', 'apontar as casas com a mão: Chat, Projeto, Tarefa com pasta', 'segundo clique: a casa do processo acende'],
+     transicao: 'Primeiro eixo: o que um Projeto guarda.'}},
+  {id: 'projeto', titulo: 'O Projeto guarda o seu jeito', passos: [2.0, 1.6],
+   notas: {diga: 'Esta é a tela de um Projeto no Claude, desenhada para a aula com o caso fictício. Numa tela só ficam as instruções, a memória, os arquivos de contexto, a pasta e o que está programado. As instruções valem para toda conversa nova dentro do Projeto, e você não repete o seu jeito a cada pedido. Tudo fica à vista e se edita com um clique. No ChatGPT, o Projeto também guarda instruções e arquivos.',
+     faca: ['segundo clique: a anotação e o ChatGPT', 'se for mostrar ao vivo, use um Projeto de teste; nunca projete um com processo real', 'rotinas programadas ficam para o dia 2'],
+     transicao: 'Segundo eixo: os documentos numa pasta. Para processo, é a regra.'}},
+  {id: 'pasta', titulo: 'Processo? Trabalhe com pasta', passos: [2.0, 1.3, 1.3, 1.3, 1.3],
+   notas: {diga: 'Processo, trabalhe com pasta. Cinco motivos, um por clique. Volume: um processo passa de 300 páginas, e o Claude aceita 100 páginas de PDF por pedido. Lê só o trecho: o agente busca e abre o que precisa. Sem reenviar: os papéis continuam na pasta na conversa seguinte. A entrega fica ao lado da fonte: a cronologia nasce na mesma pasta. E você libera só a pasta que escolheu.',
+     faca: ['um clique por motivo, cinco no total',
+       'se perguntarem de sigilo: pasta no computador não é offline; o que o agente lê vai ao provedor do modelo, como um anexo',
+       'a pasta só funciona no computador, com o app aberto; no celular, não'],
+     transicao: 'Fiz um teste para medir o que isso muda.'}},
+  {id: 'teste', titulo: 'O teste: 348 páginas, 0,2% lidas', passos: [2.4, 2.5],
+   notas: {diga: 'Montei um processo fictício: 7 PDFs, 348 páginas, 129 mil palavras, perto de 190 mil tokens. No chat do Claude, são 4 pedidos de 100 páginas; no ChatGPT gratuito, passa do limite de 5 arquivos por projeto. Na pasta, convertido em Markdown, achar a data 12/03/2019 levou 6 milissegundos, e o agente leu só o trecho: umas 300 palavras, 0,2% do processo.',
+     faca: ['primeiro clique: as páginas e os pedidos do chat', 'segundo clique: a busca e a barra do processo',
+       'limites do teste, se perguntarem: texto repetitivo e PDF com texto digital; PDF escaneado sai vazio sem reconhecimento de texto',
+       'cabeçalho e rodapé repetidos eram 6,7% das palavras do processo'],
+     transicao: 'Se a pasta guarda o caso, onde fica a lei?'}},
+  {id: 'lei', titulo: 'Lei: guardar ou pesquisar?', passos: [1.9, 1.1],
+   notas: {diga: 'A lei que você usa sempre pode morar na pasta, com a fonte oficial e a data em que você conferiu. O que muda, você pesquisa: jurisprudência, alteração recente, a pergunta "esta lei mudou?". E escreva a regra para o agente: use o arquivo; para confirmar alteração, consulte o site oficial e diga a data.',
+     faca: ['segundo clique: a regra para o agente', 'sugerir que copiem a regra para as instruções do Projeto'],
+     transicao: 'E em que formato guardar? PDF ou Markdown.'}},
+  {id: 'mdpdf', titulo: 'PDF ou Markdown?', passos: [2.0, 2.0],
+   notas: {diga: 'À esquerda, a página do contrato em PDF. No Claude, cada página vai como texto e como imagem, com tudo o que está nela, inclusive o rodapé que se repete em toda página. À direita, a mesma cláusula em Markdown, um formato de texto simples em que o jogo da velha marca o título. Só o texto, com um título que o agente acha. Gasta menos, erra menos e acha o artigo certo.',
+     faca: ['primeiro clique: o PDF, com o rodapé repetido marcado', 'segundo clique: o Markdown e as três vantagens', 'a página é do contrato fictício do caso'],
+     transicao: 'Então eu converto tudo?'}},
+  {id: 'converter', titulo: 'Converter tudo? Não',
+   notas: {diga: 'Não. Converta o que você vai reusar, como a lei de sempre e os papéis do caso. Pergunta única sobre um arquivo: suba o PDF como está. PDF escaneado precisa de reconhecimento de texto antes, senão o texto sai vazio. Guarde o PDF como prova e o Markdown como cópia de trabalho.',
+     faca: ['perguntar quem recebe PDF escaneado no dia a dia, com a mão levantada'],
+     transicao: 'Até aqui, o app de conversa basta. Quando ir além?'}},
+  {id: 'codigo', titulo: 'Quando ir além: Claude Code e Codex',
+   notas: {diga: 'Claude Code e Codex trabalham na pasta como um programador trabalha num projeto. Quatro motivos para usar. Mostram o plano e o que mudou, arquivo por arquivo. Aguentam volume e repetição. Ligam o agente a outros sistemas pelo MCP, um padrão aberto de conexão, que fica para o dia 2. E o Codex funciona até no plano gratuito, no app desktop, com limites.',
+     faca: ['não abrir terminal agora; o Codex aparece gravado no bloco Mão na massa'],
+     transicao: 'Com tantos nomes, vale separar quem é quem.'}},
+  {id: 'ferramentas', titulo: 'Quatro nomes, dois pares', passos: [2.0, 1.3, 1.1],
+   notas: {diga: 'São quatro nomes em dois pares, um de cada empresa. Para pedir uma entrega, como uma pesquisa, um documento ou uma planilha: o Claude e o ChatGPT Work. Para trabalhar na pasta como um desenvolvedor: o Claude Code e o Codex. E um aviso: o Cowork não existe mais. Em 16/09/2026, a Anthropic juntou o Cowork e o chat num Claude só; tudo o que o Cowork fazia está em qualquer conversa.',
+     faca: ['primeiro clique: o par da entrega', 'segundo clique: o par da pasta', 'terceiro clique: o aviso do Cowork',
+       'o Claude novo chegou primeiro a Pro e Max; Team e Free depois'],
+     transicao: 'E o que muda, na prática, de um para o outro?'}},
+  {id: 'diferenca', titulo: 'O que muda de um para o outro', passos: [2.0, 1.4, 1.4],
+   notas: {diga: 'Linha por linha. Para que serve: os dois primeiros fazem entregas; os dois últimos trabalham na pasta como desenvolvedor. Onde roda: o Claude e o Work rodam na nuvem e usam a pasta do computador só no app desktop; o Claude Code roda no terminal, em editores, no app desktop e na web; o Codex, no app desktop e na nuvem. Quem tem: o Claude novo, Pro e Max primeiro, e Team e Free depois; o Work, os planos pagos elegíveis; o Claude Code exige plano pago, e o Pro custa 20 dólares por mês; o Codex está em todos os planos do ChatGPT, até no gratuito, no app desktop.',
+     faca: ['um clique por linha, três no total', 'Pro anual: 17 dólares por mês', 'Codex no gratuito e no Go: só no app desktop e com limites; do Plus em diante, também web, linha de comando e editores',
+       'fatos lidos em 23/10/2026 nas páginas de ajuda da Anthropic e da OpenAI'],
+     transicao: 'Para a escolha não virar dúvida, quatro perguntas.'}},
+  {id: 'escolher', titulo: 'Como escolher em 10 segundos', passos: [1.9, 1.2, 1.2, 1.2],
+   notas: {diga: 'Quatro perguntas, dez segundos. Um arquivo só? Chat com anexo. É processo, ou você vai reusar? Projeto com pasta. Precisa ver o plano e o que mudou, ou tem volume? Claude Code ou Codex. Sem plano pago? Codex no app desktop.',
+     faca: ['um clique por pergunta, quatro no total', 'pedir que cada um pense em um trabalho da semana e diga a rota ao vizinho'],
+     transicao: 'Falta uma peça: o jeito de fazer, escrito uma vez. A skill.'}},
+);
+
+// Bloco C, skills (8 min): skill, onde, liga.
+SLIDES.push(
+  {id: 'skills', titulo: 'Escreva o seu jeito uma vez', bloco: 'skills', linhaDia: false,
+   notas: {diga: 'Falta uma peça. Até aqui o pedido foi bom e a pasta guardou os papéis. Mas você repete o mesmo jeito de fazer toda vez. A skill é a forma de escrever esse jeito uma vez.',
+     faca: ['oito minutos neste bloco, seis de aula e dois de perguntas: não deixar virar aula de programação'], transicao: 'Como é uma skill por dentro.'}},
+  {id: 'skill', titulo: 'Skill é o seu jeito de fazer, escrito uma vez', passos: [2.4, 2.3],
+   notas: {diga: 'Skill é uma pasta com um arquivo, o SKILL.md. Em cima vêm o nome e a descrição, e a descrição diz quando usar. O modelo só lê essas duas linhas até decidir abrir a skill; por isso ela custa pouco contexto. Embaixo ficam as instruções: o seu jeito de fazer, escrito uma vez. Reparem na linha 8. É a regra do "se não souber, diga", agora guardada num arquivo.',
+     faca: ['clique 1: o cabeçalho; aponte o nome e a descrição', 'clique 2: o editor rola até as instruções; leia em voz alta a linha "não encontrei nos documentos"', 'avise: esta é a skill que roda daqui a pouco, na demonstração'],
+     transicao: 'E esse mesmo arquivo serve nos dois apps.'}},
+  {id: 'onde', titulo: 'O mesmo arquivo nos dois',
+   notas: {diga: 'A skill segue um padrão aberto. O mesmo SKILL.md serve ao Claude e ao ChatGPT e Codex; muda só a pasta onde ele mora e o jeito de chamar. No Claude, a pasta é .claude/skills e a chamada é barra com o nome. No Codex, .agents/skills e cifrão; no ChatGPT, arroba. No app desktop do ChatGPT, o menu Skills lista as suas.',
+     faca: ['aponte o fim dos dois caminhos: o arquivo é o mesmo, SKILL.md', 'prática de skill: dia 2'],
+     transicao: 'A skill é uma das peças que ligam o agente ao mundo. Há mais duas.'}},
+  {id: 'liga', titulo: 'O que liga o agente ao mundo', passos: [1.7, 1.2, 1.7],
+   notas: {diga: 'No centro, o agente. A skill é o jeito: instruções que ele segue quando a tarefa pede. O MCP é a tomada: um padrão aberto para ligar o agente a ferramentas e sistemas externos. O plugin é o pacote: junta skills e, se quiser, conexões MCP, e se instala de uma vez. Plugin e MCP na prática ficam para o dia 2.',
+     faca: ['clique 1: agente e skill', 'clique 2: MCP', 'clique 3: o plugin, que embrulha os dois'],
+     transicao: 'Agora, a pasta do caso que vamos usar.'}},
+);
+
+// Bloco D, na pasta (16 min): papeis, estrutura, memoria, agora, pedido, demo, fonte, trecho, limite.
+SLIDES.push(
+  {id: 'papeis', titulo: 'Três papéis na pasta do caso', bloco: 'pasta',
+   notas: {diga: 'Este é o caso fictício da aula. São três papéis: o contrato de manutenção predial entre o Município de Vila Serena e a Horizonte Manutenção Predial, o aditivo que prorroga o prazo e a notificação de multa. Tudo inventado; os nomes não existem. Os três vão para uma pasta, caso-ficticio. É essa pasta que o agente vai ler.',
+     faca: ['lembre que o material está no link do WhatsApp: o zip com os três PDFs e o PDF único', 'a foto da pasta é gerada por IA; os papéis são desenhados por código'],
+     transicao: 'Vejam o que mais tem na pasta.'}},
+  {id: 'estrutura', titulo: 'O que está na pasta', passos: [2.9],
+   notas: {diga: 'Na pasta estão os três PDFs, a memória do caso em Markdown e a skill da cronologia, que vimos há pouco, dentro de .claude/skills. Eu deixei tudo isso pronto antes da aula. Ao vivo, o agente cria um arquivo só, o cronologia.md, que aparece aqui tracejado porque ainda não existe.',
+     faca: ['aponte o tracejado: é o único arquivo que nasce na demonstração', 'se perguntarem pelo Codex: a mesma skill mora em .agents/skills'],
+     transicao: 'Abro a memória do caso.'}},
+  {id: 'memoria', titulo: 'A memória do caso, em Markdown',
+   notas: {diga: 'A memória é um arquivo de texto, em Markdown. Quatro linhas: quem são as partes, que os papéis são fictícios, que prazo e multa são pontos de conferência humana e como responder. É texto limpo, sem foto de página, e qualquer agente lê. O agente abre esse arquivo antes de começar.',
+     faca: ['leia devagar a linha sublinhada: prazo e multa ficam com a pessoa'],
+     transicao: 'Chega de preparo.'}},
+  {id: 'agora', titulo: 'Agora, funcionando', linhaDia: false,
+   notas: {diga: 'Agora, funcionando. Vou abrir o app na pasta do caso.',
+     faca: ['abra o Claude Desktop no computador da aula', 'escolha a pasta caso-ficticio e libere o acesso a ela', 'volte ao deck com a janela do app pronta, mas ainda sem colar nada'],
+     transicao: 'Antes de colar, o pedido e os passos.'}},
+  {id: 'pedido', titulo: 'O pedido e os cinco passos', passos: [3.4, 1.7],
+   notas: {diga: 'Este é o pedido, palavra por palavra. Ele quer a data de cada fato com o arquivo e o trecho. E pede uma coisa que não está em nenhum papel, a data do último pagamento. É de propósito: quero ver se o agente diz que não achou. À direita, os cinco passos; vocês vão repetir os mesmos na prática.',
+     faca: ['clique 1: o pedido se digita; leia em voz alta', 'clique 2: os cinco passos', 'copie o pedido do material da aula para colar no app'],
+     transicao: 'Vou ao app.'}},
+  {id: 'demo', titulo: 'Ao vivo no Claude, na pasta', andamento: 'longa', passos: [3.4, 2.5, 2.7, 3.3],
+   notas: {diga: 'Colo o pedido e envio. O agente lê os três documentos e mostra o plano. Eu leio o plano antes de autorizar, porque ele vai criar um arquivo na minha pasta. Autorizo. No fim, ele salva a cronologia e diz o que não encontrou: a data do último pagamento.',
+     faca: ['ao vivo, no app: cole o pedido e envie', 'leia o plano em voz alta e clique em permitir', 'quando terminar, abra o cronologia.md no app', 'se a rede ou o app falharem, fique no deck: quatro cliques, o pedido, a leitura, o plano e a escrita', 'na tela está escrito que é simulação por código; a gravação da aula substitui esta cena'],
+     transicao: 'Abram o arquivo comigo.'}},
+  {id: 'fonte', titulo: 'Cada data aponta para o papel',
+   notas: {diga: 'Cada data aponta para um papel. 12/03/2019 vem da cláusula terceira do contrato. O aditivo prorroga por 12 meses, até 12/03/2023. A notificação traz a multa de 2%, R$ 960,00. E o último pagamento? Não consta dos papéis, e o agente disse isso em vez de inventar. É a regra do começo da aula: se não souber, diga que não sabe.',
+     faca: ['mostre a mesma linha no cronologia.md aberto no app', 'a cronologia completa tem também 14/02/2023: o relatório de janeiro entregue com 9 dias de atraso (notificação, segundo parágrafo)'],
+     transicao: 'Uma data a gente confere no papel.'}},
+  {id: 'trecho', titulo: 'Confira o trecho no papel',
+   notas: {diga: 'A linha diz 12/03/2019, contrato, cláusula terceira. Abro o contrato e procuro a cláusula. Está lá: as partes firmam o contrato em 12/03/2019, com vigência de 36 meses. Conferir uma linha leva segundos. Quem me mostra onde está?',
+     faca: ['abra o contrato.pdf ao lado do cronologia.md', 'peça a alguém da sala que aponte o trecho na tela'],
+     transicao: 'O agente achou e citou. O que ele não decide?'}},
+  {id: 'limite', titulo: 'A conclusão jurídica fica com você', segura: 3,
+   notas: {diga: 'O agente achou as datas e citou a fonte. Três coisas continuam com vocês. A data, vocês conferem no papel. A tese é de vocês. A minuta, vocês revisam. A conclusão jurídica fica com a pessoa.',
+     faca: ['pergunte à sala qual das três costuma ser pulada na pressa: a data, a tese ou a minuta'],
+     transicao: 'Agora o mesmo pedido em outra ferramenta: o Codex.'}},
+);
+
+// ===== Bloco E: mão na massa (15 min) =====
+SLIDES.push(
+  {id: 'codex', bloco: 'mao', titulo: 'O mesmo pedido no Codex',
+   notas: {diga: 'Vocês viram o Claude trabalhar na pasta, ao vivo. Agora o mesmo pedido, na mesma pasta, no Codex. Esta parte eu gravei antes da aula. Reparem em duas coisas: se cada data vem com arquivo e trecho, e o que ele responde sobre o último pagamento.',
+     faca: ['abrir o vídeo gravado do Codex', 'pausar no plano e depois na linha do último pagamento', 'sem a gravação: dizer que o pedido e a pasta são os mesmos e seguir'],
+     transicao: 'Agora é a vez de vocês. Abram o material que mandei no WhatsApp.'}},
+  {id: 'material', titulo: 'O material está no link',
+   notas: {diga: 'Mandei no WhatsApp, antes da aula, um link com o caso fictício. Tem um zip com os três papéis, para quem está de notebook, e um PDF único com os três, para quem está no celular. É tudo inventado: os nomes não existem. Na tela está a versão curta do pedido; o texto completo, igual ao da demonstração, aparece no slide da prática.',
+     faca: ['perguntar quem ainda não recebeu o link', 'reenviar no grupo para quem levantar a mão'],
+     transicao: 'Vou deixar os passos na tela enquanto vocês trabalham.'}},
+  {id: 'pratica2', titulo: 'Sua vez no caso', pratica: 12,
+   notas: {diga: 'Doze minutos. Quem está de notebook extrai o zip e abre a pasta no app do Claude ou do ChatGPT. Quem está no celular abre o PDF único e sobe no chat. Nos dois casos, colem o pedido da tela inteiro, sem mudar nada. Quando a resposta vier, escolham uma data e confiram o trecho no papel. Reparem no que o agente diz sobre o último pagamento.',
+     faca: ['disparar o cronômetro de 12 minutos', 'circular pela sala, ajudar quem travou no zip ou no upload', 'aos 6 minutos, avisar: escolham uma data e confiram no papel', 'anotar quem achou a linha "não encontrei" para chamar no debate'],
+     transicao: 'Antes de fechar: quem travou, olhe as três saídas.'}},
+  {id: 'travou', titulo: 'Travou? Três saídas',
+   notas: {diga: 'Três tropeços comuns. Sem plano pago, o Codex funciona até no gratuito, no app desktop. Sem notebook, o PDF no celular resolve. Se a resposta veio sem fonte, não aceitem: peçam de novo o arquivo e o trecho de cada data.',
+     faca: ['deixar na tela enquanto os últimos terminam', 'ajudar uma pessoa a repetir o pedido de fonte, se alguém precisar'],
+     transicao: 'Tempo. Vamos ouvir quem terminou.'}},
+  {id: 'quem', titulo: 'Quem trouxe a fonte?', linhaDia: false,
+   notas: {diga: 'Quero ouvir duas ou três pessoas. Não basta a data: digam o arquivo e o trecho. E o último pagamento, o que a IA respondeu? Se disse que não encontrou, ela seguiu a regra. Se inventou uma data, é exatamente o que a regra evita.',
+     faca: ['pedir três respostas: data, arquivo e trecho', 'chamar quem recebeu "não encontrei" no último pagamento', 'se alguém recebeu data inventada, mostrar à sala como exemplo'],
+     transicao: 'Então o que cada um leva desta prática?'}},
+);
+
+// ===== Bloco F: fecho (4 min) =====
+SLIDES.push(
+  {id: 'registro', bloco: 'fecho', titulo: 'Resposta, fonte e o que conferir',
+   notas: {diga: 'Antes de sair, cada um registra três coisas. A resposta que a IA deu. O arquivo e o trecho de onde ela tirou. E o que ainda precisa de conferência humana: no nosso caso, o prazo e a multa. Vale para quem fez no notebook e para quem fez no celular.',
+     faca: ['dar um minuto para anotarem, no caderno ou no próprio chat', 'pedir que uma pessoa leia em voz alta o que marcou para conferir'],
+     transicao: 'Se tiverem de guardar uma frase desta tarde, é esta.'}},
+  {id: 'fecho', titulo: 'Trabalhe no caso, não no chat', segura: 4,
+   notas: {diga: 'Trabalhem no caso, não no chat. Reescrevam o pedido como um briefing, abram a pasta do processo e confiram a fonte de cada data. No dia 2: MCP, plugins, rotinas, raspagem de jurisprudência do TJMS e do STF, casos práticos, artefatos e a devolutiva.',
+     faca: ['ler os três passos apontando cada um', 'deixar este slide na tela durante as perguntas'],
+     transicao: 'Obrigado. Até o dia 2.'}},
+);
+
+const m = mundo(SLIDES);
+const CENAS = {};
+const $$ = (sec, sel) => [...sec.querySelectorAll(sel)];
+const vis = (el, sim) => { el.style.visibility = sim ? '' : 'hidden'; };
+const NS = 'http://www.w3.org/2000/svg';
+const traco = (pai, d, cls) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); if (cls) p.setAttribute('class', cls); pai.appendChild(p); return p; };
+
+// Cartões: entram em onda, da esquerda para a direita e de cima para baixo.
+const cartoes = (id) => {
+  const sec = m.secao(id), cs = [...sec.querySelectorAll('.cartao')], leg = sec.querySelector('.ct-leg'), rodape = sec.querySelector(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    if (leg) revelar(leg, molaAR(x - 0.1));
+    cs.forEach((el, n) => surgir(el, molaAR(x - 0.2 - n * 0.09), {dy: 30}));
+    if (rodape) revelar(rodape, molaAR(x - 0.4 - cs.length * 0.09));
+    fim(sec, x, 0.5 + cs.length * 0.09);
+  };
+};
+
+// Definição em partes: um item por clique, o atual em destaque, e a explicação dele à direita.
+const partes = (id) => {
+  const sec = m.secao(id), itens = $$(sec, '.partes li'), expl = $$(sec, '.explica p'), rod = sec.querySelector(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c), d = (n) => (n === 0 ? x - 0.1 : c.desde(n));
+    titulo(sec, x, c);
+    let ativo = 0;
+    for (let n = 1; n < itens.length; n++) if (c.desde(n) > 0) ativo = n;
+    itens.forEach((li, n) => {
+      const k = molaAR(d(n));
+      surgir(li, k, {dx: -20, dy: 0});
+      vis(li, k > 0);
+      li.classList.toggle('ativa', n === ativo);
+    });
+    expl.forEach((p, n) => {
+      const sai = n + 1 < expl.length ? faixa(c.desde(n + 1), 0, 0.2) : 0;
+      const k = sai > 0 ? 1 - sai : molaAR(d(n) - 0.2);
+      surgir(p, k, {dy: 18});
+      vis(p, k > 0.001);
+    });
+    if (rod) revelar(rod, molaAR(x - 0.8));
+    fim(sec, x, 1.0);
+  };
+};
+
+
+// ===== Bloco A, pedir bem =====
+
+// Ícone redondo com ✗ (pedido vago) ou ✓ (pedido bom), desenhado por código e posto antes do texto da caixa.
+const aIcone = (caixaEl, certo) => {
+  const s = document.createElementNS(NS, 'svg');
+  s.setAttribute('class', 'a-ic');
+  s.setAttribute('viewBox', '0 0 64 64');
+  const ci = document.createElementNS(NS, 'circle');
+  ci.setAttribute('cx', 32); ci.setAttribute('cy', 32); ci.setAttribute('r', 29);
+  s.appendChild(ci);
+  const p = traco(s, certo ? 'M19 33L28 42L45 23' : 'M22 22L42 42M42 22L22 42');
+  caixaEl.prepend(s);
+  return p;
+};
+
+// Par: clique 1 traz o pedido vago; clique 2, o pedido bom, as marcas de texto em sequência e a linha de baixo.
+const aPar = (id) => {
+  const sec = m.secao(id), err = sec.querySelector('.a-err'), cer = sec.querySelector('.a-cer');
+  const extra = sec.querySelector(':scope > .a-extra'), mks = $$(sec, '.a-mk');
+  const xErr = aIcone(err, false), xCer = aIcone(cer, true);
+  return (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    surgir(err, molaAR(x - 0.2), {dx: -24, dy: 0});
+    tracar(xErr, saida(faixa(x, 0.45, 0.8)));
+    const k = molaAR(y - 0.05);
+    surgir(cer, k, {dy: 34});
+    vis(cer, y > 0);
+    tracar(xCer, saida(faixa(y, 0.35, 0.7)));
+    mks.forEach((mk, n) => { mk.style.backgroundSize = `${(100 * saida(faixa(y, 0.75 + n * 0.35, 1.2 + n * 0.35))).toFixed(2)}% 100%`; });
+    if (extra) { revelar(extra, molaAR(y - 1.1 - mks.length * 0.2)); vis(extra, y > 1.1 + mks.length * 0.2); }
+    fim(sec, x, 1.0);
+  };
+};
+for (const id of ['objetivo', 'contexto', 'persona', 'saida', 'regras', 'tce']) CENAS[id] = aPar(id);
+
+// Tentativas: um cartão por clique; a barra da distância nasce no tamanho da tentativa anterior e encolhe.
+CENAS.tentativas = (() => {
+  const sec = m.secao('tentativas'), et = sec.querySelector('.a-tn-et'), fimEl = sec.querySelector('.a-tn-fim');
+  const cs = $$(sec, '.a-tn').map((el) => ({el, v: Number(el.dataset.v), b: el.querySelector('.a-tn-b')}));
+  for (const q of cs) q.b.style.width = `${q.v}%`;
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    revelar(et, molaAR(x - 0.1));
+    cs.forEach(({el, v, b}, n) => {
+      const d = n === 0 ? x - 0.2 : c.desde(n);
+      surgir(el, molaAR(d), {dy: 30});
+      vis(el, d > 0);
+      const de = n === 0 ? 0 : cs[n - 1].v, k = clamp(molaAR(d - 0.4, {resposta: 0.6, amortecimento: 0.9}), 0, 1.02);
+      b.style.transform = `scaleX(${(lerp(de, v, k) / v).toFixed(4)})`;
+    });
+    const df = c.desde(2) - 1.0;
+    revelar(fimEl, molaAR(df));
+    vis(fimEl, df > 0);
+  };
+})();
+
+// Personas: a pergunta fica; um papel por clique; a frase e a pílula vêm com o último.
+CENAS.personas = (() => {
+  const sec = m.secao('personas'), pg = sec.querySelector('.a-pg'), cols = $$(sec, '.a-col'), fr = sec.querySelector('.a-pg-fim');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    revelar(pg, molaAR(x - 0.15));
+    cols.forEach((el, n) => {
+      const d = n === 0 ? x - 0.5 : c.desde(n);
+      surgir(el, molaAR(d), {dy: 30});
+      vis(el, d > 0);
+    });
+    const df = c.desde(2) - 0.8;
+    revelar(fr, molaAR(df));
+    vis(fr, df > 0);
+    const pil = sec.querySelector(':scope > .pilula');
+    surgir(pil, molaAR(df - 0.2), {dy: 0});
+    vis(pil, df > 0.2);
+  };
+})();
+
+CENAS.exemplos = cartoes('exemplos');
+
+// Junta: as seis linhas acendem em onda, de cima para baixo; o fundo do rótulo cresce depois do trecho.
+CENAS.junta = (() => {
+  const sec = m.secao('junta'), ls = $$(sec, '.a-jl'), rod = sec.querySelector(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    ls.forEach((el, n) => {
+      surgir(el, molaAR(x - 0.2 - n * 0.28), {dx: -22, dy: 0});
+      el.style.setProperty('--a-acende', saida(faixa(x, 0.35 + n * 0.28, 0.7 + n * 0.28)).toFixed(4));
+    });
+    revelar(rod, molaAR(x - 2.0));
+  };
+})();
+
+// Prática 1: os passos entram um a um, depois o checklist.
+CENAS.pratica1 = (() => {
+  const sec = m.secao('pratica1'), ps = $$(sec, '.a-ps li'), et = sec.querySelector('.a-ck-et'), ck = $$(sec, '.a-ck li');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    ps.forEach((el, n) => surgir(el, molaAR(x - 0.2 - n * 0.25), {dx: -22, dy: 0}));
+    revelar(et, molaAR(x - 0.9));
+    ck.forEach((el, n) => surgir(el, molaAR(x - 1.0 - n * 0.08), {dx: 18, dy: 0}));
+  };
+})();
+
+// ===== Bloco B, duas escolhas =====
+
+// Ponte: a frase sobe linha a linha; a caixa do pedido aparece e os três papéis caem por cima dela, girando até a
+// inclinação final, maiores que a caixa.
+{
+  const sec = m.secao('ponte'), linhas = $$(sec, '.b-pt-frase > span'), caixaP = sec.querySelector('.b-pt-caixa');
+  const papeis = $$(sec, '.b-pt-papel'), sub = sec.querySelector('.respiro-sub'), rot = sec.querySelector(':scope > .rotulo');
+  CENAS.ponte = (t, c) => {
+    const x = conteudo(c);
+    revelar(rot, molaAR(x));
+    linhas.forEach((el, n) => revelar(el, molaAR(x - 0.05 - n * 0.14)));
+    surgir(caixaP, molaAR(x - 0.5), {dy: 0, escala: 0.2});
+    papeis.forEach((p, n) => {
+      const k = clamp(molaAR(x - 0.8 - n * 0.22, {resposta: 0.6, amortecimento: 0.8}), 0, 1.04), r = Number(p.dataset.rot);
+      p.style.opacity = String(clamp((x - 0.8 - n * 0.22) * 6));
+      p.style.transform = k >= 1 && Math.abs(k - 1) < 1e-9 ? `rotate(${r}deg)` : `translate(${(260 * (1 - k)).toFixed(1)}px, ${(-320 * (1 - k)).toFixed(1)}px) rotate(${(r + 30 * (1 - k)).toFixed(2)}deg)`;
+    });
+    revelar(sub, molaAR(x - 1.7));
+  };
+}
+
+// Agente: a faixa do chat (primeiro clique) vai do pedido à resposta e termina; a do agente (segundo) se desenha passo
+// a passo, com a autorização entre o plano e as ações e o laço do ajuste no fim.
+{
+  const sec = m.secao('agente'), rots = $$(sec, '.b-ag-rot'), chat = $$(sec, '.b-ag-chat'), ag = $$(sec, '.b-ag-ag');
+  const pc = $$(sec, '.b-ag-c'), fimC = sec.querySelector('.b-ag-fim'), pa = $$(sec, '.b-ag-a'), ok = sec.querySelector('.b-ag-ok');
+  const laco = sec.querySelector('.b-ag-laco'), aut = sec.querySelector('.b-ag-autoriza'), aju = sec.querySelector('.b-ag-ajusta');
+  const div = sec.querySelector('.b-ag-div'), rod = sec.querySelector(':scope > .rodape');
+  CENAS.agente = (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    revelar(rots[0], molaAR(x - 0.1));
+    surgir(chat[0], molaAR(x - 0.2), {dx: -20, dy: 0});
+    tracar(pc[0], saida(faixa(x, 0.45, 0.75)));
+    surgir(chat[1], molaAR(x - 0.7), {dx: -20, dy: 0});
+    tracar(pc[1], saida(faixa(x, 0.95, 1.15)));
+    tracar(fimC, saida(faixa(x, 1.1, 1.3)));
+    // segundo clique
+    div.style.transform = `scaleX(${saida(faixa(y, 0, 0.4)).toFixed(4)})`;
+    div.style.transformOrigin = '0 50%';
+    revelar(rots[1], molaAR(y - 0.05));
+    ag.forEach((el, n) => { const d = y - 0.15 - n * 0.4; surgir(el, molaAR(d), {dx: -20, dy: 0}); vis(el, d > 0); });
+    pa.forEach((p, n) => tracar(p, saida(faixa(y, 0.4 + n * 0.4, 0.6 + n * 0.4))));
+    tracar(ok, saida(faixa(y, 0.85, 1.05)));
+    surgir(aut, molaAR(y - 0.8), {dy: -12});
+    vis(aut, y > 0.8);
+    tracar(laco, saida(faixa(y, 1.95, 2.45)));
+    revelar(aju, molaAR(y - 2.3));
+    revelar(rod, molaAR(y - 2.5));
+  };
+}
+
+// Reenvio: cada conversa aparece e os três papéis sobem pelo campo de envio até o balão; a etiqueta dela acende no
+// fim. A primeira no primeiro clique; a segunda e a terceira, em seguida, no segundo.
+{
+  const sec = m.secao('reenvio'), convs = $$(sec, '.b-conv'), rod = sec.querySelector(':scope > .rodape');
+  CENAS.reenvio = (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    convs.forEach((cv, i) => {
+      const d = i === 0 ? x - 0.25 : y - 0.05 - (i - 1) * 0.95;
+      const k = molaAR(d);
+      surgir(cv, k, {dy: 24});
+      vis(cv, d > 0);
+      $$(cv, '.b-anexos img').forEach((im, j) => surgir(im, molaAR(d - 0.3 - j * 0.12, {resposta: 0.55}), {dy: 170}));
+      revelar(cv.querySelector('.b-conv-msg'), molaAR(d - 0.8));
+      surgir(cv.querySelector('.b-tag'), molaAR(d - 1.0), {dy: 0, escala: 0.4});
+    });
+    revelar(rod, molaAR(y - 2.0));
+  };
+}
+
+// Matriz: cabeçalhos dos dois eixos, as quatro casas em onda (Chat, Projeto, Tarefa com pasta, Projeto com pasta);
+// no segundo clique a casa do processo acende, com a nota, e a linha de Code e Codex entra embaixo.
+{
+  const sec = m.secao('matriz'), cabs = $$(sec, '.b-mx-cab'), cels = $$(sec, '.b-cel');
+  const aro = sec.querySelector('.b-aro'), luz = sec.querySelector('.b-luz'), nota = sec.querySelector('.b-cel-nota');
+  const fio = sec.querySelector('.b-alem-fio'), alem = sec.querySelector('.b-alem');
+  CENAS.matriz = (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    cabs.forEach((el, n) => revelar(el, molaAR(x - 0.1 - n * 0.05)));
+    cels.forEach((el) => surgir(el, molaAR(x - 0.5 - Number(el.dataset.ordem) * 0.24), {dy: 0, escala: 0.06}));
+    surgir(aro, molaAR(y - 0.05), {dy: 0, escala: 0.06});
+    vis(aro, y > 0);
+    luz.style.opacity = String(saida(faixa(y, 0.05, 0.45)));
+    revelar(nota, molaAR(y - 0.25));
+    fio.style.transform = `scaleX(${saida(faixa(y, 0.35, 0.8)).toFixed(4)})`;
+    fio.style.transformOrigin = '0 50%';
+    revelar(alem, molaAR(y - 0.5));
+  };
+}
+
+// Projeto: a janela do app sobe, a coluna das conversas e o painel do Projeto entram linha a linha; no segundo
+// clique, a seta dourada aponta o lápis das instruções e entram a anotação e a linha do ChatGPT.
+{
+  const sec = m.secao('projeto'), app = sec.querySelector('.b-app'), esq = $$(sec, '.b-app-esq > *'), pcs = $$(sec, '.b-pc');
+  const setas = $$(sec, '.b-seta-p path'), anota = sec.querySelector('.b-anota'), gpt = sec.querySelector('.b-chatgpt');
+  CENAS.projeto = (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    surgir(app, molaAR(x - 0.05), {dy: 30});
+    esq.forEach((el, n) => surgir(el, molaAR(x - 0.3 - n * 0.08), {dy: 14}));
+    pcs.forEach((el, n) => surgir(el, molaAR(x - 0.45 - n * 0.12), {dx: 24, dy: 0}));
+    tracar(setas[0], saida(faixa(y, 0.05, 0.45)));
+    tracar(setas[1], saida(faixa(y, 0.4, 0.6)));
+    revelar(anota, molaAR(y - 0.25));
+    revelar(gpt, molaAR(y - 0.7));
+  };
+}
+
+// Pasta: cinco motivos, um por clique (a cena em partes da base).
+CENAS.pasta = partes('pasta');
+
+// Teste: as 348 páginas contam e os quatro pedidos do chat crescem (primeiro clique); no segundo, a data se digita na
+// busca, o tempo aparece e a parte lida do processo encolhe de 100% até 0,2%.
+{
+  const sec = m.secao('teste'), n348 = sec.querySelector('.b-348'), leg = sec.querySelector('.b-348-leg'), n129 = sec.querySelector('.b-129');
+  const pedLeg = sec.querySelector('.b-ped-leg'), peds = $$(sec, '.b-ped i');
+  const busca = sec.querySelector('.b-busca'), txt = sec.querySelector('.b-busca-txt'), res = sec.querySelector('.b-busca-res');
+  const procLeg = sec.querySelector('.b-proc-leg'), pct = sec.querySelector('.b-pct'), proc = sec.querySelector('.b-proc');
+  const lido = sec.querySelector('.b-lido'), procSub = sec.querySelector('.b-proc-sub');
+  const MINIMO = 0.012;   // a fatia de 0,2% (1,8 px) desenhada com 11 px, para a sala ver que existe
+  CENAS.teste = (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    const kc = saida(faixa(x, 0.1, 1.3));
+    surgir(n348, molaAR(x - 0.05), {dy: 0});
+    contar(n348, kc, 0, 348);
+    revelar(leg, molaAR(x - 0.3));
+    contar(n129, kc, 0, 129, {sufixo: ' mil'});
+    revelar(pedLeg, molaAR(x - 0.7));
+    peds.forEach((el, n) => { el.style.transform = `scaleY(${clamp(molaAR(x - 0.9 - n * 0.15), 0, 1.03).toFixed(4)})`; });
+    // segundo clique
+    surgir(busca, molaAR(y - 0.05), {dy: 16});
+    digitar(txt, faixa(y, 0.25, 0.85));
+    revelar(res, molaAR(y - 0.95));
+    revelar(procLeg, molaAR(y - 1.05));
+    surgir(proc, molaAR(y - 1.05), {dy: 0});
+    const encolhe = entradaSaida(faixa(y, 1.35, 2.05));
+    lido.style.width = `${(100 * lerp(1, MINIMO, encolhe)).toFixed(3)}%`;
+    lido.style.opacity = String(clamp((y - 1.1) * 4));
+    contar(pct, encolhe, 100, 0.2, {casas: encolhe < 1 ? 0 : 1, sufixo: '%'});
+    revelar(procSub, molaAR(y - 1.9));
+    fim(sec, x, 1.4);
+  };
+}
+
+// Lei: as duas colunas entram, primeiro a do que se guarda; no segundo clique, a regra para o agente.
+{
+  const sec = m.secao('lei'), lados = $$(sec, '.b-lado'), fio = sec.querySelector('.b-lado-fio'), regra = sec.querySelector('.b-regra');
+  CENAS.lei = (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    lados.forEach((lado, n) => {
+      const d = x - 0.15 - n * 0.45;
+      revelar(lado.querySelector('.b-lado-tit'), molaAR(d - 0.05));
+      $$(lado, 'li').forEach((li, j) => revelar(li, molaAR(d - 0.25 - j * 0.1)));
+    });
+    fio.style.transform = `scaleY(${saida(faixa(x, 0.3, 0.8)).toFixed(4)})`;
+    fio.style.transformOrigin = '50% 0';
+    surgir(regra, molaAR(y - 0.05), {dy: 20});
+    vis(regra, y > 0);
+  };
+}
+
+// PDF ou Markdown: a página entra e o rodapé repetido se marca (primeiro clique); no segundo, o fio sai da cláusula
+// terceira do PDF até o Markdown limpo, e as três vantagens entram em fila.
+{
+  const sec = m.secao('mdpdf'), etPdf = sec.querySelector('.b-et-pdf'), pdf = sec.querySelector('.b-pdf');
+  const ruido = sec.querySelector('.b-ruido'), clausula = sec.querySelector('.b-clausula'), rLeg = sec.querySelector('.b-ruido-leg');
+  const etMd = sec.querySelector('.b-et-md'), md = sec.querySelector('.b-md'), mdH = sec.querySelector('.b-md-h'), mdP = sec.querySelector('.b-md-p');
+  const ganhos = $$(sec, '.b-ganhos li'), fio = sec.querySelector('.b-md-fio path');
+  CENAS.mdpdf = (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    revelar(etPdf, molaAR(x - 0.1));
+    surgir(pdf, molaAR(x - 0.15), {dy: 24});
+    surgir(ruido, molaAR(x - 0.75), {dy: 0, escala: 0.15});
+    revelar(rLeg, molaAR(x - 0.95));
+    // segundo clique
+    surgir(clausula, molaAR(y - 0.05), {dy: 0, escala: 0.1});
+    vis(clausula, y > 0);
+    tracar(fio, saida(faixa(y, 0.15, 0.65)));
+    revelar(etMd, molaAR(y - 0.3));
+    surgir(md, molaAR(y - 0.4), {dx: 30, dy: 0});
+    vis(md, y > 0);
+    revelar(mdH, molaAR(y - 0.55));
+    revelar(mdP, molaAR(y - 0.7));
+    ganhos.forEach((li, n) => { surgir(li, molaAR(y - 1.0 - n * 0.15), {dy: 16}); vis(li, y > 0); });
+  };
+}
+
+// Converter: o "não" chega grande; as três regras entram de cima para baixo e o rodapé por último.
+{
+  const sec = m.secao('converter'), nao = sec.querySelector('.b-nao'), cs = $$(sec, '.cartao'), rod = sec.querySelector(':scope > .rodape');
+  CENAS.converter = (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    surgir(nao, molaAR(x - 0.2, {resposta: 0.6}), {dy: 0, escala: 0.2});
+    cs.forEach((el, n) => surgir(el, molaAR(x - 0.55 - n * 0.18), {dx: 30, dy: 0}));
+    revelar(rod, molaAR(x - 1.3));
+  };
+}
+
+CENAS.codigo = cartoes('codigo');
+
+// Ferramentas: o par da entrega (primeiro clique), o par da pasta (segundo) e a faixa do Cowork (terceiro).
+{
+  const sec = m.secao('ferramentas'), cabs = $$(sec, '.b-par-cab'), emps = $$(sec, '.b-emp'), cels = $$(sec, '.b-ferr');
+  const cowork = sec.querySelector('.b-cowork');
+  CENAS.ferramentas = (t, c) => {
+    const x = conteudo(c), y = c.desde(1), z = c.desde(2);
+    titulo(sec, x, c);
+    emps.forEach((el, n) => revelar(el, molaAR(x - 0.15 - n * 0.1)));
+    cabs.forEach((el, n) => revelar(el, molaAR((n === 0 ? x - 0.25 : y - 0.05))));
+    let fila = [0, 0];
+    cels.forEach((el) => {
+      const col = Number(el.dataset.col), d = (col === 0 ? x - 0.45 : y - 0.2) - fila[col]++ * 0.2;
+      surgir(el, molaAR(d), {dy: 24});
+      vis(el, d > 0);
+    });
+    surgir(cowork, molaAR(z - 0.05), {dy: 24});
+    vis(cowork, z > 0);
+  };
+}
+
+// Diferença: uma linha da grade por clique (cabeçalho e "para que serve" no primeiro), cada linha em onda.
+{
+  const sec = m.secao('diferenca'), gs = $$(sec, '.b-g');
+  CENAS.diferenca = (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    const ini = [x - 0.1, x - 0.5, c.desde(1) - 0.05, c.desde(2) - 0.05];
+    gs.forEach((el) => {
+      const l = Number(el.dataset.l), d = ini[l] - Number(el.dataset.c) * 0.1;
+      revelar(el, molaAR(d));
+    });
+  };
+}
+
+// Escolher: uma pergunta por clique; a seta se traça e a rota entra ao lado.
+{
+  const sec = m.secao('escolher'), linhas = $$(sec, '.b-esc'), setas = $$(sec, '.b-esc-setas path');
+  CENAS.escolher = (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    linhas.forEach((ln, n) => {
+      const d = n === 0 ? x - 0.3 : c.desde(n) - 0.05;
+      revelar(ln.querySelector('.b-esc-q'), molaAR(d));
+      tracar(setas[n], saida(faixa(d, 0.25, 0.6)));
+      surgir(ln.querySelector('.b-esc-r'), molaAR(d - 0.5), {dx: -24, dy: 0});
+    });
+  };
+}
+
+// ===== Bloco C: skills =====
+// Ícones desenhados por código (caixas do diagrama "liga"): arquivo, tomada e pacote, em viewBox 64 x 76.
+const C_ICONES = {
+  arquivo: ['M8 4H40L56 20V72H8Z', 'M40 4V20H56', 'M18 40H46M18 52H46M18 64H36'],
+  tomada: ['M14 30H50V50Q50 64 36 64H28Q14 64 14 50Z', 'M24 30V10M40 30V10', 'M32 64V76'],
+  pacote: ['M6 22L32 8L58 22V58L32 72L6 58Z', 'M6 22L32 36L58 22M32 36V72'],
+};
+for (const el of document.querySelectorAll('.c-ic[data-ic]')) {
+  const s = document.createElementNS(NS, 'svg');
+  s.setAttribute('viewBox', '0 0 64 76');
+  for (const d of C_ICONES[el.dataset.ic]) traco(s, d);
+  el.appendChild(s);
+}
+
+// skill: o painel abre com o cabeçalho (nome e descrição, anotados); no clique 2 o editor rola até as instruções, o
+// cabeçalho sai pelo alto da vista e a regra "não encontrei nos documentos" ganha o sublinhado dourado.
+CENAS.skill = (() => {
+  const sec = m.secao('skill'), arq = sec.querySelector('.c-arq'), txt = sec.querySelector('.c-arq-txt'), aba = sec.querySelector('.c-arq-cab');
+  const cab = $$(sec, '.c-cab'), ins = $$(sec, '.c-ins'), regra = sec.querySelector('.c-regra'), rod = sec.querySelector('.c-rod');
+  const nNome = sec.querySelector('.c-n-nome'), nDesc = sec.querySelector('.c-n-desc'), nIns = sec.querySelector('.c-n-ins');
+  const lNome = sec.querySelector('.c-l-nome'), lDesc = sec.querySelector('.c-l-desc'), lIns = sec.querySelector('.c-l-ins');
+  const sub = document.createElement('div');
+  sub.className = 'c-sub';
+  txt.appendChild(sub);
+  let rolar = null;
+  const montar = () => {
+    if (rolar !== null) return;
+    rolar = ins[0].offsetTop - cab[0].offsetTop;   // a primeira instrução sobe até o lugar da primeira linha
+    const y0 = arq.offsetTop + 4 + 68 + txt.offsetTop, xa = arq.offsetLeft + arq.offsetWidth;
+    // cada anotação fica na altura do centro do que ela aponta; o traço vai da borda do painel até ela
+    const pos = (nota, liga, centro) => {
+      const yc = Math.round(y0 + centro);
+      nota.style.top = `${yc - 26}px`;
+      liga.setAttribute('d', `M${xa + 14} ${yc}H${nota.offsetLeft - 20}`);
+    };
+    const meio = (el) => el.offsetTop + 24;   // centro da primeira linha da linha lógica
+    pos(nNome, lNome, meio(cab[1]));
+    pos(nDesc, lDesc, cab[2].offsetTop + cab[2].offsetHeight / 2);
+    // o sublinhado da regra mora numa caixa irmã das linhas, para a camada dele não entrar na medida do texto
+    const ln = regra.parentElement;
+    Object.assign(sub.style, {left: `${ln.offsetLeft + regra.offsetLeft}px`, top: `${ln.offsetTop + regra.offsetTop}px`, width: `${regra.offsetWidth}px`, height: `${regra.offsetHeight}px`});
+    const fimIns = ins[ins.length - 1].offsetTop + ins[ins.length - 1].offsetHeight;
+    pos(nIns, lIns, (ins[0].offsetTop + fimIns) / 2 - rolar);
+  };
+  return (t, c) => {
+    montar();
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    surgir(arq, molaAR(x - 0.1), {dy: 30});
+    revelar(aba, molaAR(x - 0.2));
+    const ks = entradaSaida(faixa(y, 0, 0.9));
+    txt.style.transform = ks > 0 ? `translateY(${(-rolar * ks).toFixed(1)}px)` : '';
+    // cabeçalho: entra linha a linha e sai com a rolagem
+    cab.forEach((el, n) => {
+      const k = clamp(molaAR(x - 0.3 - n * 0.12)), o = k * (1 - faixa(ks, 0, 0.55));
+      el.style.opacity = String(o);
+      vis(el, o > 0.001);
+    });
+    // instruções: sobem com a rolagem, uma linha depois da outra
+    ins.forEach((el, n) => {
+      const o = saida(faixa(y, 0.45 + n * 0.09, 0.85 + n * 0.09));
+      el.style.opacity = String(o);
+      vis(el, o > 0.001);
+    });
+    // anotações do cabeçalho e o rodapé saem quando o editor rola
+    const sai = 1 - faixa(y, 0, 0.3);
+    for (const [nota, liga, d] of [[nNome, lNome, 0.85], [nDesc, lDesc, 1.0]]) {
+      revelar(nota, molaAR(x - d));
+      nota.style.opacity = String(sai);
+      tracar(liga, saida(faixa(x, d - 0.15, d + 0.15)) * (sai > 0 ? 1 : 0));
+      liga.style.opacity = String(sai);
+      if (sai <= 0) vis(nota, false);
+    }
+    revelar(rod, molaAR(x - 1.2));
+    rod.style.opacity = String(sai);
+    if (sai <= 0) vis(rod, false);
+    revelar(nIns, molaAR(y - 0.95));
+    tracar(lIns, saida(faixa(y, 0.8, 1.1)));
+    anotar(sub, saida(faixa(y, 1.3, 1.8)), {forma: 'sublinhado', semente: 5, folga: 4});
+    fim(sec, x, 1.4);
+  };
+})();
+
+// onde: os nomes dos apps, depois uma linha da grade por vez (onde mora, como chamar), com os fios entre as linhas.
+CENAS.onde = (() => {
+  const sec = m.secao('onde'), grade = sec.querySelector('.c-grade'), rod = sec.querySelector(':scope > .rodape');
+  const tits = $$(sec, '.c-col-tit');
+  const linhas = [[...$$(sec, '[style*="grid-area: la"], [style*="grid-area: a1"], [style*="grid-area: b1"]')],
+    [...$$(sec, '[style*="grid-area: lb"], [style*="grid-area: a2"], [style*="grid-area: b2"]')]];
+  const camada = document.createElementNS(NS, 'svg');
+  camada.setAttribute('class', 'c-traco');
+  camada.setAttribute('viewBox', '0 0 1920 1080');
+  sec.prepend(camada);
+  let fios = null;
+  const montar = () => {
+    if (fios) return;
+    const y1 = grade.offsetTop + 96, y2 = y1 + 150;
+    fios = [traco(camada, `M120 ${y1}H1800`), traco(camada, `M120 ${y2}H1800`)];
+  };
+  return (t, c) => {
+    montar();
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    tits.forEach((el, n) => revelar(el, molaAR(x - 0.1 - n * 0.12)));
+    tracar(fios[0], saida(faixa(x, 0.25, 0.65)));
+    linhas[0].forEach((el, n) => surgir(el, molaAR(x - 0.45 - n * 0.12), {dx: -18, dy: 0}));
+    tracar(fios[1], saida(faixa(x, 0.75, 1.15)));
+    linhas[1].forEach((el, n) => surgir(el, molaAR(x - 0.9 - n * 0.12), {dx: -18, dy: 0}));
+    revelar(rod, molaAR(x - 1.4));
+    fim(sec, x, 1.5);
+  };
+})();
+
+// liga: clique 1, o agente e a skill; clique 2, o MCP; clique 3, o plugin e o traço dourado que embrulha os dois.
+CENAS.liga = (() => {
+  const sec = m.secao('liga'), q = (s) => sec.querySelector(s), rod = q(':scope > .rodape');
+  const ag = q('.c-agente'), sk = q('.c-skill'), mc = q('.c-mcp'), pl = q('.c-plugin');
+  const dSk = q('.c-d-sk'), dMc = q('.c-d-mc'), dPl = q('.c-d-pl');
+  return (t, c) => {
+    const x = conteudo(c), y = c.desde(1), z = c.desde(2);
+    titulo(sec, x, c);
+    surgir(ag, molaAR(x - 0.1), {dy: 0, escala: 0.06});
+    tracar(dSk, saida(faixa(x, 0.35, 0.65)));
+    surgir(sk, molaAR(x - 0.5), {dx: -30, dy: 0});
+    tracar(dMc, saida(faixa(y, 0.05, 0.35)));
+    surgir(mc, molaAR(y - 0.2), {dx: 30, dy: 0});
+    surgir(pl, molaAR(z - 0.05), {dy: -30});
+    // o pacote se fecha depois que o plugin pousa; o tracejado volta quando o traço termina (o CSS dá o padrão)
+    const kp = saida(faixa(z, 0.35, 1.0));
+    tracar(dPl, kp);
+    if (kp >= 1) { dPl.removeAttribute('pathLength'); dPl.style.strokeDasharray = ''; }
+    revelar(rod, molaAR(z - 0.8));
+    fim(sec, x, 1.2);
+  };
+})();
+
+// ===== Bloco D: na pasta =====
+// O slide "papeis" é o arquétipo viagem (a biblioteca faz o voo dos objetos #ob-*) e "fonte" é o arquétipo fios.
+
+// estrutura: a árvore nasce pela raiz, os ramos se traçam, as anotações entram à direita e o cronologia.md, tracejado
+// em dourado, chega por último: é o único arquivo que o agente vai criar.
+CENAS.estrutura = (() => {
+  const sec = m.secao('estrutura'), camada = sec.querySelector('.d-arv-svg'), arv = sec.querySelector('.d-arv');
+  const rod = sec.querySelector(':scope > .rodape'), exts = $$(sec, '.d-ext');
+  const ICONE = {pasta: ['M3 12H15L19 17H37V38H3Z'], arquivo: ['M8 4H25L34 13V40H8Z', 'M25 4V13H34']};
+  const nos = $$(sec, '.d-no').map((el, n) => {
+    const nivel = Number(el.dataset.nivel || 0), nome = document.createElement('span'), ic = document.createElement('span');
+    nome.className = 'd-nome';
+    nome.append(...el.childNodes);
+    ic.className = 'd-ic';
+    const s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', '0 0 40 44');
+    for (const d of ICONE[el.dataset.tipo]) traco(s, d);
+    ic.appendChild(s);
+    el.append(ic, nome);
+    Object.assign(el.style, {left: `${56 * nivel}px`, top: `${64 * n}px`});
+    return {el, nivel, x: 56 * nivel, y: 64 * n, novo: el.classList.contains('d-novo')};
+  });
+  let ramos = null, guias = null;
+  const montar = () => {
+    if (ramos) return;
+    const X = arv.offsetLeft, Y = arv.offsetTop;
+    ramos = nos.map((no, n) => {
+      if (!no.nivel) return null;
+      let p = n - 1;
+      while (p > 0 && nos[p].nivel !== no.nivel - 1) p--;
+      return traco(camada, `M${X + nos[p].x + 20} ${Y + nos[p].y + 50}V${Y + no.y + 28}H${X + no.x - 8}`);
+    });
+    // cada anotação na altura do nó (ou do meio do grupo); colchete para os três papéis, guia pontilhada para os outros
+    guias = exts.map((ext) => {
+      const alvo = ext.dataset.de === 'd-papel' ? nos.filter((no) => no.el.classList.contains('d-papel')) : nos.filter((no) => no.el.id === ext.dataset.de);
+      const dir = Math.max(...alvo.map((no) => X + no.x + no.el.offsetWidth)) + 28;
+      const y1 = Y + alvo[0].y + 28, y2 = Y + alvo[alvo.length - 1].y + 28, ym = (y1 + y2) / 2, xe = ext.offsetLeft - 22;
+      ext.style.top = `${ym - 25}px`;
+      if (alvo.length > 1) return traco(camada, `M${dir} ${y1}H${dir + 16}V${y2}H${dir}M${dir + 16} ${ym}H${xe}`);
+      const g = traco(camada, `M${dir} ${ym}H${xe}`);
+      g.classList.add('d-guia');
+      return g;
+    });
+  };
+  return (t, c) => {
+    montar();
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    let ordem = 0;
+    nos.forEach((no, n) => {
+      const d = no.novo ? 1.55 : 0.1 + 0.08 * ordem++;
+      surgir(no.el, molaAR(x - d), {dx: -18, dy: 0});
+      if (ramos[n]) tracar(ramos[n], saida(faixa(x, d - 0.05, d + 0.3)));
+    });
+    exts.forEach((ext, n) => {
+      const novo = ext.classList.contains('d-ext-novo'), d = novo ? 1.75 : 0.85 + n * 0.14;
+      // a guia de traço tracejado/pontilhado só ganha o padrão do CSS quando termina de se traçar
+      const k = saida(faixa(x, d - 0.2, d + 0.1));
+      tracar(guias[n], k);
+      if (k >= 1) { guias[n].removeAttribute('pathLength'); guias[n].style.strokeDasharray = ''; }
+      revelar(ext, molaAR(x - d));
+    });
+    revelar(rod, molaAR(x - 1.95));
+    fim(sec, x, 2.0);
+  };
+})();
+
+// memoria: o painel abre, as linhas entram uma por uma e a linha de prazo e multa ganha o sublinhado dourado.
+CENAS.memoria = (() => {
+  const sec = m.secao('memoria'), arq = sec.querySelector('.d-arq'), aba = sec.querySelector('.d-arq-cab'), txt = sec.querySelector('.d-arq-txt');
+  const lns = $$(sec, '.d-ln'), regra = sec.querySelector('.d-mm-regra'), rod = sec.querySelector(':scope > .rodape');
+  // o sublinhado mora numa caixa irmã das linhas, para a camada dele não entrar na medida do texto
+  const sub = document.createElement('div');
+  sub.className = 'd-sub';
+  txt.appendChild(sub);
+  let pronto = false;
+  return (t, c) => {
+    if (!pronto) {
+      pronto = true;
+      const ln = regra.parentElement;
+      Object.assign(sub.style, {left: `${ln.offsetLeft + regra.offsetLeft}px`, top: `${ln.offsetTop + regra.offsetTop}px`, width: `${regra.offsetWidth}px`, height: `${regra.offsetHeight}px`});
+    }
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    surgir(arq, molaAR(x - 0.1), {dy: 30});
+    revelar(aba, molaAR(x - 0.2));
+    lns.forEach((el, n) => revelar(el, molaAR(x - 0.35 - n * 0.13)));
+    anotar(sub, saida(faixa(x, 1.3, 1.75)), {forma: 'sublinhado', semente: 8, folga: 4});
+    revelar(rod, molaAR(x - 1.5));
+    fim(sec, x, 1.6);
+  };
+})();
+
+// pedido: clique 1, o pedido se digita na caixa; clique 2, os cinco passos entram em onda.
+CENAS.pedido = (() => {
+  const sec = m.secao('pedido'), q = (s) => sec.querySelector(s);
+  const ent = q('.d-entrada'), ped = q('.d-pedido'), etP = q('.d-et-ped'), passos = $$(sec, '.d-passos li');
+  return (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    revelar(etP, molaAR(x - 0.05));
+    surgir(ent, molaAR(x - 0.1), {dy: 24});
+    digitar(ped, faixa(x, 0.35, 2.65), {cursor: x > 0.25 && x < 2.8, semente: 7});
+    passos.forEach((li, n) => surgir(li, molaAR(y - 0.1 - n * 0.12), {dx: -18, dy: 0}));
+  };
+})();
+
+// demo: simulação por código de uma sessão de agente na pasta, em quatro cliques. 1: o pedido se digita na caixa.
+// 2: vai para a conversa e o agente lê os três papéis. 3: a conversa rola, o plano aparece e o "Permitir" é apertado.
+// 4: rola de novo, o arquivo se escreve e a resposta diz o que não encontrou; o cronologia.md acende em dourado.
+CENAS.demo = (() => {
+  const sec = m.secao('demo'), q = (s) => sec.querySelector(s);
+  const jan = q('.d-jan'), fio = q('.d-fio'), rolo = q('.d-rolo'), comp = q('.d-comp'), compTxt = q('.d-comp-txt'), enviar = q('.d-enviar');
+  const eu = q('.d-eu'), lendo = q('.d-lendo'), plano = q('.d-plano'), perm = q('.d-perm'), escr = q('.d-escr'), resp = q('.d-resp');
+  const chips = $$(lendo, '.d-arqchip'), rodaL = lendo.querySelector('.d-roda'), rodaE = escr.querySelector('.d-roda');
+  const plTit = plano.querySelector('.d-plano-tit'), itens = $$(plano, 'li'), btSim = q('.d-bt-sim'), barra = q('.d-barra i');
+  const r1 = q('.d-resp-1'), r2 = q('.d-resp-2'), novo = q('.d-novo-chip');
+  const blocos = [eu, lendo, plano, perm, escr, resp];
+  let M = null;
+  const montar = () => {
+    if (M) return;
+    M = {cheio: comp.offsetHeight, curto: 84, H: jan.clientHeight, topo: 62,
+      S2: plano.offsetTop - 22, S3: escr.offsetTop - 22, caixas: blocos.map((b) => [b.offsetTop, b.offsetHeight])};
+  };
+  // gira enquanto trabalha (função do tempo) e fica cheia quando termina
+  const roda = (el, t, pronta) => {
+    el.classList.toggle('pronta', pronta);
+    el.style.transform = pronta ? '' : `rotate(${((t * 400) % 360).toFixed(1)}deg)`;
+  };
+  return (t, c) => {
+    montar();
+    const x = conteudo(c), y = c.desde(1), z = c.desde(2), w = c.desde(3);
+    titulo(sec, x, c);
+    surgir(jan, molaAR(x + 0.45), {dy: 40});   // a janela chega antes da câmera, a viagem não cruza o vazio
+    // 1. digitar; 2. enviar: a caixa encolhe e o texto vira a mensagem da conversa
+    digitar(compTxt, faixa(x, 0.5, 2.5), {cursor: x > 0.4 && x < 2.6, semente: 11});
+    const ke = entradaSaida(faixa(y, 0, 0.45)), oc = 1 - faixa(y, 0, 0.15);
+    compTxt.style.opacity = String(oc);
+    vis(compTxt, oc > 0.001);
+    enviar.classList.toggle('cheio', x > 2.5 && y < 0.1);
+    const hComp = lerp(M.cheio, M.curto, ke);
+    comp.style.height = `${hComp.toFixed(1)}px`;
+    fio.style.height = `${(M.H - M.topo - 24 - hComp - 14).toFixed(1)}px`;
+    // a conversa rola até o plano (clique 3) e até a escrita (clique 4)
+    const S = lerp(0, M.S2, entradaSaida(faixa(z, 0, 0.6))) + (M.S3 - M.S2) * entradaSaida(faixa(w, 0, 0.6));
+    rolo.style.transform = S > 0 ? `translateY(${(-S).toFixed(1)}px)` : '';
+    surgir(eu, molaAR(y - 0.15), {dy: 40});
+    surgir(lendo, molaAR(y - 0.55), {dy: 16});
+    chips.forEach((ch, n) => surgir(ch, molaAR(y - 0.8 - n * 0.32), {dx: -12, dy: 0}));
+    roda(rodaL, t, y > 1.85);
+    surgir(plano, molaAR(z - 0.3), {dy: 20});
+    revelar(plTit, molaAR(z - 0.35));
+    itens.forEach((li, n) => surgir(li, molaAR(z - 0.45 - n * 0.15), {dx: -12, dy: 0}));
+    surgir(perm, molaAR(z - 1.15), {dy: 20});
+    btSim.classList.toggle('apertado', z > 1.9);
+    surgir(escr, molaAR(w - 0.3), {dy: 16});
+    barra.style.transform = `scaleX(${saida(faixa(w, 0.5, 1.5)).toFixed(4)})`;
+    roda(rodaE, t, w > 1.5);
+    surgir(resp, molaAR(w - 1.2), {dy: 16});
+    digitar(r1, faixa(w, 1.3, 2.0), {semente: 13});
+    digitar(r2, faixa(w, 2.0, 2.55), {semente: 17});
+    surgir(novo, molaAR(w - 2.55), {dy: 0, escala: 0.1});
+    // o que rolou para cima da vista sai da tela (e da contagem); quadro em função de S, nunca de estado
+    blocos.forEach((b, n) => {
+      const [top, h] = M.caixas[n], f = clamp((top + h - S) / h), o = Number(b.style.opacity || 1) * f;
+      b.style.opacity = String(o);
+      vis(b, o > 0.001);
+    });
+    fim(sec, x, 1.0);
+  };
+})();
+
+// trecho: a linha da cronologia entra, a página do contrato chega e o fio dourado liga a fonte à cláusula marcada.
+CENAS.trecho = (() => {
+  const sec = m.secao('trecho'), q = (s) => sec.querySelector(s);
+  const lin = q('.d-lin'), partes = [...lin.children], fonte = q('.d-lin-fonte'), pag = q('.d-pag'), img = q('.d-pag-img'), leg = q('.d-pag-leg');
+  const fioT = q('.d-tr-fio'), ca = q('.d-tr-a'), cb = q('.d-tr-b');
+  // a cláusula terceira, no tamanho natural da imagem (900 x 1274): começa em x 96 e ocupa as linhas de y 650 a 700
+  const CLAUSULA = {x: 96, y: 675};
+  let pronto = false;
+  const montar = () => {
+    if (pronto) return;
+    pronto = true;
+    const ax = lin.offsetLeft + fonte.offsetLeft + fonte.offsetWidth + 24, ay = lin.offsetTop + fonte.offsetTop + fonte.offsetHeight / 2;
+    const bx = pag.offsetLeft + pag.clientLeft + img.offsetLeft + CLAUSULA.x - 20, by = pag.offsetTop + pag.clientTop + img.offsetTop + CLAUSULA.y;
+    const dy = Math.abs(by - ay), xm = (ax + bx) / 2;
+    fioT.setAttribute('d', `M${ax} ${ay}H${xm - dy / 2}L${xm + dy / 2} ${by}H${bx}`);
+    for (const [el, px, py] of [[ca, ax, ay], [cb, bx, by]]) { el.setAttribute('cx', px); el.setAttribute('cy', py); }
+  };
+  return (t, c) => {
+    montar();
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    partes.forEach((el, n) => revelar(el, molaAR(x - 0.1 - n * 0.12)));
+    surgir(pag, molaAR(x - 0.25), {dy: 30});
+    kenburns(img, saida(faixa(x, 0, 1.5)), {escala: 1.04, origem: '10% 53%'});
+    revelar(leg, molaAR(x - 0.6));
+    const k = saida(faixa(x, 0.95, 1.45));
+    tracar(fioT, k);
+    vis(ca, k > 0);
+    vis(cb, k >= 1);
+    fim(sec, x, 1.5);
+  };
+})();
+
+
+// ===== Bloco E: mão na massa =====
+// pratica2: os títulos das colunas entram em onda, cada passo logo depois do seu título, e por fim o pedido para copiar.
+CENAS.pratica2 = (() => {
+  const sec = m.secao('pratica2'), eCols = $$(sec, '.e-col'), ePedido = sec.querySelector('.e-pedido');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    eCols.forEach((col, n) => {
+      const t0 = 0.15 + n * 0.22;
+      surgir(col.querySelector('.e-col-tit'), molaAR(x - t0), {dy: 20});
+      $$(col, 'li').forEach((li, k) => surgir(li, molaAR(x - t0 - 0.12 - k * 0.1), {dx: -18, dy: 0}));
+    });
+    surgir(ePedido, molaAR(x - 1.0), {dy: 26});
+    fim(sec, x, 1.4);
+  };
+})();
+CENAS.travou = cartoes('travou');
+
+// ===== Bloco F: fecho =====
+// registro (tempo) e fecho (fecho) são arquétipos da biblioteca: sem cena própria. O logo do fecho entra pelo data-entra.
+
+// Links das práticas: o clique abre a página em nova aba e não avança o slide.
+for (const a of document.querySelectorAll('#mundo a[href]')) a.addEventListener('click', (e) => e.stopPropagation());
+
+palco({slides: m.slides, desenhar: m.desenhar, blocos, autoplay: true, cenas: m.cenas(CENAS)});
 </script>
 </body>
 </html>
