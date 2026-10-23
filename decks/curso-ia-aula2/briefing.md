@@ -315,3 +315,11 @@ Origem dos exemplos: `engenharia-de-prompt-apresentacao.html` do professor (text
 - Gravação do Codex e link do WhatsApp: só o professor faz.
 - Vídeo de reserva: o slide `demo` é simulação por código; a gravação real da aula o substitui.
 - Gasto de imagem: US$ 0 nesta versão (documentos e cenas por código); o `heroi-aula2.webp` é da prévia.
+
+## Revisão 3 (23/10/2026): o kit no GitHub
+
+O professor pediu o material pronto para baixar. O kit está no repositório público https://github.com/kaoyeoshiro/kit-aula2-curso-ia
+(gerado por `material/kit.py`, pasta `decks/curso-ia-aula2/kit/`): `caso/` (3 PDFs), `escritorio/` (padrão, logo,
+`modelo.docx`), `gabarito/` (`cronologia.md`, `cronologia.docx`, skill `parecer-no-padrao` com `preencher.py`) e `README.md`.
+O aluno ainda escreve o pedido, a cronologia e a sua skill; o gabarito é para comparar ou para quem travar. Onde a
+Revisão 2 fala em zip ou na pasta `reserva`, vale o kit e a pasta `gabarito` (a cronologia já se chama `cronologia.md`).
