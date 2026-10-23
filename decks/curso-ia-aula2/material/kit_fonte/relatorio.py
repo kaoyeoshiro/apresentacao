@@ -102,6 +102,7 @@ def main(caso_json, logo, saida):
     sec.page_width, sec.page_height = Cm(21), Cm(29.7)
     sec.left_margin = sec.right_margin = Cm(2.25); sec.top_margin, sec.bottom_margin = Cm(3.0), Cm(2.2)
     d.styles["Normal"].font.name = "Georgia"; d.styles["Normal"].font.size = Pt(11)
+    d.styles["Normal"].paragraph_format.space_after = Pt(0); d.styles["Normal"].paragraph_format.line_spacing = 1.2
     L = sec.page_width - sec.left_margin - sec.right_margin
     h = sec.header.paragraphs[0]; h.paragraph_format.tab_stops.add_tab_stop(L, WD_TAB_ALIGNMENT.RIGHT)
     h.add_run().add_picture(logo, height=Cm(1.3)); run(h, "\t\tDocumento de trabalho", 9, cor=CINZA); linha_fina(h, cor=COBRE, tam=6, espaco=6)
