@@ -159,3 +159,13 @@ da crítica.
   `motor/palco.js` (arredondar o `scaleX` da barra ou o `faixa` do bloco) e cobrir com teste.
 - `palco.js` avança o slide em qualquer clique, inclusive em link; a Aula 1 contorna nos próprios links. Corrigir no
   motor ignorando cliques em `<a>`.
+
+## Aula 1, versão 8 (23/10/2026)
+
+- "O treino ajusta os pesos" virou cena própria de quatro cliques: o texto real "O céu é azul" inteiro, a última palavra
+  escondida, o palpite errado ("verde"), a revelação e os botões girando até acertar. Novo slide "Depois, o reforço: notas,
+  não gabarito" (quatro cliques): uma pergunta, duas respostas, as notas 9 e 2 (inventadas, só para explicar) e os botões
+  girando a favor da de nota alta. 62 slides, 78 paradas; sondar sem erro e determinismo ok com os blocos 16/29/14/18/13.
+- Pedido novo, ainda não feito: mostrar que cada token vira um embedding (um embedding real, só para dar a noção da
+  complexidade) e como o embedding separa "banco" de sentar de "banco" financeiro, de forma muito simples. Falta decidir a
+  fonte do vetor real (precisa ser medido, não inventado).
