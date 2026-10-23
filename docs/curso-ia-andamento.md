@@ -168,9 +168,9 @@ da crítica.
   girando a favor da de nota alta. 62 slides, 78 paradas; sondar sem erro e determinismo ok com os blocos 16/29/14/18/13.
 - Feito depois, a pedido do professor: slide "Cada token vira uma lista de números" (dois cliques; vetor e mapa
   ilustrativos, marcados no rodapé, porque ele aceitou valor inventado; mostra "banco" de sentar e "banco" do dinheiro
-  em lugares diferentes) e slide "Parecer e lei: prefira Markdown", depois do sigilo da memória. Fonte do segundo: documentação
+  em lugares diferentes) Markdown contra PDF: o professor decidiu tratar na Aula 2 (projetos e contexto); o slide saiu da Aula 1. Material para a Aula 2: documentação
   de PDF da Anthropic (platform.claude.com, lida em 23/10/2026: página vira imagem e texto; 1.500 a 3.000 tokens de
   texto por página; 3 páginas, cerca de 1.000 tokens só com texto e 7.000 com imagens) e central de ajuda do Claude
   (projetos passam a buscar só os trechos quando o conhecimento chega perto do limite). A ideia do post, "o PDF entra
   inteiro", é verdadeira em parte: vale para o anexo direto; apps com busca já recuperam trechos. ChatGPT: página de
-  ajuda deu 403, comportamento com PDF [CONFERIR]. Total: 64 slides.
+  ajuda deu 403, comportamento com PDF [CONFERIR]. Aula 1 fica com 63 slides.

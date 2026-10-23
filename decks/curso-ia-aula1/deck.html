@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Curso de IA da co.juris, dia 1, Aula 1: "O que é IA e qual usar" (versão 7, cerca de 90 minutos). Plano contínuo de
-     64 slides, montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md), com abertura automática, linha do
+     63 slides, montado com a biblioteca motor/cenas.js (contrato em docs/cenas.md), com abertura automática, linha do
      dia em cinco blocos e guia do apresentador em todos os slides (docs/palco.md, Blocos da aula). Capa e encerramento
      claros, com o logo oficial do tema. Blocos: o que é IA (capa a previsao, com a linha do tempo da IA), como funciona
      (funciona a passos, com os pesos como botões de ajuste e o tamanho dos modelos de ponta, os tokens, a mesa e a memória), onde tropeça (linguagem a pior), qual a melhor
@@ -668,17 +668,6 @@
     </div>
   </section>
 
-  <section data-slide="pdfmd" data-arquetipo="comparacao" class="noite">
-    <p class="rotulo">Como funciona</p>
-    <h2 class="manchete">Parecer e lei: prefira Markdown</h2>
-    <div class="janela"><p class="display letra m">PDF</p><p class="etiqueta">anexado à conversa</p>
-      <p class="janela-txt">Texto e imagem de cada página entram na mesa.</p></div>
-    <div class="fio-v"></div>
-    <div class="janela"><p class="display letra m" style="font-size: 104px; top: 36px">Markdown</p><p class="etiqueta">texto puro, em arquivo</p>
-      <p class="janela-txt">O agente procura a palavra e lê só o trecho.</p></div>
-    <p class="rodape" data-entra="0.7">PDF de 3 páginas: cerca de 1.000 tokens só com texto e 7.000 com imagens (Anthropic).</p>
-  </section>
-
   <section data-slide="passos" data-arquetipo="tempo">
     <p class="rotulo">Como funciona</p>
     <h2 class="manchete">Do corpus à resposta, em cinco passos</h2>
@@ -1189,11 +1178,6 @@ const slides = [
   {id: 'sigilo', titulo: 'Apagar a conversa não apaga a memória',
    notas: {diga: 'Dado de processo digitado numa conversa comum pode virar memória e voltar em outra conversa. Apagar a conversa não apaga a memória que saiu dela, nos dois produtos: é preciso apagar a memória também. E a conversa temporária não é sigilo absoluto, porque a cópia fica guardada até 30 dias.',
      faca: ['fontes: páginas de ajuda da OpenAI e da Anthropic, lidas em 22/10/2026'],
-     transicao: 'Quem guarda parecer e lei como contexto fixo tem mais uma escolha.'}},
-  {id: 'pdfmd', titulo: 'Para guardar parecer e lei, prefira Markdown',
-   notas: {diga: 'Quando vocês deixam um parecer ou uma lei como contexto fixo, vale guardar em Markdown, que é texto puro. A ideia de que o PDF entra inteiro na mesa é verdadeira em parte. Anexado direto à conversa, o PDF vai com o texto de cada página e a imagem de cada página; a Anthropic estima de 1.500 a 3.000 tokens de texto por página, fora o custo das imagens. Num exemplo da documentação, um PDF de 3 páginas custa cerca de 1.000 tokens só com o texto e 7.000 com texto e imagens. Já o Markdown é só texto, e um agente com acesso a arquivos, como o Claude Code, procura a palavra com o grep e lê só o trecho. Mas atenção: quando o material é grande, os próprios apps passam a buscar só os trechos, como o Claude Projects faz, então a diferença aparece mais nos agentes e nos custos de API.',
-     faca: ['fontes: documentação de PDF da Anthropic (platform.claude.com) e central de ajuda do Claude sobre RAG em projetos, lidas em 23/10/2026', 'não confirmei o comportamento do ChatGPT com PDF: [CONFERIR] antes de afirmar', 'Markdown vale para texto; tabela e imagem do PDF se perdem na conversão, conferir',
-       'pedir à sala que levante a mão quem anexa PDF de lei ou parecer em toda conversa'],
      transicao: 'Fecho o bloco juntando as peças.'}},
   {id: 'passos', titulo: 'Do corpus à resposta, em cinco passos',
    notas: {diga: 'O corpus treina; o treino ajusta os pesos; o pedido vira tokens; tudo entra na mesa; e a previsão gera a resposta, um token por vez.',
