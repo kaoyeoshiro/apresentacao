@@ -166,6 +166,11 @@ da crítica.
   escondida, o palpite errado ("verde"), a revelação e os botões girando até acertar. Novo slide "Depois, o reforço: notas,
   não gabarito" (quatro cliques): uma pergunta, duas respostas, as notas 9 e 2 (inventadas, só para explicar) e os botões
   girando a favor da de nota alta. 62 slides, 78 paradas; sondar sem erro e determinismo ok com os blocos 16/29/14/18/13.
-- Pedido novo, ainda não feito: mostrar que cada token vira um embedding (um embedding real, só para dar a noção da
-  complexidade) e como o embedding separa "banco" de sentar de "banco" financeiro, de forma muito simples. Falta decidir a
-  fonte do vetor real (precisa ser medido, não inventado).
+- Feito depois, a pedido do professor: slide "Cada token vira uma lista de números" (dois cliques; vetor e mapa
+  ilustrativos, marcados no rodapé, porque ele aceitou valor inventado; mostra "banco" de sentar e "banco" do dinheiro
+  em lugares diferentes) e slide "Parecer e lei: prefira Markdown", depois do sigilo da memória. Fonte do segundo: documentação
+  de PDF da Anthropic (platform.claude.com, lida em 23/10/2026: página vira imagem e texto; 1.500 a 3.000 tokens de
+  texto por página; 3 páginas, cerca de 1.000 tokens só com texto e 7.000 com imagens) e central de ajuda do Claude
+  (projetos passam a buscar só os trechos quando o conhecimento chega perto do limite). A ideia do post, "o PDF entra
+  inteiro", é verdadeira em parte: vale para o anexo direto; apps com busca já recuperam trechos. ChatGPT: página de
+  ajuda deu 403, comportamento com PDF [CONFERIR]. Total: 64 slides.
