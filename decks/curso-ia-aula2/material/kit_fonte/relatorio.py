@@ -113,7 +113,7 @@ def main(caso_json, logo, saida):
     p = d.add_paragraph(); p.paragraph_format.space_before = Pt(6); p.paragraph_format.space_after = Pt(2)
     run(p, "Relatório de conformidade", 20, True, VERDE)
     p = d.add_paragraph(); p.paragraph_format.space_after = Pt(10)
-    run(p, f"Temas 6 e 1234 do STF · fornecimento de {c['medicamento']}", 11, False, CINZA, italico=True); linha_fina(p, cor=COBRE, tam=8, espaco=8)
+    run(p, f"Temas 6 e 1234 do STF · {c['medicamento']}", 11, False, CINZA, italico=True); linha_fina(p, cor=COBRE, tam=8, espaco=8)
 
     # ficha do caso
     ficha = d.add_table(rows=3, cols=2); larguras(ficha, [5.0, 11.5])
@@ -143,7 +143,7 @@ def main(caso_json, logo, saida):
         run(lin[0].paragraphs[0], f"({r['id']}) {r['nome']}", 9.5)
         run(lin[1].paragraphs[0], "● ", 9.5, False, cor); run(lin[1].paragraphs[0], rot, 9.5, True, cor)
         run(lin[2].paragraphs[0], r["onde"], 9.5); run(lin[3].paragraphs[0], r["obs"], 9.5)
-    larguras(m, [4.6, 3.1, 2.9, 5.9])
+    larguras(m, [3.7, 2.8, 3.4, 6.6])
     p = d.add_paragraph(); p.paragraph_format.space_before = Pt(4)
     for rot, cor in SITUACAO.values():
         run(p, "●", 8, False, cor); run(p, f" {rot}    ", 8, False, CINZA)
