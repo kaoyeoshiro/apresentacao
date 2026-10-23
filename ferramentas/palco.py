@@ -160,6 +160,12 @@ def _fundo(img, b) -> tuple[int, int, int]:
     return tuple(int(v) for v in np.median(px, axis=0))
 
 
+def _conteudo(blocos: list[dict]) -> list[dict]:
+    """Blocos do slide, sem a sinalização do tocador (data-sinalizacao, como a linha do dia): ela passa pela
+    legibilidade (corpo, borda, contraste, sobreposição), mas não conta palavras, hierarquia, escala nem respiro."""
+    return [b for b in blocos if not b.get("sinalizacao")]
+
+
 def _contem(a: dict, b: dict) -> bool:
     return b["caminho"].startswith(a["caminho"] + " > ") or a["caminho"].startswith(b["caminho"] + " > ")
 
@@ -213,7 +219,7 @@ def checar_parada(blocos: list[dict], img=None) -> list[tuple[str, str]]:
             menor = min(a["w"] * ah, b["w"] * bh)
             if iw > 0 and ih > 0 and menor > 0 and iw * ih / menor > 0.1:
                 achados.append(("AVISO", f'"{curto(a)}" e "{curto(b)}" se sobrepõem'))
-    n = sum(b["palavras"] for b in blocos)
+    n = sum(b["palavras"] for b in _conteudo(blocos))
     if n > PALAVRAS_ERRO:
         achados.append(("ERRO", f"{n} palavras visíveis: slide cheio, divida (máximo {PALAVRAS_AVISO})"))
     elif n > PALAVRAS_AVISO:
@@ -257,7 +263,7 @@ def checar_ritmo(slides: list[dict]) -> list[tuple[str, str]]:
 def checar_hierarquia(blocos: list[dict]) -> list[tuple[str, str]]:
     """Parada final sem elemento dominante: o maior texto tem menos de HIERARQUIA vezes a mediana dos outros. As linhas
     do próprio maior texto (até 10% menores) não contam como "outros", e com menos de dois outros não há o que medir."""
-    fontes = sorted(b["fonte"] for b in blocos)
+    fontes = sorted(b["fonte"] for b in _conteudo(blocos))
     if not fontes:
         return []
     maior = fontes[-1]
@@ -372,8 +378,8 @@ def sondar(deck: Path, *, determinismo: bool = True) -> int:
             antes = d.medir_em(p["t"] - 0.04)
             img = Image.open(io.BytesIO(d.foto(p["n"])))
             agora, midias = d.medir(), d.midias()
-            palavras = sum(b["palavras"] for b in agora)
-            maior_texto = max([b["fonte"] for b in agora] + [0])
+            palavras = sum(b["palavras"] for b in _conteudo(agora))
+            maior_texto = max([b["fonte"] for b in _conteudo(agora)] + [0])
             respiros[p["id"]] = respiros.get(p["id"]) or palavras <= RESPIRO_PALAVRAS or maior_texto >= RESPIRO_DISPLAY
             onde = f'parada {p["n"]:>2} ({p["id"]}, passo {p["passo"] + 1})'
             achados = checar_parada(agora, img) + checar_assentado(antes, agora)
@@ -384,7 +390,7 @@ def sondar(deck: Path, *, determinismo: bool = True) -> int:
             if p["n"] in fins:
                 achados += checar_hierarquia(agora)
                 lum = ImageStat.Stat(img.convert("L")).mean[0] / 255
-                ultimas.append({"id": p["id"], "palavras": palavras, "lum": lum, "maior": maior_elemento(agora, midias)})
+                ultimas.append({"id": p["id"], "palavras": palavras, "lum": lum, "maior": maior_elemento(_conteudo(agora), midias)})
             relatar(onde, achados)
         tempos = [tr["T0"] + 0.01 for tr in d.info["linha"] if tr["parada"] is not None]
     finally:

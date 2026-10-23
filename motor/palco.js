@@ -66,6 +66,50 @@ export const noVideo = (linha, T) => {
 	return {t: tr.t0 + (T - tr.T0), ocioso: 0};
 };
 
+// ---------- blocos da aula (linha do dia e guia do apresentador) ----------
+
+// Blocos [{id, rotulo, minutos}] e o `bloco` de cada slide: o slide sem `bloco` herda o do anterior. Devolve o índice
+// do bloco de cada slide (-1 antes do primeiro), e de cada bloco o trecho do deck (t0, t1; null se nenhum slide do deck
+// é dele, como o bloco da aula seguinte) e as paradas que encerram passos dele.
+export function planejarDia(plano, blocos = []) {
+	const erros = [], ids = blocos.map((b) => b.id);
+	blocos.forEach((b, j) => {
+		if (!b.id || !b.rotulo) erros.push(`bloco ${j + 1} sem id ou rótulo`);
+		if (b.minutos !== undefined && !(b.minutos > 0)) erros.push(`bloco "${b.id}": minutos ${b.minutos} inválidos`);
+	});
+	let atual = -1;
+	const porSlide = plano.slides.map((s) => {
+		if (s.bloco !== undefined) {
+			atual = ids.indexOf(s.bloco);
+			if (atual < 0) erros.push(`slide "${s.id}": bloco "${s.bloco}" não existe`);
+		}
+		return atual;
+	});
+	const B = blocos.map((b, j) => {
+		const ss = plano.slides.filter((s) => porSlide[s.i] === j);
+		return {id: b.id, rotulo: b.rotulo, minutos: b.minutos ?? null, t0: ss.length ? ss[0].t0 : null, t1: ss.length ? ss[ss.length - 1].t1 : null,
+			paradas: plano.paradas.filter((p) => p.passo >= 0 && porSlide[p.slide] === j).map((p) => p.n)};
+	});
+	return {blocos: B, porSlide, erros};
+}
+
+// Quanto do bloco já passou na parada `atual`: chegar à primeira parada dele é o começo (0), e a última, o começo do
+// último trecho.
+export const fracaoDoBloco = (bloco, atual) => (bloco.paradas.length ? Math.max(0, bloco.paradas.filter((n) => n <= atual).length - 1) / bloco.paradas.length : 0);
+
+// Segundos no bloco contra o previsto para a fração dele que já passou: saldo positivo é atraso. Meio minuto de folga.
+export function ritmoDoBloco(decorrido, minutos, fracao) {
+	if (!minutos) return {saldo: 0, estado: ''};
+	const saldo = decorrido - minutos * 60 * clamp(fracao);
+	return {saldo, estado: saldo > 30 ? 'atrasado' : saldo < -30 ? 'adiantado' : 'no tempo'};
+}
+
+// mm:ss de segundos (negativo leva o sinal).
+export const relogio = (seg) => {
+	const a = Math.floor(Math.abs(seg)), dois = (n) => String(n).padStart(2, '0');
+	return `${seg < 0 ? '-' : ''}${dois(Math.floor(a / 60))}:${dois(a % 60)}`;
+};
+
 // ---------- ajudantes de desenho (puros: o mesmo k dá sempre o mesmo estilo) ----------
 
 // Mola de entrada (0 antes de dt = 0, passa ~3% e assenta). Perto do fim vira 1 exato: escala de 0,999 numa parada
@@ -317,12 +361,31 @@ body.apresentador #palco { display: none; }
 #ap iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; border-radius: 6px; display: block; }
 #ap-topo { grid-column: 1 / 3; display: flex; gap: 36px; align-items: baseline; font-variant-numeric: tabular-nums; }
 #ap-topo b { font-size: 40px; font-weight: 600; } #ap-notas { font-size: 26px; line-height: 1.45; white-space: pre-wrap; overflow: auto; margin-top: 18px; }
+#ap-bloco .atrasado { color: #F08A6C; } #ap-bloco .adiantado { color: #8FD3A8; }
+#ap-pratica { font-size: 40px; font-weight: 600; color: #E8B04B; } #ap-pratica.passou { color: #F08A6C; }
+#ap-guia { font-size: 26px; line-height: 1.45; margin-top: 18px; overflow: auto; } #ap-guia p { margin: 0 0 12px; }
+#ap-guia ul { margin: 0 0 12px; padding-left: 1.2em; } #ap-guia .faca { color: #E8B04B; } #ap-guia .ponte { opacity: .7; }
+#ap-prox-titulo { font-size: 24px; margin-top: 14px; }
+#palco-pratica { right: 16px; bottom: 12px; padding: 2px 12px; border-radius: 8px; background: rgba(8,10,14,.55); font-size: 22px; font-variant-numeric: tabular-nums; opacity: .8; pointer-events: none; display: none; }
+/* linha do dia: faixa fina abaixo da trilha, na largura dela (120 a 1800 px). Faz parte do quadro: só var() do tema */
+#linha-dia { position: absolute; left: 120px; top: 993px; width: 1680px; display: flex; gap: 40px; z-index: 3; pointer-events: none;
+  font: 500 30px/36px var(--fonte-titulo, system-ui); color: var(--cor-tinta-suave); white-space: nowrap; }
+#linha-dia .ld-bloco { position: relative; flex: 1 1 auto; height: 44px; }
+#linha-dia .ld-trilho { position: absolute; left: 0; right: 0; top: 40px; height: 4px; border-radius: 2px; background: var(--cor-linha); overflow: hidden; }
+#linha-dia .ld-trilho b { position: absolute; inset: 0; background: currentColor; transform-origin: 0 50%; }
+#linha-dia .atual { color: var(--cor-tinta); }
+#linha-dia .atual .ld-trilho b { background: var(--cor-destaque); }
+#linha-dia.noite { color: var(--suave-sobre-noite, var(--cor-suave-sobre-tinta)); }
+#linha-dia.noite .ld-trilho { background: var(--linha-sobre-noite, var(--cor-linha-sobre-tinta)); }
+#linha-dia.noite .atual { color: var(--sobre-noite, var(--cor-sobre-tinta)); }
 `;
 
 const $ = (sel) => document.querySelector(sel);
 
-export function palco({titulo = document.title, slides, cenas = {}, desenhar = () => {}, mundo, segura = {}} = {}) {
+export function palco({titulo = document.title, slides, cenas = {}, desenhar = () => {}, mundo, segura = {}, blocos = [], autoplay = false} = {}) {
 	const plano = planejar(slides);
+	const dia = planejarDia(plano, blocos);
+	plano.erros.push(...dia.erros);
 	if (plano.erros.length) throw new Error('palco inválido: ' + plano.erros.join('; '));
 	const {paradas, duracao} = plano;
 	const S = plano.slides;
@@ -367,6 +430,48 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 	const kCamera = (t, s) => (usaCamera && s.i > 0 && s.camera ? viagemK(t, s) : 1);
 
 	const slideEm = (t) => S.find((s) => t <= s.t1 + 1e-9) || S[S.length - 1];
+
+	// Linha do dia: os blocos numa faixa fina abaixo da trilha, fora do mundo (não anda com a câmera). Aparece nos slides
+	// que têm bloco e não têm `linhaDia: false`, entra e sai com o slide, troca para as cores da noite no meio da viagem
+	// e enche o trilho do bloco atual com o tempo do deck. data-sinalizacao: o oráculo mede a legibilidade dela, mas não
+	// a conta como conteúdo do slide (palavras, hierarquia, respiro).
+	let linhaDia = null;
+	if (blocos.length) {
+		const el = document.createElement('div');
+		el.id = 'linha-dia';
+		el.dataset.sinalizacao = 'linha do dia';
+		const itens = dia.blocos.map((b) => {
+			const d = document.createElement('div'), rot = document.createElement('span'), trilho = document.createElement('i');
+			d.className = 'ld-bloco';
+			d.style.flexGrow = String(b.minutos || 1);
+			rot.className = 'ld-rot';
+			rot.textContent = b.rotulo;
+			trilho.className = 'ld-trilho';
+			const cheio = trilho.appendChild(document.createElement('b'));
+			d.append(rot, trilho);
+			el.appendChild(d);
+			return {d, cheio};
+		});
+		palcoEl.appendChild(el);
+		const noite = [];
+		S.forEach((s, i) => { noite[i] = secoes[s.id] ? secoes[s.id].classList.contains('noite') : !!noite[i - 1]; });
+		const mostra = (s) => !!s && dia.porSlide[s.i] >= 0 && s.linhaDia !== false;
+		linhaDia = (t, s) => {
+			const ant = S[s.i - 1], p0 = s.passos[0];
+			const k = ant ? faixa(t, p0.t0, p0.t0 + Math.min(0.4, p0.dur)) : 1;
+			const op = lerp(mostra(ant) ? 1 : 0, mostra(s) ? 1 : 0, k);
+			el.style.opacity = String(op);
+			el.style.visibility = op > 0 ? '' : 'hidden';
+			el.classList.toggle('noite', noite[kCamera(t, s) < 0.5 && ant ? ant.i : s.i]);
+			const atual = dia.porSlide[mostra(s) || !ant ? s.i : ant.i];
+			itens.forEach(({d, cheio}, j) => {
+				const b = dia.blocos[j];
+				const f = j < atual ? 1 : j > atual || b.t0 === null ? 0 : faixa(t, b.t0, b.t1);
+				d.classList.toggle('atual', j === atual);
+				cheio.style.transform = `scaleX(${+f.toFixed(4)})`;
+			});
+		};
+	}
 
 	// Visibilidade e transição padrão (fora do modo mundo): o slide atual aparece; o anterior fica durante a entrada
 	// do atual, para a transição ter os dois. `transicao`: 'corte' (padrão), 'fade', 'empurrar'.
@@ -428,6 +533,7 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 		const vis = mundo ? S : s.i > 0 && t > p0.t0 && t < p0.t1 ? [S[s.i - 1], s] : [s];
 		for (const o of vis) if (cenas[o.id]) await cenas[o.id](t, o === s ? ctx : ctxDe(o, t, 0, false, ctx.camera));
 		await desenhar(t, ctx);
+		if (linhaDia) linhaDia(t, s);
 		if (estado.pendentes.length) await Promise.all(estado.pendentes);
 	};
 
@@ -477,6 +583,8 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 				topoCortado,
 				// isenção declarada do aviso de contraste (temas/*/regras.md): o motivo, ou null
 				contrasteOk: el.closest('[data-contraste-ok]')?.dataset.contrasteOk ?? null,
+				// sinalização do tocador (linha do dia): legibilidade sim, conteúdo do slide não
+				sinalizacao: !!el.closest('[data-sinalizacao]'),
 				id: el.id || '', caminho: caminho(el), ...origem(el),
 			});
 		}
@@ -559,10 +667,13 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 		titulo, largura: W, altura: H, duracao,
 		// viagem e camera dizem ao ./ap paradas --viagens onde fotografar; arquetipo (data-arquetipo da seção) e ritmoOk
 		// (data-ritmo-ok da seção, ou `ritmoOk` no slide que é só uma pose de câmera, sem seção) vão para o oráculo.
-		slides: S.map((s) => ({id: s.id, titulo: s.titulo, notas: s.notas || '', t0: s.t0, t1: s.t1, passos: s.passos.map((p) => p.dur),
+		// notas é texto ou {diga, faca, transicao} (guia), para a tela do apresentador; bloco é o índice em `blocos` (-1 sem bloco)
+		slides: S.map((s) => ({id: s.id, titulo: s.titulo, notas: typeof s.notas === 'string' ? s.notas : '', t0: s.t0, t1: s.t1, passos: s.passos.map((p) => p.dur),
 			viagem: s.viagem ?? null, camera: !!s.camera, arquetipo: secoes[s.id]?.dataset.arquetipo || '',
-			ritmoOk: s.ritmoOk ?? secoes[s.id]?.dataset.ritmoOk ?? null})),
+			ritmoOk: s.ritmoOk ?? secoes[s.id]?.dataset.ritmoOk ?? null,
+			bloco: dia.porSlide[s.i], guia: s.notas && typeof s.notas === 'object' ? s.notas : null, pratica: s.pratica ?? null})),
 		paradas: paradas.map((p) => ({...p, id: S[p.slide].id})),
+		blocos: dia.blocos,
 	};
 
 	const q = new URLSearchParams(location.search);
@@ -594,12 +705,12 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 		return window.__palco;
 	}
 	if (q.has('apresentador')) return apresentador(resumo);
-	return tocador({ver, resumo, palcoEl, previa: q.has('previa') ? Number(q.get('previa')) : null});
+	return tocador({ver, resumo, palcoEl, previa: q.has('previa') ? Number(q.get('previa')) : null, autoplay, fontes});
 }
 
 // ---------- ao vivo ----------
 
-function tocador({ver, resumo, palcoEl, previa}) {
+function tocador({ver, resumo, palcoEl, previa, autoplay, fontes}) {
 	const {paradas, slides} = resumo;
 	const ajustar = () => {
 		const e = Math.min(innerWidth / W, innerHeight / H);
@@ -636,6 +747,10 @@ function tocador({ver, resumo, palcoEl, previa}) {
 <p><kbd>B</kbd>tela preta &nbsp; <kbd>F</kbd>tela cheia &nbsp; <kbd>G</kbd>índice &nbsp; <kbd>P</kbd>tela do apresentador</p>
 <p><kbd>número</kbd> + <kbd>Enter</kbd> vai ao slide &nbsp; <kbd>Home</kbd><kbd>End</kbd> início e fim &nbsp; <kbd>?</kbd> esta ajuda</p>`);
 	const aviso = ui('palco-aviso', 'P apresentador · ? atalhos');
+	// Cronômetro de prática, discreto no canto e fora do #palco (não sai em still, PDF nem vídeo): conta desde a chegada
+	// ao slide com `pratica` (minutos).
+	const praticaEl = ui('palco-pratica');
+	let pratica = null;
 
 	let atual = Math.min(Number((location.hash.match(/parada=(\d+)/) || [])[1] || 0), paradas.length - 1);
 	let tocando = null, chegada = performance.now(), janelaAp = null, digitos = '';
@@ -643,6 +758,8 @@ function tocador({ver, resumo, palcoEl, previa}) {
 
 	const avisarAp = () => janelaAp && !janelaAp.closed && janelaAp.postMessage({palco: {atual, inicio: inicioPalestra}}, ALVO);
 	const chegou = (n) => {
+		const s = slides[paradas[n].slide];
+		if (paradas[n].slide !== paradas[atual].slide || pratica === null) pratica = s.pratica ? {fim: performance.now() + s.pratica * 60000} : null;
 		atual = n; tocando = null; chegada = performance.now();
 		history.replaceState(null, '', `#parada=${n}`);
 		avisarAp();
@@ -730,9 +847,17 @@ function tocador({ver, resumo, palcoEl, previa}) {
 			t = paradas[atual].t;
 			ocioso = (agora - chegada) / 1000;
 		}
+		praticaEl.style.display = pratica ? 'block' : 'none';
+		if (pratica) {
+			const resta = (pratica.fim - agora) / 1000, txt = resta >= 0 ? relogio(Math.ceil(resta)) : '+' + relogio(-resta);
+			if (praticaEl.textContent !== txt) praticaEl.textContent = txt;
+		}
 		try { await ver(t, ocioso); } finally { desenhando = false; }
 	};
 	quadro();
+	// Abertura automática: na parada 0, a entrada do primeiro slide toca sozinha assim que as fontes carregam. Recarregar
+	// no meio da aula (#parada=N) não toca nada.
+	if (autoplay && atual === 0) fontes.then(() => { if (atual === 0 && !tocando) proxima(); });
 }
 
 // Tela do apresentador: parada atual e próxima (o próprio deck em modo prévia), notas, cronômetro e relógio.
@@ -743,30 +868,76 @@ function apresentador(resumo) {
 	const ap = document.createElement('div');
 	ap.id = 'ap';
 	ap.innerHTML = `
-<div id="ap-topo"><b id="ap-crono">00:00</b><span id="ap-relogio"></span><span id="ap-pos"></span><span style="opacity:.5">← → avançam daqui também</span></div>
-<div><div class="rot">Agora</div><iframe id="ap-agora" src="${base}0"></iframe><div id="ap-notas"></div></div>
-<div><div class="rot">Próxima parada</div><iframe id="ap-prox" src="${base}1"></iframe><div class="rot" style="margin-top:18px" id="ap-slide"></div></div>`;
+<div id="ap-topo"><b id="ap-crono">00:00</b><span id="ap-relogio"></span><span id="ap-pos"></span><span id="ap-bloco"></span><b id="ap-pratica"></b><span style="opacity:.5">← → avançam daqui também</span></div>
+<div><div class="rot">Agora · <span id="ap-slide"></span></div><iframe id="ap-agora" src="${base}0"></iframe><div id="ap-notas"></div><div id="ap-guia"></div></div>
+<div><div class="rot">Próxima parada</div><iframe id="ap-prox" src="${base}1"></iframe><div id="ap-prox-titulo"></div></div>`;
 	document.body.appendChild(ap);
 	const agora = $('#ap-agora'), prox = $('#ap-prox');
-	let atual = 0, inicio = null;
+	const {paradas, slides, blocos} = resumo;
+	let atual = 0, inicio = null, bloco = -1, inicioBloco = null, pratica = null, slideVisto = -1;
+	const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; e.textContent = txt; return e; };
+	// Guia do slide: {diga, faca (texto ou lista de ações), transicao}.
+	const guia = (g) => {
+		const out = [];
+		if (g.diga) out.push(el('p', '', g.diga));
+		if (g.faca) {
+			const ul = el('ul', 'faca', '');
+			ul.append(...[].concat(g.faca).map((f) => el('li', '', f)));
+			out.push(ul);
+		}
+		if (g.transicao) out.push(el('p', 'ponte', '→ ' + g.transicao));
+		return out;
+	};
+	const proxima = () => {
+		if (atual >= paradas.length - 1) return 'fim do deck';
+		const p = paradas[atual + 1], s = slides[p.slide], n = s.passos.length;
+		const novo = s.bloco >= 0 && s.bloco !== slides[paradas[atual].slide].bloco ? ` · novo bloco: ${blocos[s.bloco].rotulo}` : '';
+		return `${s.titulo}${n > 1 ? ` (passo ${p.passo + 1} de ${n})` : ''}${novo}`;
+	};
+	const pintarRitmo = () => {
+		const caixa = $('#ap-bloco');
+		if (bloco < 0) { caixa.textContent = ''; return; }
+		const b = blocos[bloco], dec = (performance.now() - inicioBloco) / 1000;
+		const r = ritmoDoBloco(dec, b.minutos, fracaoDoBloco(b, atual));
+		caixa.replaceChildren(`bloco ${bloco + 1} de ${blocos.length} · ${b.rotulo} · ${relogio(dec)}${b.minutos ? ` de ${relogio(b.minutos * 60)}` : ''}`);
+		if (r.estado) caixa.append(' · ', el('span', r.estado.replace(' ', '-'), r.estado + (r.estado === 'no tempo' ? '' : ` ${relogio(Math.abs(r.saldo))}`)));
+	};
+	const pintarPratica = () => {
+		const c = $('#ap-pratica');
+		if (!pratica) { c.textContent = ''; return; }
+		const resta = (pratica.fim - performance.now()) / 1000;
+		const txt = resta >= 0 ? relogio(Math.ceil(resta)) : '+' + relogio(-resta);
+		if (c.textContent !== txt) c.textContent = txt;
+		c.classList.toggle('passou', resta < 0);
+	};
 	const pintar = () => {
-		const p = resumo.paradas[atual], s = resumo.slides[p.slide];
+		const p = paradas[atual], s = slides[p.slide];
 		agora.contentWindow?.postMessage({palcoPrevia: atual}, ALVO);
-		prox.contentWindow?.postMessage({palcoPrevia: Math.min(atual + 1, resumo.paradas.length - 1)}, ALVO);
+		prox.contentWindow?.postMessage({palcoPrevia: Math.min(atual + 1, paradas.length - 1)}, ALVO);
 		$('#ap-notas').textContent = s.notas;
-		$('#ap-pos').textContent = `slide ${p.slide + 1} de ${resumo.slides.length} · parada ${atual} de ${resumo.paradas.length - 1}`;
+		$('#ap-guia').replaceChildren(...(s.guia ? guia(s.guia) : []));
+		$('#ap-pos').textContent = `slide ${p.slide + 1} de ${slides.length} · parada ${atual} de ${paradas.length - 1}`;
 		$('#ap-slide').textContent = s.titulo;
+		$('#ap-prox-titulo').textContent = 'Próxima: ' + proxima();
+		pintarRitmo();
+		pintarPratica();
 	};
 	const dois = (n) => String(Math.floor(n)).padStart(2, '0');
 	setInterval(() => {
 		const d = new Date();
 		$('#ap-relogio').textContent = `${dois(d.getHours())}:${dois(d.getMinutes())}`;
 		if (inicio !== null) { const s = (performance.now() - inicio) / 1000; $('#ap-crono').textContent = `${dois(s / 60)}:${dois(s % 60)}`; }
+		pintarRitmo();
+		pintarPratica();
 	}, 250);
 	addEventListener('message', (m) => {
 		if (!deCasa(m) || m.source !== opener || !m.data || !m.data.palco) return;
 		atual = m.data.palco.atual;
-		if (inicio === null) inicio = performance.now();
+		const agoraMs = performance.now(), s = slides[paradas[atual].slide];
+		if (inicio === null) inicio = agoraMs;
+		// o bloco começa a contar quando a tela o vê pela primeira vez; a prática, quando chega ao slide dela
+		if (s.bloco !== bloco) { bloco = s.bloco; inicioBloco = agoraMs; }
+		if (paradas[atual].slide !== slideVisto) { slideVisto = paradas[atual].slide; pratica = s.pratica ? {fim: agoraMs + s.pratica * 60000} : null; }
 		pintar();
 	});
 	addEventListener('keydown', (e) => {

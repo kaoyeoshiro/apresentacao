@@ -102,6 +102,7 @@ roteiro não usa: apague a section e a linha; ao apagar a demonstração, apague
 - `andamento` só se escreve para mudar o sentido de uma passagem: `corte` quando o assunto muda, `capitulo` no
   respiro que fecha uma parte. O resto sai do padrão da biblioteca.
 - Cada slide tem `notas` para leitura de relance e `titulo` curto; `segura: 3` ou 4 na abertura e no fecho.
+- Aula com blocos: `blocos` e `bloco` dão a linha do dia e o ritmo na tela do apresentador, `notas: {diga, faca, transicao}` o guia, `pratica: N` o cronômetro e `autoplay: true` a abertura sozinha (`docs/palco.md`, Blocos da aula).
 - Texto sempre no HTML (o oráculo mede o HTML), dados em `data-*`, cor só por `var()` do tema. Reescreva também o
   comentário do topo do arquivo e o `<title>`.
 - Monte primeiro a abertura, o slide mais denso e um slide com dado; rode `./ap sondar` e `./ap paradas` neles e

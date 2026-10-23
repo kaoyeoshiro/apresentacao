@@ -133,6 +133,57 @@ Animação é função do tempo: nada de relógio, timer, `Math.random()` sem se
 que o oráculo lê como o navegador calcula. Dados entram no próprio HTML, porque `fetch()` não funciona no pacote
 aberto por arquivo.
 
+## Blocos da aula
+
+Três recursos opcionais, ligados pelo deck e sem efeito nenhum em quem não os usa. O deck de teste é
+`tests/fixtures/palco_guia/`, e o catálogo usa os três.
+
+```js
+palco({
+  autoplay: true,
+  blocos: [
+    {id: 'o-que-e', rotulo: 'O que é IA', minutos: 15},
+    {id: 'como-funciona', rotulo: 'Como funciona', minutos: 20},
+    {id: 'fechados-abertos', rotulo: 'Fechados e abertos', minutos: 10},   // pode ser da aula seguinte
+  ],
+  slides: [
+    {id: 'capa', passos: [1.4], linhaDia: false},
+    {id: 'definicao', bloco: 'o-que-e', passos: [1.2]},
+    {id: 'exemplo', passos: [1.0]},                                       // herda 'o-que-e'
+    {id: 'pratica', bloco: 'como-funciona', passos: [1.0], pratica: 3,
+     notas: {diga: 'Agora é com vocês.', faca: ['abrir o app', 'pedir mão levantada'], transicao: 'Quem terminou mostra.'}},
+  ],
+  ...
+});
+```
+
+A abertura automática (`autoplay: true`) toca a entrada do primeiro slide sozinha ao abrir o deck ao vivo, assim que
+as fontes carregam, e para na parada 1 como se alguém tivesse clicado. Só vale na parada 0: recarregar a página no
+meio da aula (`#parada=N`) não toca nada. Render, vídeo, PDF, stills, prévias e a tela do apresentador não passam pelo
+tocador e continuam idênticos.
+
+A linha do dia é uma faixa fina embaixo da trilha, de 120 a 1800 px e de y 993 a 1037, dentro da margem de 4%. Cada
+bloco de `blocos` é um rótulo de 30 px com um trilho de 4 px por baixo; a largura de cada um cresce na proporção dos
+`minutos`, sem cortar o rótulo. O bloco atual vem na tinta cheia, os outros na tinta suave, e o trilho do atual enche
+de dourado com o tempo do deck (do começo do primeiro slide do bloco ao fim do último); os passados ficam cheios na
+tinta suave e os futuros vazios. O `bloco` de um slide vale para os seguintes até outro `bloco`, e `linhaDia: false`
+a esconde naquele slide (capa, aberturas, respiro). Ela entra e sai em 0,4 s no começo do slide, troca para as cores
+da noite (`.noite` na section) no meio da viagem da câmera e fica fora do `#mundo`, então não anda com a câmera. Tudo
+é função de t, e por isso aparece nos stills do `./ap paradas`, no PDF e no vídeo. Ficam só `var()` do tema
+(`--cor-tinta`, `--cor-tinta-suave`, `--cor-linha`, `--cor-destaque` e as da noite). O oráculo mede a legibilidade
+dela (corpo, borda, contraste, sobreposição), mas não a conta como conteúdo do slide nas palavras, na hierarquia, na
+escala e no respiro, porque ela é marcada com `data-sinalizacao`. Bloco sem slide neste deck aparece sempre: futuro
+se vem depois do atual, cheio se vem antes, para a aula 2 mostrar o dia inteiro.
+
+A tela do apresentador (P) mostra, além do que já mostrava, o bloco atual ("bloco 2 de 5 · Como funciona · 07:12 de
+20:00"), com o ritmo: o tempo no bloco contra os minutos previstos para a fração dele que já passou (parada a parada),
+e "adiantado" ou "atrasado" acima de meio minuto de diferença. O relógio do bloco começa quando a tela vê o bloco pela
+primeira vez. Embaixo da próxima parada vai o título dela, o passo e o aviso de bloco novo. `notas` aceita texto ou o
+guia `{diga, faca, transicao}`: `diga` é a fala, `faca` uma ação ou uma lista delas (abrir o app, pedir mão levantada,
+cronômetro de prática) e `transicao` a ponte para o próximo slide. Com `pratica: 3` (minutos), a tela do apresentador
+conta 3 minutos para trás desde a chegada ao slide, em dourado, e depois do zero conta o excesso (`+00:12`) em
+vermelho; no palco aparece o mesmo número, pequeno no canto, fora do `#palco` (não sai em still, PDF nem vídeo).
+
 ## Ao vivo
 
 | tecla | ação |
@@ -144,7 +195,7 @@ aberto por arquivo.
 | B ou . | tela preta |
 | F | tela cheia |
 | G | índice de slides |
-| P | tela do apresentador (agora, próxima parada, notas, cronômetro, relógio) |
+| P | tela do apresentador (agora, próxima parada, notas ou guia, bloco e ritmo, prática, cronômetro, relógio) |
 | ? | atalhos |
 
 A posição fica no endereço (`#parada=N`), então recarregar a página não perde o lugar. A tela do apresentador

@@ -186,17 +186,25 @@ import {mundo} from '../../motor/cenas.js';
 
 // Uma linha por slide, na ordem da apresentação. Passos, viagem e recuo saem do arquétipo e do vizinho (docs/cenas.md);
 // `andamento: 'corte' | 'curta' | 'media' | 'longa' | 'capitulo' | 'mergulho'` troca a viagem, e `passos: [s]` a duração.
+// `bloco` abre um bloco da linha do dia (os seguintes herdam); `linhaDia: false` a esconde no slide; `pratica: 3` conta
+// 3 minutos na tela do apresentador; `notas` pode ser {diga, faca, transicao} (docs/palco.md, Blocos da aula).
+const blocos = [
+  {id: 'medir', rotulo: 'Escolher e medir', minutos: 10},
+  {id: 'ordenar', rotulo: 'Pôr em ordem', minutos: 8},
+  {id: 'mostrar', rotulo: 'Provar e mostrar', minutos: 12},
+];
 const slides = [
   {id: 'abertura', titulo: 'Doze cenas, um só plano', segura: 3, notas: 'Molde do plano contínuo: cada slide é um arquétipo de motor/cenas.js. A foto é marcador (selo no canto).'},
-  {id: 'escolha', titulo: 'Escolha', notas: 'Leque de candidatas com barras; a vencedora voa para a frase. Duas rodadas. Valores ilustrativos.'},
+  {id: 'escolha', titulo: 'Escolha', bloco: 'medir', notas: 'Leque de candidatas com barras; a vencedora voa para a frase. Duas rodadas. Valores ilustrativos.'},
   {id: 'numero', titulo: 'Número', andamento: 'corte', notas: 'Corte seco: muda o assunto. A caneta corrige a grade e o placar sobe. Nota ilustrativa.'},
   {id: 'comparacao', titulo: 'Comparação', notas: 'Duas versões sem nome; a escolhida é circulada no fim.'},
   {id: 'ramos', titulo: 'Ramos', notas: 'A trilha se divide: em cima o que dá ritmo, embaixo o que prova a ideia.'},
-  {id: 'respiro', titulo: 'Respiro', andamento: 'capitulo', notas: 'Pausa entre capítulos: uma frase, e a fala carrega o resto.'},
+  {id: 'respiro', titulo: 'Respiro', andamento: 'capitulo', bloco: 'ordenar', linhaDia: false, notas: 'Pausa entre capítulos: uma frase, e a fala carrega o resto.'},
   {id: 'tempo', titulo: 'Tempo', notas: 'Etapas numa linha: a linha se traça, cada marco surge quando ela passa e o de agora fica dourado.'},
-  {id: 'objetos', titulo: 'Objetos', notas: 'O pedido se digita ao lado do material. Os papéis seguem para o próximo slide.'},
+  {id: 'objetos', titulo: 'Objetos', pratica: 3, notas: {diga: 'O pedido se digita ao lado do material.', faca: ['abrir o app', 'cronômetro de 3 minutos'],
+   transicao: 'Os papéis seguem para o próximo slide.'}},
   {id: 'viagem', titulo: 'Viagem', notas: 'Os papéis atravessam grandes e entram nos arquivos da pasta do deck; o nome acende depois.'},
-  {id: 'fios', titulo: 'Fios', notas: 'Cada linha aponta para a fonte; o dourado acende quando o fio chega. A linha sem fonte se confere ou sai.'},
+  {id: 'fios', titulo: 'Fios', bloco: 'mostrar', notas: 'Cada linha aponta para a fonte; o dourado acende quando o fio chega. A linha sem fonte se confere ou sai.'},
   {id: 'demonstracao', titulo: 'Demonstração', video: [0.9, 2.4], notas: 'Vídeo de exemplo (marcador). Toca no clique e para sozinho.'},
   {id: 'mergulho', titulo: 'Demonstração: mergulho', video: [0, 1.6], notas: 'A câmera mergulha no vídeo; o holofote aponta e a legenda explica.',
    mergulho: {em: 'demonstracao', x: 0, y: 0.03, f: 0.56, furos: [[0.03, 0.254, 0.208, 0.035], [0.273, 0.172, 0.145, 0.037]]}},
@@ -204,7 +212,7 @@ const slides = [
 ];
 
 const m = mundo(slides);
-palco({slides: m.slides, cenas: m.cenas(), desenhar: m.desenhar});
+palco({slides: m.slides, cenas: m.cenas(), desenhar: m.desenhar, blocos, autoplay: true});
 </script>
 </body>
 </html>
