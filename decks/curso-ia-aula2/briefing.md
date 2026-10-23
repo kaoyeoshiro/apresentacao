@@ -36,7 +36,7 @@ O deck é montado por `montar.py` a partir de `fonte/`; edite `fonte/`, nunca o 
    artigos citados na tela passam por conferência em fonte oficial antes de a versão final sair (ver Pendências).
 8. Nenhuma versão de modelo (Claude 4.6, ChatGPT 5.4 etc.) aparece nos slides de pedir bem.
 
-## Linha do dia (90 min)
+## Linha do dia (90 min; vale a da Revisão 2 abaixo: 23, 18, 8, 11, 27, 3)
 
 | min | bloco (`bloco`) | slides |
 |---|---|---|
@@ -122,7 +122,7 @@ Fontes: [Claude Cowork and chat are one Claude](https://support.claude.com/en/ar
   que o Cowork fazia está disponível em qualquer conversa." No app Claude Desktop o Claude lê, organiza e cria arquivos
   numa pasta liberada, mas só com o app aberto. Pedidos longos continuam na nuvem. Tem Projetos, memória, skills e plugins.
 - Claude Code: lê a pasta, edita arquivos, roda comandos; no terminal, em editores, no app desktop (aba Code) e na web.
-  Exige plano pago. Pro: US$ 20 por mês (US$ 17 no plano anual); Code e Cowork incluídos em Pro, Max e Team; o plano
+  Exige plano pago. Pro: US$ 20 por mês (US$ 17 no plano anual); Code incluído em Pro, Max e Team; o plano
   gratuito não tem Code.
 - ChatGPT tem Chat, Work e Codex. Work: agente para trabalho de várias etapas e entregas (pesquisa, documento, planilha,
   apresentação). Na web e no celular roda na nuvem; no app desktop pode usar arquivos locais, com permissão. Work: planos
@@ -135,10 +135,23 @@ Fontes: [Claude Cowork and chat are one Claude](https://support.claude.com/en/ar
   lista as suas. O modelo vê só o nome e a descrição até decidir usar a skill, então ela custa pouco contexto.
 - Plugin é um pacote com skills e, se quiser, conexões (servidores MCP). MCP é um padrão aberto para ligar o agente a
   ferramentas e sistemas externos.
-- Limites do anexo: Claude aceita até 100 páginas de PDF por pedido (600 com contexto de 1 milhão de tokens) e processa
-  cada página como texto e imagem; PDF denso pode encher o contexto antes do limite. ChatGPT: projeto com 5 arquivos no
-  plano gratuito, 25 no Go e no Plus, 40 nos demais; o gratuito faz 3 envios por dia; arquivos de projeto são tratados
-  diferente de anexos de chat, e imagens dentro do PDF podem não entrar.
+- Limites do anexo no app do Claude (central de ajuda, "Upload files to Claude", lida em 23/10/2026): até 20 arquivos por
+  conversa; PDF de até 1000 páginas; em PDF de até 100 páginas o Claude lê texto e elementos visuais (imagens, gráficos),
+  de 101 a 1000 páginas lê só o texto. Arquivos de projeto: 30 MB cada, sem limite de quantidade, mas o conteúdo total tem
+  de caber na janela de contexto do Claude. (O número "100 páginas por pedido" que apareceu antes era da API do Claude,
+  não do app: não use.) ChatGPT: projeto com 5 arquivos no plano gratuito, 25 no Go e no Plus, 40 nos demais; o gratuito
+  faz 3 envios por dia; arquivos de projeto são tratados diferente de anexos de chat, e imagens dentro do PDF podem não
+  entrar.
+- Conectores: o app do Claude liga a Drive, Gmail, Microsoft 365 e Slack em Customize > Connectors; o ChatGPT Work usa
+  apps conectados e plugins, que podem trazer conexões MCP. Ou seja, conectar sistemas não é exclusivo de Claude Code e
+  Codex.
+- Skills: o ChatGPT Work cria skills com `@skill-creator` e o Codex com `$skill-creator`; o Codex detecta mudança em
+  skills sozinho e, se a atualização não aparecer, basta reiniciar. No Claude, a skill se cria pedindo ao Claude ou
+  escrevendo o `SKILL.md`.
+- Word: o app do Claude cria documentos, planilhas e apresentações como arquivos editáveis, e o ChatGPT Work cria
+  documento, planilha e apresentação; por isso o exercício pede o `.docx` ao próprio agente, sem instalar conversor.
+  Conversor de linha de comando (pandoc) não está instalado nesta máquina e o aluno não o terá: fica só como opção
+  avançada nas notas.
 - No Claude, o Projeto agrega instruções, memória, contexto (arquivos) e pasta numa tela só.
 
 ## O teste do processo fictício (feito em 23/10/2026, `/tmp/teste_processo`, reproduzível)
@@ -146,14 +159,13 @@ Fontes: [Claude Cowork and chat are one Claude](https://support.claude.com/en/ar
 Processo inventado com 7 PDFs de texto digital: 348 páginas, 1,5 MB, 129.226 palavras (cerca de 190 mil tokens, estimativa
 de 1,5 token por palavra). Cabeçalho e rodapé repetidos em cada página somam 8.700 palavras (6,7%). Ao converter para
 Markdown e remover o ruído, 120.540 palavras. Achar "12/03/2019" na pasta de arquivos Markdown levou 6 milissegundos e
-o agente lê só o trecho, cerca de 300 palavras (0,2% do processo). No chat, 348 páginas exigem 4 pedidos no Claude (100
-páginas por pedido) e passam do limite de 5 arquivos por projeto do ChatGPT gratuito. Limites do teste: texto
+o agente lê só o trecho, cerca de 300 palavras (0,2% do processo). No chat, as 348 páginas entram inteiras na conversa e passam do limite de 5 arquivos por projeto do ChatGPT gratuito (no app do Claude, ver a Revisão 2: o número de 4 pedidos de 100 páginas era da API e foi retirado). Limites do teste: texto
 repetitivo e PDFs com texto digital; em PDF escaneado o texto sai vazio sem reconhecimento de caracteres. Marcar na tela
 como "teste com processo fictício".
 
 ## Mudanças depois da primeira montagem (23/10/2026)
 
-O deck final tem 51 slides. Em relação à lista abaixo: entraram `agente` ("O chat responde. O agente age.") e `confere`
+O deck final tem 56 slides (ver a Revisão 2). Em relação à lista abaixo: entraram `agente` ("O chat responde. O agente age.") e `confere`
 ("O agente propõe; você confere") logo depois de `reenvio`, porque faltava explicar a diferença entre chat e agente;
 entrou `skills` (respiro que abre o bloco); `ponte` virou cena própria (papéis caindo sobre a caixa do pedido);
 `limite` virou respiro ("A conclusão jurídica fica com você"), com os três pontos nas notas. Skills ganhou 8 minutos
@@ -161,6 +173,66 @@ entrou `skills` (respiro que abre o bloco); `ponte` virou cena própria (papéis
 para o Claude novo, Team e Free depois. Citações de lei conferidas no Planalto em 23/10/2026: Lei 14.133/2021, art. 67
 (o §1º limita atestados às parcelas de maior relevância, 4% ou mais do valor) e LC 101/2000 existem como citadas; o
 caput do art. 67 fala em obra "semelhante" e serviço "similar".
+
+## Revisão 2 (23/10/2026, depois de o professor ver a primeira montagem)
+
+Decisões do professor e correções, a seguir. Quem constrói cada bloco segue esta seção e vence o que estiver abaixo.
+
+1. **Contexto é prompt.** Em Pedir bem, no elemento 2, e no slide que abre o bloco "Duas escolhas", dizer que o contexto
+   normalmente vem de documentos anexados, não digitado no pedido, e que tudo o que a IA lê (pedido, anexos,
+   instruções, memória, conversa anterior) é prompt. Correção ao professor, a dizer nas notas: digitar quem você é e o
+   caso também é contexto e vale; o grosso do material pesado é que costuma vir por anexo, instruções e memória.
+2. **`ponte`** (abre Duas escolhas) vira "Tudo o que a IA lê é prompt": uma caixa grande "o que a IA lê" onde entram, um
+   por clique de onda, "seu pedido" (pequeno), "anexos", "instruções", "memória" e "conversa anterior". Legenda: "O contexto
+   costuma chegar por anexos, instruções e memória." Sem a frase "o contexto não cabe mais no pedido".
+3. **`pasta` (cinco motivos), motivo 1 e `teste`:** o número "o Claude aceita 100 páginas por pedido" está errado para o
+   app (era limite da API). Use os fatos corrigidos acima. Motivo 1: "No anexo, o processo entra inteiro na conversa e
+   ocupa a mesa; na pasta, o agente abre só o que precisa." `teste` mostra, à esquerda, 348 páginas e 129 mil palavras
+   e a busca de 12/03/2019 em 6 milissegundos; à direita, duas barras que comparam "Anexado no chat: o processo inteiro
+   entra na conversa" com "Na pasta: o agente lê cerca de 300 palavras (0,2%)". Sem os "4 pedidos de 100 páginas".
+4. **`lei`:** guarde as leis que você usa sempre e a jurisprudência favorável que você sempre cita, em `.md`, com a fonte
+   e a data da conferência. Pesquise o que muda: jurisprudência nova e alterações de lei.
+5. **`codigo`, `escolher`, `matriz`, `travou`:** Claude Code e Codex são ferramentas avançadas para quem quer integrações,
+   raspagem (scrapers), automação e controle fino, não "o que tem plano gratuito". Conectar sistemas (MCP, conectores)
+   também se faz no Claude e no ChatGPT Work; a diferença é que Code e Codex programam e rodam o que for preciso. Sai
+   de toda a aula a recomendação "sem plano pago, use o Codex" (continua só o fato, na grade de planos).
+   `codigo`: título "Claude Code e Codex são para quem constrói"; quatro cartões: Integrações (ligam o agente a
+   sistemas por MCP e APIs), Raspagem (baixam e organizam dados de sites e tribunais, em lote), Automação (rotinas e
+   scripts para centenas de arquivos), Controle (plano, permissões e cada mudança à vista). Rodapé: "Claude e ChatGPT
+   Work também têm conectores. Code e Codex programam e rodam o que for preciso."
+   `escolher`: 1 "Um arquivo só?" chat com anexo; 2 "Quer o documento pronto, em Word ou planilha?" Claude ou ChatGPT Work;
+   3 "É processo, ou vai reusar?" Projeto com pasta; 4 "Precisa integrar sistemas, raspar dados ou automatizar?"
+   Claude Code ou Codex. `matriz`, linha de baixo: "Para integrar sistemas, raspar dados e automatizar: Claude Code e
+   Codex."
+6. **Mão na massa fica mais complexa (24 min).** Duas práticas: (a) a cronologia (10 min, como estava); (b) o desafio de
+   criar uma **skill que entrega a cronologia em Word no padrão do escritório fictício** (15 min). O escritório é
+   **Dias & Moura Advocacia**; o logo é um emblema gerado por IA (GPT Image, pelo `./ap imagem`, em 23/10/2026) com o nome
+   composto em texto; as cores do padrão (verde `#064A45` e cobre `#B87548`) foram amostradas do emblema. Arquivos já
+   prontos: `midia/logo-escritorio.webp` (logo, com selo de IA), `midia/caso-parecer-exemplo.webp` (como o Word deve
+   ficar), e no zip do aluno `padrao-do-escritorio.md`, `logo-escritorio.png` e `cronologia-exemplo.md` (rede de
+   segurança para quem não terminou a prática a). Padrão (texto exato, 8 regras): fonte Georgia corpo 11; títulos em
+   verde com filete cobre; cabeçalho com o logo e "Documento de trabalho"; título em caixa alta, centralizado, corpo 14,
+   negrito; datas dd/mm/aaaa e valores com duas casas; tabela com cabeçalho verde e linhas alternadas; rodapé com o nome e
+   a página; termina com "Pontos para conferência humana". Celular: cole o padrão no pedido e peça o Word.
+   Pedido do desafio (texto exato): "Crie uma skill chamada parecer-no-padrao. Ela lê o cronologia.md e o
+   padrao-do-escritorio.md da pasta e gera o cronologia.docx no padrão do escritório, com o logo no cabeçalho e a seção
+   Pontos para conferência humana. Depois rode a skill e salve o Word na pasta."
+   Slides do bloco E, nesta ordem: `codex`, `material` (acrescente a linha "No zip: padrão do escritório, logo e
+   cronologia pronta"), `pratica2` (renomeie na tela para "Prática 1: a cronologia", 10 min), `escritorio` (o logo e o
+   padrão em poucas linhas), `desafio` (a missão em três passos e como criar a skill em cada ferramenta: Claude, peça "crie
+   uma skill"; ChatGPT Work, `@skill-creator`; Codex, `$skill-creator`), `alvo` (a imagem `caso-parecer-exemplo.webp`
+   grande, com três legendas: logo no cabeçalho, tabela no padrão, seção de conferência), `pratica3` ("Prática 2: a
+   skill em Word", 15 min, com o pedido exato e cinco passos curtos), `travou` (revisto: sem cronologia.md, use
+   cronologia-exemplo.md do zip; o app não gerou Word, peça o `.docx` explicitamente; a skill não aparece, reinicie o
+   app; celular, cole o padrão no pedido), `mostrar` (respiro: "Mostre o seu Word."). O slide `quem` ("Quem trouxe a
+   fonte?") sai.
+7. **Fecho melhor (3 min).** Slides do bloco F: `levar` (tempo, seis marcos, "O que você leva hoje": pedido com seis
+   elementos; diga que não achou; projeto com pasta; skill escrita uma vez; confira a fonte; Word no padrão), `dia2` ("No
+   dia 2": MCP e plugins, rotinas, raspagem de jurisprudência do TJMS e do STF, casos práticos, artefatos e
+   apresentações, devolutiva), `fecho` (a mensagem "Trabalhe no caso, não no chat", o logo oficial da co.juris e
+   "Obrigado"; veja o encerramento da Aula 1). O slide `registro` sai (a ideia de registrar resposta, fonte e o que
+   conferir vai para as notas das duas práticas).
+8. **Linha do dia:** pedir 23, escolhas 18, skills 8, pasta 11, mão na massa 27, fecho 3 (90 min). As duas práticas somam 25 min dentro dos 27 do bloco. Os arquivos `cronologia-exemplo.md` do zip ficam na pasta `reserva/`, para não aparecer na Prática 1.
 
 ## Os slides
 
@@ -197,7 +269,7 @@ Origem dos exemplos: `engenharia-de-prompt-apresentacao.html` do professor (text
 19. `matriz` (cena): "Duas escolhas, não uma escada". Dois eixos: instruções e memória (na conversa solta | no Projeto) e documentos (anexados | numa pasta). As quatro células preenchem em onda: conversa+anexo "Chat"; Projeto+anexo "Projeto"; conversa+pasta "Tarefa com pasta"; Projeto+pasta "Projeto com pasta" (destacada: "processo: sempre aqui"). Abaixo, uma linha: "Mais controle e volume: Claude Code e Codex".
 20. `projeto` (cena): "O Projeto guarda o seu jeito". Desenho por código da tela de Projeto do Claude (instruções, memória, contexto, pasta, programado), com conteúdo do caso fictício; nunca o print do professor (tem número de processo real). Anotações: "visível e editável com um clique". Rodapé: "No ChatGPT, Projeto também guarda instruções e arquivos."
 21. `pasta` (cena, lista que acende): "Processo? Trabalhe com pasta". Cinco motivos: 1 volume (um processo passa de 300 páginas), 2 lê só o trecho (busca e abre o que precisa), 3 sem reenviar, 4 a entrega fica ao lado da fonte, 5 você libera só a pasta. Notas: a correção do sigilo (ver "Para quem"); funciona no computador, com o app aberto, não no celular.
-22. `teste` (cena de números): "O teste: 348 páginas, 0,2% lidas". Contadores: 348 páginas, 129 mil palavras, achar a data em 6 milissegundos, 0,2% do processo lido. Ao lado: "No chat: 4 pedidos de 100 páginas." Pílula "teste com processo fictício".
+22. `teste` (cena de números): "O teste: 348 páginas, 0,2% lidas". Contadores: 348 páginas, 129 mil palavras, achar a data em 6 milissegundos, 0,2% do processo lido. Ao lado, duas barras: "Anexado no chat: o processo inteiro" e "Na pasta: 0,2%". Pílula "teste com processo fictício".
 23. `lei` (cena): "Lei: guardar ou pesquisar?". Duas colunas. Guarde: as leis que você usa sempre, com a fonte oficial e a data da conferência. Pesquise: jurisprudência, alteração recente, "esta lei mudou?". Faixa embaixo: "Use o arquivo. Para confirmar alteração, consulte o site oficial e diga a data."
 24. `mdpdf` (cena): "PDF ou Markdown?". Mesma página, lado a lado: à esquerda, o PDF (a "foto da página", com cabeçalho e rodapé repetidos marcados em tracejado dourado); à direita, o Markdown limpo (`## Cláusula terceira`). Três legendas: "gasta menos", "erra menos", "acha o artigo certo". Dois clicks: o PDF (com o ruído marcado), depois o Markdown.
 25. `converter` (cartoes, 3 cartões): "Converter tudo? Não". "Converta o que você vai reusar", "Pergunta única: suba o PDF como está", "Escaneado: precisa de reconhecimento de texto antes". Rodapé: "Guarde o PDF como prova e o Markdown como cópia de trabalho."

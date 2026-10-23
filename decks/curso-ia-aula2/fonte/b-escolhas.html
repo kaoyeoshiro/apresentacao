@@ -1,16 +1,20 @@
 
   <!-- ===== Bloco B, duas escolhas (22 min): ponte a escolher. Fatos das ferramentas: briefing.md, "Fatos sobre as
        ferramentas"; números do teste: briefing.md, "O teste do processo fictício". ===== -->
-  <!-- ponte (cena própria, noite): a frase à esquerda; à direita, a caixa pequena do pedido e os três papéis do caso
-       chegando por cima dela, maiores que ela -->
+  <!-- ponte (cena própria, noite): a frase à esquerda; à direita, a caixa grande "o que a IA lê", onde entram em onda o
+       pedido (pequeno) e tudo o que vem junto com ele (briefing.md, Revisão 2, item 2) -->
   <section data-slide="ponte" class="noite">
     <p class="rotulo">Duas escolhas</p>
-    <h2 class="display b-pt-frase"><span>O contexto</span><span>não cabe mais</span><span>no <span class="sinal">pedido</span></span></h2>
-    <div class="b-pt-caixa"><p>pedido</p></div>
-    <img class="b-pt-papel" src="midia/caso-contrato.webp" alt="" style="left: 1236px; top: 420px" data-rot="-9">
-    <img class="b-pt-papel" src="midia/caso-aditivo.webp" alt="" style="left: 1420px; top: 400px" data-rot="4">
-    <img class="b-pt-papel" src="midia/caso-notificacao.webp" alt="" style="left: 1596px; top: 450px" data-rot="11">
-    <p class="respiro-sub">A engenharia de contexto cuida do que vem junto com o pedido.</p>
+    <h2 class="display b-pt-frase"><span>Tudo o que</span><span>a IA lê</span><span>é <span class="sinal">prompt</span></span></h2>
+    <div class="b-pt-caixa">
+      <p class="b-pt-cab">o que a IA lê</p>
+      <p class="b-pt-item b-pt-pedido">seu pedido</p>
+      <p class="b-pt-item">anexos</p>
+      <p class="b-pt-item">instruções</p>
+      <p class="b-pt-item">memória</p>
+      <p class="b-pt-item">conversa anterior</p>
+    </div>
+    <p class="respiro-sub">O contexto costuma chegar por anexos, instruções e memória.</p>
   </section>
 
   <!-- reenvio (cena própria): três conversas, e em cada uma os mesmos três papéis sobem de novo pelo campo -->
@@ -97,7 +101,7 @@
     <div class="b-cel b-cel-proc" data-ordem="3" style="left: 1245px; top: 590px"><i class="b-luz"></i><p class="b-cel-nome">Projeto com pasta</p><p class="b-cel-nota">processo: sempre aqui</p></div>
     <i class="b-aro"></i>
     <i class="b-alem-fio"></i>
-    <p class="b-alem">Para mais controle e volume, Claude Code e Codex.</p>
+    <p class="b-alem">Para integrar sistemas, raspar dados e automatizar: Claude Code e Codex.</p>
   </section>
 
   <!-- projeto (cena própria, noite): a tela de um Projeto do Claude desenhada por código, com o caso fictício; nunca o
@@ -139,7 +143,7 @@
       <li><span>Você libera só a pasta</span></li>
     </ol>
     <div class="explica">
-      <p>Um processo passa de 300 páginas; o Claude aceita 100 por pedido.</p>
+      <p>No anexo, o processo entra inteiro na conversa e ocupa a mesa; na pasta, o agente abre só o que precisa.</p>
       <p>O agente busca a data e abre só o trecho de que precisa.</p>
       <p>Os papéis ficam na pasta, e a conversa nova não pede upload.</p>
       <p>A cronologia nasce na mesma pasta dos papéis que ela cita.</p>
@@ -153,13 +157,12 @@
     <h2 class="manchete">O agente leu 0,2% do processo</h2>
     <p class="display b-348">348</p>
     <p class="b-348-leg">páginas e <b class="b-129">129 mil</b> palavras</p>
-    <p class="b-ped-leg">No chat, 4 pedidos de 100 páginas.</p>
-    <div class="b-ped"><i style="left: 0; height: 170px"></i><i style="left: 230px; height: 170px"></i><i style="left: 460px; height: 170px"></i><i style="left: 690px; height: 82px"></i></div>
     <div class="b-busca"><svg viewBox="0 0 44 44"><circle cx="18" cy="18" r="12"/><path d="M27 27l11 11"/></svg><span class="b-busca-txt">12/03/2019</span></div>
     <p class="b-busca-res">achou a data em <b>6 milissegundos</b></p>
-    <p class="b-proc-leg"><b class="b-pct">0,2%</b> do processo lido</p>
-    <div class="b-proc"><i class="b-lido"></i></div>
-    <p class="b-proc-sub">cerca de 300 palavras</p>
+    <p class="b-bar-leg" style="top: 300px"><b>Anexado no chat:</b> o processo inteiro entra na conversa</p>
+    <div class="b-bar" style="top: 430px"><i class="b-bar-chat"></i></div>
+    <p class="b-bar-leg" style="top: 600px"><b>Na pasta:</b> o agente lê cerca de 300 palavras (0,2%)</p>
+    <div class="b-bar" style="top: 730px"><i class="b-lido"></i></div>
     <p class="pilula">teste com processo fictício</p>
   </section>
 
@@ -169,16 +172,16 @@
     <h2 class="manchete">Guardar a lei ou pesquisar?</h2>
     <div class="b-lado" style="left: 120px">
       <p class="display b-lado-tit">Guarde</p>
-      <ul><li>leis que você usa sempre</li><li>com fonte oficial e data da conferência</li></ul>
+      <ul><li>leis que você usa sempre</li><li>jurisprudência favorável que você cita</li><li>em .md, com fonte e data da conferência</li></ul>
     </div>
     <i class="b-lado-fio"></i>
     <div class="b-lado" style="left: 1040px">
       <p class="display b-lado-tit">Pesquise</p>
-      <ul><li>jurisprudência</li><li>alteração recente</li><li>“esta lei mudou?”</li></ul>
+      <ul><li>jurisprudência nova</li><li>alterações de lei</li></ul>
     </div>
     <div class="b-regra">
-      <p class="b-regra-et">regra para o agente</p>
-      <p class="b-regra-txt">Use o arquivo. Para confirmar alteração, consulte o site oficial e diga a data.</p>
+      <p class="b-regra-et">para o agente</p>
+      <p class="b-regra-txt">Lei alterada? Consulte o site oficial e diga a data.</p>
     </div>
   </section>
 
@@ -215,13 +218,14 @@
 
   <section data-slide="codigo">
     <p class="rotulo">Duas escolhas</p>
-    <h2 class="manchete">Quando usar Claude Code e Codex</h2>
+    <h2 class="manchete">Claude Code e Codex são para quem constrói</h2>
     <div class="cartoes c4">
-      <div class="cartao"><p class="ct-tit">Plano</p><p class="ct-txt">O plano e o que mudou, arquivo por arquivo.</p></div>
-      <div class="cartao"><p class="ct-tit">Volume</p><p class="ct-txt">Dezenas de arquivos, a mesma tarefa de novo.</p></div>
-      <div class="cartao"><p class="ct-tit">Conexões</p><p class="ct-txt">Liga a outros sistemas (MCP, dia 2).</p></div>
-      <div class="cartao"><p class="ct-tit">Custo</p><p class="ct-txt">Codex até no plano gratuito, no app desktop.</p></div>
+      <div class="cartao"><p class="ct-tit">Integrações</p><p class="ct-txt">Sistemas, por MCP e APIs.</p></div>
+      <div class="cartao"><p class="ct-tit">Raspagem</p><p class="ct-txt">Dados de sites e tribunais, em lote.</p></div>
+      <div class="cartao"><p class="ct-tit">Automação</p><p class="ct-txt">Scripts e rotinas para centenas de arquivos.</p></div>
+      <div class="cartao"><p class="ct-tit">Controle</p><p class="ct-txt">Plano, permissões e mudanças visíveis.</p></div>
     </div>
+    <p class="rodape">Claude e ChatGPT Work também têm conectores.</p>
   </section>
 
   <!-- ferramentas (cena própria, noite): quatro nomes em dois pares (para que serve x empresa); o aviso do Cowork -->
@@ -273,13 +277,13 @@
     <p class="rotulo">Duas escolhas</p>
     <h2 class="manchete">Como escolher em 10 segundos</h2>
     <div class="b-esc" style="top: 318px"><p class="b-esc-q">Um arquivo só?</p><p class="b-esc-r">chat com anexo</p></div>
-    <div class="b-esc" style="top: 458px"><p class="b-esc-q">É processo, ou vai reusar?</p><p class="b-esc-r b-esc-proc">Projeto com pasta</p></div>
-    <div class="b-esc" style="top: 598px"><p class="b-esc-q">Precisa ver o plano e o que mudou, ou tem volume?</p><p class="b-esc-r">Claude Code ou Codex</p></div>
-    <div class="b-esc" style="top: 738px"><p class="b-esc-q">Sem plano pago?</p><p class="b-esc-r">Codex no app desktop</p></div>
+    <div class="b-esc" style="top: 458px"><p class="b-esc-q">Quer o documento pronto, em Word ou planilha?</p><p class="b-esc-r">Claude ou ChatGPT Work</p></div>
+    <div class="b-esc" style="top: 598px"><p class="b-esc-q">É processo, ou vai reusar?</p><p class="b-esc-r b-esc-proc">Projeto com pasta</p></div>
+    <div class="b-esc" style="top: 738px"><p class="b-esc-q">Precisa integrar sistemas, raspar dados ou automatizar?</p><p class="b-esc-r">Claude Code ou Codex</p></div>
     <svg class="b-camada b-esc-setas" viewBox="0 0 1920 1080">
-      <path d="M1124 357H1206M1190 343L1208 357L1190 371"/>
-      <path d="M1124 497H1206M1190 483L1208 497L1190 511"/>
-      <path d="M1124 637H1206M1190 623L1208 637L1190 651"/>
-      <path d="M1124 777H1206M1190 763L1208 777L1190 791"/>
+      <path d="M1074 357H1156M1140 343L1158 357L1140 371"/>
+      <path d="M1074 497H1156M1140 483L1158 497L1140 511"/>
+      <path d="M1074 637H1156M1140 623L1158 637L1140 651"/>
+      <path d="M1074 777H1156M1140 763L1158 777L1140 791"/>
     </svg>
   </section>

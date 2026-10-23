@@ -3,12 +3,12 @@ import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
 
 // Seis blocos da linha do dia, somando 90 minutos. Os ids são os de `bloco` nos slides.
 const blocos = [
-  {id: 'pedir', rotulo: 'Pedir bem', minutos: 25},
-  {id: 'escolhas', rotulo: 'Duas escolhas', minutos: 22},
+  {id: 'pedir', rotulo: 'Pedir bem', minutos: 23},
+  {id: 'escolhas', rotulo: 'Duas escolhas', minutos: 18},
   {id: 'skills', rotulo: 'Skills', minutos: 8},
-  {id: 'pasta', rotulo: 'Na pasta', minutos: 16},
-  {id: 'mao', rotulo: 'Mão na massa', minutos: 15},
-  {id: 'fecho', rotulo: 'Fecho', minutos: 4},
+  {id: 'pasta', rotulo: 'Na pasta', minutos: 11},
+  {id: 'mao', rotulo: 'Mão na massa', minutos: 27},
+  {id: 'fecho', rotulo: 'Fecho', minutos: 3},
 ];
 
 // Uma linha por slide, na ordem da aula. Cada bloco de fonte/ acrescenta as suas com SLIDES.push(...).

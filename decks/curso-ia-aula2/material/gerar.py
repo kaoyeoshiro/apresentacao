@@ -108,6 +108,10 @@ if __name__ == "__main__":
     with zipfile.ZipFile(AQUI / "caso-ficticio.zip", "w", zipfile.ZIP_DEFLATED) as z:
         for nome in DOCS:
             z.write(SAIDA / f"{nome}.pdf", f"caso-ficticio/{nome}.pdf")
+        esc = AQUI / "escritorio"          # criado por escritorio.py; vai junto para a segunda prática
+        for nome in ("padrao-do-escritorio.md", "logo-escritorio.png", "cronologia-exemplo.md"):
+            if (esc / nome).exists():
+                z.write(esc / nome, f"caso-ficticio/{'reserva/' if nome.startswith('cronologia') else ''}{nome}")
     # imagens dos slides: primeira página inteira de cada papel e a página do contrato com o trecho marcado
     for nome in DOCS:
         png(SAIDA / f"{nome}.pdf", MIDIA / f"caso-{nome}.png", 0)

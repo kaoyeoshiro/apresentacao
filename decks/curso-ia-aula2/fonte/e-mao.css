@@ -6,10 +6,8 @@
   [data-slide="material"] .objeto { object-fit: contain; }
   [data-slide="material"] .entrada { height: 236px; }
   [data-slide="material"] .doc-leg { top: 418px; }
-  /* travou: cartões mais altos e texto maior, para ler de longe enquanto a sala trabalha */
-  [data-slide="travou"] .cartoes { top: 400px; }
-  [data-slide="travou"] .cartao { min-height: 300px; padding: 36px 40px; }
-  [data-slide="travou"] .ct-txt { margin-top: 22px; font-size: var(--esc-2); }
+  /* o que mais vem no zip, embaixo do pedido, à esquerda dos papéis */
+  .e-zip { position: absolute; left: 120px; top: 730px; width: 720px; font-size: 40px; line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
 
   /* pratica2: três colunas de passos (notebook, celular, nos dois) e o pedido exato embaixo, para copiar */
   .e-cols { position: absolute; left: 120px; top: 316px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; }
@@ -17,7 +15,62 @@
   .e-passos { margin-top: 22px; counter-reset: e-p; }
   .e-passos.e-depois { counter-reset: e-p 2; }
   /* o número do passo vem de um contador do CSS: é marcação, não texto a ler */
-  .e-passos li { counter-increment: e-p; display: flex; align-items: center; gap: 22px; margin-bottom: 18px; font-size: 40px; line-height: 1.25; white-space: nowrap; }
-  .e-passos li::before { content: counter(e-p); flex: 0 0 58px; height: 58px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
+  .e-passos li, .e-cinco li { counter-increment: e-p; display: flex; align-items: center; gap: 22px; margin-bottom: 18px; font-size: 40px; line-height: 1.25; white-space: nowrap; }
+  .e-passos li::before, .e-cinco li::before { content: counter(e-p); flex: 0 0 58px; height: 58px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
   .e-pedido { position: absolute; left: 120px; top: 596px; width: 1680px; box-sizing: border-box; padding: 30px 44px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
   .e-pedido p { font-size: 46px; line-height: 1.3; text-wrap: pretty; }
+
+  /* escritorio: o logo em cima e as oito regras em duas fileiras de quatro, cada uma com o seu pictograma */
+  .e-logo-cx { position: absolute; left: 120px; top: 300px; box-sizing: border-box; padding: 6px 24px 6px 0; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); }
+  .e-logo { display: block; height: 150px; width: auto; }
+  .e-regras { position: absolute; left: 120px; top: 500px; width: 1680px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 40px; }
+  .e-regras li { display: flex; flex-direction: column; gap: 16px; padding-top: 22px; border-top: 4px solid var(--cor-linha); }
+  .e-regras p { font-size: 36px; line-height: 1.25; text-wrap: balance; }
+  [data-slide="escritorio"] .selo-ia { left: 760px; right: auto; top: 404px; }
+  .e-ic { width: 96px; height: 64px; overflow: visible; }
+  .e-ic path { fill: none; stroke: var(--cor-tinta); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .e-ic path.e-fino { stroke: var(--cor-tinta-suave); stroke-width: 3; }
+  .e-ic path.e-cheio { fill: var(--cor-tinta); stroke: none; }
+  .e-ic path.e-ouro { stroke: var(--cor-destaque); stroke-width: 7; }
+
+  /* desafio: a missão em três passos ligados por setas e, embaixo, uma janela de app por ferramenta */
+  .e-missao { position: absolute; left: 0; top: 330px; counter-reset: e-p; }
+  .e-missao li { position: absolute; top: 0; }
+  .e-missao li:nth-child(1) { left: 120px; } .e-missao li:nth-child(2) { left: 700px; } .e-missao li:nth-child(3) { left: 1320px; }
+  .e-missao li { counter-increment: e-p; display: flex; align-items: center; gap: 24px; font: 700 48px/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .e-missao li::before { content: counter(e-p); flex: 0 0 76px; height: 76px; border-radius: 38px; display: grid; place-items: center; background: var(--sobre-noite); color: var(--noite); font: 800 40px/1 var(--fonte-titulo); }
+  .e-setas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .e-setas path { fill: none; stroke: var(--suave-sobre-noite); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+  .e-et-criar { left: 120px; top: 488px; }
+  .e-jans { position: absolute; left: 120px; top: 546px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .e-jan { position: relative; height: 318px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; background: color-mix(in srgb, var(--sobre-noite) 6%, var(--noite)); overflow: hidden; }
+  .e-jan-barra { position: relative; height: 62px; box-sizing: border-box; border-bottom: 3px solid var(--linha-sobre-noite); display: flex; align-items: center; padding-left: 112px; white-space: nowrap; }
+  .e-jan-barra i { position: absolute; top: 24px; width: 14px; height: 14px; border-radius: 7px; background: var(--linha-sobre-noite); }
+  .e-jan-barra i:nth-child(1) { left: 26px; } .e-jan-barra i:nth-child(2) { left: 50px; } .e-jan-barra i:nth-child(3) { left: 74px; }
+  .e-jan-barra b { font: 700 32px/1 var(--fonte-titulo); color: var(--sobre-noite); }
+  .e-jan-leg { position: absolute; left: 32px; top: 96px; font-size: 34px; line-height: 1.2; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .e-comp { position: absolute; left: 28px; right: 28px; bottom: 28px; height: 96px; box-sizing: border-box; padding: 0 28px; display: flex; align-items: center; border: 3px solid var(--linha-sobre-noite); border-radius: 20px; background: var(--noite); }
+  .e-cmd { font: 600 40px/1.2 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+
+  /* alvo: a página do Word esperado em 115% (só a parte de cima, onde está o conteúdo) e as legendas à direita */
+  .e-folha { position: absolute; left: 140px; top: 305px; width: 913px; height: 621px; overflow: hidden; border: 3px solid var(--cor-linha); border-radius: 6px; background: var(--cor-papel);
+    mask-image: linear-gradient(to bottom, var(--cor-tinta) 94%, transparent); }
+  .e-folha img { display: block; width: 913px; height: auto; margin-top: -23px; }
+  .e-ligas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .e-ligas path { fill: none; stroke: var(--cor-tinta); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .e-ligas path.e-caixa { stroke: var(--cor-destaque); }
+  .e-leg { position: absolute; left: 1130px; width: 670px; }
+  .e-leg-tit { font: 800 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .e-leg-txt { margin-top: 6px; font-size: 36px; line-height: 1.25; color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* pratica3: os cinco passos à esquerda e o pedido exato do desafio à direita, grande, para copiar */
+  .e-cinco { position: absolute; left: 120px; top: 340px; width: 560px; counter-reset: e-p; }
+  .e-cinco li { margin-bottom: 30px; }
+  .e-pedido2 { position: absolute; left: 740px; top: 320px; width: 1060px; box-sizing: border-box; padding: 34px 44px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
+  .e-pedido2 p { font-size: 44px; line-height: 1.34; text-wrap: pretty; }
+
+  /* travou: quatro cartões em duas fileiras, texto maior, para ler de longe enquanto a sala trabalha */
+  [data-slide="travou"] .cartoes { top: 330px; gap: 32px 40px; }
+  [data-slide="travou"] .cartao { min-height: 236px; padding: 32px 40px; }
+  [data-slide="travou"] .ct-txt { margin-top: 18px; font-size: var(--esc-2); }
+  .e-nq { white-space: nowrap; }

@@ -65,5 +65,5 @@ SLIDES.push(
   {id: 'relato', titulo: 'O que mudou na resposta?', linhaDia: false, andamento: 'capitulo',
    notas: {diga: 'Duas pessoas, se toparem: leiam o pedido antigo, o novo e digam o que mudou na resposta. Qual elemento pesou mais? Em geral é o contexto ou o objetivo. A regra de ouro: eu daria este briefing para um colega que não me conhece?',
      faca: ['pedir consentimento antes de ler o pedido de alguém', 'perguntar à sala qual elemento mais pesou'],
-     transicao: 'O contexto, porém, logo deixa de caber no pedido.'}},
+     transicao: 'Pedido, anexos e instruções somam o que a IA lê, e tudo isso é prompt.'}},
 );

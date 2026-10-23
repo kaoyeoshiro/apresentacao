@@ -1,22 +1,20 @@
 
 // ===== Bloco B, duas escolhas =====
 
-// Ponte: a frase sobe linha a linha; a caixa do pedido aparece e os três papéis caem por cima dela, girando até a
-// inclinação final, maiores que a caixa.
+// Ponte: a frase sobe linha a linha; a caixa "o que a IA lê" aparece e, em onda, entram nela o pedido (pequeno) e o
+// que vem junto com ele; a legenda por último.
 {
   const sec = m.secao('ponte'), linhas = $$(sec, '.b-pt-frase > span'), caixaP = sec.querySelector('.b-pt-caixa');
-  const papeis = $$(sec, '.b-pt-papel'), sub = sec.querySelector('.respiro-sub'), rot = sec.querySelector(':scope > .rotulo');
+  const cabP = sec.querySelector('.b-pt-cab'), itensP = $$(sec, '.b-pt-item'), sub = sec.querySelector('.respiro-sub');
+  const rot = sec.querySelector(':scope > .rotulo');
   CENAS.ponte = (t, c) => {
     const x = conteudo(c);
     revelar(rot, molaAR(x));
     linhas.forEach((el, n) => revelar(el, molaAR(x - 0.05 - n * 0.14)));
-    surgir(caixaP, molaAR(x - 0.5), {dy: 0, escala: 0.2});
-    papeis.forEach((p, n) => {
-      const k = clamp(molaAR(x - 0.8 - n * 0.22, {resposta: 0.6, amortecimento: 0.8}), 0, 1.04), r = Number(p.dataset.rot);
-      p.style.opacity = String(clamp((x - 0.8 - n * 0.22) * 6));
-      p.style.transform = k >= 1 && Math.abs(k - 1) < 1e-9 ? `rotate(${r}deg)` : `translate(${(260 * (1 - k)).toFixed(1)}px, ${(-320 * (1 - k)).toFixed(1)}px) rotate(${(r + 30 * (1 - k)).toFixed(2)}deg)`;
-    });
-    revelar(sub, molaAR(x - 1.7));
+    surgir(caixaP, molaAR(x - 0.5), {dy: 0, escala: 0.9});
+    revelar(cabP, molaAR(x - 0.6));
+    itensP.forEach((el, n) => surgir(el, molaAR(x - 0.8 - n * 0.2), {dy: -60}));
+    revelar(sub, molaAR(x - 2.0));
   };
 }
 
@@ -113,14 +111,13 @@
 // Pasta: cinco motivos, um por clique (a cena em partes da base).
 CENAS.pasta = partes('pasta');
 
-// Teste: as 348 páginas contam e os quatro pedidos do chat crescem (primeiro clique); no segundo, a data se digita na
-// busca, o tempo aparece e a parte lida do processo encolhe de 100% até 0,2%.
+// Teste: as 348 páginas contam e a barra do anexo enche (primeiro clique); no segundo, a data se digita na busca, o
+// tempo aparece e a barra da pasta encolhe de 100% até 0,2%.
 {
   const sec = m.secao('teste'), n348 = sec.querySelector('.b-348'), leg = sec.querySelector('.b-348-leg'), n129 = sec.querySelector('.b-129');
-  const pedLeg = sec.querySelector('.b-ped-leg'), peds = $$(sec, '.b-ped i');
+  const barLegs = $$(sec, '.b-bar-leg'), bars = $$(sec, '.b-bar'), chat = sec.querySelector('.b-bar-chat');
   const busca = sec.querySelector('.b-busca'), txt = sec.querySelector('.b-busca-txt'), res = sec.querySelector('.b-busca-res');
-  const procLeg = sec.querySelector('.b-proc-leg'), pct = sec.querySelector('.b-pct'), proc = sec.querySelector('.b-proc');
-  const lido = sec.querySelector('.b-lido'), procSub = sec.querySelector('.b-proc-sub');
+  const lido = sec.querySelector('.b-lido');
   const MINIMO = 0.012;   // a fatia de 0,2% (1,8 px) desenhada com 11 px, para a sala ver que existe
   CENAS.teste = (t, c) => {
     const x = conteudo(c), y = c.desde(1);
@@ -130,19 +127,18 @@ CENAS.pasta = partes('pasta');
     contar(n348, kc, 0, 348);
     revelar(leg, molaAR(x - 0.3));
     contar(n129, kc, 0, 129, {sufixo: ' mil'});
-    revelar(pedLeg, molaAR(x - 0.7));
-    peds.forEach((el, n) => { el.style.transform = `scaleY(${clamp(molaAR(x - 0.9 - n * 0.15), 0, 1.03).toFixed(4)})`; });
+    revelar(barLegs[0], molaAR(x - 0.7));
+    surgir(bars[0], molaAR(x - 0.8), {dy: 0});
+    chat.style.transform = `scaleX(${saida(faixa(x, 0.95, 1.7)).toFixed(4)})`;
     // segundo clique
     surgir(busca, molaAR(y - 0.05), {dy: 16});
     digitar(txt, faixa(y, 0.25, 0.85));
     revelar(res, molaAR(y - 0.95));
-    revelar(procLeg, molaAR(y - 1.05));
-    surgir(proc, molaAR(y - 1.05), {dy: 0});
+    revelar(barLegs[1], molaAR(y - 1.05));
+    surgir(bars[1], molaAR(y - 1.05), {dy: 0});
     const encolhe = entradaSaida(faixa(y, 1.35, 2.05));
     lido.style.width = `${(100 * lerp(1, MINIMO, encolhe)).toFixed(3)}%`;
     lido.style.opacity = String(clamp((y - 1.1) * 4));
-    contar(pct, encolhe, 100, 0.2, {casas: encolhe < 1 ? 0 : 1, sufixo: '%'});
-    revelar(procSub, molaAR(y - 1.9));
     fim(sec, x, 1.4);
   };
 }
