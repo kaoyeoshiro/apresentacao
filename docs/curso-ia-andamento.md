@@ -82,3 +82,27 @@ Fonte: arena.ai, página inicial, captura do professor de 22/10/2026. Antes de p
 página e ler o que ele significa (a captura não diz); se não houver explicação, mostrar só a ordem e escrever na tela
 "ranking de agentes, arena.ai, 22/10/2026". É um ranking de agentes (tarefas reais), diferente da Text Arena de
 conversa, em que o Gemini 4 Argon lidera; o slide deve dizer qual quadro é.
+
+## Pedidos do ensaio da versão 4 (23/10/2026)
+
+Versão 4 da Aula 1: commit `37a7245` mais a correção do motor `effee7c` (linha do dia some na viagem). Ajustes pedidos
+pelo professor, em execução por um subagente quando esta nota foi escrita (versão 5); se o commit da versão 5 não
+estiver no branch, refazer a partir daqui, pela numeração da folha `decks/curso-ia-aula1/storyboard/folha.png` da v4:
+
+1. Slide 16 (ramos simbólica/máquina/profundo/transformers): virar linha do tempo com períodos e marcos até os LLMs
+   (Dartmouth 1956, sistemas especialistas, aprendizado de máquina, AlexNet 2012, transformers 2017, GPT-3 2020,
+   ChatGPT 30/11/2022), cada data com fonte.
+2. Slides 25 e 26 (conta da matriz): difíceis; trocar por um neurônio com três entradas, três pesos e a soma, com
+   analogia do cotidiano (nota ponderada), sem tabela.
+3. Slide 33: sem folha impressa; QR vira link clicável (o professor testa ao vivo). Idem nas outras práticas.
+4. Slides 57 e 59 (Artificial Analysis geral e jurídico): escala aproximada, não 0 a 100, com o início do eixo escrito,
+   para a vantagem do Claude aparecer.
+5. Slide 61: acrescentar a Text Arena, em que o Gemini 4 Argon lidera (captura do professor de arena.ai/leaderboard/text,
+   22/10/2026, 8.946.356 votos, 418 modelos: Gemini 4 Argon 1517 ±7 preliminar; Claude Opus 5.5 1509 ±7; Muse Wonder
+   1509 ±8; Claude Fable 5 1503 ±4; Claude Fable 5.1 1503 ±6). Agentes: Claude lidera; conversa: Gemini.
+6. Slide 63 (duelo do prazo em dobro): a plateia sabe de cor. Trocar por duelo de preferência (explicar precatório a um
+   leigo), com respostas reais do Claude Opus 5.5 e do Claude Haiku 5.5, sem nome, e revelação no slide seguinte.
+7. Capa mais simples, com o logo da co.juris (`temas/cojuris/marca/`, só sobre fundo claro), abrindo sozinha.
+8. Slide de encerramento com o logo da co.juris.
+
+Depois da versão 5: novo ensaio do professor; em seguida a Aula 2 (rever o briefing, que ainda usa o fio da data).
