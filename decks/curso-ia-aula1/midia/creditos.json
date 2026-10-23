@@ -123,44 +123,6 @@
     "nota": "reaproveitada da prévia aprovada (mesmo tema, mesma série), sem custo novo; leva .selo-ia na tela"
   },
   {
-    "arquivo": "midia/heroi-aula1.webp",
-    "data": "2026-10-19",
-    "ferramenta": "image-video-api (./cvm imagem)",
-    "modelo": "gemini",
-    "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Title-slide photograph, low-key. Subject: an open wooden index-card drawer full of blank cards, seen from a low three-quarter angle; one blank card is lifted slightly above the others and catches the light. Subject in the right third of the frame. Background: smooth, dark, out-of-focus wall, slightly lighter behind the subject. Keep the left 50% of the frame completely empty: only the smooth dark background, no objects, no lines, no texture. Keep all important content inside the central horizontal band; the top and bottom 8% are plain background. All cards blank.\nImage 2 is the approved draft of this photograph: keep its subject, camera angle, light, tonal range and dark smooth wall, but shift the drawer and the desk slightly to the right so that nothing, not even the desk edge, enters the left 50% of the frame. Render at full fidelity with fine wood grain and crisp card edges.",
-    "parametros": {
-      "aspecto": "16:9",
-      "resolucao": "4K"
-    },
-    "licenca": "termos do provedor do modelo",
-    "refs": [
-      "decks/previa-curso-ia/midia/originais/mestra.png",
-      "decks/previa-curso-ia/midia/originais/rascunhos/heroi-aula1-3.png"
-    ],
-    "custo_usd": 0,
-    "custo_nota": "cópia da prévia, sem geração nova; o custo da geração está no creditos.json da prévia",
-    "original": "decks/previa-curso-ia/midia/originais/heroi-aula1.png",
-    "tratamento": {
-      "ferramenta": "./ap tratar",
-      "tom": "duotone",
-      "intensidade": 0.8,
-      "largura": 2048,
-      "alfa": false,
-      "grao": 0.02,
-      "semente": 0,
-      "niveis": "auto",
-      "gama": 1.0,
-      "limiar": null,
-      "cores": {
-        "tinta": "#0F2641",
-        "destaque": "#D49D38",
-        "fundo": "#FCF9F4"
-      }
-    },
-    "copiado_de": "decks/previa-curso-ia/midia/heroi-aula1.webp",
-    "nota": "reaproveitada da prévia aprovada (mesmo tema, mesma série), sem custo novo; leva .selo-ia na tela"
-  },
-  {
     "arquivo": "midia/mesa.webp",
     "data": "2026-10-22",
     "ferramenta": "image-video-api (./ap imagens)",
@@ -220,6 +182,60 @@
     "licenca": "termos do provedor do modelo"
   },
   {
+    "arquivo": "midia/originais/rascunhos/capa-1.png",
+    "data": "2026-10-22",
+    "ferramenta": "image-video-api (./ap imagens)",
+    "modelo": "gemini",
+    "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Close-up of a printer's composing stick held at a low angle, filled with old lead movable type sorts that spell a single short word, the metal letters reversed as real type is, catching a soft raking light from the left. Beside the stick, an open wooden type case with its small compartments of loose letters fades into shadow. Shallow depth of field, the type in sharp focus, the type sits in the right half; the left half is dark calm background left empty for a title. No hands, no people, no paper, no legible printed text.",
+    "parametros": {
+      "aspecto": "16:9",
+      "resolucao": "1K"
+    },
+    "refs": [
+      "temas/cojuris/imagem/refs/mestra.jpg"
+    ],
+    "estilo_sha256": "7514a5a25ca15f06de3f8fa96c3106c21dcf57fd5d1273a06e1774ba3fbf8262",
+    "custo_usd": 0.0336,
+    "custo_nota": "estimado pela tabela de ferramentas/imagens.py, não é valor faturado",
+    "licenca": "termos do provedor do modelo"
+  },
+  {
+    "arquivo": "midia/originais/rascunhos/capa-2.png",
+    "data": "2026-10-22",
+    "ferramenta": "image-video-api (./ap imagens)",
+    "modelo": "gemini",
+    "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Close-up of a printer's composing stick held at a low angle, filled with old lead movable type sorts that spell a single short word, the metal letters reversed as real type is, catching a soft raking light from the left. Beside the stick, an open wooden type case with its small compartments of loose letters fades into shadow. Shallow depth of field, the type in sharp focus, the type sits in the right half; the left half is dark calm background left empty for a title. No hands, no people, no paper, no legible printed text.",
+    "parametros": {
+      "aspecto": "16:9",
+      "resolucao": "1K"
+    },
+    "refs": [
+      "temas/cojuris/imagem/refs/mestra.jpg"
+    ],
+    "estilo_sha256": "7514a5a25ca15f06de3f8fa96c3106c21dcf57fd5d1273a06e1774ba3fbf8262",
+    "custo_usd": 0.0336,
+    "custo_nota": "estimado pela tabela de ferramentas/imagens.py, não é valor faturado",
+    "licenca": "termos do provedor do modelo"
+  },
+  {
+    "arquivo": "midia/originais/rascunhos/capa-3.png",
+    "data": "2026-10-22",
+    "ferramenta": "image-video-api (./ap imagens)",
+    "modelo": "gemini",
+    "prompt": "SERIES STYLE: quiet editorial still-life photography of everyday legal work, black-and-white print look with rich, open midtones and soft shadows. One soft directional window light from the upper left, gentle falloff. 50mm lens look, f/5.6, camera level or pointing straight down, no tilt. Materials: plain A4 office paper, kraft-brown cardboard case folders, thin rubber bands, metal staples and paper clips, a rubber stamp, a ballpoint pen, light oak desk. Fine, barely visible film grain, natural contrast, no HDR, no lens flare, no bokeh balls, no haze. No text, letters, numbers, logos, emblems or watermarks; paper shows at most faint grey lines. No people, faces or hands. No robots, brains, circuit boards, holograms, gavels, scales of justice, statues, columns or marble.\n\nImage 1 is a style reference only: match its light direction, tonal range, grain and lens look; do not copy its objects or layout. Close-up of a printer's composing stick held at a low angle, filled with old lead movable type sorts that spell a single short word, the metal letters reversed as real type is, catching a soft raking light from the left. Beside the stick, an open wooden type case with its small compartments of loose letters fades into shadow. Shallow depth of field, the type in sharp focus, the type sits in the right half; the left half is dark calm background left empty for a title. No hands, no people, no paper, no legible printed text.",
+    "parametros": {
+      "aspecto": "16:9",
+      "resolucao": "1K"
+    },
+    "refs": [
+      "temas/cojuris/imagem/refs/mestra.jpg"
+    ],
+    "estilo_sha256": "7514a5a25ca15f06de3f8fa96c3106c21dcf57fd5d1273a06e1774ba3fbf8262",
+    "custo_usd": 0.0336,
+    "custo_nota": "estimado pela tabela de ferramentas/imagens.py, não é valor faturado",
+    "licenca": "termos do provedor do modelo"
+  },
+  {
     "arquivo": "midia/originais/rascunhos/mesa-1.png",
     "data": "2026-10-22",
     "ferramenta": "image-video-api (./ap imagens)",
@@ -272,5 +288,236 @@
     "custo_usd": 0.0336,
     "custo_nota": "estimado pela tabela de ferramentas/imagens.py, não é valor faturado",
     "licenca": "termos do provedor do modelo"
+  },
+  {
+    "arquivo": "midia/logos/openai.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://upload.wikimedia.org/wikipedia/commons/6/66/OpenAI_logo_2025_%28symbol%29.svg",
+    "empresa": "OpenAI (símbolo)",
+    "licenca": "Wikimedia Commons: domínio público",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/claude.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Claude_AI_symbol.svg",
+    "empresa": "Claude, da Anthropic (símbolo)",
+    "licenca": "Wikimedia Commons: CC0",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/gemini.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Google_Gemini_icon_2025.svg",
+    "empresa": "Google Gemini (ícone)",
+    "licenca": "Wikimedia Commons: domínio público",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/grok.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Grok-feb-2025-logo.svg",
+    "empresa": "Grok, da xAI (SpaceXSI)",
+    "licenca": "Wikimedia Commons: domínio público; se ainda é o logo em uso [CONFERIR] em grok.com",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/meta-ai.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Meta_AI_Logo_%282026%29.svg",
+    "empresa": "Meta AI (usado para Muse)",
+    "licenca": "Wikimedia Commons: domínio público",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/copilot.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://res.cdn.office.net/officehub/images/content/images/unauth/copilot-app-4b262e7e56.svg",
+    "empresa": "Microsoft Copilot",
+    "licenca": "arquivo do servidor da Microsoft; termos de marca [CONFERIR] na página de marcas da Microsoft",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/meta.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg",
+    "empresa": "Meta (usado para Muse Spark Open e Llama)",
+    "licenca": "Wikimedia Commons: domínio público",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/gemma.png",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Gemma_icon.png",
+    "empresa": "Google Gemma",
+    "licenca": "Wikimedia Commons: Apache 2.0 (ícone do repositório google-deepmind/gemma)",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/deepseek.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://upload.wikimedia.org/wikipedia/commons/e/ec/DeepSeek_logo.svg",
+    "empresa": "DeepSeek",
+    "licenca": "Wikimedia Commons: MIT",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/qwen.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://upload.wikimedia.org/wikipedia/commons/6/65/Qwen_Logo.svg",
+    "empresa": "Alibaba Qwen",
+    "licenca": "Wikimedia Commons: Apache 2.0",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/mistral.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Mistral_AI_logo_%282025%E2%80%93%29.svg",
+    "empresa": "Mistral AI",
+    "licenca": "Wikimedia Commons: domínio público",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/kimi.png",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/HEAD/assets/kimi-logo.png",
+    "empresa": "Moonshot Kimi",
+    "licenca": "repositório oficial; termos de marca não publicados [CONFERIR]",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/zai.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "https://raw.githubusercontent.com/zai-org/GLM-5/HEAD/resources/logo.svg",
+    "empresa": "Z.ai / GLM",
+    "licenca": "repositório oficial; termos de marca não publicados [CONFERIR]",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto, sem sugerir patrocínio",
+    "alteracao": "nenhuma: arquivo original, cores e desenho intactos",
+    "custo_usd": 0,
+    "uso": "slides fechados e abertos (grade de modelos)",
+    "conferencia": "apuracao.md, seção 11, Logos baixados"
+  },
+  {
+    "arquivo": "midia/logos/anthropic.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "ver apuracao.md, seção 11, Logos baixados",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto",
+    "custo_usd": 0,
+    "uso": "não usado na tela; guardado como alternativa",
+    "alteracao": "nenhuma"
+  },
+  {
+    "arquivo": "midia/logos/claude-wordmark.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "ver apuracao.md, seção 11, Logos baixados",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto",
+    "custo_usd": 0,
+    "uso": "não usado na tela; guardado como alternativa",
+    "alteracao": "nenhuma"
+  },
+  {
+    "arquivo": "midia/logos/gemini-wordmark.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "ver apuracao.md, seção 11, Logos baixados",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto",
+    "custo_usd": 0,
+    "uso": "não usado na tela; guardado como alternativa",
+    "alteracao": "nenhuma"
+  },
+  {
+    "arquivo": "midia/logos/openai-wordmark.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "ver apuracao.md, seção 11, Logos baixados",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto",
+    "custo_usd": 0,
+    "uso": "não usado na tela; guardado como alternativa",
+    "alteracao": "nenhuma"
+  },
+  {
+    "arquivo": "midia/logos/xai.svg",
+    "data": "2026-10-22",
+    "ferramenta": "trazido",
+    "origem": "ver apuracao.md, seção 11, Logos baixados",
+    "marca": "marca registrada, uso só para identificar a empresa ou o produto",
+    "custo_usd": 0,
+    "uso": "não usado na tela; guardado como alternativa",
+    "alteracao": "nenhuma"
+  },
+  {
+    "arquivo": "(no deck.html) QR codes inline dos slides pratica2, pratica4 e pratica5",
+    "data": "2026-10-22",
+    "ferramenta": "segno 1.6.6 (Python, local), nível de correção M",
+    "origem": "código próprio: matriz do segno convertida em caminho SVG dentro do deck, cor pelo tema",
+    "destinos": [
+      "https://platform.openai.com/tokenizer",
+      "https://processo.stj.jus.br/SCON/",
+      "https://arena.ai"
+    ],
+    "custo_usd": 0
   }
 ]

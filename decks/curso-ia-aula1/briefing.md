@@ -1,182 +1,293 @@
-# Briefing: curso de IA da co.juris, dia 1, Aula 1. O que é IA e qual usar
+# Briefing: curso de IA da co.juris, dia 1, Aula 1. O que é IA e qual usar (versão 3)
 
-Primeira de duas aulas de cerca de 90 minutos, dadas na mesma tarde; a segunda está em `decks/curso-ia-aula2`. O
-roteiro foi definido com o professor em 22/10/2026 e passou por dois conselhos (Sol e Gemini, juiz Opus), um sobre o
-mapa por blocos e outro sobre os slides; vereditos e decisões em `docs/councils/2026-10-22-mapa-dia-1/` e
-`docs/councils/2026-10-22-slides-dia-1/`. As manchetes abaixo são as aprovadas; o texto miúdo de cada tela ainda
-passa pelo professor no passo 5 da skill.
+Primeira de duas aulas de cerca de 90 minutos, dadas na mesma tarde; a segunda está em `decks/curso-ia-aula2`. A
+versão 2 (23 slides) foi reprovada no ensaio por explicar pouco. Esta versão segue o roteiro 3 aprovado pelo usuário,
+`docs/councils/2026-10-22-aula1-v3/_alvo.md`, com os 19 itens da "Lista final" de
+`docs/councils/2026-10-22-aula1-v3/documento-final.md` aplicados, e as decisões do usuário de 22/10/2026 sobre capa,
+placar, corrida EUA e China, grades de modelos, números e respiro. Os fatos estão em `apuracao.md` (anexo deste
+briefing) e o parecer fictício medido, em `apuracao-parecer-ficticio.md`.
 
 - Curso pago, o primeiro do professor. Turma mista: advogados, uma desembargadora, servidores e assessores, muitos
-  sem plano pago de IA. Os exemplos alternam escritório, gabinete e órgão público, e o sigilo é tratado como dever de
-  todos.
-- Curso agnóstico: Claude e ChatGPT aparecem lado a lado, sem vender marca.
-- Prática em formato misto: celular ou mão levantada nesta aula; notebook na Aula 2.
-- Tema `cojuris`, plano contínuo, um clique por slide, com a mesma trilha dourada e o mesmo acabamento da prévia
-  (`decks/previa-curso-ia`), que é a régua de qualidade e de onde vêm as cenas reaproveitadas.
-- Fio do dia: no slide 3 o professor pede ao vivo a data de assinatura de um contrato fictício sem entregar o
-  contrato, e a turma observa se a IA admite que não sabe ou arrisca um palpite. Nada é dado como inventado antes
-  desse teste; o slide 7 trata os dois desfechos, e um erro real do professor, anonimizado, fica de reserva. A data
-  só ganha fonte no slide 16 da Aula 2 (contrato fictício de 12/03/2019, o mesmo da prévia).
-- S.T.A.R. da aula: o placar da prova discursiva da PGE-MS (slide 20), único dado que só esta turma vê.
+  sem plano pago de IA. Exemplos neutros, que servem a escritório, gabinete e órgão público.
+- Curso agnóstico: Claude e ChatGPT lado a lado, sem vender marca.
+- Mensagem em uma frase: a IA escreve bem por previsão, não por consulta, e por isso cada um escolhe a ferramenta pela
+  tarefa e confere na fonte. A capa pergunta "Você confere como?" e o fecho responde.
+- Cinco práticas com celular ou mão levantada, cada uma com onde, passos, tempo e o que dizer em voz alta.
+- Tema `cojuris`, plano contínuo, um clique por slide, mesma trilha dourada e acabamento da prévia
+  (`decks/previa-curso-ia`).
+- S.T.A.R. da aula: o placar da prova discursiva da PGE-MS (slide 45). Cada bloco tem o seu momento, e só um: a
+  classificação da sala (bloco 1, slide 9), a palavra que se parte em tokens (bloco 2, slide 17), a busca do acórdão
+  (bloco 3, slide 31), o placar (bloco 4) e a corrida EUA e China (bloco 5, semente curta para o fim do curso).
 
 ## Mapa
 
-| min | bloco | slides | prática |
+| min | bloco | slides | práticas |
 |---|---|---|---|
-| 5 | Abertura | 1 a 3 | enquete de receio; pergunta da data ao vivo |
-| 15 | O que é IA e como escreve: máquina de probabilidade, não banco de consulta; janela de contexto como mesa | 4 a 9 | |
-| 20 | Detetive de alucinação | 10 a 13 | duplas classificam três trechos com a fonte ao lado |
-| 35 | Qual a melhor IA: arena (12), prova da PGE-MS (13), limites e discussão (10) | 14 a 20 | arena com voto da sala |
-| 10 | Modelo local, onde fica o dado e fecho | 21 a 23 | |
-| 5 | folga | | |
+| 3 | Abertura: capa e roteiro | 1 e 2 | |
+| 15 | O que é IA | 3 a 12 | 1, classificar seis sistemas (3 min) |
+| 25 | Como funciona por dentro | 13 a 28 | 2, contar tokens (4 min); 3, o mesmo pedido três vezes (3 min) |
+| 15 | Onde brilha e onde tropeça | 29 a 35 | 4, conferir o acórdão (6 min) |
+| 20 | Qual é a melhor IA | 36 a 46 | 5, a sala vota às cegas (3 min) |
+| 12 | Fechados e abertos | 47 a 52 | |
+
+Os tempos dos blocos 4 e 5 seguem o item 16 da Lista final (20 e 12 minutos). Os 2 minutos a mais da prática 2 saem
+da fala do próprio bloco 2.
 
 ## Slides
 
+Densidade pela parada final, nas faixas do oráculo: respiro (até 12 palavras ou texto de 200 px), leve (13 a 24),
+médio (25 a 45). Nenhuma imagem nova foi gerada; custo de mídia desta versão, US$ 0.
+
 | # | slide | manchete | o que a tela prova | clima e densidade | arquétipo | mídia e custo |
 |---|---|---|---|---|---|---|
-| 1 | aula1 | O que é IA e qual usar | abertura da aula | noite, respiro | abertura | `heroi-aula1.webp` da prévia, US$ 0 |
-| 2 | receio | Seu maior receio com a IA | sigilo, erro, tempo, não sei usar; a sala levanta a mão | claro, respiro | respiro | nenhuma |
-| 3 | pergunta | Pergunte a data sem dar o contrato | o pedido ao lado do lugar vazio do contrato; pergunta ao vivo, sem armadilha | claro, leve | objetos | recortes da prévia, US$ 0 |
-| 4 | dados | De regras fixas a padrões de dados | a trilha se divide: tarefa única (filtro de spam, radar) e tarefa geral (ChatGPT, Claude, Gemini); datas históricas só na fala | claro, médio | ramos | código |
-| 5 | palavra | A IA escreve uma palavra por vez | leque de candidatas; a vencedora entra na frase | claro, leve | escolha | cena da prévia; valores ilustrativos (pílula) |
-| 6 | probabilidade | Probabilidade, não consulta | frase única | noite, respiro | respiro | nenhuma |
-| 7 | data | Sem fonte, a data não se sustenta | os dois desfechos do slide 3: a recusa, ou o leque raso e o sorteio de uma data plausível | noite, leve | escolha com `data-sorteio` | cena da prévia; datas ilustrativas (pílula) |
-| 8 | mesa | A janela de contexto é a mesa | papéis voam para a mesa; o que não cabe fica de fora | claro, médio | viagem | foto de mesa gerada, cerca de US$ 0,05 |
-| 9 | conviccao | Ela erra com a mesma convicção | frase única | noite, respiro | respiro | nenhuma |
-| 10 | fronteira | A fronteira da IA é irregular | fácil para nós e difícil para ela, e o contrário | claro, médio | comparacao | código |
-| 11 | detetive | Três trechos para conferir na fonte | a tarefa (sustentado, contradito ou não localizado) e o QR Code; os trechos vão em folha ou link | claro, leve | objetos | QR por código; trechos do professor |
-| 12 | erro | Onde estava o erro | fios ligam cada trecho à fonte: um sem fonte, um contradito, um certo | claro, médio | fios | código |
-| 13 | humana | A verificação continua humana | frase única; na fala, quem confere antes de cada entrega | noite, respiro | respiro | nenhuma |
-| 14 | medir | Há duas formas de medir uma IA | a trilha se divide: a mesma prova para todos e votação de pessoas | claro, médio | ramos | código |
-| 15 | benchmark | O benchmark aplica a mesma prova | a caneta corrige uma prova | claro, respiro | numero | cena da prévia; nota ilustrativa (pílula) |
-| 16 | arena | Vote antes de saber qual é qual | respostas A e B sem nome sobre o caso fictício; critério anunciado antes do voto; na fala, "na arena, pessoas votam às cegas" | claro, leve | comparacao | duas respostas ilustrativas escritas no deck (pílula) |
-| 17 | pge | Demos a prova da PGE às IAs | frase única | noite, respiro | respiro | nenhuma |
-| 18 | prova | A prova tem 14 questões e 180 pontos | 12 curtas de 10, parecer de 30, peça de 30; "corrigida por dois modelos Gemma 4 locais" | claro, leve | numero | código |
-| 19 | placar | Nesta prova, o topo ficou próximo | as onze barras crescem; o topo próximo é o momento; o modelo local leva só uma cor; rodapé fixo "correção por modelos; não mede trabalho jurídico" (S.T.A.R.) | noite, médio | cena própria | código, a partir do gráfico do professor |
-| 20 | limites | O que essa nota não prova | sem respostas por questão; juízes Gemma, não banca; a prova de 2021 pode ter sido vista no treino; prova não é trabalho | claro, médio | comparacao | código |
-| 21 | local | Modelo local: 68,7% nesta prova | o Gemma 4 31B, que rodou no computador do professor | claro, respiro | numero | código |
-| 22 | sigilo | O sigilo depende de onde roda | duas perguntas separadas, qual modelo e onde o dado é processado; última linha "verifique a configuração antes de usar dados do caso" | claro, médio | ramos | código; [CONFERIR] exemplos de out/2026 |
-| 23 | fecho | Escolha por tarefa e teste você | a tese da aula e a ponte: a data continua sem fonte | noite, leve | fecho | nenhuma |
+| 1 | capa | O que é IA e qual usar | título, subtítulo "A IA escreve bem. Você confere como?" e a frase "O juiz julgou o pedido procedente" escrita palavra por palavra, com as candidatas em leque antes de cada escolha | noite, médio | escolha | código, valores ilustrativos (pílula) |
+| 2 | mapa | Entender a IA vem antes de escolher | quatro paradas, "conceito" (o começo) em dourado; dados de 22/10/2026 | claro, leve | tempo | código |
+| 3 | definicao | IA imita capacidades humanas | "Sistema que recebe dados, acha padrões e gera previsões ou conteúdo"; entrada (foto da placa) e saída (texto da placa) | claro, médio | comparacao | código |
+| 4 | lei | A OCDE define; o PL propõe | fios da OCDE (tradução livre) e do PL 2338/2023 às definições curtas; o PL é projeto, aprovado no Senado em 10/12/2024 | claro, médio | fios | código |
+| 5 | cotidiano | Você já usa IA todo dia | frase grande; Waze, Netflix, spam, rosto, teclado | noite, respiro | respiro | nenhuma |
+| 6 | regras | Regras escritas ou padrões aprendidos | IA simbólica contra aprendizado de máquina, um exemplo de spam em cada lado (item 6) | claro, médio | comparacao | código |
+| 7 | llms | LLMs nascem dos transformers | a trilha se divide: simbólica; máquina, profundo, transformers (2017), LLMs; 2022 é o lançamento do ChatGPT | claro, médio | ramos | código; [CONFERIR] 2022 |
+| 8 | tipos | Específica faz uma; generalista, várias | frase grande; "Uso geral, não IA geral (AGI)" (item 3) | claro, respiro | respiro | nenhuma |
+| 9 | pratica1 | Você classifica seis sistemas | os seis sistemas numerados, a regra dos dedos e o voluntário (item 11) | noite, médio | objetos | código |
+| 10 | gabarito | Quatro específicas, duas generalistas | quatro estações no ramo da específica, duas no da generalista; vale o sistema descrito | claro, médio | ramos | código |
+| 11 | generativa | A generativa cria, não só classifica | quatro cartões: texto, imagem, áudio, código, com exemplo jurídico neutro | claro, médio | cena própria (cartões) | código; exemplos ilustrativos (pílula) |
+| 12 | previsao | Parece criatividade; é previsão | frase grande | claro, respiro | respiro | nenhuma |
+| 13 | funciona | Como funciona por dentro | abertura do bloco 2, sem foto | noite, respiro | abertura | nenhuma |
+| 14 | corpus | Ela treinou com trilhões de pedaços | "15 trilhões" de tokens, Llama 3.1 405B, Meta, 2024 | claro, leve | numero | código |
+| 15 | parametros | O treino ajusta os parâmetros | "Parâmetros são números ajustados no treino, não textos salvos"; treino contra uso; 405 bilhões de parâmetros (item 2) | claro, médio | comparacao | código |
+| 16 | calcula | Sem busca, ela calcula; não consulta | frase grande (item 2) | noite, respiro | respiro | nenhuma |
+| 17 | tokens | Ela lê pedaços, não palavras | "inconstitucionalidade" se parte em in, constit, ucional, idade (4); "O réu agravou da decisão." em 8 blocos; tokenizador nomeado | claro, médio | cena própria (tokens) | código |
+| 18 | parecer | Parecer de 3 páginas: 2.056 tokens | 2.056 grande; 1.486 palavras, 1,38 token por palavra; medido em 22/10/2026 | claro, respiro (320 px) | numero | código |
+| 19 | pratica2 | Palavras viram blocos na tela | a frase do slide 17 no pedido, duas rotas (com e sem internet), QR do tokenizador (item 7) | noite, médio | objetos | QR por código |
+| 20 | previsto | A IA prevê um token por vez | dois ciclos de leque: "A sentença foi publicada ontem"; probabilidades inventadas para explicar (item 13) | claro, médio | escolha | código |
+| 21 | pratica3 | O mesmo pedido pode variar | o pedido, Claude ou ChatGPT, nova conversa, anotar igual ou diferente, rota sem botão (item 12) | noite, médio | objetos | código |
+| 22 | sorteio | Cada resposta é um sorteio com pesos | à esquerda o que vimos no app; à direita o leque raso e o sorteio de "improcedente", que não era a mais provável | claro, médio | escolha com `data-sorteio` | código; mecanismo ilustrado (pílula) |
+| 23 | mesa | A janela de contexto é a mesa | dois papéis voam para a árvore: instrução, conversa, anexo e espaço da resposta | claro, leve | viagem | `mesa.webp` (já gerada), US$ 0 nesta versão |
+| 24 | tamanho | A mesa tem tamanho | "1 milhão" de tokens: mais de mil páginas (Claude Opus 5.5) | claro, respiro (230 px) | numero | código; [CONFERIR] no app |
+| 25 | limite | Passou do limite, algo fica de fora | cabe contra não cabe: partes cortadas ou resumidas (item 4) | claro, médio | comparacao | código; [CONFERIR] varia por produto |
+| 26 | meio | No meio, o dado pode se perder | o mesmo dado no início, no meio e no fim do anexo; achado de Liu et al., 2023 (item 4, slide 24B) | claro, médio | objetos | recortes da prévia, US$ 0; exemplo ilustrativo (pílula) |
+| 27 | conversa | Conversa nova, mesa limpa | frase grande; salvo memória ligada | noite, respiro | respiro | nenhuma |
+| 28 | passos | Do corpus à resposta, em cinco passos | cinco marcos; "previsão gera a resposta" em dourado | claro, médio | tempo | código |
+| 29 | linguagem | Ela vai bem em linguagem | resumir, rascunhar, traduzir, explicar, classificar, em letra grande | claro, respiro | respiro | nenhuma |
+| 30 | avianca | Ela inventa com a mesma confiança | fios da ordem de sanção (Mata v. Avianca, 22/06/2023) a três fatos; os nomes inventados ficam sem fonte | claro, médio | fios | código |
+| 31 | pratica4 | Você confere se o acórdão existe | pedido literal, três passos, QR do STJ (item 1) | noite, médio | objetos | QR por código |
+| 32 | conferiram | Os números conferiram? | frase grande; "não encontrei", "tema diferente", "confere" (item 8) | noite, respiro | respiro | nenhuma |
+| 33 | fronteira | A fronteira da IA é irregular | ajuda contra fonte externa; conferência humana nos dois lados (Dell'Acqua et al., 2023) | claro, médio | comparacao | código |
+| 34 | responde | Quem usa responde pelo que entrega | dar contexto, supervisionar, validar (dourado), corrigir | claro, leve | tempo | código |
+| 35 | pior | Hoje é a pior IA que você usará | frase grande, provocação | claro, respiro | respiro | nenhuma |
+| 36 | melhor | Qual é a melhor IA? | abertura do bloco 4; "Melhor para quê?" | noite, respiro | abertura | nenhuma |
+| 37 | benchmark | Benchmark é o ENEM da IA | a caneta corrige dez itens, 8 de 10 | claro, leve | numero | código; ilustrativo (pílula) |
+| 38 | medidas | Seis coisas que os benchmarks medem | seis cartões | claro, médio | cena própria (cartões) | código |
+| 39 | legal | Existe prova só para o jurídico | seis barras com nome e peso; 35% em dourado (item 15) | claro, médio | cena própria (pesos) | código |
+| 40 | processo | Prova não é processo | frase grande; "No caso real, nada vem limpo." | noite, respiro | respiro | nenhuma |
+| 41 | arena | Na arena, pessoas votam às cegas | pergunta, duas respostas sem nome, voto, nomes | claro, médio | tempo | código |
+| 42 | pratica5 | A sala vota sem ver o nome | A e B sem nome, "Qual parece mais pronta?", 1 ou 2 dedos, QR da arena (item 9) | noite, médio | comparacao | QR por código; [CONFERIR] respostas do professor |
+| 43 | mede | Benchmark mede prova; arena, preferência | frase grande | noite, respiro | respiro | nenhuma |
+| 44 | prova | Demos a prova da PGE às IAs | 180 grande; 12 dissertativas de 10, parecer de 30, peça de 30; correção por dois modelos Gemma 4 com gabarito e espelho | claro, respiro (320 px) | numero | código |
+| 45 | placar | Nesta prova, o topo ficou próximo | dez barras com nome e nota; colchete dourado sobre os dois primeiros; selo "1 prova (PGE-MS 2021), correção por IA, não é ranking geral" (S.T.A.R.) | noite, mais de 45 | cena própria (placar) | código |
+| 46 | limites | O que essa nota não diz | prova contra correção | claro, médio | comparacao | código |
+| 47 | aberto | Fechado ou aberto? | abertura do bloco 5 | noite, respiro | abertura | nenhuma |
+| 48 | pesos | Aberto é ter os pesos | fechado: só pelo serviço; aberto: baixado e rodado em servidor próprio, conforme licença, configuração e controles do órgão (item 19) | noite, médio | comparacao | código |
+| 49 | fechados | Os principais modelos fechados | seis cartões com logo oficial, empresa, família e produto | claro, médio | cena própria (cartões) | logos de `midia/logos`, US$ 0; [CONFERIR] versões nos apps |
+| 50 | abertos | Os principais modelos abertos | oito cartões com logo, família e empresa | claro, médio | cena própria (cartões) | logos, US$ 0; [CONFERIR] família Mistral |
+| 51 | corrida | Na ponta, EUA e China disputam | EUA contra China, com as empresas das duas grades; na Europa, a Mistral | noite, médio | comparacao | código |
+| 52 | fecho | Escolha por tarefa e teste você | teste com seu material, use mais de uma IA, confira na fonte; Aula 2: como pedir bem | noite, leve | fecho | nenhuma |
 
-Três escolhas pedem registro, porque o oráculo vai avisar. Os slides 5 e 7 repetem o arquétipo escolha com o respiro
-6 no meio, e não são vizinhos. O placar é cena própria porque nenhum arquétipo mostra onze barras com uma marcada; ele
-é o S.T.A.R. O slide 4 fundiu a linha do tempo com a divisão entre tarefa única e geral para não pôr datas sem fonte
-na tela.
+### O que mudou em relação ao roteiro 3 e por quê
+
+O roteiro tem 49 linhas; com 6A e 6B (slides 6 e 7), 24 e 24B (25 e 26) e a corrida EUA e China (51), o deck fica com
+52 slides. Os arquétipos que mudaram:
+
+- Capa (1): sem foto, por decisão do usuário. É o arquétipo escolha na zona noite, com a manchete em 110 px; nenhuma
+  cena própria precisou ser escrita. São duas rodadas de leque, o máximo da biblioteca. A foto `heroi-aula1.webp`
+  saiu do deck e do `midia/creditos.json`.
+- Definição (3): o roteiro pedia respiro, mas a definição completa e o exemplo da placa passam de 12 palavras e não
+  cabem em letra de respiro; virou comparação entrada e saída, com a definição logo abaixo da manchete.
+- Cotidiano (5) e específica e generalista (8): objetos e comparação no roteiro, viraram respiros. O objetos pede
+  recortes fotográficos que não existem e não seriam gerados nesta versão; e, com os slides 6A e 6B, os slides 1 a 11
+  ficariam com sete seguidos sem respiro. Os cinco itens do cotidiano ficam numa linha embaixo; os exemplos de
+  específica (placa) e generalista (texto, código, imagem) passam para a fala.
+- Generativa (11), medidas (38), fechados (49) e abertos (50): cena própria de cartões, escrita uma vez no deck e usada
+  quatro vezes. Nenhum arquétipo mostra quatro a oito itens sem ordem; o tempo sugeriria sequência e o ramos aceita
+  no máximo três estações por ramo. As duas grades de modelos ficam vizinhas, como pede o roteiro, mas com desenhos
+  diferentes: fechados em três colunas, com logo ao lado do nome da empresa e o produto embaixo; abertos em quatro
+  colunas, com logo em cima e a família em destaque.
+- Tokens (17), Legal Index (39) e placar (45): cenas próprias. A palavra que se parte em blocos é o S.T.A.R. do bloco
+  2; as seis barras de peso não cabem no leque do escolha, que pede uma frase e até quatro candidatas; o placar já era
+  cena própria na versão 2.
+- Linguagem (29): objetos no roteiro, virou respiro com manchete, pelo mesmo motivo do cotidiano.
+- Arena (41): comparação no roteiro, virou tempo (os quatro passos da votação), porque a prática 5 (42) é uma
+  comparação A e B e as duas seriam vizinhas com o mesmo arquétipo.
+- Conferiram (32): respiro; as três categorias do item 8 cabem como três etiquetas curtas, as mesmas palavras do
+  passo 3 da prática 4.
+- Práticas 1 a 4: arquétipo objetos, em que o pedido se digita na caixa (é o que a sala vai digitar ou fazer) e os
+  passos ficam à direita. Para caber em 45 palavras, os protocolos da Lista final foram condensados na tela; a versão
+  inteira está nas notas do apresentador.
+- Previsto (20): o roteiro pedia três ciclos; a biblioteca faz no máximo duas rodadas de leque. O terceiro ciclo fica
+  na fala.
+
+### Respiro (decisão 6 do usuário)
+
+A regra é nunca mais de cinco slides seguidos sem respiro (parada de até 12 palavras ou texto de 200 px). Com 6A e 6B
+o roteiro tinha sete seguidos (4 a 10). A correção foi dupla: o cotidiano (5) e a específica e generalista (8) viraram
+respiros. O deck fica assim: as maiores sequências sem respiro são 19 a 23 (prática 2, previsto, prática 3, sorteio,
+mesa) e 48 a 52 (pesos, fechados, abertos, corrida, fecho), ambas com cinco, no limite. Contam como respiro também os
+números de 230 e 320 px (14, 18, 24, 44) e as aberturas. O `./ap sondar` não avisa sequência nem respiro.
+
+### Partitura de luz
+
+Noite: capa, respiros (salvo 8, 12, 29 e 35, que ficam no claro), aberturas, as cinco práticas, o placar, os pesos (48), a corrida (51) e o fecho. Os pesos foram
+para a noite porque, no claro, pesos, fechados e abertos seriam três claros médios seguidos; a zona noite da abertura
+47 continua neles. A corrida fica na noite pelo mesmo motivo e por ser a semente que fecha o bloco.
 
 ## Fala, por bloco
 
-- Abertura: a enquete calibra a linguagem; a pergunta da data é feita ao vivo, no chat de qualquer IA, sem o
-  contrato, e o professor não anuncia o resultado esperado.
-- Como escreve: tokens entram só na fala ("inconstitucionalidade" fatiada); as duas ideias que ficam são
-  probabilidade em vez de consulta e a mesa de trabalho.
-- Detetive: três trechos de casos reais de erro de IA do professor, anonimizados (sem partes, número de processo nem
-  dado pessoal), um deles correto como controle.
-- Qual a melhor IA: a arena vem antes do gráfico e é exercício independente dele. No placar, nada de "empate
-  técnico"; a separação entre o teste local do professor e o computador de cada aluno é dita no slide 21.
-- Fecho: escolher por tarefa e testar com o próprio material, e a data em aberto para a Aula 2.
+- Abertura. A frase da capa se escreve sozinha: cada palavra saiu de candidatas com peso, e é isso que a aula vai
+  abrir por dentro. A pergunta do subtítulo ("Você confere como?") só é respondida no fecho. O roteiro tem quatro
+  paradas; os dados de mercado foram verificados em 22/10/2026.
+- O que é IA. As capacidades humanas que a IA imita (reconhecer imagens, entender e gerar texto, prever, criar) ficam
+  na fala; a tela dá a definição simples e o exemplo da placa. OCDE e PL dizem a mesma coisa com o verbo "inferir"; o
+  PL ainda é projeto. A IA simbólica (regras escritas) é a de antes; o aprendizado de máquina tira padrões dos dados,
+  e dele vêm o aprendizado profundo, os transformers (Vaswani et al., 2017) e os LLMs, modelos de linguagem grandes.
+  "Generalista" é modelo de uso geral, não IA geral (AGI). Prática 1 e gabarito: o que conta é o sistema descrito.
+  A generativa produz conteúdo novo, e o que parece criatividade é previsão.
+- Como funciona. Treino com trilhões de tokens (Llama 3.1, cerca de 15 trilhões); o treino ajusta números, os
+  parâmetros, e o texto não fica guardado. Sem busca, ela calcula; com a busca ligada, o app consulta e entrega.
+  Tokens medidos no tokenizador da OpenAI; cada fabricante tem o seu, por isso a prática 2 não promete os mesmos
+  blocos em outra ferramenta. A previsão é um token por vez e cada resposta é um sorteio com pesos: repetir a mesma
+  saída é peso alto, não falha. A mesa tem tamanho (1 milhão de tokens na API do Claude Opus 5.5; no app, depende do
+  plano), o excesso é cortado ou resumido conforme o produto, e o meio de um anexo longo pesa menos (Liu et al.,
+  2023, modelos de 2023, não é lei geral). Conversa nova, mesa limpa, salvo memória ligada.
+- Onde brilha e tropeça. Linguagem é o forte. Mata v. Avianca: seis decisões inventadas pelo ChatGPT e a multa de
+  US$ 5.000 vieram também de os advogados terem sustentado as citações depois de questionados. Na prática 4, o
+  critério é conferir número e tema, com ou sem busca ligada. Depois, um relato real de cada categoria que tiver
+  aparecido; conferir continua sendo a regra. A fronteira irregular é de Dell'Acqua et al. (758 consultores do BCG);
+  a expressão é dos autores. "Hoje é a pior IA que você usará" entra como provocação e transição, não como clímax.
+- Qual é a melhor IA. Benchmark é prova padronizada, controlada, repetível e comparável, e prova não é veredito. O
+  Legal Index pondera as capacidades pela frequência em tarefas jurídicas reais; as provas são, na maior parte, em
+  inglês e de direito estrangeiro. Arena mede preferência: depois da prática 5, perguntar se a sala votou por
+  precisão, clareza ou aparência de segurança, e que afirmação exigiria fonte. A prova da PGE-MS é teste do
+  professor, não da PGE-MS; o placar mostra o topo próximo (0,8 ponto entre os dois primeiros), sem "empate técnico".
+- Fechados e abertos. Aberto é ter os pesos, e isso não garante sigilo sozinho: depende de licença, configuração e
+  controles do órgão. Nas grades, "aberto" é peso disponível, não necessariamente licença de código aberto. A ponta
+  fechada é americana; entre os abertos fortes há americanos e chineses; na Europa, a Mistral. O tema volta no fim do
+  curso (encerramento do dia 2). Fecho: escolher por tarefa, testar com o próprio material, usar mais de uma IA e
+  conferir na fonte; na Aula 2, como pedir bem.
 
-## Fontes e pendências
+## Fontes
 
-- Benchmark: gráfico "Benchmark, PGE-MS 2021, prova discursiva" do professor. Nota ponderada = Σ(razão × peso) / Σ
-  peso, total de 180 pontos; dissertativas curtas (12) de 10 pontos, parecer (1) de 30, peça (1) de 30; juízes
-  gemma4:26b-t1.0-local e gemma4:31b-t1.0-local. Percentuais: Claude Opus 5.5 91,7; Gemini 4 Argon 90,9; Claude
-  Sonnet 5.5 88,7; Muse Wonder 86,8; GPT-6.1 Sol 83,4; GPT-6 Luna 79,4; Muse Spark 1.3 78,0; Gemini 3.8 Flash 77,8;
-  Claude Haiku 5.5 75,5; Gemma 4 31B (local, Ollama) 68,7; DeepSeek V4.1 Flash 64,4. Não há respostas por questão.
-  [CONFERIR] com o professor: data da rodada e a empresa por trás de "Muse".
-- Fronteira irregular: Dell'Acqua et al., "Navigating the Jagged Technological Frontier" (Harvard Business School,
-  2023) [CONFERIR] antes de citar; a expressão vem de Ethan Mollick.
-- Alucinação: Kalai, Nachum, Vempala e Zhang, "Why Language Models Hallucinate", arXiv:2509.04664 [CONFERIR], já
-  pendente na prévia.
-- Arena: número oficial e data da LMArena [CONFERIR]; Chiang et al., arXiv:2403.04132, para o mecanismo. Sem número
-  oficial confirmado, o antigo slide 17 (arena-real) saiu do deck, e a frase "na arena, pessoas votam às cegas" foi
-  para a fala do slide 16. O deck tem 23 slides.
-- Slide 22 (sigilo; era o 23 no roteiro aprovado): exemplos de modelos abertos e fechados e onde rodam, com fonte de out/2026 [CONFERIR].
-- Material da prática: os três trechos anonimizados (professor) ainda não existem. Os slides 11 e 12 usam três
-  trechos de marcador, neutros e fictícios ("A cláusula 4 fixa multa de 2%.", "A sentença julgou o pedido
-  procedente.", "Há precedente idêntico do tribunal."), com a pílula "[CONFERIR] trecho do professor"; o QR do
-  material também falta e está na tela como "[CONFERIR]". Pendência do professor.
-- Arena (slide 16): as duas respostas são ilustrativas, escritas para o deck sobre o caso fictício: A recusa e pede o
-  contrato; B afirma 05/08/2020, a mesma data sorteada no slide 7. Nenhuma coincide com 12/03/2019, a data do
-  contrato fictício, que só aparece na Aula 2.
-- Fronteira (slide 10): os dois exemplos ("contar os i de inconstitucionalidade" e "resumir cem páginas de autos")
-  são ilustrativos, com pílula, e a fonte Dell'Acqua et al. segue [CONFERIR].
-- Slide 7: as datas candidatas (17/11/2019, 05/08/2020, 02/01/2018, 30/09/2021) e os percentuais são ilustrativos e
-  não coincidem com 12/03/2019.
+Todas lidas em 22/10/2026; o detalhe, com o trecho lido e a ressalva de cada uma, está em `apuracao.md`.
+
+| slide | dado na tela | fonte |
+|---|---|---|
+| 4 | definição da OCDE, tradução livre | OCDE, OECD/LEGAL/0449, PDF oficial (apuração, item 1) |
+| 4 | PL 2338/2023 aprovado no Senado em 10/12/2024, aguardando parecer na Câmara; não é lei | ficha da Câmara (id 2487262) e matéria 157233 do Senado (item 2) |
+| 7 | transformers, 2017 | Vaswani et al., "Attention Is All You Need", arXiv:1706.03762, v1 de 12/06/2017, lido nesta sessão |
+| 7 | 2022, lançamento do ChatGPT | não lido: openai.com recusou o acesso automático; `[CONFERIR]` na tela |
+| 14, 15 | Llama 3.1 405B: cerca de 15 trilhões de tokens; 405 bilhões de parâmetros | model card do Llama 3.1, Meta (item 3) |
+| 17 | in, constit, ucional, idade (4); "O réu agravou da decisão." em 8 tokens | `tiktoken` 0.14.0, `o200k_base`, conferido no tokenizador web (item 5) |
+| 18 | 2.056 tokens, 1.486 palavras, 1,38 por palavra | parecer fictício medido (item 5c; `apuracao-parecer-ficticio.md`) |
+| 19 | QR: https://platform.openai.com/tokenizer | item 5 |
+| 24 | 1 milhão de tokens; mais de mil páginas | Anthropic, Models overview (item 4); conta do item 5d |
+| 26 | começo e fim melhores que o meio | Liu et al., arXiv:2307.03172 (item 7) |
+| 30 | Mata v. Avianca, 22-cv-1461, ordem de 22/06/2023, multa de US$ 5.000, nomes inventados | Opinion and Order on Sanctions, S.D.N.Y., Document 54 (item 6) |
+| 31 | QR: https://processo.stj.jus.br/SCON/ | item 12 |
+| 33 | Dell'Acqua et al., 2023; 758 consultores (na fala) | HBS Working Paper 24-013 (item 8) |
+| 39 | pesos 35, 25, 15, 10, 10, 5 | Artificial Analysis, Capability Indexes Methodology (item 9) |
+| 41, 42 | mecanismo da arena; QR https://arena.ai | Chiang et al., arXiv:2403.04132; item 10 |
+| 44, 45 | prova discursiva da PGE-MS de 2021, 180 pontos; dez notas | gráfico "Benchmark, PGE-MS 2021, prova discursiva" do professor: Claude Opus 5.5 91,7; Gemini 4 Argon 90,9; Claude Sonnet 5.5 88,7; Muse Wonder 86,8; GPT-6.1 Sol 83,4; GPT-6 Luna 79,4; Muse Spark 1.3 78,0; Gemini 3.8 Flash 77,8; Claude Haiku 5.5 75,5; DeepSeek V4.1 Flash 64,4. Juízes gemma4:26b e gemma4:31b, com gabarito e espelho. O resultado do modelo local saiu do placar e do deck por decisão do usuário |
+| 49, 50, 51 | empresas, famílias, produtos, origem por país | item 11 (subagente nas páginas oficiais); grupos por país definidos pelo usuário |
+
+## Pendências [CONFERIR]
+
+Todas aparecem na tela com a pílula e impedem `./ap pdf` e `./ap empacotar` sem `--rascunho`.
+
+- Slide 7: a data de lançamento do ChatGPT (2022).
+- Slide 24: o limite da janela nos apps, que depende do plano.
+- Slide 25: como cada produto corta ou resume o histórico.
+- Slide 42: as duas respostas do duelo, a preparar pelo professor (a tela mostra linhas cinza no lugar delas).
+- Slide 49: qual modelo cada app usa hoje (ChatGPT por plano, Grok 4.7 como padrão, Muse no Meta AI, lista do
+  Copilot).
+- Slide 50: o carro-chefe atual da Mistral.
+
+Só na fala ou no material, sem pílula na tela: a data de 1956 da IA simbólica (sem fonte, saiu da tela); o
+reconhecimento de que a busca do STJ pode pedir desafio anti-robô com muitos celulares (rota impressa); as três
+tentativas da prática 3, que o professor grava antes; a folha impressa da prática 2; e os termos de marca da
+Microsoft, da Moonshot e da Z.ai (`midia/creditos.json`). Reconferir na véspera a ficha do PL 2338/2023 e a grade de
+modelos.
 
 ## Mídia e custo
 
-| arquivo | origem | custo |
-|---|---|---|
-| `heroi-aula1.webp` (slide 1) | prévia aprovada, Gemini, crédito copiado | US$ 0 |
-| `doc-peticao.webp`, `doc-contrato.webp`, `doc-modelo.webp` (slides 3, 8, 11) | prévia aprovada, crédito copiado | US$ 0 |
-| `pasta-aberta.webp` (slide 8) | marcador da prévia até a escolha da mesa | US$ 0 |
-| rascunhos `mesa-1` a `mesa-3` | `./ap imagens --rascunhos -n 3`, Gemini 1K | US$ 0,10 (3 × 0,0336) |
-| `mesa.webp` final | `./ap imagens --final mesa=N`, Gemini 2K, depois da escolha | US$ 0,05 previstos |
+| arquivo | uso | origem | custo |
+|---|---|---|---|
+| `mesa.webp` | slide 23 | gerada para a versão 2 (`./ap imagens`, Gemini 2K) | US$ 0,0504, já gasto |
+| `doc-peticao.webp`, `doc-contrato.webp`, `doc-modelo.webp` | slides 23 e 26 | prévia aprovada, crédito copiado | US$ 0 |
+| `logos/*.svg`, `logos/gemma.png`, `logos/kimi.png` | slides 49 e 50 | Wikimedia Commons e repositórios oficiais, sem alteração (`apuracao.md`, item 11) | US$ 0 |
+| QR do tokenizador, do STJ e da arena | slides 19, 31 e 42 | segno 1.6.6, local; caminho SVG dentro do deck, cor do tema | US$ 0 |
 
-Gasto até agora: US$ 0,10. Os rascunhos estão em `storyboard/candidatos.png`; quem escolhe é o usuário. Depois da
-escolha: `./ap imagens decks/curso-ia-aula1 --final mesa=N`, trocar o `src` do slide 8 para `midia/mesa.webp`,
-apagar `midia/pasta-aberta.webp` e a entrada dele no `midia/creditos.json` (a única com "marcador"). Os vídeos de
-marcador do catálogo saíram com os créditos. Toda imagem gerada leva o selo na tela.
+Gasto desta versão: US$ 0. Gasto acumulado do deck: US$ 0,25 (rascunhos da mesa e da capa antiga, a final da mesa),
+somado do `midia/creditos.json`. Os rascunhos da capa de tipos móveis ficaram sem uso, porque a capa passou a ser
+feita por código. `heroi-aula1.webp` saiu do deck e do crédito. Cada logo tem entrada no crédito com a origem, a
+licença do arquivo e a nota "marca registrada, uso só para identificar". O xAI usa o logo do Grok, como pedido; Llama
+e Muse não têm logo próprio, e os cartões usam `meta.svg` e `meta-ai.svg` com o nome ao lado. Toda imagem gerada leva
+o selo na tela (23 e 26).
 
-## Montagem (passo 5)
+## Avisos aceitos
 
-- Andamentos fora do padrão: `corte` no slide 4 (o assunto muda da pergunta ao vivo para a teoria) e `capitulo` nos
-  respiros 9 e 13, que fecham os blocos "como escreve" e "detetive".
-- Slide 3: o contrato aparece esmaecido (cinza, 15%) no lugar dele, com a legenda "contrato: não enviado".
-- Slide 8: os dois papéis que viajam até a árvore ficam no vão antes do slide, fora de quadro na parada 7, e entram
-  durante a viagem; a frase "O que não cabe fica fora da mesa." fica embaixo da árvore.
-- Slide 18: sem grade de caneta (catorze vistos se liam como catorze acertos); o 180 grande à esquerda e a
-  composição à direita.
-- Slide 19 (placar), cena própria: onze barras de 0 a 100%, na ordem do gráfico, crescendo da esquerda; nomes na
-  vertical dentro das barras (30 px); o colchete dourado sobre os três primeiros é o único dourado e entra depois de
-  todas as barras; o Gemma 4 31B local leva uma barra mais clara; rodapé fixo desde a entrada. Sem logos.
-
-### Avisos aceitos do oráculo
-
-- Placar (19): 59 palavras visíveis (máximo 45). Os onze nomes e percentuais são o dado do S.T.A.R.; cortar nomes ou
-  valores esconderia a fonte. A fala conduz a leitura pelo colchete do topo.
-- Sequência fronteira, detetive, erro (10 a 12): três claros com 25 a 45 palavras. É o bloco prático (tarefa,
-  exercício, correção), com três arquétipos e desenhos diferentes (comparação, objetos, fios), e o respiro 13 fecha
-  o bloco no escuro.
+- Placar (45): 58 palavras visíveis, acima de 45. Os dez nomes e notas são o dado do S.T.A.R. e a Lista final (item 5)
+  manda mantê-los; a fala conduz a leitura pelo colchete dos dois primeiros.
+- Fechados e abertos (49 e 50): duas grades de cartões vizinhas. É o pedido do roteiro (item 16); os desenhos diferem
+  (três colunas com logo ao lado do nome; quatro colunas com logo em cima). O oráculo não avisa, porque são cenas
+  próprias.
+- Cartões em quatro slides (11, 38, 49, 50) e comparação em nove (3, 6, 15, 25, 33, 42, 46, 48, 51): nenhum par
+  vizinho, salvo as grades acima.
 
 ## Crítica
 
-### Rodada 1 (a própria sessão, stills e viagens)
+Três rodadas no mínimo, como manda o passo 7: a primeira feita pela própria sessão, as seguintes por um subagente
+crítico (Opus) que não montou o deck, com a rubrica e a lista de `critica.md`. Cada correção foi conferida nos stills
+regerados.
+
+### Rodada 1 (a própria sessão: sondar, folha, stills e viagens)
 
 | gravidade | slide | defeito e evidência | correção |
 |---|---|---|---|
-| alta | 19 placar | nomes verticais transbordavam a caixa (ERRO do sondar) e "DeepSeek V4.1 Flash" passava do topo da barra até o valor (`parada-19-placar.png`, x 1670–1780) | entrelinha 1,4 no nome; escala das barras de 500 para 570 px e base em 872 |
-| alta | 1 aula1 | subtítulo cruzava a trilha (`parada-01-aula1.png`, y 930–1000) | palavra "IA" com `largura: 340` e subtítulo mais largo |
-| média | 8 mesa | papel em voo atravessava o traço da trilha no vão (`viagem-08-mesa-35.png`, x 1580–1730, y 880–1000) | papéis sobem no vão (top 60 e 380) |
-| média | 3 pergunta | slide sem elemento dominante, moldura vazia pequena | lugar do contrato maior e à direita |
-| média | deck | escala: 12 de 23 sem nada acima de 120 px; sequências de três claros médios (sondar) | letras maiores na fronteira (140 px) e na arena (180 px); legenda do slide 14 para a fala |
+| alta | 7 llms | "transformers" transbordava a estação (ERRO do sondar) | estação mais larga no slide |
+| alta | 39 legal | os percentuais de 68 px transbordavam a caixa (cinco ERROs) | coluna do número com 210 px, trilho com 780 |
+| alta | 31 pratica4 | o pedido de 14 palavras saía da caixa e o QR cobria a última linha (`parada-31-pratica4.png`, y 600 a 700) | nas práticas, caixa sobe para 346 px; na prática 4, caixa de 290 px |
+| média | 1 capa | rótulo e título se sobrepunham (AVISO) | título em 176 px, subtítulo e frase descem |
+| média | 17 tokens | o "8" encostava no ponto final da frase; hierarquia 1,2x (AVISOs) | contagem em 180 px, à direita, em 1600 |
+| média | 26 meio | "no meio" com contraste 3,9:1 em 36 px; 46 palavras; a barra do papel do fim saía da folha | legenda em 40 px; achado e etiqueta mais curtos; barra reposicionada |
+| média | 31 pratica4 | 48 palavras | passos e legenda do QR mais curtos (45) |
+| média | 46 limites | "Correção" a 140 px entrava na margem | volta a 110 px |
+| média | deck | três claros médios seguidos em mapa, definição, lei; tamanho, limite, meio; benchmark, medidas, legal | mapa e tamanho para leve (rótulo, rodapé e pílula mais curtos); a legenda do benchmark saiu |
+| baixa | 22 sorteio | "pedido." sozinho na segunda linha | `text-wrap: balance` no bloco da esquerda |
 
 ### Rodada 2 (subagente crítico)
 
 | gravidade | slide | defeito e evidência | correção |
 |---|---|---|---|
-| alta | 11 detetive | pedido de três linhas saía da caixa (`parada-11-detetive.png`, y 600–650) | caixa com 250 px |
-| alta | 18 prova | catorze vistos e contador até 14 liam-se como catorze acertos | sem grade; 180 grande e a composição ao lado |
-| média | 3 pergunta | moldura tracejada vazia parecia wireframe | recorte do contrato esmaecido no lugar |
-| média | 11 detetive | quadrado tracejado vazio do QR | trocado por "trechos e fontes por QR [CONFERIR]" |
-| média | 4 dados | lado "regras fixas" não aparecia na tela | legenda "Antes, regras escritas à mão; hoje, padrões tirados de dados." |
-| média | 21 local | repete o 68,7% do placar e da manchete | não corrigido: manchete aprovada; depende do usuário |
-| média | deck | quatro respiros noite de mesmo desenho (6, 9, 13, 17) | não corrigido: roteiro aprovado; trocar o 17 por imagem depende do usuário |
-| baixa | 4 dados | "só" sozinho na caixa | caixa reescrita |
-| baixa | 21 local | pouso do corte sem o número | andamento padrão, o número entra antes do pouso |
+| alta | 42 pratica5 | "1 dedo" e "2 dedos" caíam sobre as barras (`parada-42-pratica5.png`, y 700); o seletor das práticas pegava também a etiqueta de dentro da janela | seletor com `>`: só as etiquetas filhas da section |
+| alta | 7 llms | "profundo" e "transformers" se liam juntos (`parada-07-llms.png`, x 480 a 1000) | nomes das estações em 36 px no slide |
+| média | 12→13, 35→36 | respiro escuro colado na abertura escura: a virada de bloco não mudava a luz (`viagem-36-melhor-35.png`) | previsao (12) e pior (35) viram respiros claros |
+| média | 13, 36, 47 | rótulos "Bloco 2, 4, 5" sem bloco 1 e 3 na tela, e o mapa tem quatro etapas | rótulos com o nome da etapa ("Como funciona"; em 36 e 47, o mesmo rótulo dos slides seguintes, "Qual a melhor IA" e "Fechados e abertos") |
+| média | 11, 38 | cartões com a metade de baixo vazia, cara de esqueleto | sem altura mínima; grades descem e ganham espaço |
+| média | deck | aberturas só com título; pouca imagem | não corrigido: o usuário mandou tirar a foto do fichário e não gerar imagem nova |
+| média/baixa | 2 mapa | o marco dourado estava em "qual usar", como se a aula estivesse no fim | o dourado vai para "conceito" |
+| baixa | 52 fecho | quatro dourados (a palavra e os números dos passos) | números em tom suave |
+| baixa | 26 meio | a barra do papel "no fim" ficava a 65% da folha | barra em 262 px |
+| baixa | 49 fechados | "xAI (SpaceXSI)" encostava na borda do cartão | logo do Grok em 44 px, espaço de 16 px |
+| baixa | 23 mesa | canto da foto lavado | não corrigido: foto escolhida pelo usuário, sem re-tratar |
+| baixa | 18 parecer | manchete repete o número grande | não corrigido: texto do roteiro (depende do usuário) |
 
-### Rodada 3 (subagente crítico)
+### Rodada 3 (subagente crítico, conferência)
+
+Nenhum defeito alto ou médio. As nove correções da rodada 2 aparecem nos stills regerados, sem regressão; nas viagens
+11→12→13 e 34→35→36 a borda claro e escuro aparece sem pisca nem terceiro tom; `./ap sondar` com 0 erro e só o aviso
+aceito do placar.
 
 | gravidade | slide | defeito e evidência | correção |
 |---|---|---|---|
-| média | 12 erro | o único dourado caía no trecho certo, contra a pergunta "onde estava o erro" | sem marca: o sublinhado do trecho sem fonte é o único dourado |
-| média | 3 pergunta | o contrato esmaecido ainda parecia presente | opacidade 15% |
-| média | 19 placar | a barra clara do modelo local competia com o colchete | barra local a 58% e nome escuro (contraste conferido no sondar) |
-| baixa | 1 aula1 | subtítulo invadia a foto | duas linhas equilibradas, 880 px |
-| baixa | 4 dados | caixa de cima com uma linha só | "uma única / tarefa" |
+| baixa | 36, 47 | o rótulo da abertura ("Qual usar") diferia do rótulo dos slides seguintes | rótulos alinhados: "Qual a melhor IA" e "Fechados e abertos" |
+| baixa | 33 a 35 | três claros seguidos (comparação, tempo, respiro), com densidades diferentes; o oráculo não avisa | mantido: desenhos e faixas diferentes |
 
-### Rodada 4 (subagente crítico, conferência)
-
-Nenhum defeito alto ou médio; as correções da rodada 3 aparecem nos stills. Ficam três baixos: o cedilha de "PARA
-COMEÇAR" cortado pela máscara de entrada a 70% da viagem ao slide 2 (vem do `revelar` do motor); os rótulos "Pedido"
-e "Material" do slide 3 em alturas diferentes; "procedente." sozinha na segunda linha do slide 12.
