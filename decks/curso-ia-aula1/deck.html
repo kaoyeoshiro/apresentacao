@@ -529,12 +529,13 @@
       <div class="ap-ch em-tok">banco</div>
       <p class="em-seta">→</p>
       <div class="em-vet"><span>0,21</span><span>−0,87</span><span>0,05</span><span>0,63</span><span>0,34</span><span>−0,12</span><span>0,78</span><span>−0,45</span><span class="em-mais">…</span></div>
-      <p class="em-leg">É a posição do token num mapa de significados, escrita em números.</p>
+      <p class="em-leg">Ponto de partida: o mesmo vetor para "banco" em qualquer frase.</p>
     </div>
     <div class="em-b">
       <p class="em-fr" style="top: 400px">Sentei no <mark>banco</mark> da praça.</p>
       <p class="em-fr" style="top: 580px">Abri conta no <mark>banco</mark>.</p>
-      <p class="ap-et em-mt">Mapa de significados, simplificado</p>
+      <p class="em-fr" style="top: 740px; font-size: 36px; color: var(--cor-tinta-suave)">A atenção lê a frase toda e ajusta o vetor de cada token.</p>
+      <p class="ap-et em-mt">Depois das camadas de atenção</p>
       <div class="em-mapa">
         <i class="em-pt" style="left: 120px; top: 80px"></i><span class="em-pl" style="left: 120px; top: 80px">cadeira</span>
         <i class="em-pt" style="left: 330px; top: 160px"></i><span class="em-pl" style="left: 330px; top: 160px">praça</span>
@@ -1134,9 +1135,9 @@ const slides = [
      faca: ['clicar no endereço da tela: abre em nova aba', 'colar a frase e contar os blocos com a sala', 'não prometer os mesmos blocos em outro tokenizador'],
      transicao: 'Cada bloco desses ainda vira outra coisa por dentro: números.'}},
   {id: 'embedding', titulo: 'Cada token vira uma lista de números', passos: [2.6, 3.4],
-   notas: {diga: 'Dentro do modelo, nenhum token fica como texto: cada um vira uma longa lista de números, o embedding. Na tela, oito números de um exemplo, mas na prática são milhares por token. Esses números dizem onde o token fica num mapa de significados. Palavras parecidas ficam perto. E o modelo olha a frase inteira: "banco" de "sentei no banco da praça" cai perto de cadeira e sentar, e "banco" de "abri conta no banco" cai perto de juros e dinheiro. É assim que a mesma palavra ganha dois sentidos.',
-     faca: ['primeiro clique: o token e a lista de números', 'segundo clique: as duas frases e o mapa', 'os números e o mapa são ilustrativos, inventados para explicar; o rodapé avisa',
-       'na prática o mapa tem milhares de dimensões, não duas'],
+   notas: {diga: 'Dentro do modelo, nenhum token fica como texto: cada um vira uma longa lista de números, o embedding. Na tela, oito números de um exemplo, mas na prática são milhares por token. No começo, a palavra "banco" tem um vetor só, o mesmo em qualquer frase, como numa tabela de consulta. Depois vêm as camadas do transformer, que usam a atenção: cada token olha para os outros da frase e o vetor dele se ajusta. Por isso, ao fim das camadas, o "banco" de "sentei no banco da praça" fica perto de cadeira e sentar, e o "banco" de "abri conta no banco" fica perto de juros e dinheiro. O vetor de partida é um só; o que muda com a frase é o vetor depois da atenção.',
+     faca: ['primeiro clique: o token e o vetor de partida, igual em qualquer frase', 'segundo clique: as duas frases e o mapa depois das camadas de atenção', 'os números e o mapa são ilustrativos, inventados para explicar; o rodapé avisa',
+       'se perguntarem se o banco tem dois embeddings: um de entrada, fixo, e um por frase, depois das camadas de atenção; o mapa tem milhares de dimensões, não duas'],
      transicao: 'Com os tokens já em números, a IA faz uma coisa só: prevê o próximo.'}},
   {id: 'previsto', titulo: 'A IA prevê um token por vez',
    notas: {diga: 'A IA recebe o texto, calcula as candidatas para o próximo token, cada uma com uma probabilidade, escolhe uma e repete. Aqui cada palavra é um token, para simplificar, e as probabilidades são inventadas para explicar.',
