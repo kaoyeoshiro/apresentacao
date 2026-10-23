@@ -160,3 +160,13 @@
   .b-sa p { margin: 0; padding: 22px 0; border-top: 3px solid var(--linha-sobre-noite); }
   .b-sa-n { font: 800 44px/1.2 var(--fonte-titulo); }
   .b-sa-t { font: 400 38px/1.3 var(--fonte-texto); text-wrap: pretty; }
+
+  /* pdflido: a mesa do chat e a pasta do agente */
+  .b-pdfcol { position: absolute; top: 340px; width: 780px; }
+  .b-pdfe { left: 120px; } .b-pdfd { left: 1020px; }
+  .b-pdfcol .etiqueta { position: static; display: block; margin: 0 0 18px; }
+  .b-pdfcaixa { box-sizing: border-box; display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; padding: 28px; border: 4px solid var(--linha-sobre-noite); border-radius: 22px; }
+  .b-pg { display: block; height: 120px; border: 3px solid var(--suave-sobre-noite); border-radius: 8px; }
+  .b-pdfe .b-pg { background: color-mix(in srgb, var(--suave-sobre-noite) 35%, transparent); }
+  .b-pg.b-pg-on { background: var(--cor-destaque); border-color: var(--cor-destaque); }
+  .b-pdftx { margin: 26px 0 0; font: 400 40px/1.3 var(--fonte-texto); }

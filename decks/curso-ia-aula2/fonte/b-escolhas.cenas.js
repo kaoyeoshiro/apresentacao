@@ -278,3 +278,21 @@ CENAS.codigo = cartoes('codigo');
     revelar(rod, molaAR(x - 1.2));
   };
 }
+
+// PDF lido inteiro? As doze páginas entram na mesa do chat (primeiro clique); na pasta, entram esmaecidas e uma acende (segundo).
+{
+  const sec = m.secao('pdflido'), pe = $$(sec, '.b-pdfe .b-pg'), pd = $$(sec, '.b-pdfd .b-pg'), on = sec.querySelector('.b-pg-on');
+  const ets = $$(sec, '.etiqueta'), txs = $$(sec, '.b-pdftx'), caixas = $$(sec, '.b-pdfcaixa'), rod = sec.querySelector(':scope > .rodape');
+  CENAS.pdflido = (t, c) => {
+    const x = conteudo(c), y = c.desde(1);
+    titulo(sec, x, c);
+    revelar(ets[0], molaAR(x - 0.1)); surgir(caixas[0], molaAR(x - 0.15), {dy: 0, escala: 0.9});
+    pe.forEach((el, n) => surgir(el, molaAR(x - 0.4 - n * 0.06), {dy: -30}));
+    revelar(txs[0], molaAR(x - 1.3));
+    revelar(ets[1], molaAR(y - 0.1)); surgir(caixas[1], molaAR(y - 0.15), {dy: 0, escala: 0.9});
+    pd.forEach((el, n) => { surgir(el, molaAR(y - 0.4 - n * 0.04), {dy: 0}); if (el !== on) el.style.opacity = String(0.35 * Number(el.style.opacity || 1)); });
+    on.style.transform = '';
+    revelar(txs[1], molaAR(y - 1.3));
+    revelar(rod, molaAR(y - 1.6));
+  };
+}
