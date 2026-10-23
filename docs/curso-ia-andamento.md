@@ -10,7 +10,7 @@ Dia 1 de um curso pago de IA (turma mista: advogados, uma desembargadora, servid
 pago). Duas aulas de ~90 min na mesma tarde, tema `cojuris`, plano contínuo. Siga a skill
 `.claude/skills/apresentacao/SKILL.md`.
 
-- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 62 slides da versão 6, `apuracao.md` e
+- Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 61 slides da versão 7, `apuracao.md` e
   `apuracao-2.md`).
 - Aula 2, "Do chat à pasta": `decks/curso-ia-aula2/briefing.md` aprovado em 22/10, mas ainda com o fio da data do
   contrato, que o professor rejeitou na Aula 1; rever antes de montar. O deck ainda é a cópia do catálogo.
@@ -139,18 +139,23 @@ os 3 minutos da prática 5 foram para o bloco 5 e podem ir para outra parte, se 
 O slide "Pesos dizem quanto cada pista importa" (fios entre "juiz/julgou/pedido" e "procedente/improcedente") ficou
 confuso até para o professor.
 
-1. [a fazer] Retirar o slide "Pesos dizem quanto cada pista importa".
-2. [a fazer] Em "Os de ponta passam de 1 trilhão de pesos", trocar a primeira parada (rede com fios) por texto grande com a
+Feito na versão 7 (61 slides, 71 paradas); detalhe no `briefing.md`, seção "O que mudou da versão 6", e na rodada 9
+da crítica.
+
+1. [feito] Retirar o slide "Pesos dizem quanto cada pista importa".
+2. [feito] Em "Os de ponta passam de 1 trilhão de pesos", trocar a primeira parada (rede com fios) por texto grande com a
    analogia "Uma rede neural é feita de bilhões de botões de ajuste: os pesos, ou parâmetros. Treinar é girar esses
    botões até as respostas ficarem boas.", com no máximo um desenho discreto de botões girando; a segunda parada
-   (barras e linha dos fechados) continua.
-3. [a fazer] Vizinhança de arquétipos, respiro, notas e transições dos vizinhos; soma dos blocos em 90 e determinismo
-   conferido.
+   (barras e linha dos fechados) continua. Ficou com nove botões discretos que giram; no segundo clique, frase e
+   botões saem e as barras ocupam a largura toda.
+3. [feito] Vizinhança de arquétipos, respiro, notas e transições dos vizinhos; soma dos blocos em 90 e determinismo
+   conferido. Blocos em 16/29/14/18/13: o minuto do slide retirado saiu do bloco 2 e foi para o 4, porque
+   16/30/14/17/13 com 61 slides reprovou o determinismo (o mesmo pixel da linha do dia).
 
 ## Pendência de motor (23/10/2026)
 
 - O teste de determinismo do `./ap sondar` falha por um pixel na barra de progresso da linha do dia conforme a
-  divisão de minutos dos blocos (ex.: 16/30/14/17/10). Contornado na Aula 1 com 16/30/14/17/13. Corrigir em
+  divisão de minutos dos blocos (ex.: 16/30/14/17/10). Contornado na Aula 1 com 16/30/14/17/13 (versão 6) e 16/29/14/18/13 (versão 7). Corrigir em
   `motor/palco.js` (arredondar o `scaleX` da barra ou o `faixa` do bloco) e cobrir com teste.
 - `palco.js` avança o slide em qualquer clique, inclusive em link; a Aula 1 contorna nos próprios links. Corrigir no
   motor ignorando cliques em `<a>`.
