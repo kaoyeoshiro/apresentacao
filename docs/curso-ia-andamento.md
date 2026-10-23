@@ -55,3 +55,26 @@ pago). Duas aulas de ~90 min na mesma tarde, tema `cojuris`, plano contínuo. Si
 Com `apuracao-2.md` e o motor prontos, remontar a Aula 1 com os 11 itens, rodar lint, sondar, mídia e três rodadas de
 crítica (passos 5 a 7 da skill), commitar e abrir `./ap abrir decks/curso-ia-aula1` para o professor ensaiar. Depois,
 a Aula 2. Antes de juntar ao `main`: bateria completa (`./ap teste`), autorrevisão por subagente e o "posso juntar?".
+
+## Decisão de 22/10/2026: ranking da arena na Aula 1
+
+O professor mandou captura da página inicial da arena.ai, quadro "Top 10 Agents · Best Overall" (367.936.358 sessões
+no total), e pediu para usar esse ranking geral, em que o Claude lidera:
+
+| # | modelo | valor mostrado |
+|---|---|---|
+| 1 | Claude Opus 5.5 (Max) | 20,92% |
+| 2 | GPT-6 Astra (Max) | 14,70% |
+| 3 | Claude Fable 5.1 (Max) | 14,17% |
+| 4 | GPT-6.1 Sol (Max) | 13,55% |
+| 5 | Claude Sonnet 5.5 (Max) | 12,67% |
+| 6 | Gemini 4 Argon (High) | 12,03% |
+| 7 | Muse Wonder Full (Max) | 11,26% |
+| 8 | GPT-6 Sol (Max) | 9,36% |
+| 9 | Claude Fable 5 (High) | 8,31% |
+| 10 | Claude Opus 5 (Max) | 8,09% |
+
+Fonte: arena.ai, página inicial, captura do professor de 22/10/2026. Antes de pôr o percentual na tela, abrir a
+página e ler o que ele significa (a captura não diz); se não houver explicação, mostrar só a ordem e escrever na tela
+"ranking de agentes, arena.ai, 22/10/2026". É um ranking de agentes (tarefas reais), diferente da Text Arena de
+conversa, em que o Gemini 4 Argon lidera; o slide deve dizer qual quadro é.
