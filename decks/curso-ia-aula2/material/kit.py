@@ -1,149 +1,68 @@
-"""Monta o kit da Aula 2 em decks/curso-ia-aula2/kit/ (vai para o repositório público do curso).
-Usa python-docx (uv pip install --python ~/.venvs/apresentacao/bin/python python-docx). Rode antes escritorio.py e gerar.py."""
-import pathlib, shutil, subprocess, sys
-from docx import Document
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
-from docx.oxml import OxmlElement
-from docx.oxml.ns import qn
-from docx.shared import Cm, Pt, RGBColor
+"""Arruma o kit publicado da Aula 2 em decks/curso-ia-aula2/kit/: move os gabaritos para fora das pastas dos casos,
+monta a skill conferir-temas, gera o relatório em Word de cada caso e o README. NUNCA apaga casos/ nem temas/.
+Precisa de python-docx (uv pip install --python ~/.venvs/apresentacao/bin/python python-docx)."""
+import pathlib, shutil, subprocess, sys, zipfile
 
 AQUI = pathlib.Path(__file__).parent
 KIT = AQUI.parent / "kit"
-ESC = AQUI / "escritorio"
-VERDE, COBRE = RGBColor(0x06, 0x4A, 0x45), "B87548"
-NOME = "Dias & Moura"
+FONTE = AQUI / "kit_fonte"
+SKILL = KIT / "gabarito" / "skills" / "conferir-temas"
 
+README = """# Kit da Aula 2: conferir os Temas 6 e 1234 do STF
 
-def fonte(run, tam=None, negrito=None, cor=None):
-    run.font.name = "Georgia"
-    run._element.rPr.rFonts.set(qn("w:eastAsia"), "Georgia")
-    if tam: run.font.size = Pt(tam)
-    if negrito is not None: run.bold = negrito
-    if cor is not None: run.font.color.rgb = cor
-
-
-def borda(par, lado, cor, tam=12):
-    pr = par._p.get_or_add_pPr()
-    b = OxmlElement("w:pBdr")
-    e = OxmlElement(f"w:{lado}")
-    for k, v in (("val", "single"), ("sz", str(tam)), ("space", "4"), ("color", cor)):
-        e.set(qn(f"w:{k}"), v)
-    b.append(e); pr.append(b)
-
-
-def campo(par, instr):
-    for t, txt in (("begin", None), (None, instr), ("end", None)):
-        r = par.add_run(); fonte(r, 8.5)
-        if t:
-            f = OxmlElement("w:fldChar"); f.set(qn("w:fldCharType"), t); r._r.append(f)
-        else:
-            i = OxmlElement("w:instrText"); i.set(qn("xml:space"), "preserve"); i.text = txt; r._r.append(i)
-
-
-def sombra(celula, cor):
-    s = OxmlElement("w:shd")
-    s.set(qn("w:val"), "clear"); s.set(qn("w:color"), "auto"); s.set(qn("w:fill"), cor)
-    celula._tc.get_or_add_tcPr().append(s)
-
-
-def modelo(destino):
-    d = Document()
-    sec = d.sections[0]
-    sec.page_width, sec.page_height = Cm(21), Cm(29.7)
-    sec.left_margin = sec.right_margin = Cm(2.2)
-    sec.top_margin, sec.bottom_margin = Cm(3.2), Cm(2.4)
-    est = d.styles["Normal"]; est.font.name = "Georgia"; est.font.size = Pt(11)
-    est.paragraph_format.line_spacing = 1.3
-    largura = sec.page_width - sec.left_margin - sec.right_margin
-    # cabeçalho: logo à esquerda, "Documento de trabalho" à direita, filete cobre
-    h = sec.header.paragraphs[0]
-    h.paragraph_format.tab_stops.add_tab_stop(largura, WD_TAB_ALIGNMENT.RIGHT)
-    h.add_run().add_picture(str(ESC / "logo-escritorio.png"), height=Cm(1.5))
-    r = h.add_run("\tDocumento de trabalho"); fonte(r, 9.5, cor=RGBColor(0x66, 0x66, 0x66))
-    borda(h, "bottom", COBRE)
-    # rodapé: nome e número da página
-    f = sec.footer.paragraphs[0]
-    f.paragraph_format.tab_stops.add_tab_stop(largura, WD_TAB_ALIGNMENT.RIGHT)
-    r = f.add_run(f"{NOME} Advocacia · documento fictício\tPágina "); fonte(r, 8.5, cor=RGBColor(0x66, 0x66, 0x66))
-    campo(f, "PAGE")
-    # corpo
-    t = d.add_paragraph(); t.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    t.paragraph_format.space_before, t.paragraph_format.space_after = Pt(14), Pt(16)
-    fonte(t.add_run("{{TITULO}}"), 14, True, VERDE)
-    h2 = d.add_paragraph(); h2.paragraph_format.space_before = Pt(10)
-    fonte(h2.add_run("Datas e fontes"), 12, True, VERDE); borda(h2, "bottom", COBRE)
-    tab = d.add_table(rows=2, cols=3)
-    tab.autofit = False
-    for c, (cab, larg) in enumerate((("Data", 3.2), ("Fato", 8.0), ("Fonte", 5.4))):
-        for lin in tab.rows:
-            lin.cells[c].width = Cm(larg)
-        cel = tab.rows[0].cells[c]; sombra(cel, "064A45")
-        fonte(cel.paragraphs[0].add_run(cab), 10, True, RGBColor(255, 255, 255))
-        fonte(tab.rows[1].cells[c].paragraphs[0].add_run("{{c}}"), 10)
-    h3 = d.add_paragraph(); h3.paragraph_format.space_before = Pt(18)
-    fonte(h3.add_run("Pontos para conferência humana"), 12, True, VERDE); borda(h3, "bottom", COBRE)
-    fonte(d.add_paragraph().add_run("{{CONFERENCIA}}"), 11)
-    d.save(destino)
-
-
-def main():
-    if KIT.exists():
-        shutil.rmtree(KIT)
-    (KIT / "caso").mkdir(parents=True); (KIT / "escritorio").mkdir()
-    gab = KIT / "gabarito"; skill = gab / "skills" / "parecer-no-padrao"; skill.mkdir(parents=True)
-    for n in ("contrato", "aditivo", "notificacao"):
-        shutil.copy(AQUI / "caso-ficticio" / f"{n}.pdf", KIT / "caso")
-    shutil.copy(ESC / "padrao-do-escritorio.md", KIT / "escritorio")
-    shutil.copy(ESC / "logo-escritorio.png", KIT / "escritorio")
-    modelo(KIT / "escritorio" / "modelo.docx")
-    shutil.copy(ESC / "cronologia-exemplo.md", gab / "cronologia.md")
-    shutil.copy(AQUI / "kit_fonte" / "preencher.py", skill)
-    (skill / "SKILL.md").write_text(SKILL, encoding="utf-8")
-    (KIT / "README.md").write_text(README, encoding="utf-8")
-    subprocess.run([sys.executable, str(skill / "preencher.py"), str(gab / "cronologia.md"),
-                    str(KIT / "escritorio" / "modelo.docx"), str(gab / "cronologia.docx")], check=True)
-    print("kit ok:", KIT)
-
-
-SKILL = """---
-name: parecer-no-padrao
-description: Gera o cronologia.docx no padrão do escritório Dias & Moura a partir do cronologia.md da pasta. Use quando o usuário pedir a cronologia ou o parecer em Word no padrão do escritório.
----
-
-# Parecer no padrão do escritório
-
-1. Leia o `cronologia.md` e o `padrao-do-escritorio.md` da pasta do caso.
-2. Rode `python3 preencher.py cronologia.md escritorio/modelo.docx cronologia.docx`, com o `preencher.py` desta skill.
-   O script precisa de `python-docx` (`pip install python-docx`). O modelo já traz logo, cabeçalho, tabela e rodapé.
-3. Confira se a tabela tem uma linha por fato, com data no formato dd/mm/aaaa, e se a seção "Pontos para conferência
-   humana" lista tudo o que ficou sem fonte.
-4. Salve o `cronologia.docx` na pasta e diga ao usuário o que ele precisa conferir.
-
-Regra fixa: se um dado não está nos documentos, escreva "Não encontrei nos documentos". Nunca complete por conta própria.
-"""
-
-README = """# Kit da Aula 2: do chat à pasta
-
-Caso fictício e escritório fictício (Dias & Moura). Nenhum dado é real.
+Seis casos de medicamento, todos fictícios (recriados a partir de situações reais, sem nenhum dado verdadeiro).
+O escritório (Dias & Moura) também é fictício.
 
 ## O que tem aqui
 
-- `caso/`: contrato, aditivo e notificação (PDF).
-- `escritorio/`: padrão de documentos, logo e `modelo.docx` já no padrão.
-- `gabarito/`: a cronologia pronta, o Word final e a skill pronta. Só abra depois de tentar a sua.
+- `casos/`: os autos de cada caso em PDF (petição inicial, laudo, receita e o que mais importa).
+- `temas/`: o texto dos Temas 6 e 1234 em Markdown, com fonte e data da consulta.
+- `escritorio/`: o logo do escritório, usado no relatório.
+- `gabarito/`: o relatório pronto de cada caso, a resposta (`gabarito.json`) e a skill `conferir-temas`.
+  Só abra depois de tentar a sua.
 
 ## Como usar na aula
 
-1. Baixe o kit (botão verde Code > Download ZIP) e abra a pasta `kit` no Claude, no ChatGPT Work ou no Codex.
-2. Prática 1: peça a cronologia do caso, com os seis elementos do pedido e a regra "se não souber, diga".
-   Salve como `cronologia.md` na pasta (copie o seu para a raiz do kit).
-3. Prática 2: peça ao agente que crie uma skill chamada `parecer-no-padrao`. Ela lê o `cronologia.md`, preenche o
-   `escritorio/modelo.docx` e salva o `cronologia.docx`. Rode a skill e confira o Word.
-4. Travou? Compare com `gabarito/skills/parecer-no-padrao`, copie para a pasta de skills da sua ferramenta e rode.
+1. Baixe o kit: botão verde **Code** > **Download ZIP**, e extraia a pasta.
+2. Abra a pasta no seu app (Claude, ChatGPT Work ou Codex).
+3. Escolha um caso e peça ao agente que confira, com os temas, se o autor cumpriu os requisitos do Tema 6 e qual é a
+   competência pelo Tema 1234. Use os seis elementos do pedido e a regra "se não souber, diga".
+4. Instale a skill `conferir-temas` (copie a pasta `gabarito/skills/conferir-temas` para a pasta de skills da sua
+   ferramenta, ou envie o arquivo `gabarito/conferir-temas.zip` no app do Claude) e rode no caso 2, para ver o
+   relatório em Word.
+5. Compare com `gabarito/caso-N/` e confira as páginas decisivas nos PDFs.
 
-O `modelo.docx` é preenchido por um script curto (`preencher.py`). Se o seu app gerar o Word direto, tudo bem:
-o importante é o resultado seguir `escritorio/padrao-do-escritorio.md`.
+O relatório organiza a leitura. A conferência da fonte e a decisão sobre a defesa são suas.
 """
+
+
+def main():
+    for p in ("caso", "escritorio/modelo.docx", "escritorio/padrao-do-escritorio.md",
+              "gabarito/cronologia.docx", "gabarito/cronologia.md", "gabarito/skills/parecer-no-padrao"):
+        alvo = KIT / p
+        if alvo.is_dir():
+            shutil.rmtree(alvo)
+        elif alvo.exists():
+            alvo.unlink()
+    SKILL.mkdir(parents=True, exist_ok=True)
+    shutil.copy(FONTE / "SKILL.md", SKILL / "SKILL.md")
+    shutil.copy(FONTE / "relatorio.py", SKILL / "relatorio.py")
+    shutil.copy(FONTE / "caso-exemplo.json", SKILL / "exemplo.json")
+    shutil.copy(KIT / "escritorio" / "logo-escritorio.png", SKILL / "logo-escritorio.png")
+    for pasta in sorted((KIT / "casos").glob("caso-*")):
+        destino = KIT / "gabarito" / pasta.name
+        destino.mkdir(parents=True, exist_ok=True)
+        js = pasta / "gabarito.json"
+        if js.exists():
+            shutil.move(str(js), destino / "gabarito.json")
+        subprocess.run([sys.executable, str(SKILL / "relatorio.py"), str(destino / "gabarito.json"),
+                        str(KIT / "escritorio" / "logo-escritorio.png"), str(destino / f"relatorio-{pasta.name}.docx")], check=True)
+    with zipfile.ZipFile(KIT / "gabarito" / "conferir-temas.zip", "w", zipfile.ZIP_DEFLATED) as z:
+        for f in sorted(SKILL.iterdir()):
+            z.write(f, f"conferir-temas/{f.name}")
+    (KIT / "README.md").write_text(README, encoding="utf-8")
+    print("kit ok")
+
 
 if __name__ == "__main__":
     main()
