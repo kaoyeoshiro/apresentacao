@@ -7,8 +7,7 @@ O deck é montado por `montar.py` a partir de `fonte/`; edite `fonte/`, nunca o 
 
 ## ESTADO ATUAL (24/10/2026): vale este bloco; onde as seções abaixo discordarem dele, estão superadas
 
-**Dinâmica da prática.** O professor faz ao vivo, na tela compartilhada do notebook; os alunos acompanham no app deles
-se quiserem. O material é o kit público https://github.com/kaoyeoshiro/kit-aula2-curso-ia (gerado por `material/kit.py`
+**Dinâmica da prática (decisão de 24/10/2026).** O professor faz ao vivo, só no Claude (sem gravação do Codex e sem mostrar o resultado dos alunos), na tela compartilhada; os alunos refazem em casa com o kit. Os blocos agora se chamam "Três caminhos" (chat, pasta, Code e Codex) e o Code e o Codex são para o usuário avançado, não só para desenvolvedor. O dia 2 inclui harness e computer use. O material é o kit público https://github.com/kaoyeoshiro/kit-aula2-curso-ia (gerado por `material/kit.py`
 em `decks/curso-ia-aula2/kit/`): `casos/caso-1..6` (autos fictícios em PDF, anonimizados a partir de ações reais de
 medicamento contra o Estado de MS, geradores em `material/casos_gerar/`), `temas/` (Tema 6 e Tema 1234 do STF em
 Markdown, copiados do portal do STF em 23/10/2026; o texto do Tema 1234 na página termina cortado no item 5.1 e foi
@@ -28,10 +27,10 @@ casos 2, 3 e 6.
 **Sub-agentes** (lido em 23/10/2026): Claude Code, até 20 simultâneos por padrão, cada um com janela de contexto própria,
 sem ver a conversa, contando no mesmo limite de uso; Codex, no app desktop, no terminal e na extensão do editor (na web
 só se acompanha), limite configurável; ChatGPT Work, em contas elegíveis, na maioria dos níveis é preciso pedir de forma
-explícita; chat comum do ChatGPT não despacha agentes independentes (a própria resposta do ChatGPT disse); Claude,
-depende da versão e da aba, e o professor testa com a pergunta "você consegue despachar subagents?". Fonte: documentação
+explícita; chat comum do ChatGPT não despacha agentes independentes (a própria resposta do ChatGPT disse); Claude (app),
+sim, integrado ao Cowork (informação do professor, confirmada em teste dele, 24/10/2026). Fonte: documentação
 da Anthropic (code.claude.com, sub-agents) e da OpenAI (learn.chatgpt.com, subagents), mais a resposta do ChatGPT em
-23/10/2026. O Claude comum não foi confirmado.
+23/10/2026. 
 
 **PDF lido inteiro?** No chat, o conteúdo do PDF inteiro entra na conversa (no app do Claude, até 1000 páginas; até 100
 lê texto e imagens, acima disso só o texto). Na pasta, o agente escolhe o que abrir; PDF digitalizado exige

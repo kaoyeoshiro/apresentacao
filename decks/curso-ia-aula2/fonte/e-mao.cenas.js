@@ -121,3 +121,4 @@ CENAS.pratica2 = (() => {
 })();
 
 CENAS.travou = cartoes('travou');
+CENAS.casa = cartoes('casa');

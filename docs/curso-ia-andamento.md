@@ -190,6 +190,6 @@ da crítica.
   Prática: o professor faz ao vivo e a sala acompanha; material no kit público
   https://github.com/kaoyeoshiro/kit-aula2-curso-ia (fonte em `decks/curso-ia-aula2/kit/`, montado por
   `material/kit.py`; os casos vêm de `material/casos_gerar/`). Detalhe e fatos no `briefing.md`, bloco "ESTADO ATUAL".
-- Antes da aula: ensaiar a instalação da skill `conferir-temas` no Claude, no ChatGPT Work e no Codex, e a pergunta
-  "você consegue despachar subagents?" em cada conta (o Claude comum não foi confirmado).
+- Antes da aula: ensaiar no Claude a instalação da skill `conferir-temas` e as duas demonstrações ao vivo (caso 2 e
+  caso 6). Os alunos refazem em casa; não há gravação do Codex nem mostra de resultados em sala.
 - Os originais reais dos casos e os mapas de anonimização ficam só em `~/Downloads/casos-aula2` (fora do repositório).

@@ -1,5 +1,5 @@
 
-// ===== Bloco B, duas escolhas =====
+// ===== Bloco B, três caminhos =====
 
 // Ponte: a frase sobe linha a linha; a caixa "o que a IA lê" aparece e, em onda, entram nela o pedido (pequeno) e o
 // que vem junto com ele; a legenda por último.
@@ -69,24 +69,21 @@
   };
 }
 
-// Matriz: cabeçalhos dos dois eixos, as quatro casas em onda (Chat, Projeto, Tarefa com pasta, Projeto com pasta);
-// no segundo clique a casa do processo acende, com a nota, e a linha de Code e Codex entra embaixo.
+// Matriz: o cartão do Projeto e suas três coisas (primeiro clique); no segundo, a pergunta da pasta e as duas respostas.
 {
-  const sec = m.secao('matriz'), cabs = $$(sec, '.b-mx-cab'), cels = $$(sec, '.b-cel');
-  const aro = sec.querySelector('.b-aro'), luz = sec.querySelector('.b-luz'), nota = sec.querySelector('.b-cel-nota');
-  const fio = sec.querySelector('.b-alem-fio'), alem = sec.querySelector('.b-alem');
+  const sec = m.secao('matriz'), pj = sec.querySelector('.b-pj'), its = $$(sec, '.b-pj-it'), leg = sec.querySelector('.b-pj-leg');
+  const et = sec.querySelector('.b-pj-et'), sem = sec.querySelector('.b-pj-sem'), com = sec.querySelector('.b-pj-com');
+  const rod = sec.querySelector(':scope > .rodape');
   CENAS.matriz = (t, c) => {
     const x = conteudo(c), y = c.desde(1);
     titulo(sec, x, c);
-    cabs.forEach((el, n) => revelar(el, molaAR(x - 0.1 - n * 0.05)));
-    cels.forEach((el) => surgir(el, molaAR(x - 0.5 - Number(el.dataset.ordem) * 0.24), {dy: 0, escala: 0.06}));
-    surgir(aro, molaAR(y - 0.05), {dy: 0, escala: 0.06});
-    vis(aro, y > 0);
-    luz.style.opacity = String(saida(faixa(y, 0.05, 0.45)));
-    revelar(nota, molaAR(y - 0.25));
-    fio.style.transform = `scaleX(${saida(faixa(y, 0.35, 0.8)).toFixed(4)})`;
-    fio.style.transformOrigin = '0 50%';
-    revelar(alem, molaAR(y - 0.5));
+    surgir(pj, molaAR(x - 0.1), {dy: 24});
+    its.forEach((el, n) => revelar(el, molaAR(x - 0.5 - n * 0.2)));
+    revelar(leg, molaAR(x - 1.3));
+    revelar(et, molaAR(y - 0.05));
+    surgir(sem, molaAR(y - 0.3), {dx: 30, dy: 0});
+    surgir(com, molaAR(y - 0.7), {dx: 30, dy: 0});
+    revelar(rod, molaAR(y - 1.3));
   };
 }
 

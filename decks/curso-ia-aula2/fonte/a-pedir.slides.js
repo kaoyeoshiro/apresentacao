@@ -7,7 +7,7 @@ SLIDES.push(
      faca: ['a capa toca sozinha quando o deck abre', 'conferir se todos conseguem abrir o link do kit no GitHub (o passo a passo vem na prática)'],
      transicao: 'Primeiro, o caminho da tarde.'}},
   {id: 'mapa', titulo: 'A tarde em seis etapas',
-   notas: {diga: 'São seis etapas. Pedir bem, que é onde estamos. Duas escolhas: Projeto e pasta. Skills. O trabalho na pasta, com uma demonstração. Mão na massa, no caso fictício. E o fecho. Cada etapa termina numa tarefa de vocês.',
+   notas: {diga: 'São seis etapas. Pedir bem, que é onde estamos. Três caminhos: o chat, a pasta e o Code ou Codex. Skills. O trabalho na pasta, com uma demonstração. Mão na massa, no caso fictício. E o fecho. Cada etapa termina numa tarefa de vocês.',
      faca: ['mostrar a linha embaixo da tela: ela marca a etapa em que estamos'],
      transicao: 'Começo por uma cena que todo mundo conhece.'}},
   {id: 'tentativas', titulo: 'Você reescreve até chegar lá', passos: [1.7, 1.3, 2.1],

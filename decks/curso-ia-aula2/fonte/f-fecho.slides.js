@@ -6,7 +6,7 @@ SLIDES.push(
      faca: ['apontar os marcos da esquerda para a direita', 'parar no marco dourado: conferir a fonte', 'lembrar que o kit continua no GitHub, com os seis casos e o gabarito, para treinar em casa'],
      transicao: 'E o que vem no dia 2.'}},
   {id: 'dia2', titulo: 'O próximo encontro',
-   notas: {diga: 'No dia 2: MCP e plugins, para ligar o agente aos sistemas; rotinas; raspagem de jurisprudência do TJMS e do STF; casos práticos; artefatos e apresentações; e a devolutiva.',
+   notas: {diga: 'No dia 2: MCP e plugins, para ligar o agente aos sistemas; o harness, que é o conjunto de ferramentas e regras em volta do modelo; o computer use, em que o agente usa o computador como uma pessoa usaria; rotinas e raspagem de jurisprudência do TJMS e do STF; casos práticos e a devolutiva; artefatos e apresentações; e o que mais aparecer.',
      faca: ['ler a lista sem se demorar', 'lembrar a sala de guardar a pasta do kit e a skill conferir-temas para o dia 2'],
      transicao: 'Se tiverem de guardar uma frase desta tarde, é esta.'}},
   {id: 'fecho', titulo: 'Trabalhe no caso, não no chat', linhaDia: false, segura: 4,

@@ -131,7 +131,7 @@
   .a-ck li { display: flex; align-items: center; gap: 24px; height: 74px; font: 600 40px/1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
   .a-ck i { flex: 0 0 40px; height: 40px; box-sizing: border-box; border: 4px solid var(--suave-sobre-noite); border-radius: 8px; }
 
-  /* ===== BLOCO B, duas escolhas: classes b- e seletores [data-slide]. Cor só por var() do tema. ===== */
+  /* ===== BLOCO B, três caminhos: classes b- e seletores [data-slide]. Cor só por var() do tema. ===== */
   .b-camada { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; pointer-events: none; }
   .b-camada path { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -168,17 +168,6 @@
   .b-campo svg circle, .b-campo svg path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 
   /* matriz: dois eixos e quatro casas; a casa do processo acende no segundo clique */
-  [data-slide="matriz"] .b-mx-ey { left: 120px; top: 410px; }
-  [data-slide="matriz"] .b-mx-ex { left: 640px; top: 292px; }
-  .b-mx-col { position: absolute; top: 338px; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
-  .b-mx-lin { position: absolute; left: 120px; margin-top: 18px; font: 700 var(--esc-2)/1.2 var(--fonte-titulo); white-space: nowrap; }
-  .b-cel { position: absolute; width: 555px; height: 150px; box-sizing: border-box; padding: 0 30px; border: 4px solid var(--cor-linha); border-radius: 24px; display: flex; flex-direction: column; justify-content: center; }
-  .b-cel-nome { position: relative; font: 800 46px/1.1 var(--fonte-titulo); white-space: nowrap; }
-  .b-cel-nota { position: relative; margin-top: 6px; font: 700 34px/1.25 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
-  .b-luz { position: absolute; inset: 0; border-radius: 20px; background: var(--cor-destaque-fraca); }
-  .b-aro { position: absolute; left: 1237px; top: 582px; width: 571px; height: 166px; box-sizing: border-box; border: 6px solid var(--cor-destaque); border-radius: 30px; }
-  .b-alem-fio { position: absolute; left: 120px; top: 792px; width: 1680px; border-top: 3px solid var(--cor-linha); }
-  .b-alem { position: absolute; left: 120px; top: 816px; font: 400 var(--esc-2)/1.3 var(--fonte-texto); white-space: nowrap; }
 
   /* projeto (noite): a janela clara do app, com as conversas à esquerda e o painel do Projeto à direita */
   .b-app { position: absolute; left: 120px; top: 290px; width: 1160px; height: 600px; box-sizing: border-box; border-radius: 22px; background: var(--cor-papel); color: var(--cor-tinta); }
@@ -288,7 +277,7 @@
   .b-vlinhas path { fill: none; stroke: var(--cor-destaque); stroke-width: 4; }
   .b-vint { position: absolute; left: 560px; top: 740px; width: 800px; height: 120px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 5px solid var(--cor-destaque); border-radius: 22px; font: 800 48px/1.2 var(--fonte-titulo); }
   /* varios2: ferramenta e o que ela faz */
-  .b-sa { position: absolute; left: 120px; top: 340px; width: 1680px; display: grid; grid-template-columns: 420px 1fr; }
+  .b-sa { position: absolute; left: 120px; top: 340px; width: 1680px; display: grid; grid-template-columns: 480px 1fr; }
   .b-sa p { margin: 0; padding: 22px 0; border-top: 3px solid var(--linha-sobre-noite); }
   .b-sa-n { font: 800 44px/1.2 var(--fonte-titulo); }
   .b-sa-t { font: 400 38px/1.3 var(--fonte-texto); text-wrap: pretty; }
@@ -302,6 +291,17 @@
   .b-pdfe .b-pg { background: color-mix(in srgb, var(--suave-sobre-noite) 35%, transparent); }
   .b-pg.b-pg-on { background: var(--cor-destaque); border-color: var(--cor-destaque); }
   .b-pdftx { margin: 26px 0 0; font: 400 40px/1.3 var(--fonte-texto); }
+
+  /* matriz: o que é um Projeto, e a pasta como escolha à parte */
+  .b-pj { position: absolute; left: 120px; top: 330px; width: 640px; box-sizing: border-box; padding: 28px 36px; border: 4px solid var(--cor-destaque); border-radius: 22px; }
+  .b-pj-tit { margin: 0 0 14px; font: 800 56px/1.1 var(--fonte-titulo); }
+  .b-pj-it { margin: 0; padding: 14px 0; border-top: 3px solid var(--cor-linha); font: 400 40px/1.2 var(--fonte-texto); }
+  .b-pj-leg { position: absolute; left: 120px; top: 760px; width: 640px; margin: 0; font: 400 36px/1.3 var(--fonte-texto); color: var(--cor-tinta-suave); }
+  .b-pj-et { position: absolute; left: 900px; top: 330px; margin: 0; }
+  .b-pj-op { position: absolute; left: 900px; width: 900px; box-sizing: border-box; padding: 22px 34px; border: 4px solid var(--cor-linha); border-radius: 20px; }
+  .b-pj-sem { top: 400px; } .b-pj-com { top: 580px; border-color: var(--cor-destaque); }
+  .b-pj-op-t { margin: 0; font: 800 50px/1.15 var(--fonte-titulo); }
+  .b-pj-op-d { margin: 6px 0 0; font: 400 38px/1.3 var(--fonte-texto); }
 
   /* ===== Bloco C: skills ===== */
   /* painel de arquivo (skill): um editor desenhado por código, com aba, números de linha (contador do CSS, marcação e
@@ -451,8 +451,6 @@
   .d-enviar.cheio { background: var(--sobre-noite); }
 
   /* ===== Bloco E, mão na massa ===== */
-  /* codex: o nome de cada ferramenta grande na sua coluna */
-  [data-slide="codex"] .janela .letra { font-size: 140px; top: 16px; }
 
   /* github: a janela do navegador à esquerda, com a página do repositório; a pasta extraída à direita */
   .e-nav { position: absolute; left: 120px; top: 300px; width: 1100px; height: 600px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); overflow: hidden; }
@@ -538,6 +536,8 @@
   [data-slide="travou"] .ct-txt { margin-top: 18px; font-size: var(--esc-2); }
   .e-nq { white-space: nowrap; }
 
+  a.e-url { display: block; color: inherit; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; cursor: pointer; }
+
   /* ===== Bloco F, fecho ===== */
   /* levar: seis marcos, o texto de cada um em até duas linhas */
   [data-slide="levar"] .etapas li { font-size: 36px; }
@@ -547,8 +547,8 @@
   .f-dia span { display: block; }
   .f-dia span:first-child { font-size: var(--esc-5); }
   .f-dia span.sinal { font-size: var(--esc-6); }
-  .f-lista { position: absolute; left: 720px; top: 316px; width: 1080px; }
-  .f-lista li { padding: 18px 0; border-bottom: 3px solid var(--linha-sobre-noite); font-size: 44px; line-height: 1.2; white-space: nowrap; }
+  .f-lista { position: absolute; left: 720px; top: 306px; width: 1080px; }
+  .f-lista li { padding: 14px 0; border-bottom: 3px solid var(--linha-sobre-noite); font-size: 44px; line-height: 1.2; white-space: nowrap; }
 
   /* fecho: o logo oficial à esquerda, o fio e o texto à direita, como o encerramento da Aula 1 */
   .f-logo { position: absolute; left: 120px; top: 300px; height: 480px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
@@ -580,7 +580,7 @@
     <h2 class="manchete">A tarde em seis etapas</h2>
     <ol class="etapas">
       <li class="agora"><b>1</b>pedir bem</li>
-      <li><b>2</b>duas escolhas</li>
+      <li><b>2</b>três caminhos</li>
       <li><b>3</b>skills</li>
       <li><b>4</b>na pasta</li>
       <li><b>5</b>mão na massa</li>
@@ -733,12 +733,12 @@
     <p class="respiro-sub" data-entra="0.5">Duas pessoas leem em voz alta.</p>
   </section>
 
-  <!-- ===== Bloco B, duas escolhas (22 min): ponte a escolher. Fatos das ferramentas: briefing.md, "Fatos sobre as
+  <!-- ===== Bloco B, três caminhos (22 min): ponte a escolher. Fatos das ferramentas: briefing.md, "Fatos sobre as
        ferramentas"; números do teste: briefing.md, "O teste do processo fictício". ===== -->
   <!-- ponte (cena própria, noite): a frase à esquerda; à direita, a caixa grande "o que a IA lê", onde entram em onda o
        pedido (pequeno) e tudo o que vem junto com ele (briefing.md, Revisão 2, item 2) -->
   <section data-slide="ponte" class="noite">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="display b-pt-frase"><span>Tudo o que</span><span>a IA lê</span><span>é <span class="sinal">prompt</span></span></h2>
     <div class="b-pt-caixa">
       <p class="b-pt-cab">o que a IA lê</p>
@@ -753,7 +753,7 @@
 
   <!-- reenvio (cena própria): três conversas, e em cada uma os mesmos três papéis sobem de novo pelo campo -->
   <section data-slide="reenvio">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">No chat, você sobe tudo de novo</h2>
     <div class="b-conv" style="left: 120px">
       <p class="b-conv-cab">Conversa 1</p><p class="b-tag b-primeira">primeira vez</p>
@@ -779,7 +779,7 @@
   <!-- agente (cena própria): o chat responde e termina; o agente faz plano, lê, altera e mostra, com o laço de ajuste
        e a autorização antes das ações. Fatos: briefing.md, Fatos sobre as ferramentas -->
   <section data-slide="agente">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">O chat responde. O agente age.</h2>
     <p class="b-ag-rot" style="top: 362px">Chat</p>
     <div class="b-ag-no b-ag-chat" style="left: 420px; top: 340px; width: 150px">pedido</div>
@@ -808,7 +808,7 @@
   </section>
 
   <section data-slide="confere" data-arquetipo="tempo" class="noite">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">O agente propõe; você confere</h2>
     <ol class="etapas">
       <li><b>plano</b>peça o plano</li>
@@ -821,7 +821,7 @@
 
   <!-- varios (cena própria): sete PDFs, um agente para cada; no segundo clique, as linhas convergem no agente integrador -->
   <section data-slide="varios">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">Um processo grande, vários agentes</h2>
     <p class="etiqueta b-v-et">Um agente por PDF, cada um com a sua mesa</p>
     <div class="b-vcs">
@@ -840,40 +840,39 @@
 
   <!-- varios2: o que cada ferramenta tem; o chat comum fecha a lista -->
   <section data-slide="varios2" class="noite">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">Quem despacha agentes</h2>
     <div class="b-sa">
+      <p class="b-sa-n">Claude</p><p class="b-sa-t">Sim, integrado ao Cowork.</p>
       <p class="b-sa-n">Claude Code</p><p class="b-sa-t">Sim. Até 20 ao mesmo tempo.</p>
       <p class="b-sa-n">Codex</p><p class="b-sa-t">Sim, no app, no terminal e no editor.</p>
       <p class="b-sa-n">ChatGPT Work</p><p class="b-sa-t">Sim, em contas elegíveis. Peça de forma explícita.</p>
-      <p class="b-sa-n">Chat comum</p><p class="b-sa-t">ChatGPT, não. Claude, teste.</p>
+      <p class="b-sa-n">Chat do ChatGPT</p><p class="b-sa-t">Não despacha agentes.</p>
     </div>
     <p class="rodape">Pergunte à sua ferramenta se ela despacha agentes.</p>
   </section>
 
-  <!-- matriz (cena própria): dois eixos independentes; as quatro casas enchem em onda e a do processo acende -->
+  <!-- matriz (cena própria): o que é um Projeto e a pasta como escolha à parte; segundo clique abre a pergunta da pasta -->
   <section data-slide="matriz">
-    <p class="rotulo">Duas escolhas</p>
-    <h2 class="manchete">Duas escolhas independentes</h2>
-    <p class="etiqueta b-mx-cab b-mx-ey">Instruções e memória</p>
-    <p class="etiqueta b-mx-cab b-mx-ex">Documentos</p>
-    <p class="b-mx-cab b-mx-col" style="left: 640px">anexados</p>
-    <p class="b-mx-cab b-mx-col" style="left: 1245px">numa pasta</p>
-    <p class="b-mx-cab b-mx-lin" style="top: 458px">na conversa</p>
-    <p class="b-mx-cab b-mx-lin" style="top: 638px">no Projeto</p>
-    <div class="b-cel" data-ordem="0" style="left: 640px; top: 410px"><p class="b-cel-nome">Chat</p></div>
-    <div class="b-cel" data-ordem="2" style="left: 1245px; top: 410px"><p class="b-cel-nome">Tarefa com pasta</p></div>
-    <div class="b-cel" data-ordem="1" style="left: 640px; top: 590px"><p class="b-cel-nome">Projeto</p></div>
-    <div class="b-cel b-cel-proc" data-ordem="3" style="left: 1245px; top: 590px"><i class="b-luz"></i><p class="b-cel-nome">Projeto com pasta</p><p class="b-cel-nota">processo: sempre aqui</p></div>
-    <i class="b-aro"></i>
-    <i class="b-alem-fio"></i>
-    <p class="b-alem">Para integrar sistemas, raspar dados e automatizar: Claude Code e Codex.</p>
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">O que é um Projeto</h2>
+    <div class="b-pj">
+      <p class="b-pj-tit">Projeto</p>
+      <p class="b-pj-it">Instruções fixas</p>
+      <p class="b-pj-it">Arquivos do caso</p>
+      <p class="b-pj-it">Memória do trabalho</p>
+    </div>
+    <p class="b-pj-leg">A mesa de trabalho que o app guarda para você.</p>
+    <p class="etiqueta b-pj-et">E a pasta?</p>
+    <div class="b-pj-op b-pj-sem"><p class="b-pj-op-t">Sem pasta</p><p class="b-pj-op-d">usa os arquivos que você anexa</p></div>
+    <div class="b-pj-op b-pj-com"><p class="b-pj-op-t">Com pasta</p><p class="b-pj-op-d">trabalha nos arquivos do seu computador</p></div>
+    <p class="rodape">Processo? Escolha sempre a pasta.</p>
   </section>
 
   <!-- projeto (cena própria, noite): a tela de um Projeto do Claude desenhada por código, com o caso fictício; nunca o
        print do professor, que tem número de processo real -->
   <section data-slide="projeto" class="noite">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">O Projeto guarda o seu jeito</h2>
     <div class="b-app">
       <div class="b-app-barra"><i></i><i></i><i></i></div>
@@ -899,7 +898,7 @@
 
   <!-- pasta (cena em partes): cinco motivos, um por clique; a explicação do atual à direita -->
   <section data-slide="pasta">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">Processo? Trabalhe com pasta</h2>
     <ol class="partes">
       <li><span>Volume</span></li>
@@ -919,7 +918,7 @@
 
   <!-- teste (cena de números, noite): o processo fictício medido em 23/10/2026 (briefing.md) -->
   <section data-slide="teste" class="noite">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">O agente leu 0,2% do processo</h2>
     <p class="display b-348">348</p>
     <p class="b-348-leg">páginas e <b class="b-129">129 mil</b> palavras</p>
@@ -934,7 +933,7 @@
 
   <!-- lei (cena própria): o que guardar na pasta e o que pesquisar; embaixo, a regra para o agente -->
   <section data-slide="lei">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">Guardar a lei ou pesquisar?</h2>
     <div class="b-lado" style="left: 120px">
       <p class="display b-lado-tit">Guarde</p>
@@ -953,7 +952,7 @@
 
   <!-- pdflido (cena própria): o PDF inteiro entra no chat; na pasta o agente abre só o trecho -->
   <section data-slide="pdflido" class="noite">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">O PDF é lido inteiro?</h2>
     <div class="b-pdfcol b-pdfe">
       <p class="etiqueta">No chat</p>
@@ -972,7 +971,7 @@
        texto real do contrato.pdf do caso fictício (cláusula terceira). O contrato não tem cabeçalho repetido, só o
        rodapé, e só ele é marcado. -->
   <section data-slide="mdpdf">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">PDF ou Markdown?</h2>
     <p class="etiqueta b-et-pdf">PDF, foto da página</p>
     <div class="b-pdf"><img src="midia/caso-contrato.webp" alt=""><i class="b-clausula"></i><i class="b-ruido"></i></div>
@@ -988,7 +987,7 @@
 
   <!-- converter (cartões, noite): o "não" grande à esquerda, as três regras empilhadas à direita -->
   <section data-slide="converter" class="noite">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">Converter tudo?</h2>
     <p class="display b-nao"><span class="sinal">Não</span></p>
     <div class="cartoes c3">
@@ -1000,7 +999,7 @@
   </section>
 
   <section data-slide="codigo">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">Claude Code e Codex são para quem constrói</h2>
     <div class="cartoes c4">
       <div class="cartao"><p class="ct-tit">Integrações</p><p class="ct-txt">Sistemas, por MCP e APIs.</p></div>
@@ -1013,10 +1012,10 @@
 
   <!-- ferramentas (cena própria, noite): quatro nomes em dois pares (para que serve x empresa); o aviso do Cowork -->
   <section data-slide="ferramentas" class="noite">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">Quatro nomes, dois pares</h2>
     <p class="b-par-cab" style="left: 520px">Pedir uma entrega</p>
-    <p class="b-par-cab" style="left: 1185px">Trabalhar na pasta como um desenvolvedor</p>
+    <p class="b-par-cab" style="left: 1185px">Para o usuário avançado</p>
     <p class="b-emp" style="top: 470px">Anthropic</p>
     <p class="b-emp" style="top: 650px">OpenAI</p>
     <div class="b-ferr" data-col="0" style="left: 520px; top: 420px"><p class="b-ferr-nome">Claude</p><p class="b-ferr-sub">o antigo Cowork</p></div>
@@ -1028,7 +1027,7 @@
 
   <!-- diferenca (grade): para que serve, onde roda, quem tem; uma linha por clique. Fatos lidos em 23/10/2026 -->
   <section data-slide="diferenca">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">O que muda entre os quatro</h2>
     <div class="b-grade">
       <p class="b-g b-g-cab" data-l="0" data-c="0"></p>
@@ -1039,7 +1038,7 @@
 
       <p class="b-g b-g-rot" data-l="1" data-c="0">para que serve</p>
       <p class="b-g b-g-par" data-l="1" data-c="1">pedir uma entrega</p>
-      <p class="b-g b-g-par" data-l="1" data-c="3">trabalhar como desenvolvedor</p>
+      <p class="b-g b-g-par" data-l="1" data-c="3">usuário avançado: integrar e automatizar</p>
 
       <p class="b-g b-g-rot" data-l="2" data-c="0">onde roda</p>
       <p class="b-g" data-l="2" data-c="1">nuvem; pasta no app desktop</p>
@@ -1057,7 +1056,7 @@
 
   <!-- escolher (cena própria, noite): quatro perguntas, uma por clique, cada uma com a rota ao lado -->
   <section data-slide="escolher" class="noite">
-    <p class="rotulo">Duas escolhas</p>
+    <p class="rotulo">Três caminhos</p>
     <h2 class="manchete">Como escolher em 10 segundos</h2>
     <div class="b-esc" style="top: 318px"><p class="b-esc-q">Um arquivo só?</p><p class="b-esc-r">chat com anexo</p></div>
     <div class="b-esc" style="top: 458px"><p class="b-esc-q">Quer o documento pronto, em Word ou planilha?</p><p class="b-esc-r">Claude ou ChatGPT Work</p></div>
@@ -1295,25 +1294,13 @@
   <!-- ===== Bloco E: mão na massa (27 min). O professor faz ao vivo, na tela do notebook, com o kit público do GitHub
        (kit/README.md); quem tem app acompanha no seu. Prática 1: conferir o caso 2 pelos Temas 6 e 1234. Prática 2:
        rodar a skill conferir-temas no caso 6. ===== -->
-  <!-- codex: o mesmo pedido nas duas ferramentas; o Codex entra gravado pelo professor -->
-  <section data-slide="codex" data-arquetipo="comparacao" class="noite">
-    <p class="rotulo">Mão na massa</p>
-    <h2 class="manchete">O mesmo pedido no Codex</h2>
-    <div class="janela"><p class="display letra">Claude</p><p class="etiqueta">ao vivo</p>
-      <p class="janela-txt">Na pasta do caso, agora, com a sala.</p></div>
-    <div class="fio-v"></div>
-    <div class="janela"><p class="display letra">Codex</p><p class="etiqueta">gravado no ensaio</p>
-      <p class="janela-txt">O mesmo pedido, na mesma pasta.</p></div>
-    <p class="pilula">gravação do professor</p>
-  </section>
-
   <!-- github (cena própria, claro): a página do repositório desenhada por código; o botão Code, o menu com Download
        ZIP e, à direita, a pasta extraída (o GitHub acrescenta -main ao nome da pasta do zip) -->
   <section data-slide="github">
     <p class="rotulo">Mão na massa</p>
     <h2 class="manchete">O kit está no GitHub</h2>
     <div class="e-nav">
-      <div class="e-nav-barra"><i></i><i></i><i></i><p class="e-url">github.com/kaoyeoshiro/kit-aula2-curso-ia</p></div>
+      <div class="e-nav-barra"><i></i><i></i><i></i><a class="e-url" href="https://github.com/kaoyeoshiro/kit-aula2-curso-ia" target="_blank" rel="noopener">github.com/kaoyeoshiro/kit-aula2-curso-ia</a></div>
       <p class="e-repo">kit-aula2-curso-ia</p>
       <p class="e-code">Code</p>
       <ul class="e-arqs">
@@ -1347,7 +1334,7 @@
        de saída). O pedido inteiro tem 73 palavras e não cabe numa parada só; o texto completo está nas notas. -->
   <section data-slide="pratica-caso" class="noite">
     <p class="rotulo">Mão na massa</p>
-    <h2 class="manchete">Prática 1: confira o caso 2</h2>
+    <h2 class="manchete">Ao vivo 1: confira o caso 2</h2>
     <ol class="e-cinco">
       <li>Abra a pasta.</li>
       <li>Cole o pedido.</li>
@@ -1416,7 +1403,7 @@
   <!-- pratica2 (cena própria, claro, guia da prática 2): cinco passos curtos e o pedido exato para copiar -->
   <section data-slide="pratica2">
     <p class="rotulo">Mão na massa</p>
-    <h2 class="manchete">Prática 2: rode a skill no caso 6</h2>
+    <h2 class="manchete">Ao vivo 2: rode a skill no caso 6</h2>
     <ol class="e-cinco">
       <li>Instale a skill.</li>
       <li>Rode no caso 6.</li>
@@ -1432,7 +1419,7 @@
   <!-- travou (cena de cartões, da base): as quatro saídas mais comuns durante as práticas -->
   <section data-slide="travou">
     <p class="rotulo">Mão na massa</p>
-    <h2 class="manchete">Travou? Quatro saídas</h2>
+    <h2 class="manchete">Travou em casa? Quatro saídas</h2>
     <div class="cartoes c2">
       <div class="cartao"><p class="ct-tit">Sem plano ou sem app</p><p class="ct-txt">Acompanhe na tela do professor.</p></div>
       <div class="cartao"><p class="ct-tit">PDF sem texto</p><p class="ct-txt">Se for digitalizado, reconhecer o texto antes demora.</p></div>
@@ -1441,9 +1428,21 @@
     </div>
   </section>
 
-  <section data-slide="mostrar" data-arquetipo="respiro" class="noite">
+  <!-- casa (cena de cartões, da base): o que cada um faz em casa com o kit -->
+  <section data-slide="casa" class="noite">
     <p class="rotulo">Mão na massa</p>
-    <p class="respiro"><span>Mostre o seu</span><span><span class="sinal">Word</span>.</span></p>
+    <h2 class="manchete">Para fazer em casa</h2>
+    <div class="cartoes c2">
+      <div class="cartao"><p class="ct-tit">1. Baixe o kit</p><p class="ct-txt">No GitHub, Code e Download ZIP.</p></div>
+      <div class="cartao"><p class="ct-tit">2. Caso 2</p><p class="ct-txt">Peça a conferência, com os temas.</p></div>
+      <div class="cartao"><p class="ct-tit">3. Skill no caso 6</p><p class="ct-txt">Instale, rode e abra o Word.</p></div>
+      <div class="cartao"><p class="ct-tit">4. Compare</p><p class="ct-txt">Veja o gabarito e a página citada.</p></div>
+    </div>
+  </section>
+
+  <section data-slide="emcasa" data-arquetipo="respiro">
+    <p class="rotulo">Mão na massa</p>
+    <p class="respiro"><span>Hoje eu fiz.</span><span>Em casa, é <span class="sinal">você</span>.</span></p>
   </section>
 
   <!-- ===== Bloco F: fecho (3 min). Revisão 2, item 7: levar, dia2 e o encerramento com o logo. ===== -->
@@ -1470,11 +1469,12 @@
     <p class="display f-dia"><span>Dia</span><span class="sinal">2</span></p>
     <ul class="f-lista">
       <li>MCP e plugins</li>
-      <li>Rotinas</li>
-      <li>Raspagem de jurisprudência do TJMS e do STF</li>
-      <li>Casos práticos</li>
+      <li>Harness</li>
+      <li>Computer use</li>
+      <li>Rotinas e raspagem de jurisprudência</li>
+      <li>Casos práticos e devolutiva</li>
       <li>Artefatos e apresentações</li>
-      <li>Devolutiva</li>
+      <li>Etc.</li>
     </ul>
   </section>
 
@@ -1499,7 +1499,7 @@ import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
 // Seis blocos da linha do dia, somando 90 minutos. Os ids são os de `bloco` nos slides.
 const blocos = [
   {id: 'pedir', rotulo: 'Pedir bem', minutos: 22},
-  {id: 'escolhas', rotulo: 'Duas escolhas', minutos: 20},
+  {id: 'escolhas', rotulo: 'Três caminhos', minutos: 20},
   {id: 'skills', rotulo: 'Skills', minutos: 8},
   {id: 'pasta', rotulo: 'Na pasta', minutos: 10},
   {id: 'mao', rotulo: 'Mão na massa', minutos: 27},
@@ -1519,7 +1519,7 @@ SLIDES.push(
      faca: ['a capa toca sozinha quando o deck abre', 'conferir se todos conseguem abrir o link do kit no GitHub (o passo a passo vem na prática)'],
      transicao: 'Primeiro, o caminho da tarde.'}},
   {id: 'mapa', titulo: 'A tarde em seis etapas',
-   notas: {diga: 'São seis etapas. Pedir bem, que é onde estamos. Duas escolhas: Projeto e pasta. Skills. O trabalho na pasta, com uma demonstração. Mão na massa, no caso fictício. E o fecho. Cada etapa termina numa tarefa de vocês.',
+   notas: {diga: 'São seis etapas. Pedir bem, que é onde estamos. Três caminhos: o chat, a pasta e o Code ou Codex. Skills. O trabalho na pasta, com uma demonstração. Mão na massa, no caso fictício. E o fecho. Cada etapa termina numa tarefa de vocês.',
      faca: ['mostrar a linha embaixo da tela: ela marca a etapa em que estamos'],
      transicao: 'Começo por uma cena que todo mundo conhece.'}},
   {id: 'tentativas', titulo: 'Você reescreve até chegar lá', passos: [1.7, 1.3, 2.1],
@@ -1580,10 +1580,10 @@ SLIDES.push(
      transicao: 'Pedido, anexos e instruções somam o que a IA lê, e tudo isso é prompt.'}},
 );
 
-// Bloco B, duas escolhas (22 min): ponte a escolher. Fatos das ferramentas lidos em 23/10/2026 (briefing.md).
+// Bloco B, três caminhos (22 min): ponte a escolher. Fatos das ferramentas lidos em 23/10/2026 (briefing.md).
 SLIDES.push(
   {id: 'ponte', titulo: 'Tudo o que a IA lê é prompt', bloco: 'escolhas', linhaDia: false, passos: [3.0],
-   notas: {diga: 'Tudo o que a IA lê é prompt. O seu pedido é a parte pequena; junto com ele entram os anexos, as instruções, a memória e a conversa anterior. Digitar quem você é e qual é o caso também é contexto, e vale. O material pesado, como contrato, aditivo e notificação, é que costuma chegar por anexo, instruções e memória. No fecho da minha apresentação de prompt, 2025 e 2026 são os anos da engenharia de contexto: cuidar de tudo isso que a IA lê. Este bloco mostra duas escolhas sobre esse contexto.',
+   notas: {diga: 'Tudo o que a IA lê é prompt. O seu pedido é a parte pequena; junto com ele entram os anexos, as instruções, a memória e a conversa anterior. Digitar quem você é e qual é o caso também é contexto, e vale. O material pesado, como contrato, aditivo e notificação, é que costuma chegar por anexo, instruções e memória. No fecho da minha apresentação de prompt, 2025 e 2026 são os anos da engenharia de contexto: cuidar de tudo isso que a IA lê. Este bloco mostra três caminhos sobre esse contexto.',
      faca: ['deixar a frase na tela uns segundos antes de falar', 'apontar a caixa pequena do pedido no meio das outras'],
      transicao: 'Primeiro, o que acontece hoje no chat.'}},
   {id: 'reenvio', titulo: 'No chat, você sobe tudo de novo', passos: [2.3, 2.7],
@@ -1597,19 +1597,19 @@ SLIDES.push(
   {id: 'confere', titulo: 'O agente propõe; você confere',
    notas: {diga: 'Este é o hábito da tarde. Peça o plano antes de qualquer ação. Veja o que ele vai abrir. Autorize a ação. E leia o que mudou, que é o passo mais esquecido. Cada passo para antes do próximo. Vale igual para o Claude, o ChatGPT Work, o Claude Code e o Codex.',
      faca: ['ler os quatro marcos em voz alta', 'pedir que anotem os quatro verbos: pedir, ver, autorizar, ler'],
-     transicao: 'Agora, as duas escolhas sobre o contexto, e uma não depende da outra.'}},
+     transicao: 'Agora, os três caminhos para trabalhar: o chat, a pasta e as ferramentas avançadas.'}},
   {id: 'varios', titulo: 'Um processo grande, vários agentes', passos: [2.0, 1.6],
    notas: {diga: 'Num processo grande, um agente só lê tudo e se perde. Aqui, o agente principal entrega um PDF para cada agente. Cada um trabalha na sua própria janela de contexto, sem carregar as outras peças, e devolve só um resumo. Depois um agente integrador junta tudo numa cronologia única e aponta as contradições. Ganha-se velocidade e menos esquecimento. Três avisos. Cada agente gasta tokens, então o consumo sobe. O agente novo não sabe o que vocês conversaram: o pedido tem de dizer o caso, a regra e o formato. E o resumo pode errar, por isso a cronologia sempre cita arquivo e página, e quem confere é você.',
      faca: ['primeiro clique, os sete agentes', 'segundo clique, as linhas e o integrador', 'dizer que pedir sete agentes não garante sete ao mesmo tempo: a plataforma pode limitar e fazer em lotes'],
      transicao: 'Quem faz isso hoje? Depende da ferramenta.'}},
   {id: 'varios2', titulo: 'Quem despacha agentes', passos: [2.8],
-   notas: {diga: 'No Claude Code há agentes em paralelo, até 20 ao mesmo tempo, cada um com a sua janela de contexto. No Codex também, no app, no terminal e no editor; na web só se acompanha. No ChatGPT Work existem em contas elegíveis, e na maioria dos níveis é preciso pedir de forma explícita, por exemplo: use um agente por documento. No chat comum do ChatGPT a resposta é que não há agentes independentes. No Claude, depende da versão e do plano, então o jeito seguro é perguntar à sua própria conta.',
-     faca: ['pedir que todos digitem na ferramenta deles: você consegue despachar subagents?', 'comparar as respostas em voz alta', 'fatos lidos em 23/10/2026 na documentação da Anthropic e da OpenAI; o Claude comum não foi confirmado'],
-     transicao: 'Agora, duas escolhas independentes: o projeto e a pasta.'}},
-  {id: 'matriz', titulo: 'Duas escolhas independentes', passos: [2.4, 1.5],
-   notas: {diga: 'São duas perguntas separadas. Primeira: onde moram as instruções e a memória, na conversa solta ou num Projeto. Segunda: onde moram os documentos, anexados ou numa pasta do computador. Dá quatro combinações, e nenhuma é degrau da outra. Para processo, a resposta é sempre a casa de baixo, à direita: Projeto com pasta. Para integrar sistemas, raspar dados e automatizar, existem o Claude Code e o Codex, que vemos no fim do bloco.',
-     faca: ['primeiro clique: os eixos e as quatro casas', 'apontar as casas com a mão: Chat, Projeto, Tarefa com pasta', 'segundo clique: a casa do processo acende'],
-     transicao: 'Primeiro eixo: o que um Projeto guarda.'}},
+   notas: {diga: 'No Claude Code há agentes em paralelo, até 20 ao mesmo tempo, cada um com a sua janela de contexto. No Codex também, no app, no terminal e no editor; na web só se acompanha. No ChatGPT Work existem em contas elegíveis, e na maioria dos níveis é preciso pedir de forma explícita, por exemplo: use um agente por documento. No Claude, o professor informa que o Cowork foi integrado ao app, e com isso ele também despacha agentes. No chat comum do ChatGPT a resposta que ele deu é que não há agentes independentes.',
+     faca: ['pedir que todos digitem na ferramenta deles: você consegue despachar subagents?', 'comparar as respostas em voz alta', 'fatos lidos em 23/10/2026 na documentação da Anthropic e da OpenAI; o Claude no app, informado e testado pelo professor'],
+     transicao: 'Agora, três caminhos independentes: o projeto e a pasta.'}},
+  {id: 'matriz', titulo: 'O que é um Projeto', passos: [2.4, 1.8],
+   notas: {diga: 'Um Projeto é uma mesa de trabalho que o app guarda para você. Dentro dele ficam três coisas: as instruções fixas, o seu jeito de trabalhar, escrito uma vez; os arquivos do caso; e a memória do trabalho, para a próxima conversa não começar do zero. Existe no Claude e no ChatGPT. Agora, a pergunta que muita gente confunde: e a pasta? Um Projeto pode trabalhar sem pasta, só com os arquivos que você anexa, ou com pasta, abrindo os arquivos do seu computador. Projeto e pasta são decisões separadas. A minha regra para processo é uma só: sempre com pasta.',
+     faca: ['primeiro clique: o cartão do Projeto e as três coisas dentro dele', 'segundo clique: a pergunta da pasta e as duas respostas', 'se a sala perguntar, o Projeto com pasta depende do app e do plano; conferir na conta de cada um'],
+     transicao: 'Vamos ver como é um Projeto por dentro.'}},
   {id: 'projeto', titulo: 'O Projeto guarda o seu jeito', passos: [2.0, 1.6],
    notas: {diga: 'Esta é a tela de um Projeto no Claude, desenhada para a aula com o caso fictício. Numa tela só ficam as instruções, a memória, os arquivos de contexto, a pasta e o que está programado. As instruções valem para toda conversa nova dentro do Projeto, e você não repete o seu jeito a cada pedido. Tudo fica à vista e se edita com um clique. No ChatGPT, o Projeto também guarda instruções e arquivos.',
      faca: ['segundo clique: a anotação e o ChatGPT', 'se for mostrar ao vivo, use um Projeto de teste; nunca projete um com processo real', 'rotinas programadas ficam para o dia 2'],
@@ -1645,15 +1645,15 @@ SLIDES.push(
      transicao: 'Até aqui, o app de conversa basta. Quando ir além?'}},
   {id: 'codigo', titulo: 'Claude Code e Codex são para quem constrói',
    notas: {diga: 'Claude Code e Codex são ferramentas avançadas, para quem quer construir. Integrações: ligam o agente a sistemas pelo MCP, um padrão aberto de conexão, e por APIs. Raspagem: baixam e organizam dados de sites e tribunais, em lote. Automação: rotinas e scripts para centenas de arquivos. Controle: o plano, as permissões e cada mudança à vista. Conectar sistemas também se faz no Claude e no ChatGPT Work, com os conectores. A diferença é que o Code e o Codex programam e rodam o que for preciso.',
-     faca: ['não abrir terminal agora; o Codex aparece gravado no bloco Mão na massa', 'MCP e raspagem de jurisprudência ficam para o dia 2'],
+     faca: ['não abrir terminal agora; o Claude Code e o Codex ficam para o dia 2', 'MCP e raspagem de jurisprudência ficam para o dia 2'],
      transicao: 'Com tantos nomes, vale separar quem é quem.'}},
   {id: 'ferramentas', titulo: 'Quatro nomes, dois pares', passos: [2.0, 1.3, 1.1],
-   notas: {diga: 'São quatro nomes em dois pares, um de cada empresa. Para pedir uma entrega, como uma pesquisa, um documento ou uma planilha: o Claude e o ChatGPT Work. Para trabalhar na pasta como um desenvolvedor: o Claude Code e o Codex. E um aviso: o Cowork não existe mais. Em 16/09/2026, a Anthropic juntou o Cowork e o chat num Claude só; tudo o que o Cowork fazia está em qualquer conversa.',
+   notas: {diga: 'São quatro nomes em dois pares, um de cada empresa. Para pedir uma entrega, como uma pesquisa, um documento ou uma planilha: o Claude e o ChatGPT Work. Para o usuário avançado, que integra sistemas e automatiza: o Claude Code e o Codex. Não é preciso ser desenvolvedor para usá-los. E um aviso: o Cowork não existe mais. Em 16/09/2026, a Anthropic juntou o Cowork e o chat num Claude só; tudo o que o Cowork fazia está em qualquer conversa.',
      faca: ['primeiro clique: o par da entrega', 'segundo clique: o par da pasta', 'terceiro clique: o aviso do Cowork',
        'o Claude novo chegou primeiro a Pro e Max; Team e Free depois'],
      transicao: 'E o que muda, na prática, de um para o outro?'}},
   {id: 'diferenca', titulo: 'O que muda de um para o outro', passos: [2.0, 1.4, 1.4],
-   notas: {diga: 'Linha por linha. Para que serve: os dois primeiros fazem entregas; os dois últimos trabalham na pasta como desenvolvedor. Onde roda: o Claude e o Work rodam na nuvem e usam a pasta do computador só no app desktop; o Claude Code roda no terminal, em editores, no app desktop e na web; o Codex, no app desktop e na nuvem. Quem tem: o Claude novo, Pro e Max primeiro, e Team e Free depois; o Work, os planos pagos elegíveis; o Claude Code exige plano pago, e o Pro custa 20 dólares por mês; o Codex está em todos os planos do ChatGPT, até no gratuito, no app desktop.',
+   notas: {diga: 'Linha por linha. Para que serve: os dois primeiros fazem entregas; os dois últimos são para o usuário avançado, que integra, raspa dados e automatiza. Onde roda: o Claude e o Work rodam na nuvem e usam a pasta do computador só no app desktop; o Claude Code roda no terminal, em editores, no app desktop e na web; o Codex, no app desktop e na nuvem. Quem tem: o Claude novo, Pro e Max primeiro, e Team e Free depois; o Work, os planos pagos elegíveis; o Claude Code exige plano pago, e o Pro custa 20 dólares por mês; o Codex está em todos os planos do ChatGPT, até no gratuito, no app desktop.',
      faca: ['um clique por linha, três no total', 'Pro anual: 17 dólares por mês', 'Codex no gratuito e no Go: só no app desktop e com limites; do Plus em diante, também web, linha de comando e editores',
        'fatos lidos em 23/10/2026 nas páginas de ajuda da Anthropic e da OpenAI'],
      transicao: 'Para a escolha não virar dúvida, quatro perguntas.'}},
@@ -1725,15 +1725,11 @@ SLIDES.push(
 // ===== Bloco E: mão na massa (27 min). O professor faz ao vivo na tela compartilhada; o kit é público no GitHub
 // (kit/README.md). Fatos dos casos: kit/gabarito/caso-N/gabarito.json; texto da skill: kit/gabarito/skills/conferir-temas.
 SLIDES.push(
-  {id: 'codex', bloco: 'mao', titulo: 'O mesmo pedido no Codex',
-   notas: {diga: 'Vocês viram o Claude trabalhar na pasta, ao vivo. Agora o mesmo pedido, na mesma pasta, no Codex. Esta parte eu gravei antes da aula. Reparem em duas coisas: se cada data vem com arquivo e trecho, e o que ele responde sobre o último pagamento.',
-     faca: ['abrir o vídeo gravado do Codex', 'pausar no plano e depois na linha do último pagamento', 'sem a gravação: dizer que o pedido e a pasta são os mesmos e seguir'],
-     transicao: 'Agora é a vez de vocês. O material da prática está no GitHub.'}},
-  {id: 'github', titulo: 'O kit está no GitHub', passos: [1.6, 1.0, 1.2, 1.6],
+  {id: 'github', bloco: 'mao', titulo: 'O kit está no GitHub', passos: [1.6, 1.0, 1.2, 1.6],
    notas: {diga: 'O material da prática está no GitHub, um site onde se guardam e se compartilham arquivos. Vale aprender a baixar de lá, porque muita coisa de IA chega assim. O endereço é github.com/kaoyeoshiro/kit-aula2-curso-ia. Na página, procurem o botão Code, que no site é verde. Ele abre um menu, e ali está Download ZIP. O arquivo chega compactado: extraiam, e aparece a pasta kit-aula2-curso-ia-main, com quatro pastas dentro. Em casos, seis ações de medicamento contra o Estado de Mato Grosso do Sul, todas fictícias, recriadas de casos reais sem nenhum dado verdadeiro. Em temas, os Temas 6 e 1234 do STF em Markdown. Em escritorio, o logo do nosso escritório inventado. E em gabarito, as respostas e a skill pronta. Eu faço tudo aqui, na minha tela. Quem tem o app acompanha no seu; quem não tem app ou plano só assiste, e aprende igual.',
      faca: ['abrir o navegador na tela compartilhada e digitar o endereço devagar', 'ao chegar: a página do repositório e as pastas', 'primeiro clique: apontar o botão Code', 'segundo clique: o menu; clicar em Download ZIP de verdade', 'terceiro clique: extrair o zip (no Windows, botão direito e Extrair tudo; no Mac, dois cliques) e abrir a pasta', 'pedir que ninguém abra a pasta gabarito antes de tentar'],
      transicao: 'Com a pasta aberta, a primeira prática: o caso 2.'}},
-  {id: 'pratica-caso', titulo: 'Prática 1: confira o caso 2', pratica: 12, passos: [1.8, 1.2, 1.0],
+  {id: 'pratica-caso', titulo: 'Ao vivo 1: confira o caso 2', pratica: 12, passos: [1.8, 1.2, 1.0],
    notas: {diga: 'Doze minutos. Eu faço aqui e quem quiser faz junto. Primeiro, o que estamos conferindo. O Tema 6 do STF traz seis requisitos, de (a) a (f), para o juiz conceder um medicamento que não está nas listas do SUS, e o ônus da prova é do autor. O Tema 1234 manda a ação para a Justiça Federal quando o tratamento custa por ano 210 salários mínimos ou mais. A pergunta do estudo de caso é uma só: o autor cumpriu os requisitos? Os passos estão na tela. Agora o pedido, em duas partes. Antes de eu colar, me digam: qual é a persona? E qual é a regra de saída? Quando a tabela vier, a gente escolhe um requisito e abre a página no PDF. O agente organiza; quem decide é você.',
      faca: ['disparar o cronômetro de 12 minutos (começa sozinho na tela do apresentador)',
        'ao chegar: os cinco passos; primeiro clique: a primeira parte do pedido; segundo clique: a segunda parte',
@@ -1757,8 +1753,8 @@ SLIDES.push(
    notas: {diga: 'A skill está no kit, em gabarito/skills/conferir-temas. Por dentro, é um arquivo de texto, o SKILL.md. Tem um nome, conferir-temas; uma descrição de uma linha, que diz ao agente quando usar; e seis passos: ler os temas, ler os PDFs do caso, classificar cada requisito, aplicar as regras fixas, gerar o Word e dizer o que conferir à mão. As regras fixas são o jeito de ler de quem conhece o tema. Um exemplo: protocolo de pedido sem resposta só prova que o pedido foi feito, e não prova a negativa. Para instalar, nas três ferramentas, peçam ao próprio agente: instale a skill da pasta gabarito/skills/conferir-temas.',
      faca: ['ao chegar: o SKILL.md; abrir o arquivo de verdade na pasta, se der tempo', 'ler uma regra fixa em voz alta: a do protocolo sem resposta, no requisito (a)', 'clique: as formas de instalar', 'se a instalação não funcionar numa ferramenta, pedir ao agente que diga onde ele guarda skills; não prometer caminho de pasta'],
      transicao: 'Agora a skill trabalha num caso que vocês ainda não viram: o 6.'}},
-  {id: 'pratica2', titulo: 'Prática 2: rode a skill no caso 6', pratica: 10,
-   notas: {diga: 'Dez minutos. Agora quem trabalha é a skill. O pedido é curto: instale a skill conferir-temas, que está em gabarito/skills, use no caso 6 e grave o relatório em saida/caso-6. O agente vai mostrar um plano: leiam e autorizem. Depois abram o Word e comparem com o gabarito do caso 6. Uma dica. O Word sai por uma biblioteca do Python chamada python-docx. Se o computador pedir para instalar, deixem o agente criar um ambiente virtual, uma pasta só para isso, e instalar lá.',
+  {id: 'pratica2', titulo: 'Ao vivo 2: rode a skill no caso 6', pratica: 10,
+   notas: {diga: 'Dez minutos. Agora quem trabalha é a skill. O pedido é curto: instale a skill conferir-temas, que está em gabarito/skills, use no caso 6 e grave o relatório em saida/caso-6. O agente vai mostrar um plano: leiam e autorizem. Depois eu abro o Word e comparo com o gabarito do caso 6. Em casa, cada um repete no seu app. Uma dica. O Word sai por uma biblioteca do Python chamada python-docx. Se o computador pedir para instalar, deixem o agente criar um ambiente virtual, uma pasta só para isso, e instalar lá.',
      faca: ['disparar o cronômetro de 10 minutos (começa sozinho na tela do apresentador)',
        'fazer na tela compartilhada: colar o pedido, mostrar o plano, autorizar, abrir o Word',
        'se travar na instalação ou no Word: abrir gabarito/caso-6/relatorio-caso-6.docx e seguir com ele',
@@ -1766,13 +1762,17 @@ SLIDES.push(
        'avisar: em (c) e (d) a leitura é de juízo, e o gabarito é conservador; quem discordar, discorda com a página na mão',
        'lembrar: nada se grava dentro de casos/; a saída vai em saida/'],
      transicao: 'Quem travou, olhe as quatro saídas.'}},
-  {id: 'travou', titulo: 'Travou? Quatro saídas',
+  {id: 'travou', titulo: 'Travou em casa? Quatro saídas',
    notas: {diga: 'Quatro tropeços comuns. Sem plano ou sem o app, acompanhem na minha tela: o exercício é o mesmo. PDF sem texto é PDF digitalizado, uma foto do papel; o agente precisa reconhecer o texto antes, e isso demora mais. Se o Word não saiu, peçam o arquivo .docx pelo nome, ou abram o relatório pronto no gabarito. E se a skill não aparece, reiniciem o app.',
      faca: ['deixar na tela enquanto os últimos terminam', 'ajudar uma pessoa a pedir o .docx pelo nome, se alguém precisar'],
-     transicao: 'Tempo. Quero ver os Words.'}},
-  {id: 'mostrar', titulo: 'Mostre o seu Word.', linhaDia: false,
-   notas: {diga: 'Quero ver dois ou três. Mostrem o Word do caso 6 e digam: quantos requisitos ficaram de pé? Bateu com o gabarito? Onde vocês discordaram, e com que página na mão? Quem só assistiu também responde: no caso 2, o que faltou ao autor?',
-     faca: ['chamar duas ou três pessoas, uma de cada ferramenta se possível', 'comparar em voz alta com o gabarito do caso 6', 'perguntar a quem discordou em (c) ou (d) qual página sustenta a leitura', 'fechar com a frase da prática: o agente organiza, quem decide é você'],
+     transicao: 'E o que cada um faz em casa?'}},
+  {id: 'casa', titulo: 'Para fazer em casa', passos: [2.0],
+   notas: {diga: 'Hoje eu fiz, no meu computador, e vocês acompanharam. O exercício é de vocês, em casa, sem pressa. Baixem o kit no GitHub. Peçam a conferência do caso 2, com os temas. Depois instalem a skill e rodem no caso 6, e abram o Word. Por fim, comparem com o gabarito e confiram a página que o agente citou. Onde discordarem, discordem com a página na mão.',
+     faca: ['deixar na tela por alguns segundos', 'repetir o endereço do GitHub, que está no slide do kit', 'avisar que a skill roda melhor onde o app abre uma pasta (Claude, ChatGPT Work, Code ou Codex)'],
+     transicao: 'Uma pausa antes do fecho.'}},
+  {id: 'emcasa', titulo: 'Hoje eu fiz. Em casa, é você.', linhaDia: false,
+   notas: {diga: 'Hoje eu fiz, e vocês acompanharam. A parte que fixa é a de vocês, em casa. O agente organiza, quem decide é você.',
+     faca: ['pausa curta, sem avançar logo', 'respirar e passar ao fecho'],
      transicao: 'Então o que cada um leva desta tarde?'}},
 );
 
@@ -1783,7 +1783,7 @@ SLIDES.push(
      faca: ['apontar os marcos da esquerda para a direita', 'parar no marco dourado: conferir a fonte', 'lembrar que o kit continua no GitHub, com os seis casos e o gabarito, para treinar em casa'],
      transicao: 'E o que vem no dia 2.'}},
   {id: 'dia2', titulo: 'O próximo encontro',
-   notas: {diga: 'No dia 2: MCP e plugins, para ligar o agente aos sistemas; rotinas; raspagem de jurisprudência do TJMS e do STF; casos práticos; artefatos e apresentações; e a devolutiva.',
+   notas: {diga: 'No dia 2: MCP e plugins, para ligar o agente aos sistemas; o harness, que é o conjunto de ferramentas e regras em volta do modelo; o computer use, em que o agente usa o computador como uma pessoa usaria; rotinas e raspagem de jurisprudência do TJMS e do STF; casos práticos e a devolutiva; artefatos e apresentações; e o que mais aparecer.',
      faca: ['ler a lista sem se demorar', 'lembrar a sala de guardar a pasta do kit e a skill conferir-temas para o dia 2'],
      transicao: 'Se tiverem de guardar uma frase desta tarde, é esta.'}},
   {id: 'fecho', titulo: 'Trabalhe no caso, não no chat', linhaDia: false, segura: 4,
@@ -1964,7 +1964,7 @@ CENAS.capa = (() => {
   };
 })();
 
-// ===== Bloco B, duas escolhas =====
+// ===== Bloco B, três caminhos =====
 
 // Ponte: a frase sobe linha a linha; a caixa "o que a IA lê" aparece e, em onda, entram nela o pedido (pequeno) e o
 // que vem junto com ele; a legenda por último.
@@ -2034,24 +2034,21 @@ CENAS.capa = (() => {
   };
 }
 
-// Matriz: cabeçalhos dos dois eixos, as quatro casas em onda (Chat, Projeto, Tarefa com pasta, Projeto com pasta);
-// no segundo clique a casa do processo acende, com a nota, e a linha de Code e Codex entra embaixo.
+// Matriz: o cartão do Projeto e suas três coisas (primeiro clique); no segundo, a pergunta da pasta e as duas respostas.
 {
-  const sec = m.secao('matriz'), cabs = $$(sec, '.b-mx-cab'), cels = $$(sec, '.b-cel');
-  const aro = sec.querySelector('.b-aro'), luz = sec.querySelector('.b-luz'), nota = sec.querySelector('.b-cel-nota');
-  const fio = sec.querySelector('.b-alem-fio'), alem = sec.querySelector('.b-alem');
+  const sec = m.secao('matriz'), pj = sec.querySelector('.b-pj'), its = $$(sec, '.b-pj-it'), leg = sec.querySelector('.b-pj-leg');
+  const et = sec.querySelector('.b-pj-et'), sem = sec.querySelector('.b-pj-sem'), com = sec.querySelector('.b-pj-com');
+  const rod = sec.querySelector(':scope > .rodape');
   CENAS.matriz = (t, c) => {
     const x = conteudo(c), y = c.desde(1);
     titulo(sec, x, c);
-    cabs.forEach((el, n) => revelar(el, molaAR(x - 0.1 - n * 0.05)));
-    cels.forEach((el) => surgir(el, molaAR(x - 0.5 - Number(el.dataset.ordem) * 0.24), {dy: 0, escala: 0.06}));
-    surgir(aro, molaAR(y - 0.05), {dy: 0, escala: 0.06});
-    vis(aro, y > 0);
-    luz.style.opacity = String(saida(faixa(y, 0.05, 0.45)));
-    revelar(nota, molaAR(y - 0.25));
-    fio.style.transform = `scaleX(${saida(faixa(y, 0.35, 0.8)).toFixed(4)})`;
-    fio.style.transformOrigin = '0 50%';
-    revelar(alem, molaAR(y - 0.5));
+    surgir(pj, molaAR(x - 0.1), {dy: 24});
+    its.forEach((el, n) => revelar(el, molaAR(x - 0.5 - n * 0.2)));
+    revelar(leg, molaAR(x - 1.3));
+    revelar(et, molaAR(y - 0.05));
+    surgir(sem, molaAR(y - 0.3), {dx: 30, dy: 0});
+    surgir(com, molaAR(y - 0.7), {dx: 30, dy: 0});
+    revelar(rod, molaAR(y - 1.3));
   };
 }
 
@@ -2726,6 +2723,7 @@ CENAS.pratica2 = (() => {
 })();
 
 CENAS.travou = cartoes('travou');
+CENAS.casa = cartoes('casa');
 
 // ===== Bloco F: fecho =====
 // levar é o arquétipo tempo da biblioteca: sem cena própria.

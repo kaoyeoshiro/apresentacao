@@ -1,7 +1,5 @@
 
   /* ===== Bloco E, mão na massa ===== */
-  /* codex: o nome de cada ferramenta grande na sua coluna */
-  [data-slide="codex"] .janela .letra { font-size: 140px; top: 16px; }
 
   /* github: a janela do navegador à esquerda, com a página do repositório; a pasta extraída à direita */
   .e-nav { position: absolute; left: 120px; top: 300px; width: 1100px; height: 600px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); overflow: hidden; }
@@ -86,3 +84,5 @@
   [data-slide="travou"] .cartao { min-height: 236px; padding: 32px 40px; }
   [data-slide="travou"] .ct-txt { margin-top: 18px; font-size: var(--esc-2); }
   .e-nq { white-space: nowrap; }
+
+  a.e-url { display: block; color: inherit; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; cursor: pointer; }
