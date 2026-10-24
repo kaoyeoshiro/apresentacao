@@ -12,8 +12,11 @@ pago). Duas aulas de ~90 min na mesma tarde, tema `cojuris`, plano contínuo. Si
 
 - Aula 1, "O que é IA e qual usar": `decks/curso-ia-aula1/` (briefing, deck de 61 slides da versão 7, `apuracao.md` e
   `apuracao-2.md`).
-- Aula 2, "Do chat à pasta": `decks/curso-ia-aula2/briefing.md` aprovado em 22/10, mas ainda com o fio da data do
-  contrato, que o professor rejeitou na Aula 1; rever antes de montar. O deck ainda é a cópia do catálogo.
+- Aula 2, "Do chat à pasta": `decks/curso-ia-aula2/` refeita em 23/10/2026 (51 slides, 90 minutos). O `deck.html` é
+  gerado por `decks/curso-ia-aula2/montar.py` a partir de `fonte/` (um arquivo por bloco; leia `fonte/LEIA-ME.md`);
+  o roteiro, o caso fictício e os fatos sobre as ferramentas estão no `briefing.md`; o material do aluno (contrato,
+  aditivo, notificação em PDF e zip) sai de `material/gerar.py`. A demonstração é uma simulação por código; a gravação
+  real e a do Codex dependem do professor.
 
 ## Decisões do professor que valem
 
@@ -180,3 +183,13 @@ da crítica.
   04/03/2024, 9; o1, 05/12/2024, 15; o3, 16/04/2025, 20; GPT-5 High, 07/08/2025, 23; Claude Opus 5.5, 22/09/2026, 58; as páginas
   marcam as notas antigas como estimativas). Degraus entre os marcos e o ponto de 5 em nov/2022 lidos do gráfico, aproximados
   (rodapé avisa). Aula 1 fica com 64 slides.
+
+## Aula 2 (24/10/2026)
+
+- Deck `decks/curso-ia-aula2`: 59 slides, 6 blocos (pedir 22, escolhas 20, skills 8, pasta 10, mão na massa 27, fecho 3).
+  Prática: o professor faz ao vivo e a sala acompanha; material no kit público
+  https://github.com/kaoyeoshiro/kit-aula2-curso-ia (fonte em `decks/curso-ia-aula2/kit/`, montado por
+  `material/kit.py`; os casos vêm de `material/casos_gerar/`). Detalhe e fatos no `briefing.md`, bloco "ESTADO ATUAL".
+- Antes da aula: ensaiar no Claude a instalação da skill `conferir-temas` e as duas demonstrações ao vivo (caso 2 e
+  caso 6). Os alunos refazem em casa; não há gravação do Codex nem mostra de resultados em sala.
+- Os originais reais dos casos e os mapas de anonimização ficam só em `~/Downloads/casos-aula2` (fora do repositório).

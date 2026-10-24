@@ -1,0 +1,86 @@
+
+  /* ===== BLOCO A, pedir bem: classes a-* ===== */
+
+  /* par (cena própria): o pedido vago numa caixa tracejada, o pedido bom numa caixa cheia embaixo; os ícones ✗ e ✓
+     são desenhados pelo a-pedir.cenas.js */
+  .a-err { position: absolute; left: 120px; top: 318px; display: flex; align-items: center; gap: 30px; box-sizing: border-box; padding: 20px 40px 20px 26px; border: 4px dashed var(--cor-linha); border-radius: 26px; }
+  .a-err p { font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .a-cer { position: absolute; left: 120px; top: 470px; width: 1680px; display: flex; align-items: flex-start; gap: 30px; box-sizing: border-box; padding: 32px 48px 36px 26px; border: 5px solid var(--cor-tinta); border-radius: 26px; }
+  .a-cer p { flex: 1; font-size: var(--esc-2); line-height: 1.36; text-wrap: pretty; }
+  .a-ic { flex: 0 0 64px; width: 64px; height: 64px; overflow: visible; }
+  .a-cer .a-ic { margin-top: -2px; }
+  .a-ic circle { fill: none; stroke: var(--cor-linha); stroke-width: 4; }
+  .a-ic path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .a-cer .a-ic circle { stroke: var(--cor-tinta); }
+  .a-cer .a-ic path { stroke: var(--cor-tinta); }
+  /* marca-texto: a faixa cresce da esquerda (background-size animado pela cena) */
+  .a-mk { color: inherit; font-weight: 600; white-space: nowrap; background: linear-gradient(transparent 58%, color-mix(in srgb, var(--cor-destaque) 55%, transparent) 58%) no-repeat 0 0 / 0% 100%; padding: 0 2px; }
+  .a-extra { position: absolute; left: 120px; top: 800px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .a-fmt { display: flex; gap: 22px; }
+  .a-fmt span { padding: 4px 26px; border: 3px solid var(--cor-linha); border-radius: 999px; font: 600 36px/1.3 var(--fonte-titulo); color: var(--cor-tinta); }
+  .a-ouro { top: 790px; font: 800 60px/1.1 var(--fonte-titulo); text-transform: uppercase; letter-spacing: -0.01em; }
+  .noite .a-err { border-color: var(--linha-sobre-noite); }
+  .noite .a-err p { color: var(--suave-sobre-noite); }
+  .noite .a-cer { border-color: var(--sobre-noite); }
+  .noite .a-ic circle { stroke: var(--linha-sobre-noite); }
+  .noite .a-ic path { stroke: var(--suave-sobre-noite); }
+  .noite .a-cer .a-ic circle, .noite .a-cer .a-ic path { stroke: var(--sobre-noite); }
+  .noite .a-mk { background-image: linear-gradient(transparent 62%, color-mix(in srgb, var(--cor-destaque) 60%, var(--noite)) 62%); }
+  .noite .a-extra { color: var(--suave-sobre-noite); }
+  .noite .a-extra.sinal { color: var(--sinal-noite); }
+
+  /* capa (cena própria, fundo claro, como a da Aula 1): o logo oficial à esquerda, o texto à direita de um fio */
+  .a-logo-cj { position: absolute; left: 120px; top: 300px; height: 480px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+  .a-cp-fio { position: absolute; left: 740px; top: 290px; width: 4px; height: 500px; background: var(--cor-linha); transform-origin: 50% 0; }
+  .a-cp-txt { position: absolute; left: 800px; top: 300px; width: 1000px; }
+  .a-cp-txt .rotulo { position: static; }
+  .a-cp-tit { margin-top: 26px; font-size: 124px; line-height: 1.04; color: var(--cor-tinta); }
+  .a-cp-tit > span { display: block; white-space: nowrap; }
+  .a-cp-sub { margin-top: 44px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
+
+  /* tentativas (cena própria): uma linha por tentativa, com o pedido, o veredito e a barra da distância */
+  .a-tn-et { left: 120px; top: 300px; }
+  .a-tn { position: absolute; left: 120px; width: 1680px; box-sizing: border-box; padding-top: 22px; border-top: 4px solid var(--linha-sobre-noite); }
+  .a-tn:nth-of-type(1) { top: 350px; height: 150px; } .a-tn:nth-of-type(2) { top: 500px; height: 150px; } .a-tn:nth-of-type(3) { top: 650px; height: 200px; }
+  .a-tn-n { position: absolute; left: 0; top: 14px; font: 800 96px/1 var(--fonte-titulo); letter-spacing: -0.03em; color: var(--suave-sobre-noite); }
+  .a-tn-p { position: absolute; left: 190px; top: 24px; width: 950px; font-size: 42px; line-height: 1.3; text-wrap: pretty; }
+  .a-tn-v { position: absolute; left: 1210px; top: 28px; width: 470px; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); text-transform: uppercase; letter-spacing: .06em; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .a-tn-t { position: absolute; left: 1210px; top: 84px; width: 470px; height: 22px; border-radius: 11px; background: var(--linha-sobre-noite); }
+  .a-tn-b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 11px; background: color-mix(in srgb, var(--sobre-noite) 50%, var(--noite)); transform-origin: 0 50%; }
+  .a-tn:nth-of-type(3) .a-tn-b { background: var(--cor-destaque); }
+  .a-tn:nth-of-type(3) .a-tn-v { color: var(--sinal-noite); }
+  .a-tn-fim { position: absolute; left: 120px; top: 872px; font-size: var(--esc-2); line-height: 1.3; color: var(--sobre-noite); white-space: nowrap; }
+
+  /* personas (cena própria): a pergunta em cima, um papel por coluna */
+  .a-pg { position: absolute; left: 120px; top: 300px; font: italic 400 var(--esc-3)/1.2 var(--fonte-texto); white-space: nowrap; }
+  .a-col { position: absolute; top: 450px; width: 520px; box-sizing: border-box; padding-top: 26px; border-top: 5px solid var(--linha-sobre-noite); }
+  .a-col:nth-of-type(1) { left: 120px; } .a-col:nth-of-type(2) { left: 700px; } .a-col:nth-of-type(3) { left: 1280px; }
+  .a-col-t { font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .06em; text-transform: uppercase; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .a-col-r { margin-top: 22px; font-size: 42px; line-height: 1.3; text-wrap: pretty; }
+  .a-pg-fim { position: absolute; left: 120px; top: 812px; font-size: var(--esc-2); color: var(--sobre-noite); white-space: nowrap; }
+
+  /* exemplos (cartões): quadrados que contam os exemplos do pedido */
+  [data-slide="exemplos"] .cartoes { top: 350px; }
+  [data-slide="exemplos"] .cartao { padding: 34px 36px 38px; }
+  .a-ex { display: flex; gap: 14px; height: 54px; margin-bottom: 26px; }
+  .a-ex i { width: 54px; height: 54px; box-sizing: border-box; border-radius: 10px; background: var(--cor-tinta); }
+  .a-ex i.vazio { background: none; border: 4px dashed var(--cor-tinta-suave); }
+  .ct-tit i { font-style: italic; }
+
+  /* junta (cena própria): o rótulo do elemento à esquerda, o trecho do pedido à direita */
+  .a-jt { position: absolute; left: 120px; top: 318px; width: 1680px; }
+  .a-jl { position: relative; display: flex; align-items: center; height: 82px; white-space: nowrap; }
+  .a-jl b { position: relative; flex: 0 0 300px; font: 700 var(--esc-1)/1 var(--fonte-titulo); letter-spacing: .12em; text-transform: uppercase; color: var(--cor-tinta); }
+  .a-jl b::before { content: ''; position: absolute; left: -18px; top: -14px; width: 250px; height: 58px; border-radius: 12px; background: var(--cor-destaque-fraca); transform: scaleX(var(--a-acende, 0)); transform-origin: 0 50%; z-index: -1; }
+  .a-jl b { margin-left: 18px; isolation: isolate; }
+  .a-jl span { font-size: 42px; line-height: 1.2; }
+  [data-slide="junta"] .rodape { top: 860px; font-size: var(--esc-2); color: var(--cor-tinta); }
+
+  /* prática 1 (cena guia): passos à esquerda, checklist à direita */
+  .a-ps { position: absolute; left: 120px; top: 340px; width: 1100px; }
+  .a-ps li { display: flex; align-items: flex-start; gap: 30px; margin-bottom: 44px; font-size: var(--esc-2); line-height: 1.3; }
+  .a-ps b { flex: 0 0 76px; height: 76px; margin-top: -10px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 38px; display: grid; place-items: center; font: 800 40px/1 var(--fonte-titulo); color: var(--sobre-noite); }
+  .a-ck-et { left: 1260px; top: 300px; }
+  .a-ck { position: absolute; left: 1260px; top: 356px; width: 540px; }
+  .a-ck li { display: flex; align-items: center; gap: 24px; height: 74px; font: 600 40px/1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+  .a-ck i { flex: 0 0 40px; height: 40px; box-sizing: border-box; border: 4px solid var(--suave-sobre-noite); border-radius: 8px; }

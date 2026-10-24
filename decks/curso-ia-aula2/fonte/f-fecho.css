@@ -1,0 +1,21 @@
+
+  /* ===== Bloco F, fecho ===== */
+  /* levar: seis marcos, o texto de cada um em até duas linhas */
+  [data-slide="levar"] .etapas li { font-size: 36px; }
+
+  /* dia2: "Dia 2" grande à esquerda; à direita a lista, uma linha fina entre os itens */
+  .f-dia { position: absolute; left: 120px; top: 330px; width: 520px; line-height: .9; color: var(--sobre-noite); }
+  .f-dia span { display: block; }
+  .f-dia span:first-child { font-size: var(--esc-5); }
+  .f-dia span.sinal { font-size: var(--esc-6); }
+  .f-lista { position: absolute; left: 720px; top: 306px; width: 1080px; }
+  .f-lista li { padding: 14px 0; border-bottom: 3px solid var(--linha-sobre-noite); font-size: 44px; line-height: 1.2; white-space: nowrap; }
+
+  /* fecho: o logo oficial à esquerda, o fio e o texto à direita, como o encerramento da Aula 1 */
+  .f-logo { position: absolute; left: 120px; top: 300px; height: 480px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+  .f-fio { position: absolute; left: 740px; top: 290px; width: 4px; height: 500px; background: var(--cor-linha); transform-origin: 50% 0; }
+  .f-txt { position: absolute; left: 800px; top: 270px; width: 1000px; }
+  .f-txt .rotulo { position: static; }
+  .f-tit { margin-top: 26px; font-size: 124px; line-height: 1.04; color: var(--cor-tinta); }
+  .f-tit > span { display: block; white-space: nowrap; }
+  .f-obg { margin-top: 44px; font: 700 var(--esc-3)/1.2 var(--fonte-titulo); color: var(--cor-tinta-suave); }

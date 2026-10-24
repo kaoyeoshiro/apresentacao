@@ -12,3 +12,4 @@ __pycache__/
 decks/*/midia/originais/
 # cache que o image-video-api grava ao lado de uma ref grande
 *.cache.jpg
+decks/_p-*/

@@ -1,0 +1,154 @@
+
+  <!-- ===== Bloco D: na pasta (16 min) ===== -->
+  <!-- papeis (viagem): os três papéis do caso fictício esperam no vão antes do slide, atravessam grandes e entram nos
+       arquivos da pasta. Primeira página de cada papel, desenhada por código (material/gerar.py). -->
+  <section data-slide="papeis" data-arquetipo="viagem">
+    <p class="rotulo">Na pasta</p>
+    <h2 class="manchete">Três papéis na pasta do caso</h2>
+    <img class="objeto d-ob" id="ob-contrato" src="midia/caso-contrato.webp" alt="" style="left: -360px; top: 330px">
+    <img class="objeto d-ob" id="ob-aditivo" src="midia/caso-aditivo.webp" alt="" style="left: -330px; top: 390px">
+    <img class="objeto d-ob" id="ob-notificacao" src="midia/caso-notificacao.webp" alt="" style="left: -300px; top: 450px">
+    <img class="viagem-foto" src="midia/pasta-aberta.webp" alt="">
+    <div class="arvore">
+      <p class="no" data-nivel="0">caso-ficticio/</p>
+      <p class="no" data-nivel="1" data-arquivo data-de="ob-contrato">contrato.pdf</p>
+      <p class="no" data-nivel="1" data-arquivo data-de="ob-aditivo">aditivo.pdf</p>
+      <p class="no" data-nivel="1" data-arquivo data-de="ob-notificacao">notificacao.pdf</p>
+    </div>
+    <p class="selo-ia">imagem gerada por IA</p>
+  </section>
+
+  <!-- estrutura (cena própria, árvore): o que está pronto na pasta antes da aula; o cronologia.md ainda não existe -->
+  <section data-slide="estrutura" class="noite">
+    <p class="rotulo">Na pasta</p>
+    <h2 class="manchete">O que está na pasta</h2>
+    <div class="d-arv">
+      <p class="d-no" data-nivel="0" data-tipo="pasta">caso-ficticio/</p>
+      <p class="d-no d-papel" data-nivel="1" data-tipo="arquivo">contrato.pdf</p>
+      <p class="d-no d-papel" data-nivel="1" data-tipo="arquivo">aditivo.pdf</p>
+      <p class="d-no d-papel" data-nivel="1" data-tipo="arquivo">notificacao.pdf</p>
+      <p class="d-no" data-nivel="1" data-tipo="arquivo" id="d-no-memoria">memoria.md</p>
+      <p class="d-no d-novo" data-nivel="1" data-tipo="arquivo" id="d-no-crono">cronologia.md</p>
+      <p class="d-no" data-nivel="1" data-tipo="pasta">.claude/skills/cronologia-com-fonte/</p>
+      <p class="d-no" data-nivel="2" data-tipo="arquivo" id="d-no-skill">SKILL.md</p>
+    </div>
+    <svg class="d-arv-svg" viewBox="0 0 1920 1080"></svg>
+    <p class="d-ext" data-de="d-papel">os três papéis</p>
+    <p class="d-ext" data-de="d-no-memoria">o contexto do caso</p>
+    <p class="d-ext d-ext-novo" data-de="d-no-crono">o agente vai criar</p>
+    <p class="d-ext" data-de="d-no-skill">o jeito de fazer</p>
+    <p class="rodape">Pronto antes da aula. Nada é criado ao vivo, só a cronologia.</p>
+  </section>
+
+  <!-- memoria (cena própria): o memoria.md da pasta, texto exato do briefing; # e - vêm do CSS, como no editor -->
+  <section data-slide="memoria">
+    <p class="rotulo">Na pasta</p>
+    <h2 class="manchete">A memória do caso, em Markdown</h2>
+    <div class="d-arq">
+      <p class="d-arq-cab">caso-ficticio/memoria.md</p>
+      <div class="d-arq-txt">
+        <p class="d-ln d-h1">Memória do caso</p>
+        <p class="d-ln d-li">Contrato nº 07/2019, manutenção predial: Município de Vila Serena e Horizonte Manutenção Predial Ltda.</p>
+        <p class="d-ln d-li">Os três documentos são fictícios, para a aula.</p>
+        <p class="d-ln d-li"><span class="d-mm-regra">Trate prazo e multa como pontos de conferência humana.</span></p>
+        <p class="d-ln d-li">Responda em português, em frases curtas.</p>
+      </div>
+    </div>
+    <p class="rodape">Texto limpo, que qualquer agente lê e que fica de um dia para o outro.</p>
+  </section>
+
+  <section data-slide="agora" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Demonstração</p>
+    <p class="respiro"><span>Agora,</span><span><span class="sinal">funcionando.</span></span></p>
+  </section>
+
+  <!-- pedido (cena guia, dois cliques): o pedido exato do briefing se digita; depois, os cinco passos da demonstração -->
+  <section data-slide="pedido">
+    <p class="rotulo">Demonstração</p>
+    <h2 class="manchete">O pedido e os cinco passos</h2>
+    <p class="etiqueta d-et-ped">pedido</p>
+    <div class="d-entrada"></div>
+    <p class="d-pedido">Monte a cronologia do caso com a data de cada fato. Para cada data, cite o arquivo e o trecho. Inclua a data do último pagamento. O que não estiver nos documentos, diga que não encontrou. Salve em cronologia.md.</p>
+    <ol class="d-passos">
+      <li>Abra a pasta.</li>
+      <li>Cole o pedido.</li>
+      <li>Leia o plano e autorize.</li>
+      <li>Abra o cronologia.md.</li>
+      <li>Confira um trecho no papel.</li>
+    </ol>
+  </section>
+
+  <!-- demo (cena própria, noite, quatro cliques): simulação por código de uma sessão de agente na pasta. Reserva da
+       demonstração ao vivo: o pedido se digita, o agente lê os três papéis, mostra o plano, pede autorização e escreve
+       o cronologia.md. Textos do pedido e da resposta saem do briefing ("O caso fictício"). -->
+  <section data-slide="demo" class="noite">
+    <p class="rotulo">Demonstração</p>
+    <h2 class="manchete">Ao vivo no Claude, na pasta</h2>
+    <div class="d-jan">
+      <div class="d-jan-barra"><i></i><i></i><i></i><b>Claude</b><span class="d-chip-pasta">caso-ficticio/</span></div>
+      <div class="d-fio">
+        <div class="d-rolo">
+          <div class="d-msg d-eu"><p>Monte a cronologia do caso com a data de cada fato. Para cada data, cite o arquivo e o trecho. Inclua a data do último pagamento. O que não estiver nos documentos, diga que não encontrou. Salve em cronologia.md.</p></div>
+          <div class="d-msg d-lendo"><span class="d-roda"></span><p>Lendo</p><span class="d-arqchip">contrato.pdf</span><span class="d-arqchip">aditivo.pdf</span><span class="d-arqchip">notificacao.pdf</span></div>
+          <div class="d-msg d-plano">
+            <p class="d-plano-tit">Plano</p>
+            <ol>
+              <li>Ler os três documentos.</li>
+              <li>Listar cada data com arquivo e trecho.</li>
+              <li>Marcar o que não estiver nos papéis.</li>
+              <li>Salvar cronologia.md.</li>
+            </ol>
+          </div>
+          <div class="d-msg d-perm"><p>Criar cronologia.md nesta pasta?</p><span class="d-bt d-bt-sim">Permitir</span><span class="d-bt">Recusar</span></div>
+          <div class="d-msg d-escr"><span class="d-roda"></span><p>Escrevendo cronologia.md</p><span class="d-barra"><i></i></span></div>
+          <div class="d-msg d-resp">
+            <p class="d-resp-1">Salvei cronologia.md com as datas, cada uma com arquivo e trecho.</p>
+            <p class="d-resp-2">Data do último pagamento: não encontrei nos documentos.</p>
+            <span class="d-arqchip d-novo-chip">cronologia.md</span>
+          </div>
+        </div>
+      </div>
+      <div class="d-comp"><p class="d-comp-txt">Monte a cronologia do caso com a data de cada fato. Para cada data, cite o arquivo e o trecho. Inclua a data do último pagamento. O que não estiver nos documentos, diga que não encontrou. Salve em cronologia.md.</p><span class="d-enviar"></span></div>
+    </div>
+    <p class="pilula">simulação por código; a gravação da aula substitui</p>
+  </section>
+
+  <!-- fonte (fios, noite): o S.T.A.R. da aula. Cronologia do briefing; o fio do contrato chega e a data acende; o
+       último pagamento fica sem fonte (a regra "se não souber, diga") -->
+  <section data-slide="fonte" data-arquetipo="fios" class="noite">
+    <p class="rotulo">Conferência</p>
+    <h2 class="manchete">Cada data aponta para o papel</h2>
+    <div class="fontes">
+      <p class="no" data-arquivo id="d-fn-contrato">contrato.pdf</p>
+      <p class="no" data-arquivo id="d-fn-aditivo">aditivo.pdf</p>
+      <p class="no" data-arquivo id="d-fn-notificacao">notificacao.pdf</p>
+    </div>
+    <div class="minuta">
+      <p class="cab">cronologia.md</p>
+      <p class="linha" data-fonte="d-fn-contrato"><span><span class="marca">12/03/2019</span>: contrato assinado</span></p>
+      <p class="linha" data-fonte="d-fn-aditivo"><span>01/04/2021: aditivo prorroga 12 meses</span></p>
+      <p class="linha" data-fonte="d-fn-notificacao"><span>20/02/2023: multa de 2% notificada</span></p>
+      <p class="linha"><span>Último pagamento</span></p>
+      <p class="sem-fonte">não encontrei nos documentos</p>
+    </div>
+  </section>
+
+  <!-- trecho (cena própria): a linha da cronologia e o trecho marcado no contrato (o amarelo é do papel, não do tema) -->
+  <section data-slide="trecho">
+    <p class="rotulo">Conferência</p>
+    <h2 class="manchete">Confira o trecho no papel</h2>
+    <div class="d-lin">
+      <p class="d-lin-cab">cronologia.md</p>
+      <p class="d-lin-data">12/03/2019</p>
+      <p class="d-lin-fato">contrato assinado,<br>vigência de 36 meses</p>
+      <p class="d-lin-fonte">contrato.pdf, cláusula terceira</p>
+    </div>
+    <div class="d-pag"><img class="d-pag-img" src="midia/caso-contrato-trecho.webp" alt="Página do contrato fictício com a cláusula terceira marcada"></div>
+    <p class="etiqueta d-pag-leg">contrato.pdf</p>
+    <svg class="d-tr-svg" viewBox="0 0 1920 1080"><path class="d-tr-fio"/><circle class="d-tr-a" r="9"/><circle class="d-tr-b" r="9"/></svg>
+  </section>
+
+  <section data-slide="limite" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Conferência</p>
+    <p class="respiro"><span>A conclusão jurídica</span><span>fica com <span class="sinal">você</span>.</span></p>
+  </section>

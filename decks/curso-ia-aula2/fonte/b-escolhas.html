@@ -1,0 +1,337 @@
+
+  <!-- ===== Bloco B, três caminhos (22 min): ponte a escolher. Fatos das ferramentas: briefing.md, "Fatos sobre as
+       ferramentas"; números do teste: briefing.md, "O teste do processo fictício". ===== -->
+  <!-- ponte (cena própria, noite): a frase à esquerda; à direita, a caixa grande "o que a IA lê", onde entram em onda o
+       pedido (pequeno) e tudo o que vem junto com ele (briefing.md, Revisão 2, item 2) -->
+  <section data-slide="ponte" class="noite">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="display b-pt-frase"><span>Tudo o que</span><span>a IA lê</span><span>é <span class="sinal">prompt</span></span></h2>
+    <div class="b-pt-caixa">
+      <p class="b-pt-cab">o que a IA lê</p>
+      <p class="b-pt-item b-pt-pedido">seu pedido</p>
+      <p class="b-pt-item">anexos</p>
+      <p class="b-pt-item">instruções</p>
+      <p class="b-pt-item">memória</p>
+      <p class="b-pt-item">conversa anterior</p>
+    </div>
+    <p class="respiro-sub">O contexto costuma chegar por anexos, instruções e memória.</p>
+  </section>
+
+  <!-- reenvio (cena própria): três conversas, e em cada uma os mesmos três papéis sobem de novo pelo campo -->
+  <section data-slide="reenvio">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">No chat, você sobe tudo de novo</h2>
+    <div class="b-conv" style="left: 120px">
+      <p class="b-conv-cab">Conversa 1</p><p class="b-tag b-primeira">primeira vez</p>
+      <div class="b-anexos"><img src="midia/caso-contrato.webp" alt=""><img src="midia/caso-aditivo.webp" alt=""><img src="midia/caso-notificacao.webp" alt=""></div>
+      <p class="b-conv-msg">Seguem os três papéis.</p>
+      <div class="b-campo"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><path d="M22 31V13M14 20l8-8 8 8"/></svg></div>
+    </div>
+    <div class="b-conv" style="left: 700px">
+      <p class="b-conv-cab">Conversa 2</p><p class="b-tag">de novo</p>
+      <div class="b-anexos"><img src="midia/caso-contrato.webp" alt=""><img src="midia/caso-aditivo.webp" alt=""><img src="midia/caso-notificacao.webp" alt=""></div>
+      <p class="b-conv-msg">Seguem os três papéis.</p>
+      <div class="b-campo"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><path d="M22 31V13M14 20l8-8 8 8"/></svg></div>
+    </div>
+    <div class="b-conv" style="left: 1280px">
+      <p class="b-conv-cab">Conversa 3</p><p class="b-tag">de novo</p>
+      <div class="b-anexos"><img src="midia/caso-contrato.webp" alt=""><img src="midia/caso-aditivo.webp" alt=""><img src="midia/caso-notificacao.webp" alt=""></div>
+      <p class="b-conv-msg">Seguem os três papéis.</p>
+      <div class="b-campo"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><path d="M22 31V13M14 20l8-8 8 8"/></svg></div>
+    </div>
+    <p class="rodape">Conversa nova, upload novo.</p>
+  </section>
+
+  <!-- agente (cena própria): o chat responde e termina; o agente faz plano, lê, altera e mostra, com o laço de ajuste
+       e a autorização antes das ações. Fatos: briefing.md, Fatos sobre as ferramentas -->
+  <section data-slide="agente">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">O chat responde. O agente age.</h2>
+    <p class="b-ag-rot" style="top: 362px">Chat</p>
+    <div class="b-ag-no b-ag-chat" style="left: 420px; top: 340px; width: 150px">pedido</div>
+    <div class="b-ag-no b-ag-chat" style="left: 610px; top: 340px; width: 220px">resposta</div>
+    <i class="b-ag-div"></i>
+    <p class="b-ag-rot" style="top: 642px">Agente</p>
+    <div class="b-ag-no b-ag-ag" style="left: 420px; width: 150px">pedido</div>
+    <div class="b-ag-no b-ag-ag" style="left: 610px; width: 150px">plano</div>
+    <div class="b-ag-no b-ag-ag" style="left: 860px; width: 250px">lê os arquivos</div>
+    <div class="b-ag-no b-ag-ag" style="left: 1150px; width: 300px">cria ou altera arquivos</div>
+    <div class="b-ag-no b-ag-ag" style="left: 1500px; width: 300px">mostra o que mudou</div>
+    <p class="b-ag-autoriza">você autoriza</p>
+    <p class="b-ag-ajusta">você ajusta</p>
+    <svg class="b-camada b-ag-svg" viewBox="0 0 1920 1080">
+      <path class="b-ag-c" d="M574 390H604M590 378L604 390L590 402"/>
+      <path class="b-ag-c" d="M834 390H880"/>
+      <path class="b-ag-fim" d="M884 358V422"/>
+      <path class="b-ag-a" d="M574 670H604M590 658L604 670L590 682"/>
+      <path class="b-ag-a" d="M764 670H854M840 658L854 670L840 682"/>
+      <path class="b-ag-a" d="M1114 670H1144M1130 658L1144 670L1130 682"/>
+      <path class="b-ag-a" d="M1454 670H1494M1480 658L1494 670L1480 682"/>
+      <path class="b-ag-ok" d="M810 598V664"/>
+      <path class="b-ag-laco" d="M1650 724C1650 800 1580 812 1480 812H860C760 812 685 800 685 724M673 740L685 724L697 740"/>
+    </svg>
+    <p class="rodape">O agente usa ferramentas: ler, buscar, criar, rodar.</p>
+  </section>
+
+  <section data-slide="confere" data-arquetipo="tempo" class="noite">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">O agente propõe; você confere</h2>
+    <ol class="etapas">
+      <li><b>plano</b>peça o plano</li>
+      <li><b>acessos</b>veja o que ele abre</li>
+      <li><b>autoriza</b>autorize a ação</li>
+      <li class="agora"><b>revisa</b>leia o que mudou</li>
+    </ol>
+    <p class="tempo-leg">Cada passo para antes do próximo.</p>
+  </section>
+
+  <!-- varios (cena própria): sete PDFs, um agente para cada; no segundo clique, as linhas convergem no agente integrador -->
+  <section data-slide="varios">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">Um processo grande, vários agentes</h2>
+    <p class="etiqueta b-v-et">Um agente por PDF, cada um com a sua mesa</p>
+    <div class="b-vcs">
+      <div class="b-vc"><b>PDF 1</b></div>
+      <div class="b-vc"><b>PDF 2</b></div>
+      <div class="b-vc"><b>PDF 3</b></div>
+      <div class="b-vc"><b>PDF 4</b></div>
+      <div class="b-vc"><b>PDF 5</b></div>
+      <div class="b-vc"><b>PDF 6</b></div>
+      <div class="b-vc"><b>PDF 7</b></div>
+    </div>
+    <svg class="b-vlinhas" viewBox="0 0 1920 1080"></svg>
+    <div class="b-vint"><b>Agente integrador</b></div>
+    <p class="rodape">Uma cronologia única, com arquivo e página.</p>
+  </section>
+
+  <!-- varios2: o que cada ferramenta tem; o chat comum fecha a lista -->
+  <section data-slide="varios2" class="noite">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">Quem despacha agentes</h2>
+    <div class="b-sa">
+      <p class="b-sa-n">Claude</p><p class="b-sa-t">Sim, integrado ao Cowork.</p>
+      <p class="b-sa-n">Claude Code</p><p class="b-sa-t">Sim. Até 20 ao mesmo tempo.</p>
+      <p class="b-sa-n">Codex</p><p class="b-sa-t">Sim, no app, no terminal e no editor.</p>
+      <p class="b-sa-n">ChatGPT Work</p><p class="b-sa-t">Sim, em contas elegíveis. Peça de forma explícita.</p>
+      <p class="b-sa-n">Chat do ChatGPT</p><p class="b-sa-t">Não despacha agentes.</p>
+    </div>
+    <p class="rodape">Pergunte à sua ferramenta se ela despacha agentes.</p>
+  </section>
+
+  <!-- matriz (cena própria): o que é um Projeto e a pasta como escolha à parte; segundo clique abre a pergunta da pasta -->
+  <section data-slide="matriz">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">O que é um Projeto</h2>
+    <div class="b-pj">
+      <p class="b-pj-tit">Projeto</p>
+      <p class="b-pj-it">Instruções fixas</p>
+      <p class="b-pj-it">Arquivos do caso</p>
+      <p class="b-pj-it">Memória do trabalho</p>
+    </div>
+    <p class="b-pj-leg">A mesa de trabalho que o app guarda para você.</p>
+    <p class="etiqueta b-pj-et">E a pasta?</p>
+    <div class="b-pj-op b-pj-sem"><p class="b-pj-op-t">Sem pasta</p><p class="b-pj-op-d">usa os arquivos que você anexa</p></div>
+    <div class="b-pj-op b-pj-com"><p class="b-pj-op-t">Com pasta</p><p class="b-pj-op-d">trabalha nos arquivos do seu computador</p></div>
+    <p class="rodape">Processo? Escolha sempre a pasta.</p>
+  </section>
+
+  <!-- projeto (cena própria, noite): a tela de um Projeto do Claude desenhada por código, com o caso fictício; nunca o
+       print do professor, que tem número de processo real -->
+  <section data-slide="projeto" class="noite">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">O Projeto guarda o seu jeito</h2>
+    <div class="b-app">
+      <div class="b-app-barra"><i></i><i></i><i></i></div>
+      <div class="b-app-esq">
+        <p class="b-app-tipo">Projeto</p>
+        <p class="b-app-nome">Caso Vila Serena</p>
+        <div class="b-app-conv"><i style="width: 420px"></i><i style="width: 360px"></i><i style="width: 400px"></i></div>
+        <div class="b-app-campo"></div>
+      </div>
+      <div class="b-app-lado">
+        <div class="b-pc"><p class="b-pc-tit">Instruções</p><p class="b-pc-txt">Cite arquivo e trecho.</p>
+          <svg class="b-lapis" viewBox="0 0 40 40"><path d="M8 32l4-12L26 6l8 8-14 14z M12 20l8 8"/></svg></div>
+        <div class="b-pc"><p class="b-pc-tit">Memória</p><p class="b-pc-txt">Contrato 07/2019, Vila Serena</p></div>
+        <div class="b-pc"><p class="b-pc-tit">Contexto</p><p class="b-pc-txt">contrato, aditivo, notificação</p></div>
+        <div class="b-pc"><p class="b-pc-tit">Pasta</p><p class="b-pc-txt">caso-ficticio/</p></div>
+        <div class="b-pc"><p class="b-pc-tit">Programado</p><p class="b-pc-txt">nenhuma rotina</p></div>
+      </div>
+    </div>
+    <svg class="b-camada b-seta-p" viewBox="0 0 1920 1080"><path d="M1330 420C1300 400 1290 392 1262 384"/><path d="M1282 370L1260 384L1284 398"/></svg>
+    <p class="b-anota">Visível e editável com um clique.</p>
+    <p class="b-chatgpt">No ChatGPT, Projeto também guarda instruções e arquivos.</p>
+  </section>
+
+  <!-- pasta (cena em partes): cinco motivos, um por clique; a explicação do atual à direita -->
+  <section data-slide="pasta">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">Processo? Trabalhe com pasta</h2>
+    <ol class="partes">
+      <li><span>Volume</span></li>
+      <li><span>Lê só o trecho</span></li>
+      <li><span>Sem reenviar</span></li>
+      <li><span>A entrega fica ao lado da fonte</span></li>
+      <li><span>Você libera só a pasta</span></li>
+    </ol>
+    <div class="explica">
+      <p>No anexo, o processo entra inteiro na conversa e ocupa a mesa; na pasta, o agente abre só o que precisa.</p>
+      <p>O agente busca a data e abre só o trecho de que precisa.</p>
+      <p>Os papéis ficam na pasta, e a conversa nova não pede upload.</p>
+      <p>A cronologia nasce na mesma pasta dos papéis que ela cita.</p>
+      <p>Você escolhe a pasta; o agente trabalha dentro dela.</p>
+    </div>
+  </section>
+
+  <!-- teste (cena de números, noite): o processo fictício medido em 23/10/2026 (briefing.md) -->
+  <section data-slide="teste" class="noite">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">O agente leu 0,2% do processo</h2>
+    <p class="display b-348">348</p>
+    <p class="b-348-leg">páginas e <b class="b-129">129 mil</b> palavras</p>
+    <div class="b-busca"><svg viewBox="0 0 44 44"><circle cx="18" cy="18" r="12"/><path d="M27 27l11 11"/></svg><span class="b-busca-txt">12/03/2019</span></div>
+    <p class="b-busca-res">achou a data em <b>6 milissegundos</b></p>
+    <p class="b-bar-leg" style="top: 300px"><b>Anexado no chat:</b> o processo inteiro entra na conversa</p>
+    <div class="b-bar" style="top: 430px"><i class="b-bar-chat"></i></div>
+    <p class="b-bar-leg" style="top: 600px"><b>Na pasta:</b> o agente lê cerca de 300 palavras (0,2%)</p>
+    <div class="b-bar" style="top: 730px"><i class="b-lido"></i></div>
+    <p class="pilula">teste com processo fictício</p>
+  </section>
+
+  <!-- lei (cena própria): o que guardar na pasta e o que pesquisar; embaixo, a regra para o agente -->
+  <section data-slide="lei">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">Guardar a lei ou pesquisar?</h2>
+    <div class="b-lado" style="left: 120px">
+      <p class="display b-lado-tit">Guarde</p>
+      <ul><li>leis que você usa sempre</li><li>jurisprudência favorável que você cita</li><li>em .md, com fonte e data da conferência</li></ul>
+    </div>
+    <i class="b-lado-fio"></i>
+    <div class="b-lado" style="left: 1040px">
+      <p class="display b-lado-tit">Pesquise</p>
+      <ul><li>jurisprudência nova</li><li>alterações de lei</li></ul>
+    </div>
+    <div class="b-regra">
+      <p class="b-regra-et">para o agente</p>
+      <p class="b-regra-txt">Lei alterada? Consulte o site oficial e diga a data.</p>
+    </div>
+  </section>
+
+  <!-- pdflido (cena própria): o PDF inteiro entra no chat; na pasta o agente abre só o trecho -->
+  <section data-slide="pdflido" class="noite">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">O PDF é lido inteiro?</h2>
+    <div class="b-pdfcol b-pdfe">
+      <p class="etiqueta">No chat</p>
+      <div class="b-pdfcaixa"><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i></div>
+      <p class="b-pdftx">O PDF inteiro entra na conversa.</p>
+    </div>
+    <div class="b-pdfcol b-pdfd">
+      <p class="etiqueta">Na pasta</p>
+      <div class="b-pdfcaixa"><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg b-pg-on"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i><i class="b-pg"></i></div>
+      <p class="b-pdftx">O agente abre só o trecho.</p>
+    </div>
+    <p class="rodape">Se o PDF for digitalizado, o texto precisa ser reconhecido antes.</p>
+  </section>
+
+  <!-- mdpdf (cena própria): a mesma página como PDF (a foto, com o rodapé repetido marcado) e como Markdown limpo;
+       texto real do contrato.pdf do caso fictício (cláusula terceira). O contrato não tem cabeçalho repetido, só o
+       rodapé, e só ele é marcado. -->
+  <section data-slide="mdpdf">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">PDF ou Markdown?</h2>
+    <p class="etiqueta b-et-pdf">PDF, foto da página</p>
+    <div class="b-pdf"><img src="midia/caso-contrato.webp" alt=""><i class="b-clausula"></i><i class="b-ruido"></i></div>
+    <p class="b-ruido-leg">rodapé repetido</p>
+    <p class="etiqueta b-et-md">Markdown, só texto</p>
+    <div class="b-md">
+      <p class="b-md-h"><span class="b-md-hash">##</span> Cláusula terceira, do prazo</p>
+      <p class="b-md-p">As partes firmam este contrato em 12/03/2019, com vigência de 36 (trinta e seis) meses, contados da assinatura.</p>
+    </div>
+    <ul class="b-ganhos"><li>gasta menos</li><li>erra menos</li><li>acha o artigo certo</li></ul>
+    <svg class="b-camada b-md-fio" viewBox="0 0 1920 1080"><path d="M450 606C620 606 700 420 850 420"/></svg>
+  </section>
+
+  <!-- converter (cartões, noite): o "não" grande à esquerda, as três regras empilhadas à direita -->
+  <section data-slide="converter" class="noite">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">Converter tudo?</h2>
+    <p class="display b-nao"><span class="sinal">Não</span></p>
+    <div class="cartoes c3">
+      <div class="cartao"><p class="ct-tit">Vai reusar</p><p class="ct-txt">Converta para Markdown.</p></div>
+      <div class="cartao"><p class="ct-tit">Pergunta única</p><p class="ct-txt">Suba o PDF como está.</p></div>
+      <div class="cartao"><p class="ct-tit">Escaneado</p><p class="ct-txt">Precisa de reconhecimento de texto antes.</p></div>
+    </div>
+    <p class="rodape">Guarde o PDF como prova e o Markdown como cópia de trabalho.</p>
+  </section>
+
+  <section data-slide="codigo">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">Claude Code e Codex são para quem constrói</h2>
+    <div class="cartoes c4">
+      <div class="cartao"><p class="ct-tit">Integrações</p><p class="ct-txt">Sistemas, por MCP e APIs.</p></div>
+      <div class="cartao"><p class="ct-tit">Raspagem</p><p class="ct-txt">Dados de sites e tribunais, em lote.</p></div>
+      <div class="cartao"><p class="ct-tit">Automação</p><p class="ct-txt">Scripts e rotinas para centenas de arquivos.</p></div>
+      <div class="cartao"><p class="ct-tit">Controle</p><p class="ct-txt">Plano, permissões e mudanças visíveis.</p></div>
+    </div>
+    <p class="rodape">Claude e ChatGPT Work também têm conectores.</p>
+  </section>
+
+  <!-- ferramentas (cena própria, noite): quatro nomes em dois pares (para que serve x empresa); o aviso do Cowork -->
+  <section data-slide="ferramentas" class="noite">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">Quatro nomes, dois pares</h2>
+    <p class="b-par-cab" style="left: 520px">Pedir uma entrega</p>
+    <p class="b-par-cab" style="left: 1185px">Para o usuário avançado</p>
+    <p class="b-emp" style="top: 470px">Anthropic</p>
+    <p class="b-emp" style="top: 650px">OpenAI</p>
+    <div class="b-ferr" data-col="0" style="left: 520px; top: 420px"><p class="b-ferr-nome">Claude</p><p class="b-ferr-sub">o antigo Cowork</p></div>
+    <div class="b-ferr" data-col="1" style="left: 1185px; top: 420px"><p class="b-ferr-nome">Claude Code</p></div>
+    <div class="b-ferr" data-col="0" style="left: 520px; top: 600px"><p class="b-ferr-nome">ChatGPT Work</p></div>
+    <div class="b-ferr" data-col="1" style="left: 1185px; top: 600px"><p class="b-ferr-nome">Codex</p></div>
+    <p class="b-cowork">O Cowork não existe mais. Virou o próprio Claude em 16/09/2026.</p>
+  </section>
+
+  <!-- diferenca (grade): para que serve, onde roda, quem tem; uma linha por clique. Fatos lidos em 23/10/2026 -->
+  <section data-slide="diferenca">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">O que muda entre os quatro</h2>
+    <div class="b-grade">
+      <p class="b-g b-g-cab" data-l="0" data-c="0"></p>
+      <p class="b-g b-g-cab" data-l="0" data-c="1">Claude</p>
+      <p class="b-g b-g-cab" data-l="0" data-c="2">ChatGPT Work</p>
+      <p class="b-g b-g-cab" data-l="0" data-c="3">Claude Code</p>
+      <p class="b-g b-g-cab" data-l="0" data-c="4">Codex</p>
+
+      <p class="b-g b-g-rot" data-l="1" data-c="0">para que serve</p>
+      <p class="b-g b-g-par" data-l="1" data-c="1">pedir uma entrega</p>
+      <p class="b-g b-g-par" data-l="1" data-c="3">usuário avançado: integrar e automatizar</p>
+
+      <p class="b-g b-g-rot" data-l="2" data-c="0">onde roda</p>
+      <p class="b-g" data-l="2" data-c="1">nuvem; pasta no app desktop</p>
+      <p class="b-g" data-l="2" data-c="2">nuvem; arquivos no app desktop</p>
+      <p class="b-g" data-l="2" data-c="3">terminal, editor, desktop e web</p>
+      <p class="b-g" data-l="2" data-c="4">app desktop e nuvem</p>
+
+      <p class="b-g b-g-rot" data-l="3" data-c="0">quem tem</p>
+      <p class="b-g" data-l="3" data-c="1">Pro e Max; Team e Free depois</p>
+      <p class="b-g" data-l="3" data-c="2">planos pagos elegíveis</p>
+      <p class="b-g" data-l="3" data-c="3">pagos; Pro, US$&nbsp;20/mês</p>
+      <p class="b-g" data-l="3" data-c="4">até o gratuito, no desktop</p>
+    </div>
+  </section>
+
+  <!-- escolher (cena própria, noite): quatro perguntas, uma por clique, cada uma com a rota ao lado -->
+  <section data-slide="escolher" class="noite">
+    <p class="rotulo">Três caminhos</p>
+    <h2 class="manchete">Como escolher em 10 segundos</h2>
+    <div class="b-esc" style="top: 318px"><p class="b-esc-q">Um arquivo só?</p><p class="b-esc-r">chat com anexo</p></div>
+    <div class="b-esc" style="top: 458px"><p class="b-esc-q">Quer o documento pronto, em Word ou planilha?</p><p class="b-esc-r">Claude ou ChatGPT Work</p></div>
+    <div class="b-esc" style="top: 598px"><p class="b-esc-q">É processo, ou vai reusar?</p><p class="b-esc-r b-esc-proc">Projeto com pasta</p></div>
+    <div class="b-esc" style="top: 738px"><p class="b-esc-q">Precisa integrar sistemas, raspar dados ou automatizar?</p><p class="b-esc-r">Claude Code ou Codex</p></div>
+    <svg class="b-camada b-esc-setas" viewBox="0 0 1920 1080">
+      <path d="M1074 357H1156M1140 343L1158 357L1140 371"/>
+      <path d="M1074 497H1156M1140 483L1158 497L1140 511"/>
+      <path d="M1074 637H1156M1140 623L1158 637L1140 651"/>
+      <path d="M1074 777H1156M1140 763L1158 777L1140 791"/>
+    </svg>
+  </section>

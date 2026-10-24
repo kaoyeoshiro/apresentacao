@@ -1,0 +1,170 @@
+
+  <!-- ===== Bloco A: pedir bem (slides 1 a 16). Exemplos da apresentação de engenharia de prompt do professor
+       (17/03/2026), com as palavras dele, encurtados só para caber. ===== -->
+  <section data-slide="capa">
+    <div class="a-logo-cj" role="img" aria-label="co.juris"></div>
+    <i class="a-cp-fio"></i>
+    <div class="a-cp-txt">
+      <p class="rotulo">Curso de IA · Aula 2</p>
+      <h1 class="display a-cp-tit"><span>Do chat</span><span>à pasta</span></h1>
+      <p class="a-cp-sub">Como pedir bem e trabalhar nos documentos do caso.</p>
+    </div>
+  </section>
+
+  <section data-slide="mapa" data-arquetipo="tempo">
+    <p class="rotulo">Roteiro</p>
+    <h2 class="manchete">A tarde em seis etapas</h2>
+    <ol class="etapas">
+      <li class="agora"><b>1</b>pedir bem</li>
+      <li><b>2</b>três caminhos</li>
+      <li><b>3</b>skills</li>
+      <li><b>4</b>na pasta</li>
+      <li><b>5</b>mão na massa</li>
+      <li><b>6</b>fecho</li>
+    </ol>
+    <p class="tempo-leg">Cada etapa termina numa tarefa sua.</p>
+  </section>
+
+  <!-- tentativas (cena própria, noite, um clique por tentativa): a barra da distância encolhe a cada pedido -->
+  <section data-slide="tentativas" class="noite">
+    <p class="rotulo">Pedir bem</p>
+    <h2 class="manchete">Você reescreve até chegar lá</h2>
+    <p class="etiqueta a-tn-et">distância do que você queria</p>
+    <div class="a-tn" data-v="92"><p class="a-tn-n">1</p><p class="a-tn-p">“Resume esse parecer.”</p><p class="a-tn-v">longo e genérico</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
+    <div class="a-tn" data-v="58"><p class="a-tn-n">2</p><p class="a-tn-p">“Resume em 10 linhas.”</p><p class="a-tn-v">curto, sem foco</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
+    <div class="a-tn" data-v="18"><p class="a-tn-n">3</p><p class="a-tn-p">“Resuma o parecer em 10 linhas para o procurador-chefe, só com o que muda o prazo. Se não houver, diga.”</p><p class="a-tn-v">o que você queria</p><span class="a-tn-t"><span class="a-tn-b"></span></span></div>
+    <p class="a-tn-fim">A terceira diz o objetivo, para quem e o que fazer se faltar.</p>
+  </section>
+
+  <section data-slide="colega" data-arquetipo="comparacao">
+    <p class="rotulo">Pedir bem</p>
+    <h2 class="manchete">Prompt é briefing para colega novo</h2>
+    <div class="janela"><p class="display letra m">Vago</p><p class="etiqueta">o que costuma sair</p>
+      <p class="janela-txt">“Resume esse acórdão.”</p></div>
+    <div class="fio-v"></div>
+    <div class="janela escolhida"><p class="display letra m">Briefing</p><p class="etiqueta">o que o colega precisa</p>
+      <p class="janela-txt">“Objetivo: o que muda o prazo. Contexto: o contrato e o aditivo. Regra: cite o trecho.”</p></div>
+    <p class="pilula">exemplo de pedido</p>
+  </section>
+
+  <section data-slide="seis" data-arquetipo="tempo">
+    <h2 class="manchete">Seis elementos, nem todos obrigatórios</h2>
+    <ol class="etapas">
+      <li class="agora"><b>1</b>objetivo</li>
+      <li><b>2</b>contexto</li>
+      <li><b>3</b>persona</li>
+      <li><b>4</b>saída</li>
+      <li><b>5</b>exemplos</li>
+      <li><b>6</b>regras</li>
+    </ol>
+    <p class="tempo-leg">Pergunta simples pede só o objetivo.</p>
+  </section>
+
+  <!-- par (cena própria, dois cliques): o pedido vago primeiro; no segundo clique, o pedido com o elemento, com os
+       trechos que fazem a diferença marcados -->
+  <section data-slide="objetivo" class="a-par">
+    <p class="rotulo">Elemento 1</p>
+    <h2 class="manchete">Objetivo: o que você quer</h2>
+    <div class="a-err"><p>“Escreve sobre inteligência artificial.”</p></div>
+    <div class="a-cer"><p>“Escreva um parágrafo de <mark class="a-mk">100 palavras</mark> sobre como a IA é usada no Judiciário brasileiro, com <mark class="a-mk">2 aplicações concretas</mark>.”</p></div>
+  </section>
+
+  <section data-slide="contexto" class="a-par">
+    <p class="rotulo">Elemento 2</p>
+    <h2 class="manchete">Contexto: o que a IA precisa saber</h2>
+    <div class="a-err"><p>“Me ajuda a redigir um parecer.”</p></div>
+    <div class="a-cer"><p>“<mark class="a-mk">Sou procurador do Estado</mark>. Preciso de parecer sobre a legalidade de convênio entre o Estado de MS e um município, <mark class="a-mk">repasse de R$ 2 milhões</mark>, à luz da Lei 14.133/2021 e da LC 101/2000.”</p></div>
+    <p class="a-extra">O que você anexa também é prompt.</p>
+  </section>
+
+  <section data-slide="persona" class="a-par noite">
+    <p class="rotulo">Elemento 3</p>
+    <h2 class="manchete">Persona: quem a IA deve ser</h2>
+    <div class="a-err"><p>“Me explica o que é precatório.”</p></div>
+    <div class="a-cer"><p>“Você é <mark class="a-mk">professor de direito financeiro</mark> explicando a <mark class="a-mk">servidores que não são da área jurídica</mark>. Explique o que é precatório, como o pagamento funciona e por que demora. Sem jargão.”</p></div>
+  </section>
+
+  <!-- personas (cena própria, noite, um clique por papel): a mesma pergunta em três registros; respostas escritas para a aula -->
+  <section data-slide="personas" class="noite">
+    <h2 class="manchete">A mesma pergunta, três papéis</h2>
+    <p class="a-pg">“O que é precatório?”</p>
+    <div class="a-col"><p class="a-col-t">Professor para leigos</p><p class="a-col-r">Dívida do governo que a Justiça mandou pagar. Entra numa fila.</p></div>
+    <div class="a-col"><p class="a-col-t">Consultor sênior</p><p class="a-col-r">Requisição de pagamento de condenação da Fazenda, em ordem cronológica.</p></div>
+    <div class="a-col"><p class="a-col-t">Procurador do Estado</p><p class="a-col-r">Débito judicial da Fazenda: confira cálculo, ordem e orçamento.</p></div>
+    <p class="a-pg-fim">A persona muda o registro da resposta inteira.</p>
+    <p class="pilula">respostas ilustrativas, escritas para a aula</p>
+  </section>
+
+  <section data-slide="saida" class="a-par">
+    <p class="rotulo">Elemento 4</p>
+    <h2 class="manchete">Estrutura de saída: o formato da resposta</h2>
+    <div class="a-err"><p>“Me dá argumentos para contestar essa tese.”</p></div>
+    <div class="a-cer"><p>“Liste <mark class="a-mk">5 argumentos</mark> para contestar a prescrição intercorrente. <mark class="a-mk">Para cada um</mark>, o fundamento legal, a explicação em 2 frases e um precedente do STJ ou STF, se houver.”</p></div>
+    <p class="a-extra a-fmt"><span>tabela</span><span>lista numerada</span><span>passo a passo</span><span>prós e contras</span></p>
+  </section>
+
+  <!-- exemplos (cartões): a fileira de quadrados mostra quantos exemplos vão no pedido -->
+  <section data-slide="exemplos">
+    <p class="rotulo">Elemento 5</p>
+    <h2 class="manchete">Exemplos: mostre o que você quer</h2>
+    <div class="cartoes c3">
+      <div class="cartao"><p class="a-ex"><i class="vazio"></i></p><p class="ct-tit g"><i>Zero-shot</i></p><p class="ct-txt">tarefa simples e clara</p><p class="ct-sub">só a instrução</p></div>
+      <div class="cartao"><p class="a-ex"><i></i></p><p class="ct-tit g"><i>One-shot</i></p><p class="ct-txt">tom ou formato específico</p><p class="ct-sub">1 exemplo resolvido</p></div>
+      <div class="cartao"><p class="a-ex"><i></i><i></i><i></i></p><p class="ct-tit g"><i>Few-shot</i></p><p class="ct-txt">tarefa ambígua ou subjetiva</p><p class="ct-sub">2 a 5 exemplos</p></div>
+    </div>
+    <p class="rodape">Exemplos continuam muito poderosos.</p>
+  </section>
+
+  <section data-slide="regras" class="a-par noite">
+    <p class="rotulo">Elemento 6</p>
+    <h2 class="manchete">Regras: o que a IA não faz</h2>
+    <div class="a-err"><p>“Analisa essa cláusula.”</p></div>
+    <div class="a-cer"><p>“Analise a cláusula 7ª. Só legalidade, não conveniência. Aponte o que for ambíguo. Cite os artigos. Sem jurisprudência clara, diga.”</p></div>
+    <p class="a-extra a-ouro sinal">Se não souber, diga que não sabe.</p>
+  </section>
+
+  <!-- junta (cena própria, um clique em onda): o prompt do edital, um elemento por linha -->
+  <section data-slide="junta">
+    <h2 class="manchete">Juntando tudo</h2>
+    <div class="a-jt">
+      <p class="a-jl"><b>Persona</b><span>Procurador do Estado, experiente em licitações.</span></p>
+      <p class="a-jl"><b>Objetivo</b><span>Analise o edital e aponte irregularidades jurídicas.</span></p>
+      <p class="a-jl"><b>Contexto</b><span>Escola estadual, R$ 5 milhões, impugnação em 5 dias úteis.</span></p>
+      <p class="a-jl"><b>Saída</b><span>Tabela: cláusula, irregularidade, fundamento legal, risco.</span></p>
+      <p class="a-jl"><b>Exemplo</b><span>Atestado de obra idêntica: art. 67, §1º, Lei 14.133/2021, risco alto.</span></p>
+      <p class="a-jl"><b>Regras</b><span>Não invente artigos. Na dúvida, “verificar manualmente”.</span></p>
+    </div>
+    <p class="rodape">Prompt bom traz a informação certa.</p>
+  </section>
+
+  <section data-slide="tce" class="a-par">
+    <p class="rotulo">Caso</p>
+    <h2 class="manchete">O contexto muda tudo</h2>
+    <div class="a-err"><p>“Escreve uma resposta para o Tribunal de Contas.”</p></div>
+    <div class="a-cer"><p>“Responda ao ofício do TCE-MS sobre o convênio de pavimentação. O TCE diz que falta o plano de trabalho. <mark class="a-mk">O plano existe e foi juntado em apenso.</mark> Tom formal, não defensivo, até 250 palavras.”</p></div>
+  </section>
+
+  <!-- prática 1 (cena guia, noite): três passos à esquerda, o checklist dos seis elementos à direita -->
+  <section data-slide="pratica1" class="noite">
+    <p class="rotulo">Prática 1, 4 min</p>
+    <h2 class="manchete">Sua vez: reescreva um pedido seu</h2>
+    <ol class="a-ps">
+      <li><b>1</b><span>Pegue um pedido que você faz hoje.</span></li>
+      <li><b>2</b><span>Reescreva com objetivo, contexto e uma regra.</span></li>
+      <li><b>3</b><span>Cole no seu app e compare.</span></li>
+    </ol>
+    <p class="etiqueta a-ck-et">Antes de enviar</p>
+    <ul class="a-ck">
+      <li><i></i>objetivo</li>
+      <li><i></i>contexto</li>
+      <li><i></i>persona</li>
+      <li><i></i>saída</li>
+      <li><i></i>exemplos</li>
+      <li><i></i>regras</li>
+    </ul>
+  </section>
+
+  <section data-slide="relato" data-arquetipo="respiro" class="noite">
+    <p class="respiro"><span>O que mudou</span><span>na <span class="sinal">resposta?</span></span></p>
+    <p class="respiro-sub" data-entra="0.5">Duas pessoas leem em voz alta.</p>
+  </section>
