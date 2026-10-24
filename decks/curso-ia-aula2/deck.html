@@ -355,6 +355,14 @@
   .c-cx-tit { font: 800 var(--esc-3)/1.05 var(--fonte-titulo); white-space: nowrap; }
   .c-cx-sub { margin-top: 8px; font: 400 36px/1.2 var(--fonte-texto); color: var(--cor-tinta-suave); white-space: nowrap; }
 
+  /* cresce: três degraus que crescem da esquerda para a direita, alinhados pela base */
+  .c-deg { position: absolute; bottom: 230px; box-sizing: border-box; padding: 26px 32px; border: 4px solid var(--linha-sobre-noite); border-radius: 22px; }
+  .c-deg1 { left: 120px; width: 520px; height: 260px; }
+  .c-deg2 { left: 680px; width: 520px; height: 360px; }
+  .c-deg3 { left: 1240px; width: 560px; height: 450px; border-color: var(--cor-destaque); }
+  .c-deg-t { margin: 0; font: 800 46px/1.15 var(--fonte-titulo); }
+  .c-deg-d { margin: 14px 0 0; font: 400 36px/1.3 var(--fonte-texto); color: var(--suave-sobre-noite); }
+
   /* ===== Bloco D: na pasta ===== */
   /* papeis (viagem): as páginas do caso têm proporção A4 (900 x 1274), mais altas que o recorte padrão */
   .d-ob { width: 280px; height: 396px; }
@@ -638,7 +646,7 @@
     <h2 class="manchete">Contexto: o que a IA precisa saber</h2>
     <div class="a-err"><p>“Me ajuda a redigir um parecer.”</p></div>
     <div class="a-cer"><p>“<mark class="a-mk">Sou procurador do Estado</mark>. Preciso de parecer sobre a legalidade de convênio entre o Estado de MS e um município, <mark class="a-mk">repasse de R$ 2 milhões</mark>, à luz da Lei 14.133/2021 e da LC 101/2000.”</p></div>
-    <p class="a-extra">O que você anexa também é prompt. O essencial vai no começo ou no fim.</p>
+    <p class="a-extra">O que você anexa também é prompt.</p>
   </section>
 
   <section data-slide="persona" class="a-par noite">
@@ -1137,6 +1145,17 @@
     <p class="rodape">Plugin e MCP na prática ficam para o dia 2.</p>
   </section>
 
+  <!-- cresce (cena própria, noite): a escada de uma skill pequena até um sistema interno; um degrau por clique -->
+  <section data-slide="cresce" class="noite">
+    <p class="rotulo">Skills</p>
+    <h2 class="manchete">Comece pequeno. Deixe crescer.</h2>
+    <div class="c-deg c-deg1"><p class="c-deg-t">Skill de uma página</p><p class="c-deg-d">Um pedido que você repete.</p></div>
+    <div class="c-deg c-deg2"><p class="c-deg-t">Dez, vinte regras</p><p class="c-deg-d">Os casos que ela aprende.</p></div>
+    <div class="c-deg c-deg3"><p class="c-deg-t">Um sistema interno</p><p class="c-deg-d">O meu: 6 skills e 94 arquivos de instruções.</p></div>
+    <p class="rodape">Comece com uma skill pequena.</p>
+  </section>
+
+
   <!-- ===== Bloco D: na pasta (16 min) ===== -->
   <!-- papeis (viagem): os três papéis do caso fictício esperam no vão antes do slide, atravessam grandes e entram nos
        arquivos da pasta. Primeira página de cada papel, desenhada por código (material/gerar.py). -->
@@ -1498,11 +1517,11 @@ import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
 
 // Seis blocos da linha do dia, somando 90 minutos. Os ids são os de `bloco` nos slides.
 const blocos = [
-  {id: 'pedir', rotulo: 'Pedir bem', minutos: 22},
-  {id: 'escolhas', rotulo: 'Três caminhos', minutos: 20},
+  {id: 'pedir', rotulo: 'Pedir bem', minutos: 21},
+  {id: 'escolhas', rotulo: 'Três caminhos', minutos: 19},
   {id: 'skills', rotulo: 'Skills', minutos: 8},
-  {id: 'pasta', rotulo: 'Na pasta', minutos: 10},
-  {id: 'mao', rotulo: 'Mão na massa', minutos: 27},
+  {id: 'pasta', rotulo: 'Na pasta', minutos: 11},
+  {id: 'mao', rotulo: 'Mão na massa', minutos: 28},
   {id: 'fecho', rotulo: 'Fecho', minutos: 3},
 ];
 
@@ -1679,6 +1698,10 @@ SLIDES.push(
   {id: 'liga', titulo: 'O que liga o agente ao mundo', passos: [1.7, 1.2, 1.7],
    notas: {diga: 'No centro, o agente. A skill é o jeito: instruções que ele segue quando a tarefa pede. O MCP é a tomada: um padrão aberto para ligar o agente a ferramentas e sistemas externos. O plugin é o pacote: junta skills e, se quiser, conexões MCP, e se instala de uma vez. Plugin e MCP na prática ficam para o dia 2.',
      faca: ['clique 1: agente e skill', 'clique 2: MCP', 'clique 3: o plugin, que embrulha os dois'],
+     transicao: 'E uma skill não precisa nascer grande.'}},
+  {id: 'cresce', titulo: 'Comece pequeno. Deixe crescer.', passos: [1.6, 1.4, 1.8],
+   notas: {diga: 'Não comecem pelo sistema. Comecem por uma skill pequena, de uma página, para uma coisa que vocês repetem toda semana. Quando ela falhar num caso, vocês acrescentam uma regra. Com o tempo ela cresce. A minha, de gerar peças, chegou a ter uma skill de 215 linhas que manda ler 71 arquivos de instruções, cerca de 342 mil palavras. Tem camadas condicionais, como um motor de regras: primeiro verifica se os documentos existem e aborta se faltar algum. Depois olha a ação e o tipo de peça, são dez tipos. Depois carrega a matéria, saúde ou Detran, com os temas e os precedentes vigentes daquela matéria. No fim, confere 15 regras que reprovam a peça se violadas. Nada disso nasceu pronto. Comecem pequeno.',
+     faca: ['primeiro clique: a skill de uma página', 'segundo clique: dez, vinte regras', 'terceiro clique: o sistema interno; dizer os números com calma', 'números medidos em 24/10/2026 no projeto Automacao_Total: 6 skills, 94 arquivos de instruções (71 só na geração de peça), saúde com 34 arquivos e Detran com 23'],
      transicao: 'Agora, a pasta do caso que vamos usar.'}},
 );
 
@@ -2394,6 +2417,20 @@ CENAS.liga = (() => {
     fim(sec, x, 1.2);
   };
 })();
+
+// cresce: a escada, um degrau por clique; cada degrau sobe a partir da base.
+{
+  const sec = m.secao('cresce'), degs = $$(sec, '.c-deg'), rod = sec.querySelector(':scope > .rodape');
+  CENAS.cresce = (t, c) => {
+    const x = conteudo(c), y = c.desde(1), z = c.desde(2);
+    titulo(sec, x, c);
+    [x - 0.15, y - 0.1, z - 0.1].forEach((d, n) => {
+      surgir(degs[n], molaAR(d), {dy: 40});
+      vis(degs[n], d > 0);
+    });
+    revelar(rod, molaAR(z - 1.2));
+  };
+}
 
 // ===== Bloco D: na pasta =====
 // O slide "papeis" é o arquétipo viagem (a biblioteca faz o voo dos objetos #ob-*) e "fonte" é o arquétipo fios.

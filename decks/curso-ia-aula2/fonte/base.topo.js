@@ -3,11 +3,11 @@ import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
 
 // Seis blocos da linha do dia, somando 90 minutos. Os ids são os de `bloco` nos slides.
 const blocos = [
-  {id: 'pedir', rotulo: 'Pedir bem', minutos: 22},
-  {id: 'escolhas', rotulo: 'Três caminhos', minutos: 20},
+  {id: 'pedir', rotulo: 'Pedir bem', minutos: 21},
+  {id: 'escolhas', rotulo: 'Três caminhos', minutos: 19},
   {id: 'skills', rotulo: 'Skills', minutos: 8},
-  {id: 'pasta', rotulo: 'Na pasta', minutos: 10},
-  {id: 'mao', rotulo: 'Mão na massa', minutos: 27},
+  {id: 'pasta', rotulo: 'Na pasta', minutos: 11},
+  {id: 'mao', rotulo: 'Mão na massa', minutos: 28},
   {id: 'fecho', rotulo: 'Fecho', minutos: 3},
 ];
 

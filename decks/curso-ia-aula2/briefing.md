@@ -367,3 +367,7 @@ O professor pediu o material pronto para baixar. O kit está no repositório pú
 `modelo.docx`), `gabarito/` (`cronologia.md`, `cronologia.docx`, skill `parecer-no-padrao` com `preencher.py`) e `README.md`.
 O aluno ainda escreve o pedido, a cronologia e a sua skill; o gabarito é para comparar ou para quem travar. Onde a
 Revisão 2 fala em zip ou na pasta `reserva`, vale o kit e a pasta `gabarito` (a cronologia já se chama `cronologia.md`).
+
+## Slide cresce (24/10/2026)
+
+Slide `cresce`, "Comece pequeno. Deixe crescer.", no bloco Skills, depois de `liga`. Três degraus (skill de uma página, dez ou vinte regras, sistema interno). Números do Automacao_Total medidos em 24/10/2026: 6 skills, 94 arquivos de instruções (71 na geração de peça), saúde com 34 e Detran com 23; skill de geração com 215 linhas, cerca de 342 mil palavras, 10 tipos de peça, 15 regras de reprovação. Minutos dos blocos: 21/19/8/11/28/3.

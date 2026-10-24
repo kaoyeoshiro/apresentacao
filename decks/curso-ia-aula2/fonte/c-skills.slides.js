@@ -15,5 +15,9 @@ SLIDES.push(
   {id: 'liga', titulo: 'O que liga o agente ao mundo', passos: [1.7, 1.2, 1.7],
    notas: {diga: 'No centro, o agente. A skill é o jeito: instruções que ele segue quando a tarefa pede. O MCP é a tomada: um padrão aberto para ligar o agente a ferramentas e sistemas externos. O plugin é o pacote: junta skills e, se quiser, conexões MCP, e se instala de uma vez. Plugin e MCP na prática ficam para o dia 2.',
      faca: ['clique 1: agente e skill', 'clique 2: MCP', 'clique 3: o plugin, que embrulha os dois'],
+     transicao: 'E uma skill não precisa nascer grande.'}},
+  {id: 'cresce', titulo: 'Comece pequeno. Deixe crescer.', passos: [1.6, 1.4, 1.8],
+   notas: {diga: 'Não comecem pelo sistema. Comecem por uma skill pequena, de uma página, para uma coisa que vocês repetem toda semana. Quando ela falhar num caso, vocês acrescentam uma regra. Com o tempo ela cresce. A minha, de gerar peças, chegou a ter uma skill de 215 linhas que manda ler 71 arquivos de instruções, cerca de 342 mil palavras. Tem camadas condicionais, como um motor de regras: primeiro verifica se os documentos existem e aborta se faltar algum. Depois olha a ação e o tipo de peça, são dez tipos. Depois carrega a matéria, saúde ou Detran, com os temas e os precedentes vigentes daquela matéria. No fim, confere 15 regras que reprovam a peça se violadas. Nada disso nasceu pronto. Comecem pequeno.',
+     faca: ['primeiro clique: a skill de uma página', 'segundo clique: dez, vinte regras', 'terceiro clique: o sistema interno; dizer os números com calma', 'números medidos em 24/10/2026 no projeto Automacao_Total: 6 skills, 94 arquivos de instruções (71 só na geração de peça), saúde com 34 arquivos e Detran com 23'],
      transicao: 'Agora, a pasta do caso que vamos usar.'}},
 );

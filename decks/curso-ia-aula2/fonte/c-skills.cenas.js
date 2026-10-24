@@ -134,3 +134,17 @@ CENAS.liga = (() => {
     fim(sec, x, 1.2);
   };
 })();
+
+// cresce: a escada, um degrau por clique; cada degrau sobe a partir da base.
+{
+  const sec = m.secao('cresce'), degs = $$(sec, '.c-deg'), rod = sec.querySelector(':scope > .rodape');
+  CENAS.cresce = (t, c) => {
+    const x = conteudo(c), y = c.desde(1), z = c.desde(2);
+    titulo(sec, x, c);
+    [x - 0.15, y - 0.1, z - 0.1].forEach((d, n) => {
+      surgir(degs[n], molaAR(d), {dy: 40});
+      vis(degs[n], d > 0);
+    });
+    revelar(rod, molaAR(z - 1.2));
+  };
+}
