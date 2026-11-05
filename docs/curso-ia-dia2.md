@@ -86,8 +86,8 @@ servem a escritório, gabinete e órgão público. Dados pessoais nunca aparecem
 
 ## Pendências antes de montar
 
-- Ler o repositório do quatilex (agentes, papéis e ordem) para a animação do harness; em `/Volumes/Projetos` só aparece
-  `quatilex-knowledge-leonardo`, então o caminho do código principal precisa ser localizado.
+- Ler o repositório do quatilex (agentes, papéis e ordem) para a animação do harness; o código está em
+  `/Volumes/Projetos/Automacao_Agent` (remoto `kaoyeoshiro/quatilex`), só para leitura.
 - O livro *A próxima onda* (Suleyman e Bhaskar, 2023), anotado em `curso-ia-ideias.md` para o bloco do futuro, só entra
   se houver a edição em mãos para citar tese e página; sem isso, o bloco do futuro usa só as fichas.
 - Imagens da série do tema: custo de geração sob o teto de US$ 2,00 do `./ap imagens`; acima disso, só com o sim do
