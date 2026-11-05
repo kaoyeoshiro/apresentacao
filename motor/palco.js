@@ -183,9 +183,19 @@ export function video(el, seg, {fps = 30} = {}) {
 		if (el.error || el.readyState === 0) throw new Error(`vídeo não abriu: ${el.getAttribute('src')}`);
 		if (Math.abs(el.currentTime - seg) < 1e-3) return;
 		el.pause();
+		// `seeked` pode chegar antes de o quadro novo ir para a tela (visto num clipe de 40 s: a primeira busca
+		// fotografava o quadro antigo). Espera também o quadro apresentado; se ele não vier (busca que cai no mesmo
+		// quadro), segue 0,3 s depois do `seeked`.
 		const pronto = new Promise((r, falha) => {
 			const prazo = setTimeout(() => falha(new Error(`vídeo não posicionou em ${seg.toFixed(2)} s: ${el.getAttribute('src')}`)), 15000);
-			el.addEventListener('seeked', () => { clearTimeout(prazo); r(); }, {once: true});
+			let apresentado = !('requestVideoFrameCallback' in el), buscado = false;
+			const talvez = () => { if (apresentado && buscado) { clearTimeout(prazo); r(); } };
+			const quadro = (_, meta) => {
+				if (apresentado) return;
+				if (Math.abs(meta.mediaTime - seg) < 0.1) { apresentado = true; talvez(); } else el.requestVideoFrameCallback(quadro);
+			};
+			if (!apresentado) el.requestVideoFrameCallback(quadro);
+			el.addEventListener('seeked', () => { buscado = true; setTimeout(() => { apresentado = true; talvez(); }, 300); talvez(); }, {once: true});
 		});
 		el.currentTime = seg;
 		estado.pendentes.push(pronto);

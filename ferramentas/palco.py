@@ -90,7 +90,9 @@ class _Deck:
         tocam, t0 = set(), s["t0"]
         for k, d in enumerate(s["passos"]):
             if d > PASSO_LONGO:
-                a, b = self.videos_em(t0 + 0.1), self.videos_em(t0 + d - 0.05)
+                # no começo do passo a câmera ainda pode estar chegando, com a moldura do vídeo escondida
+                a = self.videos_em(t0 + 0.1) or self.videos_em(t0 + d / 4)
+                b = self.videos_em(t0 + d - 0.05)
                 if any(abs(b[v] - a[v]) > 0.5 for v in a.keys() & b.keys()):
                     tocam.add(k)
             t0 += d
