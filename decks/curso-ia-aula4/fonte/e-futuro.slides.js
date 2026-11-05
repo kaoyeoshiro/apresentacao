@@ -1,7 +1,8 @@
 // Bloco E, futuro e fecho (16 min): capítulo, o ritmo medido, os dois cenários, os sinais, A10, A11, os quatro verbos e
 // o fecho. Fatos só do briefing.md e da ficha G (docs/pesquisa/dia2-geopolitica-ia.md, 1.6 e seção 3).
 SLIDES.push(
-  {id: 'futuro-cap', titulo: 'E em 2030?', bloco: 'futuro', andamento: 'capitulo', linhaDia: false,
+  // passos 3,0 s: a viagem de capítulo (2,2 s) só fecha a base da trilha e o pad direito 0,7 s depois do pouso
+  {id: 'futuro-cap', titulo: 'E em 2030?', bloco: 'futuro', andamento: 'capitulo', linhaDia: false, passos: [3.0],
    notas: {diga: 'Último bloco: e em 2030? Não vou fazer previsão de consultoria. Vou mostrar o ritmo medido, dois cenários e sinais com data, para vocês acompanharem.',
      faca: ['deixar a pergunta na tela um instante antes de falar'],
      transicao: 'Primeiro, o ritmo.'}},

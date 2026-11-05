@@ -391,7 +391,8 @@
     <p class="rodape b-aviso">A co.juris não fala em nome da PGE-MS.</p>
   </section>
 
-  <!-- harness (demonstração, S.T.A.R. do bloco): o vídeo da Tarefa 6A (claude_video_maker, agentes-peca-2), 40 s. -->
+  <!-- harness (demonstração, S.T.A.R. do bloco): o vídeo da Tarefa 6A (claude_video_maker, agentes-peca-2), 40 s. A capa
+       é o quadro 0 do clipe: a de 2,5 s (cena montada) aparecia na viagem e sumia quando o clipe começava. -->
   <section data-slide="harness" data-arquetipo="demonstracao" class="noite">
     <p class="rotulo">Harness</p>
     <h2 class="manchete">Dez agentes, uma peça</h2>
@@ -488,7 +489,7 @@
     <ol class="etapas">
       <li><b>jun./26</b>Copilot cobra por consumo</li>
       <li><b>jul./26</b>Claude Pro perde o modelo de ponta</li>
-      <li class="agora"><b>nov./26</b>ChatGPT Go “pode incluir anúncios”</li>
+      <li class="agora"><b>nov./26</b>ChatGPT Go <span style="white-space: nowrap">“pode incluir anúncios”</span></li>
     </ol>
     <p class="tempo-leg">A própria Anthropic lista isso como risco.</p>
   </section>
@@ -894,7 +895,8 @@ SLIDES.push(
 // Bloco E, futuro e fecho (16 min): capítulo, o ritmo medido, os dois cenários, os sinais, A10, A11, os quatro verbos e
 // o fecho. Fatos só do briefing.md e da ficha G (docs/pesquisa/dia2-geopolitica-ia.md, 1.6 e seção 3).
 SLIDES.push(
-  {id: 'futuro-cap', titulo: 'E em 2030?', bloco: 'futuro', andamento: 'capitulo', linhaDia: false,
+  // passos 3,0 s: a viagem de capítulo (2,2 s) só fecha a base da trilha e o pad direito 0,7 s depois do pouso
+  {id: 'futuro-cap', titulo: 'E em 2030?', bloco: 'futuro', andamento: 'capitulo', linhaDia: false, passos: [3.0],
    notas: {diga: 'Último bloco: e em 2030? Não vou fazer previsão de consultoria. Vou mostrar o ritmo medido, dois cenários e sinais com data, para vocês acompanharem.',
      faca: ['deixar a pergunta na tela um instante antes de falar'],
      transicao: 'Primeiro, o ritmo.'}},
@@ -1194,7 +1196,8 @@ CENAS.chips = (() => {
 })();
 CENAS['aberto-seguro'] = cartoes('aberto-seguro');
 
-// quatro-meses: o "4" sobe, "meses" chega ao lado, a caneta dourada sublinha o número; a legenda depois.
+// quatro-meses: o "4" sobe, "meses" chega ao lado; a legenda depois. Sem o sublinhado: o "4" já é o dourado da
+// parada, e a caneta clara embaixo do dourado de texto fazia dois dourados.
 CENAS['quatro-meses'] = (() => {
   const sec = m.secao('quatro-meses'), q = (s) => sec.querySelector(s);
   const dN = q('.d-num-n'), dU = q('.d-num-u'), dLeg = q('.d-num-leg');
@@ -1203,7 +1206,6 @@ CENAS['quatro-meses'] = (() => {
     titulo(sec, x, c);
     surgir(dN, molaAR(x - 0.1), {dy: 50});
     surgir(dU, molaAR(x - 0.35), {dx: -30, dy: 0});
-    anotar(dN, saida(faixa(x, 0.7, 1.2)), {forma: 'sublinhado', semente: 4});
     revelar(dLeg, molaAR(x - 0.9));
     fim(sec, x, 1.4);
   };

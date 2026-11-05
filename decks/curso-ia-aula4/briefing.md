@@ -164,3 +164,22 @@ Depois da rodada, a capa passou ao modelo da Aula 2 e o slide 11 toca a animaç�
 do claude_video_maker), com `ritmoOk` declarado porque o professor narra por cima. O vídeo-marcador `demo.mp4` saiu da
 pasta. A primeira busca desse vídeo longo às vezes fotografava o quadro antigo; o motor passou a esperar o quadro
 apresentado (`requestVideoFrameCallback`) no modo de render. Oráculo: 0 erro(s), 1 aviso (hierarquia), 1 isenção.
+
+**Rodada 2 (05/11/2026).** Corrigidos: no harness, a capa do vídeo era o quadro de 2,5 s, com a cena já montada, e
+aparecia inteira na viagem para sumir no pouso, quando o clipe começa do quadro 0 (cheio, vazio, cheio em menos de dois
+segundos); a capa passou a ser o próprio quadro 0, gravada de novo a partir do vídeo, que não mudou, e o crédito
+registra o segundo 0. Tirar a capa resolvia a viagem mas deixava o oráculo instável no instante em que o clipe ainda
+não pintou o primeiro quadro, por isso ela voltou com o quadro novo. Em quatro-meses, o "4" no dourado de texto e o
+sublinhado no dourado da trilha eram dois dourados que se chocavam; saiu o sublinhado e o número fica como o único
+dourado. Em encolhe, as aspas de "pode incluir anúncios" ficavam no fim da linha de cima e agora vão inteiras para a de
+baixo. Ficam como estão, por serem da biblioteca e baixos: a elipse de "Assistente" em chat-agente passa a 10 px do
+divisor, e a moldura do vídeo do harness termina a 23 px da trilha, como no catálogo.
+
+**Rodada 3 (05/11/2026).** Corrigido: em futuro-cap, a viagem de capítulo só fecha a base da trilha e acende o pad da
+direita 0,7 s depois do pouso, depois do fim do passo, e a parada ficava sem o pad; o slide ganhou `passos: [3.0]`.
+Nenhum defeito alto ou médio restante. Em aberto para o professor, de gravidade baixa: sigilo e chips são os únicos
+slides de conteúdo sem rótulo acima da manchete (proposta "ASSISTENTES" e "GEOPOLÍTICA"); no cartão do Altman, em
+pesado, sobra meia altura vazia. Numa das rodadas, a folha de `paradas --viagens` fotografou o vídeo do harness no
+quadro 0 na parada final; o defeito era do modo de render do motor, que esperava
+só 0,3 s pelo quadro; com 1 s, três rodadas seguidas deram o mesmo still. Oráculo: 0
+erro(s), 1 aviso (hierarquia), 1 isenção (harness).
