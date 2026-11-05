@@ -246,6 +246,9 @@ dele tem alterações de outra sessão ainda não salvas: trabalhar num worktree
 
 ### Tarefa 7: Imagens das duas aulas (portão de custo e de escolha)
 
+> Dispensada em 05/11/2026: o professor decidiu "sem foto, como antes". As capas seguem o modelo da Aula 2 (logo
+> oficial) e as aberturas de capítulo ficam sem foto; nenhuma imagem gerada.
+
 - [ ] Escrever `imagens.toml` de cada aula pela série do tema (`temas/cojuris/imagem/`): só onde a imagem prova algo
   (capa de cada aula e um herói por bloco, no máximo seis por aula).
 - [ ] `./ap imagens decks/curso-ia-aula3` e `aula4` sem gastar, para ver o custo. Se a soma passar de US$ 2,00 por

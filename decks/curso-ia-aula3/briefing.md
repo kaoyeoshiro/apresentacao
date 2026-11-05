@@ -215,3 +215,10 @@ padrão; rodapé encostado em plugin. Pendentes, por dependerem do professor: o 
 repositório público (defeito alto); abrir a aula com o contraste do word-antes em vez do mapa; um slide de abertura
 para o bloco GitHub. O rótulo "Segurança" em casos não coube no limite de 45 palavras. Oráculo depois da rodada:
 0 erro(s), 4 avisos já aceitos.
+
+## Decisão sobre imagens (05/11/2026)
+
+O professor decidiu "sem foto, como antes": nenhuma imagem gerada nesta aula, como nas Aulas 1 e 2. A capa segue o
+modelo da capa da Aula 2 (logo oficial da co.juris à esquerda, fio e título à direita, fundo claro) e as aberturas de
+capítulo ficam no arquétipo abertura sem `.heroi-caixa`. A coluna "mídia e custo" do roteiro que previa heroicas fica
+sem efeito; gasto de imagem: zero.

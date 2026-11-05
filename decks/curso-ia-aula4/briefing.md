@@ -141,3 +141,10 @@ quebrar três claros seguidos. Pelos subagentes: pesado (17) foi para a noite pe
 rótulo. O vídeo do harness (slide 11) ainda é o marcador; a animação vem do claude_video_maker (Tarefa 6A).
 
 Aviso aceito: hierarquia (23 de 37 sem nada acima de 120 px), a rever depois das heroicas.
+
+## Decisão sobre imagens (05/11/2026)
+
+O professor decidiu "sem foto, como antes": nenhuma imagem gerada nesta aula, como nas Aulas 1 e 2. A capa segue o
+modelo da capa da Aula 2 (logo oficial da co.juris à esquerda, fio e título à direita, fundo claro) e as aberturas de
+capítulo ficam no arquétipo abertura sem `.heroi-caixa`. A coluna "mídia e custo" do roteiro que previa heroicas fica
+sem efeito; gasto de imagem: zero.
