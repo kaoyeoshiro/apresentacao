@@ -23,6 +23,6 @@ Totais calculados nesta sessão: 10 agentes, 6 modelos, US$ 1,5928, 72.166 token
 US$ 1,3859, 87,0% do custo.
 
 Presunções a resolver na leitura do código (`/Volumes/Projetos/Automacao_Agent`, só leitura): a ordem real do fluxo e o
-papel de `mm_agrupador` e `afirmacao_oficio`. A tabela termina na borda da imagem; se houver linhas abaixo, os totais
-mudam, e o professor confirma. A versão anterior da animação (`claude_video_maker/videos/agentes-peca`, 07/10/2026)
+papel de `mm_agrupador` e `afirmacao_oficio`. O professor confirmou em 05/11/2026 que a tabela termina em
+`afirmacao_oficio`, então os totais acima são os da peça. A versão anterior da animação (`claude_video_maker/videos/agentes-peca`, 07/10/2026)
 usava outro print: 8 agentes, 5 modelos, US$ 0,7527.

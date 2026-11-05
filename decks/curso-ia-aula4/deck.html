@@ -1,0 +1,174 @@
+<!doctype html>
+<!-- GERADO por montar.py a partir de fonte/. Edite os arquivos de fonte/, nunca este deck.html.
+     Aula 4 do curso de IA da co.juris, dia 2: "Decidir" (cerca de 90 minutos). Plano contínuo pela biblioteca
+     (docs/cenas.md). Briefing, roteiro, fontes e o caso fictício em briefing.md. Ao vivo: ./ap abrir decks/curso-ia-aula4 -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Decidir · Aula 4</title>
+<link rel="stylesheet" href="../../temas/cojuris/tema.css">
+<link rel="stylesheet" href="../../motor/cenas.css">
+<style>
+  /* BASE: peças comuns a todos os blocos. Cada bloco escreve só classes com o prefixo dele (a-, b-, c-, d-, e-, f-). */
+  .linha-top { position: absolute; left: 120px; top: 292px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .rodape { position: absolute; left: 120px; top: 892px; font-size: 36px; line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .respiro-sub { position: absolute; left: 120px; top: 850px; font-size: var(--esc-2); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .noite .linha-top, .noite .rodape, .noite .respiro-sub { color: var(--suave-sobre-noite); }
+
+  /* cartões (cena própria): grade de 3 ou 4 colunas; nas grades de modelos, o logo oficial em cima */
+  .cartoes { position: absolute; left: 120px; top: 380px; width: 1680px; display: grid; gap: 36px 40px; }
+  .cartoes.c2 { grid-template-columns: repeat(2, 1fr); }
+  .cartoes.c3 { grid-template-columns: repeat(3, 1fr); }
+  .cartoes.c4 { grid-template-columns: repeat(4, 1fr); }
+  .cartao { box-sizing: border-box; padding: 26px 32px; border: 4px solid var(--cor-linha); border-radius: 26px; }
+  .ct-tit { font: 800 var(--esc-2)/1.15 var(--fonte-titulo); white-space: nowrap; }
+  .ct-tit.g { font-size: var(--esc-3); }
+  .ct-txt { margin-top: 12px; font-size: 36px; line-height: 1.3; text-wrap: pretty; }
+  .ct-sub { margin-top: 6px; font-size: 32px; line-height: 1.3; color: var(--cor-tinta-suave); }
+  .ct-cab { display: flex; align-items: center; gap: 22px; height: 64px; }
+  .ct-logo { display: block; height: 56px; width: auto; max-width: 240px; object-fit: contain; object-position: left center; }
+  .ct-col .ct-logo { height: 48px; margin-bottom: 18px; }
+  .ct-leg { position: absolute; left: 120px; top: 300px; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* definições em partes: os itens à esquerda, um por clique; a explicação do item atual à direita */
+  .partes { position: absolute; left: 120px; top: 330px; width: 900px; }
+  /* o número de cada parte vem de um contador do CSS: é marcação, não texto a ler */
+  .partes { counter-reset: parte; }
+  .partes li { counter-increment: parte; display: flex; align-items: flex-start; gap: 26px; margin-bottom: 26px; font-size: 40px; line-height: 1.25; color: var(--cor-tinta-suave); }
+  .partes li::before { content: counter(parte); flex: 0 0 58px; height: 58px; margin-top: -4px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); }
+  .partes li.ativa { color: var(--cor-tinta); }
+  .partes li.ativa::before { background: var(--cor-destaque); border-color: var(--cor-destaque); color: var(--sobre-destaque); }
+  .noite .partes li { color: var(--suave-sobre-noite); }
+  .noite .partes li.ativa { color: var(--sobre-noite); }
+  .noite .partes li::before { border-color: var(--linha-sobre-noite); }
+  .noite .partes li.ativa::before { border-color: var(--cor-destaque); }
+  .explica { position: absolute; left: 1100px; top: 330px; width: 700px; height: 520px; }
+  .explica p { position: absolute; left: 0; top: 0; width: 700px; font: 400 60px/1.25 var(--fonte-texto); text-wrap: pretty; }
+/* Bloco a-assistentes: só classes a- e [data-slide] deste bloco. */
+/* Bloco b-harness: só classes b- e [data-slide] deste bloco. */
+/* Bloco c-conta: só classes c- e [data-slide] deste bloco. */
+/* Bloco d-geopolitica: só classes d- e [data-slide] deste bloco. */
+/* Bloco e-futuro: só classes e- e [data-slide] deste bloco. */
+</style>
+</head>
+<body>
+<div id="palco"><div id="mundo">
+  <section data-slide="a-prov" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Assistentes</p>
+    <p class="respiro"><span>Assistentes</span><span><span class="sinal">em construção</span>.</span></p>
+  </section>
+
+  <section data-slide="b-prov" data-arquetipo="respiro">
+    <p class="rotulo">Harness</p>
+    <p class="respiro"><span>Harness</span><span><span class="sinal">em construção</span>.</span></p>
+  </section>
+
+  <section data-slide="c-prov" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Quem paga</p>
+    <p class="respiro"><span>Quem paga</span><span><span class="sinal">em construção</span>.</span></p>
+  </section>
+
+  <section data-slide="d-prov" data-arquetipo="respiro">
+    <p class="rotulo">Geopolítica</p>
+    <p class="respiro"><span>Geopolítica</span><span><span class="sinal">em construção</span>.</span></p>
+  </section>
+
+  <section data-slide="e-prov" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Futuro</p>
+    <p class="respiro"><span>Futuro</span><span><span class="sinal">em construção</span>.</span></p>
+  </section>
+
+
+</div></div>
+
+<script type="module">
+import {palco, revelar, surgir, tracar, contar, digitar, voar, anotar, caixa, kenburns, escalonar, molaAR, faixa, saida, entradaSaida, clamp, lerp} from '../../motor/palco.js';
+import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
+
+// 5 blocos da linha do dia, somando 90 minutos. Os ids são os de `bloco` nos slides.
+const blocos = [
+  {id: 'assistentes', rotulo: 'Assistentes', minutos: 27},
+  {id: 'harness', rotulo: 'Harness', minutos: 6},
+  {id: 'conta', rotulo: 'Quem paga', minutos: 23},
+  {id: 'geopolitica', rotulo: 'Geopolítica', minutos: 18},
+  {id: 'futuro', rotulo: 'Futuro', minutos: 16},
+];
+
+// Uma linha por slide, na ordem da aula. Cada bloco de fonte/ acrescenta as suas com SLIDES.push(...).
+// `notas` é o guia do apresentador: {diga, faca, transicao}.
+const SLIDES = [];
+
+SLIDES.push(
+  {id: 'a-prov', bloco: 'assistentes', titulo: 'Assistentes (provisório)', notas: {diga: 'Slide provisório do esqueleto.', faca: [], transicao: ''}},
+);
+SLIDES.push(
+  {id: 'b-prov', bloco: 'harness', titulo: 'Harness (provisório)', notas: {diga: 'Slide provisório do esqueleto.', faca: [], transicao: ''}},
+);
+SLIDES.push(
+  {id: 'c-prov', bloco: 'conta', titulo: 'Quem paga (provisório)', notas: {diga: 'Slide provisório do esqueleto.', faca: [], transicao: ''}},
+);
+SLIDES.push(
+  {id: 'd-prov', bloco: 'geopolitica', titulo: 'Geopolítica (provisório)', notas: {diga: 'Slide provisório do esqueleto.', faca: [], transicao: ''}},
+);
+SLIDES.push(
+  {id: 'e-prov', bloco: 'futuro', titulo: 'Futuro (provisório)', notas: {diga: 'Slide provisório do esqueleto.', faca: [], transicao: ''}},
+);
+
+const m = mundo(SLIDES);
+const CENAS = {};
+const $$ = (sec, sel) => [...sec.querySelectorAll(sel)];
+const vis = (el, sim) => { el.style.visibility = sim ? '' : 'hidden'; };
+const NS = 'http://www.w3.org/2000/svg';
+const traco = (pai, d, cls) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); if (cls) p.setAttribute('class', cls); pai.appendChild(p); return p; };
+
+// Cartões: entram em onda, da esquerda para a direita e de cima para baixo.
+const cartoes = (id) => {
+  const sec = m.secao(id), cs = [...sec.querySelectorAll('.cartao')], leg = sec.querySelector('.ct-leg'), rodape = sec.querySelector(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    if (leg) revelar(leg, molaAR(x - 0.1));
+    cs.forEach((el, n) => surgir(el, molaAR(x - 0.2 - n * 0.09), {dy: 30}));
+    if (rodape) revelar(rodape, molaAR(x - 0.4 - cs.length * 0.09));
+    fim(sec, x, 0.5 + cs.length * 0.09);
+  };
+};
+
+// Definição em partes: um item por clique, o atual em destaque, e a explicação dele à direita.
+const partes = (id) => {
+  const sec = m.secao(id), itens = $$(sec, '.partes li'), expl = $$(sec, '.explica p'), rod = sec.querySelector(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c), d = (n) => (n === 0 ? x - 0.1 : c.desde(n));
+    titulo(sec, x, c);
+    let ativo = 0;
+    for (let n = 1; n < itens.length; n++) if (c.desde(n) > 0) ativo = n;
+    itens.forEach((li, n) => {
+      const k = molaAR(d(n));
+      surgir(li, k, {dx: -20, dy: 0});
+      vis(li, k > 0);
+      li.classList.toggle('ativa', n === ativo);
+    });
+    expl.forEach((p, n) => {
+      const sai = n + 1 < expl.length ? faixa(c.desde(n + 1), 0, 0.2) : 0;
+      const k = sai > 0 ? 1 - sai : molaAR(d(n) - 0.2);
+      surgir(p, k, {dy: 18});
+      vis(p, k > 0.001);
+    });
+    if (rod) revelar(rod, molaAR(x - 0.8));
+    fim(sec, x, 1.0);
+  };
+};
+
+// Cenas próprias do bloco a-assistentes (CENAS.<id> = (t, c) => {...}).
+// Cenas próprias do bloco b-harness (CENAS.<id> = (t, c) => {...}).
+// Cenas próprias do bloco c-conta (CENAS.<id> = (t, c) => {...}).
+// Cenas próprias do bloco d-geopolitica (CENAS.<id> = (t, c) => {...}).
+// Cenas próprias do bloco e-futuro (CENAS.<id> = (t, c) => {...}).
+
+// Links das práticas: o clique abre a página em nova aba e não avança o slide.
+for (const a of document.querySelectorAll('#mundo a[href]')) a.addEventListener('click', (e) => e.stopPropagation());
+
+palco({slides: m.slides, desenhar: m.desenhar, blocos, autoplay: true, cenas: m.cenas(CENAS)});
+</script>
+</body>
+</html>
