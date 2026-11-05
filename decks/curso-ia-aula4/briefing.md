@@ -39,7 +39,7 @@ Mesmas convenções da Aula 3: "própria" é cena sem `data-arquetipo`; "guia" �
 | 4 | cinco | Cinco assistentes, em novembro de 2026 | cinco cartões: Claude Duet (Anthropic, prévia, só EUA); dots (OpenAI, plano Pro, inclui o Brasil); Muse (Meta, no WhatsApp, EUA e Singapura); Grok Bot (xAI, beta, sem lista de países); Hermes Agent (código aberto, roda onde você instalar) | claro, médio | cartões | código |
 | 5 | alcance | Na sua caixa está o cliente | **S.T.A.R. do bloco.** A caixa de entrada desenhada por código; o assistente "lê tudo" e acendem, uma por clique, a conversa com o cliente, a minuta antes do protocolo e a mensagem da parte contrária | noite, médio | própria | código |
 | 6 | entrada | Quem escreve para você escreve para ele. | respiro: cada mensagem que chega é texto que o assistente lê | noite, respiro | respiro | nenhuma |
-| 7 | sigilo | O sigilo vai junto com o acesso | cartões: Estatuto da Advocacia, art. 7º, II, inviolabilidade da correspondência; art. 34, VII, violar sigilo é infração; Recomendação OAB 001/2024, fornecedor que exclua do treino; Res. CNJ 615, documento sigiloso só com anonimização ou proteção técnica | claro, médio | cartões | código |
+| 7 | sigilo | O sigilo vai junto com o acesso | quatro cartões: "E-mail da advocacia é inviolável" (EAOAB, art. 7º, II); "Violar sigilo sem justa causa é infração" (EAOAB, art. 34, VII); "Fornecedor que proteja dados e não treine com eles" (Recomendação OAB 001/2024, item 2.2); "Sigiloso na IA externa, só anonimizado ou com proteção técnica" (Res. CNJ 615/2025, art. 19, § 3º, IV, regra para magistrados e servidores) | claro, médio | cartões | código |
 | 8 | memoria | Cortar o acesso não apaga a memória | três linhas, uma por clique: Duet, o que aprendeu fica até zerar a memória; dots, só se apaga o dot inteiro; Grok Bot, apagar o Bot não limpa o computador compartilhado | noite, médio | própria | código |
 | 9 | a7 | Sua vez: o acesso mínimo | A7, 7 min. "Em dupla, escolham uma tarefa (a agenda da manhã, por exemplo) e preencham três colunas: pode ler, pode escrever, nunca." | claro, médio | guia, `pratica: 7` | código |
 | 10 | harness-cap | O sistema em volta do modelo | abertura do bloco harness (capítulo); sub: "Uma peça da PGE-MS, por dentro." Aviso de rodapé: "A co.juris não fala em nome da PGE-MS." | noite, respiro | abertura | heroica gerada 2K, cerca de US$ 0,05 |
@@ -109,7 +109,7 @@ Fichas de 05/11/2026 em `docs/pesquisa/`: economia (E, `dia2-economia-subsidio-b
 |---|---|---|
 | 3, 4 | os cinco assistentes, fabricante, data, planos e Brasil, retrato de 02/11/2026 (Duet 21/10/2026, prévia, Pro, Max e Ultra, só EUA; dots 29/09/2026, Pro, mercados exceto EEE, Suíça e Reino Unido; Muse 08/09/2026, EUA e Singapura; Grok Bot 11/08/2026, beta, sem lista de países; Hermes Agent, código aberto) | A 22.2 a 22.4, Tabela 22.1; fontes/cap22-assistentes.md |
 | 5, 6, 8 | o que o assistente lê na caixa; quem escreve para você escreve na entrada dele; memória depois de revogar o acesso (Duet, dots, Grok Bot) | A 22.5 |
-| 7 | Lei 8.906/1994, art. 7º, II, e art. 34, VII; Recomendação OAB 001/2024; Res. CNJ 615/2025, art. 19, § 3º, IV | A 22.5; conferir na fonte primária antes da montagem (pendência) |
+| 7 | Lei 8.906/1994, art. 7º, II (redação da Lei 11.767/2008), e art. 34, VII; Recomendação OAB 001/2024, item 2.2 ("não utilização dos dados fornecidos para treinamento"); Res. CNJ 615/2025, art. 19, § 3º, IV (vale para magistrados e servidores; anonimização na origem ou mecanismos técnicos e procedimentais), conferidos na fonte oficial em 05/11/2026 | `docs/pesquisa/dia2-sigilo-normas.md` (planalto.gov.br, s.oab.org.br, atos.cnj.jus.br) |
 | 11, 12 | 10 agentes, 6 modelos, US$ 1,5928 a peça, redator em Claude Opus 5.5 com US$ 1,3859 (87,0%); papéis e ordem | H (print de 05/11/2026 e leitura do código, com a correção do `afirmacao_oficio`) |
 | 14, 15 | custo de computação da Anthropic sobre a receita (653%, 160%, 57%); compromissos de cerca de US$ 895,4 bi, "regardless of actual utilization" | E, S-1/A da Anthropic na SEC, 02/11/2026 (confiança alta) |
 | 17 | Altman, 05/01/2025; Anthropic, limites semanais anunciados em 28/07/2025 | E (TechCrunch, confiança alta) |
@@ -126,8 +126,6 @@ Fichas de 05/11/2026 em `docs/pesquisa/`: economia (E, `dia2-economia-subsidio-b
 
 ## Pendências deste briefing
 
-- Conferir na fonte primária, antes de montar o slide 7: Lei 8.906/1994, art. 7º, II, e art. 34, VII; Recomendação
-  OAB 001/2024; Res. CNJ 615/2025, art. 19, § 3º, IV. O que não for confirmado sai da tela.
 - O vídeo do harness (slide 11) depende da Tarefa 6A, no claude_video_maker.
 - *A próxima onda* (Suleyman e Bhaskar) fica fora: não há edição em mãos para citar página.
 - Notas `{diga, faca, transicao}` de cada slide: escritas na montagem, só com os fatos acima.

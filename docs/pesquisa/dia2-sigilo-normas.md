@@ -1,0 +1,21 @@
+# Dia 2: sigilo profissional e IA, conferência das normas
+
+Conferência feita em 05/11/2026 na fonte oficial de cada norma, para o cartão de slide sobre o preço do acesso do assistente pessoal (apostila v2, seção 22.5). Os trechos abaixo foram copiados do texto baixado na sessão; nenhum veio da apostila ou de memória.
+
+| Norma e dispositivo | Trecho literal | URL lida | Acesso | Confiança |
+|---|---|---|---|---|
+| Lei 8.906/1994, art. 7º, II (redação da Lei 11.767/2008) | "a inviolabilidade de seu escritório ou local de trabalho, bem como de seus instrumentos de trabalho, de sua correspondência escrita, eletrônica, telefônica e telemática, desde que relativas ao exercício da advocacia" | https://www.planalto.gov.br/ccivil_03/leis/l8906.htm | 05/11/2026 | Alta |
+| Lei 8.906/1994, art. 34, VII | "Constitui infração disciplinar: [...] VII - violar, sem justa causa, sigilo profissional" | https://www.planalto.gov.br/ccivil_03/leis/l8906.htm | 05/11/2026 | Alta |
+| Lei 8.906/1994, art. 3º, § 1º (advocacia pública, citado na 22.5) | "Exercem atividade de advocacia, sujeitando-se ao regime desta lei, além do regime próprio a que se subordinem, os integrantes [...] das Procuradorias e Consultorias Jurídicas dos Estados" | https://www.planalto.gov.br/ccivil_03/leis/l8906.htm | 05/11/2026 | Alta (Planalto anota "Vide ADIN 4636") |
+| Recomendação CFOAB n. 001/2024, item 2.2 | "garantir que o fornecedor do produto irá proteger informações colocadas no sistema, adotar medidas de segurança e possibilitar a não utilização dos dados fornecidos para treinamento dos sistemas" | https://s.oab.org.br/arquivos/2024/11/80a03f8d-e4cb-4bac-a3ea-357009f77d3f.pdf (p. 13); mesmo texto no Diário Eletrônico da OAB de 14/11/2024: https://diario.oab.org.br/assets/diarios/diario-eletronico-oab-14-11-2024.pdf | 05/11/2026 | Alta para o texto; média para a vigência sem revisão (ver abaixo) |
+| Res. CNJ 615/2025, art. 19, § 3º, IV | "é vedado o uso de LLMs e sistemas de IA generativa de natureza privada ou externos ao Judiciário para processar, analisar, gerar conteúdo ou servir de suporte a decisões a partir de documentos ou dados sigilosos ou protegidos por segredo de justiça [...] salvo quando devidamente anonimizados na origem ou quando forem adotados mecanismos técnicos e procedimentais que garantam a efetiva proteção e segurança desses dados e de seus titulares" | https://atos.cnj.jus.br/atos/detalhar/6001 (texto compilado) e https://atos.cnj.jus.br/files/original1555302025031467d4517244566.pdf (original) | 05/11/2026 | Alta |
+
+Duas leituras afetam a formulação do cartão. A Recomendação da OAB pede que o fornecedor permita a *não utilização* dos dados para treino, isto é, uma opção de exclusão do treinamento; ela não fala em apagar dados já usados, e por isso "excluir os dados do treino" só é fiel se lido como "deixar os dados fora do treino". A vedação do CNJ está no § 3º do art. 19, que trata da contratação direta, para uso privado ou individual, por magistrados e servidores; ela alcança o Judiciário, não a advocacia, e admite duas saídas (anonimização na origem ou mecanismo técnico e procedimental de proteção). O inciso III do mesmo parágrafo veda ao fornecedor usar os dados do Judiciário para treinamento, o que dá um paralelo direto com o item 2.2 da OAB.
+
+Quanto a alterações, a página do CNJ consultada hoje registra como única alteração a Resolução 674, de 25/03/2026, que mudou só o art. 15 (composição do Comitê Nacional); o texto compilado do art. 19, § 3º, IV é idêntico ao do PDF original. No Planalto, o art. 7º, II traz a redação da Lei 11.767/2008, com a redação anterior riscada, e o art. 34, VII não tem anotação de alteração.
+
+## Não confirmado
+
+- Que a Recomendação 001/2024 não foi revista ou substituída até 05/11/2026. A busca restrita a oab.org.br não achou revisão nem provimento aprovado; notícias do CFOAB de 2026 mencionam um provimento sobre IA em elaboração e um Plano Nacional de Integração da IA na Advocacia, sem texto aprovado localizado. Ausência de resultado não prova ausência de ato.
+- Que nenhuma resolução do CNJ posterior à 674/2026 alterou a 615 sem constar ainda da página de compilação. A conferência se apoia só na anotação "Alteração" do próprio portal de atos.
+- O alcance da ADI 4636 sobre o art. 3º, § 1º (advocacia pública) não foi lido; o Planalto apenas remete a ela.
