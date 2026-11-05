@@ -16,5 +16,6 @@
 
 ## Pendentes
 
-- Itens 2 e 6 dependem da leitura das fontes primárias (casos do STF e do STJ, Nota Técnica do CNJ e Res. CNJ 121/2010,
-  art. 5º), em andamento; o que não for confirmado sai da tela.
+- Nenhum. Os itens 2 e 6 foram resolvidos em 05/11/2026 com a leitura das fontes primárias
+  (`docs/pesquisa/dia2-ferramentas-aula3.md`, seção 5): os três casos e a Nota Técnica confirmados; o art. 5º da Res.
+  CNJ 121/2010 confirmado e dirigido aos tribunais, por isso a tela diz "padrão da Res. CNJ 121/2010, art. 5º".
