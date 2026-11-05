@@ -15,6 +15,7 @@ COPIAS = [   # (origem em material/, destino em kit/)
     ("escritorio/modelo-timbrado.docx", "escritorio/modelo-timbrado.docx"),
     ("escritorio/logo-escritorio.png", "escritorio/logo-escritorio.png"),
     ("escritorio/padrao-do-escritorio.md", "escritorio/padrao-do-escritorio.md"),
+    ("escritorio/rascunho-parecer.md", "escritorio/rascunho-parecer.md"),
     ("scraper/stj_espelhos.py", "scraper/stj_espelhos.py"),
     ("scraper/amostra/20260930.json", "scraper/amostra/20260930.json"),
     ("scraper/amostra/dicionario-espelhodoacordao.csv", "scraper/amostra/dicionario-espelhodoacordao.csv"),
