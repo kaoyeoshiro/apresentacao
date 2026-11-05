@@ -1,5 +1,135 @@
-  <section data-slide="d-prov" data-arquetipo="respiro">
-    <p class="rotulo">Scraper</p>
-    <p class="respiro"><span>Scraper</span><span><span class="sinal">em construção</span>.</span></p>
+  <!-- ===== Bloco D: scraper (slides 26 a 34). A abertura fica sem foto até a heroica do capítulo ser gerada. ===== -->
+  <section data-slide="scraper-cap" data-arquetipo="abertura" class="noite">
+    <p class="rotulo">Bloco 3 · Scraper</p>
+    <div class="display ab-linha">Jurisprudência</div>
+    <div class="display ab-linha sinal">em lote</div>
+    <p class="ab-sub">Do navegador ao script, com as regras do tribunal.</p>
   </section>
 
+  <section data-slide="dois-jeitos" data-arquetipo="ramos">
+    <p class="rotulo">Scraper</p>
+    <h2 class="manchete">Dois jeitos de raspar</h2>
+    <div class="ramo" data-y="450">
+      <div class="estacao"><b>Navegador</b><small>skill TJMS</small></div>
+      <p class="caixa-txt">sem<br>código</p>
+    </div>
+    <div class="ramo" data-y="720">
+      <div class="estacao"><b>Claude Code</b><small>STJ aberto</small></div>
+      <p class="caixa-txt">script<br>curto</p>
+    </div>
+    <p class="ramos-leg">Raspar é coletar de um site, em lote.</p>
+  </section>
+
+  <!-- a5 (cena guia, noite): os três temas votáveis, numerados; a regra da votação embaixo -->
+  <section data-slide="a5" class="noite">
+    <p class="rotulo">Atividade A5 · 2 min</p>
+    <h2 class="manchete">A sala escolhe o tema</h2>
+    <ol class="d-temas">
+      <li>execução fiscal</li>
+      <li>improbidade</li>
+      <li>ICMS</li>
+    </ol>
+    <p class="d-voto">Mão levantada. O mais votado vai às <span class="sinal">duas etapas</span>.</p>
+  </section>
+
+  <section data-slide="etapa1" data-arquetipo="demonstracao" class="noite" data-ritmo-ok="o vídeo da demonstração toca dentro do passo de entrada">
+    <p class="rotulo">Demonstração</p>
+    <h2 class="manchete">Etapa 1, o agente no navegador</h2>
+    <div class="moldura">
+      <div class="barra-nav"><i></i><i></i><i></i><u></u></div>
+      <div class="tela">
+        <video src="midia/demo.mp4" poster="midia/demo-capa.webp" muted playsinline preload="auto"></video>
+      </div>
+    </div>
+    <p class="nota-lateral">Baixa só o pertinente.</p>
+  </section>
+
+  <!-- etapa2-pedido (cena própria, claro): a janela do Claude Code desenhada por código, com a versão de tela do pedido;
+       o [tema] se acende por último. O pedido literal fica nas notas e no kit. -->
+  <section data-slide="etapa2-pedido">
+    <p class="rotulo">Scraper</p>
+    <h2 class="manchete">Etapa 2, o pedido ao Claude Code</h2>
+    <div class="d-cc">
+      <p class="d-cc-barra"><i></i><i></i><i></i><span>Claude Code</span></p>
+      <p class="d-cc-pedido">Escreva um programa que baixe os espelhos de acórdãos de setembro de 2026 da Primeira Turma, nos Dados Abertos do STJ, filtre as ementas por <mark class="d-tema">[tema]</mark> e grave uma planilha.</p>
+    </div>
+  </section>
+
+  <section data-slide="etapa2" data-arquetipo="demonstracao" class="noite" data-ritmo-ok="o vídeo da demonstração toca dentro do passo de entrada">
+    <p class="rotulo">Demonstração</p>
+    <h2 class="manchete">Ao vivo, o script trabalha</h2>
+    <div class="moldura">
+      <div class="barra-nav"><i></i><i></i><i></i><u></u></div>
+      <div class="tela">
+        <video src="midia/demo.mp4" poster="midia/demo-capa.webp" muted playsinline preload="auto"></video>
+      </div>
+    </div>
+    <p class="nota-lateral">Dados abertos, sem captcha.</p>
+  </section>
+
+  <!-- conferir, variante execução fiscal (cena própria, quatro cliques): três linhas de execucao.csv; um clique por linha, com o recorte do espelho (20260930.json) -->
+  <section data-slide="conferir-execucao" class="d-conf">
+    <p class="rotulo">A5, execução fiscal</p>
+    <h2 class="manchete">Cada linha volta ao acórdão</h2>
+    <div class="d-csv">
+      <p class="d-csv-cab">execucao.csv</p>
+      <div class="d-lin"><i class="d-realce"></i><span>2387411</span><span>PRIMEIRA TURMA</span><span>20260831</span><span>PROCESSUAL CIVIL…</span></div>
+      <div class="d-lin"><i class="d-realce"></i><span>2251573</span><span>PRIMEIRA TURMA</span><span>20260831</span><span>PROCESSUAL CIVIL…</span></div>
+      <div class="d-lin"><i class="d-realce"></i><span>2267286</span><span>PRIMEIRA TURMA</span><span>20260831</span><span>PROCESSUAL CIVIL…</span></div>
+    </div>
+    <p class="d-leg">As duplas conferem número, órgão, data e trecho da ementa.</p>
+    <svg class="d-fios" viewBox="0 0 1920 1080"><path d="M150 400V760H260"/><path d="M150 480V760H260"/><path d="M150 560V760H260"/></svg>
+    <div class="d-esp"><p class="d-esp-et">Espelho do acórdão</p><p class="d-esp-cl">EDcl no AgInt no AREsp 2387411</p><p class="d-esp-li"><span>PRIMEIRA TURMA</span><span>31/08/2026</span></p><p class="d-esp-em">PROCESSUAL CIVIL E TRIBUTÁRIO…</p></div>
+    <div class="d-esp"><p class="d-esp-et">Espelho do acórdão</p><p class="d-esp-cl">AgInt no REsp 2251573</p><p class="d-esp-li"><span>PRIMEIRA TURMA</span><span>31/08/2026</span></p><p class="d-esp-em">PROCESSUAL CIVIL. RECURSO ESPECIAL…</p></div>
+    <div class="d-esp"><p class="d-esp-et">Espelho do acórdão</p><p class="d-esp-cl">EDcl no AgInt no REsp 2267286</p><p class="d-esp-li"><span>PRIMEIRA TURMA</span><span>31/08/2026</span></p><p class="d-esp-em">PROCESSUAL CIVIL. EXECUÇÃO FISCAL…</p></div>
+  </section>
+
+  <!-- conferir, variante improbidade (cena própria, quatro cliques): três linhas de improbidade.csv; um clique por linha, com o recorte do espelho (20260930.json) -->
+  <section data-slide="conferir-improbidade" class="d-conf">
+    <p class="rotulo">A5, improbidade</p>
+    <h2 class="manchete">Cada linha volta ao acórdão</h2>
+    <div class="d-csv">
+      <p class="d-csv-cab">improbidade.csv</p>
+      <div class="d-lin"><i class="d-realce"></i><span>2256539</span><span>PRIMEIRA TURMA</span><span>20260831</span><span>PROCESSUAL CIVIL…</span></div>
+      <div class="d-lin"><i class="d-realce"></i><span>2684540</span><span>PRIMEIRA TURMA</span><span>20260831</span><span>ADMINISTRATIVO. IMPROBIDADE…</span></div>
+      <div class="d-lin"><i class="d-realce"></i><span>2185549</span><span>PRIMEIRA TURMA</span><span>20260818</span><span>PROCESSO CIVIL…</span></div>
+    </div>
+    <p class="d-leg">As duplas conferem número, órgão, data e trecho da ementa.</p>
+    <svg class="d-fios" viewBox="0 0 1920 1080"><path d="M150 400V760H260"/><path d="M150 480V760H260"/><path d="M150 560V760H260"/></svg>
+    <div class="d-esp"><p class="d-esp-et">Espelho do acórdão</p><p class="d-esp-cl">EDcl no REsp 2256539</p><p class="d-esp-li"><span>PRIMEIRA TURMA</span><span>31/08/2026</span></p><p class="d-esp-em">PROCESSUAL CIVIL E IMPROBIDADE…</p></div>
+    <div class="d-esp"><p class="d-esp-et">Espelho do acórdão</p><p class="d-esp-cl">EDcl no AgInt no AREsp 2684540</p><p class="d-esp-li"><span>PRIMEIRA TURMA</span><span>31/08/2026</span></p><p class="d-esp-em">ADMINISTRATIVO. IMPROBIDADE. PROCESSUAL CIVIL…</p></div>
+    <div class="d-esp"><p class="d-esp-et">Espelho do acórdão</p><p class="d-esp-cl">AgInt no REsp 2185549</p><p class="d-esp-li"><span>PRIMEIRA TURMA</span><span>18/08/2026</span></p><p class="d-esp-em">PROCESSO CIVIL E ADMINISTRATIVO…</p></div>
+  </section>
+
+  <!-- conferir, variante ICMS (cena própria, quatro cliques): três linhas de icms.csv; um clique por linha, com o recorte do espelho (20260930.json) -->
+  <section data-slide="conferir-icms" class="d-conf">
+    <p class="rotulo">A5, ICMS</p>
+    <h2 class="manchete">Cada linha volta ao acórdão</h2>
+    <div class="d-csv">
+      <p class="d-csv-cab">icms.csv</p>
+      <div class="d-lin"><i class="d-realce"></i><span>2964464</span><span>PRIMEIRA TURMA</span><span>20260831</span><span>PROCESSUAL CIVIL…</span></div>
+      <div class="d-lin"><i class="d-realce"></i><span>2894701</span><span>PRIMEIRA TURMA</span><span>20260824</span><span>PROCESSUAL CIVIL…</span></div>
+      <div class="d-lin"><i class="d-realce"></i><span>2257454</span><span>PRIMEIRA TURMA</span><span>20260824</span><span>PROCESSUAL CIVIL…</span></div>
+    </div>
+    <p class="d-leg">As duplas conferem número, órgão, data e trecho da ementa.</p>
+    <svg class="d-fios" viewBox="0 0 1920 1080"><path d="M150 400V760H260"/><path d="M150 480V760H260"/><path d="M150 560V760H260"/></svg>
+    <div class="d-esp"><p class="d-esp-et">Espelho do acórdão</p><p class="d-esp-cl">EDcl no AgInt no AREsp 2964464</p><p class="d-esp-li"><span>PRIMEIRA TURMA</span><span>31/08/2026</span></p><p class="d-esp-em">PROCESSUAL CIVIL. EMBARGOS DE…</p></div>
+    <div class="d-esp"><p class="d-esp-et">Espelho do acórdão</p><p class="d-esp-cl">EDcl no AgInt no AREsp 2894701</p><p class="d-esp-li"><span>PRIMEIRA TURMA</span><span>24/08/2026</span></p><p class="d-esp-em">PROCESSUAL CIVIL. EMBARGOS DE…</p></div>
+    <div class="d-esp"><p class="d-esp-et">Espelho do acórdão</p><p class="d-esp-cl">AgInt no REsp 2257454</p><p class="d-esp-li"><span>PRIMEIRA TURMA</span><span>24/08/2026</span></p><p class="d-esp-em">PROCESSUAL CIVIL. TRIBUTÁRIO. AGRAVO…</p></div>
+  </section>
+  <!-- limites (cartões, noite): as quatro regras de conduta; a referência da Res. CNJ 121/2010 no cartão do tema -->
+  <section data-slide="limites" class="noite">
+    <p class="rotulo">Limites</p>
+    <h2 class="manchete">Raspar com educação</h2>
+    <div class="cartoes c2">
+      <div class="cartao"><p class="ct-tit">Pesquise por tema, nunca por pessoa.</p><p class="ct-sub">padrão da Res. CNJ 121/2010, art. 5º</p></div>
+      <div class="cartao"><p class="ct-tit">Uma consulta por vez, com pausa.</p></div>
+      <div class="cartao"><p class="ct-tit">Dados abertos primeiro.</p></div>
+      <div class="cartao"><p class="ct-tit">Captcha é recusa.</p></div>
+    </div>
+  </section>
+
+  <section data-slide="captcha" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Scraper</p>
+    <p class="respiro"><span>Encontrou captcha?</span><span>Pare a <span class="sinal">automação</span>.</span></p>
+  </section>

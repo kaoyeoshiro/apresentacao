@@ -1,1 +1,80 @@
-/* Bloco b-skills: só classes b- e [data-slide] deste bloco. */
+  /* ===== Bloco B: skills e Word. Só classes b- e [data-slide] deste bloco. ===== */
+
+  /* word-antes (comparação): letra menor, e a página B ganha o timbre, os títulos numerados e o recuo */
+  [data-slide="word-antes"] .janela .b-letra { font-size: 140px; top: 8px; }
+  [data-slide="word-antes"] .janela .etiqueta { top: 196px; }
+  [data-slide="word-antes"] .janela i { margin-top: 16px; }
+  .b-timbre { position: absolute; left: 4px; top: 254px; width: 736px; height: 50px; box-sizing: border-box; border-bottom: 4px solid var(--cor-tinta); }
+  .b-timbre-nome { position: absolute; right: 0; top: 2px; font: 700 30px/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta); white-space: nowrap; }
+  [data-slide="word-antes"] .janela.escolhida i { margin-top: 90px; margin-left: 52px; }
+  [data-slide="word-antes"] .janela.escolhida i:nth-of-type(1), [data-slide="word-antes"] .janela.escolhida i:nth-of-type(4) { background: var(--cor-tinta); }
+  .b-num { position: absolute; left: 4px; font: 800 32px/1 var(--fonte-titulo); color: var(--cor-tinta); }
+  .b-num1 { top: 327px; }
+  .b-num2 { top: 429px; }
+
+  /* word-pedido: a caixa de mensagem do app, com o anexo em cima, o pedido grande e o botão de enviar */
+  .b-caixa { position: absolute; left: 120px; top: 306px; width: 1680px; height: 590px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 30px; background: var(--cor-papel); }
+  .b-anexo { position: absolute; left: 48px; top: 40px; display: flex; align-items: center; gap: 16px; height: 64px; padding: 0 26px 0 20px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 16px;
+             font: 500 30px/1 var(--fonte-mono, ui-monospace, monospace); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .b-anexo-ic { width: 26px; height: 34px; overflow: visible; }
+  .b-anexo-ic path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+  .b-pedido { position: absolute; left: 48px; right: 150px; top: 136px; font-size: 56px; line-height: 1.34; text-wrap: pretty; }
+  .b-enviar { position: absolute; right: 40px; bottom: 40px; width: 76px; height: 76px; overflow: visible; }
+  .b-enviar circle { fill: var(--cor-tinta); }
+  .b-enviar path { fill: none; stroke: var(--cor-fundo); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* word-addin: cartões de duas colunas, com folga para o texto */
+  [data-slide="word-addin"] .cartoes { top: 360px; }
+  [data-slide="word-addin"] .cartao { min-height: 200px; }
+
+  /* skillmd: o SKILL.md num editor desenhado por código (números de linha por contador do CSS: marcação, não texto);
+     as anotações ficam à direita, ligadas por traços neutros */
+  .b-arq { position: absolute; left: 120px; top: 318px; width: 1160px; height: 546px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 24px; overflow: hidden; }
+  .b-arq-cab { height: 68px; box-sizing: border-box; padding: 17px 30px 0; border-bottom: 4px solid var(--linha-sobre-noite); font: 500 30px/1.15 var(--fonte-mono, ui-monospace, monospace); color: var(--suave-sobre-noite); white-space: nowrap; }
+  .b-arq-txt { position: absolute; left: 0; top: 88px; width: 100%; counter-reset: b-ln; }
+  .b-ln { position: relative; height: 48px; padding: 0 34px 0 100px; font: 400 34px/48px var(--fonte-mono, ui-monospace, monospace); color: var(--sobre-noite); white-space: nowrap; counter-increment: b-ln; }
+  .b-ln::before { content: counter(b-ln); position: absolute; left: 0; top: 0; width: 70px; text-align: right; font-size: 30px; color: var(--suave-sobre-noite); }
+  .b-ln.b-dim, .b-k { color: var(--suave-sobre-noite); }
+  .b-ln.b-dim::after { content: "---"; }   /* o separador do cabeçalho é marcação, como o número da linha */
+  .b-k { font-weight: 700; }
+  .b-desc { display: inline-block; }
+  .b-sub { position: absolute; }
+  .b-ln i { position: absolute; left: 100px; top: 13px; height: 22px; border-radius: 11px; background: color-mix(in srgb, var(--sobre-noite) 30%, var(--noite)); transform-origin: 0 50%; }
+  .b-ligas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .b-ligas path { fill: none; stroke: var(--linha-sobre-noite); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .b-nota { position: absolute; left: 1380px; width: 420px; font: 800 var(--esc-2)/1.1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+  .b-nota small { display: block; margin-top: 4px; font: 400 36px/1.2 var(--fonte-texto); color: var(--suave-sobre-noite); }
+
+  /* checklist: a explicação em corpo de leitura, menor que a das partes padrão, para caber a frase mais longa */
+  [data-slide="checklist"] .explica p { font-size: 56px; }
+
+  /* a1: os três trechos numerados (contador do CSS) em fonte de código, e a coluna dos sete pontos */
+  .noite .b-enun { color: var(--sobre-noite); }
+  .b-trechos { position: absolute; left: 120px; top: 380px; width: 1170px; counter-reset: b-tr; }
+  .b-trechos li { counter-increment: b-tr; position: relative; box-sizing: border-box; min-height: 140px; margin-bottom: 26px; padding: 24px 30px 24px 112px; border: 4px solid var(--linha-sobre-noite); border-radius: 22px; }
+  .b-trechos li::before { content: counter(b-tr); position: absolute; left: 28px; top: 28px; width: 60px; height: 60px; box-sizing: border-box; border-radius: 30px; background: var(--sobre-noite); color: var(--noite);
+                          display: grid; place-items: center; font: 800 34px/1 var(--fonte-titulo); }
+  .b-trechos code { display: block; font: 400 32px/1.45 var(--fonte-mono, ui-monospace, monospace); color: var(--sobre-noite); overflow-wrap: anywhere; }
+  .b-sete { position: absolute; left: 1360px; top: 380px; width: 440px; counter-reset: b-pt; }
+  .b-sete li { counter-increment: b-pt; display: flex; align-items: center; gap: 18px; height: 64px; font: 400 34px/1.1 var(--fonte-texto); color: var(--suave-sobre-noite); white-space: nowrap; }
+  .b-sete li::before { content: counter(b-pt); flex: 0 0 46px; height: 46px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 23px; display: grid; place-items: center; font: 800 26px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
+
+  /* a2: os três passos à esquerda (o atual em destaque) e a folha da skill à direita */
+  .b-passos { position: absolute; left: 120px; top: 360px; width: 860px; counter-reset: b-ps; }
+  .b-passos li { counter-increment: b-ps; display: flex; align-items: center; gap: 30px; height: 110px; margin-bottom: 40px; font-size: var(--esc-2); line-height: 1.2; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .b-passos li::before { content: counter(b-ps); flex: 0 0 84px; height: 84px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 42px; display: grid; place-items: center; font: 800 42px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
+  .b-passos li.b-agora { color: var(--sobre-noite); }
+  .b-passos li.b-agora::before { background: var(--cor-destaque); border-color: var(--cor-destaque); color: var(--sobre-destaque); }
+  .b-folha { position: absolute; left: 1080px; top: 330px; width: 720px; height: 540px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
+  .b-folha-cab { height: 76px; box-sizing: border-box; padding: 20px 36px 0; border-bottom: 4px solid var(--linha-sobre-noite); font: 500 32px/1.15 var(--fonte-mono, ui-monospace, monospace); color: var(--suave-sobre-noite); }
+  .b-regras { position: absolute; left: 36px; right: 36px; top: 120px; counter-reset: b-rg; }
+  .b-regras li { counter-increment: b-rg; position: relative; height: 100px; padding-left: 80px; }
+  .b-regras li::before { content: counter(b-rg); position: absolute; left: 0; top: 4px; font: 800 40px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
+  .b-regras i { position: absolute; left: 80px; right: 0; top: 40px; height: 0; border-top: 4px dashed var(--linha-sobre-noite); }
+  .b-regras u { position: absolute; left: 80px; top: 18px; height: 26px; border-radius: 13px; background: color-mix(in srgb, var(--sobre-noite) 40%, var(--noite)); transform-origin: 0 50%; }
+  .b-regras li:nth-child(1) u { width: 74%; }
+  .b-regras li:nth-child(2) u { width: 80%; }
+  .b-regras li:nth-child(3) u { width: 62%; }
+  .b-visto { position: absolute; right: 40px; bottom: 36px; width: 120px; height: 120px; overflow: visible; }
+  .b-visto circle { fill: none; stroke: var(--sobre-noite); stroke-width: 6; }
+  .b-visto path { fill: none; stroke: var(--sobre-noite); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }

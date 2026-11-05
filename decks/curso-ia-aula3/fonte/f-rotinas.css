@@ -1,1 +1,33 @@
 /* Bloco f-rotinas: só classes f- e [data-slide] deste bloco. */
+  /* símbolos das três respostas (agendavel e a6): sim cheio, conferência em anel, não cortado */
+  .f-col-tit::before, .f-opcoes i { content: ''; flex: 0 0 40px; height: 40px; box-sizing: border-box; border-radius: 50%; border: 5px solid currentColor; }
+  .f-sim .f-col-tit::before, .f-opcoes .f-o-sim { background: currentColor; }
+  .f-nao .f-col-tit::before, .f-opcoes .f-o-nao { background: linear-gradient(45deg, transparent 44%, currentColor 44%, currentColor 56%, transparent 56%); }
+
+  /* agendavel (cena própria): três colunas de cartões e a pergunta que decide */
+  .f-cols { position: absolute; left: 120px; top: 320px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; align-items: start; }
+  .f-col { display: flex; flex-direction: column; gap: 18px; }
+  .f-col-tit { display: flex; align-items: center; gap: 20px; height: 64px; font: 800 var(--esc-2)/1 var(--fonte-titulo); white-space: nowrap; }
+  .f-ct { padding: 18px 30px; font: 400 42px/1.22 var(--fonte-texto); text-wrap: pretty; }
+  .f-nao .f-ct { color: var(--cor-tinta-suave); }
+  .f-pergunta { position: absolute; left: 120px; top: 812px; font: 800 60px/1.15 var(--fonte-titulo); white-space: nowrap; }
+
+  /* a6 (cena guia, noite): as tarefas numeradas à esquerda, as respostas possíveis à direita */
+  .f-tarefas { position: absolute; left: 120px; top: 340px; width: 1000px; counter-reset: tarefa; }
+  .f-tarefas li { counter-increment: tarefa; display: flex; align-items: flex-start; gap: 30px; margin-bottom: 48px; font: 400 52px/1.2 var(--fonte-texto); }
+  .f-tarefas li::before { content: counter(tarefa); flex: 0 0 76px; height: 76px; margin-top: -8px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 38px;
+                          display: grid; place-items: center; font: 800 40px/1 var(--fonte-titulo); color: var(--sobre-noite); }
+  .f-a6-et { left: 1240px; top: 300px; }
+  .f-opcoes { position: absolute; left: 1240px; top: 360px; width: 560px; }
+  .f-opcoes li { display: flex; align-items: center; gap: 24px; height: 86px; font: 700 44px/1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+  .f-depois { position: absolute; left: 120px; top: 800px; font-size: var(--esc-2); line-height: 1.3; color: var(--suave-sobre-noite); white-space: nowrap; }
+
+  /* kit (cena própria): o endereço numa janela de navegador desenhada por código */
+  .f-end { position: absolute; left: 120px; top: 320px; width: 1680px; height: 420px; box-sizing: border-box; padding: 92px 64px 0;
+           border: 4px solid var(--cor-linha); border-radius: 28px; background: var(--cor-papel); }
+  .f-end::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 56px; border-bottom: 3px solid var(--cor-linha);
+                   background: radial-gradient(circle at 34px 28px, var(--cor-linha) 8px, transparent 9px), radial-gradient(circle at 62px 28px, var(--cor-linha) 8px, transparent 9px),
+                               radial-gradient(circle at 90px 28px, var(--cor-linha) 8px, transparent 9px); }
+  .f-end-dom { font: 700 var(--esc-3)/1.1 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .f-end-repo { margin-top: 6px; font: 800 176px/1.0 var(--fonte-titulo); letter-spacing: -0.02em; white-space: nowrap; }
+  .f-kit-sub { position: absolute; left: 120px; top: 790px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }

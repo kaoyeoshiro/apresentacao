@@ -186,3 +186,20 @@ Fichas de 05/11/2026: `docs/pesquisa/dia2-ferramentas-aula3.md` (F) e `docs/pesq
   do aval do professor.
 - Endereço do kit (slide 42): depende do sim do professor para criar o repositório público.
 - Notas `{diga, faca, transicao}` de cada slide: escritas na montagem dos blocos, só com os fatos acima.
+
+## Montagem (05/11/2026)
+
+Blocos montados: `a-abertura` pelo coordenador, os demais por subagentes, cada um conferido pela folha de contato. O deck
+inteiro passa no lint e no oráculo com 0 erro(s). Ajustes feitos na integração:
+
+- As notas das cinco demonstrações (slides 6, 17, 29, 31 e 38) ficaram com até quatro palavras na tela ("Confira as
+  páginas.", "Sem login, sem custo.", "Baixa só o pertinente.", "Dados abertos, sem captcha.", "Cada julgado se
+  confere."), para contarem como respiro; o texto completo do roteiro está nas notas `diga`.
+- O slide 32 virou três variantes seguidas (`conferir-execucao`, `conferir-improbidade`, `conferir-icms`); o professor
+  mostra só a do tema votado e pula as outras com a tecla G. A legenda aparece na primeira parada e sai no primeiro
+  clique, para caber em 45 palavras.
+- O slide 42 (kit) ficou sem código QR: não há biblioteca de QR instalada no ambiente; o endereço aparece em letra grande.
+
+Avisos aceitos: a1 com 66 palavras e a3 com 49 (atividades lidas em dupla durante 4 minutos; na a3 a ordem escondida
+vai literal); hierarquia, a rever depois das heroicas da Tarefa 7; as três variantes de conferir seguidas, porque só uma
+é mostrada.
