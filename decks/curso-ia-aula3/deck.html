@@ -74,6 +74,7 @@
   .b-num { position: absolute; left: 4px; font: 800 32px/1 var(--fonte-titulo); color: var(--cor-tinta); }
   .b-num1 { top: 327px; }
   .b-num2 { top: 429px; }
+  [data-slide="word-antes"] .pilula { top: 292px; }
 
   /* word-pedido: a caixa de mensagem do app, com o anexo em cima, o pedido grande e o botão de enviar */
   .b-caixa { position: absolute; left: 120px; top: 306px; width: 1680px; height: 590px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 30px; background: var(--cor-papel); }
@@ -108,39 +109,42 @@
   .b-nota { position: absolute; left: 1380px; width: 420px; font: 800 var(--esc-2)/1.1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
   .b-nota small { display: block; margin-top: 4px; font: 400 36px/1.2 var(--fonte-texto); color: var(--suave-sobre-noite); }
 
-  /* checklist: a explicação em corpo de leitura, menor que a das partes padrão, para caber a frase mais longa */
-  [data-slide="checklist"] .explica p { font-size: 56px; }
+  /* checklist: à direita, o nome do item atual em display e a explicação logo abaixo, em corpo de leitura */
+  [data-slide="checklist"] .explica { left: 860px; width: 940px; height: 560px; }
+  [data-slide="checklist"] .explica p { width: 940px; font-size: 56px; color: var(--cor-tinta); }
+  .b-ck-nome { display: block; margin-bottom: 30px; font: 800 124px/1.0 var(--fonte-titulo); letter-spacing: -0.02em; color: var(--cor-tinta); text-wrap: balance; }
 
-  /* a1: os três trechos numerados (contador do CSS) em fonte de código, e a coluna dos sete pontos */
+  /* a1: os três trechos marcados com A, B e C (contador do CSS) em fonte de código, e a coluna dos sete pontos */
   .noite .b-enun { color: var(--sobre-noite); }
   .b-trechos { position: absolute; left: 120px; top: 380px; width: 1170px; counter-reset: b-tr; }
   .b-trechos li { counter-increment: b-tr; position: relative; box-sizing: border-box; min-height: 140px; margin-bottom: 26px; padding: 24px 30px 24px 112px; border: 4px solid var(--linha-sobre-noite); border-radius: 22px; }
-  .b-trechos li::before { content: counter(b-tr); position: absolute; left: 28px; top: 28px; width: 60px; height: 60px; box-sizing: border-box; border-radius: 30px; background: var(--sobre-noite); color: var(--noite);
+  .b-trechos li::before { content: counter(b-tr, upper-alpha); position: absolute; left: 28px; top: 28px; width: 60px; height: 60px; box-sizing: border-box; border-radius: 30px; background: var(--sobre-noite); color: var(--noite);
                           display: grid; place-items: center; font: 800 34px/1 var(--fonte-titulo); }
   .b-trechos code { display: block; font: 400 32px/1.45 var(--fonte-mono, ui-monospace, monospace); color: var(--sobre-noite); overflow-wrap: anywhere; }
   .b-sete { position: absolute; left: 1360px; top: 380px; width: 440px; counter-reset: b-pt; }
   .b-sete li { counter-increment: b-pt; display: flex; align-items: center; gap: 18px; height: 64px; font: 400 34px/1.1 var(--fonte-texto); color: var(--suave-sobre-noite); white-space: nowrap; }
   .b-sete li::before { content: counter(b-pt); flex: 0 0 46px; height: 46px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 23px; display: grid; place-items: center; font: 800 26px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
 
-  /* a2: os três passos à esquerda (o atual em destaque) e a folha da skill à direita */
+  /* a2 (claro): os três passos à esquerda (o atual em destaque) e a folha da skill à direita, com as linhas que se
+     escrevem sobre o tracejado */
   .b-passos { position: absolute; left: 120px; top: 360px; width: 860px; counter-reset: b-ps; }
-  .b-passos li { counter-increment: b-ps; display: flex; align-items: center; gap: 30px; height: 110px; margin-bottom: 40px; font-size: var(--esc-2); line-height: 1.2; color: var(--suave-sobre-noite); white-space: nowrap; }
-  .b-passos li::before { content: counter(b-ps); flex: 0 0 84px; height: 84px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 42px; display: grid; place-items: center; font: 800 42px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
-  .b-passos li.b-agora { color: var(--sobre-noite); }
+  .b-passos li { counter-increment: b-ps; display: flex; align-items: center; gap: 30px; height: 110px; margin-bottom: 40px; font-size: var(--esc-2); line-height: 1.2; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .b-passos li::before { content: counter(b-ps); flex: 0 0 84px; height: 84px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 42px; display: grid; place-items: center; font: 800 42px/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .b-passos li.b-agora { color: var(--cor-tinta); }
   .b-passos li.b-agora::before { background: var(--cor-destaque); border-color: var(--cor-destaque); color: var(--sobre-destaque); }
-  .b-folha { position: absolute; left: 1080px; top: 330px; width: 720px; height: 540px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
-  .b-folha-cab { height: 76px; box-sizing: border-box; padding: 20px 36px 0; border-bottom: 4px solid var(--linha-sobre-noite); font: 500 32px/1.15 var(--fonte-mono, ui-monospace, monospace); color: var(--suave-sobre-noite); }
-  .b-regras { position: absolute; left: 36px; right: 36px; top: 120px; counter-reset: b-rg; }
-  .b-regras li { counter-increment: b-rg; position: relative; height: 100px; padding-left: 80px; }
-  .b-regras li::before { content: counter(b-rg); position: absolute; left: 0; top: 4px; font: 800 40px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
-  .b-regras i { position: absolute; left: 80px; right: 0; top: 40px; height: 0; border-top: 4px dashed var(--linha-sobre-noite); }
-  .b-regras u { position: absolute; left: 80px; top: 18px; height: 26px; border-radius: 13px; background: color-mix(in srgb, var(--sobre-noite) 40%, var(--noite)); transform-origin: 0 50%; }
-  .b-regras li:nth-child(1) u { width: 74%; }
-  .b-regras li:nth-child(2) u { width: 80%; }
-  .b-regras li:nth-child(3) u { width: 62%; }
-  .b-visto { position: absolute; right: 40px; bottom: 36px; width: 120px; height: 120px; overflow: visible; }
-  .b-visto circle { fill: none; stroke: var(--sobre-noite); stroke-width: 6; }
-  .b-visto path { fill: none; stroke: var(--sobre-noite); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+  .b-folha { position: absolute; left: 1000px; top: 330px; width: 800px; height: 540px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-papel); }
+  .b-folha-cab { height: 76px; box-sizing: border-box; padding: 20px 36px 0; border-bottom: 4px solid var(--cor-linha); font: 500 32px/1.15 var(--fonte-mono, ui-monospace, monospace); color: var(--cor-tinta-suave); }
+  .b-fls { position: absolute; left: 36px; right: 36px; top: 110px; }
+  .b-fl { position: relative; min-height: 48px; margin-bottom: 8px; font: 400 34px/48px var(--fonte-mono, ui-monospace, monospace); color: var(--cor-tinta); }
+  .b-fl.b-rg { color: var(--cor-tinta-suave); }
+  .b-fl.b-rg:nth-child(3) { margin-top: 28px; }
+  .b-fk { font-weight: 700; color: var(--cor-tinta-suave); }
+  .b-fl2 .b-fk { display: block; }   /* a descrição desce inteira para a linha de baixo */
+  .b-fl i { position: absolute; left: 0; right: 0; top: 22px; bottom: 22px; border-top: 4px dashed var(--cor-linha); }
+  .b-fl.b-fl2 i { border-bottom: 4px dashed var(--cor-linha); }
+  .b-visto { position: absolute; right: 40px; bottom: 36px; width: 220px; height: 220px; overflow: visible; }
+  .b-visto circle { fill: none; stroke: var(--cor-tinta); stroke-width: 4; }
+  .b-visto path { fill: none; stroke: var(--cor-tinta); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
 /* Bloco c-mcp: só classes c- e [data-slide] deste bloco. */
   /* página de petição desenhada por código (a3 e injecao): o corpo vira linhas cinza; as linhas saem de data-linhas */
   .c-pag { position: absolute; left: 120px; top: 296px; width: 450px; height: 636px; box-sizing: border-box; padding: 44px 46px 0; border: 3px solid var(--cor-linha); border-radius: 6px; background: var(--cor-papel); }
@@ -198,27 +202,28 @@
   .c-aspas { font-size: 40px; }
   [data-slide="casos"] .cartao { min-height: 330px; }
   [data-slide="casos"] .rodape { top: 800px; }
+  [data-slide="plugin"] .cartoes { top: 320px; }
   [data-slide="plugin"] .rodape { top: 820px; font-size: var(--esc-2); color: var(--cor-tinta); }
 
-  /* plugin-tela: a página do plugin desenhada por código */
-  .c-jan { position: absolute; left: 260px; top: 296px; width: 1400px; height: 556px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; background: color-mix(in srgb, var(--sobre-noite) 6%, var(--noite)); overflow: hidden; }
-  .c-jan-barra { position: relative; height: 56px; border-bottom: 3px solid var(--linha-sobre-noite); }
-  .c-jan-barra i { position: absolute; top: 21px; width: 14px; height: 14px; border-radius: 7px; background: var(--linha-sobre-noite); }
+  /* plugin-tela (claro): a página do plugin desenhada por código */
+  .c-jan { position: absolute; left: 260px; top: 296px; width: 1400px; height: 556px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); overflow: hidden; }
+  .c-jan-barra { position: relative; height: 56px; border-bottom: 3px solid var(--cor-linha); }
+  .c-jan-barra i { position: absolute; top: 21px; width: 14px; height: 14px; border-radius: 7px; background: var(--cor-linha); }
   .c-jan-barra i:nth-child(1) { left: 26px; } .c-jan-barra i:nth-child(2) { left: 50px; } .c-jan-barra i:nth-child(3) { left: 74px; }
   .c-pl-cab { position: absolute; left: 60px; top: 104px; width: 1280px; height: 100px; display: flex; align-items: center; gap: 30px; }
   .c-pl-ic { flex: 0 0 64px; height: 76px; }
   .c-pl-ic svg { display: block; width: 64px; height: 76px; overflow: visible; }
-  .c-pl-ic path, .c-av-ic path { fill: none; stroke: var(--sobre-noite); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
-  .c-pl-nome { font: 800 var(--esc-3)/1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
-  .c-pl-mk { padding: 6px 18px; border: 3px solid var(--linha-sobre-noite); border-radius: 30px; font: 600 32px/1.2 var(--fonte-titulo); color: var(--suave-sobre-noite); white-space: nowrap; }
-  .c-pl-bt { margin-left: auto; padding: 14px 34px; border-radius: 14px; background: var(--sobre-noite); font: 700 34px/1.2 var(--fonte-titulo); color: var(--noite); white-space: nowrap; }
+  .c-pl-ic path, .c-av-ic path { fill: none; stroke: var(--cor-tinta); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+  .c-pl-nome { font: 800 var(--esc-3)/1 var(--fonte-titulo); color: var(--cor-tinta); white-space: nowrap; }
+  .c-pl-mk { padding: 6px 18px; border: 3px solid var(--cor-linha); border-radius: 30px; font: 600 32px/1.2 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .c-pl-bt { margin-left: auto; padding: 14px 34px; border-radius: 14px; background: var(--cor-tinta); font: 700 34px/1.2 var(--fonte-titulo); color: var(--cor-fundo); white-space: nowrap; }
   .c-aviso { position: absolute; left: 60px; top: 250px; width: 1280px; height: 130px; box-sizing: border-box; display: flex; align-items: center; gap: 30px; padding: 0 40px; border: 4px solid var(--cor-destaque); border-radius: 18px; }
   .c-av-ic { flex: 0 0 64px; height: 60px; }
   .c-av-ic svg { display: block; width: 64px; height: 60px; overflow: visible; }
-  .c-aviso p { font: 600 var(--esc-2)/1.2 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+  .c-aviso p { font: 600 var(--esc-2)/1.2 var(--fonte-titulo); color: var(--cor-tinta); white-space: nowrap; }
   .c-traz { position: absolute; left: 60px; top: 432px; width: 1280px; display: flex; align-items: center; gap: 24px; }
   .c-traz-et { position: static; margin-right: 12px; }
-  .c-chip { padding: 12px 30px; border: 3px solid var(--linha-sobre-noite); border-radius: 36px; font: 600 38px/1.2 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+  .c-chip { padding: 12px 30px; border: 3px solid var(--cor-linha); border-radius: 36px; font: 600 38px/1.2 var(--fonte-titulo); color: var(--cor-tinta); white-space: nowrap; }
 
   /* a4: as quatro categorias em cima (a frase sai no clique e o cartão encolhe) e as seis situações embaixo */
   .c-cats { position: absolute; left: 120px; top: 300px; width: 1680px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
@@ -230,23 +235,23 @@
   .c-sits li { counter-increment: c-sit; box-sizing: border-box; height: 180px; display: flex; align-items: center; gap: 24px; padding: 0 30px; border-radius: 22px; background: var(--cor-papel); border: 3px solid var(--cor-linha); font-size: 40px; line-height: 1.25; text-wrap: pretty; }
   .c-sits li::before { content: counter(c-sit); flex: 0 0 62px; height: 62px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 31px; display: grid; place-items: center; font: 800 34px/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
 /* Bloco d-scraper: só classes d- e [data-slide] deste bloco. */
-  /* a5 (cena guia): três temas em placas numeradas; o número vem de contador do CSS, é marcação e não texto */
+  /* a5 (cena guia, claro): três temas em placas numeradas; o número vem de contador do CSS, é marcação e não texto */
   .d-temas { position: absolute; left: 120px; top: 340px; width: 1680px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; counter-reset: d-tema; }
-  .d-temas li { counter-increment: d-tema; box-sizing: border-box; height: 300px; padding: 34px 34px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px;
-                display: flex; flex-direction: column; justify-content: space-between; font: 800 64px/1.05 var(--fonte-titulo); color: var(--sobre-noite); }
-  .d-temas li::before { content: counter(d-tema); width: 76px; height: 76px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 38px;
-                        display: grid; place-items: center; font: 800 40px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
-  .d-voto { position: absolute; left: 120px; top: 720px; font-size: var(--esc-2); line-height: 1.3; color: var(--sobre-noite); white-space: nowrap; }
+  .d-temas li { counter-increment: d-tema; box-sizing: border-box; height: 300px; padding: 34px 34px; border: 4px solid var(--cor-linha); border-radius: 26px;
+                display: flex; flex-direction: column; justify-content: space-between; font: 800 64px/1.05 var(--fonte-titulo); color: var(--cor-tinta); }
+  .d-temas li::before { content: counter(d-tema); width: 76px; height: 76px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 38px;
+                        display: grid; place-items: center; font: 800 40px/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .d-voto { position: absolute; left: 120px; top: 720px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta); white-space: nowrap; }
 
-  /* etapa2-pedido: a janela do Claude Code desenhada por código; o [tema] ganha o preenchimento dourado */
-  .d-cc { position: absolute; left: 120px; top: 340px; width: 1680px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-papel); overflow: hidden; }
-  .d-cc-barra { position: relative; height: 66px; box-sizing: border-box; padding: 14px 0 0 150px; border-bottom: 4px solid var(--cor-linha);
-                font: 700 30px/1.2 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
-  .d-cc-barra i { position: absolute; top: 25px; width: 16px; height: 16px; border-radius: 8px; background: var(--cor-linha); }
+  /* etapa2-pedido (noite): a janela do Claude Code desenhada por código; o [tema] ganha o preenchimento dourado */
+  .d-cc { position: absolute; left: 120px; top: 340px; width: 1680px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; background: color-mix(in srgb, var(--sobre-noite) 6%, var(--noite)); overflow: hidden; }
+  .d-cc-barra { position: relative; height: 66px; box-sizing: border-box; padding: 14px 0 0 150px; border-bottom: 4px solid var(--linha-sobre-noite);
+                font: 700 30px/1.2 var(--fonte-titulo); color: var(--suave-sobre-noite); white-space: nowrap; }
+  .d-cc-barra i { position: absolute; top: 25px; width: 16px; height: 16px; border-radius: 8px; background: var(--linha-sobre-noite); }
   .d-cc-barra i:nth-child(1) { left: 30px; } .d-cc-barra i:nth-child(2) { left: 58px; } .d-cc-barra i:nth-child(3) { left: 86px; }
-  .d-cc-pedido { position: relative; margin: 44px 60px 50px 120px; font: 400 52px/1.36 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
-  .d-cc-pedido::before { content: '>'; position: absolute; left: -64px; top: 0; font: 800 52px/1.36 var(--fonte-titulo); color: var(--cor-tinta-suave); }
-  .d-tema { position: relative; isolation: isolate; padding: 0 8px; background: none; color: var(--cor-tinta); font-weight: 700; white-space: nowrap; }
+  .d-cc-pedido { position: relative; margin: 44px 60px 50px 120px; font: 400 52px/1.36 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
+  .d-cc-pedido::before { content: '>'; position: absolute; left: -64px; top: 0; font: 800 52px/1.36 var(--fonte-titulo); color: var(--suave-sobre-noite); }
+  .d-tema { position: relative; isolation: isolate; padding: 0 8px; background: none; color: var(--sobre-noite); font-weight: 700; white-space: nowrap; }
   .d-tema::before { content: ''; position: absolute; inset: 4px 0 2px; border-radius: 8px; background: var(--cor-destaque); opacity: .55;
                     transform: scaleX(var(--d-acende, 0)); transform-origin: 0 50%; z-index: -1; }
 
@@ -322,12 +327,13 @@
   .f-sim .f-col-tit::before, .f-opcoes .f-o-sim { background: currentColor; }
   .f-nao .f-col-tit::before, .f-opcoes .f-o-nao { background: linear-gradient(45deg, transparent 44%, currentColor 44%, currentColor 56%, transparent 56%); }
 
-  /* agendavel (cena própria): três colunas de cartões e a pergunta que decide */
-  .f-cols { position: absolute; left: 120px; top: 320px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; align-items: start; }
+  /* agendavel (cena própria): três colunas de cartões e a pergunta que decide; cabeçalho e símbolo grandes, e na
+     coluna "não" o símbolo cortado é o único sinal de negação (o texto fica na tinta cheia) */
+  .f-cols { position: absolute; left: 120px; top: 300px; width: 1680px; display: grid; grid-template-columns: 390px 898px 1fr; gap: 40px; align-items: start; }
   .f-col { display: flex; flex-direction: column; gap: 18px; }
-  .f-col-tit { display: flex; align-items: center; gap: 20px; height: 64px; font: 800 var(--esc-2)/1 var(--fonte-titulo); white-space: nowrap; }
+  .f-col-tit { display: flex; align-items: center; gap: 24px; height: 110px; font: 800 92px/1 var(--fonte-titulo); letter-spacing: -0.02em; white-space: nowrap; }
+  .f-cols .f-col-tit::before { flex-basis: 80px; height: 80px; border-width: 9px; }
   .f-ct { padding: 18px 30px; font: 400 42px/1.22 var(--fonte-texto); text-wrap: pretty; }
-  .f-nao .f-ct { color: var(--cor-tinta-suave); }
   .f-pergunta { position: absolute; left: 120px; top: 812px; font: 800 60px/1.15 var(--fonte-titulo); white-space: nowrap; }
 
   /* a6 (cena guia, noite): as tarefas numeradas à esquerda, as respostas possíveis à direita */
@@ -407,6 +413,7 @@
       <div class="b-timbre"><span class="b-timbre-nome">Dias &amp; Moura</span></div>
       <p class="b-num b-num1">1.</p><p class="b-num b-num2">2.</p>
     </div>
+    <p class="pilula">escritório fictício</p>
   </section>
 
   <section data-slide="word-demo" data-arquetipo="demonstracao" class="noite">
@@ -486,18 +493,18 @@
       <li>como remover</li>
     </ol>
     <div class="explica">
-      <p>Quem publicou, e há quanto tempo.</p>
-      <p>Abra a pasta inteira. Programa que você não lê espera revisão.</p>
-      <p>O que ela pede para ler, gravar ou executar.</p>
-      <p>Quais pastas e conectores usa, e se sai do caso.</p>
-      <p>Desconfie de download, endereço de internet e ordem para ignorar regras.</p>
-      <p>A primeira execução vai na pasta do caso fictício.</p>
-      <p>Onde desligar e apagar, e o que ela deixou.</p>
+      <p><span class="b-ck-nome">origem</span>Quem publicou, e há quanto tempo.</p>
+      <p><span class="b-ck-nome">arquivos e scripts</span>Abra a pasta inteira. Programa que você não lê espera revisão.</p>
+      <p><span class="b-ck-nome">permissões</span>O que ela pede para ler, gravar ou executar.</p>
+      <p><span class="b-ck-nome">dados acessados</span>Quais pastas e conectores usa, e se sai do caso.</p>
+      <p><span class="b-ck-nome">comandos</span>Desconfie de download, endereço de internet e ordem para ignorar regras.</p>
+      <p><span class="b-ck-nome">teste com dado fictício</span>A primeira execução vai na pasta do caso fictício.</p>
+      <p><span class="b-ck-nome">como remover</span>Onde desligar e apagar, e o que ela deixou.</p>
     </div>
   </section>
 
   <!-- a1 (guia, noite, 4 min): os três trechos reais de material/skill-defeituosa/SKILL.md (linha 8, linha 22 e o
-       passo 4 da linha 25), ampliados e numerados; os sete pontos na coluna da direita -->
+       passo 4 da linha 25), ampliados e marcados com A, B e C; os sete pontos na coluna da direita -->
   <section data-slide="a1" class="noite">
     <p class="rotulo">A1, 4 min</p>
     <h2 class="manchete">Sua vez: três defeitos escondidos</h2>
@@ -539,9 +546,9 @@
     </div>
   </section>
 
-  <!-- a2 (guia, noite, 7 min, S.T.A.R. do bloco): três passos, um por parada; à direita, a skill que a sala dita, com
-       três regras vazias que se escrevem no segundo passo e o teste no terceiro -->
-  <section data-slide="a2" class="noite">
+  <!-- a2 (guia, claro, 7 min, S.T.A.R. do bloco): três passos, um por parada; à direita, a skill que a sala dita, com
+       linhas vazias que se escrevem no segundo passo (nome, descrição e três regras) e o visto do teste no terceiro -->
+  <section data-slide="a2">
     <p class="rotulo">A2, 7 min</p>
     <h2 class="manchete">A sala dita, a skill nasce</h2>
     <ol class="b-passos">
@@ -551,7 +558,13 @@
     </ol>
     <div class="b-folha">
       <p class="b-folha-cab">SKILL.md</p>
-      <ol class="b-regras"><li><i></i><u></u></li><li><i></i><u></u></li><li><i></i><u></u></li></ol>
+      <div class="b-fls">
+        <p class="b-fl"><i></i><span class="b-fk">name:</span> <span>regras-da-sala</span></p>
+        <p class="b-fl b-fl2"><i></i><span class="b-fk">description:</span> <span>Use ao revisar peças do escritório.</span></p>
+        <p class="b-fl b-rg"><i></i><span>1. regra da sala</span></p>
+        <p class="b-fl b-rg"><i></i><span>2. regra da sala</span></p>
+        <p class="b-fl b-rg"><i></i><span>3. regra da sala</span></p>
+      </div>
       <svg class="b-visto" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/><path d="M34 62L52 80L88 42"/></svg>
     </div>
   </section>
@@ -661,9 +674,9 @@
     <p class="rodape">Toda saída é rascunho para revisão de advogado.</p>
   </section>
 
-  <!-- plugin-tela (cena própria, noite): a página de um plugin desenhada por código, sem logo de terceiro; o aviso de
+  <!-- plugin-tela (cena própria, claro): a página de um plugin desenhada por código, sem logo de terceiro; o aviso de
        rascunho chega por último, com a borda dourada. A gravação do ensaio (instalar e remover) fica de reserva. -->
-  <section data-slide="plugin-tela" class="noite">
+  <section data-slide="plugin-tela">
     <p class="rotulo">Plugins</p>
     <h2 class="manchete">O plugin avisa antes de ajudar</h2>
     <div class="c-jan">
@@ -705,7 +718,7 @@
   </section>
   <!-- ===== Bloco D: scraper (slides 26 a 34). A abertura fica sem foto até a heroica do capítulo ser gerada. ===== -->
   <section data-slide="scraper-cap" data-arquetipo="abertura" class="noite">
-    <p class="rotulo">Bloco 3 · Scraper</p>
+    <p class="rotulo">Scraper</p>
     <div class="display ab-linha">Jurisprudência</div>
     <div class="display ab-linha sinal">em lote</div>
     <p class="ab-sub">Do navegador ao script, com as regras do tribunal.</p>
@@ -725,9 +738,9 @@
     <p class="ramos-leg">Raspar é coletar de um site, em lote.</p>
   </section>
 
-  <!-- a5 (cena guia, noite): os três temas votáveis, numerados; a regra da votação embaixo -->
-  <section data-slide="a5" class="noite">
-    <p class="rotulo">Atividade A5 · 2 min</p>
+  <!-- a5 (cena guia, claro): os três temas votáveis, numerados; a regra da votação embaixo -->
+  <section data-slide="a5">
+    <p class="rotulo">A5, 2 min</p>
     <h2 class="manchete">A sala escolhe o tema</h2>
     <ol class="d-temas">
       <li>execução fiscal</li>
@@ -749,9 +762,9 @@
     <p class="nota-lateral">Baixa só o pertinente.</p>
   </section>
 
-  <!-- etapa2-pedido (cena própria, claro): a janela do Claude Code desenhada por código, com a versão de tela do pedido;
+  <!-- etapa2-pedido (cena própria, noite): a janela do Claude Code desenhada por código, com a versão de tela do pedido;
        o [tema] se acende por último. O pedido literal fica nas notas e no kit. -->
-  <section data-slide="etapa2-pedido">
+  <section data-slide="etapa2-pedido" class="noite">
     <p class="rotulo">Scraper</p>
     <h2 class="manchete">Etapa 2, o pedido ao Claude Code</h2>
     <div class="d-cc">
@@ -877,6 +890,7 @@
       <div class="e-def"><p class="e-termo">issue</p><p class="e-sig">um pedido ou problema anotado</p></div>
       <div class="e-def"><p class="e-termo">pull request</p><p class="e-sig">uma proposta de mudança</p></div>
     </div>
+    <p class="pilula">tela ilustrativa</p>
   </section>
 
   <!-- ===== Bloco F: rotinas e fecho (slides 36 a 43). A abertura do capítulo vai sem foto por enquanto. ===== -->
@@ -940,7 +954,7 @@
   <!-- a6 (cena guia, noite, dois cliques): as três tarefas fictícias e as três respostas possíveis; no clique, a segunda
        parte (sugestões da sala). O gabarito fica só nas notas. -->
   <section data-slide="a6" class="noite">
-    <p class="rotulo">A6 · 8 min</p>
+    <p class="rotulo">A6, 8 min</p>
     <h2 class="manchete">Sua vez: o que é agendável?</h2>
     <ol class="f-tarefas">
       <li><span>Boletim semanal de notícias do CNJ</span></li>
@@ -1066,17 +1080,17 @@ SLIDES.push(
      faca: ['disparar o cronômetro de 4 minutos (começa sozinho na tela do apresentador)',
        'a skill inteira está em material/skill-defeituosa/SKILL.md; não instalar: o aviso no topo impede',
        'o endereço usa exemplo.invalid, domínio reservado para exemplo, que não existe',
-       'gabarito, só no slide 13: 1 fere permissões e dados acessados; 2 fere arquivos e scripts e comandos; 3 fere comandos'],
+       'gabarito, só no slide 13: A fere permissões e dados acessados; B fere arquivos e scripts e comandos; C fere comandos'],
      transicao: 'Tempo. Hora de votar.'}},
   {id: 'a1-voto', titulo: 'Quem achou os três?', linhaDia: false,
    notas: {diga: 'Levanta a mão quem achou os três. E quem achou dois? Um?',
-     faca: ['contar as mãos em voz alta', 'pedir a uma dupla que diga o defeito do trecho 2'],
+     faca: ['contar as mãos em voz alta', 'pedir a uma dupla que diga o defeito do trecho B'],
      transicao: 'O gabarito.'}},
   {id: 'a1-gabarito', titulo: 'Três defeitos, três linhas',
-   notas: {diga: 'Trecho 1, a descrição: dispara em qualquer pedido, sobre qualquer assunto. Fere permissões e dados acessados, porque a skill entra onde não foi chamada. Trecho 2, o script: compacta a pasta inteira e manda para um endereço de fora. Fere arquivos e scripts, e comandos. Trecho 3, o passo 4: executar sem pedir confirmação. Fere comandos, porque pula a sua confirmação. Na dúvida, não instale.',
+   notas: {diga: 'Trecho A, a descrição: dispara em qualquer pedido, sobre qualquer assunto. Fere permissões e dados acessados, porque a skill entra onde não foi chamada. Trecho B, o script: compacta a pasta inteira e manda para um endereço de fora. Fere arquivos e scripts, e comandos. Trecho C, o passo 4: executar sem pedir confirmação. Fere comandos, porque pula a sua confirmação. Na dúvida, não instale.',
      faca: ['apontar cada fio, de cima para baixo', 'repetir devagar: na dúvida, não instale'],
      transicao: 'Agora a sala escreve a sua skill.'}},
-  {id: 'a2', titulo: 'A sala dita, a skill nasce', pratica: 7, passos: [1.8, 1.6, 1.4],
+  {id: 'a2', titulo: 'A sala dita, a skill nasce', pratica: 7, passos: [1.8, 2.4, 1.4],
    notas: {diga: 'Sete minutos. Vocês ditam três regras do escritório, em voz alta. Pode ser de formatação, de citação, de assinatura. Eu peço ao Claude que crie a skill a partir delas. E testamos no mesmo rascunho da demonstração do Word. Ninguém precisa de plano pago, de instalação nem de papel.',
      faca: ['disparar o cronômetro de 7 minutos (começa sozinho na tela do apresentador)',
        'chegada: passo 1; anotar as três regras no chat, do jeito que a sala disse',
@@ -1419,12 +1433,18 @@ CENAS.a1 = (() => {
   };
 })();
 
-// a2: os três passos em onda, com o passo atual em destaque (um por parada); a folha da skill sobe vazia, as três
-// regras se escrevem no segundo passo e o visto se traça no terceiro.
+// a2: os três passos em onda, com o passo atual em destaque (um por parada); a folha da skill sobe só com o tracejado,
+// o nome, a descrição e as três regras se digitam no segundo passo e o visto se traça no terceiro.
 CENAS.a2 = (() => {
   const sec = m.secao('a2'), bPs = $$(sec, '.b-passos li'), bFolha = sec.querySelector('.b-folha');
-  const bTracejos = $$(sec, '.b-regras i'), bRegras = $$(sec, '.b-regras u'), bNums = $$(sec, '.b-regras li');
+  const bLinhas = $$(sec, '.b-fl'), bTracejos = bLinhas.map((p) => p.querySelector('i'));
   const bVisto = sec.querySelector('.b-visto'), bVistoTr = [...bVisto.querySelectorAll('circle, path')];
+  // cada trecho digitável ganha uma faixa do segundo passo proporcional ao tamanho dele, em ordem
+  const bTrechos = bLinhas.flatMap((p, n) => $$(p, ':scope > span').map((el) => ({el, n, tam: el.textContent.length})));
+  const bTotal = bTrechos.reduce((a, b) => a + b.tam, 0), bIni = 0.15, bDur = 2.0;
+  let bAc = 0;
+  for (const tr of bTrechos) { tr.a = bIni + bDur * bAc / bTotal; bAc += tr.tam; tr.b = bIni + bDur * bAc / bTotal; }
+  const bComeca = bLinhas.map((_, n) => bTrechos.find((tr) => tr.n === n).a);
   return (t, c) => {
     const x = conteudo(c), y = c.desde(1), z = c.desde(2);
     titulo(sec, x, c);
@@ -1434,12 +1454,8 @@ CENAS.a2 = (() => {
       li.classList.toggle('b-agora', n === agora);
     });
     surgir(bFolha, molaAR(x - 0.6), {dy: 30});
-    bNums.forEach((li, n) => revelar(li, molaAR(x - 0.8 - n * 0.1)));
-    bRegras.forEach((u, n) => {
-      const k = saida(faixa(y, 0.2 + n * 0.35, 0.6 + n * 0.35));
-      u.style.transform = `scaleX(${k.toFixed(4)})`;
-      bTracejos[n].style.opacity = String(1 - k);
-    });
+    bTrechos.forEach((tr) => digitar(tr.el, faixa(y, tr.a, tr.b), {cursor: y > tr.a && y < tr.b}));
+    bTracejos.forEach((el, n) => { el.style.opacity = String(1 - faixa(y, bComeca[n], bComeca[n] + 0.15)); });
     vis(bVisto, z > 0);
     bVistoTr.forEach((el, n) => tracar(el, saida(faixa(z, 0.2 + n * 0.4, 0.7 + n * 0.4))));
     fim(sec, x, 1.4);

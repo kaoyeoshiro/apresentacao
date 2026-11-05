@@ -93,12 +93,18 @@ CENAS.a1 = (() => {
   };
 })();
 
-// a2: os três passos em onda, com o passo atual em destaque (um por parada); a folha da skill sobe vazia, as três
-// regras se escrevem no segundo passo e o visto se traça no terceiro.
+// a2: os três passos em onda, com o passo atual em destaque (um por parada); a folha da skill sobe só com o tracejado,
+// o nome, a descrição e as três regras se digitam no segundo passo e o visto se traça no terceiro.
 CENAS.a2 = (() => {
   const sec = m.secao('a2'), bPs = $$(sec, '.b-passos li'), bFolha = sec.querySelector('.b-folha');
-  const bTracejos = $$(sec, '.b-regras i'), bRegras = $$(sec, '.b-regras u'), bNums = $$(sec, '.b-regras li');
+  const bLinhas = $$(sec, '.b-fl'), bTracejos = bLinhas.map((p) => p.querySelector('i'));
   const bVisto = sec.querySelector('.b-visto'), bVistoTr = [...bVisto.querySelectorAll('circle, path')];
+  // cada trecho digitável ganha uma faixa do segundo passo proporcional ao tamanho dele, em ordem
+  const bTrechos = bLinhas.flatMap((p, n) => $$(p, ':scope > span').map((el) => ({el, n, tam: el.textContent.length})));
+  const bTotal = bTrechos.reduce((a, b) => a + b.tam, 0), bIni = 0.15, bDur = 2.0;
+  let bAc = 0;
+  for (const tr of bTrechos) { tr.a = bIni + bDur * bAc / bTotal; bAc += tr.tam; tr.b = bIni + bDur * bAc / bTotal; }
+  const bComeca = bLinhas.map((_, n) => bTrechos.find((tr) => tr.n === n).a);
   return (t, c) => {
     const x = conteudo(c), y = c.desde(1), z = c.desde(2);
     titulo(sec, x, c);
@@ -108,12 +114,8 @@ CENAS.a2 = (() => {
       li.classList.toggle('b-agora', n === agora);
     });
     surgir(bFolha, molaAR(x - 0.6), {dy: 30});
-    bNums.forEach((li, n) => revelar(li, molaAR(x - 0.8 - n * 0.1)));
-    bRegras.forEach((u, n) => {
-      const k = saida(faixa(y, 0.2 + n * 0.35, 0.6 + n * 0.35));
-      u.style.transform = `scaleX(${k.toFixed(4)})`;
-      bTracejos[n].style.opacity = String(1 - k);
-    });
+    bTrechos.forEach((tr) => digitar(tr.el, faixa(y, tr.a, tr.b), {cursor: y > tr.a && y < tr.b}));
+    bTracejos.forEach((el, n) => { el.style.opacity = String(1 - faixa(y, bComeca[n], bComeca[n] + 0.15)); });
     vis(bVisto, z > 0);
     bVistoTr.forEach((el, n) => tracar(el, saida(faixa(z, 0.2 + n * 0.4, 0.7 + n * 0.4))));
     fim(sec, x, 1.4);

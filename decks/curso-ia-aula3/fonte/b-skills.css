@@ -11,6 +11,7 @@
   .b-num { position: absolute; left: 4px; font: 800 32px/1 var(--fonte-titulo); color: var(--cor-tinta); }
   .b-num1 { top: 327px; }
   .b-num2 { top: 429px; }
+  [data-slide="word-antes"] .pilula { top: 292px; }
 
   /* word-pedido: a caixa de mensagem do app, com o anexo em cima, o pedido grande e o botão de enviar */
   .b-caixa { position: absolute; left: 120px; top: 306px; width: 1680px; height: 590px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 30px; background: var(--cor-papel); }
@@ -45,36 +46,39 @@
   .b-nota { position: absolute; left: 1380px; width: 420px; font: 800 var(--esc-2)/1.1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
   .b-nota small { display: block; margin-top: 4px; font: 400 36px/1.2 var(--fonte-texto); color: var(--suave-sobre-noite); }
 
-  /* checklist: a explicação em corpo de leitura, menor que a das partes padrão, para caber a frase mais longa */
-  [data-slide="checklist"] .explica p { font-size: 56px; }
+  /* checklist: à direita, o nome do item atual em display e a explicação logo abaixo, em corpo de leitura */
+  [data-slide="checklist"] .explica { left: 860px; width: 940px; height: 560px; }
+  [data-slide="checklist"] .explica p { width: 940px; font-size: 56px; color: var(--cor-tinta); }
+  .b-ck-nome { display: block; margin-bottom: 30px; font: 800 124px/1.0 var(--fonte-titulo); letter-spacing: -0.02em; color: var(--cor-tinta); text-wrap: balance; }
 
-  /* a1: os três trechos numerados (contador do CSS) em fonte de código, e a coluna dos sete pontos */
+  /* a1: os três trechos marcados com A, B e C (contador do CSS) em fonte de código, e a coluna dos sete pontos */
   .noite .b-enun { color: var(--sobre-noite); }
   .b-trechos { position: absolute; left: 120px; top: 380px; width: 1170px; counter-reset: b-tr; }
   .b-trechos li { counter-increment: b-tr; position: relative; box-sizing: border-box; min-height: 140px; margin-bottom: 26px; padding: 24px 30px 24px 112px; border: 4px solid var(--linha-sobre-noite); border-radius: 22px; }
-  .b-trechos li::before { content: counter(b-tr); position: absolute; left: 28px; top: 28px; width: 60px; height: 60px; box-sizing: border-box; border-radius: 30px; background: var(--sobre-noite); color: var(--noite);
+  .b-trechos li::before { content: counter(b-tr, upper-alpha); position: absolute; left: 28px; top: 28px; width: 60px; height: 60px; box-sizing: border-box; border-radius: 30px; background: var(--sobre-noite); color: var(--noite);
                           display: grid; place-items: center; font: 800 34px/1 var(--fonte-titulo); }
   .b-trechos code { display: block; font: 400 32px/1.45 var(--fonte-mono, ui-monospace, monospace); color: var(--sobre-noite); overflow-wrap: anywhere; }
   .b-sete { position: absolute; left: 1360px; top: 380px; width: 440px; counter-reset: b-pt; }
   .b-sete li { counter-increment: b-pt; display: flex; align-items: center; gap: 18px; height: 64px; font: 400 34px/1.1 var(--fonte-texto); color: var(--suave-sobre-noite); white-space: nowrap; }
   .b-sete li::before { content: counter(b-pt); flex: 0 0 46px; height: 46px; box-sizing: border-box; border: 3px solid var(--linha-sobre-noite); border-radius: 23px; display: grid; place-items: center; font: 800 26px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
 
-  /* a2: os três passos à esquerda (o atual em destaque) e a folha da skill à direita */
+  /* a2 (claro): os três passos à esquerda (o atual em destaque) e a folha da skill à direita, com as linhas que se
+     escrevem sobre o tracejado */
   .b-passos { position: absolute; left: 120px; top: 360px; width: 860px; counter-reset: b-ps; }
-  .b-passos li { counter-increment: b-ps; display: flex; align-items: center; gap: 30px; height: 110px; margin-bottom: 40px; font-size: var(--esc-2); line-height: 1.2; color: var(--suave-sobre-noite); white-space: nowrap; }
-  .b-passos li::before { content: counter(b-ps); flex: 0 0 84px; height: 84px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 42px; display: grid; place-items: center; font: 800 42px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
-  .b-passos li.b-agora { color: var(--sobre-noite); }
+  .b-passos li { counter-increment: b-ps; display: flex; align-items: center; gap: 30px; height: 110px; margin-bottom: 40px; font-size: var(--esc-2); line-height: 1.2; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .b-passos li::before { content: counter(b-ps); flex: 0 0 84px; height: 84px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 42px; display: grid; place-items: center; font: 800 42px/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .b-passos li.b-agora { color: var(--cor-tinta); }
   .b-passos li.b-agora::before { background: var(--cor-destaque); border-color: var(--cor-destaque); color: var(--sobre-destaque); }
-  .b-folha { position: absolute; left: 1080px; top: 330px; width: 720px; height: 540px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
-  .b-folha-cab { height: 76px; box-sizing: border-box; padding: 20px 36px 0; border-bottom: 4px solid var(--linha-sobre-noite); font: 500 32px/1.15 var(--fonte-mono, ui-monospace, monospace); color: var(--suave-sobre-noite); }
-  .b-regras { position: absolute; left: 36px; right: 36px; top: 120px; counter-reset: b-rg; }
-  .b-regras li { counter-increment: b-rg; position: relative; height: 100px; padding-left: 80px; }
-  .b-regras li::before { content: counter(b-rg); position: absolute; left: 0; top: 4px; font: 800 40px/1 var(--fonte-titulo); color: var(--suave-sobre-noite); }
-  .b-regras i { position: absolute; left: 80px; right: 0; top: 40px; height: 0; border-top: 4px dashed var(--linha-sobre-noite); }
-  .b-regras u { position: absolute; left: 80px; top: 18px; height: 26px; border-radius: 13px; background: color-mix(in srgb, var(--sobre-noite) 40%, var(--noite)); transform-origin: 0 50%; }
-  .b-regras li:nth-child(1) u { width: 74%; }
-  .b-regras li:nth-child(2) u { width: 80%; }
-  .b-regras li:nth-child(3) u { width: 62%; }
-  .b-visto { position: absolute; right: 40px; bottom: 36px; width: 120px; height: 120px; overflow: visible; }
-  .b-visto circle { fill: none; stroke: var(--sobre-noite); stroke-width: 6; }
-  .b-visto path { fill: none; stroke: var(--sobre-noite); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+  .b-folha { position: absolute; left: 1000px; top: 330px; width: 800px; height: 540px; box-sizing: border-box; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-papel); }
+  .b-folha-cab { height: 76px; box-sizing: border-box; padding: 20px 36px 0; border-bottom: 4px solid var(--cor-linha); font: 500 32px/1.15 var(--fonte-mono, ui-monospace, monospace); color: var(--cor-tinta-suave); }
+  .b-fls { position: absolute; left: 36px; right: 36px; top: 110px; }
+  .b-fl { position: relative; min-height: 48px; margin-bottom: 8px; font: 400 34px/48px var(--fonte-mono, ui-monospace, monospace); color: var(--cor-tinta); }
+  .b-fl.b-rg { color: var(--cor-tinta-suave); }
+  .b-fl.b-rg:nth-child(3) { margin-top: 28px; }
+  .b-fk { font-weight: 700; color: var(--cor-tinta-suave); }
+  .b-fl2 .b-fk { display: block; }   /* a descrição desce inteira para a linha de baixo */
+  .b-fl i { position: absolute; left: 0; right: 0; top: 22px; bottom: 22px; border-top: 4px dashed var(--cor-linha); }
+  .b-fl.b-fl2 i { border-bottom: 4px dashed var(--cor-linha); }
+  .b-visto { position: absolute; right: 40px; bottom: 36px; width: 220px; height: 220px; overflow: visible; }
+  .b-visto circle { fill: none; stroke: var(--cor-tinta); stroke-width: 4; }
+  .b-visto path { fill: none; stroke: var(--cor-tinta); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }

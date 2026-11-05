@@ -203,3 +203,15 @@ inteiro passa no lint e no oráculo com 0 erro(s). Ajustes feitos na integraçã
 Avisos aceitos: a1 com 66 palavras e a3 com 49 (atividades lidas em dupla durante 4 minutos; na a3 a ordem escondida
 vai literal); hierarquia, a rever depois das heroicas da Tarefa 7; as três variantes de conferir seguidas, porque só uma
 é mostrada.
+
+## Crítica
+
+**Rodada 1 (05/11/2026, subagente crítico com o prompt de `critica.md`).** Dez defeitos, dois altos e cinco médios.
+Corrigidos: a2 parecia wireframe (folha SKILL.md com texto real e visto de 220 px); ritmo de luz piscando (plugin-tela,
+a5 e a2 para o claro, etapa2-pedido para a noite); checklist sem elemento dominante (nome do item a 124 px);
+ilustrativo sem marca (pílulas "escritório fictício" em word-antes e "tela ilustrativa" em repositorio); agendavel só
+texto (cabeçalhos a 92 px, coluna "não" em tinta cheia); três numerações em a1 (trechos A, B e C); rótulos fora do
+padrão; rodapé encostado em plugin. Pendentes, por dependerem do professor: o endereço do kit, que só existe depois do
+repositório público (defeito alto); abrir a aula com o contraste do word-antes em vez do mapa; um slide de abertura
+para o bloco GitHub. O rótulo "Segurança" em casos não coube no limite de 45 palavras. Oráculo depois da rodada:
+0 erro(s), 4 avisos já aceitos.
