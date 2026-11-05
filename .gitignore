@@ -13,3 +13,6 @@ decks/*/midia/originais/
 # cache que o image-video-api grava ao lado de uma ref grande
 *.cache.jpg
 decks/_p-*/
+
+# página do TJMS salva para a reserva da Aula 3: ementas de terceiros, só local
+decks/curso-ia-aula3/material/scraper/amostra/tjms.html
