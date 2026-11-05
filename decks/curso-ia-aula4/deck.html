@@ -1,0 +1,1278 @@
+<!doctype html>
+<!-- GERADO por montar.py a partir de fonte/. Edite os arquivos de fonte/, nunca este deck.html.
+     Aula 4 do curso de IA da co.juris, dia 2: "Decidir" (cerca de 90 minutos). Plano contínuo pela biblioteca
+     (docs/cenas.md). Briefing, roteiro, fontes e o caso fictício em briefing.md. Ao vivo: ./ap abrir decks/curso-ia-aula4 -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Decidir · Aula 4</title>
+<link rel="stylesheet" href="../../temas/cojuris/tema.css">
+<link rel="stylesheet" href="../../motor/cenas.css">
+<style>
+  /* BASE: peças comuns a todos os blocos. Cada bloco escreve só classes com o prefixo dele (a-, b-, c-, d-, e-, f-). */
+  .linha-top { position: absolute; left: 120px; top: 292px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .rodape { position: absolute; left: 120px; top: 892px; font-size: 36px; line-height: 1.3; color: var(--cor-tinta-suave); white-space: nowrap; }
+  .respiro-sub { position: absolute; left: 120px; top: 850px; font-size: var(--esc-2); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .noite .linha-top, .noite .rodape, .noite .respiro-sub { color: var(--suave-sobre-noite); }
+
+  /* cartões (cena própria): grade de 3 ou 4 colunas; nas grades de modelos, o logo oficial em cima */
+  .cartoes { position: absolute; left: 120px; top: 380px; width: 1680px; display: grid; gap: 36px 40px; }
+  .cartoes.c2 { grid-template-columns: repeat(2, 1fr); }
+  .cartoes.c3 { grid-template-columns: repeat(3, 1fr); }
+  .cartoes.c4 { grid-template-columns: repeat(4, 1fr); }
+  .cartao { box-sizing: border-box; padding: 26px 32px; border: 4px solid var(--cor-linha); border-radius: 26px; }
+  .ct-tit { font: 800 var(--esc-2)/1.15 var(--fonte-titulo); white-space: nowrap; }
+  .ct-tit.g { font-size: var(--esc-3); }
+  .ct-txt { margin-top: 12px; font-size: 36px; line-height: 1.3; text-wrap: pretty; }
+  .ct-sub { margin-top: 6px; font-size: 32px; line-height: 1.3; color: var(--cor-tinta-suave); }
+  .ct-cab { display: flex; align-items: center; gap: 22px; height: 64px; }
+  .ct-logo { display: block; height: 56px; width: auto; max-width: 240px; object-fit: contain; object-position: left center; }
+  .ct-col .ct-logo { height: 48px; margin-bottom: 18px; }
+  .ct-leg { position: absolute; left: 120px; top: 300px; font: 700 var(--esc-1)/1.2 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* definições em partes: os itens à esquerda, um por clique; a explicação do item atual à direita */
+  .partes { position: absolute; left: 120px; top: 330px; width: 900px; }
+  /* o número de cada parte vem de um contador do CSS: é marcação, não texto a ler */
+  .partes { counter-reset: parte; }
+  .partes li { counter-increment: parte; display: flex; align-items: flex-start; gap: 26px; margin-bottom: 26px; font-size: 40px; line-height: 1.25; color: var(--cor-tinta-suave); }
+  .partes li::before { content: counter(parte); flex: 0 0 58px; height: 58px; margin-top: -4px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 29px; display: grid; place-items: center; font: 800 32px/1 var(--fonte-titulo); }
+  .partes li.ativa { color: var(--cor-tinta); }
+  .partes li.ativa::before { background: var(--cor-destaque); border-color: var(--cor-destaque); color: var(--sobre-destaque); }
+  .noite .partes li { color: var(--suave-sobre-noite); }
+  .noite .partes li.ativa { color: var(--sobre-noite); }
+  .noite .partes li::before { border-color: var(--linha-sobre-noite); }
+  .noite .partes li.ativa::before { border-color: var(--cor-destaque); }
+  .explica { position: absolute; left: 1100px; top: 330px; width: 700px; height: 520px; }
+  .explica p { position: absolute; left: 0; top: 0; width: 700px; font: 400 60px/1.25 var(--fonte-texto); text-wrap: pretty; }
+/* Bloco a-assistentes: só classes a- e [data-slide] deste bloco. */
+  /* capa clara, no desenho da Aula 2: logo oficial, fio e título */
+  .a-logo-cj { position: absolute; left: 120px; top: 300px; height: 480px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+  .a-cp-fio { position: absolute; left: 740px; top: 290px; width: 4px; height: 500px; background: var(--cor-linha); transform-origin: 50% 0; }
+  .a-cp-txt { position: absolute; left: 800px; top: 300px; width: 1000px; }
+  .a-cp-txt .rotulo { position: static; }
+  .a-cp-tit { margin-top: 26px; font-size: 124px; line-height: 1.04; color: var(--cor-tinta); }
+  .a-cp-tit > span { display: block; white-space: nowrap; }
+  .a-cp-sub { margin-top: 44px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
+  /* chat-agente (comparação): "Assistente" é larga demais para a janela no corpo padrão da letra */
+  [data-slide="chat-agente"] .janela .letra { font-size: 88px; }
+  [data-slide="chat-agente"] .janela .janela-txt { top: 180px; width: 680px; }
+  /* o círculo da caneta em volta de "Assistente" é largo: a janela B anda para a direita para ele não cruzar o fio */
+  [data-slide="chat-agente"] .janela.escolhida { left: 1100px; width: 700px; }
+
+  /* cinco (cartões): três em cima e dois centrados embaixo; o dots, único dos prontos que inclui o Brasil, de dourado */
+  [data-slide="cinco"] .cartoes { top: 300px; row-gap: 28px; grid-template-columns: repeat(6, 1fr); }
+  [data-slide="cinco"] .cartao { grid-column: span 2; min-height: 250px; }
+  [data-slide="cinco"] .ct-tit { font-size: 56px; }
+  [data-slide="cinco"] .ct-sub { font-size: 34px; }
+  [data-slide="cinco"] .ct-txt { margin-top: 8px; font-size: 40px; }
+  [data-slide="cinco"] .cartao:nth-child(4) { grid-column: 2 / 4; }
+  [data-slide="cinco"] .cartao:nth-child(5) { grid-column: 4 / 6; }
+  [data-slide="cinco"] .a-br { border-color: var(--cor-destaque); }
+
+  /* sigilo (cartões): a regra em corpo de leitura, a referência embaixo */
+  [data-slide="sigilo"] .cartoes { top: 330px; }
+  [data-slide="sigilo"] .cartao { min-height: 236px; }
+  [data-slide="sigilo"] .ct-txt { margin-top: 0; font-size: 46px; line-height: 1.28; }
+  [data-slide="sigilo"] .ct-sub { margin-top: 12px; font-size: 34px; }
+  [data-slide="sigilo"] .a-ia { border-color: var(--cor-destaque); }   /* a Res. CNJ 615, a única regra sobre IA */
+
+  /* alcance (S.T.A.R.): a caixa de entrada desenhada por código, na noite; o assistente à direita, ligado por um fio */
+  .a-diag { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .a-diag path { fill: none; stroke: var(--suave-sobre-noite); stroke-width: 5; stroke-linecap: round; }
+  .a-cx { position: absolute; left: 120px; top: 300px; width: 1130px; height: 574px; box-sizing: border-box; overflow: hidden;
+          border: 4px solid var(--linha-sobre-noite); border-radius: 26px; background: color-mix(in srgb, var(--sobre-noite) 5%, var(--noite)); }
+  .a-cx-cab { display: flex; align-items: center; gap: 14px; height: 76px; padding: 0 30px; box-sizing: border-box; border-bottom: 3px solid var(--linha-sobre-noite); }
+  .a-cx-cab i { width: 18px; height: 18px; border-radius: 50%; background: var(--linha-sobre-noite); }
+  .a-cx-cab span { margin-left: 22px; font: 700 var(--esc-1)/1 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .a-cx-lista { position: relative; }
+  .a-msg { position: relative; display: grid; grid-template-columns: 330px 1fr 50px; align-items: center; height: 98px; padding: 0 34px 0 46px; box-sizing: border-box;
+           border-bottom: 2px solid var(--linha-sobre-noite); }
+  .a-msg:last-child { border-bottom: 0; }
+  .a-msg b { position: relative; font: 700 36px/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .a-assunto { position: relative; font: 400 36px/1.2 var(--fonte-texto); white-space: nowrap; }
+  .a-msg.a-fora b, .a-msg.a-fora .a-assunto { color: color-mix(in srgb, var(--sobre-noite) 55%, var(--noite)); }
+  .a-luz { position: absolute; inset: 0; background: color-mix(in srgb, var(--sobre-noite) 16%, var(--noite)); opacity: 0; }
+  .a-barra { position: absolute; left: 0; top: 12px; bottom: 12px; width: 12px; border-radius: 0 6px 6px 0; background: var(--cor-destaque); opacity: 0; }
+  .a-lido { position: relative; justify-self: end; width: 30px; height: 15px; margin-top: -8px; border-left: 5px solid var(--suave-sobre-noite); border-bottom: 5px solid var(--suave-sobre-noite); transform: rotate(-45deg); opacity: 0; }
+  .a-feixe { position: absolute; left: 0; right: 0; top: 0; height: 98px; opacity: 0;
+             background: color-mix(in srgb, var(--sobre-noite) 16%, transparent); border-top: 3px solid var(--suave-sobre-noite); border-bottom: 3px solid var(--suave-sobre-noite); box-sizing: border-box; }
+  .a-ass { position: absolute; left: 1380px; top: 450px; width: 420px; height: 280px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center;
+           border-radius: 26px; background: var(--sobre-noite); color: var(--noite); }
+  .a-olho { width: 100px; height: 60px; margin-bottom: 18px; }
+  .a-olho svg { display: block; width: 100px; height: 60px; overflow: visible; }
+  .a-olho path { fill: none; stroke: var(--noite); stroke-width: 6; stroke-linejoin: round; stroke-linecap: round; }
+  .a-ass-tit { font: 800 52px/1.1 var(--fonte-titulo); white-space: nowrap; }
+  .a-ass-sub { margin-top: 6px; font: 400 40px/1.2 var(--fonte-texto); white-space: nowrap; }
+
+  /* memoria (noite): nome, o cabo do acesso que se corta e a caixa do que fica na memória, uma linha por parada */
+  .a-mem-et { top: 318px; }
+  .a-mem-et1 { left: 560px; }
+  .a-mem-et2 { left: 920px; }
+  .a-mem { position: absolute; left: 120px; top: 370px; width: 1680px; }
+  .a-mem-l { display: flex; align-items: center; height: 170px; }
+  .a-mem-nome { flex: 0 0 400px; font: 800 64px/1.1 var(--fonte-titulo); letter-spacing: -0.01em; white-space: nowrap; }
+  .a-cabo { flex: 0 0 320px; height: 60px; margin: 0 40px; }
+  .a-cabo svg { display: block; width: 320px; height: 60px; overflow: visible; }
+  .a-cabo path { fill: none; stroke: var(--suave-sobre-noite); stroke-width: 6; stroke-linecap: round; }
+  .a-cabo .a-corte { stroke: var(--linha-sobre-noite); stroke-width: 6; }
+  .a-mem-l.a-agora .a-corte { stroke: var(--cor-destaque); }
+  .a-mem-txt { flex: 1; padding: 20px 32px; border: 3px solid var(--linha-sobre-noite); border-radius: 20px; font: 400 44px/1.25 var(--fonte-texto); text-wrap: pretty; }
+
+  /* a7 (cena guia): o enunciado e três colunas em branco; a coluna "nunca" com a borda dourada */
+  .a-enun { position: absolute; left: 120px; top: 296px; width: 1680px; font: 400 44px/1.3 var(--fonte-texto); text-wrap: pretty; }
+  .a-cols { position: absolute; left: 120px; top: 480px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .a-col { height: 380px; box-sizing: border-box; padding: 30px 36px; border: 4px solid var(--cor-linha); border-radius: 26px; }
+  .a-col-tit { font: 800 44px/1.1 var(--fonte-titulo); white-space: nowrap; }
+  .a-col i { display: block; margin-top: 66px; border-bottom: 4px dashed color-mix(in srgb, var(--cor-tinta) 28%, transparent); transform-origin: 0 50%; }
+  .a-nunca { border-color: var(--cor-destaque); }
+  /* ===== Bloco B: harness. Só classes b- e [data-slide] deste bloco. ===== */
+
+  /* harness-cap: o aviso da marca no rodapé, com a base da linha na mesma altura da base do subtítulo */
+  [data-slide="harness-cap"] .b-aviso { left: auto; right: 120px; top: 861px; font-size: 32px; text-align: right; }
+
+  /* redator: uma linha por agente (nome, trilho, valor), todas na mesma escala; à direita, a fatia do redator */
+  [data-slide="redator"] .b-cab { left: 120px; top: 292px; }
+  .b-barras { position: absolute; left: 120px; top: 346px; width: 1180px; }
+  .b-ln { display: flex; align-items: center; height: 53px; white-space: nowrap; }
+  .b-n { width: 410px; font: 700 34px/1.1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .b-t { position: relative; flex: 1; height: 22px; margin: 0 28px 0 0; }
+  .b-t i { position: absolute; left: 0; top: 0; bottom: 0; min-width: 6px; border-radius: 11px; background: color-mix(in srgb, var(--cor-tinta) 34%, var(--cor-fundo)); transform-origin: 0 50%; }
+  .b-v { width: 150px; text-align: right; font: 700 34px/1 var(--fonte-titulo); font-variant-numeric: tabular-nums; color: var(--cor-tinta-suave); }
+  .b-vence .b-n, .b-vence .b-v { color: var(--cor-tinta); font-weight: 800; }
+  .b-vence .b-t { height: 34px; }
+  .b-vence .b-t i { border-radius: 17px; background: var(--cor-destaque); }
+  .b-pct { position: absolute; left: 1380px; top: 330px; width: 420px; }
+  .b-pct-n { display: block; font-size: var(--esc-5); line-height: 1; }
+  .b-pct-leg { display: block; margin-top: 18px; font: 400 var(--esc-2)/1.25 var(--fonte-texto); color: var(--cor-tinta-suave); white-space: normal; text-wrap: balance; }
+  /* ===== Bloco C: quem paga a conta. Só classes c- e [data-slide] deste bloco. ===== */
+
+  /* custo: uma linha por ano (rótulo, barra, valor). Escala fixa: 100% da receita = 280 px, marcada pela linha
+     tracejada; a barra de 653% passa da tela e é desenhada até 1.080 px, com a quebra visível */
+  [data-slide="custo"] .c-cab { left: 120px; top: 292px; }
+  .c-ano { position: absolute; left: 120px; width: 1680px; height: 110px; }
+  .c-ano-n { position: absolute; left: 0; top: 18px; width: 290px; font: 800 var(--esc-3)/1 var(--fonte-titulo); color: var(--cor-tinta); white-space: nowrap; }
+  .c-ano-n small { display: block; margin-top: 6px; font: 600 var(--esc-1)/1.1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .c-bar { position: absolute; left: 320px; top: 22px; height: 64px; }
+  .c-bar i { position: absolute; inset: 0; border-radius: 0 32px 32px 0; background: color-mix(in srgb, var(--cor-tinta) 34%, var(--cor-fundo)); transform-origin: 0 50%; }
+  .c-bar.c-vence i { background: var(--cor-destaque); }
+  .c-bar u { position: absolute; left: 640px; top: -14px; bottom: -14px; width: 30px; background: var(--cor-fundo); transform: skewX(-24deg); }
+  .c-pct { position: absolute; top: 20px; font-size: var(--esc-3); color: var(--cor-tinta); }
+  .c-cem { position: absolute; left: 718px; top: 350px; width: 4px; height: 470px; z-index: 2; }
+  .c-cem i { position: absolute; inset: 0; border-left: 4px dashed var(--cor-tinta); transform-origin: 50% 0; }
+  .c-cem-leg { position: absolute; left: -300px; top: 486px; width: 604px; text-align: center; font-size: 32px; line-height: 1.2; color: var(--cor-tinta-suave); white-space: nowrap; }
+  [data-slide="custo"] .c-fonte { top: 900px; font-size: 32px; left: auto; right: 120px; text-align: right; }
+
+  /* compromissos: o número a 320 px, com a moeda e a unidade menores na mesma linha de base */
+  .c-num { position: absolute; left: 112px; top: 270px; display: flex; align-items: baseline; gap: 30px; }
+  .c-moeda { font-size: var(--esc-4); }
+  .c-895 { font-size: var(--esc-6); }
+  .c-bi { font-size: var(--esc-5); }
+  .c-num-leg { position: absolute; left: 120px; top: 640px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--sobre-noite); text-wrap: balance; }
+
+  /* a8 (guia): a pergunta grande à esquerda, sozinha na chegada; à direita, no segundo clique, o checklist do slide seguinte */
+  .c-perg { position: absolute; left: 120px; top: 330px; width: 1030px; font: 400 76px/1.25 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
+  .c-mini-et { left: 1220px; top: 330px; }
+  .c-mini { position: absolute; left: 1220px; top: 386px; width: 580px; box-sizing: border-box; margin: 0; padding: 22px 30px; list-style: none; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; }
+  .c-mini li { display: flex; align-items: center; gap: 22px; height: 72px; font: 600 32px/1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+  .c-mini i { flex: 0 0 36px; height: 36px; box-sizing: border-box; border: 4px solid var(--suave-sobre-noite); border-radius: 8px; }
+
+  /* pesado e portavel: cartões de duas colunas, com altura igual */
+  [data-slide="pesado"] .cartoes { top: 330px; grid-template-columns: 0.72fr 1.28fr; }
+  [data-slide="pesado"] .cartao { min-height: 400px; }
+  [data-slide="pesado"] .ct-txt { font-size: 44px; line-height: 1.3; }
+  /* o consumo e o preço do plano em tamanho grande; só o preço em dourado */
+  [data-slide="pesado"] .ct-txt + .c-grande, [data-slide="pesado"] .c-grande + .ct-txt { margin-top: 4px; }
+  .c-grande { font: 400 var(--esc-4)/1.1 var(--fonte-texto); white-space: nowrap; }
+  .c-200 { font: 800 var(--esc-4)/1.1 var(--fonte-titulo); letter-spacing: -0.02em; white-space: nowrap; }
+  [data-slide="pesado"] .ct-sub { margin-top: 22px; font-size: 36px; }
+  [data-slide="portavel"] .cartoes { top: 360px; }
+  [data-slide="portavel"] .cartao { min-height: 220px; }
+  .c-cod { font: 500 0.9em/1 var(--fonte-mono, ui-monospace, monospace); }
+  [data-slide="quem-banca"] .estacao { width: 380px; margin-left: -50px; }   /* mais larga e recentrada no ponto da estação */
+  .noite[data-slide="pesado"] .cartao { border-color: var(--linha-sobre-noite); }
+  .noite[data-slide="pesado"] .ct-sub { color: var(--suave-sobre-noite); }
+/* Bloco d-geopolitica: só classes d- e [data-slide] deste bloco. */
+  /* chips: dois cartões largos, mais baixos na tela para o texto respirar */
+  [data-slide="chips"] .cartoes { top: 360px; align-items: start; }
+  [data-slide="chips"] .ct-txt { font-size: 44px; line-height: 1.28; }
+  [data-slide="chips"] .ct-sub { margin-top: 18px; }
+  /* o teto desenhado: a China leva no máximo metade do que se vende nos EUA; cada barra diz o que mede */
+  .d-teto { margin-top: 26px; display: grid; gap: 14px; }
+  .d-teto p { display: grid; grid-template-columns: 330px 1fr; align-items: center; font: 700 var(--esc-1)/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .d-barra { display: block; height: 30px; border-radius: 6px; background: var(--cor-tinta); transform-origin: 0 50%; }
+  .d-barra.d-meia { width: 50%; background: var(--cor-destaque); }
+
+  /* quatro-meses (claro): o "4" a 320 px em dourado, "meses" ao lado e a legenda embaixo */
+  .d-num { position: absolute; left: 112px; top: 250px; display: flex; align-items: baseline; gap: 44px; color: var(--cor-tinta); }
+  .d-num-n { font-size: var(--esc-6); line-height: .9; }
+  .d-num-u { font-size: var(--esc-5); line-height: .9; }
+  .d-num-leg { position: absolute; left: 120px; top: 610px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
+  .d-num-fonte { color: var(--cor-tinta-suave); white-space: nowrap; }
+
+  /* aberto-seguro: três cartões com o número grande em cima; o rodapé diz de quem é a avaliação */
+  [data-slide="aberto-seguro"] .cartoes { top: 370px; }
+  [data-slide="aberto-seguro"] .cartao { min-height: 400px; }
+  .d-ct-n { font-size: 132px; line-height: 1; letter-spacing: -0.02em; }
+  .d-ct-n.d-ouro { color: var(--cor-destaque-texto); }   /* o 94% é o único dourado (o escurecido do tema, legível no claro) */
+  .d-ct-n.d-suave { color: var(--cor-tinta-suave); }    /* o 8% de comparação, em tinta suave */
+  [data-slide="aberto-seguro"] .ct-txt { margin-top: 22px; font-size: 40px; }
+  [data-slide="aberto-seguro"] .rodape { top: 860px; }
+
+  /* regras: o texto do marco "alto risco (Anexo III)" em duas linhas */
+  [data-slide="regras"] .etapas li { font-size: 40px; }
+
+  /* a9 (cena guia, noite): a pergunta em cima; as três perguntas à esquerda; os dois lados da sala à direita */
+  .d-a9-perg { position: absolute; left: 120px; top: 306px; font: 400 54px/1.2 var(--fonte-texto); color: var(--sobre-noite); white-space: nowrap; }
+  .d-a9-et { left: 120px; top: 452px; color: var(--suave-sobre-noite); }
+  .d-a9-lista { position: absolute; left: 120px; top: 514px; width: 940px; counter-reset: d-perg; }
+  .d-a9-lista li { counter-increment: d-perg; display: flex; align-items: flex-start; gap: 28px; margin-bottom: 30px; font: 400 46px/1.2 var(--fonte-texto); color: var(--sobre-noite); }
+  .d-a9-lista li::before { content: counter(d-perg); flex: 0 0 68px; height: 68px; margin-top: -6px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 34px;
+                           display: grid; place-items: center; font: 800 36px/1 var(--fonte-titulo); color: var(--sobre-noite); }
+  .d-lados { position: absolute; left: 1140px; top: 514px; width: 660px; display: grid; gap: 32px; }
+  .d-lado { box-sizing: border-box; height: 150px; padding: 0 36px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px;
+            display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  .d-lado-tit { font: 800 var(--esc-3)/1.05 var(--fonte-titulo); text-transform: var(--titulo-caixa, uppercase); color: var(--sobre-noite); white-space: nowrap; }
+  .d-lado-sub { font: 400 34px/1.25 var(--fonte-texto); color: var(--suave-sobre-noite); }
+/* Bloco e-futuro: só classes e- e [data-slide] deste bloco. */
+  /* ritmo (claro): "5x" a 320 px, "ao ano" ao lado, a legenda embaixo e a fonte no rodapé */
+  .e-num { position: absolute; left: 112px; top: 250px; display: flex; align-items: baseline; gap: 44px; color: var(--cor-tinta); }
+  .e-num-n { font-size: var(--esc-6); line-height: .9; }
+  .e-num-u { font-size: var(--esc-5); line-height: .9; color: var(--cor-tinta-suave); }
+  .e-num-leg { position: absolute; left: 120px; top: 610px; width: 1560px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
+
+  /* cenarios: a caixa do ramo de baixo leva três linhas; o texto se centra na altura da caixa (170 px, de y - 85) */
+  [data-slide="cenarios"] .caixa-txt { box-sizing: border-box; height: 170px; margin-top: -32px; display: grid; align-content: center;
+                                       font-size: 38px; line-height: 1.15; }
+
+  /* sinais: textos dos marcos em até duas linhas */
+  [data-slide="sinais"] .etapas li { font-size: 40px; }
+
+  /* a10 (cena guia, noite): as quatro semanas numa faixa (1, 2 e 3, 4), cada trecho com a tarefa e a linha para escrever */
+  .e-a10-et { left: 120px; top: 300px; color: var(--suave-sobre-noite); }
+  .e-plano { position: absolute; left: 120px; top: 380px; width: 1680px; display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 32px; }
+  .e-sem { position: relative; box-sizing: border-box; height: 430px; padding: 34px 36px 0; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
+  .e-sem-tit { font: 800 var(--esc-2)/1.1 var(--fonte-titulo); text-transform: var(--titulo-caixa, uppercase); color: var(--sobre-noite); white-space: nowrap; }
+  .e-sem-txt { margin-top: 22px; font: 400 48px/1.22 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
+  .e-linha { position: absolute; left: 36px; right: 36px; bottom: 56px; height: 0; border-bottom: 4px dashed var(--linha-sobre-noite); transform-origin: 0 50%; }
+
+  /* a11 (cena guia, claro): dois campos grandes lado a lado */
+  .e-roda { position: absolute; left: 120px; top: 320px; width: 1680px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .e-campo { box-sizing: border-box; height: 460px; padding: 44px 48px; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-papel);
+             display: flex; flex-direction: column; justify-content: space-between; }
+  .e-campo-tit { font: 800 var(--esc-5)/.92 var(--fonte-titulo); letter-spacing: -0.03em; text-transform: var(--titulo-caixa, uppercase); color: var(--cor-tinta); white-space: nowrap; }
+  .e-campo-sub { font: 400 var(--esc-2)/1.25 var(--fonte-texto); color: var(--cor-tinta-suave); }
+  [data-slide="a11"] .rodape { top: 846px; color: var(--cor-tinta); }
+</style>
+</head>
+<body>
+<div id="palco"><div id="mundo">
+  <!-- ===== Bloco A: assistentes (slides 1 a 9). A capa é clara, no desenho da Aula 2, sem foto. ===== -->
+  <section data-slide="capa">
+    <div class="a-logo-cj" role="img" aria-label="co.juris"></div>
+    <i class="a-cp-fio"></i>
+    <div class="a-cp-txt">
+      <p class="rotulo">Curso de IA · Aula 4</p>
+      <h1 class="display a-cp-tit"><span>Quem decide</span><span>é você</span></h1>
+      <p class="a-cp-sub">Assistentes, custos, geopolítica e o futuro.</p>
+    </div>
+  </section>
+
+  <section data-slide="mapa" data-arquetipo="tempo">
+    <h2 class="manchete">Hoje, o que delegar e a que preço</h2>
+    <ol class="etapas">
+      <li class="agora"><b>1</b>assistentes</li>
+      <li><b>2</b>harness</li>
+      <li><b>3</b>quem paga</li>
+      <li><b>4</b>geopolítica</li>
+      <li><b>5</b>futuro</li>
+    </ol>
+    <p class="tempo-leg">Cada etapa termina numa decisão sua.</p>
+  </section>
+
+  <section data-slide="chat-agente" data-arquetipo="comparacao">
+    <p class="rotulo">Assistentes</p>
+    <h2 class="manchete">O chat responde; o assistente age</h2>
+    <div class="janela"><p class="display letra">Chat</p>
+      <p class="janela-txt">Responde quando você pede.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela escolhida"><p class="display letra">Assistente</p>
+      <p class="janela-txt">Age sem você pedir, de hora em hora.</p></div>
+  </section>
+
+  <!-- cinco (cartões, claro): retrato de 02/11/2026 (A, Tabela 22.1). O dots leva a borda dourada: o único dos prontos
+       que inclui o Brasil. -->
+  <section data-slide="cinco">
+    <p class="rotulo">Assistentes</p>
+    <h2 class="manchete">Cinco assistentes, em novembro de 2026</h2>
+    <div class="cartoes c3">
+      <div class="cartao"><p class="ct-tit">Claude Duet</p><p class="ct-sub">Anthropic</p><p class="ct-txt">Prévia, só nos EUA.</p></div>
+      <div class="cartao a-br"><p class="ct-tit">dots</p><p class="ct-sub">OpenAI</p><p class="ct-txt">Plano Pro, inclui o Brasil.</p></div>
+      <div class="cartao"><p class="ct-tit">Muse</p><p class="ct-sub">Meta</p><p class="ct-txt">No WhatsApp, EUA e Singapura.</p></div>
+      <div class="cartao"><p class="ct-tit">Grok Bot</p><p class="ct-sub">xAI</p><p class="ct-txt">Beta, sem lista de países.</p></div>
+      <div class="cartao"><p class="ct-tit">Hermes Agent</p><p class="ct-sub">Código aberto</p><p class="ct-txt">Roda onde você instalar.</p></div>
+    </div>
+  </section>
+
+  <!-- alcance (cena própria, noite, S.T.A.R. do bloco, três cliques): a caixa de entrada desenhada por código, com
+       mensagens fictícias e papéis no lugar de nomes. Na chegada, o assistente se liga à caixa e o feixe dele lê todas as
+       linhas; cada clique acende uma mensagem sensível (cliente, minuta, parte contrária), a atual com a barra dourada. -->
+  <section data-slide="alcance" class="noite">
+    <p class="rotulo">Assistentes</p>
+    <h2 class="manchete">Na sua caixa está o cliente</h2>
+    <svg class="a-diag" viewBox="0 0 1920 1080"><path class="a-fio" d="M1250 590H1380"/></svg>
+    <div class="a-cx">
+      <div class="a-cx-cab"><i></i><i></i><i></i><span>Caixa de entrada</span></div>
+      <div class="a-cx-lista">
+        <div class="a-feixe"></div>
+        <div class="a-msg"><span class="a-luz"></span><span class="a-barra"></span><b>Cliente</b><span class="a-assunto">Re: nossa conversa de ontem</span><span class="a-lido"></span></div>
+        <div class="a-msg"><span class="a-luz"></span><span class="a-barra"></span><b>Boletim</b><span class="a-assunto">Jurisprudência da semana</span><span class="a-lido"></span></div>
+        <div class="a-msg"><span class="a-luz"></span><span class="a-barra"></span><b>Minuta</b><span class="a-assunto">Contestação, antes do protocolo</span><span class="a-lido"></span></div>
+        <div class="a-msg"><span class="a-luz"></span><span class="a-barra"></span><b>Agenda</b><span class="a-assunto">Reunião remarcada</span><span class="a-lido"></span></div>
+        <div class="a-msg"><span class="a-luz"></span><span class="a-barra"></span><b>Parte contrária</b><span class="a-assunto">Proposta de acordo</span><span class="a-lido"></span></div>
+      </div>
+    </div>
+    <div class="a-ass"><span class="a-olho"></span><p class="a-ass-tit">Assistente</p><p class="a-ass-sub">lê tudo</p></div>
+    <p class="pilula">mensagens fictícias</p>
+  </section>
+
+  <section data-slide="entrada" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Assistentes</p>
+    <p class="respiro"><span>Quem escreve para você</span><span>escreve para <span class="sinal">ele</span>.</span></p>
+  </section>
+
+  <!-- sigilo (cartões, claro): o texto exato do roteiro (slide 7) e a referência de cada norma, conferidas na fonte
+       oficial em 05/11/2026 (docs/pesquisa/dia2-sigilo-normas.md). A ressalva da Res. CNJ 615 fica nas notas. -->
+  <section data-slide="sigilo">
+    <h2 class="manchete">O sigilo vai junto com o acesso</h2>
+    <div class="cartoes c2">
+      <div class="cartao"><p class="ct-txt">E-mail da advocacia é inviolável</p><p class="ct-sub">EAOAB 7º, II</p></div>
+      <div class="cartao"><p class="ct-txt">Violar sigilo sem justa causa é infração</p><p class="ct-sub">EAOAB 34, VII</p></div>
+      <div class="cartao"><p class="ct-txt">Fornecedor que não treine com os dados</p><p class="ct-sub">Rec. OAB 1/2024</p></div>
+      <div class="cartao a-ia"><p class="ct-txt">Sigiloso na IA externa, só anonimizado ou protegido</p><p class="ct-sub">CNJ 615/2025</p></div>
+    </div>
+  </section>
+
+  <!-- memoria (cena própria, noite, uma linha por parada): o nome, o cabo do acesso que se corta e o que fica na
+       memória. A marca do corte da linha atual é a única coisa dourada. Fonte: A 22.5. -->
+  <section data-slide="memoria" class="noite">
+    <p class="rotulo">Memória</p>
+    <h2 class="manchete">Cortar o acesso não apaga a memória</h2>
+    <p class="etiqueta a-mem-et a-mem-et1">acesso</p>
+    <p class="etiqueta a-mem-et a-mem-et2">o que fica</p>
+    <div class="a-mem">
+      <div class="a-mem-l"><p class="a-mem-nome">Duet</p><span class="a-cabo"></span><p class="a-mem-txt">O que aprendeu fica até você zerar a memória.</p></div>
+      <div class="a-mem-l"><p class="a-mem-nome">dots</p><span class="a-cabo"></span><p class="a-mem-txt">A memória só se apaga com o dot inteiro.</p></div>
+      <div class="a-mem-l"><p class="a-mem-nome">Grok Bot</p><span class="a-cabo"></span><p class="a-mem-txt">Apagar o Bot não limpa o computador compartilhado.</p></div>
+    </div>
+  </section>
+
+  <!-- a7 (cena guia, claro, A7, 7 min): o enunciado e as três colunas em branco para a dupla preencher. A resposta-modelo
+       e o fecho "Duas semanas, só lendo." ficam só nas notas. -->
+  <section data-slide="a7">
+    <p class="rotulo">A7, 7 min</p>
+    <h2 class="manchete">Sua vez: o acesso mínimo</h2>
+    <p class="a-enun">Em dupla, escolham uma tarefa (a agenda da manhã, por exemplo) e preencham três colunas: pode ler, pode escrever, nunca.</p>
+    <div class="a-cols">
+      <div class="a-col"><p class="a-col-tit">pode ler</p><i></i><i></i><i></i></div>
+      <div class="a-col"><p class="a-col-tit">pode escrever</p><i></i><i></i><i></i></div>
+      <div class="a-col a-nunca"><p class="a-col-tit">nunca</p><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <!-- ===== Bloco B: harness (slides 10 a 12, 6 min). Fatos e textos exatos em briefing.md e na ficha
+       docs/pesquisa/dia2-harness-quatilex.md (print de 05/11/2026). ===== -->
+  <!-- harness-cap (abertura de capítulo, noite): sem foto por enquanto; o aviso da marca vai no rodapé -->
+  <section data-slide="harness-cap" data-arquetipo="abertura" class="noite">
+    <p class="rotulo">Harness</p>
+    <div class="display ab-linha">O sistema</div>
+    <div class="display ab-linha">em volta do</div>
+    <div class="display ab-linha sinal">modelo</div>
+    <p class="ab-sub">Uma peça da PGE-MS, por dentro.</p>
+    <p class="rodape b-aviso">A co.juris não fala em nome da PGE-MS.</p>
+  </section>
+
+  <!-- harness (demonstração, S.T.A.R. do bloco): o vídeo da Tarefa 6A (claude_video_maker, agentes-peca-2), 40 s. A capa
+       é o quadro 0 do clipe: a de 2,5 s (cena montada) aparecia na viagem e sumia quando o clipe começava. -->
+  <section data-slide="harness" data-arquetipo="demonstracao" class="noite">
+    <p class="rotulo">Harness</p>
+    <h2 class="manchete">Dez agentes, uma peça</h2>
+    <div class="moldura">
+      <div class="barra-nav"><i></i><i></i><i></i><u></u></div>
+      <div class="tela">
+        <video src="midia/harness.mp4" poster="midia/harness-capa.webp" muted playsinline preload="auto"></video>
+      </div>
+    </div>
+    <p class="nota-lateral">Peça real, sem processo.</p>
+  </section>
+
+  <!-- redator (cena própria, claro): o custo de cada agente na peça do print, em barras na mesma escala. Doutrina e
+       acervo somam as duas linhas de cada um (busca e filtro). Só o redator acende em dourado. -->
+  <section data-slide="redator">
+    <p class="rotulo">Harness</p>
+    <h2 class="manchete">O caro só onde faz diferença</h2>
+    <p class="etiqueta b-cab">em US$</p>
+    <div class="b-barras">
+      <div class="b-ln b-vence" data-v="1.3859"><span class="b-n">redator</span><span class="b-t"><i></i></span><span class="b-v">1,3859</span></div>
+      <div class="b-ln" data-v="0.1362"><span class="b-n">leitor A</span><span class="b-t"><i></i></span><span class="b-v">0,1362</span></div>
+      <div class="b-ln" data-v="0.0356"><span class="b-n">leitor B</span><span class="b-t"><i></i></span><span class="b-v">0,0356</span></div>
+      <div class="b-ln" data-v="0.0121"><span class="b-n">classificador</span><span class="b-t"><i></i></span><span class="b-v">0,0121</span></div>
+      <div class="b-ln" data-v="0.0073"><span class="b-n">validador de leis</span><span class="b-t"><i></i></span><span class="b-v">0,0073</span></div>
+      <div class="b-ln" data-v="0.0063"><span class="b-n">agrupador</span><span class="b-t"><i></i></span><span class="b-v">0,0063</span></div>
+      <div class="b-ln" data-v="0.0040"><span class="b-n">validador de julgados</span><span class="b-t"><i></i></span><span class="b-v">0,0040</span></div>
+      <div class="b-ln" data-v="0.0033"><span class="b-n">busca de julgados</span><span class="b-t"><i></i></span><span class="b-v">0,0033</span></div>
+      <div class="b-ln" data-v="0.0017"><span class="b-n">busca de doutrina</span><span class="b-t"><i></i></span><span class="b-v">0,0017</span></div>
+      <div class="b-ln" data-v="0.0004"><span class="b-n">ofício</span><span class="b-t"><i></i></span><span class="b-v">0,0004</span></div>
+    </div>
+    <p class="b-pct"><span class="display b-pct-n">87%</span><span class="b-pct-leg">da peça de US$ 1,59</span></p>
+  </section>
+
+  <!-- ===== Bloco C: quem paga a conta (slides 13 a 22, 23 min). Fatos e textos exatos em briefing.md e na ficha
+       docs/pesquisa/dia2-economia-subsidio-bolha.md (E). ===== -->
+  <!-- conta-cap (abertura de capítulo, noite): sem foto por enquanto -->
+  <section data-slide="conta-cap" data-arquetipo="abertura" class="noite">
+    <p class="rotulo">Quem paga</p>
+    <div class="display ab-linha">Quem paga</div>
+    <div class="display ab-linha sinal">a conta</div>
+    <p class="ab-sub">O uso já se paga. A corrida, não.</p>
+  </section>
+
+  <!-- custo (cena própria, claro, três paradas): custo de computação da Anthropic sobre a receita, um ano por clique.
+       Escala: 100% da receita = 280 px; a barra de 653% (1.828 px) não cabe e leva a quebra marcada. S-1/A, 02/11/2026. -->
+  <section data-slide="custo">
+    <p class="rotulo">Quem paga</p>
+    <h2 class="manchete">Cada uso já se paga</h2>
+    <p class="etiqueta c-cab">custo de computação sobre a receita da Anthropic</p>
+    <div class="c-cem"><i></i><p class="c-cem-leg">custo igual à receita</p></div>
+    <div class="c-ano" style="top: 372px"><p class="c-ano-n">2024</p><div class="c-bar c-quebrada" data-v="653"><i></i><u></u></div><p class="display c-pct">653%</p></div>
+    <div class="c-ano" style="top: 522px"><p class="c-ano-n">2025</p><div class="c-bar" data-v="160"><i></i></div><p class="display c-pct">160%</p></div>
+    <div class="c-ano" style="top: 672px"><p class="c-ano-n">2026<small>jan. a set.</small></p><div class="c-bar c-vence" data-v="57"><i></i></div><p class="display c-pct">57%</p></div>
+    <p class="rodape c-fonte">Prospecto da Anthropic na SEC, 02/11/2026.</p>
+  </section>
+
+  <!-- compromissos (cena própria, noite, S.T.A.R. do bloco): o número a 320 px e a legenda do roteiro -->
+  <section data-slide="compromissos" class="noite">
+    <p class="rotulo">Quem paga</p>
+    <p class="display c-num"><span class="c-moeda">US$</span><span class="c-895 sinal">895</span><span class="c-bi">bi</span></p>
+    <p class="c-num-leg">em computação contratada pela Anthropic, pagos com ou sem uso</p>
+    <p class="rodape">Prospecto da Anthropic na SEC, 02/11/2026.</p>
+  </section>
+
+  <section data-slide="quem-banca" data-arquetipo="ramos">
+    <p class="rotulo">Quem paga</p>
+    <h2 class="manchete">Quem banca a corrida</h2>
+    <div class="ramo" data-y="450">
+      <div class="estacao"><b>investidores</b><small>bancam</small></div>
+      <p class="caixa-txt">treino e<br>data centers</p>
+    </div>
+    <div class="ramo" data-y="720">
+      <div class="estacao"><b>usuário leve</b><small>banca</small></div>
+      <p class="caixa-txt">usuário<br>pesado</p>
+    </div>
+    <p class="ramos-leg">O preço de hoje não paga a próxima geração.</p>
+  </section>
+
+  <!-- pesado (cartões da base, noite): as duas falas datadas, com as citações em inglês como estão na fonte (TechCrunch).
+       Vai na noite, e não no claro do roteiro, porque quem-banca, pesado, encolhe e bolha seriam quatro claros médios
+       seguidos (aviso de sequência do oráculo) -->
+  <section data-slide="pesado" class="noite">
+    <p class="rotulo">Quem paga</p>
+    <h2 class="manchete">O usuário pesado custa caro</h2>
+    <div class="cartoes c2">
+      <div class="cartao"><p class="ct-tit">Altman, jan./2025</p><p class="ct-txt">“<i>currently losing money on openai pro subscriptions</i>”</p><p class="ct-sub">ChatGPT Pro</p></div>
+      <div class="cartao"><p class="ct-tit">Anthropic, jul./2025</p><p class="ct-txt">Um usuário consumiu</p><p class="c-grande">“<i>tens of thousands</i>”</p><p class="ct-txt">de dólares num plano de</p><p class="c-200 sinal">US$&nbsp;200</p><p class="ct-sub">Limite semanal para menos de 5% dos assinantes.</p></div>
+    </div>
+  </section>
+
+  <section data-slide="encolhe" data-arquetipo="tempo">
+    <p class="rotulo">Quem paga</p>
+    <h2 class="manchete">O plano fixo está encolhendo</h2>
+    <ol class="etapas">
+      <li><b>jun./26</b>Copilot cobra por consumo</li>
+      <li><b>jul./26</b>Claude Pro perde o modelo de ponta</li>
+      <li class="agora"><b>nov./26</b>ChatGPT Go <span style="white-space: nowrap">“pode incluir anúncios”</span></li>
+    </ol>
+    <p class="tempo-leg">A própria Anthropic lista isso como risco.</p>
+  </section>
+
+  <!-- bolha (comparação de texto): sem janela escolhida, porque a pergunta fica com a sala -->
+  <section data-slide="bolha" data-arquetipo="comparacao">
+    <p class="rotulo">Quem paga</p>
+    <h2 class="manchete">Bolha ou não?</h2>
+    <div class="janela"><p class="display letra">A</p><p class="etiqueta">alerta</p>
+      <p class="janela-txt">BIS (jun./2026) e FMI (out./2026) veem risco de correção, com dívida e acordos opacos.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela"><p class="display letra">B</p><p class="etiqueta">contra</p>
+      <p class="janela-txt">Receita crescendo e 55,9% das empresas dos EUA pagando por IA (Ramp, set./2026).</p></div>
+  </section>
+
+  <section data-slide="tese" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Quem paga</p>
+    <p class="respiro"><span>A tecnologia fica.</span><span>O preço <span class="sinal">muda</span>.</span></p>
+  </section>
+
+  <!-- a8 (guia, noite, 5 min): na chegada, só a pergunta, grande; no segundo clique, depois do cronômetro, o checklist do
+       slide portavel em miniatura à direita -->
+  <section data-slide="a8" class="noite">
+    <p class="rotulo">A8, 5 min</p>
+    <h2 class="manchete">Sua vez: e se o preço dobrar?</h2>
+    <p class="c-perg">Em dupla, o que quebra no seu trabalho se o plano dobrar de preço na sexta?</p>
+    <p class="etiqueta c-mini-et">Vai com você</p>
+    <ul class="c-mini">
+      <li><i></i>a skill</li>
+      <li><i></i>a pasta no seu disco</li>
+      <li><i></i>as instruções em texto</li>
+      <li><i></i>um segundo fornecedor</li>
+    </ul>
+  </section>
+
+  <!-- portavel (cartões da base): o gabarito da A8 -->
+  <section data-slide="portavel">
+    <p class="rotulo">Quem paga</p>
+    <h2 class="manchete">O que vai com você de um app a outro</h2>
+    <div class="cartoes c2">
+      <div class="cartao"><p class="ct-tit">A skill</p><p class="ct-txt">O mesmo <code class="c-cod">SKILL.md</code> no Claude e no ChatGPT/Codex.</p></div>
+      <div class="cartao"><p class="ct-tit">A pasta</p><p class="ct-txt">Os documentos no seu disco.</p></div>
+      <div class="cartao"><p class="ct-tit">As instruções</p><p class="ct-txt">Em texto, fora da memória do chat.</p></div>
+      <div class="cartao"><p class="ct-tit">Um segundo fornecedor</p><p class="ct-txt">Testado antes de precisar.</p></div>
+    </div>
+  </section>
+
+  <!-- ===== Bloco D: geopolítica (slides 23 a 29). A abertura do capítulo vai sem foto por enquanto. Fatos da ficha
+       docs/pesquisa/dia2-geopolitica-ia.md (G 1.1, 1.2, 1.4, 1.5 e seção 2). ===== -->
+  <section data-slide="geo-cap" data-arquetipo="abertura" class="noite">
+    <p class="rotulo">Geopolítica</p>
+    <div class="display ab-linha">Quem manda</div>
+    <div class="display ab-linha sinal">no dado</div>
+    <p class="ab-sub">Chips, modelos abertos, regras e jurisdição.</p>
+  </section>
+
+  <!-- chips (cartões): quem fabrica e quem licencia; fontes G 1.1 -->
+  <section data-slide="chips">
+    <h2 class="manchete">Chip de ponta é política de Estado</h2>
+    <div class="cartoes c2">
+      <div class="cartao">
+        <p class="ct-tit g">TSMC</p>
+        <p class="ct-txt">Fabrica quase todo chip de IA de ponta.</p>
+        <p class="ct-sub">AI Index 2026</p>
+      </div>
+      <div class="cartao">
+        <p class="ct-tit g">Venda à China</p>
+        <p class="ct-txt">Desde 15/01/2026, os EUA licenciam caso a caso, até metade do que vendem nos EUA.</p>
+        <div class="d-teto">
+          <p><span>vendido nos EUA</span><i class="d-barra"></i></p>
+          <p><span>teto</span><i class="d-barra d-meia"></i></p>
+        </div>
+        <p class="ct-sub">91 FR 1684</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- quatro-meses (cena própria, claro, número a 320 px): G 1.2, Epoch AI, 29/05/2026. Sem o rodapé da definição (vai
+       nas notas), para não fazer três claros seguidos de 25 a 45 palavras com chips e aberto-seguro -->
+  <section data-slide="quatro-meses">
+    <p class="rotulo">Modelos abertos</p>
+    <p class="display d-num"><span class="sinal d-num-n">4</span><span class="d-num-u">meses</span></p>
+    <p class="d-num-leg">é a distância dos melhores modelos abertos para os fechados <span class="d-num-fonte">(Epoch AI, mai./2026)</span></p>
+  </section>
+
+  <!-- aberto-seguro (cartões): CAISI/NIST, 30/09/2025 (G 1.2) -->
+  <section data-slide="aberto-seguro">
+    <p class="rotulo">Modelos abertos</p>
+    <h2 class="manchete">Aberto não quer dizer seguro</h2>
+    <p class="ct-leg">CAISI/NIST, 30/09/2025, DeepSeek R1-0528</p>
+    <div class="cartoes c3">
+      <div class="cartao">
+        <p class="ct-tit d-ct-n">12x</p>
+        <p class="ct-txt">mais chance de seguir ordem maliciosa</p>
+      </div>
+      <div class="cartao">
+        <p class="ct-tit d-ct-n d-ouro">94%</p>
+        <p class="ct-txt">dos pedidos maliciosos atendidos, com o truque que fura as travas</p>
+      </div>
+      <div class="cartao">
+        <p class="ct-tit d-ct-n d-suave">8%</p>
+        <p class="ct-txt">nos modelos americanos, mesmo truque</p>
+      </div>
+    </div>
+    <p class="rodape">Avaliação do governo dos EUA sobre modelos chineses.</p>
+  </section>
+
+  <!-- cloud-act (ramos, S.T.A.R. do bloco): onde o dado mora contra quem manda entregar; G 1.5 -->
+  <section data-slide="cloud-act" data-arquetipo="ramos" class="noite">
+    <p class="rotulo">Jurisdição</p>
+    <h2 class="manchete">Dado no Brasil, empresa nos EUA</h2>
+    <div class="ramo" data-y="450">
+      <div class="estacao"><b>Data center</b><small>no Brasil</small></div>
+      <p class="caixa-txt">onde o<br>dado mora</p>
+    </div>
+    <div class="ramo" data-y="720">
+      <div class="estacao"><b>Provedor</b><small>americano</small></div>
+      <p class="caixa-txt">quem pode<br>mandar entregar</p>
+    </div>
+    <p class="ramos-leg">CLOUD Act: os EUA têm acordo só com Reino Unido e Austrália.</p>
+  </section>
+
+  <!-- regras (tempo): calendário do AI Act e do Omnibus; o marco de agora é a fiscalização, em vigor desde ago./26 (G 1.4) -->
+  <section data-slide="regras" data-arquetipo="tempo">
+    <p class="rotulo">AI Act europeu</p>
+    <h2 class="manchete">As regras chegam em datas diferentes</h2>
+    <ol class="etapas">
+      <li><b>fev./25</b>proibições</li>
+      <li class="agora"><b>ago./26</b>fiscalização</li>
+      <li><b>dez./27</b>alto risco (Anexo III)</li>
+      <li><b>ago./28</b>produtos regulados</li>
+    </ol>
+    <p class="tempo-leg">No Brasil, o PL 2338/2023 espera parecer na Câmara.</p>
+  </section>
+
+  <!-- a9 (cena guia, noite): a pergunta do debate, as três perguntas para preparar e os dois lados da sala. Sem gabarito
+       na tela; o fecho do professor está nas notas (G, seção 2). -->
+  <section data-slide="a9" class="noite">
+    <p class="rotulo">A9, 6 min</p>
+    <h2 class="manchete">Debate: modelo chinês no órgão?</h2>
+    <p class="d-a9-perg">Modelo aberto chinês, rodando no servidor do órgão. Pode?</p>
+    <p class="etiqueta d-a9-et">Para preparar</p>
+    <ol class="d-a9-lista">
+      <li>Onde roda?</li>
+      <li>Quem controla a empresa?</li>
+      <li>O que ele faz com uma ordem maliciosa?</li>
+    </ol>
+    <div class="d-lados">
+      <div class="d-lado"><p class="d-lado-tit">Pode</p><p class="d-lado-sub">metade da sala</p></div>
+      <div class="d-lado"><p class="d-lado-tit">Não pode</p><p class="d-lado-sub">a outra metade</p></div>
+    </div>
+  </section>
+
+  <!-- ===== Bloco E: futuro e fecho (slides 30 a 37). Fatos da ficha docs/pesquisa/dia2-geopolitica-ia.md (G 1.6 e
+       seção 3) e das atividades A10 e A11 do briefing. ===== -->
+  <section data-slide="futuro-cap" data-arquetipo="respiro" class="noite">
+    <p class="rotulo">Futuro</p>
+    <p class="respiro"><span>E em <span class="sinal">2030</span>?</span></p>
+  </section>
+
+  <!-- ritmo (cena própria, claro, número a 320 px): Relatório Internacional de Segurança da IA, 03/02/2026 (G 1.6) -->
+  <section data-slide="ritmo">
+    <p class="display e-num"><span class="e-num-n">5x</span><span class="e-num-u">ao ano</span></p>
+    <p class="e-num-leg">cresce o cômputo de treino dos modelos líderes; a eficiência, de 2 a 6x</p>
+    <p class="rodape">Relatório Internacional de Segurança da IA, 2026</p>
+  </section>
+
+  <!-- cenarios (ramos): a faixa de cenários da OCDE citada pelo mesmo relatório; as tarefas de vários dias são projeção
+       do próprio relatório; os gargalos na legenda (G 1.6) -->
+  <section data-slide="cenarios" data-arquetipo="ramos">
+    <p class="rotulo">Até 2030</p>
+    <h2 class="manchete">De ganho modesto a salto rápido</h2>
+    <div class="ramo" data-y="450">
+      <div class="estacao"><b>Modesto</b></div>
+      <p class="caixa-txt">melhoras<br>pequenas</p>
+    </div>
+    <div class="ramo" data-y="720">
+      <div class="estacao"><b>Rápido</b></div>
+      <p class="caixa-txt">tarefas de software<br>de vários dias,<br>na tendência</p>
+    </div>
+    <p class="ramos-leg">Faixa da OCDE; gargalos: dados, chips, dinheiro e energia.</p>
+  </section>
+
+  <!-- sinais (tempo): quatro sinais com fonte pública; o mais próximo, dez./26, aceso (G seção 3, itens 1, 4, 5 e 7) -->
+  <section data-slide="sinais" data-arquetipo="tempo">
+    <p class="rotulo">Futuro</p>
+    <h2 class="manchete">Sinais para acompanhar</h2>
+    <ol class="etapas">
+      <li class="agora"><b>dez./26</b>transparência no AI Act</li>
+      <li><b>Câmara</b>parecer do PL 2338</li>
+      <li><b>Epoch</b>nova medição dos abertos</li>
+      <li><b>abr./27</b>novo AI Index</li>
+    </ol>
+    <p class="tempo-leg">Sinal com data e fonte vale mais que previsão.</p>
+  </section>
+
+  <!-- a10 (cena guia, noite): as quatro semanas numa faixa, uma tarefa por trecho e a linha em branco para cada um
+       escrever a sua -->
+  <section data-slide="a10" class="noite">
+    <p class="rotulo">A10, 5 min</p>
+    <h2 class="manchete">Seu plano de 30 dias</h2>
+    <p class="etiqueta e-a10-et">Individual. Cada um guarda o seu.</p>
+    <div class="e-plano">
+      <div class="e-sem"><p class="e-sem-tit">semana 1</p><p class="e-sem-txt">uma skill do seu jeito</p><i class="e-linha"></i></div>
+      <div class="e-sem"><p class="e-sem-tit">semanas 2 e 3</p><p class="e-sem-txt">uma pasta de caso</p><i class="e-linha"></i></div>
+      <div class="e-sem"><p class="e-sem-tit">semana 4</p><p class="e-sem-txt">uma rotina que pode falhar sem dano</p><i class="e-linha"></i></div>
+    </div>
+  </section>
+
+  <!-- a11 (cena guia, claro): a devolutiva em roda, dois campos grandes -->
+  <section data-slide="a11">
+    <p class="rotulo">A11, 5 min</p>
+    <h2 class="manchete">O que você leva, o que faltou</h2>
+    <div class="e-roda">
+      <div class="e-campo"><p class="e-campo-tit">Leva</p><p class="e-campo-sub">diga uma</p></div>
+      <div class="e-campo"><p class="e-campo-tit">Faltou</p><p class="e-campo-sub">diga uma</p></div>
+    </div>
+    <p class="rodape">Em roda, cada um diz as duas.</p>
+  </section>
+
+  <!-- curso (tempo): os quatro verbos das quatro aulas, o último aceso -->
+  <section data-slide="curso" data-arquetipo="tempo">
+    <p class="rotulo">O curso</p>
+    <h2 class="manchete">Quatro aulas, quatro verbos</h2>
+    <ol class="etapas">
+      <li><b>Aula 1</b>entender</li>
+      <li><b>Aula 2</b>pedir</li>
+      <li><b>Aula 3</b>fazer</li>
+      <li class="agora"><b>Aula 4</b>decidir</li>
+    </ol>
+  </section>
+
+  <!-- fecho: a mensagem do curso e o primeiro passo do plano de 30 dias -->
+  <section data-slide="fecho" data-arquetipo="fecho" class="noite">
+    <h2 class="display fecho-msg"><span>Delegue pouco.</span><span>Confira a <span class="sinal">fonte</span>.</span></h2>
+    <ol class="fecho-passos"><li>Comece pela semana 1.</li></ol>
+  </section>
+
+
+</div></div>
+
+<script type="module">
+import {palco, revelar, surgir, tracar, contar, digitar, voar, anotar, caixa, kenburns, escalonar, molaAR, faixa, saida, entradaSaida, clamp, lerp} from '../../motor/palco.js';
+import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
+
+// 5 blocos da linha do dia, somando 90 minutos. Os ids são os de `bloco` nos slides.
+const blocos = [
+  {id: 'assistentes', rotulo: 'Assistentes', minutos: 27},
+  {id: 'harness', rotulo: 'Harness', minutos: 6},
+  {id: 'conta', rotulo: 'Quem paga', minutos: 23},
+  {id: 'geopolitica', rotulo: 'Geopolítica', minutos: 18},
+  {id: 'futuro', rotulo: 'Futuro', minutos: 16},
+];
+
+// Uma linha por slide, na ordem da aula. Cada bloco de fonte/ acrescenta as suas com SLIDES.push(...).
+// `notas` é o guia do apresentador: {diga, faca, transicao}.
+const SLIDES = [];
+
+// Bloco A, assistentes (27 min, com a abertura): capa, mapa, chat e assistente, os cinco, a caixa de entrada, quem
+// escreve, o sigilo, a memória e a A7. Fatos só do briefing.md (A 22.2 a 22.6, dia2-sigilo-normas.md).
+SLIDES.push(
+  {id: 'capa', titulo: 'Quem decide é você', bloco: 'assistentes', linhaDia: false, segura: 3,
+   notas: {diga: 'A Aula 3 terminou com uma frase: dê o jeito, a tomada e a agenda. Hoje, o preço disso. Quando a IA age sozinha, quem decide é você. Decide o que ela alcança, quanto você paga por ela e de quem você passa a depender. Hoje tem mais conversa que tela: cinco atividades, sem plano pago, sem instalar nada.',
+     faca: ['a capa toca sozinha quando o deck abre', 'deixar o título na tela um instante antes de falar'],
+     transicao: 'O caminho da aula.'}},
+  {id: 'mapa', titulo: 'Hoje, o que delegar e a que preço',
+   notas: {diga: 'Cinco etapas. Os assistentes, que agem sem vocês pedirem. O harness, o sistema em volta do modelo, com uma peça por dentro. Quem paga a conta da IA. A geopolítica, quem manda no dado. E o futuro, que termina no plano de 30 dias de cada um. Cada etapa termina numa decisão de vocês.',
+     faca: ['mostrar a linha embaixo da tela: ela marca a etapa em que estamos'],
+     transicao: 'Começo pela diferença entre o chat e o assistente.'}},
+  {id: 'chat-agente', titulo: 'O chat responde; o assistente age',
+   notas: {diga: 'O chat vocês já conhecem: ele responde quando vocês pedem. O assistente age sem vocês pedirem, de hora em hora. O resumo da manhã, a varredura da caixa, o lembrete que ninguém pediu. É essa iniciativa que muda a conversa sobre acesso.',
+     faca: ['apontar a palavra circulada: assistente'],
+     transicao: 'Já existem cinco no mercado.'}},
+  {id: 'cinco', titulo: 'Cinco assistentes, em novembro de 2026',
+   notas: {diga: 'Cinco assistentes, retrato de 2 de novembro. O Claude Duet, da Anthropic, saiu em 21 de outubro, em prévia, nos planos Pro, Max e Ultra, só nos EUA. O dots, da OpenAI, saiu em 29 de setembro, no plano Pro, e inclui o Brasil. O Muse, da Meta, de 8 de setembro, funciona no WhatsApp, nos EUA e em Singapura. O Grok Bot, da xAI, é de 11 de agosto, em beta, e não tem lista de países. E o Hermes Agent é código aberto: roda onde você instalar. Isso muda rápido; confiram na página do fabricante antes de assinar.',
+     faca: ['apontar o cartão dourado: o dots é o único dos prontos que inclui o Brasil'],
+     transicao: 'Agora, o que eles leem.'}},
+  {id: 'alcance', titulo: 'Na sua caixa está o cliente', passos: [2.9, 1.0, 1.0, 1.0],
+   notas: {diga: 'Uma caixa de entrada comum, com mensagens fictícias. Para montar o resumo da manhã, o assistente lê tudo, inclusive o que nada tem com o pedido. E na caixa de quem advoga está a conversa com o cliente. Está a minuta antes do protocolo. Está a mensagem da parte contrária.',
+     faca: ['chegada: o assistente lê a caixa inteira', 'clique 1: a conversa com o cliente', 'clique 2: a minuta antes do protocolo', 'clique 3: a mensagem da parte contrária; pausa'],
+     transicao: 'E tem o outro lado: quem escreve para você.'}},
+  {id: 'entrada', titulo: 'Quem escreve para você escreve para ele.',
+   notas: {diga: 'Cada mensagem que chega à caixa é texto que o assistente lê. Quem escreve para vocês escreve na entrada dele. Lembram da ordem escondida na petição, na Aula 3? Aqui ela chega por e-mail, e o assistente lê às três da manhã, sem vocês por perto.',
+     faca: ['deixar a frase na tela e esperar um instante'],
+     transicao: 'E o que diz a regra sobre esse acesso?'}},
+  {id: 'sigilo', titulo: 'O sigilo vai junto com o acesso',
+   notas: {diga: 'Quatro regras, conferidas na fonte oficial. O Estatuto da Advocacia garante a inviolabilidade da correspondência eletrônica da advocacia, no art. 7º, II. Violar sigilo profissional sem justa causa é infração disciplinar, art. 34, VII. A Recomendação 001/2024 da OAB, item 2.2, pede fornecedor que proteja os dados e permita deixá-los fora do treinamento. E a Resolução 615 do CNJ, art. 19, § 3º, IV, só admite dado sigiloso em IA externa anonimizado na origem ou com proteção técnica. Atenção: essa última vale para magistrados e servidores, não para a advocacia.',
+     faca: ['ler o último cartão com a ressalva: regra para magistrados e servidores'],
+     transicao: 'E se eu me arrepender e cortar o acesso?'}},
+  {id: 'memoria', titulo: 'Cortar o acesso não apaga a memória', passos: [2.2, 1.8, 1.8],
+   notas: {diga: 'Revogar o acesso não faz o assistente esquecer. No Duet, desligar um app corta o acesso novo, e o que ele aprendeu fica até vocês zerarem a memória. No dots, a memória só se apaga apagando o dot inteiro. No Grok Bot, apagar um Bot não limpa o computador que os Bots compartilham.',
+     faca: ['chegada: o Duet', 'clique 1: o dots', 'clique 2: o Grok Bot'],
+     transicao: 'Então, quanto acesso dar? Vocês decidem.'}},
+  {id: 'a7', titulo: 'Sua vez: o acesso mínimo', pratica: 7,
+   notas: {diga: 'Em dupla, escolham uma tarefa, a agenda da manhã, por exemplo. Preencham três colunas: o que o assistente pode ler, o que pode escrever e o que ele nunca toca. Sete minutos.',
+     faca: ['cronômetro de 7 minutos: começa sozinho na tela do apresentador',
+       'resposta-modelo para a agenda da manhã. Pode ler: a agenda e só os e-mails de uma pasta. Pode escrever: um rascunho salvo, nunca enviado. Nunca: a caixa inteira, o sistema do tribunal com certificado, pagamento, apagar.',
+       'fecho: "Duas semanas, só lendo." Uma conta de teste, só leitura, e aprovação para tudo que sai.'],
+     transicao: 'Tempo. Agora, o sistema em volta do modelo.'}},
+);
+// Bloco B, harness (6 min): o sistema em volta do modelo, o vídeo dos dez agentes e o custo de cada um. Fatos só do
+// briefing.md e da ficha docs/pesquisa/dia2-harness-quatilex.md (print de 05/11/2026).
+SLIDES.push(
+  {id: 'harness-cap', titulo: 'O sistema em volta do modelo', bloco: 'harness', andamento: 'capitulo', linhaDia: false,
+   notas: {diga: 'Até aqui, um assistente sozinho. Agora, o que fica em volta do modelo: o harness. É o sistema que divide o trabalho entre vários agentes, cada um com um modelo. Vou mostrar uma peça da PGE-MS por dentro. Falo da experiência de quem trabalha lá; a co.juris não fala em nome da PGE-MS.',
+     faca: ['bloco curto, de 6 minutos: o vídeo e o custo de cada agente', 'apontar o aviso do rodapé'],
+     transicao: 'Uma peça, dez agentes.'}},
+  {id: 'harness', titulo: 'Dez agentes, uma peça', video: [0.9, 39.5], ritmoOk: 'vídeo de 40 s, narrado pelo professor',
+   notas: {diga: 'Esta é uma peça real, gerada no quatilex, sem nenhum dado de processo. Dez agentes e seis modelos trabalharam nela. Primeiro, o classificador lê os autos e decide o tipo do caso. Dois leitores baratos leem os autos ao mesmo tempo e listam argumentos e fatos, com a fonte. O agrupador junta o que os dois disseram igual. Aí entra o redator, com o Claude Opus 5.5, que escreve a peça e confere nos autos. Dois validadores checam os julgados e os artigos de lei citados. Por último, um agente confere se a peça afirma um ofício que não foi expedido. Doutrina e jurisprudência são ferramentas de busca que os leitores e o redator chamam.',
+     faca: ['o vídeo toca sozinho na moldura; não há nada ao vivo neste slide',
+       'o vídeo tem 40 s; falar por cima dele, na ordem em que os agentes aparecem',
+       'os números valem para esta peça, não para a média do sistema'],
+     transicao: 'E quanto custou cada um?'}},
+  {id: 'redator', titulo: 'O caro só onde faz diferença', passos: [3.2],
+   notas: {diga: 'A peça inteira custou US$ 1,59. Só o redator, com o modelo caro, custou US$ 1,39: 87% da conta. Os outros nove, somados, custaram US$ 0,21. O modelo caro fica onde a qualidade decide, na escrita. Ler, classificar, buscar e conferir vão para modelos baratos. É isso que um bom harness faz.',
+     faca: ['apontar a barra dourada do redator e depois as nove barras finas', 'lembrar: números de uma peça, do print de 05/11/2026'],
+     transicao: 'Custo por peça é uma conta. Quem paga a conta inteira é outra história.'}},
+);
+// Bloco C, quem paga a conta (23 min): o uso já se paga, a corrida não; o plano fixo encolhe; o que levar de um app a
+// outro (A8). Fatos só do briefing.md e da ficha docs/pesquisa/dia2-economia-subsidio-bolha.md.
+SLIDES.push(
+  {id: 'conta-cap', titulo: 'Quem paga a conta', bloco: 'conta', andamento: 'capitulo', linhaDia: false,
+   notas: {diga: 'A peça custou um dólar e cinquenta e nove. Agora, a conta grande: quem paga a IA que vocês usam? A resposta curta está na tela. Cada uso já se paga. A corrida para o próximo modelo, ainda não.',
+     faca: ['bloco de 23 minutos: custo, compromissos, o plano fixo, bolha e a atividade A8'],
+     transicao: 'Começo pelo custo de cada uso.'}},
+  {id: 'custo', titulo: 'Cada uso já se paga', passos: [3.0, 1.6, 1.6],
+   notas: {diga: 'Estes números vêm do prospecto que a Anthropic entregou à SEC, a comissão de valores dos Estados Unidos, em 2 de novembro de 2026. É o custo de computação dividido pela receita. A linha tracejada é o empate: custo igual à receita. Em 2024, a empresa gastava 653% do que faturava, mais de seis vezes. Em 2025, 160%. De janeiro a setembro de 2026, 57%. O custo de cada uso já cabe na receita.',
+     faca: ['chegada: 2024; avisar que a barra está quebrada porque 653% não cabe na tela',
+       'clique 1: 2025, ainda acima da linha', 'clique 2: 2026, a barra dourada abaixo da linha'],
+     transicao: 'Então onde está o dinheiro que falta? Neste número.'}},
+  {id: 'compromissos', titulo: 'US$ 895 bi', passos: [3.2], segura: 3,
+   notas: {diga: 'Oitocentos e noventa e cinco bilhões de dólares. É quanto a Anthropic já contratou em computação, segundo o mesmo prospecto. E o contrato manda pagar com ou sem uso. Desse total, 447,5 bilhões vencem até o fim de 2030. A receita vai crescer nesse ritmo? Nenhum documento que eu li responde.',
+     faca: ['pausa de três segundos depois do número', 'a expressão do prospecto é "regardless of actual utilization", com ou sem uso de fato'],
+     transicao: 'Se o uso se paga, quem banca essa corrida?'}},
+  {id: 'quem-banca', titulo: 'Quem banca a corrida',
+   notas: {diga: 'Dois ramos. Em cima, os investidores, junto com a dívida, bancam o treino dos próximos modelos e os data centers. Embaixo, dentro dos planos de preço fixo, o usuário leve banca o usuário pesado. O preço de hoje cobre o uso de hoje. A próxima geração sai de outro bolso.',
+     faca: ['apontar o ramo de cima e depois o de baixo'],
+     transicao: 'Quem é esse usuário pesado?'}},
+  {id: 'pesado', titulo: 'O usuário pesado custa caro',
+   notas: {diga: 'Usuário pesado é quem põe a IA para trabalhar horas sozinha. Em janeiro de 2025, Sam Altman escreveu que a OpenAI estava perdendo dinheiro com o ChatGPT Pro, o plano de 200 dólares, porque as pessoas usam mais do que o esperado. Em julho de 2025, a Anthropic anunciou limites semanais no Claude Code para menos de 5% dos assinantes. Um deles tinha consumido dezenas de milhares de dólares de uso num plano de 200.',
+     faca: ['traduzir as duas citações em voz alta: "estamos perdendo dinheiro com as assinaturas do pro"; "dezenas de milhares"'],
+     transicao: 'E o que as empresas fizeram? Encolheram o plano fixo.'}},
+  {id: 'encolhe', titulo: 'O plano fixo está encolhendo',
+   notas: {diga: 'Três marcos de 2026. Em junho, o GitHub Copilot trocou a franquia por cobrança por consumo. Em julho, o modelo de ponta da Anthropic, o Fable, saiu dos limites do Claude Pro; agora, só com crédito pago à parte. E a página de preços do ChatGPT, hoje, diz que o plano Go pode incluir anúncios. A mensalidade quase não sobe. Muda o que ela compra. E a própria Anthropic, no prospecto, lista a mudança de limites como risco.',
+     faca: ['o dourado marca o marco mais recente, novembro'],
+     transicao: 'Diante disso, a pergunta de todo jornal: é bolha?'}},
+  {id: 'bolha', titulo: 'Bolha ou não?',
+   notas: {diga: 'Dois lados. A, o alerta. O BIS, o banco dos bancos centrais, em junho de 2026, e o FMI, em outubro, veem risco de correção, piorado pela dívida e por acordos com termos pouco divulgados. Nenhum dos dois diz que há bolha; dizem que a correção é possível e sairia cara. B, o contra. A receita cresce, e o Ramp, que mede gastos de cartão de 70 mil empresas americanas, conta 55,9% delas pagando por IA em setembro.',
+     faca: ['pedir mão levantada: quem acha que é bolha? quem acha que não?', 'o dado do Ramp tem confiança média; por isso a fonte está na tela'],
+     transicao: 'A minha posição cabe numa frase.'}},
+  {id: 'tese', titulo: 'A tecnologia fica. O preço muda.', linhaDia: false,
+   notas: {diga: 'A tecnologia fica: ela é real e é útil. O preço muda, e muda também o que o plano compra. Quem depende de um app só fica preso à conta dele.',
+     faca: ['pausa curta'],
+     transicao: 'Então vamos testar a dependência de vocês.'}},
+  {id: 'a8', titulo: 'Sua vez: e se o preço dobrar?', pratica: 5, passos: [2.0, 1.4],
+   notas: {diga: 'Cinco minutos, em dupla. Imaginem que, na sexta, o plano que vocês usam dobra de preço. O que quebra no trabalho de vocês? Pensem no que está preso ao app.',
+     faca: ['chegada: só a pergunta; disparar o cronômetro de 5 minutos (começa sozinho na tela do apresentador)',
+       'segundo clique: a resposta, depois do tempo; entra à direita o que vai com vocês para outro app',
+       'gabarito, no próximo slide: costuma quebrar o que está preso ao app; instruções só na memória do chat, documentos só no projeto do fornecedor, nenhum segundo fornecedor testado',
+       'no fim, pedir a duas duplas que digam o que quebra'],
+     transicao: 'O que não quebra é o que vai com vocês.'}},
+  {id: 'portavel', titulo: 'O que vai com você de um app a outro',
+   notas: {diga: 'Quatro coisas vão com vocês. A skill: o mesmo SKILL.md serve ao Claude e ao ChatGPT ou ao Codex. A pasta, com os documentos no seu disco. As instruções, escritas em texto, fora da memória do chat. E um segundo fornecedor, testado antes de precisar. Se o preço dobrar, vocês trocam de app e levam o trabalho junto.',
+     faca: ['comparar com o que as duplas disseram'],
+     transicao: 'O preço é uma dependência. A outra é onde o dado mora.'}},
+);
+// Bloco D, geopolítica (18 min): capítulo, chips, a distância dos abertos, o teste do CAISI, o CLOUD Act (S.T.A.R.), o
+// calendário do AI Act e o debate A9. Fatos só do briefing.md e da ficha G (docs/pesquisa/dia2-geopolitica-ia.md).
+SLIDES.push(
+  {id: 'geo-cap', titulo: 'Quem manda no dado', bloco: 'geopolitica', andamento: 'capitulo', linhaDia: false,
+   notas: {diga: 'Quarto movimento: geopolítica. Até aqui a pergunta era quanto custa. Agora é quem manda no dado. Quatro peças: chips, modelos abertos, regras e jurisdição.',
+     faca: ['deixar o título na tela um instante antes de falar'],
+     transicao: 'Começo pelo que vem antes de tudo: o chip.'}},
+  {id: 'chips', titulo: 'Chip de ponta é política de Estado',
+   notas: {diga: 'Quase todo chip de IA de ponta sai de uma fábrica só, a TSMC. Quem registra é o AI Index 2026, de Stanford. E desde 15 de janeiro de 2026 os EUA licenciam caso a caso a venda desses chips à China, com teto: no máximo metade do que vendem nos EUA. A barra cheia é o vendido nos EUA; a dourada, pela metade, o teto para a China. Quem controla o chip controla quem treina modelo.',
+     faca: ['apontar o cartão da esquerda, depois o da direita'],
+     transicao: 'E quem não tem o chip de ponta? Aposta em modelo aberto.'}},
+  {id: 'quatro-meses', titulo: '4 meses',
+   notas: {diga: 'Quatro meses. É a distância dos melhores modelos abertos para os fechados, na medição da Epoch AI de maio de 2026. Modelo aberto é aquele cujo arquivo se baixa e roda em servidor próprio. Quatro meses é pouco: o aberto anda logo atrás, e pode rodar dentro de casa.',
+     faca: ['deixar o número na tela em silêncio um instante', 'dizer o que é modelo aberto: o que se baixa e roda em servidor próprio'],
+     transicao: 'Perto em capacidade. E em segurança?'}},
+  {id: 'aberto-seguro', titulo: 'Aberto não quer dizer seguro',
+   notas: {diga: 'O CAISI, órgão do NIST, do governo americano, testou o DeepSeek R1-0528 em 30 de setembro de 2025. Agentes montados sobre ele foram 12 vezes mais propensos a seguir instruções maliciosas. Com um jailbreak comum, que é um truque de texto para furar as travas do modelo, atenderam 94% dos pedidos maliciosos. Os modelos americanos, 8%. Uma ressalva: é o governo dos EUA avaliando concorrentes chineses. Isso não invalida os números, mas pede leitura com isso em mente.',
+     faca: ['apontar o 94% e o 8%, lado a lado', 'ler o rodapé em voz alta'],
+     transicao: 'Agora o ponto que eu quero que vocês guardem: onde o dado mora.'}},
+  {id: 'cloud-act', titulo: 'Dado no Brasil, empresa nos EUA',
+   notas: {diga: 'O dado pode morar num data center no Brasil. Mas, se o provedor é americano, o CLOUD Act, a lei 18 U.S.C. § 2713, obriga a empresa a preservar ou entregar o que está sob o controle dela, dentro ou fora dos EUA. Onde o dado mora é uma pergunta. Quem pode mandar entregar é outra. Esse conflito se resolve por acordo executivo, e os EUA têm só dois: Reino Unido e Austrália. O Brasil não está na lista do Departamento de Justiça americano.',
+     faca: ['apontar o ramo de cima, onde o dado mora', 'apontar o ramo de baixo, quem pode mandar entregar', 'perguntar à sala: o contrato do seu órgão diz quem é o provedor?'],
+     transicao: 'E as regras sobre a própria IA? Chegam aos poucos.'}},
+  {id: 'regras', titulo: 'As regras chegam em datas diferentes',
+   notas: {diga: 'Na Europa, o AI Act chega por etapas. Proibições desde fevereiro de 2025. Fiscalização da maior parte das regras desde agosto de 2026: é onde estamos. Alto risco do Anexo III em dezembro de 2027 e produtos regulados em agosto de 2028, datas que o Omnibus Digital adiou. No Brasil, o PL 2338/2023, aprovado no Senado, espera o parecer do relator na Comissão Especial da Câmara. Enquanto isso, valem normas setoriais, como a Resolução CNJ 615/2025.',
+     faca: ['apontar o marco aceso: agosto de 2026, a fiscalização'],
+     transicao: 'Com isso na mão, vocês decidem.'}},
+  {id: 'a9', titulo: 'Debate: modelo chinês no órgão?', pratica: 6,
+   notas: {diga: 'Debate. Modelo aberto chinês, rodando no servidor do órgão: pode? Metade da sala defende que pode, a outra metade que não pode. Dois minutos para preparar com as três perguntas: onde roda, quem controla a empresa e o que ele faz com uma ordem maliciosa.',
+     faca: ['cronômetro de 6 minutos: começa sozinho na tela do apresentador',
+       'dividir a sala ao meio: um lado defende que pode, o outro que não pode',
+       'dois minutos de preparo, três de debate, um para o fecho',
+       'fecho do professor (ficha de geopolítica, seção 2): rodar dentro da infraestrutura do órgão tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo, que é o que o CAISI mediu',
+       'se a sala confundir: o mesmo modelo usado pela API do fabricante chinês leva o dado à jurisdição chinesa; o par que importa é rodar em casa ou mandar para fora'],
+     transicao: 'Tempo. Para fechar, o futuro.'}},
+);
+// Bloco E, futuro e fecho (16 min): capítulo, o ritmo medido, os dois cenários, os sinais, A10, A11, os quatro verbos e
+// o fecho. Fatos só do briefing.md e da ficha G (docs/pesquisa/dia2-geopolitica-ia.md, 1.6 e seção 3).
+SLIDES.push(
+  // passos 3,0 s: a viagem de capítulo (2,2 s) só fecha a base da trilha e o pad direito 0,7 s depois do pouso
+  {id: 'futuro-cap', titulo: 'E em 2030?', bloco: 'futuro', andamento: 'capitulo', linhaDia: false, passos: [3.0],
+   notas: {diga: 'Último bloco: e em 2030? Não vou fazer previsão de consultoria. Vou mostrar o ritmo medido, dois cenários e sinais com data, para vocês acompanharem.',
+     faca: ['deixar a pergunta na tela um instante antes de falar'],
+     transicao: 'Primeiro, o ritmo.'}},
+  {id: 'ritmo', titulo: '5x ao ano',
+   notas: {diga: 'Cinco vezes ao ano. É quanto cresce o cômputo de treino dos modelos líderes, isto é, o poder de computação gasto para treinar cada nova geração. A eficiência dos algoritmos melhora de 2 a 6 vezes ao ano. Quem mede é o Relatório Internacional de Segurança da IA, de 3 de fevereiro de 2026, presidido por Yoshua Bengio.',
+     faca: ['deixar o número na tela em silêncio um instante'],
+     transicao: 'Se esse ritmo continuar, onde chegamos? Depende.'}},
+  {id: 'cenarios', titulo: 'De ganho modesto a salto rápido',
+   notas: {diga: 'O mesmo relatório cita a OCDE: até 2030, o resultado pode ir de melhoras modestas a ganhos rápidos. Essa faixa, do modesto ao rápido, é da OCDE. E o próprio Relatório Internacional de Segurança da IA 2026 projeta: se a tendência se mantiver, os sistemas completariam com confiança tarefas de software bem especificadas que levam vários dias. Há gargalos possíveis: dados, chips, dinheiro e energia. Qualquer um deles pode frear a curva.',
+     faca: ['apontar o ramo de cima, depois o de baixo', 'as tarefas de vários dias são projeção do Relatório Internacional de Segurança da IA 2026; a faixa modesto a rápido é da OCDE, citada nele', 'ler a legenda: os gargalos'],
+     transicao: 'Como saber para qual lado vamos? Olhando sinais.'}},
+  {id: 'sinais', titulo: 'Sinais para acompanhar',
+   notas: {diga: 'Em vez de previsão, sinais com fonte pública. Em 2 de dezembro de 2026, na União Europeia, acaba a transição das regras de transparência do AI Act. Na Câmara, o parecer do relator do PL 2338. Na Epoch AI, a próxima medição da distância entre abertos e fechados, que estava em quatro meses. E em abril de 2027, se o calendário se mantiver, o novo AI Index de Stanford.',
+     faca: ['apontar o marco aceso: dezembro de 2026, o mais próximo'],
+     transicao: 'O futuro de vocês começa com um plano de 30 dias.'}},
+  {id: 'a10', titulo: 'Seu plano de 30 dias', pratica: 5,
+   notas: {diga: 'Cada um, sozinho, cinco minutos. Três linhas. Semana 1: uma skill do seu jeito. Semanas 2 e 3: uma pasta de caso. Semana 4: uma rotina que pode falhar sem dano. Escrevam com uma tarefa real de vocês. Cada um guarda o seu.',
+     faca: ['cronômetro de 5 minutos: começa sozinho na tela do apresentador',
+       'sem papel: cada um anota no celular, onde quiser',
+       'circular pela sala; a quem travar na semana 4, perguntar: se essa rotina falhar em silêncio, o que se perde?'],
+     transicao: 'Agora eu quero ouvir vocês.'}},
+  {id: 'a11', titulo: 'O que você leva, o que faltou', pratica: 5,
+   notas: {diga: 'Devolutiva do curso. Em roda, cada um diz uma coisa que leva e uma que faltou. Eu anoto as faltas para a próxima turma.',
+     faca: ['cronômetro de 5 minutos: começa sozinho na tela do apresentador', 'anotar as faltas para a próxima turma', 'sala grande: uma frase por pessoa'],
+     transicao: 'Obrigado. Fecho com o curso inteiro.'}},
+  {id: 'curso', titulo: 'Quatro aulas, quatro verbos',
+   notas: {diga: 'Quatro aulas, quatro verbos. Entender, na Aula 1. Pedir, na Aula 2. Fazer, na Aula 3. E hoje, decidir: o que a IA alcança, quanto ela custa e de quem vocês passam a depender.',
+     faca: ['apontar o marco aceso: decidir'],
+     transicao: 'Se for para lembrar de uma coisa só...'}},
+  {id: 'fecho', titulo: 'Delegue pouco. Confira a fonte.', segura: 4, linhaDia: false,
+   notas: {diga: 'Delegue pouco. Confira a fonte. Muito obrigado pelas quatro aulas e pela conversa de hoje. O kit do dia 2 está no GitHub, no endereço do fim da Aula 3. Comecem pela semana 1 do plano.',
+     faca: ['antes da aula, conferir o endereço do kit no GitHub: era provisório no deck da Aula 3', 'deixar a mensagem na tela durante as perguntas'],
+     transicao: 'Fim do curso.'}},
+);
+
+const m = mundo(SLIDES);
+const CENAS = {};
+const $$ = (sec, sel) => [...sec.querySelectorAll(sel)];
+const vis = (el, sim) => { el.style.visibility = sim ? '' : 'hidden'; };
+const NS = 'http://www.w3.org/2000/svg';
+const traco = (pai, d, cls) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); if (cls) p.setAttribute('class', cls); pai.appendChild(p); return p; };
+
+// Cartões: entram em onda, da esquerda para a direita e de cima para baixo.
+const cartoes = (id) => {
+  const sec = m.secao(id), cs = [...sec.querySelectorAll('.cartao')], leg = sec.querySelector('.ct-leg'), rodape = sec.querySelector(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    if (leg) revelar(leg, molaAR(x - 0.1));
+    cs.forEach((el, n) => surgir(el, molaAR(x - 0.2 - n * 0.09), {dy: 30}));
+    if (rodape) revelar(rodape, molaAR(x - 0.4 - cs.length * 0.09));
+    fim(sec, x, 0.5 + cs.length * 0.09);
+  };
+};
+
+// Definição em partes: um item por clique, o atual em destaque, e a explicação dele à direita.
+const partes = (id) => {
+  const sec = m.secao(id), itens = $$(sec, '.partes li'), expl = $$(sec, '.explica p'), rod = sec.querySelector(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c), d = (n) => (n === 0 ? x - 0.1 : c.desde(n));
+    titulo(sec, x, c);
+    let ativo = 0;
+    for (let n = 1; n < itens.length; n++) if (c.desde(n) > 0) ativo = n;
+    itens.forEach((li, n) => {
+      const k = molaAR(d(n));
+      surgir(li, k, {dx: -20, dy: 0});
+      vis(li, k > 0);
+      li.classList.toggle('ativa', n === ativo);
+    });
+    expl.forEach((p, n) => {
+      const sai = n + 1 < expl.length ? faixa(c.desde(n + 1), 0, 0.2) : 0;
+      const k = sai > 0 ? 1 - sai : molaAR(d(n) - 0.2);
+      surgir(p, k, {dy: 18});
+      vis(p, k > 0.001);
+    });
+    if (rod) revelar(rod, molaAR(x - 0.8));
+    fim(sec, x, 1.0);
+  };
+};
+
+// ===== Bloco A: assistentes =====
+// Capa (fundo claro, como a da Aula 2): o logo sobe, o fio se traça de cima para baixo e o texto entra linha a linha.
+CENAS.capa = (() => {
+  const sec = m.secao('capa'), logo = sec.querySelector('.a-logo-cj'), fio = sec.querySelector('.a-cp-fio');
+  const linhas = [sec.querySelector('.rotulo'), ...$$(sec, '.a-cp-tit > span'), sec.querySelector('.a-cp-sub')];
+  let pronto = false;
+  return (t, c) => {
+    if (!pronto) {
+      pronto = true;
+      const tit = sec.querySelector('.a-cp-tit'), largura = Math.max(...$$(sec, '.a-cp-tit > span').map((el) => el.offsetWidth));
+      if (largura > 1000) tit.style.fontSize = `${Math.floor(124 * 1000 / largura)}px`;
+    }
+    const x = c.desde(0);
+    surgir(logo, molaAR(x - 0.15, {resposta: 0.7, amortecimento: 0.9}), {dy: 24});
+    fio.style.transform = `scaleY(${saida(faixa(x, 0.55, 1.1)).toFixed(4)})`;
+    linhas.forEach((el, n) => revelar(el, molaAR(x - 0.8 - n * 0.16)));
+    fim(sec, x, 1.6);
+  };
+})();
+
+CENAS.cinco = cartoes('cinco');
+CENAS.sigilo = cartoes('sigilo');
+
+// Desenhos por código: o olho do assistente (alcance) e o cabo do acesso com as duas marcas do corte (memoria).
+for (const el of document.querySelectorAll('.a-olho')) {
+  const s = document.createElementNS(NS, 'svg');
+  s.setAttribute('viewBox', '0 0 100 60');
+  traco(s, 'M4 30Q50 -10 96 30Q50 70 4 30Z');
+  traco(s, 'M50 18A12 12 0 1 0 50.01 18');
+  el.appendChild(s);
+}
+for (const el of document.querySelectorAll('.a-cabo')) {
+  const s = document.createElementNS(NS, 'svg');
+  s.setAttribute('viewBox', '0 0 320 60');
+  traco(s, 'M0 30H160', 'a-cabo-e');
+  traco(s, 'M160 30H320', 'a-cabo-d');
+  traco(s, 'M150 10L138 50', 'a-corte');
+  traco(s, 'M182 10L170 50', 'a-corte');
+  el.appendChild(s);
+}
+
+// alcance (S.T.A.R. do bloco): a caixa chega, o assistente se liga a ela e o feixe lê as cinco mensagens, marcando cada
+// uma como lida. Cada clique acende uma sensível (cliente, minuta, parte contrária); a barra dourada fica só na atual, e
+// as que não estão acesas passam à tinta suave.
+CENAS.alcance = (() => {
+  const sec = m.secao('alcance'), q = (s) => sec.querySelector(s);
+  const aCx = q('.a-cx'), aMsgs = $$(sec, '.a-msg'), aFeixe = q('.a-feixe'), aFio = q('.a-fio'), aAss = q('.a-ass');
+  const aSens = [0, 2, 4], aPasso = 0.3;   // linhas acesas, na ordem dos cliques; segundos do feixe em cada linha
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    surgir(aCx, molaAR(x - 0.1), {dy: 24});
+    aMsgs.forEach((el, n) => surgir(el, molaAR(x - 0.25 - n * 0.08), {dy: 14}));
+    tracar(aFio, saida(faixa(x, 0.6, 0.9)));
+    surgir(aAss, molaAR(x - 0.75), {dx: 30, dy: 0});
+    const kf = faixa(x, 1.1, 1.1 + aPasso * (aMsgs.length - 1));
+    aFeixe.style.transform = `translateY(${kf * 98 * (aMsgs.length - 1)}px)`;
+    aFeixe.style.opacity = faixa(x, 0.95, 1.1) * (1 - faixa(x, 2.4, 2.6));
+    aMsgs.forEach((el, n) => {
+      el.querySelector('.a-lido').style.opacity = faixa(x, 1.15 + n * aPasso, 1.3 + n * aPasso);
+      const j = aSens.indexOf(n), acesa = j >= 0 && c.desde(j + 1) > 0;
+      const k = acesa ? saida(faixa(c.desde(j + 1), 0, 0.5)) : 0;
+      el.querySelector('.a-luz').style.opacity = k;
+      el.querySelector('.a-barra').style.opacity = j >= 0 && j < 2 ? k * (1 - faixa(c.desde(j + 2), 0, 0.3)) : k;
+      el.classList.toggle('a-fora', c.desde(1) > 0 && !acesa);
+    });
+    fim(sec, x, 1.6);
+  };
+})();
+
+// memoria: uma linha por parada. O nome entra, o cabo do acesso se traça e se corta (as pontas se afastam e as marcas
+// do corte aparecem, douradas só na linha atual), e a caixa do que fica na memória chega por último.
+CENAS.memoria = (() => {
+  const sec = m.secao('memoria'), aEts = $$(sec, '.a-mem-et'), aLs = $$(sec, '.a-mem-l');
+  return (t, c) => {
+    const x = conteudo(c), d = (n) => (n === 0 ? x - 0.15 : c.desde(n));
+    titulo(sec, x, c);
+    aEts.forEach((el, n) => revelar(el, molaAR(x - 0.05 - n * 0.1)));
+    let agora = 0;
+    for (let n = 1; n < aLs.length; n++) if (c.desde(n) > 0) agora = n;
+    aLs.forEach((l, n) => {
+      const dn = d(n), [esq, dir, ...cortes] = l.querySelectorAll('path');
+      vis(l, dn > 0);
+      l.classList.toggle('a-agora', n === agora);
+      surgir(l.querySelector('.a-mem-nome'), molaAR(dn), {dx: -20, dy: 0});
+      tracar(esq, saida(faixa(dn, 0.1, 0.35)));
+      tracar(dir, saida(faixa(dn, 0.35, 0.6)));
+      const kc = saida(faixa(dn, 0.7, 1.0));
+      esq.style.transform = `translateX(${-18 * kc}px)`;
+      dir.style.transform = `translateX(${18 * kc}px)`;
+      cortes.forEach((p) => { p.style.opacity = faixa(dn, 0.75, 0.95); });
+      surgir(l.querySelector('.a-mem-txt'), molaAR(dn - 0.9), {dx: 24, dy: 0});
+    });
+    fim(sec, x, 1.0);
+  };
+})();
+
+// a7 (cena guia): o enunciado sobe, as três colunas entram em onda e as linhas em branco de cada uma se traçam.
+CENAS.a7 = (() => {
+  const sec = m.secao('a7'), aEnun = sec.querySelector('.a-enun'), aCols = $$(sec, '.a-col');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    revelar(aEnun, molaAR(x - 0.15));
+    aCols.forEach((col, n) => {
+      surgir(col, molaAR(x - 0.5 - n * 0.15), {dy: 26});
+      $$(col, 'i').forEach((el, j) => { el.style.transform = `scaleX(${saida(faixa(x, 0.9 + n * 0.15 + j * 0.1, 1.3 + n * 0.15 + j * 0.1))})`; });
+    });
+    fim(sec, x, 1.0);
+  };
+})();
+// ===== Bloco B: harness =====
+// harness-cap (abertura) e harness (demonstracao) são arquétipos da biblioteca; redator é cena própria.
+
+// redator: as linhas entram em onda; os trilhos crescem juntos, na mesma escala (o do redator é o inteiro); por fim,
+// o 87% conta.
+CENAS.redator = (() => {
+  const sec = m.secao('redator'), bCab = sec.querySelector('.b-cab'), bLns = $$(sec, '.b-ln');
+  const bTrs = bLns.map((ln) => ln.querySelector('.b-t i')), bMax = Math.max(...bLns.map((ln) => +ln.dataset.v));
+  bLns.forEach((ln, n) => { bTrs[n].style.width = `${(100 * +ln.dataset.v / bMax).toFixed(3)}%`; });
+  const bPct = sec.querySelector('.b-pct'), bPctN = sec.querySelector('.b-pct-n'), bPctLeg = sec.querySelector('.b-pct-leg');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    revelar(bCab, molaAR(x - 0.1));
+    bLns.forEach((ln, n) => surgir(ln, molaAR(x - 0.2 - n * 0.06), {dx: -18, dy: 0}));
+    const k = saida(faixa(x, 0.9, 1.9));
+    bTrs.forEach((el) => { el.style.transform = `scaleX(${k.toFixed(4)})`; });
+    surgir(bPct, molaAR(x - 1.9), {dy: 20});
+    contar(bPctN, saida(faixa(x, 1.9, 2.6)), 0, 87, {sufixo: '%'});
+    revelar(bPctLeg, molaAR(x - 2.3));
+    fim(sec, x, 2.6);
+  };
+})();
+// ===== Bloco C: quem paga a conta =====
+// conta-cap, quem-banca, encolhe, bolha e tese são arquétipos da biblioteca; pesado e portavel usam os cartões da base.
+CENAS.pesado = cartoes('pesado');
+CENAS.portavel = cartoes('portavel');
+
+// custo: a linha dos 100% se traça na chegada; um ano por parada (2024 na chegada, 2025 e 2026 nos cliques). A barra
+// cresce, o valor conta e, na de 653%, a quebra aparece depois que ela passa do ponto.
+CENAS.custo = (() => {
+  const sec = m.secao('custo'), cCab = sec.querySelector('.c-cab'), cCem = sec.querySelector('.c-cem i'), cCemLeg = sec.querySelector('.c-cem-leg');
+  const cFonte = sec.querySelector('.c-fonte'), cAnos = $$(sec, '.c-ano');
+  const PX = 280 / 100, TETO = 1080;   // 100% da receita = 280 px; o que passa do teto é desenhado quebrado
+  const cLin = cAnos.map((el) => {
+    const bar = el.querySelector('.c-bar'), v = +bar.dataset.v, w = Math.min(v * PX, TETO);
+    bar.style.width = `${w}px`;
+    const pct = el.querySelector('.c-pct');
+    pct.style.left = `${Math.max(320 + w, 320 + 100 * PX) + 30}px`;   // o valor nunca cruza a linha dos 100%
+    return {el, n: el.querySelector('.c-ano-n'), i: bar.querySelector('i'), u: bar.querySelector('u'), pct, v};
+  });
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    revelar(cCab, molaAR(x - 0.1));
+    cCem.style.transform = `scaleY(${saida(faixa(x, 0.2, 0.8)).toFixed(4)})`;
+    revelar(cCemLeg, molaAR(x - 0.6));
+    revelar(cFonte, molaAR(x - 0.8));
+    cLin.forEach((l, n) => {
+      const d = n === 0 ? x - 0.7 : c.desde(n);
+      vis(l.el, d > 0);
+      surgir(l.n, molaAR(d), {dx: -18, dy: 0});
+      const k = saida(faixa(d, 0.15, 1.05));
+      l.i.style.transform = `scaleX(${k.toFixed(4)})`;
+      surgir(l.pct, molaAR(d - 0.9), {dx: -12, dy: 0});
+      contar(l.pct, saida(faixa(d, 0.9, 1.4)), 0, l.v, {sufixo: '%'});
+      if (l.u) l.u.style.opacity = String(faixa(d, 0.75, 0.95));
+    });
+    fim(sec, x, 1.0);
+  };
+})();
+
+// compromissos: o número conta até 895; a moeda e a unidade entram junto, e a legenda sobe depois.
+CENAS.compromissos = (() => {
+  const sec = m.secao('compromissos'), q = (s) => sec.querySelector(s);
+  const cMoeda = q('.c-moeda'), c895 = q('.c-895'), cBi = q('.c-bi'), cLeg = q('.c-num-leg'), cRod = q(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    surgir(cMoeda, molaAR(x - 0.1), {dy: 0});
+    surgir(c895, molaAR(x - 0.1), {dy: 0});
+    contar(c895, saida(faixa(x, 0.1, 1.4)), 0, 895);
+    surgir(cBi, molaAR(x - 0.3), {dy: 0});
+    revelar(cLeg, molaAR(x - 1.4));
+    revelar(cRod, molaAR(x - 1.5));
+    fim(sec, x, 1.8);
+  };
+})();
+
+// a8: na chegada, só a pergunta; no segundo clique (depois do cronômetro), o checklist em miniatura, item por item.
+CENAS.a8 = (() => {
+  const sec = m.secao('a8'), cPerg = sec.querySelector('.c-perg'), cEt = sec.querySelector('.c-mini-et');
+  const cMini = sec.querySelector('.c-mini'), cIt = $$(sec, '.c-mini li');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    surgir(cPerg, molaAR(x - 0.2), {dy: 24});
+    fim(sec, x, 1.2);
+    const d = c.desde(1);
+    vis(cEt, d > 0); vis(cMini, d > 0);
+    revelar(cEt, molaAR(d - 0.05));
+    surgir(cMini, molaAR(d - 0.1), {dy: 0});
+    cIt.forEach((el, n) => surgir(el, molaAR(d - 0.2 - n * 0.12), {dx: 18, dy: 0}));
+  };
+})();
+// ===== Bloco D: geopolítica =====
+// geo-cap (abertura), cloud-act (ramos) e regras (tempo) são arquétipos da biblioteca: sem cena própria.
+// chips: os cartões da base; depois, as duas barras do teto crescem da esquerda, a da China até a metade.
+CENAS.chips = (() => {
+  const base = cartoes('chips'), sec = m.secao('chips'), dBarras = $$(sec, '.d-barra');
+  return (t, c) => {
+    base(t, c);
+    const x = conteudo(c);
+    dBarras.forEach((el, n) => { el.style.transform = `scaleX(${saida(faixa(x, 0.8 + n * 0.35, 1.4 + n * 0.35)).toFixed(4)})`; });
+  };
+})();
+CENAS['aberto-seguro'] = cartoes('aberto-seguro');
+
+// quatro-meses: o "4" sobe, "meses" chega ao lado; a legenda depois. Sem o sublinhado: o "4" já é o dourado da
+// parada, e a caneta clara embaixo do dourado de texto fazia dois dourados.
+CENAS['quatro-meses'] = (() => {
+  const sec = m.secao('quatro-meses'), q = (s) => sec.querySelector(s);
+  const dN = q('.d-num-n'), dU = q('.d-num-u'), dLeg = q('.d-num-leg');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    surgir(dN, molaAR(x - 0.1), {dy: 50});
+    surgir(dU, molaAR(x - 0.35), {dx: -30, dy: 0});
+    revelar(dLeg, molaAR(x - 0.9));
+    fim(sec, x, 1.4);
+  };
+})();
+
+// a9 (cena guia): a pergunta do debate; as três perguntas entram uma a uma; os dois lados da sala por último.
+CENAS.a9 = (() => {
+  const sec = m.secao('a9'), dPerg = sec.querySelector('.d-a9-perg'), dEt = sec.querySelector('.d-a9-et');
+  const dLis = $$(sec, '.d-a9-lista li'), dLados = $$(sec, '.d-lado');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    revelar(dPerg, molaAR(x - 0.15));
+    revelar(dEt, molaAR(x - 0.5));
+    dLis.forEach((li, n) => surgir(li, molaAR(x - 0.6 - n * 0.2), {dx: -22, dy: 0}));
+    dLados.forEach((el, n) => surgir(el, molaAR(x - 1.3 - n * 0.15), {dx: 22, dy: 0}));
+    fim(sec, x, 1.6);
+  };
+})();
+// ===== Bloco E: futuro e fecho =====
+// futuro-cap (respiro), cenarios (ramos), sinais e curso (tempo) e fecho são arquétipos da biblioteca: sem cena própria.
+
+// ritmo: o "5x" sobe, "ao ano" chega ao lado, a caneta dourada sublinha o número; a legenda e a fonte depois.
+CENAS.ritmo = (() => {
+  const sec = m.secao('ritmo'), q = (s) => sec.querySelector(s);
+  const eN = q('.e-num-n'), eU = q('.e-num-u'), eLeg = q('.e-num-leg'), eRod = q('.rodape');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    surgir(eN, molaAR(x - 0.1), {dy: 50});
+    surgir(eU, molaAR(x - 0.35), {dx: -30, dy: 0});
+    anotar(eN, saida(faixa(x, 0.7, 1.2)), {forma: 'sublinhado', semente: 9});
+    revelar(eLeg, molaAR(x - 0.9));
+    revelar(eRod, molaAR(x - 1.3));
+    fim(sec, x, 1.4);
+  };
+})();
+
+// a10 (cena guia): as três faixas do mês entram da esquerda; a linha tracejada de cada uma se estende por último.
+CENAS.a10 = (() => {
+  const sec = m.secao('a10'), eEt = sec.querySelector('.e-a10-et'), eSem = $$(sec, '.e-sem'), eLin = $$(sec, '.e-linha');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    revelar(eEt, molaAR(x - 0.15));
+    eSem.forEach((el, n) => surgir(el, molaAR(x - 0.3 - n * 0.22), {dx: -24, dy: 0}));
+    eLin.forEach((el, n) => { el.style.transform = `scaleX(${saida(faixa(x, 1.0 + n * 0.15, 1.5 + n * 0.15)).toFixed(4)})`; });
+    fim(sec, x, 1.6);
+  };
+})();
+
+// a11 (cena guia): os dois campos sobem, um depois do outro; o pedido da roda por último.
+CENAS.a11 = (() => {
+  const sec = m.secao('a11'), eCampos = $$(sec, '.e-campo'), eRod = sec.querySelector(':scope > .rodape');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    eCampos.forEach((el, n) => surgir(el, molaAR(x - 0.2 - n * 0.3), {dy: 30}));
+    revelar(eRod, molaAR(x - 0.9));
+    fim(sec, x, 1.2);
+  };
+})();
+
+// Links das práticas: o clique abre a página em nova aba e não avança o slide.
+for (const a of document.querySelectorAll('#mundo a[href]')) a.addEventListener('click', (e) => e.stopPropagation());
+
+palco({slides: m.slides, desenhar: m.desenhar, blocos, autoplay: true, cenas: m.cenas(CENAS)});
+</script>
+</body>
+</html>

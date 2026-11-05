@@ -1,0 +1,26 @@
+[
+ {
+  "arquivo": "midia/demo-capa.webp",
+  "data": "2026-10-19",
+  "ferramenta": "trazido",
+  "origem": "./cvm html, código próprio, caso fictício; a digitação do pedido (0 a 4,8 s) e a escrita da minuta (de 6,6 s do original em diante) aceleradas 2x com ffmpeg a partir de midia/originais/demo.mp4",
+  "quadro_de": "midia/demo.mp4",
+  "segundo": 0.0,
+  "copiado_de": "decks/previa-curso-ia/midia/demo-capa.webp",
+  "nota": "marcador: substituir pela gravação do ensaio de cada demonstração (Tarefa 9)"
+ },
+ {
+  "arquivo": "midia/demo.mp4",
+  "data": "2026-10-19",
+  "ferramenta": "trazido",
+  "origem": "./cvm html, código próprio, caso fictício; a digitação do pedido (0 a 4,8 s) e a escrita da minuta (de 6,6 s do original em diante) aceleradas 2x com ffmpeg a partir de midia/originais/demo.mp4",
+  "original": "decks/previa-curso-ia/midia/originais/demo-pedido-2x.mp4",
+  "preparo": {
+   "perfil": "demo",
+   "ate": null,
+   "audio": false
+  },
+  "copiado_de": "decks/previa-curso-ia/midia/demo.mp4",
+  "nota": "marcador: substituir pela gravação do ensaio de cada demonstração (Tarefa 9)"
+ }
+]

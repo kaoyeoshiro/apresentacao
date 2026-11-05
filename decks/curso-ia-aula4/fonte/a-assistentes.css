@@ -1,0 +1,81 @@
+/* Bloco a-assistentes: só classes a- e [data-slide] deste bloco. */
+  /* capa clara, no desenho da Aula 2: logo oficial, fio e título */
+  .a-logo-cj { position: absolute; left: 120px; top: 300px; height: 480px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+  .a-cp-fio { position: absolute; left: 740px; top: 290px; width: 4px; height: 500px; background: var(--cor-linha); transform-origin: 50% 0; }
+  .a-cp-txt { position: absolute; left: 800px; top: 300px; width: 1000px; }
+  .a-cp-txt .rotulo { position: static; }
+  .a-cp-tit { margin-top: 26px; font-size: 124px; line-height: 1.04; color: var(--cor-tinta); }
+  .a-cp-tit > span { display: block; white-space: nowrap; }
+  .a-cp-sub { margin-top: 44px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
+  /* chat-agente (comparação): "Assistente" é larga demais para a janela no corpo padrão da letra */
+  [data-slide="chat-agente"] .janela .letra { font-size: 88px; }
+  [data-slide="chat-agente"] .janela .janela-txt { top: 180px; width: 680px; }
+  /* o círculo da caneta em volta de "Assistente" é largo: a janela B anda para a direita para ele não cruzar o fio */
+  [data-slide="chat-agente"] .janela.escolhida { left: 1100px; width: 700px; }
+
+  /* cinco (cartões): três em cima e dois centrados embaixo; o dots, único dos prontos que inclui o Brasil, de dourado */
+  [data-slide="cinco"] .cartoes { top: 300px; row-gap: 28px; grid-template-columns: repeat(6, 1fr); }
+  [data-slide="cinco"] .cartao { grid-column: span 2; min-height: 250px; }
+  [data-slide="cinco"] .ct-tit { font-size: 56px; }
+  [data-slide="cinco"] .ct-sub { font-size: 34px; }
+  [data-slide="cinco"] .ct-txt { margin-top: 8px; font-size: 40px; }
+  [data-slide="cinco"] .cartao:nth-child(4) { grid-column: 2 / 4; }
+  [data-slide="cinco"] .cartao:nth-child(5) { grid-column: 4 / 6; }
+  [data-slide="cinco"] .a-br { border-color: var(--cor-destaque); }
+
+  /* sigilo (cartões): a regra em corpo de leitura, a referência embaixo */
+  [data-slide="sigilo"] .cartoes { top: 330px; }
+  [data-slide="sigilo"] .cartao { min-height: 236px; }
+  [data-slide="sigilo"] .ct-txt { margin-top: 0; font-size: 46px; line-height: 1.28; }
+  [data-slide="sigilo"] .ct-sub { margin-top: 12px; font-size: 34px; }
+  [data-slide="sigilo"] .a-ia { border-color: var(--cor-destaque); }   /* a Res. CNJ 615, a única regra sobre IA */
+
+  /* alcance (S.T.A.R.): a caixa de entrada desenhada por código, na noite; o assistente à direita, ligado por um fio */
+  .a-diag { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .a-diag path { fill: none; stroke: var(--suave-sobre-noite); stroke-width: 5; stroke-linecap: round; }
+  .a-cx { position: absolute; left: 120px; top: 300px; width: 1130px; height: 574px; box-sizing: border-box; overflow: hidden;
+          border: 4px solid var(--linha-sobre-noite); border-radius: 26px; background: color-mix(in srgb, var(--sobre-noite) 5%, var(--noite)); }
+  .a-cx-cab { display: flex; align-items: center; gap: 14px; height: 76px; padding: 0 30px; box-sizing: border-box; border-bottom: 3px solid var(--linha-sobre-noite); }
+  .a-cx-cab i { width: 18px; height: 18px; border-radius: 50%; background: var(--linha-sobre-noite); }
+  .a-cx-cab span { margin-left: 22px; font: 700 var(--esc-1)/1 var(--fonte-titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--suave-sobre-noite); white-space: nowrap; }
+  .a-cx-lista { position: relative; }
+  .a-msg { position: relative; display: grid; grid-template-columns: 330px 1fr 50px; align-items: center; height: 98px; padding: 0 34px 0 46px; box-sizing: border-box;
+           border-bottom: 2px solid var(--linha-sobre-noite); }
+  .a-msg:last-child { border-bottom: 0; }
+  .a-msg b { position: relative; font: 700 36px/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .a-assunto { position: relative; font: 400 36px/1.2 var(--fonte-texto); white-space: nowrap; }
+  .a-msg.a-fora b, .a-msg.a-fora .a-assunto { color: color-mix(in srgb, var(--sobre-noite) 55%, var(--noite)); }
+  .a-luz { position: absolute; inset: 0; background: color-mix(in srgb, var(--sobre-noite) 16%, var(--noite)); opacity: 0; }
+  .a-barra { position: absolute; left: 0; top: 12px; bottom: 12px; width: 12px; border-radius: 0 6px 6px 0; background: var(--cor-destaque); opacity: 0; }
+  .a-lido { position: relative; justify-self: end; width: 30px; height: 15px; margin-top: -8px; border-left: 5px solid var(--suave-sobre-noite); border-bottom: 5px solid var(--suave-sobre-noite); transform: rotate(-45deg); opacity: 0; }
+  .a-feixe { position: absolute; left: 0; right: 0; top: 0; height: 98px; opacity: 0;
+             background: color-mix(in srgb, var(--sobre-noite) 16%, transparent); border-top: 3px solid var(--suave-sobre-noite); border-bottom: 3px solid var(--suave-sobre-noite); box-sizing: border-box; }
+  .a-ass { position: absolute; left: 1380px; top: 450px; width: 420px; height: 280px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center;
+           border-radius: 26px; background: var(--sobre-noite); color: var(--noite); }
+  .a-olho { width: 100px; height: 60px; margin-bottom: 18px; }
+  .a-olho svg { display: block; width: 100px; height: 60px; overflow: visible; }
+  .a-olho path { fill: none; stroke: var(--noite); stroke-width: 6; stroke-linejoin: round; stroke-linecap: round; }
+  .a-ass-tit { font: 800 52px/1.1 var(--fonte-titulo); white-space: nowrap; }
+  .a-ass-sub { margin-top: 6px; font: 400 40px/1.2 var(--fonte-texto); white-space: nowrap; }
+
+  /* memoria (noite): nome, o cabo do acesso que se corta e a caixa do que fica na memória, uma linha por parada */
+  .a-mem-et { top: 318px; }
+  .a-mem-et1 { left: 560px; }
+  .a-mem-et2 { left: 920px; }
+  .a-mem { position: absolute; left: 120px; top: 370px; width: 1680px; }
+  .a-mem-l { display: flex; align-items: center; height: 170px; }
+  .a-mem-nome { flex: 0 0 400px; font: 800 64px/1.1 var(--fonte-titulo); letter-spacing: -0.01em; white-space: nowrap; }
+  .a-cabo { flex: 0 0 320px; height: 60px; margin: 0 40px; }
+  .a-cabo svg { display: block; width: 320px; height: 60px; overflow: visible; }
+  .a-cabo path { fill: none; stroke: var(--suave-sobre-noite); stroke-width: 6; stroke-linecap: round; }
+  .a-cabo .a-corte { stroke: var(--linha-sobre-noite); stroke-width: 6; }
+  .a-mem-l.a-agora .a-corte { stroke: var(--cor-destaque); }
+  .a-mem-txt { flex: 1; padding: 20px 32px; border: 3px solid var(--linha-sobre-noite); border-radius: 20px; font: 400 44px/1.25 var(--fonte-texto); text-wrap: pretty; }
+
+  /* a7 (cena guia): o enunciado e três colunas em branco; a coluna "nunca" com a borda dourada */
+  .a-enun { position: absolute; left: 120px; top: 296px; width: 1680px; font: 400 44px/1.3 var(--fonte-texto); text-wrap: pretty; }
+  .a-cols { position: absolute; left: 120px; top: 480px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .a-col { height: 380px; box-sizing: border-box; padding: 30px 36px; border: 4px solid var(--cor-linha); border-radius: 26px; }
+  .a-col-tit { font: 800 44px/1.1 var(--fonte-titulo); white-space: nowrap; }
+  .a-col i { display: block; margin-top: 66px; border-bottom: 4px dashed color-mix(in srgb, var(--cor-tinta) 28%, transparent); transform-origin: 0 50%; }
+  .a-nunca { border-color: var(--cor-destaque); }

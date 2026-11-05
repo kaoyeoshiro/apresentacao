@@ -1,0 +1,19 @@
+  /* ===== Bloco B: harness. Só classes b- e [data-slide] deste bloco. ===== */
+
+  /* harness-cap: o aviso da marca no rodapé, com a base da linha na mesma altura da base do subtítulo */
+  [data-slide="harness-cap"] .b-aviso { left: auto; right: 120px; top: 861px; font-size: 32px; text-align: right; }
+
+  /* redator: uma linha por agente (nome, trilho, valor), todas na mesma escala; à direita, a fatia do redator */
+  [data-slide="redator"] .b-cab { left: 120px; top: 292px; }
+  .b-barras { position: absolute; left: 120px; top: 346px; width: 1180px; }
+  .b-ln { display: flex; align-items: center; height: 53px; white-space: nowrap; }
+  .b-n { width: 410px; font: 700 34px/1.1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .b-t { position: relative; flex: 1; height: 22px; margin: 0 28px 0 0; }
+  .b-t i { position: absolute; left: 0; top: 0; bottom: 0; min-width: 6px; border-radius: 11px; background: color-mix(in srgb, var(--cor-tinta) 34%, var(--cor-fundo)); transform-origin: 0 50%; }
+  .b-v { width: 150px; text-align: right; font: 700 34px/1 var(--fonte-titulo); font-variant-numeric: tabular-nums; color: var(--cor-tinta-suave); }
+  .b-vence .b-n, .b-vence .b-v { color: var(--cor-tinta); font-weight: 800; }
+  .b-vence .b-t { height: 34px; }
+  .b-vence .b-t i { border-radius: 17px; background: var(--cor-destaque); }
+  .b-pct { position: absolute; left: 1380px; top: 330px; width: 420px; }
+  .b-pct-n { display: block; font-size: var(--esc-5); line-height: 1; }
+  .b-pct-leg { display: block; margin-top: 18px; font: 400 var(--esc-2)/1.25 var(--fonte-texto); color: var(--cor-tinta-suave); white-space: normal; text-wrap: balance; }

@@ -1,0 +1,22 @@
+[
+ {
+  "arquivo": "midia/harness-capa.webp",
+  "data": "2026-11-05",
+  "ferramenta": "trazido",
+  "origem": "./cvm html, código próprio (claude_video_maker, branch video/agentes-peca-2, videos/agentes-peca-2); dados do print da aba Detalhes de 05/11/2026; sem narração nem música",
+  "quadro_de": "midia/harness.mp4",
+  "segundo": 0
+ },
+ {
+  "arquivo": "midia/harness.mp4",
+  "data": "2026-11-05",
+  "ferramenta": "trazido",
+  "origem": "./cvm html, código próprio (claude_video_maker, branch video/agentes-peca-2, videos/agentes-peca-2); dados do print da aba Detalhes de 05/11/2026; sem narração nem música",
+  "original": "midia/originais/final.mp4",
+  "preparo": {
+   "perfil": "tela",
+   "ate": null,
+   "audio": false
+  }
+ }
+]

@@ -1,0 +1,29 @@
+/* Bloco e-futuro: só classes e- e [data-slide] deste bloco. */
+  /* ritmo (claro): "5x" a 320 px, "ao ano" ao lado, a legenda embaixo e a fonte no rodapé */
+  .e-num { position: absolute; left: 112px; top: 250px; display: flex; align-items: baseline; gap: 44px; color: var(--cor-tinta); }
+  .e-num-n { font-size: var(--esc-6); line-height: .9; }
+  .e-num-u { font-size: var(--esc-5); line-height: .9; color: var(--cor-tinta-suave); }
+  .e-num-leg { position: absolute; left: 120px; top: 610px; width: 1560px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
+
+  /* cenarios: a caixa do ramo de baixo leva três linhas; o texto se centra na altura da caixa (170 px, de y - 85) */
+  [data-slide="cenarios"] .caixa-txt { box-sizing: border-box; height: 170px; margin-top: -32px; display: grid; align-content: center;
+                                       font-size: 38px; line-height: 1.15; }
+
+  /* sinais: textos dos marcos em até duas linhas */
+  [data-slide="sinais"] .etapas li { font-size: 40px; }
+
+  /* a10 (cena guia, noite): as quatro semanas numa faixa (1, 2 e 3, 4), cada trecho com a tarefa e a linha para escrever */
+  .e-a10-et { left: 120px; top: 300px; color: var(--suave-sobre-noite); }
+  .e-plano { position: absolute; left: 120px; top: 380px; width: 1680px; display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 32px; }
+  .e-sem { position: relative; box-sizing: border-box; height: 430px; padding: 34px 36px 0; border: 4px solid var(--linha-sobre-noite); border-radius: 26px; }
+  .e-sem-tit { font: 800 var(--esc-2)/1.1 var(--fonte-titulo); text-transform: var(--titulo-caixa, uppercase); color: var(--sobre-noite); white-space: nowrap; }
+  .e-sem-txt { margin-top: 22px; font: 400 48px/1.22 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
+  .e-linha { position: absolute; left: 36px; right: 36px; bottom: 56px; height: 0; border-bottom: 4px dashed var(--linha-sobre-noite); transform-origin: 0 50%; }
+
+  /* a11 (cena guia, claro): dois campos grandes lado a lado */
+  .e-roda { position: absolute; left: 120px; top: 320px; width: 1680px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .e-campo { box-sizing: border-box; height: 460px; padding: 44px 48px; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-papel);
+             display: flex; flex-direction: column; justify-content: space-between; }
+  .e-campo-tit { font: 800 var(--esc-5)/.92 var(--fonte-titulo); letter-spacing: -0.03em; text-transform: var(--titulo-caixa, uppercase); color: var(--cor-tinta); white-space: nowrap; }
+  .e-campo-sub { font: 400 var(--esc-2)/1.25 var(--fonte-texto); color: var(--cor-tinta-suave); }
+  [data-slide="a11"] .rodape { top: 846px; color: var(--cor-tinta); }

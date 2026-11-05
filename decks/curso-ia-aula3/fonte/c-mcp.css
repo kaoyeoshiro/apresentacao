@@ -1,0 +1,88 @@
+/* Bloco c-mcp: só classes c- e [data-slide] deste bloco. */
+  /* página de petição desenhada por código (a3 e injecao): o corpo vira linhas cinza; as linhas saem de data-linhas */
+  .c-pag { position: absolute; left: 120px; top: 296px; width: 450px; height: 636px; box-sizing: border-box; padding: 44px 46px 0; border: 3px solid var(--cor-linha); border-radius: 6px; background: var(--cor-papel); }
+  .noite .c-pag { border-color: var(--cor-papel); }
+  .c-l { position: relative; height: 13px; }
+  .c-l i { position: absolute; left: 0; top: 3px; height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--cor-tinta) 30%, var(--cor-papel)); }
+  .c-l.c-t i, .c-l.c-h i { background: color-mix(in srgb, var(--cor-tinta) 70%, var(--cor-papel)); }
+  .c-l.c-v { height: 9px; }
+  .c-l.c-c { position: absolute; left: 0; top: 14px; width: 100%; height: 18px; border-bottom: 2px solid color-mix(in srgb, var(--cor-tinta) 18%, var(--cor-papel)); }
+  .c-l.c-c i { left: 34%; width: 32%; top: 4px; height: 5px; }
+  .c-l.c-w { height: 7px; }
+  .c-l.c-w i { top: 2px; height: 3px; background: var(--cor-papel); }
+  .c-l.c-w i.c-w-tinta { background: color-mix(in srgb, var(--cor-tinta) 70%, var(--cor-papel)); opacity: 0; }
+  .c-l.c-s { height: 34px; }
+  .c-l.c-s i:nth-child(1) { left: 22%; width: 56%; top: 6px; height: 2px; }
+  .c-l.c-s i:nth-child(2) { left: 30%; width: 40%; top: 15px; }
+  .c-l.c-s i:nth-child(3) { left: 26%; width: 48%; top: 26px; }
+  .c-l.c-r { height: 8px; margin-top: 8px; }
+  .c-l.c-r i { top: 2px; height: 3px; background: color-mix(in srgb, var(--cor-tinta) 22%, var(--cor-papel)); }
+  .c-l.c-p { position: absolute; left: 0; bottom: 14px; width: 100%; }
+  .c-l.c-p i { left: 42%; width: 16%; height: 5px; }
+  /* o destaque dourado do rodapé (injecao, clique 1) e a seleção (clique 2) ficam atrás das linhas */
+  .c-mk { position: absolute; left: -8px; right: -8px; top: -6px; bottom: -6px; border-radius: 4px; background: var(--cor-destaque); transform-origin: left center; }
+  .c-sel { position: absolute; left: -4px; right: -4px; top: 0; bottom: 0; background: color-mix(in srgb, var(--cor-tinta) 26%, var(--cor-papel)); transform-origin: left center; }
+  .c-l > i { z-index: 1; }
+
+  /* a3: a lupa sobre o pé da página e o rodapé ampliado, sem destaque */
+  .c-lupa-svg, .c-inj-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  .c-lupa-svg path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 3; stroke-linejoin: round; }
+  .c-lupa-l { stroke-dasharray: 10 10; }
+  .c-enun { position: absolute; left: 700px; top: 312px; width: 1100px; font: 600 var(--esc-2)/1.3 var(--fonte-titulo); text-wrap: pretty; }
+  .c-amp { position: absolute; left: 700px; top: 520px; width: 1100px; box-sizing: border-box; padding: 34px 50px 40px; border: 3px solid var(--cor-linha); border-radius: 10px; background: var(--cor-papel); }
+  .c-amp-ass { position: relative; height: 74px; }
+  .c-amp-ass i { position: absolute; border-radius: 6px; background: color-mix(in srgb, var(--cor-tinta) 30%, var(--cor-papel)); }
+  .c-amp-ass i:nth-child(1) { left: 22%; width: 56%; top: 0; height: 4px; }
+  .c-amp-ass i:nth-child(2) { left: 30%; width: 40%; top: 22px; height: 14px; }
+  .c-amp-ass i:nth-child(3) { left: 26%; width: 48%; top: 50px; height: 14px; }
+  .c-amp-rod { margin-top: 26px; font: 400 32px/1.4 var(--fonte-texto); color: var(--cor-tinta-suave); text-wrap: pretty; }
+
+  /* injecao: a ordem em texto branco, selecionada e ampliada; o agente e a resposta dele */
+  .c-tag-rod { left: 596px; top: 852px; }
+  .c-inj-svg path { fill: none; stroke: var(--linha-sobre-noite); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+  .c-inj-svg .c-inj-fio { stroke: var(--sobre-noite); stroke-width: 5; }
+  .c-branco { position: absolute; left: 680px; top: 296px; width: 1120px; box-sizing: border-box; padding: 30px 46px 38px; border-radius: 10px; background: var(--cor-papel); }
+  .c-tag-br { position: static; color: var(--cor-tinta-suave); }
+  .noite .c-branco .c-tag-br { color: var(--cor-tinta-suave); }
+  .c-branco-txt { margin-top: 16px; font: 400 34px/1.5 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
+  .c-branco-txt span { padding: 3px 0; background: color-mix(in srgb, var(--cor-tinta) 26%, var(--cor-papel)); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .c-agente { position: absolute; left: 680px; top: 680px; width: 280px; height: 120px; box-sizing: border-box; display: grid; place-items: center; border-radius: 26px; background: var(--sobre-noite); }
+  .c-agente p { font: 800 var(--esc-2)/1 var(--fonte-titulo); color: var(--noite); }
+  .c-balao { position: absolute; left: 1000px; top: 680px; width: 800px; height: 120px; box-sizing: border-box; display: flex; align-items: center; padding: 0 40px; border: 4px solid var(--cor-destaque); border-radius: 26px 26px 26px 6px; }
+  .c-balao p { font: 600 40px/1.2 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+
+  /* casos: a citação entre aspas um pouco maior que o texto do cartão */
+  .c-aspas { font-size: 40px; }
+  [data-slide="casos"] .cartao { min-height: 330px; }
+  [data-slide="casos"] .rodape { top: 800px; }
+  [data-slide="plugin"] .cartoes { top: 320px; }
+
+  /* plugin-tela (claro): a página do plugin desenhada por código */
+  .c-jan { position: absolute; left: 260px; top: 296px; width: 1400px; height: 556px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); overflow: hidden; }
+  .c-jan-barra { position: relative; height: 56px; border-bottom: 3px solid var(--cor-linha); }
+  .c-jan-barra i { position: absolute; top: 21px; width: 14px; height: 14px; border-radius: 7px; background: var(--cor-linha); }
+  .c-jan-barra i:nth-child(1) { left: 26px; } .c-jan-barra i:nth-child(2) { left: 50px; } .c-jan-barra i:nth-child(3) { left: 74px; }
+  .c-pl-cab { position: absolute; left: 60px; top: 104px; width: 1280px; height: 100px; display: flex; align-items: center; gap: 30px; }
+  .c-pl-ic { flex: 0 0 64px; height: 76px; }
+  .c-pl-ic svg { display: block; width: 64px; height: 76px; overflow: visible; }
+  .c-pl-ic path, .c-av-ic path { fill: none; stroke: var(--cor-tinta); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+  .c-pl-nome { font: 800 var(--esc-3)/1 var(--fonte-titulo); color: var(--cor-tinta); white-space: nowrap; }
+  .c-pl-mk { padding: 6px 18px; border: 3px solid var(--cor-linha); border-radius: 30px; font: 600 32px/1.2 var(--fonte-titulo); color: var(--cor-tinta-suave); white-space: nowrap; }
+  .c-pl-bt { margin-left: auto; padding: 14px 34px; border-radius: 14px; background: var(--cor-tinta); font: 700 34px/1.2 var(--fonte-titulo); color: var(--cor-fundo); white-space: nowrap; }
+  .c-aviso { position: absolute; left: 60px; top: 250px; width: 1280px; height: 130px; box-sizing: border-box; display: flex; align-items: center; gap: 30px; padding: 0 40px; border: 4px solid var(--cor-destaque); border-radius: 18px; }
+  .c-av-ic { flex: 0 0 64px; height: 60px; }
+  .c-av-ic svg { display: block; width: 64px; height: 60px; overflow: visible; }
+  .c-aviso p { font: 600 var(--esc-2)/1.2 var(--fonte-titulo); color: var(--cor-tinta); white-space: nowrap; }
+  .c-traz { position: absolute; left: 60px; top: 432px; width: 1280px; display: flex; align-items: center; gap: 24px; }
+  .c-traz-et { position: static; margin-right: 12px; }
+  .c-chip { padding: 12px 30px; border: 3px solid var(--cor-linha); border-radius: 36px; font: 600 38px/1.2 var(--fonte-titulo); color: var(--cor-tinta); white-space: nowrap; }
+
+  /* a4: as quatro categorias em cima (a frase sai no clique e o cartão encolhe) e as seis situações embaixo */
+  .c-cats { position: absolute; left: 120px; top: 300px; width: 1680px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
+  .c-cat { box-sizing: border-box; height: 330px; padding: 26px 30px 44px; border: 4px solid var(--cor-linha); border-radius: 22px; overflow: hidden; }
+  .c-cat-n { font: 800 var(--esc-2)/1.15 var(--fonte-titulo); }
+  .c-cat-f { margin-top: 14px; font-size: 36px; line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: pretty; }
+  .c-sits { position: absolute; left: 120px; top: 520px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px 36px; counter-reset: c-sit; }
+  /* o número da situação vem de um contador do CSS: é marcação, não texto a ler */
+  .c-sits li { counter-increment: c-sit; box-sizing: border-box; height: 180px; display: flex; align-items: center; gap: 24px; padding: 0 30px; border-radius: 22px; background: var(--cor-papel); border: 3px solid var(--cor-linha); font-size: 40px; line-height: 1.25; text-wrap: pretty; }
+  .c-sits li::before { content: counter(c-sit); flex: 0 0 62px; height: 62px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 31px; display: grid; place-items: center; font: 800 34px/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
