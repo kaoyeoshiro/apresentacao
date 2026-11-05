@@ -1,7 +1,7 @@
 // Bloco D, scraper (20 min): abertura, dois jeitos, votação, as duas etapas, a conferência (três variantes), limites
 // e captcha. Fatos só do briefing.md.
 const D_TJMS = 'Pesquise no TJMS acórdãos de segundo grau sobre [tema votado], julgados nos últimos três meses. Leia as ementas, baixe só os pertinentes e me dê uma planilha com processo, relator, data e o motivo de cada escolha.';
-const D_STJ = 'Escreva um script em Python que baixe o arquivo de espelhos de acórdãos de setembro de 2026 da Primeira Turma nos Dados Abertos do STJ, filtre as ementas por [tema votado] e grave um CSV com classe, processo, relator, órgão, data e ementa. Uma requisição por vez.';
+const D_STJ = 'Escreva um script em Python que baixe o arquivo de setembro de 2026 dos espelhos de acórdãos da Primeira Turma nos Dados Abertos do STJ, filtre as ementas por [tema votado] e grave um CSV com classe, processo, relator, órgão, data e ementa. Uma requisição por vez.';
 const D_CONFERIR = (tema, outras) => ({
   diga: `Tema votado: ${tema}. Estas são as três primeiras linhas da planilha que o script gravou. A cada clique, uma linha e o espelho do acórdão de onde ela veio. Em dupla, confiram número, órgão, data e o começo da ementa. Reparem na data: na planilha vem ano, mês e dia, tudo junto; no espelho, dia, mês e ano. O script coleta; quem confere a fonte é a pessoa.`,
   faca: [`pule as outras duas com a tecla G (${outras})`, 'cliques 1 a 3: uma linha e o seu espelho por clique', 'dar um minuto por linha; pedir mão levantada de quem achou divergência', 'o nome do relator está na planilha completa e pode aparecer'],
@@ -25,7 +25,7 @@ SLIDES.push(
      faca: [`colar o pedido, com o tema votado: "${D_TJMS}"`, 'uma tentativa ao vivo; sem resultado útil em 40 s, parar e tocar a gravação do ensaio na moldura', 'a página salva do TJMS é a gravação do ensaio, nunca coleta ao vivo: dizer isso à sala se ela entrar', 'mostrar a planilha: processo, relator, data e motivo'],
      transicao: 'Agora o segundo jeito: o script.'}},
   {id: 'etapa2-pedido', titulo: 'Etapa 2, o pedido ao Claude Code',
-   notas: {diga: 'Etapa 2. O pedido agora vai ao Claude Code, que escreve e roda programas. Peço um programa que baixe os espelhos de acórdãos de setembro de 2026 da Primeira Turma, nos Dados Abertos do STJ, filtre as ementas pelo tema de vocês e grave uma planilha. No pedido de verdade, peço também uma requisição por vez.',
+   notas: {diga: 'Etapa 2. O pedido agora vai ao Claude Code, que escreve e roda programas. Peço um programa que baixe o arquivo de setembro de 2026 dos espelhos de acórdãos da Primeira Turma, nos Dados Abertos do STJ, filtre as ementas pelo tema de vocês e grave uma planilha. No pedido de verdade, peço também uma requisição por vez.',
      faca: [`colar o pedido literal, que está também no kit: "${D_STJ}"`, 'trocar [tema votado] pelo tema da sala antes de enviar'],
      transicao: 'Envio, e o script trabalha.'}},
   {id: 'etapa2', titulo: 'Ao vivo, o script trabalha', video: [0.9, 2.4],

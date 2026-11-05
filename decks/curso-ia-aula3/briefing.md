@@ -119,11 +119,11 @@ padrão do modelo, com o mesmo cabeçalho, estilos e numeração. No fim, gere o
 últimos três meses. Leia as ementas, baixe só os pertinentes e me dê uma planilha com processo, relator, data e o
 motivo de cada escolha."
 
-**Scraper, etapa 2, versão de tela (slide 30).** "Escreva um programa que baixe os espelhos de acórdãos de setembro de
-2026 da Primeira Turma, nos Dados Abertos do STJ, filtre as ementas por [tema] e grave uma planilha."
+**Scraper, etapa 2, versão de tela (slide 30).** "Escreva um programa que baixe o arquivo de setembro de 2026 dos espelhos
+de acórdãos da Primeira Turma, nos Dados Abertos do STJ, filtre as ementas por [tema] e grave uma planilha."
 
-**Scraper, etapa 2, literal (notas do slide 30 e kit).** "Escreva um script em Python que baixe o arquivo de espelhos
-de acórdãos de setembro de 2026 da Primeira Turma nos Dados Abertos do STJ, filtre as ementas por [tema votado] e grave
+**Scraper, etapa 2, literal (notas do slide 30 e kit).** "Escreva um script em Python que baixe o arquivo de setembro de 2026
+dos espelhos de acórdãos da Primeira Turma nos Dados Abertos do STJ, filtre as ementas por [tema votado] e grave
 um CSV com classe, processo, relator, órgão, data e ementa. Uma requisição por vez."
 
 **Rotina (notas do slide 38).** "Toda segunda às 7h10, consulte os Dados Abertos do STJ, abra o arquivo mais recente de
@@ -230,7 +230,8 @@ folga, lidos como uma frase só); a folga ficou em uns 110 px. Em word-pedido, o
 hífen segura o nome inteiro. Em repositorio, a legenda do README deixava "usar" sozinho na linha e passou a `balance`.
 Ficam como proposta ao professor, por mudarem texto da tela, o pedido do scraper, cuja expressão "acórdãos de setembro
 de 2026" não bate com as datas de 24 a 31/08/2026 que as duplas conferem, já que o arquivo de setembro traz sobretudo
-decisões de agosto publicadas em setembro (415 de 471). Fica pendente, por depender das gravações do ensaio (Tarefa 9),
+decisões de agosto publicadas em setembro (415 de 471). O professor aprovou a troca no mesmo dia, e o pedido passou a dizer "o arquivo de setembro de 2026 dos
+espelhos de acórdãos". Fica pendente, por depender das gravações do ensaio (Tarefa 9),
 a gravação provisória da prévia nas cinco molduras de demonstração, que mostra o pedido de contestação da Aula 2
 debaixo de títulos de MCP, scraper e rotina. Oráculo: 0 erro(s), os mesmos 4 avisos aceitos.
 
