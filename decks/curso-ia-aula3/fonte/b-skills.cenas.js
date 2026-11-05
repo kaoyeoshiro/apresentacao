@@ -37,7 +37,7 @@ CENAS.skillmd = (() => {
     if (pronto) return;
     pronto = true;
     const y0 = bArq.offsetTop + 4 + bTxt.offsetTop, xa = bArq.offsetLeft + bArq.offsetWidth;
-    const centro = (n) => y0 + bLns[n].offsetTop + 24;
+    const centro = (n) => y0 + bLns[n].offsetTop + bLns[n].offsetHeight / 2;
     // a anotação fica na altura pedida; o traço sai da borda do editor na altura da linha e dobra até ela
     const pos = (k, yLinha, yNota) => {
       notas[k].style.top = `${Math.round(yNota - 26)}px`;

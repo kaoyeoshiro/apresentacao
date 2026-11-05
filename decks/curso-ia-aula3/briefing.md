@@ -216,6 +216,12 @@ repositório público (defeito alto); abrir a aula com o contraste do word-antes
 para o bloco GitHub. O rótulo "Segurança" em casos não coube no limite de 45 palavras. Oráculo depois da rodada:
 0 erro(s), 4 avisos já aceitos.
 
+**Rodada 2 (05/11/2026).** Corrigidos: rodapé de plugin retirado, com a ponte para as notas; em injecao, o dourado do
+documento apaga no clique do texto branco e o balão da resposta ganha borda dourada; em word-addin, o primeiro cartão
+("Peça, só com conferência") ocupa a largura toda a 104 px; legenda de skillmd reescrita e espaçada; esperança da
+cláusula em serifa 700; altura das categorias de a4 de 300 para 330 px. A capa passou ao modelo da Aula 2. Oráculo:
+0 erro(s), os mesmos 4 avisos aceitos.
+
 ## Decisão sobre imagens (05/11/2026)
 
 O professor decidiu "sem foto, como antes": nenhuma imagem gerada nesta aula, como nas Aulas 1 e 2. A capa segue o

@@ -89,6 +89,7 @@ CENAS.injecao = (() => {
     surgir(pag, molaAR(x - 0.1), {dx: -24, dy: 0});
     // 1: o rodapé
     mk.style.transform = `scaleX(${saida(faixa(y, 0.05, 0.6)).toFixed(4)})`;
+    mk.style.opacity = (1 - saida(faixa(z, 0.05, 0.4))).toFixed(4);
     revelar(tagR, molaAR(y - 0.5));
     // 2: a seleção varre as três linhas; a linha branca aparece dentro dela; a lupa abre a ordem ao lado
     sels.forEach((s, n) => { s.style.transform = `scaleX(${saida(faixa(z, 0.05 + n * 0.22, 0.3 + n * 0.22)).toFixed(4)})`; });
@@ -145,7 +146,7 @@ CENAS.a4 = (() => {
     const sai = saida(faixa(y, 0, 0.3)), encolhe = entradaSaida(faixa(y, 0.2, 0.6));
     cats.forEach((el, n) => {
       surgir(el, molaAR(x - 0.2 - n * 0.12), {dy: 24});
-      el.style.height = `${lerp(300, 170, encolhe).toFixed(2)}px`;
+      el.style.height = `${lerp(330, 170, encolhe).toFixed(2)}px`;
     });
     frases.forEach((el, n) => {
       const k = sai > 0 ? 1 - sai : molaAR(x - 0.35 - n * 0.12);

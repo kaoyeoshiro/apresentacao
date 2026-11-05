@@ -45,6 +45,15 @@
   .explica { position: absolute; left: 1100px; top: 330px; width: 700px; height: 520px; }
   .explica p { position: absolute; left: 0; top: 0; width: 700px; font: 400 60px/1.25 var(--fonte-texto); text-wrap: pretty; }
 /* Bloco a-abertura: só classes a- e [data-slide] deste bloco. */
+  /* capa (cena própria, clara, no desenho da Aula 2): o logo à esquerda, o fio e o texto à direita */
+  .a-logo-cj { position: absolute; left: 120px; top: 300px; height: 480px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+  .a-cp-fio { position: absolute; left: 740px; top: 290px; width: 4px; height: 500px; background: var(--cor-linha); transform-origin: 50% 0; }
+  .a-cp-txt { position: absolute; left: 800px; top: 300px; width: 1000px; }
+  .a-cp-txt .rotulo { position: static; }
+  .a-cp-tit { margin-top: 26px; font-size: 124px; line-height: 1.04; color: var(--cor-tinta); }
+  .a-cp-tit > span { display: block; white-space: nowrap; }
+  .a-cp-sub { margin-top: 44px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
+
   /* pecas (diagrama): caixas com ícone desenhado por código; o tracejado dourado é o pacote do plugin */
   .a-diag { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
   .a-diag path { fill: none; stroke: color-mix(in srgb, var(--cor-tinta) 40%, var(--cor-fundo)); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
@@ -87,27 +96,31 @@
   .b-enviar circle { fill: var(--cor-tinta); }
   .b-enviar path { fill: none; stroke: var(--cor-fundo); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* word-addin: cartões de duas colunas, com folga para o texto */
-  [data-slide="word-addin"] .cartoes { top: 360px; }
-  [data-slide="word-addin"] .cartao { min-height: 200px; }
+  /* word-addin: o cartão da conferência vem primeiro e ocupa a linha inteira; os outros três ficam em fila abaixo */
+  [data-slide="word-addin"] .cartoes { top: 320px; }
+  [data-slide="word-addin"] .cartao:first-child { grid-column: 1 / -1; }
+  [data-slide="word-addin"] .cartao:first-child .ct-tit { font-size: 104px; line-height: 1.05; }
+  [data-slide="word-addin"] .cartao:not(:first-child) { min-height: 280px; }
+  [data-slide="word-addin"] .cartao:not(:first-child) .ct-tit { white-space: normal; text-wrap: balance; }
 
   /* skillmd: o SKILL.md num editor desenhado por código (números de linha por contador do CSS: marcação, não texto);
      as anotações ficam à direita, ligadas por traços neutros */
-  .b-arq { position: absolute; left: 120px; top: 318px; width: 1160px; height: 546px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 24px; overflow: hidden; }
+  .b-arq { position: absolute; left: 120px; top: 300px; width: 1160px; height: 498px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 24px; overflow: hidden; }
   .b-arq-cab { height: 68px; box-sizing: border-box; padding: 17px 30px 0; border-bottom: 4px solid var(--linha-sobre-noite); font: 500 30px/1.15 var(--fonte-mono, ui-monospace, monospace); color: var(--suave-sobre-noite); white-space: nowrap; }
   .b-arq-txt { position: absolute; left: 0; top: 88px; width: 100%; counter-reset: b-ln; }
-  .b-ln { position: relative; height: 48px; padding: 0 34px 0 100px; font: 400 34px/48px var(--fonte-mono, ui-monospace, monospace); color: var(--sobre-noite); white-space: nowrap; counter-increment: b-ln; }
+  .b-ln { position: relative; height: 44px; padding: 0 34px 0 100px; font: 400 34px/44px var(--fonte-mono, ui-monospace, monospace); color: var(--sobre-noite); white-space: nowrap; counter-increment: b-ln; }
   .b-ln::before { content: counter(b-ln); position: absolute; left: 0; top: 0; width: 70px; text-align: right; font-size: 30px; color: var(--suave-sobre-noite); }
   .b-ln.b-dim, .b-k { color: var(--suave-sobre-noite); }
   .b-ln.b-dim::after { content: "---"; }   /* o separador do cabeçalho é marcação, como o número da linha */
   .b-k { font-weight: 700; }
   .b-desc { display: inline-block; }
   .b-sub { position: absolute; }
-  .b-ln i { position: absolute; left: 100px; top: 13px; height: 22px; border-radius: 11px; background: color-mix(in srgb, var(--sobre-noite) 30%, var(--noite)); transform-origin: 0 50%; }
+  .b-ln i { position: absolute; left: 100px; top: 11px; height: 22px; border-radius: 11px; background: color-mix(in srgb, var(--sobre-noite) 30%, var(--noite)); transform-origin: 0 50%; }
   .b-ligas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
   .b-ligas path { fill: none; stroke: var(--linha-sobre-noite); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
   .b-nota { position: absolute; left: 1380px; width: 420px; font: 800 var(--esc-2)/1.1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
   .b-nota small { display: block; margin-top: 4px; font: 400 36px/1.2 var(--fonte-texto); color: var(--suave-sobre-noite); }
+  [data-slide="skillmd"] .b-rod { top: 862px; }   /* 60 px ou mais de folga acima (editor) e abaixo (linha do dia) */
 
   /* checklist: à direita, o nome do item atual em display e a explicação logo abaixo, em corpo de leitura */
   [data-slide="checklist"] .explica { left: 860px; width: 940px; height: 560px; }
@@ -195,7 +208,7 @@
   .c-branco-txt span { padding: 3px 0; background: color-mix(in srgb, var(--cor-tinta) 26%, var(--cor-papel)); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
   .c-agente { position: absolute; left: 680px; top: 680px; width: 280px; height: 120px; box-sizing: border-box; display: grid; place-items: center; border-radius: 26px; background: var(--sobre-noite); }
   .c-agente p { font: 800 var(--esc-2)/1 var(--fonte-titulo); color: var(--noite); }
-  .c-balao { position: absolute; left: 1000px; top: 680px; width: 800px; height: 120px; box-sizing: border-box; display: flex; align-items: center; padding: 0 40px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px 26px 26px 6px; }
+  .c-balao { position: absolute; left: 1000px; top: 680px; width: 800px; height: 120px; box-sizing: border-box; display: flex; align-items: center; padding: 0 40px; border: 4px solid var(--cor-destaque); border-radius: 26px 26px 26px 6px; }
   .c-balao p { font: 600 40px/1.2 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
 
   /* casos: a citação entre aspas um pouco maior que o texto do cartão */
@@ -203,7 +216,6 @@
   [data-slide="casos"] .cartao { min-height: 330px; }
   [data-slide="casos"] .rodape { top: 800px; }
   [data-slide="plugin"] .cartoes { top: 320px; }
-  [data-slide="plugin"] .rodape { top: 820px; font-size: var(--esc-2); color: var(--cor-tinta); }
 
   /* plugin-tela (claro): a página do plugin desenhada por código */
   .c-jan { position: absolute; left: 260px; top: 296px; width: 1400px; height: 556px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); overflow: hidden; }
@@ -227,7 +239,7 @@
 
   /* a4: as quatro categorias em cima (a frase sai no clique e o cartão encolhe) e as seis situações embaixo */
   .c-cats { position: absolute; left: 120px; top: 300px; width: 1680px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
-  .c-cat { box-sizing: border-box; height: 300px; padding: 26px 30px; border: 4px solid var(--cor-linha); border-radius: 22px; overflow: hidden; }
+  .c-cat { box-sizing: border-box; height: 330px; padding: 26px 30px 44px; border: 4px solid var(--cor-linha); border-radius: 22px; overflow: hidden; }
   .c-cat-n { font: 800 var(--esc-2)/1.15 var(--fonte-titulo); }
   .c-cat-f { margin-top: 14px; font-size: 36px; line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: pretty; }
   .c-sits { position: absolute; left: 120px; top: 520px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px 36px; counter-reset: c-sit; }
@@ -269,7 +281,7 @@
   .d-fios path { fill: none; stroke: var(--cor-destaque); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
   .d-esp { position: absolute; left: 260px; top: 648px; width: 1180px; box-sizing: border-box; padding: 22px 40px 26px; border: 4px solid var(--cor-linha); border-radius: 20px; background: var(--cor-papel); }
   .d-esp-et { font: 700 30px/1.2 var(--fonte-titulo); letter-spacing: .12em; text-transform: uppercase; color: var(--cor-tinta-suave); white-space: nowrap; }
-  .d-esp-cl { margin-top: 10px; font: 800 44px/1.2 var(--fonte-titulo); white-space: nowrap; }
+  .d-esp-cl { margin-top: 10px; font: 700 44px/1.2 var(--fonte-texto); white-space: nowrap; }   /* fonte de texto: o "I" de AgInt não vira "l" */
   .d-esp-li { margin-top: 8px; display: flex; gap: 48px; font-size: 38px; line-height: 1.25; white-space: nowrap; }
   .d-esp-em { margin-top: 6px; font-size: 38px; line-height: 1.25; white-space: nowrap; }
 
@@ -359,12 +371,15 @@
 </head>
 <body>
 <div id="palco"><div id="mundo">
-  <!-- ===== Bloco A: abertura (slides 1 a 3). A capa recebe a heroica gerada na Tarefa 7 do plano. ===== -->
-  <section data-slide="capa" data-arquetipo="abertura" class="noite">
-    <p class="rotulo">Curso de IA · Aula 3</p>
-    <div class="display ab-linha">A IA fora</div>
-    <div class="display ab-linha sinal">do chat</div>
-    <p class="ab-sub">Skills, MCP, plugins, scraper, GitHub e rotinas, ao vivo.</p>
+  <!-- ===== Bloco A: abertura (slides 1 a 3). A capa é clara, no desenho da Aula 2, sem foto. ===== -->
+  <section data-slide="capa">
+    <div class="a-logo-cj" role="img" aria-label="co.juris"></div>
+    <i class="a-cp-fio"></i>
+    <div class="a-cp-txt">
+      <p class="rotulo">Curso de IA · Aula 3</p>
+      <h1 class="display a-cp-tit"><span>A IA fora</span><span>do chat</span></h1>
+      <p class="a-cp-sub">Skills, MCP, plugins, scraper, GitHub e rotinas, ao vivo.</p>
+    </div>
   </section>
 
   <section data-slide="mapa" data-arquetipo="tempo">
@@ -444,11 +459,11 @@
   <section data-slide="word-addin">
     <p class="rotulo">Skills</p>
     <h2 class="manchete">Claude for Word revisa no arquivo</h2>
-    <div class="cartoes c2">
+    <div class="cartoes c3">
+      <div class="cartao"><p class="ct-tit">Peça, só com conferência</p><p class="ct-txt">Não recomendado sem verificação.</p></div>
       <div class="cartao"><p class="ct-tit">Alterações controladas</p><p class="ct-txt">Cada mudança fica marcada para você aceitar.</p></div>
       <div class="cartao"><p class="ct-tit">Herda os estilos</p><p class="ct-txt">Os de título e parágrafo do modelo.</p></div>
       <div class="cartao"><p class="ct-tit">Pro, Max, Team e Enterprise</p><p class="ct-txt">Suplemento do Word, instalado à parte.</p></div>
-      <div class="cartao"><p class="ct-tit">Peça, só com conferência</p><p class="ct-txt">Não recomendado sem verificação.</p></div>
     </div>
   </section>
 
@@ -476,7 +491,7 @@
     <p class="b-nota b-n-desc">descrição<small>decide quando dispara</small></p>
     <p class="b-nota b-n-corpo">corpo<small>o passo a passo</small></p>
     <p class="b-nota b-n-scr">scripts<small>o que ela executa</small></p>
-    <p class="rodape b-rod">A de Word tem código publicado, com licença proprietária.</p>
+    <p class="rodape b-rod">A skill de Word tem código publicado, com licença proprietária.</p>
   </section>
 
   <!-- checklist (partes da base): os sete pontos da apostila (A 16.8), um por clique, com a explicação à direita -->
@@ -671,7 +686,6 @@
       <div class="cartao"><p class="ct-tit">Instala</p><p class="ct-txt">Por Customize e Plugins.</p></div>
       <div class="cartao"><p class="ct-tit">Limite</p><p class="ct-txt">Feitos para o direito dos EUA.</p></div>
     </div>
-    <p class="rodape">Toda saída é rascunho para revisão de advogado.</p>
   </section>
 
   <!-- plugin-tela (cena própria, claro): a página de um plugin desenhada por código, sem logo de terceiro; o aviso de
@@ -1142,8 +1156,8 @@ SLIDES.push(
      faca: ['pausa; deixar a frase na tela'],
      transicao: 'De volta às tomadas: o pacote pronto.'}},
   {id: 'plugin', titulo: 'Plugin é o pacote pronto',
-   notas: {diga: 'O plugin junta tudo num pacote: skills, conectores e subagentes, que são agentes auxiliares para partes da tarefa. A Anthropic mantém um marketplace Legal, com 12 plugins por área. Instala por Customize e Plugins. Atenção: foram feitos para o direito dos EUA. E toda saída é rascunho para revisão de advogado.',
-     faca: ['ler o rodapé em voz alta'],
+   notas: {diga: 'O plugin junta tudo num pacote: skills, conectores e subagentes, que são agentes auxiliares para partes da tarefa. A Anthropic mantém um marketplace Legal, com 12 plugins por área. Instala por Customize e Plugins. Atenção: foram feitos para o direito dos EUA. E há um aviso que vale para todos eles; o aviso está no próximo slide.',
+     faca: ['ler os quatro cartões; o aviso de rascunho fica para o próximo slide'],
      transicao: 'O próprio plugin diz isso na tela.'}},
   {id: 'plugin-tela', titulo: 'O plugin avisa antes de ajudar',
    notas: {diga: 'Esta é a página de um plugin, desenhada para a aula. Ele diz o que traz: skills, conectores e subagentes. E, antes de ajudar, avisa: toda saída é rascunho para revisão de advogado.',
@@ -1316,6 +1330,25 @@ for (const el of document.querySelectorAll('.a-ic[data-ic]')) {
   el.appendChild(s);
 }
 
+// Capa (fundo claro, como a da Aula 2): o logo sobe, o fio se traça de cima para baixo e o texto entra linha a linha.
+CENAS.capa = (() => {
+  const sec = m.secao('capa'), logo = sec.querySelector('.a-logo-cj'), fio = sec.querySelector('.a-cp-fio');
+  const linhas = [sec.querySelector('.rotulo'), ...$$(sec, '.a-cp-tit > span'), sec.querySelector('.a-cp-sub')];
+  let pronto = false;
+  return (t, c) => {
+    if (!pronto) {
+      pronto = true;
+      const tit = sec.querySelector('.a-cp-tit'), largura = Math.max(...$$(sec, '.a-cp-tit > span').map((el) => el.offsetWidth));
+      if (largura > 1000) tit.style.fontSize = `${Math.floor(124 * 1000 / largura)}px`;
+    }
+    const x = c.desde(0);
+    surgir(logo, molaAR(x - 0.15, {resposta: 0.7, amortecimento: 0.9}), {dy: 24});
+    fio.style.transform = `scaleY(${saida(faixa(x, 0.55, 1.1)).toFixed(4)})`;
+    linhas.forEach((el, n) => revelar(el, molaAR(x - 0.8 - n * 0.16)));
+    fim(sec, x, 1.6);
+  };
+})();
+
 // pecas: agente e skill; o conector; o plugin, cujo tracejado embrulha os dois; a rotina embaixo.
 CENAS.pecas = (() => {
   const sec = m.secao('pecas'), q = (s) => sec.querySelector(s);
@@ -1377,7 +1410,7 @@ CENAS.skillmd = (() => {
     if (pronto) return;
     pronto = true;
     const y0 = bArq.offsetTop + 4 + bTxt.offsetTop, xa = bArq.offsetLeft + bArq.offsetWidth;
-    const centro = (n) => y0 + bLns[n].offsetTop + 24;
+    const centro = (n) => y0 + bLns[n].offsetTop + bLns[n].offsetHeight / 2;
     // a anotação fica na altura pedida; o traço sai da borda do editor na altura da linha e dobra até ela
     const pos = (k, yLinha, yNota) => {
       notas[k].style.top = `${Math.round(yNota - 26)}px`;
@@ -1552,6 +1585,7 @@ CENAS.injecao = (() => {
     surgir(pag, molaAR(x - 0.1), {dx: -24, dy: 0});
     // 1: o rodapé
     mk.style.transform = `scaleX(${saida(faixa(y, 0.05, 0.6)).toFixed(4)})`;
+    mk.style.opacity = (1 - saida(faixa(z, 0.05, 0.4))).toFixed(4);
     revelar(tagR, molaAR(y - 0.5));
     // 2: a seleção varre as três linhas; a linha branca aparece dentro dela; a lupa abre a ordem ao lado
     sels.forEach((s, n) => { s.style.transform = `scaleX(${saida(faixa(z, 0.05 + n * 0.22, 0.3 + n * 0.22)).toFixed(4)})`; });
@@ -1608,7 +1642,7 @@ CENAS.a4 = (() => {
     const sai = saida(faixa(y, 0, 0.3)), encolhe = entradaSaida(faixa(y, 0.2, 0.6));
     cats.forEach((el, n) => {
       surgir(el, molaAR(x - 0.2 - n * 0.12), {dy: 24});
-      el.style.height = `${lerp(300, 170, encolhe).toFixed(2)}px`;
+      el.style.height = `${lerp(330, 170, encolhe).toFixed(2)}px`;
     });
     frases.forEach((el, n) => {
       const k = sai > 0 ? 1 - sai : molaAR(x - 0.35 - n * 0.12);

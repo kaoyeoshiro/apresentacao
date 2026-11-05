@@ -48,7 +48,7 @@
   .c-branco-txt span { padding: 3px 0; background: color-mix(in srgb, var(--cor-tinta) 26%, var(--cor-papel)); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
   .c-agente { position: absolute; left: 680px; top: 680px; width: 280px; height: 120px; box-sizing: border-box; display: grid; place-items: center; border-radius: 26px; background: var(--sobre-noite); }
   .c-agente p { font: 800 var(--esc-2)/1 var(--fonte-titulo); color: var(--noite); }
-  .c-balao { position: absolute; left: 1000px; top: 680px; width: 800px; height: 120px; box-sizing: border-box; display: flex; align-items: center; padding: 0 40px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px 26px 26px 6px; }
+  .c-balao { position: absolute; left: 1000px; top: 680px; width: 800px; height: 120px; box-sizing: border-box; display: flex; align-items: center; padding: 0 40px; border: 4px solid var(--cor-destaque); border-radius: 26px 26px 26px 6px; }
   .c-balao p { font: 600 40px/1.2 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
 
   /* casos: a citação entre aspas um pouco maior que o texto do cartão */
@@ -56,7 +56,6 @@
   [data-slide="casos"] .cartao { min-height: 330px; }
   [data-slide="casos"] .rodape { top: 800px; }
   [data-slide="plugin"] .cartoes { top: 320px; }
-  [data-slide="plugin"] .rodape { top: 820px; font-size: var(--esc-2); color: var(--cor-tinta); }
 
   /* plugin-tela (claro): a página do plugin desenhada por código */
   .c-jan { position: absolute; left: 260px; top: 296px; width: 1400px; height: 556px; box-sizing: border-box; border: 3px solid var(--cor-linha); border-radius: 22px; background: var(--cor-papel); overflow: hidden; }
@@ -80,7 +79,7 @@
 
   /* a4: as quatro categorias em cima (a frase sai no clique e o cartão encolhe) e as seis situações embaixo */
   .c-cats { position: absolute; left: 120px; top: 300px; width: 1680px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
-  .c-cat { box-sizing: border-box; height: 300px; padding: 26px 30px; border: 4px solid var(--cor-linha); border-radius: 22px; overflow: hidden; }
+  .c-cat { box-sizing: border-box; height: 330px; padding: 26px 30px 44px; border: 4px solid var(--cor-linha); border-radius: 22px; overflow: hidden; }
   .c-cat-n { font: 800 var(--esc-2)/1.15 var(--fonte-titulo); }
   .c-cat-f { margin-top: 14px; font-size: 36px; line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: pretty; }
   .c-sits { position: absolute; left: 120px; top: 520px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px 36px; counter-reset: c-sit; }
