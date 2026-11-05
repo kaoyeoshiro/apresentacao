@@ -128,9 +128,10 @@ acórdãos novos desde a última execução, cada um com o link do espelho. Se n
   contencioso com skills e conectores (plugin); minha agenda do Google (conector); padrão de citação do gabinete
   (skill); sistema interno do órgão com endereço próprio (MCP); conjunto de ferramentas jurídicas instalado de uma vez
   (plugin).
-- **A5, o tema da sala (slides 28 e 32, 2 min mais a conferência).** Temas propostos: fornecimento de medicamento,
-  concurso público, responsabilidade civil do Estado. Na conferência, a sala abre três espelhos do CSV e confere relator
-  e data.
+- **A5, o tema da sala (slides 28 e 32, 2 min mais a conferência).** Temas propostos: execução fiscal, improbidade e
+  ICMS, escolhidos porque dão resultado no arquivo de setembro/2026 da Primeira Turma (45, 20 e 18 acórdãos de 471, no
+  teste de 05/11/2026; "medicamento" dava zero). Na conferência, a sala abre três espelhos do CSV e confere relator e
+  data.
 - **A6, agendável ou não (slide 42, 8 min).** A sala propõe tarefas da semana, vota, e o professor cria a rotina da mais
   votada, aplicando a pergunta do slide 41.
 
@@ -158,7 +159,10 @@ Fichas de 05/11/2026: `docs/pesquisa/dia2-ferramentas-aula3.md` (F) e `docs/pesq
 
 ## Pendências deste briefing
 
-- Nome do arquivo do modelo timbrado e dos materiais de treino: confirmar com o que a Tarefa 4 gravar em `material/`.
+- Materiais gravados na Tarefa 4: `material/escritorio/modelo-timbrado.docx` (Dias & Moura), `material/skill-defeituosa/`,
+  `material/peticao-injecao/peticao-injecao.pdf` e `material/scraper/` (campos do STJ usados: `siglaClasse`,
+  `numeroProcesso`, `ministroRelator`, `nomeOrgaoJulgador`, `dataDecisao`, `ementa`). Falta o rascunho em Markdown da
+  demonstração do Word: é texto jurídico fictício e precisa do aval do professor.
 - Endereço do kit (slide 44): depende do sim do professor para criar o repositório público.
 - As três linhas do slide 32 saem da amostra baixada na Tarefa 4.
 - Notas `{diga, faca, transicao}` de cada slide: escritas na montagem dos blocos, só com os fatos acima.
