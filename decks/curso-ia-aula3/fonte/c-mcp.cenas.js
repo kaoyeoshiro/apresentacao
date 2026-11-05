@@ -91,6 +91,8 @@ CENAS.injecao = (() => {
     mk.style.transform = `scaleX(${saida(faixa(y, 0.05, 0.6)).toFixed(4)})`;
     mk.style.opacity = (1 - saida(faixa(z, 0.05, 0.4))).toFixed(4);
     revelar(tagR, molaAR(y - 0.5));
+    // a etiqueta sai com o destaque: dali em diante a ordem em foco é a do texto branco
+    tagR.style.opacity = mk.style.opacity;
     // 2: a seleção varre as três linhas; a linha branca aparece dentro dela; a lupa abre a ordem ao lado
     sels.forEach((s, n) => { s.style.transform = `scaleX(${saida(faixa(z, 0.05 + n * 0.22, 0.3 + n * 0.22)).toFixed(4)})`; });
     wt.style.opacity = saida(faixa(z, 0.4, 0.6)).toFixed(4);

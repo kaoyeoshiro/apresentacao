@@ -222,6 +222,18 @@ documento apaga no clique do texto branco e o balão da resposta ganha borda dou
 cláusula em serifa 700; altura das categorias de a4 de 300 para 330 px. A capa passou ao modelo da Aula 2. Oráculo:
 0 erro(s), os mesmos 4 avisos aceitos.
 
+**Rodada 3 (05/11/2026).** Corrigidos: em injecao, a etiqueta "rodapé" ficava acesa depois que o destaque dourado do
+rodapé apagava e, nos cliques seguintes, rotulava o nada, embaixo do agente; agora sai junto com o destaque. Em
+agendavel, os cabeçalhos das colunas passaram de 92 para 84 px, porque "com conferência" encostava em "não" (43 px de
+folga, lidos como uma frase só); a folga ficou em uns 110 px. Em word-pedido, o nome do arquivo quebrava no próprio hífen
+("(modelo-" numa linha, "timbrado.docx)." na outra), porque a digitação descarta o `nowrap`; um *word joiner* depois do
+hífen segura o nome inteiro. Em repositorio, a legenda do README deixava "usar" sozinho na linha e passou a `balance`.
+Ficam como proposta ao professor, por mudarem texto da tela, o pedido do scraper, cuja expressão "acórdãos de setembro
+de 2026" não bate com as datas de 24 a 31/08/2026 que as duplas conferem, já que o arquivo de setembro traz sobretudo
+decisões de agosto publicadas em setembro (415 de 471). Fica pendente, por depender das gravações do ensaio (Tarefa 9),
+a gravação provisória da prévia nas cinco molduras de demonstração, que mostra o pedido de contestação da Aula 2
+debaixo de títulos de MCP, scraper e rotina. Oráculo: 0 erro(s), os mesmos 4 avisos aceitos.
+
 ## Decisão sobre imagens (05/11/2026)
 
 O professor decidiu "sem foto, como antes": nenhuma imagem gerada nesta aula, como nas Aulas 1 e 2. A capa segue o

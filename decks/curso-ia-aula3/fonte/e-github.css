@@ -37,4 +37,4 @@
   .e-defs { position: absolute; left: 1330px; top: 330px; width: 470px; height: 520px; }
   .e-def { position: absolute; left: 0; top: 0; width: 470px; }
   .e-termo { font: 800 var(--esc-3)/1.05 var(--fonte-titulo); text-wrap: balance; }
-  .e-sig { margin-top: 26px; font: 400 56px/1.2 var(--fonte-texto); text-wrap: pretty; }
+  .e-sig { margin-top: 26px; font: 400 56px/1.2 var(--fonte-texto); text-wrap: balance; }

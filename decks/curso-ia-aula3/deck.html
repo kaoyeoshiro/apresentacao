@@ -332,7 +332,7 @@
   .e-defs { position: absolute; left: 1330px; top: 330px; width: 470px; height: 520px; }
   .e-def { position: absolute; left: 0; top: 0; width: 470px; }
   .e-termo { font: 800 var(--esc-3)/1.05 var(--fonte-titulo); text-wrap: balance; }
-  .e-sig { margin-top: 26px; font: 400 56px/1.2 var(--fonte-texto); text-wrap: pretty; }
+  .e-sig { margin-top: 26px; font: 400 56px/1.2 var(--fonte-texto); text-wrap: balance; }
 /* Bloco f-rotinas: só classes f- e [data-slide] deste bloco. */
   /* símbolos das três respostas (agendavel e a6): sim cheio, conferência em anel, não cortado */
   .f-col-tit::before, .f-opcoes i { content: ''; flex: 0 0 40px; height: 40px; box-sizing: border-box; border-radius: 50%; border: 5px solid currentColor; }
@@ -343,7 +343,7 @@
      coluna "não" o símbolo cortado é o único sinal de negação (o texto fica na tinta cheia) */
   .f-cols { position: absolute; left: 120px; top: 300px; width: 1680px; display: grid; grid-template-columns: 390px 898px 1fr; gap: 40px; align-items: start; }
   .f-col { display: flex; flex-direction: column; gap: 18px; }
-  .f-col-tit { display: flex; align-items: center; gap: 24px; height: 110px; font: 800 92px/1 var(--fonte-titulo); letter-spacing: -0.02em; white-space: nowrap; }
+  .f-col-tit { display: flex; align-items: center; gap: 24px; height: 110px; font: 800 84px/1 var(--fonte-titulo); letter-spacing: -0.02em; white-space: nowrap; }
   .f-cols .f-col-tit::before { flex-basis: 80px; height: 80px; border-width: 9px; }
   .f-ct { padding: 18px 30px; font: 400 42px/1.22 var(--fonte-texto); text-wrap: pretty; }
   .f-pergunta { position: absolute; left: 120px; top: 812px; font: 800 60px/1.15 var(--fonte-titulo); white-space: nowrap; }
@@ -450,7 +450,7 @@
     <h2 class="manchete">O pedido, para copiar</h2>
     <div class="b-caixa">
       <p class="b-anexo"><svg class="b-anexo-ic" viewBox="0 0 32 40"><path d="M4 2H21L29 10V38H4Z"/><path d="M21 2V10H29"/><path d="M10 20H23M10 26H23M10 32H18"/></svg>modelo-timbrado.docx</p>
-      <p class="b-pedido">Use o modelo do escritório anexo (<span style="white-space: nowrap">modelo-timbrado.docx</span>). Transforme este rascunho em parecer no padrão do modelo, com o mesmo cabeçalho, estilos e numeração. No fim, gere o PDF e me diga o que não coube no modelo.</p>
+      <p class="b-pedido">Use o modelo do escritório anexo (<span style="white-space: nowrap">modelo-&#8288;timbrado.docx</span>). Transforme este rascunho em parecer no padrão do modelo, com o mesmo cabeçalho, estilos e numeração. No fim, gere o PDF e me diga o que não coube no modelo.</p>
       <svg class="b-enviar" viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><path d="M38 54V22M24 36L38 22L52 36"/></svg>
     </div>
   </section>
@@ -1587,6 +1587,8 @@ CENAS.injecao = (() => {
     mk.style.transform = `scaleX(${saida(faixa(y, 0.05, 0.6)).toFixed(4)})`;
     mk.style.opacity = (1 - saida(faixa(z, 0.05, 0.4))).toFixed(4);
     revelar(tagR, molaAR(y - 0.5));
+    // a etiqueta sai com o destaque: dali em diante a ordem em foco é a do texto branco
+    tagR.style.opacity = mk.style.opacity;
     // 2: a seleção varre as três linhas; a linha branca aparece dentro dela; a lupa abre a ordem ao lado
     sels.forEach((s, n) => { s.style.transform = `scaleX(${saida(faixa(z, 0.05 + n * 0.22, 0.3 + n * 0.22)).toFixed(4)})`; });
     wt.style.opacity = saida(faixa(z, 0.4, 0.6)).toFixed(4);

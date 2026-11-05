@@ -8,7 +8,7 @@
      coluna "não" o símbolo cortado é o único sinal de negação (o texto fica na tinta cheia) */
   .f-cols { position: absolute; left: 120px; top: 300px; width: 1680px; display: grid; grid-template-columns: 390px 898px 1fr; gap: 40px; align-items: start; }
   .f-col { display: flex; flex-direction: column; gap: 18px; }
-  .f-col-tit { display: flex; align-items: center; gap: 24px; height: 110px; font: 800 92px/1 var(--fonte-titulo); letter-spacing: -0.02em; white-space: nowrap; }
+  .f-col-tit { display: flex; align-items: center; gap: 24px; height: 110px; font: 800 84px/1 var(--fonte-titulo); letter-spacing: -0.02em; white-space: nowrap; }
   .f-cols .f-col-tit::before { flex-basis: 80px; height: 80px; border-width: 9px; }
   .f-ct { padding: 18px 30px; font: 400 42px/1.22 var(--fonte-texto); text-wrap: pretty; }
   .f-pergunta { position: absolute; left: 120px; top: 812px; font: 800 60px/1.15 var(--fonte-titulo); white-space: nowrap; }
