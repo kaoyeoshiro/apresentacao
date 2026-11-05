@@ -39,7 +39,7 @@ o aluno refaz em casa com o kit.
 |---|---|---|---|
 | 0 a 4 | Abertura | Da ferramenta que responde ao assistente que age sozinho. | |
 | 4 a 27 | Assistentes pessoais | Claude Duet, dots, Muse, Grok Bot e Hermes Agent, com datas, planos e disponibilidade no Brasil (apostila, cap. 22, e a ficha `fontes/cap22-assistentes.md`). O preço do acesso: sigilo profissional (Lei 8.906/1994, Recomendação OAB 001/2024, Resolução CNJ 615/2025). | A7 |
-| 27 a 33 | O harness | Animação com caso fictício: os agentes do quatilex, da PGE-MS, montando uma peça complexa, cada um com seu papel e na ordem em que atua. Mostra que o sistema em volta do modelo pesa tanto quanto o modelo. | |
+| 27 a 33 | O harness | Animação engraçada no estilo de `claude_video_maker/videos/agentes-peca` (bichinhos que acordam, trabalham e colam o que produziram numa folha que percorre a trilha, com o custo acumulado subindo), refeita com os dados do print da aba "Detalhes" de uma peça do quatilex enviado pelo professor em 05/11/2026: 10 agentes, 6 modelos, US$ 1,59 no total, dos quais US$ 1,39 (87%) do redator em Claude Opus 5.5 e o resto em modelos baratos. Mostra que o sistema em volta do modelo pesa tanto quanto o modelo, e serve de ponte para "Quem paga a conta": o modelo caro só onde ele faz diferença. | |
 | 33 a 56 | Quem paga a conta | Tese (decisão de 05/11/2026): o uso já se paga, a corrida não. Investidores bancam o treino e a infraestrutura, e o usuário pesado é bancado pelo leve. Números do S-1/A da Anthropic (02/11/2026): receita, custo de computação caindo para 57% da receita, compromissos de cerca de US$ 895 bi pagos com ou sem uso. Os planos fixos encolhendo: modelo de ponta fora do Pro, Copilot por consumo desde 01/06/2026, anúncios no ChatGPT, Gemini CLI desligado para contas pessoais. Bolha: alertas de BIS, FMI e Banco da Inglaterra, que falam em risco de correção e não afirmam bolha, contra receita recorrente e demanda acima da oferta. Consequência: portabilidade. | A8 |
 | 56 a 74 | Geopolítica | Chips e licenças caso a caso para a China (91 FR 1684, 15/01/2026); modelos abertos cerca de quatro meses atrás dos fechados (Epoch AI) e a avaliação do CAISI/NIST sobre DeepSeek, com a ressalva de quem avalia; CLOUD Act e a ausência de acordo com o Brasil; AI Act em vigor com o alto risco adiado para 2027 e 2028; PL 2338/2023 parado na Câmara. | A9 |
 | 74 a 90 | Futuro, plano e devolutiva | Cenários com sinais para acompanhar; plano de 30 dias (conclusão da apostila); devolutiva da turma; fecho do curso. | A10, A11 |
@@ -86,8 +86,10 @@ servem a escritório, gabinete e órgão público. Dados pessoais nunca aparecem
 
 ## Pendências antes de montar
 
-- Ler o repositório do quatilex (agentes, papéis e ordem) para a animação do harness; o código está em
-  `/Volumes/Projetos/Automacao_Agent` (remoto `kaoyeoshiro/quatilex`), só para leitura.
+- Ler o repositório do quatilex (papéis e ordem dos 10 agentes de `docs/pesquisa/dia2-harness-quatilex.md`) para a
+  animação do harness; o código está em `/Volumes/Projetos/Automacao_Agent` (remoto `kaoyeoshiro/quatilex`), só para
+  leitura. A animação é feita no repositório `claude_video_maker`, a partir de `videos/agentes-peca`, e entra no deck
+  pelo `./ap trazer` (decisão do professor de 05/11/2026).
 - O livro *A próxima onda* (Suleyman e Bhaskar, 2023), anotado em `curso-ia-ideias.md` para o bloco do futuro, só entra
   se houver a edição em mãos para citar tese e página; sem isso, o bloco do futuro usa só as fichas.
 - Imagens da série do tema: custo de geração sob o teto de US$ 2,00 do `./ap imagens`; acima disso, só com o sim do

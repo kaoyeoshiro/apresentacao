@@ -115,9 +115,9 @@ Esperado: "lint: tudo certo" e "0 erro(s)". Repetir para a Aula 4.
 **Consome:** spec, `dia2-economia-subsidio-bolha.md`, `dia2-geopolitica-ia.md`, apostila cap. 22 e conclusão,
 `/Volumes/Projetos/Automacao_Agent` (quatilex; só leitura).
 
-- [ ] Ler `ARCHITECTURE.md`, `AGENTS.md` e `docs/` do quatilex e anotar no briefing os agentes que montam uma peça: nome,
-  papel, ordem, o que recebe e o que entrega. Nada de dado de processo; o caso da animação é fictício (medicamento
-  contra o Estado, como os casos do kit da Aula 2).
+- [ ] Ler `ARCHITECTURE.md`, `AGENTS.md` e `docs/` do quatilex e confirmar, para os 10 agentes de
+  `docs/pesquisa/dia2-harness-quatilex.md`, o papel de cada um e a ordem real do fluxo (quem roda em paralelo). Anotar
+  na ficha, com o arquivo do quatilex que sustenta cada linha. Nada de dado de processo.
 - [ ] Mesmo conteúdo da Tarefa 2 adaptado: mensagem em uma frase ("delegar é decidir o que a máquina alcança e quanto
   você depende de quem a vende"), roteiro, fontes por slide, enunciados de A7 a A11, notas em rascunho.
 - [ ] Bloco "Quem paga a conta" com a tese decidida: o uso já se paga, a corrida não. Cada número com a linha da ficha
@@ -218,9 +218,31 @@ Esperado: lint e sondar limpos, e a lista de títulos igual à do roteiro, na or
 
 ### Tarefa 6: Blocos da Aula 4 (paralelizável)
 
-Igual à Tarefa 5, com `decks/curso-ia-aula4` e os blocos dela. O bloco `b-harness` é cena própria: os agentes do
-quatilex (lista da Tarefa 3) como estações acesas uma a uma, passando o caso fictício até a peça; cada estação com
-nome e papel em até seis palavras. Verificação idêntica, trocando o número da aula. Commit: `Aula 4: blocos montados`.
+Igual à Tarefa 5, com `decks/curso-ia-aula4` e os blocos dela. O bloco `b-harness` usa o arquétipo `demonstracao`
+com o vídeo da Tarefa 6A, seguido de um slide com o dado (US$ 1,59 a peça, 87% no redator) que faz a ponte para
+"Quem paga a conta". Verificação idêntica, trocando o número da aula. Commit: `Aula 4: blocos montados`.
+
+### Tarefa 6A: Animação do harness no claude_video_maker
+
+**Repositório:** `/Volumes/Projetos/claude_video_maker`, seguindo o `CLAUDE.md` e a skill `video-maker` de lá. O `main`
+dele tem alterações de outra sessão ainda não salvas: trabalhar num worktree com branch próprio, sem tocar nelas.
+
+**Consome:** `docs/pesquisa/dia2-harness-quatilex.md` (dados e ordem confirmada na Tarefa 3) e o vídeo anterior
+`videos/agentes-peca/` (motor `engines/html`, `comp.html`, `sistema.json`, briefing de 07/10/2026).
+
+**Produz:** `videos/agentes-peca-2/output/final.mp4`, 16:9, sem narração, cerca de 40 s.
+
+- [ ] Criar `videos/agentes-peca-2/` a partir de `agentes-peca/`: `briefing.md` com a nova fonte (print de 05/11/2026,
+  copiado para a pasta) e as presunções; `sistema.json` com as cores dos dois agentes novos.
+- [ ] Ajustar `comp.html` para os 10 agentes e 6 modelos, na ordem confirmada: dois bichinhos novos (`mm_agrupador`, em
+  Claude Haiku, e `afirmacao_oficio`), no mesmo traço e humor dos atuais (acordam, trabalham, colam a contribuição na
+  folha). O redator ganha uma piada visual de ser o mais caro (o contador de custo dispara quando ele trabalha). Fecho:
+  "10 agentes, 6 modelos" e "US$ 1,59 esta peça".
+- [ ] `./cvm html videos/agentes-peca-2/comp.html --verificar 1,8,15,22,30,38` (quadro é função do tempo) e stills;
+  abrir os stills e corrigir texto cortado, sobreposição e personagem escondido.
+- [ ] Render final, `./cvm check`, e mostrar ao professor o vídeo; mudanças voltam ao `comp.html`.
+- [ ] Commit no branch do claude_video_maker; trazer para a Aula 4 com `./ap trazer` (contrato em `docs/palco.md`,
+  seção Mídia) e registrar o crédito em `midia/creditos.json`.
 
 ### Tarefa 7: Imagens das duas aulas (portão de custo e de escolha)
 
@@ -264,6 +286,6 @@ nome e papel em até seis palavras. Verificação idêntica, trocando o número 
 ## Portões do professor, em ordem
 
 1. Roteiro da Aula 3 (Tarefa 2) e da Aula 4 (Tarefa 3).
-2. Custo e escolha das imagens (Tarefa 7).
+2. Animação do harness (Tarefa 6A) e custo e escolha das imagens (Tarefa 7).
 3. Ensaio ao vivo e gravações de reserva (Tarefa 9).
 4. Repositório público do kit, merge e publicação (Tarefa 10).
