@@ -666,10 +666,18 @@ def conferir_pacote(arq: Path) -> list[str]:
             print("AVISO pacote: nenhuma fonte web; o texto usa a fonte do sistema de cada computador")
         problemas += [f"vídeo não abriu: {v['src']}" for v in r["videos"] if not v["ok"]]
         problemas += [f"imagem não abriu: {i['src']}" for i in r["imgs"] if not i["ok"]]
+        # A capa toca sozinha até a parada 1 assim que as fontes carregam; uma seta no meio dela acelera e já segue
+        # para a parada 2. Espera a abertura chegar (pacote grande demora mais) e confere que a seta avança uma parada.
+        parada = "Number((location.hash.match(/parada=(\\d+)/) || [])[1] || 0)"
+        try:
+            pg.wait_for_function(f"{parada} >= 1", timeout=15000)
+        except Exception:
+            pass
+        antes = pg.evaluate(parada)
         pg.keyboard.press("ArrowRight")
         pg.wait_for_timeout(2500)
-        if "parada=1" not in pg.evaluate("location.hash"):
-            problemas.append("a seta → não avançou para a parada 1")
+        if pg.evaluate(parada) <= antes:
+            problemas.append(f"a seta → não avançou da parada {antes}")
         ap = ctx.new_page()
         ap.on("pageerror", lambda e: problemas.append(f"erro na tela do apresentador: {e}"))
         ap.goto(arq.resolve().as_uri() + "?apresentador")
