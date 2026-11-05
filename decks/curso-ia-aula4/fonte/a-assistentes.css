@@ -1,4 +1,12 @@
 /* Bloco a-assistentes: só classes a- e [data-slide] deste bloco. */
+  /* capa clara, no desenho da Aula 2: logo oficial, fio e título */
+  .a-logo-cj { position: absolute; left: 120px; top: 300px; height: 480px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+  .a-cp-fio { position: absolute; left: 740px; top: 290px; width: 4px; height: 500px; background: var(--cor-linha); transform-origin: 50% 0; }
+  .a-cp-txt { position: absolute; left: 800px; top: 300px; width: 1000px; }
+  .a-cp-txt .rotulo { position: static; }
+  .a-cp-tit { margin-top: 26px; font-size: 124px; line-height: 1.04; color: var(--cor-tinta); }
+  .a-cp-tit > span { display: block; white-space: nowrap; }
+  .a-cp-sub { margin-top: 44px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
   /* chat-agente (comparação): "Assistente" é larga demais para a janela no corpo padrão da letra */
   [data-slide="chat-agente"] .janela .letra { font-size: 88px; }
   [data-slide="chat-agente"] .janela .janela-txt { top: 180px; width: 680px; }
@@ -20,6 +28,7 @@
   [data-slide="sigilo"] .cartao { min-height: 236px; }
   [data-slide="sigilo"] .ct-txt { margin-top: 0; font-size: 46px; line-height: 1.28; }
   [data-slide="sigilo"] .ct-sub { margin-top: 12px; font-size: 34px; }
+  [data-slide="sigilo"] .a-ia { border-color: var(--cor-destaque); }   /* a Res. CNJ 615, a única regra sobre IA */
 
   /* alcance (S.T.A.R.): a caixa de entrada desenhada por código, na noite; o assistente à direita, ligado por um fio */
   .a-diag { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }

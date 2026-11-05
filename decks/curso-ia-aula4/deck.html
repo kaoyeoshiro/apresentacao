@@ -45,6 +45,14 @@
   .explica { position: absolute; left: 1100px; top: 330px; width: 700px; height: 520px; }
   .explica p { position: absolute; left: 0; top: 0; width: 700px; font: 400 60px/1.25 var(--fonte-texto); text-wrap: pretty; }
 /* Bloco a-assistentes: só classes a- e [data-slide] deste bloco. */
+  /* capa clara, no desenho da Aula 2: logo oficial, fio e título */
+  .a-logo-cj { position: absolute; left: 120px; top: 300px; height: 480px; aspect-ratio: var(--logo-marca-proporcao); background: var(--logo-marca) center / contain no-repeat; }
+  .a-cp-fio { position: absolute; left: 740px; top: 290px; width: 4px; height: 500px; background: var(--cor-linha); transform-origin: 50% 0; }
+  .a-cp-txt { position: absolute; left: 800px; top: 300px; width: 1000px; }
+  .a-cp-txt .rotulo { position: static; }
+  .a-cp-tit { margin-top: 26px; font-size: 124px; line-height: 1.04; color: var(--cor-tinta); }
+  .a-cp-tit > span { display: block; white-space: nowrap; }
+  .a-cp-sub { margin-top: 44px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
   /* chat-agente (comparação): "Assistente" é larga demais para a janela no corpo padrão da letra */
   [data-slide="chat-agente"] .janela .letra { font-size: 88px; }
   [data-slide="chat-agente"] .janela .janela-txt { top: 180px; width: 680px; }
@@ -66,6 +74,7 @@
   [data-slide="sigilo"] .cartao { min-height: 236px; }
   [data-slide="sigilo"] .ct-txt { margin-top: 0; font-size: 46px; line-height: 1.28; }
   [data-slide="sigilo"] .ct-sub { margin-top: 12px; font-size: 34px; }
+  [data-slide="sigilo"] .a-ia { border-color: var(--cor-destaque); }   /* a Res. CNJ 615, a única regra sobre IA */
 
   /* alcance (S.T.A.R.): a caixa de entrada desenhada por código, na noite; o assistente à direita, ligado por um fio */
   .a-diag { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
@@ -118,8 +127,8 @@
   .a-nunca { border-color: var(--cor-destaque); }
   /* ===== Bloco B: harness. Só classes b- e [data-slide] deste bloco. ===== */
 
-  /* harness-cap: o aviso da marca no rodapé, abaixo do subtítulo */
-  [data-slide="harness-cap"] .b-aviso { left: auto; right: 120px; top: 896px; font-size: 32px; text-align: right; }
+  /* harness-cap: o aviso da marca no rodapé, com a base da linha na mesma altura da base do subtítulo */
+  [data-slide="harness-cap"] .b-aviso { left: auto; right: 120px; top: 861px; font-size: 32px; text-align: right; }
 
   /* redator: uma linha por agente (nome, trilho, valor), todas na mesma escala; à direita, a fatia do redator */
   [data-slide="redator"] .b-cab { left: 120px; top: 292px; }
@@ -160,17 +169,21 @@
   .c-bi { font-size: var(--esc-5); }
   .c-num-leg { position: absolute; left: 120px; top: 640px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--sobre-noite); text-wrap: balance; }
 
-  /* a8 (guia): a pergunta grande à esquerda; à direita, o checklist do slide seguinte em miniatura */
-  .c-perg { position: absolute; left: 120px; top: 340px; width: 1000px; font: 400 60px/1.3 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
+  /* a8 (guia): a pergunta grande à esquerda, sozinha na chegada; à direita, no segundo clique, o checklist do slide seguinte */
+  .c-perg { position: absolute; left: 120px; top: 330px; width: 1030px; font: 400 76px/1.25 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
   .c-mini-et { left: 1220px; top: 330px; }
   .c-mini { position: absolute; left: 1220px; top: 386px; width: 580px; box-sizing: border-box; margin: 0; padding: 22px 30px; list-style: none; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; }
   .c-mini li { display: flex; align-items: center; gap: 22px; height: 72px; font: 600 32px/1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
   .c-mini i { flex: 0 0 36px; height: 36px; box-sizing: border-box; border: 4px solid var(--suave-sobre-noite); border-radius: 8px; }
 
   /* pesado e portavel: cartões de duas colunas, com altura igual */
-  [data-slide="pesado"] .cartoes { top: 380px; }
-  [data-slide="pesado"] .cartao { min-height: 380px; }
+  [data-slide="pesado"] .cartoes { top: 330px; grid-template-columns: 0.72fr 1.28fr; }
+  [data-slide="pesado"] .cartao { min-height: 400px; }
   [data-slide="pesado"] .ct-txt { font-size: 44px; line-height: 1.3; }
+  /* o consumo e o preço do plano em tamanho grande; só o preço em dourado */
+  [data-slide="pesado"] .ct-txt + .c-grande, [data-slide="pesado"] .c-grande + .ct-txt { margin-top: 4px; }
+  .c-grande { font: 400 var(--esc-4)/1.1 var(--fonte-texto); white-space: nowrap; }
+  .c-200 { font: 800 var(--esc-4)/1.1 var(--fonte-titulo); letter-spacing: -0.02em; white-space: nowrap; }
   [data-slide="pesado"] .ct-sub { margin-top: 22px; font-size: 36px; }
   [data-slide="portavel"] .cartoes { top: 360px; }
   [data-slide="portavel"] .cartao { min-height: 220px; }
@@ -180,26 +193,28 @@
   .noite[data-slide="pesado"] .ct-sub { color: var(--suave-sobre-noite); }
 /* Bloco d-geopolitica: só classes d- e [data-slide] deste bloco. */
   /* chips: dois cartões largos, mais baixos na tela para o texto respirar */
-  [data-slide="chips"] .cartoes { top: 360px; }
+  [data-slide="chips"] .cartoes { top: 360px; align-items: start; }
   [data-slide="chips"] .ct-txt { font-size: 44px; line-height: 1.28; }
   [data-slide="chips"] .ct-sub { margin-top: 18px; }
-  /* o teto desenhado: a China leva no máximo metade do volume vendido nos EUA */
+  /* o teto desenhado: a China leva no máximo metade do que se vende nos EUA; cada barra diz o que mede */
   .d-teto { margin-top: 26px; display: grid; gap: 14px; }
-  .d-teto p { display: grid; grid-template-columns: 130px 1fr; align-items: center; font: 700 var(--esc-1)/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .d-teto p { display: grid; grid-template-columns: 330px 1fr; align-items: center; font: 700 var(--esc-1)/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
   .d-barra { display: block; height: 30px; border-radius: 6px; background: var(--cor-tinta); transform-origin: 0 50%; }
   .d-barra.d-meia { width: 50%; background: var(--cor-destaque); }
 
-  /* quatro-meses (noite): o "4" a 320 px em dourado, "meses" ao lado, a legenda embaixo e a definição no rodapé */
-  .d-num { position: absolute; left: 112px; top: 250px; display: flex; align-items: baseline; gap: 44px; color: var(--sobre-noite); }
+  /* quatro-meses (claro): o "4" a 320 px em dourado, "meses" ao lado e a legenda embaixo */
+  .d-num { position: absolute; left: 112px; top: 250px; display: flex; align-items: baseline; gap: 44px; color: var(--cor-tinta); }
   .d-num-n { font-size: var(--esc-6); line-height: .9; }
   .d-num-u { font-size: var(--esc-5); line-height: .9; }
-  .d-num-leg { position: absolute; left: 120px; top: 610px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
-  .d-num-fonte { color: var(--suave-sobre-noite); white-space: nowrap; }
+  .d-num-leg { position: absolute; left: 120px; top: 610px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
+  .d-num-fonte { color: var(--cor-tinta-suave); white-space: nowrap; }
 
   /* aberto-seguro: três cartões com o número grande em cima; o rodapé diz de quem é a avaliação */
   [data-slide="aberto-seguro"] .cartoes { top: 370px; }
   [data-slide="aberto-seguro"] .cartao { min-height: 400px; }
   .d-ct-n { font-size: 132px; line-height: 1; letter-spacing: -0.02em; }
+  .d-ct-n.d-ouro { color: var(--cor-destaque-texto); }   /* o 94% é o único dourado (o escurecido do tema, legível no claro) */
+  .d-ct-n.d-suave { color: var(--cor-tinta-suave); }    /* o 8% de comparação, em tinta suave */
   [data-slide="aberto-seguro"] .ct-txt { margin-top: 22px; font-size: 40px; }
   [data-slide="aberto-seguro"] .rodape { top: 860px; }
 
@@ -225,8 +240,9 @@
   .e-num-u { font-size: var(--esc-5); line-height: .9; color: var(--cor-tinta-suave); }
   .e-num-leg { position: absolute; left: 120px; top: 610px; width: 1560px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
 
-  /* cenarios: a caixa do ramo de baixo leva quatro palavras em duas linhas */
-  [data-slide="cenarios"] .caixa-txt { font-size: 40px; }
+  /* cenarios: a caixa do ramo de baixo leva três linhas; o texto se centra na altura da caixa (170 px, de y - 85) */
+  [data-slide="cenarios"] .caixa-txt { box-sizing: border-box; height: 170px; margin-top: -32px; display: grid; align-content: center;
+                                       font-size: 38px; line-height: 1.15; }
 
   /* sinais: textos dos marcos em até duas linhas */
   [data-slide="sinais"] .etapas li { font-size: 40px; }
@@ -250,12 +266,15 @@
 </head>
 <body>
 <div id="palco"><div id="mundo">
-  <!-- ===== Bloco A: assistentes (slides 1 a 9). A capa vai sem foto por enquanto: a heroica entra quando for gerada. ===== -->
-  <section data-slide="capa" data-arquetipo="abertura" class="noite">
-    <p class="rotulo">Curso de IA · Aula 4</p>
-    <div class="display ab-linha">Quem decide</div>
-    <div class="display ab-linha sinal">é você</div>
-    <p class="ab-sub">Assistentes, custos, geopolítica e o futuro.</p>
+  <!-- ===== Bloco A: assistentes (slides 1 a 9). A capa é clara, no desenho da Aula 2, sem foto. ===== -->
+  <section data-slide="capa">
+    <div class="a-logo-cj" role="img" aria-label="co.juris"></div>
+    <i class="a-cp-fio"></i>
+    <div class="a-cp-txt">
+      <p class="rotulo">Curso de IA · Aula 4</p>
+      <h1 class="display a-cp-tit"><span>Quem decide</span><span>é você</span></h1>
+      <p class="a-cp-sub">Assistentes, custos, geopolítica e o futuro.</p>
+    </div>
   </section>
 
   <section data-slide="mapa" data-arquetipo="tempo">
@@ -329,7 +348,7 @@
       <div class="cartao"><p class="ct-txt">E-mail da advocacia é inviolável</p><p class="ct-sub">EAOAB 7º, II</p></div>
       <div class="cartao"><p class="ct-txt">Violar sigilo sem justa causa é infração</p><p class="ct-sub">EAOAB 34, VII</p></div>
       <div class="cartao"><p class="ct-txt">Fornecedor que não treine com os dados</p><p class="ct-sub">Rec. OAB 1/2024</p></div>
-      <div class="cartao"><p class="ct-txt">Sigiloso na IA externa, só anonimizado ou protegido</p><p class="ct-sub">CNJ 615/2025</p></div>
+      <div class="cartao a-ia"><p class="ct-txt">Sigiloso na IA externa, só anonimizado ou protegido</p><p class="ct-sub">CNJ 615/2025</p></div>
     </div>
   </section>
 
@@ -372,17 +391,14 @@
     <p class="rodape b-aviso">A co.juris não fala em nome da PGE-MS.</p>
   </section>
 
-  <!-- harness (demonstração, S.T.A.R. do bloco): o vídeo da Tarefa 6A (claude_video_maker, agentes-peca-2).
-       Até ele ficar pronto, toca o vídeo-marcador; o arquivo final será midia/harness.mp4, com poster
-       midia/harness-capa.webp:
-       <video src="midia/harness.mp4" poster="midia/harness-capa.webp" muted playsinline preload="auto"></video> -->
+  <!-- harness (demonstração, S.T.A.R. do bloco): o vídeo da Tarefa 6A (claude_video_maker, agentes-peca-2), 40 s. -->
   <section data-slide="harness" data-arquetipo="demonstracao" class="noite">
     <p class="rotulo">Harness</p>
     <h2 class="manchete">Dez agentes, uma peça</h2>
     <div class="moldura">
       <div class="barra-nav"><i></i><i></i><i></i><u></u></div>
       <div class="tela">
-        <video src="midia/demo.mp4" poster="midia/demo-capa.webp" muted playsinline preload="auto"></video>
+        <video src="midia/harness.mp4" poster="midia/harness-capa.webp" muted playsinline preload="auto"></video>
       </div>
     </div>
     <p class="nota-lateral">Peça real, sem processo.</p>
@@ -462,7 +478,7 @@
     <h2 class="manchete">O usuário pesado custa caro</h2>
     <div class="cartoes c2">
       <div class="cartao"><p class="ct-tit">Altman, jan./2025</p><p class="ct-txt">“<i>currently losing money on openai pro subscriptions</i>”</p><p class="ct-sub">ChatGPT Pro</p></div>
-      <div class="cartao"><p class="ct-tit">Anthropic, jul./2025</p><p class="ct-txt">Um usuário consumiu “<i>tens of thousands</i>” de dólares num plano de US$ 200.</p><p class="ct-sub">Limite semanal para menos de 5% dos assinantes.</p></div>
+      <div class="cartao"><p class="ct-tit">Anthropic, jul./2025</p><p class="ct-txt">Um usuário consumiu</p><p class="c-grande">“<i>tens of thousands</i>”</p><p class="ct-txt">de dólares num plano de</p><p class="c-200 sinal">US$&nbsp;200</p><p class="ct-sub">Limite semanal para menos de 5% dos assinantes.</p></div>
     </div>
   </section>
 
@@ -493,7 +509,8 @@
     <p class="respiro"><span>A tecnologia fica.</span><span>O preço <span class="sinal">muda</span>.</span></p>
   </section>
 
-  <!-- a8 (guia, noite, 5 min): a pergunta à esquerda; à direita, o checklist do slide portavel em miniatura -->
+  <!-- a8 (guia, noite, 5 min): na chegada, só a pergunta, grande; no segundo clique, depois do cronômetro, o checklist do
+       slide portavel em miniatura à direita -->
   <section data-slide="a8" class="noite">
     <p class="rotulo">A8, 5 min</p>
     <h2 class="manchete">Sua vez: e se o preço dobrar?</h2>
@@ -530,7 +547,6 @@
 
   <!-- chips (cartões): quem fabrica e quem licencia; fontes G 1.1 -->
   <section data-slide="chips">
-    <p class="rotulo">Chips</p>
     <h2 class="manchete">Chip de ponta é política de Estado</h2>
     <div class="cartoes c2">
       <div class="cartao">
@@ -540,22 +556,22 @@
       </div>
       <div class="cartao">
         <p class="ct-tit g">Venda à China</p>
-        <p class="ct-txt">Desde 15/01/2026, os EUA licenciam caso a caso, até metade do volume vendido no país.</p>
+        <p class="ct-txt">Desde 15/01/2026, os EUA licenciam caso a caso, até metade do que vendem nos EUA.</p>
         <div class="d-teto">
-          <p><span>EUA</span><i class="d-barra"></i></p>
-          <p><span>China</span><i class="d-barra d-meia"></i></p>
+          <p><span>vendido nos EUA</span><i class="d-barra"></i></p>
+          <p><span>teto</span><i class="d-barra d-meia"></i></p>
         </div>
-        <p class="ct-sub">regra 91 FR 1684</p>
+        <p class="ct-sub">91 FR 1684</p>
       </div>
     </div>
   </section>
 
-  <!-- quatro-meses (cena própria, noite, número a 320 px): G 1.2, Epoch AI, 29/05/2026 -->
-  <section data-slide="quatro-meses" class="noite">
+  <!-- quatro-meses (cena própria, claro, número a 320 px): G 1.2, Epoch AI, 29/05/2026. Sem o rodapé da definição (vai
+       nas notas), para não fazer três claros seguidos de 25 a 45 palavras com chips e aberto-seguro -->
+  <section data-slide="quatro-meses">
     <p class="rotulo">Modelos abertos</p>
     <p class="display d-num"><span class="sinal d-num-n">4</span><span class="d-num-u">meses</span></p>
     <p class="d-num-leg">é a distância dos melhores modelos abertos para os fechados <span class="d-num-fonte">(Epoch AI, mai./2026)</span></p>
-    <p class="rodape">Modelo aberto é o que se baixa e roda em servidor próprio.</p>
   </section>
 
   <!-- aberto-seguro (cartões): CAISI/NIST, 30/09/2025 (G 1.2) -->
@@ -569,11 +585,11 @@
         <p class="ct-txt">mais chance de seguir ordem maliciosa</p>
       </div>
       <div class="cartao">
-        <p class="ct-tit d-ct-n">94%</p>
+        <p class="ct-tit d-ct-n d-ouro">94%</p>
         <p class="ct-txt">dos pedidos maliciosos atendidos, com o truque que fura as travas</p>
       </div>
       <div class="cartao">
-        <p class="ct-tit d-ct-n">8%</p>
+        <p class="ct-tit d-ct-n d-suave">8%</p>
         <p class="ct-txt">nos modelos americanos, mesmo truque</p>
       </div>
     </div>
@@ -640,19 +656,20 @@
     <p class="rodape">Relatório Internacional de Segurança da IA, 2026</p>
   </section>
 
-  <!-- cenarios (ramos): os dois cenários da OCDE citados pelo mesmo relatório; os gargalos na legenda (G 1.6) -->
+  <!-- cenarios (ramos): a faixa de cenários da OCDE citada pelo mesmo relatório; as tarefas de vários dias são projeção
+       do próprio relatório; os gargalos na legenda (G 1.6) -->
   <section data-slide="cenarios" data-arquetipo="ramos">
     <p class="rotulo">Até 2030</p>
     <h2 class="manchete">De ganho modesto a salto rápido</h2>
     <div class="ramo" data-y="450">
-      <div class="estacao"><b>Modesto</b><small>OCDE</small></div>
+      <div class="estacao"><b>Modesto</b></div>
       <p class="caixa-txt">melhoras<br>pequenas</p>
     </div>
     <div class="ramo" data-y="720">
-      <div class="estacao"><b>Rápido</b><small>OCDE</small></div>
-      <p class="caixa-txt">tarefas de software<br>de vários dias</p>
+      <div class="estacao"><b>Rápido</b></div>
+      <p class="caixa-txt">tarefas de software<br>de vários dias,<br>na tendência</p>
     </div>
-    <p class="ramos-leg">Gargalos: dados, chips, dinheiro e energia.</p>
+    <p class="ramos-leg">Faixa da OCDE; gargalos: dados, chips, dinheiro e energia.</p>
   </section>
 
   <!-- sinais (tempo): quatro sinais com fonte pública; o mais próximo, dez./26, aceso (G seção 3, itens 1, 4, 5 e 7) -->
@@ -686,8 +703,8 @@
     <p class="rotulo">A11, 5 min</p>
     <h2 class="manchete">O que você leva, o que faltou</h2>
     <div class="e-roda">
-      <div class="e-campo"><p class="e-campo-tit">Leva</p><p class="e-campo-sub">uma coisa que você leva</p></div>
-      <div class="e-campo"><p class="e-campo-tit">Faltou</p><p class="e-campo-sub">uma coisa que faltou</p></div>
+      <div class="e-campo"><p class="e-campo-tit">Leva</p><p class="e-campo-sub">diga uma</p></div>
+      <div class="e-campo"><p class="e-campo-tit">Faltou</p><p class="e-campo-sub">diga uma</p></div>
     </div>
     <p class="rodape">Em roda, cada um diz as duas.</p>
   </section>
@@ -779,10 +796,10 @@ SLIDES.push(
    notas: {diga: 'Até aqui, um assistente sozinho. Agora, o que fica em volta do modelo: o harness. É o sistema que divide o trabalho entre vários agentes, cada um com um modelo. Vou mostrar uma peça da PGE-MS por dentro. Falo da experiência de quem trabalha lá; a co.juris não fala em nome da PGE-MS.',
      faca: ['bloco curto, de 6 minutos: o vídeo e o custo de cada agente', 'apontar o aviso do rodapé'],
      transicao: 'Uma peça, dez agentes.'}},
-  {id: 'harness', titulo: 'Dez agentes, uma peça', video: [0.9, 2.4],
+  {id: 'harness', titulo: 'Dez agentes, uma peça', video: [0.9, 39.5], ritmoOk: 'vídeo de 40 s, narrado pelo professor',
    notas: {diga: 'Esta é uma peça real, gerada no quatilex, sem nenhum dado de processo. Dez agentes e seis modelos trabalharam nela. Primeiro, o classificador lê os autos e decide o tipo do caso. Dois leitores baratos leem os autos ao mesmo tempo e listam argumentos e fatos, com a fonte. O agrupador junta o que os dois disseram igual. Aí entra o redator, com o Claude Opus 5.5, que escreve a peça e confere nos autos. Dois validadores checam os julgados e os artigos de lei citados. Por último, um agente confere se a peça afirma um ofício que não foi expedido. Doutrina e jurisprudência são ferramentas de busca que os leitores e o redator chamam.',
      faca: ['o vídeo toca sozinho na moldura; não há nada ao vivo neste slide',
-       'vídeo final: midia/harness.mp4 (Tarefa 6A, claude_video_maker, agentes-peca-2); até lá, o marcador',
+       'o vídeo tem 40 s; falar por cima dele, na ordem em que os agentes aparecem',
        'os números valem para esta peça, não para a média do sistema'],
      transicao: 'E quanto custou cada um?'}},
   {id: 'redator', titulo: 'O caro só onde faz diferença', passos: [3.2],
@@ -826,9 +843,10 @@ SLIDES.push(
    notas: {diga: 'A tecnologia fica: ela é real e é útil. O preço muda, e muda também o que o plano compra. Quem depende de um app só fica preso à conta dele.',
      faca: ['pausa curta'],
      transicao: 'Então vamos testar a dependência de vocês.'}},
-  {id: 'a8', titulo: 'Sua vez: e se o preço dobrar?', pratica: 5,
-   notas: {diga: 'Cinco minutos, em dupla. Imaginem que, na sexta, o plano que vocês usam dobra de preço. O que quebra no trabalho de vocês? Pensem no que está preso ao app. À direita, uma pista: o que vai com vocês para outro app.',
-     faca: ['disparar o cronômetro de 5 minutos (começa sozinho na tela do apresentador)',
+  {id: 'a8', titulo: 'Sua vez: e se o preço dobrar?', pratica: 5, passos: [2.0, 1.4],
+   notas: {diga: 'Cinco minutos, em dupla. Imaginem que, na sexta, o plano que vocês usam dobra de preço. O que quebra no trabalho de vocês? Pensem no que está preso ao app.',
+     faca: ['chegada: só a pergunta; disparar o cronômetro de 5 minutos (começa sozinho na tela do apresentador)',
+       'segundo clique: a resposta, depois do tempo; entra à direita o que vai com vocês para outro app',
        'gabarito, no próximo slide: costuma quebrar o que está preso ao app; instruções só na memória do chat, documentos só no projeto do fornecedor, nenhum segundo fornecedor testado',
        'no fim, pedir a duas duplas que digam o que quebra'],
      transicao: 'O que não quebra é o que vai com vocês.'}},
@@ -845,12 +863,12 @@ SLIDES.push(
      faca: ['deixar o título na tela um instante antes de falar'],
      transicao: 'Começo pelo que vem antes de tudo: o chip.'}},
   {id: 'chips', titulo: 'Chip de ponta é política de Estado',
-   notas: {diga: 'Quase todo chip de IA de ponta sai de uma fábrica só, a TSMC. Quem registra é o AI Index 2026, de Stanford. E desde 15 de janeiro de 2026 os EUA licenciam caso a caso a venda desses chips à China, com teto: no máximo metade do volume vendido nos EUA. Quem controla o chip controla quem treina modelo.',
+   notas: {diga: 'Quase todo chip de IA de ponta sai de uma fábrica só, a TSMC. Quem registra é o AI Index 2026, de Stanford. E desde 15 de janeiro de 2026 os EUA licenciam caso a caso a venda desses chips à China, com teto: no máximo metade do que vendem nos EUA. A barra cheia é o vendido nos EUA; a dourada, pela metade, o teto para a China. Quem controla o chip controla quem treina modelo.',
      faca: ['apontar o cartão da esquerda, depois o da direita'],
      transicao: 'E quem não tem o chip de ponta? Aposta em modelo aberto.'}},
   {id: 'quatro-meses', titulo: '4 meses',
    notas: {diga: 'Quatro meses. É a distância dos melhores modelos abertos para os fechados, na medição da Epoch AI de maio de 2026. Modelo aberto é aquele cujo arquivo se baixa e roda em servidor próprio. Quatro meses é pouco: o aberto anda logo atrás, e pode rodar dentro de casa.',
-     faca: ['deixar o número na tela em silêncio um instante', 'ler o rodapé: o que é modelo aberto'],
+     faca: ['deixar o número na tela em silêncio um instante', 'dizer o que é modelo aberto: o que se baixa e roda em servidor próprio'],
      transicao: 'Perto em capacidade. E em segurança?'}},
   {id: 'aberto-seguro', titulo: 'Aberto não quer dizer seguro',
    notas: {diga: 'O CAISI, órgão do NIST, do governo americano, testou o DeepSeek R1-0528 em 30 de setembro de 2025. Agentes montados sobre ele foram 12 vezes mais propensos a seguir instruções maliciosas. Com um jailbreak comum, que é um truque de texto para furar as travas do modelo, atenderam 94% dos pedidos maliciosos. Os modelos americanos, 8%. Uma ressalva: é o governo dos EUA avaliando concorrentes chineses. Isso não invalida os números, mas pede leitura com isso em mente.',
@@ -885,8 +903,8 @@ SLIDES.push(
      faca: ['deixar o número na tela em silêncio um instante'],
      transicao: 'Se esse ritmo continuar, onde chegamos? Depende.'}},
   {id: 'cenarios', titulo: 'De ganho modesto a salto rápido',
-   notas: {diga: 'O mesmo relatório cita a OCDE: até 2030, o resultado pode ir de melhoras modestas a ganhos rápidos. No cenário rápido, mantida a tendência, os sistemas completariam com confiança tarefas de software bem especificadas que levam vários dias. E há gargalos possíveis: dados, chips, dinheiro e energia. Qualquer um deles pode frear a curva.',
-     faca: ['apontar o ramo de cima, depois o de baixo', 'ler a legenda: os gargalos'],
+   notas: {diga: 'O mesmo relatório cita a OCDE: até 2030, o resultado pode ir de melhoras modestas a ganhos rápidos. Essa faixa, do modesto ao rápido, é da OCDE. E o próprio Relatório Internacional de Segurança da IA 2026 projeta: se a tendência se mantiver, os sistemas completariam com confiança tarefas de software bem especificadas que levam vários dias. Há gargalos possíveis: dados, chips, dinheiro e energia. Qualquer um deles pode frear a curva.',
+     faca: ['apontar o ramo de cima, depois o de baixo', 'as tarefas de vários dias são projeção do Relatório Internacional de Segurança da IA 2026; a faixa modesto a rápido é da OCDE, citada nele', 'ler a legenda: os gargalos'],
      transicao: 'Como saber para qual lado vamos? Olhando sinais.'}},
   {id: 'sinais', titulo: 'Sinais para acompanhar',
    notas: {diga: 'Em vez de previsão, sinais com fonte pública. Em 2 de dezembro de 2026, na União Europeia, acaba a transição das regras de transparência do AI Act. Na Câmara, o parecer do relator do PL 2338. Na Epoch AI, a próxima medição da distância entre abertos e fechados, que estava em quatro meses. E em abril de 2027, se o calendário se mantiver, o novo AI Index de Stanford.',
@@ -958,6 +976,25 @@ const partes = (id) => {
 };
 
 // ===== Bloco A: assistentes =====
+// Capa (fundo claro, como a da Aula 2): o logo sobe, o fio se traça de cima para baixo e o texto entra linha a linha.
+CENAS.capa = (() => {
+  const sec = m.secao('capa'), logo = sec.querySelector('.a-logo-cj'), fio = sec.querySelector('.a-cp-fio');
+  const linhas = [sec.querySelector('.rotulo'), ...$$(sec, '.a-cp-tit > span'), sec.querySelector('.a-cp-sub')];
+  let pronto = false;
+  return (t, c) => {
+    if (!pronto) {
+      pronto = true;
+      const tit = sec.querySelector('.a-cp-tit'), largura = Math.max(...$$(sec, '.a-cp-tit > span').map((el) => el.offsetWidth));
+      if (largura > 1000) tit.style.fontSize = `${Math.floor(124 * 1000 / largura)}px`;
+    }
+    const x = c.desde(0);
+    surgir(logo, molaAR(x - 0.15, {resposta: 0.7, amortecimento: 0.9}), {dy: 24});
+    fio.style.transform = `scaleY(${saida(faixa(x, 0.55, 1.1)).toFixed(4)})`;
+    linhas.forEach((el, n) => revelar(el, molaAR(x - 0.8 - n * 0.16)));
+    fim(sec, x, 1.6);
+  };
+})();
+
 CENAS.cinco = cartoes('cinco');
 CENAS.sigilo = cartoes('sigilo');
 
@@ -1128,7 +1165,7 @@ CENAS.compromissos = (() => {
   };
 })();
 
-// a8: a pergunta entra, depois o checklist em miniatura, item por item.
+// a8: na chegada, só a pergunta; no segundo clique (depois do cronômetro), o checklist em miniatura, item por item.
 CENAS.a8 = (() => {
   const sec = m.secao('a8'), cPerg = sec.querySelector('.c-perg'), cEt = sec.querySelector('.c-mini-et');
   const cMini = sec.querySelector('.c-mini'), cIt = $$(sec, '.c-mini li');
@@ -1136,10 +1173,12 @@ CENAS.a8 = (() => {
     const x = conteudo(c);
     titulo(sec, x, c);
     surgir(cPerg, molaAR(x - 0.2), {dy: 24});
-    revelar(cEt, molaAR(x - 0.9));
-    surgir(cMini, molaAR(x - 0.95), {dy: 0});
-    cIt.forEach((el, n) => surgir(el, molaAR(x - 1.05 - n * 0.1), {dx: 18, dy: 0}));
-    fim(sec, x, 1.6);
+    fim(sec, x, 1.2);
+    const d = c.desde(1);
+    vis(cEt, d > 0); vis(cMini, d > 0);
+    revelar(cEt, molaAR(d - 0.05));
+    surgir(cMini, molaAR(d - 0.1), {dy: 0});
+    cIt.forEach((el, n) => surgir(el, molaAR(d - 0.2 - n * 0.12), {dx: 18, dy: 0}));
   };
 })();
 // ===== Bloco D: geopolítica =====
@@ -1155,10 +1194,10 @@ CENAS.chips = (() => {
 })();
 CENAS['aberto-seguro'] = cartoes('aberto-seguro');
 
-// quatro-meses: o "4" sobe, "meses" chega ao lado, a caneta dourada sublinha o número; a legenda e a definição depois.
+// quatro-meses: o "4" sobe, "meses" chega ao lado, a caneta dourada sublinha o número; a legenda depois.
 CENAS['quatro-meses'] = (() => {
   const sec = m.secao('quatro-meses'), q = (s) => sec.querySelector(s);
-  const dN = q('.d-num-n'), dU = q('.d-num-u'), dLeg = q('.d-num-leg'), dRod = q('.rodape');
+  const dN = q('.d-num-n'), dU = q('.d-num-u'), dLeg = q('.d-num-leg');
   return (t, c) => {
     const x = conteudo(c);
     titulo(sec, x, c);
@@ -1166,7 +1205,6 @@ CENAS['quatro-meses'] = (() => {
     surgir(dU, molaAR(x - 0.35), {dx: -30, dy: 0});
     anotar(dN, saida(faixa(x, 0.7, 1.2)), {forma: 'sublinhado', semente: 4});
     revelar(dLeg, molaAR(x - 0.9));
-    revelar(dRod, molaAR(x - 1.3));
     fim(sec, x, 1.4);
   };
 })();

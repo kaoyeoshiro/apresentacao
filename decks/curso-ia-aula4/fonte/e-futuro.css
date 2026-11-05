@@ -5,8 +5,9 @@
   .e-num-u { font-size: var(--esc-5); line-height: .9; color: var(--cor-tinta-suave); }
   .e-num-leg { position: absolute; left: 120px; top: 610px; width: 1560px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
 
-  /* cenarios: a caixa do ramo de baixo leva quatro palavras em duas linhas */
-  [data-slide="cenarios"] .caixa-txt { font-size: 40px; }
+  /* cenarios: a caixa do ramo de baixo leva três linhas; o texto se centra na altura da caixa (170 px, de y - 85) */
+  [data-slide="cenarios"] .caixa-txt { box-sizing: border-box; height: 170px; margin-top: -32px; display: grid; align-content: center;
+                                       font-size: 38px; line-height: 1.15; }
 
   /* sinais: textos dos marcos em até duas linhas */
   [data-slide="sinais"] .etapas li { font-size: 40px; }

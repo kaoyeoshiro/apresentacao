@@ -11,10 +11,10 @@ CENAS.chips = (() => {
 })();
 CENAS['aberto-seguro'] = cartoes('aberto-seguro');
 
-// quatro-meses: o "4" sobe, "meses" chega ao lado, a caneta dourada sublinha o número; a legenda e a definição depois.
+// quatro-meses: o "4" sobe, "meses" chega ao lado, a caneta dourada sublinha o número; a legenda depois.
 CENAS['quatro-meses'] = (() => {
   const sec = m.secao('quatro-meses'), q = (s) => sec.querySelector(s);
-  const dN = q('.d-num-n'), dU = q('.d-num-u'), dLeg = q('.d-num-leg'), dRod = q('.rodape');
+  const dN = q('.d-num-n'), dU = q('.d-num-u'), dLeg = q('.d-num-leg');
   return (t, c) => {
     const x = conteudo(c);
     titulo(sec, x, c);
@@ -22,7 +22,6 @@ CENAS['quatro-meses'] = (() => {
     surgir(dU, molaAR(x - 0.35), {dx: -30, dy: 0});
     anotar(dN, saida(faixa(x, 0.7, 1.2)), {forma: 'sublinhado', semente: 4});
     revelar(dLeg, molaAR(x - 0.9));
-    revelar(dRod, molaAR(x - 1.3));
     fim(sec, x, 1.4);
   };
 })();

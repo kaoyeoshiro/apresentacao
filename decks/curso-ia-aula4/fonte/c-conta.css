@@ -23,17 +23,21 @@
   .c-bi { font-size: var(--esc-5); }
   .c-num-leg { position: absolute; left: 120px; top: 640px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--sobre-noite); text-wrap: balance; }
 
-  /* a8 (guia): a pergunta grande à esquerda; à direita, o checklist do slide seguinte em miniatura */
-  .c-perg { position: absolute; left: 120px; top: 340px; width: 1000px; font: 400 60px/1.3 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
+  /* a8 (guia): a pergunta grande à esquerda, sozinha na chegada; à direita, no segundo clique, o checklist do slide seguinte */
+  .c-perg { position: absolute; left: 120px; top: 330px; width: 1030px; font: 400 76px/1.25 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
   .c-mini-et { left: 1220px; top: 330px; }
   .c-mini { position: absolute; left: 1220px; top: 386px; width: 580px; box-sizing: border-box; margin: 0; padding: 22px 30px; list-style: none; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; }
   .c-mini li { display: flex; align-items: center; gap: 22px; height: 72px; font: 600 32px/1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
   .c-mini i { flex: 0 0 36px; height: 36px; box-sizing: border-box; border: 4px solid var(--suave-sobre-noite); border-radius: 8px; }
 
   /* pesado e portavel: cartões de duas colunas, com altura igual */
-  [data-slide="pesado"] .cartoes { top: 380px; }
-  [data-slide="pesado"] .cartao { min-height: 380px; }
+  [data-slide="pesado"] .cartoes { top: 330px; grid-template-columns: 0.72fr 1.28fr; }
+  [data-slide="pesado"] .cartao { min-height: 400px; }
   [data-slide="pesado"] .ct-txt { font-size: 44px; line-height: 1.3; }
+  /* o consumo e o preço do plano em tamanho grande; só o preço em dourado */
+  [data-slide="pesado"] .ct-txt + .c-grande, [data-slide="pesado"] .c-grande + .ct-txt { margin-top: 4px; }
+  .c-grande { font: 400 var(--esc-4)/1.1 var(--fonte-texto); white-space: nowrap; }
+  .c-200 { font: 800 var(--esc-4)/1.1 var(--fonte-titulo); letter-spacing: -0.02em; white-space: nowrap; }
   [data-slide="pesado"] .ct-sub { margin-top: 22px; font-size: 36px; }
   [data-slide="portavel"] .cartoes { top: 360px; }
   [data-slide="portavel"] .cartao { min-height: 220px; }

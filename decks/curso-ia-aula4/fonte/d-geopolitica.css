@@ -1,25 +1,27 @@
 /* Bloco d-geopolitica: só classes d- e [data-slide] deste bloco. */
   /* chips: dois cartões largos, mais baixos na tela para o texto respirar */
-  [data-slide="chips"] .cartoes { top: 360px; }
+  [data-slide="chips"] .cartoes { top: 360px; align-items: start; }
   [data-slide="chips"] .ct-txt { font-size: 44px; line-height: 1.28; }
   [data-slide="chips"] .ct-sub { margin-top: 18px; }
-  /* o teto desenhado: a China leva no máximo metade do volume vendido nos EUA */
+  /* o teto desenhado: a China leva no máximo metade do que se vende nos EUA; cada barra diz o que mede */
   .d-teto { margin-top: 26px; display: grid; gap: 14px; }
-  .d-teto p { display: grid; grid-template-columns: 130px 1fr; align-items: center; font: 700 var(--esc-1)/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .d-teto p { display: grid; grid-template-columns: 330px 1fr; align-items: center; font: 700 var(--esc-1)/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
   .d-barra { display: block; height: 30px; border-radius: 6px; background: var(--cor-tinta); transform-origin: 0 50%; }
   .d-barra.d-meia { width: 50%; background: var(--cor-destaque); }
 
-  /* quatro-meses (noite): o "4" a 320 px em dourado, "meses" ao lado, a legenda embaixo e a definição no rodapé */
-  .d-num { position: absolute; left: 112px; top: 250px; display: flex; align-items: baseline; gap: 44px; color: var(--sobre-noite); }
+  /* quatro-meses (claro): o "4" a 320 px em dourado, "meses" ao lado e a legenda embaixo */
+  .d-num { position: absolute; left: 112px; top: 250px; display: flex; align-items: baseline; gap: 44px; color: var(--cor-tinta); }
   .d-num-n { font-size: var(--esc-6); line-height: .9; }
   .d-num-u { font-size: var(--esc-5); line-height: .9; }
-  .d-num-leg { position: absolute; left: 120px; top: 610px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
-  .d-num-fonte { color: var(--suave-sobre-noite); white-space: nowrap; }
+  .d-num-leg { position: absolute; left: 120px; top: 610px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
+  .d-num-fonte { color: var(--cor-tinta-suave); white-space: nowrap; }
 
   /* aberto-seguro: três cartões com o número grande em cima; o rodapé diz de quem é a avaliação */
   [data-slide="aberto-seguro"] .cartoes { top: 370px; }
   [data-slide="aberto-seguro"] .cartao { min-height: 400px; }
   .d-ct-n { font-size: 132px; line-height: 1; letter-spacing: -0.02em; }
+  .d-ct-n.d-ouro { color: var(--cor-destaque-texto); }   /* o 94% é o único dourado (o escurecido do tema, legível no claro) */
+  .d-ct-n.d-suave { color: var(--cor-tinta-suave); }    /* o 8% de comparação, em tinta suave */
   [data-slide="aberto-seguro"] .ct-txt { margin-top: 22px; font-size: 40px; }
   [data-slide="aberto-seguro"] .rodape { top: 860px; }
 

@@ -54,7 +54,7 @@ CENAS.compromissos = (() => {
   };
 })();
 
-// a8: a pergunta entra, depois o checklist em miniatura, item por item.
+// a8: na chegada, só a pergunta; no segundo clique (depois do cronômetro), o checklist em miniatura, item por item.
 CENAS.a8 = (() => {
   const sec = m.secao('a8'), cPerg = sec.querySelector('.c-perg'), cEt = sec.querySelector('.c-mini-et');
   const cMini = sec.querySelector('.c-mini'), cIt = $$(sec, '.c-mini li');
@@ -62,9 +62,11 @@ CENAS.a8 = (() => {
     const x = conteudo(c);
     titulo(sec, x, c);
     surgir(cPerg, molaAR(x - 0.2), {dy: 24});
-    revelar(cEt, molaAR(x - 0.9));
-    surgir(cMini, molaAR(x - 0.95), {dy: 0});
-    cIt.forEach((el, n) => surgir(el, molaAR(x - 1.05 - n * 0.1), {dx: 18, dy: 0}));
-    fim(sec, x, 1.6);
+    fim(sec, x, 1.2);
+    const d = c.desde(1);
+    vis(cEt, d > 0); vis(cMini, d > 0);
+    revelar(cEt, molaAR(d - 0.05));
+    surgir(cMini, molaAR(d - 0.1), {dy: 0});
+    cIt.forEach((el, n) => surgir(el, molaAR(d - 0.2 - n * 0.12), {dx: 18, dy: 0}));
   };
 })();

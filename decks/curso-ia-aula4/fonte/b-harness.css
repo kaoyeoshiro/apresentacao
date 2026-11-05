@@ -1,7 +1,7 @@
   /* ===== Bloco B: harness. Só classes b- e [data-slide] deste bloco. ===== */
 
-  /* harness-cap: o aviso da marca no rodapé, abaixo do subtítulo */
-  [data-slide="harness-cap"] .b-aviso { left: auto; right: 120px; top: 896px; font-size: 32px; text-align: right; }
+  /* harness-cap: o aviso da marca no rodapé, com a base da linha na mesma altura da base do subtítulo */
+  [data-slide="harness-cap"] .b-aviso { left: auto; right: 120px; top: 861px; font-size: 32px; text-align: right; }
 
   /* redator: uma linha por agente (nome, trilho, valor), todas na mesma escala; à direita, a fatia do redator */
   [data-slide="redator"] .b-cab { left: 120px; top: 292px; }

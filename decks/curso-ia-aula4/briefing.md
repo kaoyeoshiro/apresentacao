@@ -148,3 +148,19 @@ O professor decidiu "sem foto, como antes": nenhuma imagem gerada nesta aula, co
 modelo da capa da Aula 2 (logo oficial da co.juris à esquerda, fio e título à direita, fundo claro) e as aberturas de
 capítulo ficam no arquétipo abertura sem `.heroi-caixa`. A coluna "mídia e custo" do roteiro que previa heroicas fica
 sem efeito; gasto de imagem: zero.
+
+## Crítica
+
+**Rodada 1 (05/11/2026, subagente crítico com o prompt de `critica.md`).** Corrigidos: em chips, o cartão "Venda à
+China" dizia o contrário da regra e passou a "até metade do que vendem nos EUA", com as barras "vendido nos EUA" e
+"teto"; em a8, a resposta aparecia antes do tempo da dupla e agora entra no segundo clique; em pesado, "US$ 200" ficou
+grande e é o único dourado; em sigilo, o cartão da CNJ 615 ganhou a borda dourada; em aberto-seguro, só o 94% fica em
+dourado e o 8% vai na tinta suave; quatro-meses passou para o claro, e o rodapé com a definição de modelo aberto foi
+para as notas, para não formar três claros parecidos; em cenarios, a faixa fica atribuída à OCDE e as tarefas de vários
+dias ao Relatório Internacional de Segurança da IA 2026; o aviso de harness-cap ficou na linha do subtítulo; os dois
+subtítulos de a11 dizem "diga uma".
+
+Depois da rodada, a capa passou ao modelo da Aula 2 e o slide 11 toca a animação do harness (`midia/harness.mp4`, 40 s,
+do claude_video_maker), com `ritmoOk` declarado porque o professor narra por cima. O vídeo-marcador `demo.mp4` saiu da
+pasta. A primeira busca desse vídeo longo às vezes fotografava o quadro antigo; o motor passou a esperar o quadro
+apresentado (`requestVideoFrameCallback`) no modo de render. Oráculo: 0 erro(s), 1 aviso (hierarquia), 1 isenção.
