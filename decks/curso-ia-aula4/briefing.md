@@ -129,3 +129,15 @@ Fichas de 05/11/2026 em `docs/pesquisa/`: economia (E, `dia2-economia-subsidio-b
 - O vídeo do harness (slide 11) depende da Tarefa 6A, no claude_video_maker.
 - *A próxima onda* (Suleyman e Bhaskar) fica fora: não há edição em mãos para citar página.
 - Notas `{diga, faca, transicao}` de cada slide: escritas na montagem, só com os fatos acima.
+
+## Montagem (05/11/2026)
+
+Blocos montados por subagentes e conferidos pela folha de contato; deck inteiro com lint limpo e 0 erro(s) no oráculo.
+Ajustes na integração: no slide 7 (sigilo), as referências ficaram curtas na tela ("EAOAB 7º, II", "EAOAB 34, VII",
+"Rec. OAB 1/2024", "CNJ 615/2025") e dois cartões foram encurtados ("Fornecedor que não treine com os dados";
+"Sigiloso na IA externa, só anonimizado ou protegido"), para caber em 45 palavras; as referências completas e a
+ressalva da Res. CNJ 615 estão nas notas. O slide 27 (cloud-act, S.T.A.R. da geopolítica) foi para a noite, para
+quebrar três claros seguidos. Pelos subagentes: pesado (17) foi para a noite pelo mesmo motivo; ritmo (31) saiu sem
+rótulo. O vídeo do harness (slide 11) ainda é o marcador; a animação vem do claude_video_maker (Tarefa 6A).
+
+Aviso aceito: hierarquia (23 de 37 sem nada acima de 120 px), a rever depois das heroicas.

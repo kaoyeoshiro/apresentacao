@@ -1,1 +1,40 @@
 /* Bloco d-geopolitica: só classes d- e [data-slide] deste bloco. */
+  /* chips: dois cartões largos, mais baixos na tela para o texto respirar */
+  [data-slide="chips"] .cartoes { top: 360px; }
+  [data-slide="chips"] .ct-txt { font-size: 44px; line-height: 1.28; }
+  [data-slide="chips"] .ct-sub { margin-top: 18px; }
+  /* o teto desenhado: a China leva no máximo metade do volume vendido nos EUA */
+  .d-teto { margin-top: 26px; display: grid; gap: 14px; }
+  .d-teto p { display: grid; grid-template-columns: 130px 1fr; align-items: center; font: 700 var(--esc-1)/1 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  .d-barra { display: block; height: 30px; border-radius: 6px; background: var(--cor-tinta); transform-origin: 0 50%; }
+  .d-barra.d-meia { width: 50%; background: var(--cor-destaque); }
+
+  /* quatro-meses (noite): o "4" a 320 px em dourado, "meses" ao lado, a legenda embaixo e a definição no rodapé */
+  .d-num { position: absolute; left: 112px; top: 250px; display: flex; align-items: baseline; gap: 44px; color: var(--sobre-noite); }
+  .d-num-n { font-size: var(--esc-6); line-height: .9; }
+  .d-num-u { font-size: var(--esc-5); line-height: .9; }
+  .d-num-leg { position: absolute; left: 120px; top: 610px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
+  .d-num-fonte { color: var(--suave-sobre-noite); white-space: nowrap; }
+
+  /* aberto-seguro: três cartões com o número grande em cima; o rodapé diz de quem é a avaliação */
+  [data-slide="aberto-seguro"] .cartoes { top: 370px; }
+  [data-slide="aberto-seguro"] .cartao { min-height: 400px; }
+  .d-ct-n { font-size: 132px; line-height: 1; letter-spacing: -0.02em; }
+  [data-slide="aberto-seguro"] .ct-txt { margin-top: 22px; font-size: 40px; }
+  [data-slide="aberto-seguro"] .rodape { top: 860px; }
+
+  /* regras: o texto do marco "alto risco (Anexo III)" em duas linhas */
+  [data-slide="regras"] .etapas li { font-size: 40px; }
+
+  /* a9 (cena guia, noite): a pergunta em cima; as três perguntas à esquerda; os dois lados da sala à direita */
+  .d-a9-perg { position: absolute; left: 120px; top: 306px; font: 400 54px/1.2 var(--fonte-texto); color: var(--sobre-noite); white-space: nowrap; }
+  .d-a9-et { left: 120px; top: 452px; color: var(--suave-sobre-noite); }
+  .d-a9-lista { position: absolute; left: 120px; top: 514px; width: 940px; counter-reset: d-perg; }
+  .d-a9-lista li { counter-increment: d-perg; display: flex; align-items: flex-start; gap: 28px; margin-bottom: 30px; font: 400 46px/1.2 var(--fonte-texto); color: var(--sobre-noite); }
+  .d-a9-lista li::before { content: counter(d-perg); flex: 0 0 68px; height: 68px; margin-top: -6px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 34px;
+                           display: grid; place-items: center; font: 800 36px/1 var(--fonte-titulo); color: var(--sobre-noite); }
+  .d-lados { position: absolute; left: 1140px; top: 514px; width: 660px; display: grid; gap: 32px; }
+  .d-lado { box-sizing: border-box; height: 150px; padding: 0 36px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px;
+            display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  .d-lado-tit { font: 800 var(--esc-3)/1.05 var(--fonte-titulo); text-transform: var(--titulo-caixa, uppercase); color: var(--sobre-noite); white-space: nowrap; }
+  .d-lado-sub { font: 400 34px/1.25 var(--fonte-texto); color: var(--suave-sobre-noite); }
