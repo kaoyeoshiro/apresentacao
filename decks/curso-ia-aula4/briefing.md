@@ -183,3 +183,14 @@ pesado, sobra meia altura vazia. Numa das rodadas, a folha de `paradas --viagens
 quadro 0 na parada final; o defeito era do modo de render do motor, que esperava
 só 0,3 s pelo quadro; com 1 s, três rodadas seguidas deram o mesmo still. Oráculo: 0
 erro(s), 1 aviso (hierarquia), 1 isenção (harness).
+
+## Slide do Grok Bot (06/11/2026)
+
+A pedido do professor, entrou depois de cinco o slide grokbot ("Como eu uso o meu"), com uma animação de 62 s feita no
+claude_video_maker (`videos/grokbot`, branch `video/grokbot`): o assistente pessoal do professor e o que ele faz com ele,
+nas palavras da mensagem de 06/11/2026 (resumo diário de IA do X, do Reddit e do YouTube; WhatsApp e recados para a
+agenda; orquestração pelo t3code no Claude, no GPT, no opencode e no Gemini; ofícios, CIs e processos no E-MS,
+respondidos sozinho por escolha do professor; pendências do PGE.Net; eventos de legaltech e editais da semana;
+pesquisa de compras). Avatares desenhados por código, sem logotipo; mensagens, ofícios e compromissos fictícios. É o
+único vídeo do deck com som: só os efeitos sintetizados, a 30% do volume, para o professor falar por cima. As prévias
+da tela do apresentador ficam sempre mudas. O deck passa a 38 slides.

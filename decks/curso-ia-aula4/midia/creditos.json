@@ -1,5 +1,26 @@
 [
  {
+  "arquivo": "midia/grokbot-capa.webp",
+  "data": "2026-11-06",
+  "ferramenta": "trazido",
+  "origem": "./cvm html, código próprio (claude_video_maker, branch video/grokbot, videos/grokbot); usos do Grok Bot descritos pelo professor em 06/11/2026; dados fictícios; avatares desenhados por código, sem logotipo",
+  "quadro_de": "midia/grokbot.mp4",
+  "segundo": 0.0
+ },
+ {
+  "arquivo": "midia/grokbot.mp4",
+  "data": "2026-11-06",
+  "ferramenta": "trazido",
+  "origem": "./cvm html, código próprio (claude_video_maker, branch video/grokbot, videos/grokbot); usos do Grok Bot descritos pelo professor em 06/11/2026; dados fictícios; avatares desenhados por código, sem logotipo",
+  "original": "midia/originais/grokbot.mp4",
+  "preparo": {
+   "perfil": "tela",
+   "ate": null,
+   "audio": true
+  },
+  "nota": "áudio: só os efeitos sintetizados do ./cvm mix, a 30% do volume (ffmpeg volume=0.3), a pedido do professor em 06/11/2026"
+ },
+ {
   "arquivo": "midia/harness-capa.webp",
   "data": "2026-11-05",
   "ferramenta": "trazido",
