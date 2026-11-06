@@ -204,7 +204,8 @@ export function video(el, seg, {fps = 30} = {}) {
 	const antes = ultimoSeg.get(el);
 	ultimoSeg.set(el, seg);
 	const andando = antes !== undefined && seg > antes;
-	if (andando && el.paused) el.play().catch(() => {});
+	// Vídeo com som: se o navegador recusar o som (a janela ainda não recebeu clique nem tecla), toca mudo em vez de parar.
+	if (andando && el.paused) el.play().catch(() => { if (!el.muted) { el.muted = true; el.play().catch(() => {}); } });
 	if (!andando && !el.paused) el.pause();
 	if (Math.abs(el.currentTime - seg) > (andando ? 0.25 : 0.5 / fps)) el.currentTime = seg;
 }
