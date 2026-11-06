@@ -22,7 +22,7 @@ casa, com o kit do GitHub, que repete todas as demonstrações.
 
 ## 2. Antes da aula
 
-A Aula 4 não pede preparo além de conferir que os vídeos dos slides 5 e 12 tocam, e que o som baixo do slide 5 sai na caixa da sala. A Aula 3 depende de cinco demonstrações ao
+A Aula 4 não pede preparo além de conferir que os vídeos dos slides 5 e 12 tocam, e que o som baixo dos dois sai na caixa da sala. A Aula 3 depende de cinco demonstrações ao
 vivo, e cada uma precisa estar ensaiada e gravada, porque a regra da aula é uma tentativa só: sem resultado útil em 60
 segundos (40 no TJMS), você para e toca a gravação do ensaio na moldura do slide. Hoje as molduras dos slides 5, 15, 27,
 29 e 38 tocam uma gravação provisória, de outra aula, que mostra um pedido de contestação; sem as gravações novas, a
@@ -205,7 +205,7 @@ cenas: resumo de IA de manhã (5 a 13 s), WhatsApp e agenda (13 a 22), t3code co
 38), PGE.Net (38 a 44), eventos e editais (44 a 50), compras (50 a 55) e todos ligados ao centro (55 a 62). Mensagens,
 ofícios e compromissos do vídeo são fictícios.
 
-No slide 12, o vídeo tem 40 segundos e você fala por cima dele, na ordem em que os agentes aparecem: o classificador,
+No slide 12, o vídeo tem 40 segundos, também com efeitos sonoros baixos, e você fala por cima dele, na ordem em que os agentes aparecem: o classificador,
 os dois leitores, o agrupador, o redator, os validadores e, por último, o agente que confere o ofício. O slide 11
 lembra que a co.juris não fala em nome da PGE-MS; diga isso antes do vídeo.
 

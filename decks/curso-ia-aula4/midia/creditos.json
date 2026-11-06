@@ -37,7 +37,8 @@
   "preparo": {
    "perfil": "tela",
    "ate": null,
-   "audio": false
-  }
+   "audio": true
+  },
+  "nota": "áudio: só os efeitos sintetizados do ./cvm mix (final.mp4 do agentes-peca-2), a 30% do volume (ffmpeg volume=0.3), a pedido do professor em 06/11/2026"
  }
 ]

@@ -191,6 +191,6 @@ claude_video_maker (`videos/grokbot`, branch `video/grokbot`): o assistente pess
 nas palavras da mensagem de 06/11/2026 (resumo diário de IA do X, do Reddit e do YouTube; WhatsApp e recados para a
 agenda; orquestração pelo t3code no Claude, no GPT, no opencode e no Gemini; ofícios, CIs e processos no E-MS,
 respondidos sozinho por escolha do professor; pendências do PGE.Net; eventos de legaltech e editais da semana;
-pesquisa de compras). Avatares desenhados por código, sem logotipo; mensagens, ofícios e compromissos fictícios. É o
-único vídeo do deck com som: só os efeitos sintetizados, a 30% do volume, para o professor falar por cima. As prévias
+pesquisa de compras). Avatares desenhados por código, sem logotipo; mensagens, ofícios e compromissos fictícios. Tem som: só os efeitos sintetizados, a 30% do volume, para o professor falar por cima; no mesmo dia o vídeo do
+harness passou a ter o mesmo tratamento, também a pedido do professor. As prévias
 da tela do apresentador ficam sempre mudas. O deck passa a 38 slides.
