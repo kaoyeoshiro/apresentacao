@@ -53,23 +53,6 @@
   .a-cp-tit { margin-top: 26px; font-size: 124px; line-height: 1.04; color: var(--cor-tinta); }
   .a-cp-tit > span { display: block; white-space: nowrap; }
   .a-cp-sub { margin-top: 44px; font-size: var(--esc-2); line-height: 1.3; color: var(--cor-tinta-suave); text-wrap: balance; }
-
-  /* pecas (diagrama): caixas com ícone desenhado por código; o tracejado dourado é o pacote do plugin */
-  .a-diag { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
-  .a-diag path { fill: none; stroke: color-mix(in srgb, var(--cor-tinta) 40%, var(--cor-fundo)); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-  .a-diag .a-d-pl { stroke: var(--cor-destaque); stroke-dasharray: 18 14; }
-  .a-caixa { position: absolute; box-sizing: border-box; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 26px; align-content: center;
-             padding: 0 34px; border: 4px solid var(--cor-linha); border-radius: 26px; background: var(--cor-fundo); }
-  .a-skill { left: 120px; top: 556px; width: 470px; height: 200px; }
-  .a-conector { left: 1290px; top: 556px; width: 510px; height: 200px; }
-  .a-plugin { left: 640px; top: 318px; width: 640px; height: 152px; }
-  .a-rotina { left: 640px; top: 780px; width: 640px; height: 140px; }
-  .a-agente { left: 745px; top: 575px; width: 430px; height: 150px; grid-template-columns: 1fr; justify-items: center; background: var(--cor-tinta); border-color: var(--cor-tinta); color: var(--cor-fundo); }
-  .a-ic { grid-row: 1 / 3; width: 64px; height: 76px; }
-  .a-ic svg { display: block; width: 64px; height: 76px; overflow: visible; }
-  .a-ic path { fill: none; stroke: var(--cor-tinta-suave); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
-  .a-cx-tit { font: 800 var(--esc-3)/1.05 var(--fonte-titulo); white-space: nowrap; }
-  .a-cx-sub { margin-top: 8px; font: 400 36px/1.2 var(--fonte-texto); color: var(--cor-tinta-suave); white-space: nowrap; }
   /* ===== Bloco B: skills e Word. Só classes b- e [data-slide] deste bloco. ===== */
 
   /* word-antes (comparação): letra menor, e a página B ganha o timbre, os títulos numerados e o recuo */
@@ -102,25 +85,7 @@
   [data-slide="word-addin"] .cartao:first-child .ct-tit { font-size: 104px; line-height: 1.05; }
   [data-slide="word-addin"] .cartao:not(:first-child) { min-height: 280px; }
   [data-slide="word-addin"] .cartao:not(:first-child) .ct-tit { white-space: normal; text-wrap: balance; }
-
-  /* skillmd: o SKILL.md num editor desenhado por código (números de linha por contador do CSS: marcação, não texto);
-     as anotações ficam à direita, ligadas por traços neutros */
-  .b-arq { position: absolute; left: 120px; top: 300px; width: 1160px; height: 498px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 24px; overflow: hidden; }
-  .b-arq-cab { height: 68px; box-sizing: border-box; padding: 17px 30px 0; border-bottom: 4px solid var(--linha-sobre-noite); font: 500 30px/1.15 var(--fonte-mono, ui-monospace, monospace); color: var(--suave-sobre-noite); white-space: nowrap; }
-  .b-arq-txt { position: absolute; left: 0; top: 88px; width: 100%; counter-reset: b-ln; }
-  .b-ln { position: relative; height: 44px; padding: 0 34px 0 100px; font: 400 34px/44px var(--fonte-mono, ui-monospace, monospace); color: var(--sobre-noite); white-space: nowrap; counter-increment: b-ln; }
-  .b-ln::before { content: counter(b-ln); position: absolute; left: 0; top: 0; width: 70px; text-align: right; font-size: 30px; color: var(--suave-sobre-noite); }
-  .b-ln.b-dim, .b-k { color: var(--suave-sobre-noite); }
-  .b-ln.b-dim::after { content: "---"; }   /* o separador do cabeçalho é marcação, como o número da linha */
-  .b-k { font-weight: 700; }
-  .b-desc { display: inline-block; }
-  .b-sub { position: absolute; }
-  .b-ln i { position: absolute; left: 100px; top: 11px; height: 22px; border-radius: 11px; background: color-mix(in srgb, var(--sobre-noite) 30%, var(--noite)); transform-origin: 0 50%; }
-  .b-ligas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
-  .b-ligas path { fill: none; stroke: var(--linha-sobre-noite); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-  .b-nota { position: absolute; left: 1380px; width: 420px; font: 800 var(--esc-2)/1.1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
-  .b-nota small { display: block; margin-top: 4px; font: 400 36px/1.2 var(--fonte-texto); color: var(--suave-sobre-noite); }
-  [data-slide="skillmd"] .b-rod { top: 862px; }   /* 60 px ou mais de folga acima (editor) e abaixo (linha do dia) */
+  [data-slide="word-addin"] .cartao { border-color: var(--linha-sobre-noite); }   /* slide na noite desde que saiu o skillmd */
 
   /* checklist: à direita, o nome do item atual em display e a explicação logo abaixo, em corpo de leitura */
   [data-slide="checklist"] .explica { left: 860px; width: 940px; height: 560px; }
@@ -371,7 +336,7 @@
 </head>
 <body>
 <div id="palco"><div id="mundo">
-  <!-- ===== Bloco A: abertura (slides 1 a 3). A capa é clara, no desenho da Aula 2, sem foto. ===== -->
+  <!-- ===== Bloco A: abertura (slides 1 e 2). A capa é clara, no desenho da Aula 2, sem foto. ===== -->
   <section data-slide="capa">
     <div class="a-logo-cj" role="img" aria-label="co.juris"></div>
     <i class="a-cp-fio"></i>
@@ -393,23 +358,6 @@
       <li><b>5</b>rotinas</li>
     </ol>
     <p class="tempo-leg">Eu faço ao vivo; vocês decidem junto.</p>
-  </section>
-
-  <!-- pecas (cena própria, diagrama, quatro cliques): o agente no centro e as quatro peças que o levam para fora do chat -->
-  <section data-slide="pecas">
-    <p class="rotulo">Abertura</p>
-    <h2 class="manchete">Quatro peças em volta do agente</h2>
-    <svg class="a-diag" viewBox="0 0 1920 1080">
-      <path class="a-d-sk" d="M590 650H745"/>
-      <path class="a-d-co" d="M1175 650H1290"/>
-      <path class="a-d-pl" d="M960 470V512H355V556M960 512H1545V556"/>
-      <path class="a-d-ro" d="M960 725V780"/>
-    </svg>
-    <div class="a-caixa a-agente"><p class="a-cx-tit">Agente</p></div>
-    <div class="a-caixa a-skill"><span class="a-ic" data-ic="arquivo"></span><p class="a-cx-tit">Skill</p><p class="a-cx-sub">o jeito</p></div>
-    <div class="a-caixa a-conector"><span class="a-ic" data-ic="tomada"></span><p class="a-cx-tit">Conector</p><p class="a-cx-sub">a tomada</p></div>
-    <div class="a-caixa a-plugin"><span class="a-ic" data-ic="pacote"></span><p class="a-cx-tit">Plugin</p><p class="a-cx-sub">o pacote</p></div>
-    <div class="a-caixa a-rotina"><span class="a-ic" data-ic="relogio"></span><p class="a-cx-tit">Rotina</p><p class="a-cx-sub">a agenda</p></div>
   </section>
 
   <!-- ===== Bloco B: skills e Word (slides 4 a 14, 24 min). Fatos e textos exatos em briefing.md. ===== -->
@@ -456,7 +404,7 @@
   </section>
 
   <!-- word-addin (cartões da base): o suplemento do Word, sem demonstração (decisão do professor) -->
-  <section data-slide="word-addin">
+  <section data-slide="word-addin" class="noite">
     <p class="rotulo">Skills</p>
     <h2 class="manchete">Claude for Word revisa no arquivo</h2>
     <div class="cartoes c3">
@@ -465,33 +413,6 @@
       <div class="cartao"><p class="ct-tit">Herda os estilos</p><p class="ct-txt">Os de título e parágrafo do modelo.</p></div>
       <div class="cartao"><p class="ct-tit">Pro, Max, Team e Enterprise</p><p class="ct-txt">Suplemento do Word, instalado à parte.</p></div>
     </div>
-  </section>
-
-  <!-- skillmd (cena própria, noite, três paradas): um SKILL.md de exemplo, anotado. Chegada: nome e descrição;
-       clique 1: o corpo, em linhas cinza; clique 2: a linha que roda um script, e o rodapé da licença -->
-  <section data-slide="skillmd" class="noite">
-    <p class="rotulo">Skills</p>
-    <h2 class="manchete">Uma skill é uma pasta com instruções</h2>
-    <div class="b-arq">
-      <p class="b-arq-cab">parecer-timbrado/SKILL.md</p>
-      <div class="b-arq-txt">
-        <p class="b-ln b-dim"></p>
-        <p class="b-ln b-cab"><span class="b-k">name:</span> parecer-timbrado</p>
-        <p class="b-ln b-cab"><span class="b-k">description:</span> <span class="b-desc">Use para parecer no papel timbrado.</span></p>
-        <p class="b-ln b-dim"></p>
-        <p class="b-ln b-vazia"></p>
-        <p class="b-ln b-corpo"><i style="width: 82%"></i></p>
-        <p class="b-ln b-corpo"><i style="width: 70%"></i></p>
-        <p class="b-ln b-corpo"><i style="width: 88%"></i></p>
-        <p class="b-ln b-scr">Rode scripts/gerar-pdf.py.</p>
-      </div>
-    </div>
-    <svg class="b-ligas" viewBox="0 0 1920 1080"><path class="b-l-nome"/><path class="b-l-desc"/><path class="b-l-corpo"/><path class="b-l-scr"/></svg>
-    <p class="b-nota b-n-nome">nome</p>
-    <p class="b-nota b-n-desc">descrição<small>decide quando dispara</small></p>
-    <p class="b-nota b-n-corpo">corpo<small>o passo a passo</small></p>
-    <p class="b-nota b-n-scr">scripts<small>o que ela executa</small></p>
-    <p class="rodape b-rod">A skill de Word tem código publicado, com licença proprietária.</p>
   </section>
 
   <!-- checklist (partes da base): os sete pontos da apostila (A 16.8), um por clique, com a explicação à direita -->
@@ -1037,19 +958,15 @@ const blocos = [
 // `notas` é o guia do apresentador: {diga, faca, transicao}.
 const SLIDES = [];
 
-// Bloco A, abertura (4 min): capa, mapa e as quatro peças. Fatos só do briefing.md.
+// Bloco A, abertura (4 min): capa e mapa. Fatos só do briefing.md.
 SLIDES.push(
   {id: 'capa', titulo: 'A IA fora do chat', bloco: 'abertura', linhaDia: false, segura: 3,
    notas: {diga: 'Boa tarde. No dia 1 terminamos com uma frase: trabalhe no caso, não no chat. Hoje a IA sai do chat de vez. Ela vai escrever no papel timbrado do escritório, ligar em sistemas, coletar jurisprudência e trabalhar enquanto vocês dormem. Tudo ao vivo, e vocês decidem junto comigo.',
      faca: ['a capa toca sozinha quando o deck abre', 'conferir se a conta do Claude da demonstração está aberta e com o modelo timbrado à mão'],
      transicao: 'O caminho da tarde.'}},
   {id: 'mapa', titulo: 'Hoje, do arquivo ao mundo',
-   notas: {diga: 'Cinco etapas. Skills, para a IA fazer do jeito do escritório. MCP e plugins, para ligar a IA a sistemas. O scraper, que coleta jurisprudência em lote. GitHub, onde essas coisas moram. E rotinas, o trabalho agendado. Em cada etapa eu faço ao vivo e vocês têm uma tarefa curta, em dupla, sem precisar de computador.',
+   notas: {diga: 'Cinco etapas. Skills, para a IA fazer do jeito do escritório. MCP e plugins, para ligar a IA a sistemas. O scraper, que coleta jurisprudência em lote. GitHub, onde essas coisas moram. E rotinas, o trabalho agendado. Lembram da Aula 2: a skill é o jeito, o conector é a tomada, o plugin é o pacote. Hoje entra a quarta peça, a rotina, que é a agenda. Em cada etapa eu faço ao vivo e vocês têm uma tarefa curta, em dupla, sem precisar de computador.',
      faca: ['mostrar a linha embaixo da tela: ela marca a etapa em que estamos'],
-     transicao: 'Antes, as quatro peças que vamos usar.'}},
-  {id: 'pecas', titulo: 'Quatro peças em volta do agente', passos: [1.7, 1.2, 1.7, 1.3],
-   notas: {diga: 'No centro, o agente, a IA que executa. A skill é o jeito: as instruções de como o escritório faz. O conector é a tomada: liga o agente a um sistema, como o Drive ou o Gmail. O plugin é o pacote: junta skills e conectores e se instala de uma vez. E a rotina é a agenda: o agente trabalha num horário marcado, sem vocês pedirem. A aula de hoje é uma peça de cada vez.',
-     faca: ['clique 1: agente e skill', 'clique 2: conector', 'clique 3: o plugin, que embrulha os dois', 'clique 4: a rotina'],
      transicao: 'Começo pela primeira: a skill, no Word.'}},
 );
 // Bloco B, skills e Word (24 min): do rascunho ao papel timbrado, a skill por dentro, a auditoria A1 e a skill que a
@@ -1057,7 +974,7 @@ SLIDES.push(
 SLIDES.push(
   {id: 'word-cap', titulo: 'Do rascunho ao papel timbrado.', bloco: 'skills', andamento: 'capitulo', linhaDia: false,
    notas: {diga: 'Primeira peça: a skill. E começo pelo problema de todo dia. O rascunho fica pronto, mas a peça ainda sai sem o timbre, sem os estilos, sem a numeração do escritório. Alguém passa meia hora arrumando no Word.',
-     faca: ['pausa curta antes de seguir', 'bloco de 24 minutos: Word, a skill por dentro e duas atividades'],
+     faca: ['pausa curta antes de seguir', 'bloco de 24 minutos: Word, o que ler antes de instalar e duas atividades'],
      transicao: 'Vejam o mesmo rascunho em duas versões.'}},
   {id: 'word-antes', titulo: 'O mesmo rascunho, outro acabamento',
    notas: {diga: 'O texto é o mesmo nas duas. A versão A saiu sem skill: texto corrido. A versão B saiu com o modelo do escritório: o timbre em cima, os estilos de título e a numeração. Quem faz essa diferença é uma skill de Word que já vem no Claude.',
@@ -1080,11 +997,7 @@ SLIDES.push(
    notas: {diga: 'Além da skill, existe o Claude for Word, um suplemento que roda dentro do Word. Ele trabalha com alterações controladas: cada mudança fica marcada, e vocês aceitam ou recusam. Preenche modelos herdando os estilos de título e parágrafo. É para os planos Pro, Max, Team e Enterprise. E a própria página dele diz que não é recomendado para peças processuais sem verificação.',
      faca: ['sem demonstração neste slide (decisão do professor)',
        'aviso para quem usa Windows: depois das atualizações do Microsoft 365 de setembro e outubro de 2026, alguns usuários perderam o histórico de chat e as skills enviadas ao suplemento'],
-     transicao: 'Agora, o que é uma skill por dentro.'}},
-  {id: 'skillmd', titulo: 'Uma skill é uma pasta com instruções', passos: [2.2, 1.6, 1.8],
-   notas: {diga: 'Uma skill é uma pasta com um arquivo de instruções, o SKILL.md. Em cima, o nome. Logo abaixo, a descrição, e ela decide quando a skill dispara: o Claude lê a descrição e resolve se aquele pedido é com ela. Depois vem o corpo, o passo a passo. E a skill pode trazer scripts, pequenos programas que ela executa. A de Word que vimos tem o código publicado, mas com licença proprietária: dá para ler, não é código aberto.',
-     faca: ['chegada: nome e descrição; apontar a descrição sublinhada', 'clique 1: o corpo', 'clique 2: a linha que roda um script, e o rodapé da licença', 'avisar: esta skill é um exemplo da aula, não está instalada'],
-     transicao: 'Se uma skill executa coisas, antes de instalar é preciso ler.'}},
+     transicao: 'Uma skill pode rodar programas. Antes de instalar a de outra pessoa, é preciso ler.'}},
   {id: 'checklist', titulo: 'Sete pontos antes de instalar', passos: [1.6, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
    notas: {diga: 'Sete pontos antes de instalar qualquer skill. Origem: quem publicou. Arquivos e scripts: abram a pasta inteira. Permissões: o que ela pede para ler, gravar ou executar. Dados acessados: que pastas e conectores ela usa. Comandos: desconfiem de download, endereço de internet e ordem para ignorar regras. Teste com dado fictício: a primeira vez, na pasta do caso inventado. E como remover: onde desligar e apagar.',
      faca: ['um ponto por clique, sete no total', 'no ponto 2: quem não lê código pede a revisão de quem lê antes de rodar'],
@@ -1262,7 +1175,7 @@ SLIDES.push(
      transicao: 'E tudo isso está no kit.'}},
   {id: 'kit', titulo: 'O kit está no GitHub',
    notas: {diga: 'O kit está no GitHub: a skill de treino com os três defeitos, a petição com a ordem escondida, o modelo timbrado do escritório fictício e o script do scraper com modo offline. Em casa, botão Code, Download ZIP, e refaçam as demonstrações.',
-     faca: ['endereço provisório: o repositório ainda não existe e depende do sim do professor; conferir o endereço antes da aula', 'sem código QR nesta versão: ler o endereço em voz alta e deixar a tela parada'],
+     faca: ['o repositório é público desde 05/11/2026: github.com/kaoyeoshiro/kit-dia2-curso-ia', 'sem código QR nesta versão: ler o endereço em voz alta e deixar a tela parada'],
      transicao: 'Para fechar, o pedido da aula.'}},
   {id: 'fecho', titulo: 'Dê o jeito, a tomada e a agenda.', segura: 4, linhaDia: false,
    notas: {diga: 'Deem à IA o jeito, que é a skill; a tomada, que é o conector e o plugin; e a agenda, que é a rotina. E continuem conferindo a fonte. Na Aula 4, Decidir, a pergunta muda: o que se entrega à máquina, e a que preço.',
@@ -1316,20 +1229,6 @@ const partes = (id) => {
 };
 
 // ===== Bloco A: abertura =====
-// Ícones desenhados por código (caixas do diagrama "pecas"): arquivo, tomada, pacote e relógio, em viewBox 64 x 76.
-const A_ICONES = {
-  arquivo: ['M8 4H40L56 20V72H8Z', 'M40 4V20H56', 'M18 40H46M18 52H46M18 64H36'],
-  tomada: ['M14 30H50V50Q50 64 36 64H28Q14 64 14 50Z', 'M24 30V10M40 30V10', 'M32 64V76'],
-  pacote: ['M6 22L32 8L58 22V58L32 72L6 58Z', 'M6 22L32 36L58 22M32 36V72'],
-  relogio: ['M32 12A28 28 0 1 0 32.01 12', 'M32 24V40L44 48'],
-};
-for (const el of document.querySelectorAll('.a-ic[data-ic]')) {
-  const s = document.createElementNS(NS, 'svg');
-  s.setAttribute('viewBox', '0 0 64 76');
-  for (const d of A_ICONES[el.dataset.ic]) traco(s, d);
-  el.appendChild(s);
-}
-
 // Capa (fundo claro, como a da Aula 2): o logo sobe, o fio se traça de cima para baixo e o texto entra linha a linha.
 CENAS.capa = (() => {
   const sec = m.secao('capa'), logo = sec.querySelector('.a-logo-cj'), fio = sec.querySelector('.a-cp-fio');
@@ -1346,29 +1245,6 @@ CENAS.capa = (() => {
     fio.style.transform = `scaleY(${saida(faixa(x, 0.55, 1.1)).toFixed(4)})`;
     linhas.forEach((el, n) => revelar(el, molaAR(x - 0.8 - n * 0.16)));
     fim(sec, x, 1.6);
-  };
-})();
-
-// pecas: agente e skill; o conector; o plugin, cujo tracejado embrulha os dois; a rotina embaixo.
-CENAS.pecas = (() => {
-  const sec = m.secao('pecas'), q = (s) => sec.querySelector(s);
-  const ag = q('.a-agente'), sk = q('.a-skill'), co = q('.a-conector'), pl = q('.a-plugin'), ro = q('.a-rotina');
-  const dSk = q('.a-d-sk'), dCo = q('.a-d-co'), dPl = q('.a-d-pl'), dRo = q('.a-d-ro');
-  return (t, c) => {
-    const x = conteudo(c), y = c.desde(1), z = c.desde(2), w = c.desde(3);
-    titulo(sec, x, c);
-    surgir(ag, molaAR(x - 0.1), {dy: 0, escala: 0.06});
-    tracar(dSk, saida(faixa(x, 0.35, 0.65)));
-    surgir(sk, molaAR(x - 0.5), {dx: -30, dy: 0});
-    tracar(dCo, saida(faixa(y, 0.05, 0.35)));
-    surgir(co, molaAR(y - 0.2), {dx: 30, dy: 0});
-    surgir(pl, molaAR(z - 0.05), {dy: -30});
-    const kp = saida(faixa(z, 0.35, 1.0));
-    tracar(dPl, kp);
-    if (kp >= 1) { dPl.removeAttribute('pathLength'); dPl.style.strokeDasharray = ''; }
-    tracar(dRo, saida(faixa(w, 0.05, 0.3)));
-    surgir(ro, molaAR(w - 0.2), {dy: 30});
-    fim(sec, x, 1.2);
   };
 })();
 // ===== Bloco B: skills e Word =====
@@ -1389,67 +1265,6 @@ CENAS['word-pedido'] = (() => {
     digitar(bPedido, faixa(x, 0.6, 2.5), {cursor: true});
     surgir(bEnviar, molaAR(x - 2.5), {dy: 0, escala: 0.2});
     fim(sec, x, 2.6);
-  };
-})();
-
-// skillmd: chegada, o editor com o cabeçalho, as anotações de nome e descrição e o sublinhado dourado da descrição;
-// clique 1, as linhas do corpo e a anotação; clique 2, a linha do script, a anotação e o rodapé da licença.
-CENAS.skillmd = (() => {
-  const sec = m.secao('skillmd'), q = (s) => sec.querySelector(s);
-  const bArq = q('.b-arq'), bAba = q('.b-arq-cab'), bTxt = q('.b-arq-txt'), bDesc = q('.b-desc');
-  const bCab = $$(sec, '.b-dim, .b-cab'), bBarras = $$(sec, '.b-corpo i'), bScr = q('.b-scr'), bRod = q('.b-rod');
-  const bLns = $$(sec, '.b-ln');
-  const notas = {nome: q('.b-n-nome'), desc: q('.b-n-desc'), corpo: q('.b-n-corpo'), scr: q('.b-n-scr')};
-  const ligas = {nome: q('.b-l-nome'), desc: q('.b-l-desc'), corpo: q('.b-l-corpo'), scr: q('.b-l-scr')};
-  // o sublinhado mora numa caixa irmã das linhas, para a camada dele não entrar na medida do texto
-  const bSub = document.createElement('div');
-  bSub.className = 'b-sub';
-  bTxt.appendChild(bSub);
-  let pronto = false;
-  const montar = () => {
-    if (pronto) return;
-    pronto = true;
-    const y0 = bArq.offsetTop + 4 + bTxt.offsetTop, xa = bArq.offsetLeft + bArq.offsetWidth;
-    const centro = (n) => y0 + bLns[n].offsetTop + bLns[n].offsetHeight / 2;
-    // a anotação fica na altura pedida; o traço sai da borda do editor na altura da linha e dobra até ela
-    const pos = (k, yLinha, yNota) => {
-      notas[k].style.top = `${Math.round(yNota - 26)}px`;
-      ligas[k].setAttribute('d', `M${xa + 14} ${Math.round(yLinha)}H${xa + 46}V${Math.round(yNota)}H${notas[k].offsetLeft - 20}`);
-    };
-    pos('nome', centro(1), centro(1) - 30);
-    pos('desc', centro(2), centro(2) + 22);
-    pos('corpo', centro(6), centro(6) - 20);
-    pos('scr', centro(8), centro(8));
-    const ln = bDesc.parentElement;
-    Object.assign(bSub.style, {left: `${ln.offsetLeft + bDesc.offsetLeft}px`, top: `${ln.offsetTop + bDesc.offsetTop}px`, width: `${bDesc.offsetWidth}px`, height: `${bDesc.offsetHeight}px`});
-  };
-  const nota = (k, d) => {
-    const kk = molaAR(d);
-    revelar(notas[k], kk);
-    vis(notas[k], d > 0);
-    tracar(ligas[k], saida(faixa(d + 0.25, 0, 0.35)));
-    vis(ligas[k], d + 0.25 > 0);
-  };
-  return (t, c) => {
-    montar();
-    const x = conteudo(c), y = c.desde(1), z = c.desde(2);
-    titulo(sec, x, c);
-    surgir(bArq, molaAR(x - 0.1), {dy: 30});
-    revelar(bAba, molaAR(x - 0.2));
-    bCab.forEach((el, n) => revelar(el, molaAR(x - 0.35 - n * 0.1)));
-    nota('nome', x - 0.85);
-    nota('desc', x - 1.05);
-    anotar(bSub, saida(faixa(x, 1.5, 2.0)), {forma: 'sublinhado', semente: 7, folga: 4});
-    bBarras.forEach((el, n) => {
-      el.style.transform = `scaleX(${saida(faixa(y, 0.1 + n * 0.18, 0.45 + n * 0.18)).toFixed(4)})`;
-    });
-    nota('corpo', y - 0.7);
-    revelar(bScr, molaAR(z - 0.1));
-    vis(bScr, z > 0);
-    nota('scr', z - 0.45);
-    revelar(bRod, molaAR(z - 0.9));
-    vis(bRod, z > 0);
-    fim(sec, x, 1.6);
   };
 })();
 
