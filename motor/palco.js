@@ -204,7 +204,8 @@ export function video(el, seg, {fps = 30} = {}) {
 	const antes = ultimoSeg.get(el);
 	ultimoSeg.set(el, seg);
 	const andando = antes !== undefined && seg > antes;
-	if (andando && el.paused) el.play().catch(() => {});
+	// Vídeo com som: se o navegador recusar o som (a janela ainda não recebeu clique nem tecla), toca mudo em vez de parar.
+	if (andando && el.paused) el.play().catch(() => { if (!el.muted) { el.muted = true; el.play().catch(() => {}); } });
 	if (!andando && !el.paused) el.pause();
 	if (Math.abs(el.currentTime - seg) > (andando ? 0.25 : 0.5 / fps)) el.currentTime = seg;
 }
@@ -735,6 +736,8 @@ function tocador({ver, resumo, palcoEl, previa, autoplay, fontes}) {
 
 	// Prévia (dentro da tela do apresentador): mostra uma parada, parada, e obedece ao pai.
 	if (previa !== null) {
+		// a prévia nunca toca som: o vídeo com áudio do palco já toca na janela da sala
+		for (const v of document.querySelectorAll('video')) v.muted = true;
 		ver(paradas[Math.min(previa, paradas.length - 1)].t);
 		addEventListener('message', (m) => {
 			if (deCasa(m) && m.source === parent && m.data && m.data.palcoPrevia !== undefined) ver(paradas[Math.min(m.data.palcoPrevia, paradas.length - 1)].t);

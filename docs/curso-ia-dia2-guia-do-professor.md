@@ -22,7 +22,7 @@ casa, com o kit do GitHub, que repete todas as demonstrações.
 
 ## 2. Antes da aula
 
-A Aula 4 não pede preparo além de conferir que o vídeo do slide 11 toca. A Aula 3 depende de cinco demonstrações ao
+A Aula 4 não pede preparo além de conferir que os vídeos dos slides 5 e 12 tocam, e que o som baixo dos dois sai na caixa da sala. A Aula 3 depende de cinco demonstrações ao
 vivo, e cada uma precisa estar ensaiada e gravada, porque a regra da aula é uma tentativa só: sem resultado útil em 60
 segundos (40 no TJMS), você para e toca a gravação do ensaio na moldura do slide. Hoje as molduras dos slides 5, 15, 27,
 29 e 38 tocam uma gravação provisória, de outra aula, que mostra um pedido de contestação; sem as gravações novas, a
@@ -177,8 +177,8 @@ que já está pronta no slide 38.
 
 A Aula 4 tem mais conversa que tela. Cada bloco termina numa decisão da sala: o acesso que se dá ao assistente, o que
 quebra se o preço dobrar, se um modelo chinês pode rodar no órgão, o plano de 30 dias de cada um. Não há demonstração
-ao vivo nem arquivo para abrir; o único vídeo, no slide 11, toca sozinho. As cinco atividades, de A7 a A11, dispensam
-computador, e a última é a devolutiva do curso inteiro.
+ao vivo nem arquivo para abrir; os dois vídeos, nos slides 5 e 12, tocam sozinhos. As cinco atividades, de A7 a A11,
+dispensam computador, e a última é a devolutiva do curso inteiro.
 
 ### 5.2. O mapa, minuto a minuto
 
@@ -187,32 +187,37 @@ Os blocos são assistentes 27 minutos, harness 6, quem paga 23, geopolítica 18 
 | minuto | slides | o que acontece | quem trabalha |
 |---|---|---|---|
 | 0 a 3 | 1 e 2 | capa e roteiro | você |
-| 3 a 14 | 3 a 6 | o chat responde, o assistente age; os cinco do mercado; o que ele lê; quem escreve para você | você |
-| 14 a 20 | 7 e 8 | o sigilo e o acesso; cortar o acesso não apaga a memória | você |
-| 20 a 27 | 9 | A7, o acesso mínimo | duplas |
-| 27 a 33 | 10 a 12 | o harness: o vídeo dos dez agentes e o custo de cada um | você narra o vídeo |
-| 33 a 44 | 13 a 18 | o custo de cada uso, os US$ 895 bi, quem banca, o usuário pesado, o plano que encolhe | você |
-| 44 a 48 | 19 e 20 | bolha ou não (mão levantada) e a tese | você pergunta |
-| 48 a 56 | 21 e 22 | A8, e se o preço dobrar; o que vai com você | duplas |
-| 56 a 66 | 23 a 28 | chips, os quatro meses, aberto não é seguro, CLOUD Act, as regras | você |
-| 66 a 74 | 29 | A9, debate sobre o modelo chinês | sala dividida |
-| 74 a 80 | 30 a 33 | 2030: o ritmo, os cenários, os sinais | você |
-| 80 a 85 | 34 | A10, o plano de 30 dias | cada um |
-| 85 a 90 | 35 a 37 | A11, a devolutiva; os quatro verbos; o fecho | roda e você |
+| 3 a 14 | 3 a 7 | o chat responde, o assistente age; os cinco do mercado; o vídeo do seu Grok Bot; o que ele lê; quem escreve para você | você narra o vídeo |
+| 14 a 20 | 8 e 9 | o sigilo e o acesso; cortar o acesso não apaga a memória | você |
+| 20 a 27 | 10 | A7, o acesso mínimo | duplas |
+| 27 a 33 | 11 a 13 | o harness: o vídeo dos dez agentes e o custo de cada um | você narra o vídeo |
+| 33 a 44 | 14 a 19 | o custo de cada uso, os US$ 895 bi, quem banca, o usuário pesado, o plano que encolhe | você |
+| 44 a 48 | 20 e 21 | bolha ou não (mão levantada) e a tese | você pergunta |
+| 48 a 56 | 22 e 23 | A8, e se o preço dobrar; o que vai com você | duplas |
+| 56 a 66 | 24 a 29 | chips, os quatro meses, aberto não é seguro, CLOUD Act, as regras | você |
+| 66 a 74 | 30 | A9, debate sobre o modelo chinês | sala dividida |
+| 74 a 80 | 31 a 34 | 2030: o ritmo, os cenários, os sinais | você |
+| 80 a 85 | 35 | A10, o plano de 30 dias | cada um |
+| 85 a 90 | 36 a 38 | A11, a devolutiva; os quatro verbos; o fecho | roda e você |
 
-No slide 11, o vídeo tem 40 segundos e você fala por cima dele, na ordem em que os agentes aparecem: o classificador,
-os dois leitores, o agrupador, o redator, os validadores e, por último, o agente que confere o ofício. O slide 10
+No slide 5, o vídeo do Grok Bot tem 62 segundos e efeitos sonoros baixos, sem voz; você fala por cima, na ordem das
+cenas: resumo de IA de manhã (5 a 13 s), WhatsApp e agenda (13 a 22), t3code com as quatro IAs (22 a 31), E-MS (31 a
+38), PGE.Net (38 a 44), eventos e editais (44 a 50), compras (50 a 55) e todos ligados ao centro (55 a 62). Mensagens,
+ofícios e compromissos do vídeo são fictícios.
+
+No slide 12, o vídeo tem 40 segundos, também com efeitos sonoros baixos, e você fala por cima dele, na ordem em que os agentes aparecem: o classificador,
+os dois leitores, o agrupador, o redator, os validadores e, por último, o agente que confere o ofício. O slide 11
 lembra que a co.juris não fala em nome da PGE-MS; diga isso antes do vídeo.
 
 ### 5.3. As atividades da sala
 
 | atividade | slide | tempo | o que a sala faz | resposta-modelo |
 |---|---|---|---|---|
-| A7, o acesso mínimo | 9 | 7 min | escolhe uma tarefa e preenche o que o assistente pode ler, o que pode escrever e o que nunca toca | para a agenda da manhã: lê a agenda e uma pasta de e-mails; escreve um rascunho salvo, nunca enviado; nunca toca a caixa inteira, o sistema do tribunal, pagamento ou apagar. Fecho: "Duas semanas, só lendo." |
-| A8, o preço dobrou | 21, resposta no segundo clique | 5 min | diz o que quebra no trabalho se o plano dobrar de preço | quebra o que está preso ao app: instruções só na memória do chat, documentos só no projeto do fornecedor, nenhum segundo fornecedor testado. O slide 22 mostra o que vai com você |
-| A9, debate | 29 | 6 min | metade defende que o modelo chinês pode rodar no órgão, metade que não; dois minutos de preparo, três de debate | seu fecho: rodar dentro da infraestrutura do órgão tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo, que é o que o CAISI mediu |
-| A10, o plano de 30 dias | 34 | 5 min | cada um escreve três linhas no celular: uma skill, uma pasta de caso, uma rotina | não há gabarito; a quem travar na rotina, pergunte o que se perde se ela falhar em silêncio |
-| A11, a devolutiva | 35 | 5 min | em roda, cada um diz uma coisa que leva e uma que faltou | anote as faltas para a próxima turma |
+| A7, o acesso mínimo | 10 | 7 min | escolhe uma tarefa e preenche o que o assistente pode ler, o que pode escrever e o que nunca toca | para a agenda da manhã: lê a agenda e uma pasta de e-mails; escreve um rascunho salvo, nunca enviado; nunca toca a caixa inteira, o sistema do tribunal, pagamento ou apagar. Fecho: "Duas semanas, só lendo." |
+| A8, o preço dobrou | 22, resposta no segundo clique | 5 min | diz o que quebra no trabalho se o plano dobrar de preço | quebra o que está preso ao app: instruções só na memória do chat, documentos só no projeto do fornecedor, nenhum segundo fornecedor testado. O slide 23 mostra o que vai com você |
+| A9, debate | 30 | 6 min | metade defende que o modelo chinês pode rodar no órgão, metade que não; dois minutos de preparo, três de debate | seu fecho: rodar dentro da infraestrutura do órgão tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo, que é o que o CAISI mediu |
+| A10, o plano de 30 dias | 35 | 5 min | cada um escreve três linhas no celular: uma skill, uma pasta de caso, uma rotina | não há gabarito; a quem travar na rotina, pergunte o que se perde se ela falhar em silêncio |
+| A11, a devolutiva | 36 | 5 min | em roda, cada um diz uma coisa que leva e uma que faltou | anote as faltas para a próxima turma |
 
 ## 6. Quando algo der errado
 

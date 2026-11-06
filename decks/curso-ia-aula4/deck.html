@@ -313,6 +313,21 @@
     </div>
   </section>
 
+  <!-- grokbot (demonstração): como o professor usa o assistente pessoal dele; animação do claude_video_maker
+       (videos/grokbot, 62 s), dados fictícios, avatares desenhados por código, sem logotipo. Único vídeo com som: efeitos baixos (30%), sem
+       voz; o professor fala por cima -->
+  <section data-slide="grokbot" data-arquetipo="demonstracao" class="noite">
+    <p class="rotulo">Assistentes</p>
+    <h2 class="manchete">Como eu uso o meu</h2>
+    <div class="moldura">
+      <div class="barra-nav"><i></i><i></i><i></i><u></u></div>
+      <div class="tela">
+        <video src="midia/grokbot.mp4" poster="midia/grokbot-capa.webp" playsinline preload="auto"></video>
+      </div>
+    </div>
+    <p class="nota-lateral">Uso real, dados fictícios.</p>
+  </section>
+
   <!-- alcance (cena própria, noite, S.T.A.R. do bloco, três cliques): a caixa de entrada desenhada por código, com
        mensagens fictícias e papéis no lugar de nomes. Na chegada, o assistente se liga à caixa e o feixe dele lê todas as
        linhas; cada clique acende uma mensagem sensível (cliente, minuta, parte contrária), a atual com a barra dourada. -->
@@ -399,7 +414,7 @@
     <div class="moldura">
       <div class="barra-nav"><i></i><i></i><i></i><u></u></div>
       <div class="tela">
-        <video src="midia/harness.mp4" poster="midia/harness-capa.webp" muted playsinline preload="auto"></video>
+        <video src="midia/harness.mp4" poster="midia/harness-capa.webp" playsinline preload="auto"></video>
       </div>
     </div>
     <p class="nota-lateral">Peça real, sem processo.</p>
@@ -766,7 +781,11 @@ SLIDES.push(
   {id: 'cinco', titulo: 'Cinco assistentes, em novembro de 2026',
    notas: {diga: 'Cinco assistentes, retrato de 2 de novembro. O Claude Duet, da Anthropic, saiu em 21 de outubro, em prévia, nos planos Pro, Max e Ultra, só nos EUA. O dots, da OpenAI, saiu em 29 de setembro, no plano Pro, e inclui o Brasil. O Muse, da Meta, de 8 de setembro, funciona no WhatsApp, nos EUA e em Singapura. O Grok Bot, da xAI, é de 11 de agosto, em beta, e não tem lista de países. E o Hermes Agent é código aberto: roda onde você instalar. Isso muda rápido; confiram na página do fabricante antes de assinar.',
      faca: ['apontar o cartão dourado: o dots é o único dos prontos que inclui o Brasil'],
-     transicao: 'Agora, o que eles leem.'}},
+     transicao: 'Vou mostrar como eu uso o meu.'}},
+  {id: 'grokbot', titulo: 'Como eu uso o meu', video: [0.9, 61.5], ritmoOk: 'vídeo de 62 s, narrado pelo professor',
+   notas: {diga: 'Este é o meu assistente, o Grok Bot, e eu uso para quase tudo. Todo dia de manhã ele me manda um resumo das novidades de IA do X, do Reddit e do YouTube. Lê o meu WhatsApp e põe na agenda os compromissos marcados ali, e também os que eu mando. No trabalho, orquestra tarefas pelo t3code no Claude, no GPT, no opencode e no Gemini. Confere e responde ofícios, CIs e processos no E-MS, sozinho, e analisa as pendências do PGE.Net. Toda semana me manda os eventos de legaltech e os editais abertos para publicação. E faz pesquisa de compras. Reparem no fim: tudo passa por um assistente só.',
+     faca: ['o vídeo toca sozinho na moldura; falar por cima', 'cenas: 0 a 5 s apresentação; 5 a 13 resumo de IA; 13 a 22 WhatsApp e agenda; 22 a 31 t3code; 31 a 38 E-MS; 38 a 44 PGE.Net; 44 a 50 eventos e editais; 50 a 55 compras; 55 a 62 tudo ligado ao centro', 'mensagens, ofícios e compromissos do vídeo são fictícios', 'E-MS e PGE.Net aparecem como uso pessoal do professor; a co.juris não fala em nome da PGE-MS'],
+     transicao: 'Tudo isso passa por ele. Agora, o que ele lê.'}},
   {id: 'alcance', titulo: 'Na sua caixa está o cliente', passos: [2.9, 1.0, 1.0, 1.0],
    notas: {diga: 'Uma caixa de entrada comum, com mensagens fictícias. Para montar o resumo da manhã, o assistente lê tudo, inclusive o que nada tem com o pedido. E na caixa de quem advoga está a conversa com o cliente. Está a minuta antes do protocolo. Está a mensagem da parte contrária.',
      faca: ['chegada: o assistente lê a caixa inteira', 'clique 1: a conversa com o cliente', 'clique 2: a minuta antes do protocolo', 'clique 3: a mensagem da parte contrária; pausa'],
