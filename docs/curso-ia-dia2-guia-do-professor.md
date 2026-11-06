@@ -24,8 +24,8 @@ casa, com o kit do GitHub, que repete todas as demonstrações.
 
 A Aula 4 não pede preparo além de conferir que o vídeo do slide 11 toca. A Aula 3 depende de cinco demonstrações ao
 vivo, e cada uma precisa estar ensaiada e gravada, porque a regra da aula é uma tentativa só: sem resultado útil em 60
-segundos (40 no TJMS), você para e toca a gravação do ensaio na moldura do slide. Hoje as molduras dos slides 6, 17, 29,
-31 e 40 tocam uma gravação provisória, de outra aula, que mostra um pedido de contestação; sem as gravações novas, a
+segundos (40 no TJMS), você para e toca a gravação do ensaio na moldura do slide. Hoje as molduras dos slides 5, 15, 27,
+29 e 38 tocam uma gravação provisória, de outra aula, que mostra um pedido de contestação; sem as gravações novas, a
 reserva não existe.
 
 - Gravar o ensaio de cada demonstração da Aula 3 (Word, conector, TJMS, script e rotina) e mandar os vídeos para serem
@@ -40,7 +40,7 @@ reserva não existe.
   `python3 stj_espelhos.py --tema "execução fiscal"`, depois `--tema improbidade` e `--tema ICMS`. Tema que vier vazio
   sai da votação.
 - No ensaio da rotina, conferir se a tarefa agendada roda com o computador desligado. Se não rodar, a legenda do slide
-  39 deixa de prometer isso (a nota do slide explica).
+  37 deixa de prometer isso (a nota do slide explica).
 
 ## 3. Onde está o material
 
@@ -50,11 +50,11 @@ caminho no repositório.
 
 | arquivo | para quê | onde |
 |---|---|---|
-| `modelo-timbrado.docx` | demonstração do Word (slide 6) e A2 (slide 14) | kit, `escritorio/` |
+| `modelo-timbrado.docx` | demonstração do Word (slide 5) e A2 (slide 12) | kit, `escritorio/` |
 | `rascunho-parecer.md` | o rascunho que vira parecer, nas mesmas duas | kit, `escritorio/` |
 | `padrao-do-escritorio.md` e `logo-escritorio.png` | o padrão do escritório fictício Dias & Moura | kit, `escritorio/` |
-| `SKILL.md` da skill com defeitos | A1 (slide 11); não instalar | kit, `skill-defeituosa/` |
-| `peticao-injecao.pdf` | A3 e slide 20 (selecionar tudo para revelar a ordem) | kit, `peticao/` |
+| `SKILL.md` da skill com defeitos | A1 (slide 9); não instalar | kit, `skill-defeituosa/` |
+| `peticao-injecao.pdf` | A3 e slide 18 (selecionar tudo para revelar a ordem) | kit, `peticao/` |
 | `stj_espelhos.py` e `amostra/20260930.json` | etapa 2 do scraper e o plano sem internet | kit, `scraper/` |
 | `atividades.md` | gabarito da A1 e da A3 | kit, `gabarito/` |
 | `execucao.csv`, `improbidade.csv`, `icms.csv` | planilha pronta de cada tema, reserva da etapa 2 | repositório, `decks/curso-ia-aula3/material/scraper/amostra/` |
@@ -71,13 +71,12 @@ A mensagem cabe numa frase: a IA trabalha fora do chat quando você lhe dá o je
 plugin) e a agenda (a rotina), e você continua conferindo a fonte. São seis atividades da sala, de A1 a A6, e cinco
 demonstrações suas.
 
-A Aula 2 já explicou o que é uma skill, mostrou o SKILL.md por dentro e rodou a skill de conferir temas no caso. Por
-isso dois slides da Aula 3 funcionam só como lembrete, de uns 30 segundos cada: o slide 3, das quatro peças, que repete
-o desenho da Aula 2 acrescentando a rotina, e o slide 9, da skill por dentro. O que a Aula 3 acrescenta em skills são
-três coisas que a Aula 2 não fez: a skill de Word que já vem no Claude, transformando um rascunho em parecer no papel
-timbrado (slides 5 a 7); ler uma skill de terceiro antes de instalar, com os sete pontos e a auditoria da A1 (slides 10
-a 13); e criar uma skill nova a partir das regras que a própria sala dita, a A2 (slide 14). É ali que fica a prática de
-skills do dia.
+A Aula 2 já explicou o que é uma skill, mostrou o SKILL.md por dentro e rodou a skill de conferir temas no caso, e
+a Aula 3 não repete essa parte. A fala do slide 2 lembra em uma frase o jeito, a tomada e o pacote da Aula 2 e anuncia
+a peça nova, a rotina. O que a Aula 3 acrescenta em skills são três coisas que a Aula 2 não fez: a skill de Word que já
+vem no Claude, transformando um rascunho em parecer no papel timbrado (slides 4 a 6); ler uma skill de terceiro antes de
+instalar, com os sete pontos e a auditoria da A1 (slides 8 a 11); e criar uma skill nova a partir das regras que a
+própria sala dita, a A2 (slide 12). É ali que fica a prática de skills do dia.
 
 ### 4.2. O mapa, minuto a minuto
 
@@ -86,45 +85,45 @@ GitHub 5 e rotinas 21. O ensaio cronometrado decide o resto.
 
 | minuto | slides | o que acontece | quem trabalha |
 |---|---|---|---|
-| 0 a 4 | 1 a 3 | capa, roteiro, as quatro peças (lembrete) | você |
-| 4 a 8 | 4 e 5 | o rascunho sem timbre; "qual das duas vocês protocolariam?" | você pergunta |
-| 8 a 12 | 6 e 7 | demonstração do Word, com o pedido para copiar | você, no Claude |
-| 12 a 14 | 8 e 9 | Claude for Word, só os cartões; a skill por dentro (lembrete) | você |
-| 14 a 18 | 10 | sete pontos antes de instalar | você |
-| 18 a 23 | 11 a 13 | A1, os três defeitos; votação e gabarito | duplas |
-| 23 a 28 | 14 | A2, a sala dita a skill | sala dita, você executa |
-| 28 a 30 | 15 e 16 | a tomada: conector pronto ou próprio | você |
-| 30 a 33 | 17 e 18 | demonstração do conector do Microsoft Learn | você, no Claude |
-| 33 a 38 | 19 a 22 | A3, a ordem escondida; os casos do STF e do STJ | duplas |
-| 38 a 40 | 23 e 24 | o plugin | você |
-| 40 a 44 | 25 | A4, tomada ou pacote | duplas |
-| 44 a 46 | 26 e 27 | dois jeitos de raspar | você |
-| 46 a 48 | 28 | A5, votação do tema | sala |
-| 48 a 52 | 29 | etapa 1, o Claude no navegador consulta o TJMS | você, no Chrome |
-| 52 a 57 | 30 e 31 | etapa 2, o Claude Code escreve e roda o script | você |
-| 57 a 62 | 32, 33 ou 34 | conferência de três linhas da planilha | duplas |
-| 62 a 64 | 35 e 36 | regras para raspar; captcha | você |
-| 64 a 69 | 37 | o repositório no GitHub | você |
-| 69 a 72 | 38 e 39 | rotinas: o boletim de segunda | você |
-| 72 a 75 | 40 | demonstração da tarefa agendada | você, no Claude |
-| 75 a 77 | 41 | agendar, conferir ou não automatizar | você |
-| 77 a 85 | 42 | A6, o que é agendável | duplas |
-| 85 a 90 | 43 a 45 | o que levam, o kit, o fecho | você |
+| 0 a 4 | 1 e 2 | capa e roteiro, com o lembrete da Aula 2 | você |
+| 4 a 8 | 3 e 4 | o rascunho sem timbre; "qual das duas vocês protocolariam?" | você pergunta |
+| 8 a 12 | 5 e 6 | demonstração do Word, com o pedido para copiar | você, no Claude |
+| 12 a 14 | 7 | Claude for Word, só os cartões | você |
+| 14 a 18 | 8 | sete pontos antes de instalar | você |
+| 18 a 23 | 9 a 11 | A1, os três defeitos; votação e gabarito | duplas |
+| 23 a 28 | 12 | A2, a sala dita a skill | sala dita, você executa |
+| 28 a 30 | 13 e 14 | a tomada: conector pronto ou próprio | você |
+| 30 a 33 | 15 e 16 | demonstração do conector do Microsoft Learn | você, no Claude |
+| 33 a 38 | 17 a 20 | A3, a ordem escondida; os casos do STF e do STJ | duplas |
+| 38 a 40 | 21 e 22 | o plugin | você |
+| 40 a 44 | 23 | A4, tomada ou pacote | duplas |
+| 44 a 46 | 24 e 25 | dois jeitos de raspar | você |
+| 46 a 48 | 26 | A5, votação do tema | sala |
+| 48 a 52 | 27 | etapa 1, o Claude no navegador consulta o TJMS | você, no Chrome |
+| 52 a 57 | 28 e 29 | etapa 2, o Claude Code escreve e roda o script | você |
+| 57 a 62 | 30, 31 ou 32 | conferência de três linhas da planilha | duplas |
+| 62 a 64 | 33 e 34 | regras para raspar; captcha | você |
+| 64 a 69 | 35 | o repositório no GitHub | você |
+| 69 a 72 | 36 e 37 | rotinas: o boletim de segunda | você |
+| 72 a 75 | 38 | demonstração da tarefa agendada | você, no Claude |
+| 75 a 77 | 39 | agendar, conferir ou não automatizar | você |
+| 77 a 85 | 40 | A6, o que é agendável | duplas |
+| 85 a 90 | 41 a 43 | o que levam, o kit, o fecho | você |
 
-Os slides 32, 33 e 34 são a mesma conferência, um para cada tema da votação. Mostre só o do tema vencedor: execução
-fiscal segue normalmente para o 32; improbidade, digite 33 e Enter; ICMS, digite 34 e Enter. Terminada a conferência,
-digite 35 e Enter.
+Os slides 30, 31 e 32 são a mesma conferência, um para cada tema da votação. Mostre só o do tema vencedor: execução
+fiscal segue normalmente para o 30; improbidade, digite 31 e Enter; ICMS, digite 32 e Enter. Terminada a conferência,
+digite 33 e Enter.
 
 ### 4.3. As demonstrações
 
-Word (slides 6 e 7). Numa conversa nova, anexe `modelo-timbrado.docx` e `rascunho-parecer.md` e cole o pedido do slide
-7. Abra o PDF que o Claude devolve e confira com a sala, página por página, o cabeçalho, os estilos e a numeração. O
+Word (slides 5 e 6). Numa conversa nova, anexe `modelo-timbrado.docx` e `rascunho-parecer.md` e cole o pedido do slide
+6. Abra o PDF que o Claude devolve e confira com a sala, página por página, o cabeçalho, os estilos e a numeração. O
 pedido literal é este:
 
 > Use o modelo do escritório anexo (modelo-timbrado.docx). Transforme este rascunho em parecer no padrão do modelo, com
 > o mesmo cabeçalho, estilos e numeração. No fim, gere o PDF e me diga o que não coube no modelo.
 
-A2 (slide 14), a skill que a sala dita. São três passos, um por clique, em sete minutos. Primeiro, anote no chat as três
+A2 (slide 12), a skill que a sala dita. São três passos, um por clique, em sete minutos. Primeiro, anote no chat as três
 regras do escritório exatamente como a sala disser (de formatação, de citação, de assinatura). Depois, peça ao Claude
 que crie uma skill com essas três regras. Por último, rode a skill no mesmo rascunho da demonstração do Word e confira
 cada regra no resultado. Para instalar uma skill própria, o caminho conferido em 05/11/2026 é Customize > Skills > "+" >
@@ -132,24 +131,24 @@ cada regra no resultado. Para instalar uma skill própria, o caminho conferido e
 O texto do segundo passo fica a seu critério; uma forma possível é "crie uma skill com estas três regras, para usar
 quando eu transformar um rascunho em parecer no modelo timbrado".
 
-Conector (slides 17 e 18). Em Customize > Connectors > "+ Add" > "Add custom connector", dê um nome e cole o endereço
+Conector (slides 15 e 16). Em Customize > Connectors > "+ Add" > "Add custom connector", dê um nome e cole o endereço
 `https://learn.microsoft.com/api/mcp`. Numa conversa nova, ligue o conector, pergunte algo sobre o Word e abra o link
 que a resposta citar.
 
-Scraper, etapa 1 (slide 29). No Chrome, com a skill do TJMS, cole o pedido trocando o tema pelo vencedor da A5. Se a
+Scraper, etapa 1 (slide 27). No Chrome, com a skill do TJMS, cole o pedido trocando o tema pelo vencedor da A5. Se a
 consulta não andar em 40 segundos, toque a gravação e diga à sala que é o ensaio, nunca coleta ao vivo.
 
 > Pesquise no TJMS acórdãos de segundo grau sobre [tema votado], julgados nos últimos três meses. Leia as ementas,
 > baixe só os pertinentes e me dê uma planilha com processo, relator, data e o motivo de cada escolha.
 
-Scraper, etapa 2 (slides 30 e 31). No Claude Code, na pasta vazia, cole o pedido com o tema votado. Abra o CSV que o
+Scraper, etapa 2 (slides 28 e 29). No Claude Code, na pasta vazia, cole o pedido com o tema votado. Abra o CSV que o
 script gravar e mostre as três primeiras linhas; o slide seguinte as põe lado a lado com o espelho de cada acórdão.
 
 > Escreva um script em Python que baixe o arquivo de setembro de 2026 dos espelhos de acórdãos da Primeira Turma nos
 > Dados Abertos do STJ, filtre as ementas por [tema votado] e grave um CSV com classe, processo, relator, órgão, data e
 > ementa. Uma requisição por vez.
 
-Rotina (slide 40). Em Scheduled > New task, crie a tarefa com o pedido abaixo e o tema votado. A tarefa roda na nuvem e
+Rotina (slide 38). Em Scheduled > New task, crie a tarefa com o pedido abaixo e o tema votado. A tarefa roda na nuvem e
 não lê arquivo do seu computador, por isso o pedido não cita pasta nenhuma.
 
 > Toda segunda às 7h10, consulte os Dados Abertos do STJ, abra o arquivo mais recente de espelhos de acórdãos da
@@ -162,15 +161,15 @@ Todas têm o enunciado no slide e o cronômetro na tela do apresentador. A respo
 
 | atividade | slide | tempo | o que a sala faz | resposta |
 |---|---|---|---|---|
-| A1, três defeitos | 11, votação no 12, gabarito no 13 | 4 min | lê três trechos de uma skill e diz que ponto do checklist cada um fere | A fere permissões e dados acessados (dispara em qualquer pedido); B fere arquivos e scripts e comandos (manda a pasta para fora); C fere comandos (executa sem confirmar) |
-| A2, a sala dita | 14 | 7 min | dita três regras do escritório | não há gabarito; confira cada regra no parecer gerado |
-| A3, a ordem escondida | 19, revelação no 20 | 4 min | procura na petição a ordem dirigida à IA e conta quantas há | duas: uma no rodapé, em letra minúscula, e outra em texto branco no meio da página, que só aparece ao selecionar tudo |
-| A4, tomada ou pacote | 25 | 4 min | classifica seis situações em skill, conector pronto, conector próprio ou plugin | 1 conector pronto; 2 conector próprio; 3 skill; 4 conector próprio; 5 plugin; 6 skill |
-| A5, o tema | 28, conferência em 32 a 34 | 2 min mais a conferência | vota entre execução fiscal, improbidade e ICMS; depois cada dupla confere três linhas contra o espelho | não há gabarito; conta quem achou divergência |
-| A6, o que é agendável | 42 | 8 min | classifica três tarefas e sugere outras | boletim do CNJ, agendar; resumo da pasta do caso, agendar com conferência; controle de prazos, não automatizar |
+| A1, três defeitos | 9, votação no 10, gabarito no 11 | 4 min | lê três trechos de uma skill e diz que ponto do checklist cada um fere | A fere permissões e dados acessados (dispara em qualquer pedido); B fere arquivos e scripts e comandos (manda a pasta para fora); C fere comandos (executa sem confirmar) |
+| A2, a sala dita | 12 | 7 min | dita três regras do escritório | não há gabarito; confira cada regra no parecer gerado |
+| A3, a ordem escondida | 17, revelação no 18 | 4 min | procura na petição a ordem dirigida à IA e conta quantas há | duas: uma no rodapé, em letra minúscula, e outra em texto branco no meio da página, que só aparece ao selecionar tudo |
+| A4, tomada ou pacote | 23 | 4 min | classifica seis situações em skill, conector pronto, conector próprio ou plugin | 1 conector pronto; 2 conector próprio; 3 skill; 4 conector próprio; 5 plugin; 6 skill |
+| A5, o tema | 26, conferência em 30 a 32 | 2 min mais a conferência | vota entre execução fiscal, improbidade e ICMS; depois cada dupla confere três linhas contra o espelho | não há gabarito; conta quem achou divergência |
+| A6, o que é agendável | 40 | 8 min | classifica três tarefas e sugere outras | boletim do CNJ, agendar; resumo da pasta do caso, agendar com conferência; controle de prazos, não automatizar |
 
 Na A6, se uma das sugestões da sala couber em "agendar", você pode criar essa rotina ao vivo; senão, crie a do boletim,
-que já está pronta no slide 40.
+que já está pronta no slide 38.
 
 ## 5. Aula 4: Quem decide é você
 
@@ -224,7 +223,7 @@ ritmo. As notas de cada slide trazem a contingência específica; as mais prová
 Sem internet, a etapa 2 do scraper roda com a amostra do kit, dentro da pasta `scraper`:
 `python3 stj_espelhos.py --tema "execução fiscal" --offline amostra/20260930.json`. A planilha pronta de cada tema
 também está em `material/scraper/amostra/`, e a página salva do TJMS substitui a etapa 1, apresentada como gravação do
-ensaio. Se aparecer captcha no TJMS, pare a automação, que é exatamente o que o slide 36 ensina, e toque a gravação.
+ensaio. Se aparecer captcha no TJMS, pare a automação, que é exatamente o que o slide 34 ensina, e toque a gravação.
 
 Se o conector não entrar, quase sempre a vaga do plano gratuito está ocupada: desconecte o outro em Customize >
 Connectors. Se o Word não sair, confira "Create and edit files" em Settings > Capabilities. Se o projetor falhar ou o

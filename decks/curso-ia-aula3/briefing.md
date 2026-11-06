@@ -235,6 +235,14 @@ espelhos de acórdãos". Fica pendente, por depender das gravações do ensaio (
 a gravação provisória da prévia nas cinco molduras de demonstração, que mostra o pedido de contestação da Aula 2
 debaixo de títulos de MCP, scraper e rotina. Oráculo: 0 erro(s), os mesmos 4 avisos aceitos.
 
+## Slides que repetiam a Aula 2 (06/11/2026)
+
+O professor decidiu tirar os slides pecas (as quatro peças em volta do agente) e skillmd (a skill por dentro), porque a
+Aula 2 já tinha mostrado os dois; a Aula 3 fica com o aprofundamento e a prática de skills. A fala do mapa passou a
+lembrar o jeito, a tomada e o pacote da Aula 2 e a anunciar a rotina, e o word-addin foi para a noite, para não formar
+três claros seguidos. O deck tem agora 43 slides; a numeração do roteiro acima é a antiga, e o guia do professor
+(`docs/curso-ia-dia2-guia-do-professor.md`) traz a nova.
+
 ## Decisão sobre imagens (05/11/2026)
 
 O professor decidiu "sem foto, como antes": nenhuma imagem gerada nesta aula, como nas Aulas 1 e 2. A capa segue o
