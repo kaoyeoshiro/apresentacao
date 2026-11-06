@@ -374,6 +374,7 @@ body.apresentador #palco { display: none; }
 #ap-bloco .atrasado { color: #F08A6C; } #ap-bloco .adiantado { color: #8FD3A8; }
 #ap-pratica { font-size: 40px; font-weight: 600; color: #E8B04B; } #ap-pratica.passou { color: #F08A6C; }
 #ap-guia { font-size: 26px; line-height: 1.45; margin-top: 18px; overflow: auto; } #ap-guia p { margin: 0 0 12px; }
+#ap-guia .material { margin: 0 0 16px; padding: 12px 16px; border: 2px solid #E8B04B; border-radius: 12px; background: rgba(232,176,75,.08); } #ap-guia .material h4 { margin: 10px 0 4px; font-size: 20px; letter-spacing: .08em; text-transform: uppercase; color: #E8B04B; } #ap-guia .material h4:first-child { margin-top: 0; } #ap-guia .material ul, #ap-guia .material ol { margin: 0; } #ap-guia .material a { color: #fff; } #ap-guia .material p { margin: 0; }
 #ap-guia ul { margin: 0 0 12px; padding-left: 1.2em; } #ap-guia .faca { color: #E8B04B; } #ap-guia .ponte { opacity: .7; }
 #ap-prox-titulo { font-size: 24px; margin-top: 14px; }
 #palco-pratica { right: 16px; bottom: 12px; padding: 2px 12px; border-radius: 8px; background: rgba(8,10,14,.55); font-size: 22px; font-variant-numeric: tabular-nums; opacity: .8; pointer-events: none; display: none; }
@@ -889,8 +890,31 @@ function apresentador(resumo) {
 	let atual = 0, inicio = null, bloco = -1, inicioBloco = null, pratica = null, slideVisto = -1;
 	const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; e.textContent = txt; return e; };
 	// Guia do slide: {diga, faca (texto ou lista de ações), transicao}.
+	// `material` do guia: {objetivo, abrir: [arquivo ou texto], passos: [...], base}. Arquivo com extensão conhecida vira
+	// link para `base` + caminho (o kit no GitHub); o resto sai como texto.
+	const cartaoMaterial = (m) => {
+		const c = el('div', 'material', '');
+		const secao = (rot, ...filhos) => { c.append(el('h4', '', rot), ...filhos); };
+		if (m.objetivo) secao('Objetivo', el('p', '', m.objetivo));
+		if (m.abrir?.length) {
+			const ul = el('ul', '', '');
+			for (const item of m.abrir) {
+				const li = el('li', '', '');
+				if (m.base && /^[\w./-]+\.(md|docx|pdf|py|json|csv|html)$/.test(item)) {
+					const a = el('a', '', item);
+					a.href = m.base + item; a.target = '_blank'; a.rel = 'noopener';
+					li.append(a);
+				} else li.textContent = item;
+				ul.append(li);
+			}
+			secao('Abrir', ul);
+		}
+		if (m.passos?.length) { const ol = el('ol', '', ''); ol.append(...m.passos.map((x) => el('li', '', x))); secao('Passo a passo', ol); }
+		return c;
+	};
 	const guia = (g) => {
 		const out = [];
+		if (g.material) out.push(cartaoMaterial(g.material));
 		if (g.diga) out.push(el('p', '', g.diga));
 		if (g.faca) {
 			const ul = el('ul', 'faca', '');
