@@ -21,9 +21,9 @@ COPIAS = [   # (origem em material/, destino em kit/)
     ("scraper/amostra/dicionario-espelhodoacordao.csv", "scraper/amostra/dicionario-espelhodoacordao.csv"),
 ]
 
-README = """# Kit da Aula 3: do arquivo ao mundo
+README = """# Kit do Dia 2 (Aulas 3 e 4): do arquivo ao mundo e quem decide
 
-Material para refazer em casa as demonstrações da Aula 3 do curso de IA da co.juris (Dia 2). O escritório Dias & Moura,
+Material para refazer em casa as demonstrações da Aula 3 e as atividades da Aula 4 do curso de IA da co.juris (Dia 2). O escritório Dias & Moura,
 a petição e a skill são fictícios. As informações sobre cada ferramenta foram conferidas nas páginas oficiais em
 05/11/2026; menus e planos mudam, então confira a tela no dia em que for usar.
 
@@ -36,6 +36,8 @@ a petição e a skill são fictícios. As informações sobre cada ferramenta fo
 - `scraper/`: o script `stj_espelhos.py`, que monta um boletim de acórdãos do STJ por tema em planilha (CSV), e a pasta
   `amostra/` com o arquivo de setembro de 2026 da Primeira Turma e o dicionário de dados, para usar sem internet.
 - `gabarito/atividades.md`: as respostas das Atividades 1 e 3. Só abra depois de tentar.
+- `aula4/`: as fichas em branco das Atividades 7 (acesso mínimo) e 10 (plano de 30 dias) e o gabarito das
+  Atividades 7, 8 e 9. A Aula 4 não tem arquivo para abrir; as fichas servem para refazer as atividades em casa.
 
 ## Como baixar
 
@@ -140,7 +142,7 @@ assistente de IA que audite o arquivo e compare com o que você achou.
 (dica: selecione todo o texto). Depois peça a um assistente que resuma a petição e veja se ele obedece à ordem, avisa
 dela ou a ignora.
 
-O gabarito está em `gabarito/atividades.md`.
+O gabarito está em `gabarito/atividades.md`. As atividades da Aula 4 estão em `aula4/`.
 """
 
 GABARITO = """# Gabarito das Atividades 1 e 3
@@ -167,6 +169,59 @@ dois trechos.
 """
 
 
+AULA4_A7 = """# Atividade 7: o acesso mínimo
+
+Escolha uma tarefa que você gostaria de delegar a um assistente pessoal de IA (a agenda da manhã, por exemplo) e preencha
+as três colunas. Pense no que o assistente lê, no que ele escreve e no que ele nunca deve tocar.
+
+| Tarefa escolhida | |
+|---|---|
+| Pode ler | |
+| Pode escrever | |
+| Nunca toca | |
+
+Depois responda: se o acesso fosse cortado amanhã, o que o assistente continuaria sabendo? (Revogar o acesso não apaga a
+memória; confira, no app que você usa, como se zera.)
+"""
+
+AULA4_A10 = """# Atividade 10: meu plano de 30 dias
+
+Escreva as três linhas com uma tarefa real do seu trabalho. Guarde esta ficha; ninguém recolhe.
+
+- **Semana 1:** uma skill do meu jeito. Qual tarefa que eu repito toda semana vira skill?
+- **Semanas 2 e 3:** uma pasta de caso. Qual caso vai para uma pasta com documentos e memória em Markdown?
+- **Semana 4:** uma rotina que pode falhar sem dano. Se ela falhar em silêncio, o que se perde? (Se a resposta for
+  prazo, e-mail ou protocolo, escolha outra.)
+
+Regras que valem nas quatro semanas: delegue pouco, confira a fonte e teste primeiro com dado fictício.
+"""
+
+AULA4_GABARITO = """# Gabarito das Atividades 7, 8 e 9 (Aula 4)
+
+Só abra depois de tentar.
+
+## Atividade 7: o acesso mínimo
+
+Resposta-modelo para a agenda da manhã. Pode ler: a agenda e só os e-mails de uma pasta. Pode escrever: um rascunho
+salvo, nunca enviado. Nunca toca: a caixa inteira, o sistema do tribunal com certificado, pagamento, apagar. Fecho: duas
+semanas, só lendo, numa conta de teste, com aprovação para tudo que sai.
+
+## Atividade 8: e se o preço dobrar?
+
+Costuma quebrar o que está preso ao app: instruções que só existem na memória do chat, documentos que só estão no
+projeto do fornecedor e a falta de um segundo fornecedor testado. O que vai com você de um app a outro: a skill (o mesmo
+SKILL.md serve ao Claude e ao ChatGPT ou ao Codex), a pasta com os documentos no seu disco, as instruções escritas em
+texto e um segundo fornecedor testado antes de precisar.
+
+## Atividade 9: modelo aberto chinês no órgão?
+
+Não há resposta única; é um debate. O fecho do professor: rodar o modelo dentro da infraestrutura do órgão tira o dado do
+alcance de terceiros e desloca o risco para o comportamento do modelo, que é o que o CAISI mediu (agentes montados sobre
+o DeepSeek R1-0528 foram 12 vezes mais propensos a seguir instruções maliciosas). O mesmo modelo usado pela API do
+fabricante chinês leva o dado à jurisdição chinesa; o par que importa é rodar em casa ou mandar para fora.
+"""
+
+
 def main():
     for origem, destino in COPIAS:
         alvo = KIT / destino
@@ -174,6 +229,9 @@ def main():
         shutil.copy2(AQUI / origem, alvo)
     (KIT / "gabarito").mkdir(parents=True, exist_ok=True)
     (KIT / "gabarito" / "atividades.md").write_text(GABARITO, encoding="utf-8")
+    (KIT / "aula4").mkdir(parents=True, exist_ok=True)
+    for nome, txt in (("A7-acesso-minimo.md", AULA4_A7), ("A10-plano-30-dias.md", AULA4_A10), ("gabarito.md", AULA4_GABARITO)):
+        (KIT / "aula4" / nome).write_text(txt, encoding="utf-8")
     (KIT / "README.md").write_text(README, encoding="utf-8")
     print("kit ok:", ", ".join(sorted(p.name for p in KIT.iterdir() if not p.name.startswith("._"))))
 
