@@ -1,6 +1,6 @@
-# Kit da Aula 3: do arquivo ao mundo
+# Kit do Dia 2 (Aulas 3 e 4): do arquivo ao mundo e quem decide
 
-Material para refazer em casa as demonstrações da Aula 3 do curso de IA da co.juris (Dia 2). O escritório Dias & Moura,
+Material para refazer em casa as demonstrações da Aula 3 e as atividades da Aula 4 do curso de IA da co.juris (Dia 2). O escritório Dias & Moura,
 a petição e a skill são fictícios. As informações sobre cada ferramenta foram conferidas nas páginas oficiais em
 05/11/2026; menus e planos mudam, então confira a tela no dia em que for usar.
 
@@ -13,6 +13,8 @@ a petição e a skill são fictícios. As informações sobre cada ferramenta fo
 - `scraper/`: o script `stj_espelhos.py`, que monta um boletim de acórdãos do STJ por tema em planilha (CSV), e a pasta
   `amostra/` com o arquivo de setembro de 2026 da Primeira Turma e o dicionário de dados, para usar sem internet.
 - `gabarito/atividades.md`: as respostas das Atividades 1 e 3. Só abra depois de tentar.
+- `aula4/`: as fichas em branco das Atividades 7 (acesso mínimo) e 10 (plano de 30 dias) e o gabarito das
+  Atividades 7, 8 e 9. A Aula 4 não tem arquivo para abrir; as fichas servem para refazer as atividades em casa.
 
 ## Como baixar
 
@@ -117,4 +119,4 @@ assistente de IA que audite o arquivo e compare com o que você achou.
 (dica: selecione todo o texto). Depois peça a um assistente que resuma a petição e veja se ele obedece à ordem, avisa
 dela ou a ignora.
 
-O gabarito está em `gabarito/atividades.md`.
+O gabarito está em `gabarito/atividades.md`. As atividades da Aula 4 estão em `aula4/`.
