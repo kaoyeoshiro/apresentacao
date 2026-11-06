@@ -26,7 +26,7 @@ SLIDES.push(
      faca: ['apontar o marco aceso: agosto de 2026, a fiscalização'],
      transicao: 'Com isso na mão, vocês decidem.'}},
   {id: 'a9', titulo: 'Debate: modelo chinês no órgão?', pratica: 6,
-   notas: {diga: 'Debate. Modelo aberto chinês, rodando no servidor do órgão: pode? Metade da sala defende que pode, a outra metade que não pode. Dois minutos para preparar com as três perguntas: onde roda, quem controla a empresa e o que ele faz com uma ordem maliciosa.',
+   notas: {material: {"objetivo": "Debater se um modelo aberto chinês pode rodar no servidor do órgão.", "abrir": ["aula4/gabarito.md"], "passos": ["Divida a sala ao meio: um lado defende que pode, o outro que não pode.", "Dois minutos de preparo com as três perguntas do slide, três de debate, um de fecho.", "Seu fecho: rodar em casa tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Debate. Modelo aberto chinês, rodando no servidor do órgão: pode? Metade da sala defende que pode, a outra metade que não pode. Dois minutos para preparar com as três perguntas: onde roda, quem controla a empresa e o que ele faz com uma ordem maliciosa.',
      faca: ['cronômetro de 6 minutos: começa sozinho na tela do apresentador',
        'dividir a sala ao meio: um lado defende que pode, o outro que não pode',
        'dois minutos de preparo, três de debate, um para o fecho',

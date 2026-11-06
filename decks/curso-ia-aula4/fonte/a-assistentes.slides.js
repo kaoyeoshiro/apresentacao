@@ -34,7 +34,7 @@ SLIDES.push(
      faca: ['chegada: o Duet', 'clique 1: o dots', 'clique 2: o Grok Bot'],
      transicao: 'Então, quanto acesso dar? Vocês decidem.'}},
   {id: 'a7', titulo: 'Sua vez: o acesso mínimo', pratica: 7,
-   notas: {diga: 'Em dupla, escolham uma tarefa, a agenda da manhã, por exemplo. Preencham três colunas: o que o assistente pode ler, o que pode escrever e o que ele nunca toca. Sete minutos.',
+   notas: {material: {"objetivo": "Decidir o acesso mínimo de um assistente: o que lê, o que escreve e o que nunca toca.", "abrir": ["aula4/A7-acesso-minimo.md"], "passos": ["Duplas escolhem uma tarefa (a agenda da manhã, por exemplo).", "Preenchem três colunas em sete minutos: pode ler, pode escrever, nunca toca.", "Fecho: duas semanas, só lendo, conta de teste e aprovação para tudo que sai.", "Resposta-modelo no kit: aula4/gabarito.md."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Em dupla, escolham uma tarefa, a agenda da manhã, por exemplo. Preencham três colunas: o que o assistente pode ler, o que pode escrever e o que ele nunca toca. Sete minutos.',
      faca: ['cronômetro de 7 minutos: começa sozinho na tela do apresentador',
        'resposta-modelo para a agenda da manhã. Pode ler: a agenda e só os e-mails de uma pasta. Pode escrever: um rascunho salvo, nunca enviado. Nunca: a caixa inteira, o sistema do tribunal com certificado, pagamento, apagar.',
        'fecho: "Duas semanas, só lendo." Uma conta de teste, só leitura, e aprovação para tudo que sai.'],
