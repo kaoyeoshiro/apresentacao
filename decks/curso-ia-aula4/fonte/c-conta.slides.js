@@ -35,7 +35,7 @@ SLIDES.push(
      faca: ['pausa curta'],
      transicao: 'Então vamos testar a dependência de vocês.'}},
   {id: 'a8', titulo: 'Sua vez: e se o preço dobrar?', pratica: 5, passos: [2.0, 1.4],
-   notas: {diga: 'Cinco minutos, em dupla. Imaginem que, na sexta, o plano que vocês usam dobra de preço. O que quebra no trabalho de vocês? Pensem no que está preso ao app.',
+   notas: {material: {"objetivo": "Descobrir o que está preso ao app quando o preço dobra.", "abrir": ["aula4/gabarito.md"], "passos": ["Só a pergunta na tela; cinco minutos em dupla.", "Segundo clique: entra o que vai com você para outro app.", "Peça a duas duplas que digam o que quebra."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Cinco minutos, em dupla. Imaginem que, na sexta, o plano que vocês usam dobra de preço. O que quebra no trabalho de vocês? Pensem no que está preso ao app.',
      faca: ['chegada: só a pergunta; disparar o cronômetro de 5 minutos (começa sozinho na tela do apresentador)',
        'segundo clique: a resposta, depois do tempo; entra à direita o que vai com vocês para outro app',
        'gabarito, no próximo slide: costuma quebrar o que está preso ao app; instruções só na memória do chat, documentos só no projeto do fornecedor, nenhum segundo fornecedor testado',

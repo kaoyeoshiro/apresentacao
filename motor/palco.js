@@ -374,8 +374,10 @@ body.apresentador #palco { display: none; }
 #ap-bloco .atrasado { color: #F08A6C; } #ap-bloco .adiantado { color: #8FD3A8; }
 #ap-pratica { font-size: 40px; font-weight: 600; color: #E8B04B; } #ap-pratica.passou { color: #F08A6C; }
 #ap-guia { font-size: 26px; line-height: 1.45; margin-top: 18px; overflow: auto; } #ap-guia p { margin: 0 0 12px; }
+#ap-guia .material { margin: 0 0 16px; padding: 12px 16px; border: 2px solid #E8B04B; border-radius: 12px; background: rgba(232,176,75,.08); } #ap-guia .material h4 { margin: 10px 0 4px; font-size: 20px; letter-spacing: .08em; text-transform: uppercase; color: #E8B04B; } #ap-guia .material h4:first-child { margin-top: 0; } #ap-guia .material ul, #ap-guia .material ol { margin: 0; } #ap-guia .material a { color: #fff; } #ap-guia .material p { margin: 0; }
 #ap-guia ul { margin: 0 0 12px; padding-left: 1.2em; } #ap-guia .faca { color: #E8B04B; } #ap-guia .ponte { opacity: .7; }
 #ap-prox-titulo { font-size: 24px; margin-top: 14px; }
+#palco-copiar { right: 16px; top: 14px; padding: 10px 22px; border-radius: 10px; border: 2px solid #E8B04B; background: rgba(8,10,14,.82); color: #fff; font: 600 22px/1.2 system-ui, sans-serif; cursor: pointer; display: none; } #palco-copiar:hover { background: rgba(232,176,75,.25); }
 #palco-pratica { right: 16px; bottom: 12px; padding: 2px 12px; border-radius: 8px; background: rgba(8,10,14,.55); font-size: 22px; font-variant-numeric: tabular-nums; opacity: .8; pointer-events: none; display: none; }
 /* linha do dia: faixa fina abaixo da trilha, na largura dela (120 a 1800 px). Faz parte do quadro: só var() do tema */
 #linha-dia { position: absolute; left: 120px; top: 993px; width: 1680px; display: flex; gap: 40px; z-index: 3; pointer-events: none;
@@ -763,6 +765,25 @@ function tocador({ver, resumo, palcoEl, previa, autoplay, fontes}) {
 	// ao slide com `pratica` (minutos).
 	const praticaEl = ui('palco-pratica');
 	let pratica = null;
+	// Botão "Copiar pedido": nos slides cujo guia traz `copiar`, copia o texto (também na tecla C). Fica fora do #palco,
+	// então não sai em still, PDF nem vídeo, e o clique nele não avança o slide.
+	const copiarEl = ui('palco-copiar');
+	copiarEl.tabIndex = -1;
+	let copiarTimer = null;
+	const copiar = async () => {
+		const txt = slides[paradas[atual].slide].guia?.copiar;
+		if (!txt) return false;
+		try { await navigator.clipboard.writeText(txt); } catch {
+			const ta = document.createElement('textarea');
+			ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+			document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+		}
+		copiarEl.textContent = 'Copiado!';
+		clearTimeout(copiarTimer);
+		copiarTimer = setTimeout(() => { copiarEl.textContent = 'Copiar pedido (C)'; }, 1800);
+		return true;
+	};
+	copiarEl.addEventListener('click', (e) => { e.stopPropagation(); copiar(); copiarEl.blur(); });
 
 	let atual = Math.min(Number((location.hash.match(/parada=(\d+)/) || [])[1] || 0), paradas.length - 1);
 	let tocando = null, chegada = performance.now(), janelaAp = null, digitos = '';
@@ -808,6 +829,7 @@ function tocador({ver, resumo, palcoEl, previa, autoplay, fontes}) {
 		else if (k === 'End') chegou(paradas.length - 1);
 		else if (k === 'b' || k === 'B' || k === '.') preto.style.display = preto.style.display === 'block' ? 'none' : 'block';
 		else if (k === 'f' || k === 'F') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+		else if ((k === 'c' || k === 'C') && !tocando) { if (!copiar()) return; }
 		else if (k === 'g' || k === 'G') indice.style.display = indice.style.display === 'block' ? 'none' : 'block';
 		else if (k === '?') ajuda.style.display = ajuda.style.display === 'block' ? 'none' : 'block';
 		else if (k === 'p' || k === 'P') {
@@ -860,6 +882,9 @@ function tocador({ver, resumo, palcoEl, previa, autoplay, fontes}) {
 			ocioso = (agora - chegada) / 1000;
 		}
 		praticaEl.style.display = pratica ? 'block' : 'none';
+		const querCopiar = !tocando && !!slides[paradas[atual].slide].guia?.copiar;
+		copiarEl.style.display = querCopiar ? 'block' : 'none';
+		if (querCopiar && !copiarEl.textContent) copiarEl.textContent = 'Copiar pedido (C)';
 		if (pratica) {
 			const resta = (pratica.fim - agora) / 1000, txt = resta >= 0 ? relogio(Math.ceil(resta)) : '+' + relogio(-resta);
 			if (praticaEl.textContent !== txt) praticaEl.textContent = txt;
@@ -889,8 +914,31 @@ function apresentador(resumo) {
 	let atual = 0, inicio = null, bloco = -1, inicioBloco = null, pratica = null, slideVisto = -1;
 	const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; e.textContent = txt; return e; };
 	// Guia do slide: {diga, faca (texto ou lista de ações), transicao}.
+	// `material` do guia: {objetivo, abrir: [arquivo ou texto], passos: [...], base}. Arquivo com extensão conhecida vira
+	// link para `base` + caminho (o kit no GitHub); o resto sai como texto.
+	const cartaoMaterial = (m) => {
+		const c = el('div', 'material', '');
+		const secao = (rot, ...filhos) => { c.append(el('h4', '', rot), ...filhos); };
+		if (m.objetivo) secao('Objetivo', el('p', '', m.objetivo));
+		if (m.abrir?.length) {
+			const ul = el('ul', '', '');
+			for (const item of m.abrir) {
+				const li = el('li', '', '');
+				if (m.base && /^[\w./-]+\.(md|docx|pdf|py|json|csv|html)$/.test(item)) {
+					const a = el('a', '', item);
+					a.href = m.base + item; a.target = '_blank'; a.rel = 'noopener';
+					li.append(a);
+				} else li.textContent = item;
+				ul.append(li);
+			}
+			secao('Abrir', ul);
+		}
+		if (m.passos?.length) { const ol = el('ol', '', ''); ol.append(...m.passos.map((x) => el('li', '', x))); secao('Passo a passo', ol); }
+		return c;
+	};
 	const guia = (g) => {
 		const out = [];
+		if (g.material) out.push(cartaoMaterial(g.material));
 		if (g.diga) out.push(el('p', '', g.diga));
 		if (g.faca) {
 			const ul = el('ul', 'faca', '');
