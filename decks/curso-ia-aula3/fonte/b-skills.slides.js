@@ -17,7 +17,7 @@ SLIDES.push(
        'abrir o PDF e conferir página por página com a sala: cabeçalho, estilos, numeração'],
      transicao: 'O pedido que eu colei está no próximo slide.'}},
   {id: 'word-pedido', titulo: 'O pedido, para copiar', passos: [3.2],
-   notas: {diga: 'Este é o pedido, palavra por palavra. Três partes. Use o modelo anexo. Transforme o rascunho no padrão do modelo, com cabeçalho, estilos e numeração. E, no fim, me diga o que não coube. Essa última frase é a que mais importa: ela obriga a IA a contar o que ficou de fora.',
+   notas: {copiar: "Use o modelo do escritório anexo (modelo-timbrado.docx). Transforme este rascunho em parecer no padrão do modelo, com o mesmo cabeçalho, estilos e numeração. No fim, gere o PDF e me diga o que não coube no modelo.", diga: 'Este é o pedido, palavra por palavra. Três partes. Use o modelo anexo. Transforme o rascunho no padrão do modelo, com cabeçalho, estilos e numeração. E, no fim, me diga o que não coube. Essa última frase é a que mais importa: ela obriga a IA a contar o que ficou de fora.',
      faca: ['ler o pedido em voz alta, devagar',
        'pedido literal, para colar: Use o modelo do escritório anexo (modelo-timbrado.docx). Transforme este rascunho em parecer no padrão do modelo, com o mesmo cabeçalho, estilos e numeração. No fim, gere o PDF e me diga o que não coube no modelo.',
        'avisar que o pedido também está no kit do GitHub'],
