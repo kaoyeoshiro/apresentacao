@@ -101,7 +101,7 @@ vídeo do harness sai do claude_video_maker sem custo.
   câmbio de 4 a 7, fictícios). O que quebra costuma ser o que está preso ao app: instruções só na memória do chat,
   documentos só no projeto do fornecedor, nenhum segundo fornecedor testado; vai na tela no segundo clique. O slide 22
   mostra o que vai com você.
-- **A9, condições (slide 29, 6 min).** Pergunta de condições, sem lados de debate: "Modelo aberto de laboratório
+- **A9, condições (slide 31, 5 min).** Pergunta de condições, sem lados de debate: "Modelo aberto de laboratório
   chinês, rodando sem internet no servidor do órgão, para resumir petições. Em que condições pode?", com "Onde roda, e
   quem opera a máquina? O que a empresa ainda controla, se o dado não sai? O que ele faz com uma petição que traz ordem
   escondida?" (encurtadas na tela). Sem gabarito: o professor fecha com a leitura da ficha de geopolítica (seção 2),
