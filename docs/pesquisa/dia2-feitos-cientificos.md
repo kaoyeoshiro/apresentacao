@@ -59,12 +59,12 @@ Título: "IA na ciência"
 |---|---|---|
 | Biologia | 2024 | Nobel de Química pelo AlphaFold |
 | Matemática | 2025 | Ouro oficial na Olimpíada Internacional |
-| Computação | 2025 | Algoritmo de matrizes melhor que Strassen |
+| Computação | 2025 | Bate Strassen em matrizes 4x4 complexas |
 | Meteorologia | 2024 | Previsão de 15 dias melhor que europeia |
 | Química | 2025 | Antibióticos novos curam infecção em camundongos |
 | Matemática | 2026 | Derrubou conjectura de Erdős de 1946 |
 
-Cerca de 45 palavras visíveis. Fala sugerida: em todos os casos, alguém humano verificou depois.
+Cerca de 45 palavras visíveis. Fala sugerida: a IA gera depressa e conferir leva tempo (AlphaEvolve e GenCast foram conferidos por avaliadores automáticos e pela própria empresa; na matemática, por matemáticos).
 
 ### Slide B: "a IA resolveu um problema do milênio?"
 
