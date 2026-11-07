@@ -95,6 +95,22 @@ CENAS.memoria = (() => {
   };
 })();
 
+// retencao: o desenho da comparação, em dois tempos. Chegam os dois nomes e o fio; no clique, as regras de cada lado
+// e a linha da fonte.
+CENAS.retencao = (() => {
+  const sec = m.secao('retencao'), jans = $$(sec, '.janela'), fio = sec.querySelector('.fio-v');
+  const txts = $$(sec, '.janela-txt'), fonte = sec.querySelector('.a-ret-fonte');
+  return (t, c) => {
+    const x = conteudo(c), d1 = c.desde(1);
+    titulo(sec, x, c);
+    jans.forEach((jn, n) => surgir(jn.querySelector('.letra'), molaAR(x - 0.12 - n * 0.1), {dy: 30}));
+    fio.style.transform = `scaleY(${saida(faixa(x, 0.1, 0.6))})`;
+    txts.forEach((el, n) => surgir(el, molaAR(d1 - n * 0.15), {dy: 24}));
+    revelar(fonte, molaAR(d1 - 0.4));
+    fim(sec, x, 1.0);
+  };
+})();
+
 // a7 (cena guia): o enunciado sobe, as três colunas entram em onda e as linhas em branco de cada uma se traçam.
 CENAS.a7 = (() => {
   const sec = m.secao('a7'), aEnun = sec.querySelector('.a-enun'), aCols = $$(sec, '.a-col');

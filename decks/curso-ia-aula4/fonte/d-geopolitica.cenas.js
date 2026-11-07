@@ -26,17 +26,16 @@ CENAS['quatro-meses'] = (() => {
   };
 })();
 
-// a9 (cena guia): a pergunta do debate; as três perguntas entram uma a uma; os dois lados da sala por último.
+// a9 (cena guia): a pergunta de condições; as três perguntas entram uma a uma.
 CENAS.a9 = (() => {
   const sec = m.secao('a9'), dPerg = sec.querySelector('.d-a9-perg'), dEt = sec.querySelector('.d-a9-et');
-  const dLis = $$(sec, '.d-a9-lista li'), dLados = $$(sec, '.d-lado');
+  const dLis = $$(sec, '.d-a9-lista li');
   return (t, c) => {
     const x = conteudo(c);
     titulo(sec, x, c);
     revelar(dPerg, molaAR(x - 0.15));
     revelar(dEt, molaAR(x - 0.5));
     dLis.forEach((li, n) => surgir(li, molaAR(x - 0.6 - n * 0.2), {dx: -22, dy: 0}));
-    dLados.forEach((el, n) => surgir(el, molaAR(x - 1.3 - n * 0.15), {dx: 22, dy: 0}));
     fim(sec, x, 1.6);
   };
 })();
