@@ -14,6 +14,7 @@
   .b-vence .b-n, .b-vence .b-v { color: var(--cor-tinta); font-weight: 800; }
   .b-vence .b-t { height: 34px; }
   .b-vence .b-t i { border-radius: 17px; background: var(--cor-destaque); }
-  .b-pct { position: absolute; left: 1380px; top: 330px; width: 420px; }
-  .b-pct-n { display: block; font-size: var(--esc-5); line-height: 1; }
+  .b-pct { position: absolute; left: 1330px; top: 320px; width: 470px; }
+  /* 206 px: o número conta como respiro (texto de 200 px ou mais) no trecho de sigilo a custo */
+  .b-pct-n { display: block; font-size: 206px; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; }
   .b-pct-leg { display: block; margin-top: 18px; font: 400 var(--esc-2)/1.25 var(--fonte-texto); color: var(--cor-tinta-suave); white-space: normal; text-wrap: balance; }

@@ -1,6 +1,6 @@
 # Guia do professor: Aulas 3 e 4 do curso de IA (Dia 2)
 
-Versão de 06/11/2026. Cada aula tem 90 minutos. A Aula 3 está em `cojuris.com.br/apresentacao/aula-3/` e a Aula 4 em
+Versão de 07/11/2026. Cada aula tem 90 minutos. A Aula 3 está em `cojuris.com.br/apresentacao/aula-3/` e a Aula 4 em
 `cojuris.com.br/apresentacao/aula-4/`; sem internet, as duas abrem do computador com `./ap abrir decks/curso-ia-aula3`
 e `./ap abrir decks/curso-ia-aula4`.
 
@@ -16,31 +16,38 @@ o notebook. A seta para a direita, o espaço e o passador avançam; a seta para 
 digite o número e aperte Enter. G abre o índice, B apaga a tela (bom para conversa longa) e F liga a tela cheia.
 
 As atividades das duas aulas são feitas em dupla, com o enunciado no slide e sem computador, porque boa parte da turma
-não tem plano pago. Quem mexe no Claude durante a aula é você, na tela projetada, e a sala decide junto: dita as regras
-da skill, vota o tema da jurisprudência, confere as linhas da planilha. A prática no computador de cada um fica para
-casa, com o kit do GitHub, que repete todas as demonstrações.
+não tem plano pago. A exceção é a A3: quem puder abre o PDF da petição, do kit, no celular ou no notebook, e quem não
+puder faz dupla com quem abriu. Quem mexe no Claude durante a aula é você, na tela projetada, e a sala decide junto:
+vota o tema da jurisprudência, confere as linhas da planilha. A prática no computador de cada um fica para
+casa, com o kit (o ZIP do site), que repete todas as demonstrações.
 
 ## 2. Antes da aula
 
-A Aula 4 não pede preparo além de conferir que os vídeos dos slides 5 e 12 tocam, e que o som baixo dos dois sai na caixa da sala. A Aula 3 depende de cinco demonstrações ao
-vivo, e cada uma precisa estar ensaiada e gravada, porque a regra da aula é uma tentativa só: sem resultado útil em 60
-segundos (40 no TJMS), você para e toca a gravação do ensaio na moldura do slide. Hoje as molduras dos slides 5, 15, 27,
-29 e 38 tocam uma gravação provisória, de outra aula, que mostra um pedido de contestação; sem as gravações novas, a
-reserva não existe.
+A Aula 4 não pede preparo além de conferir que os vídeos dos slides 5 e 13 tocam, e que o som baixo dos dois sai na caixa da sala. A Aula 3 depende de cinco demonstrações ao
+vivo, e a regra é uma tentativa só: sem resultado útil em 60 segundos (40 no TJMS), você para e usa a reserva. Não há
+gravação de nenhuma delas. As molduras dos slides 7, 28 e 39 tocam um vídeo provisório, de outra aula, que mostra
+um pedido de contestação; não deixe a sala assistir a ele. O slide 30, da etapa 2, não tem vídeo: desenha o caminho do
+script. As reservas reais são o slide 6 e o `modelo-timbrado.docx` (Word), o próprio slide 16, que desenha o resultado
+do teste de 06/11/2026 (conector), a página salva `tjms.html`
+(etapa 1), o modo offline e as planilhas prontas (etapa 2) e a planilha da etapa 2 ou o pedido colado, sem salvar
+(rotina).
 
-- Gravar o ensaio de cada demonstração da Aula 3 (Word, conector, TJMS, script e rotina) e mandar os vídeos para serem
-  colocados nas molduras.
-- Baixar o kit em `github.com/kaoyeoshiro/kit-dia2-curso-ia` (botão Code, Download ZIP) e extrair na Área de Trabalho.
-  Todo arquivo que você abre na Aula 3 está nele, no mesmo lugar em que os alunos vão achar.
+- Ensaiar cada demonstração da Aula 3 (Word, conector, TJMS, script e rotina) na conta e no computador da aula.
+- Baixar o kit em `https://www.cojuris.com.br/kit/kit-dia2-curso-ia.zip`, o endereço do slide 43, e extrair na Área de Trabalho. Todo arquivo que você abre na
+  Aula 3 está nele, no mesmo lugar em que os alunos vão achar, já com a petição nova da A3 e o script que grava
+  `.xlsx`; é também o endereço para a sala abrir o PDF na A3. O repositório `github.com/kaoyeoshiro/kit-dia2-curso-ia`
+  é só referência: até ser atualizado, traz a versão anterior.
 - Na conta do Claude da demonstração, em Settings > Capabilities, deixar ligado "Create and edit files". Em Customize >
-  Connectors, deixar livre a vaga de conector próprio (no plano gratuito cabe um só).
+  Connectors, deixar livre a vaga de conector por endereço (no plano gratuito cabe um só).
 - No Chrome, a extensão Claude in Chrome conectada e a skill de consulta ao TJMS ativa.
 - O Claude Code aberto numa pasta vazia, para a etapa 2 do scraper.
 - Na véspera, rodar os três temas da votação no script do kit, dentro da pasta `scraper`:
-  `python3 stj_espelhos.py --tema "execução fiscal"`, depois `--tema improbidade` e `--tema ICMS`. Tema que vier vazio
-  sai da votação.
+  `python3 stj_espelhos.py --tema "execução fiscal" --arquivo 20260930.json`, depois `--tema improbidade` e `--tema ICMS`.
+  Cada rodada grava `boletim-stj.xlsx` e `boletim-stj.csv` e confere as seis colunas; use `--saida` para não
+  sobrescrever. Tema que vier vazio sai da votação. Abra uma vez a pesquisa de jurisprudência do STJ
+  (`scon.stj.jus.br`) no computador da aula e cole um dos números da A5: o site pode pedir verificação do navegador.
 - No ensaio da rotina, conferir se a tarefa agendada roda com o computador desligado. Se não rodar, a legenda do slide
-  37 deixa de prometer isso (a nota do slide explica).
+  38 deixa de prometer isso (a nota do slide explica).
 
 ## 3. Onde está o material
 
@@ -50,14 +57,14 @@ caminho no repositório.
 
 | arquivo | para quê | onde |
 |---|---|---|
-| `modelo-timbrado.docx` | demonstração do Word (slide 5) e A2 (slide 12) | kit, `escritorio/` |
-| `rascunho-parecer.md` | o rascunho que vira parecer, nas mesmas duas | kit, `escritorio/` |
+| `modelo-timbrado.docx` | demonstração do Word (slide 7) | kit, `escritorio/` |
+| `rascunho-parecer.md` | o rascunho que vira parecer, na mesma demonstração | kit, `escritorio/` |
 | `padrao-do-escritorio.md` e `logo-escritorio.png` | o padrão do escritório fictício Dias & Moura | kit, `escritorio/` |
-| `SKILL.md` da skill com defeitos | A1 (slide 9); não instalar | kit, `skill-defeituosa/` |
-| `peticao-injecao.pdf` | A3 e slide 18 (selecionar tudo para revelar a ordem) | kit, `peticao/` |
+| `SKILL.md` da skill com defeitos | A1 (slide 11); não instalar | kit, `skill-defeituosa/` |
+| `peticao-injecao.pdf` | A3 (slide 18) e slide 19, que revela as duas ordens | kit, `peticao/` |
 | `stj_espelhos.py` e `amostra/20260930.json` | etapa 2 do scraper e o plano sem internet | kit, `scraper/` |
 | `atividades.md` | gabarito da A1 e da A3 | kit, `gabarito/` |
-| `execucao.csv`, `improbidade.csv`, `icms.csv` | planilha pronta de cada tema, reserva da etapa 2 | repositório, `decks/curso-ia-aula3/material/scraper/amostra/` |
+| `execucao.xlsx`, `improbidade.xlsx`, `icms.xlsx` (com o `.csv` de mesmo nome ao lado) | planilha pronta de cada tema, reserva da etapa 2 | repositório, `decks/curso-ia-aula3/material/scraper/amostra/` |
 | `tjms.html` | página salva do TJMS, reserva da etapa 1 | só no seu computador, na mesma pasta acima |
 
 O PDF de emergência de cada aula, um quadro por clique, fica em
@@ -68,92 +75,109 @@ O PDF de emergência de cada aula, um quadro por clique, fica em
 ### 4.1. O que a aula quer
 
 A mensagem cabe numa frase: a IA trabalha fora do chat quando você lhe dá o jeito (a skill), a tomada (o conector e o
-plugin) e a agenda (a rotina), e você continua conferindo a fonte. São seis atividades da sala, de A1 a A6, e cinco
-demonstrações suas.
+plugin) e a agenda (a rotina), e você continua conferindo a fonte. São cinco atividades da sala (A1 e A3 a A6; a A2 saiu
+em 07/11/2026, e os rótulos ficaram para casar com o kit) e cinco demonstrações suas.
 
 A Aula 2 já explicou o que é uma skill, mostrou o SKILL.md por dentro e rodou a skill de conferir temas no caso, e
 a Aula 3 não repete essa parte. A fala do slide 2 lembra em uma frase o jeito, a tomada e o pacote da Aula 2 e anuncia
-a peça nova, a rotina. O que a Aula 3 acrescenta em skills são três coisas que a Aula 2 não fez: a skill de Word que já
-vem no Claude, transformando um rascunho em parecer no papel timbrado (slides 4 a 6); ler uma skill de terceiro antes de
-instalar, com os sete pontos e a auditoria da A1 (slides 8 a 11); e criar uma skill nova a partir das regras que a
-própria sala dita, a A2 (slide 12). É ali que fica a prática de skills do dia.
+a peça nova, a rotina. Logo depois, os slides 3 e 4 retomam na tela, em dois minutos, o jeito de organizar as pastas
+que entrou na Aula 2 (`meu-jeito`): uma pasta por assunto, com o CLAUDE.md de cada nível (no Codex, AGENTS.md), e a
+diferença entre o arquivo na pasta e o Projeto. Só o Claude Code aparece lendo o arquivo sozinho; o app Claude e o
+Codex ficam nas notas. O que a Aula 3 acrescenta em skills são duas coisas que a Aula 2 não fez: a skill de Word que já
+vem no Claude, transformando um rascunho em parecer no papel timbrado (slides 6 a 8), e ler uma skill de terceiro antes
+de instalar, com os sete pontos e a auditoria da A1 (slides 10 a 13), que é a prática de skills do dia.
 
 ### 4.2. O mapa, minuto a minuto
 
-Os minutos são aproximados e respeitam o tamanho de cada bloco: abertura 4, skills 24, MCP e plugins 16, scraper 20,
-GitHub 5 e rotinas 21. O ensaio cronometrado decide o resto.
+Os minutos são aproximados e respeitam o tamanho de cada bloco: abertura 6, skills 17, MCP e plugins 18, scraper 22,
+GitHub 5 e rotinas 22. O ensaio cronometrado decide o resto.
 
 | minuto | slides | o que acontece | quem trabalha |
 |---|---|---|---|
 | 0 a 4 | 1 e 2 | capa e roteiro, com o lembrete da Aula 2 | você |
-| 4 a 8 | 3 e 4 | o rascunho sem timbre; "qual das duas vocês protocolariam?" | você pergunta |
-| 8 a 12 | 5 e 6 | demonstração do Word, com o pedido para copiar | você, no Claude |
-| 12 a 14 | 7 | Claude for Word, só os cartões | você |
-| 14 a 18 | 8 | sete pontos antes de instalar | você |
-| 18 a 23 | 9 a 11 | A1, os três defeitos; votação e gabarito | duplas |
-| 23 a 28 | 12 | A2, a sala dita a skill | sala dita, você executa |
-| 28 a 30 | 13 e 14 | a tomada: conector pronto ou próprio | você |
-| 30 a 33 | 15 e 16 | demonstração do conector do Microsoft Learn | você, no Claude |
-| 33 a 38 | 17 a 20 | A3, a ordem escondida; os casos do STF e do STJ | duplas |
-| 38 a 40 | 21 e 22 | o plugin | você |
-| 40 a 44 | 23 | A4, tomada ou pacote | duplas |
-| 44 a 46 | 24 e 25 | dois jeitos de raspar | você |
-| 46 a 48 | 26 | A5, votação do tema | sala |
-| 48 a 52 | 27 | etapa 1, o Claude no navegador consulta o TJMS | você, no Chrome |
-| 52 a 57 | 28 e 29 | etapa 2, o Claude Code escreve e roda o script | você |
-| 57 a 62 | 30, 31 ou 32 | conferência de três linhas da planilha | duplas |
-| 62 a 64 | 33 e 34 | regras para raspar; captcha | você |
-| 64 a 69 | 35 | o repositório no GitHub | você |
-| 69 a 72 | 36 e 37 | rotinas: o boletim de segunda | você |
-| 72 a 75 | 38 | demonstração da tarefa agendada | você, no Claude |
-| 75 a 77 | 39 | agendar, conferir ou não automatizar | você |
-| 77 a 85 | 40 | A6, o que é agendável | duplas |
-| 85 a 90 | 41 a 43 | o que levam, o kit, o fecho | você |
+| 4 a 6 | 3 e 4 | retomada da Aula 2: uma pasta por assunto; arquivo na pasta ou Projeto | você |
+| 6 a 9 | 5 e 6 | o rascunho sem timbre; "qual das duas vocês protocolariam?" | você pergunta |
+| 9 a 13 | 7 e 8 | demonstração do Word, com o pedido para copiar | você, no Claude |
+| 13 a 14 | 9 | Claude for Word, só os cartões | você |
+| 14 a 18 | 10 | sete pontos antes de instalar | você |
+| 18 a 23 | 11 a 13 | A1, os três defeitos; votação e gabarito | duplas |
+| 23 a 25 | 14 e 15 | a tomada: conector da lista ou por endereço | você |
+| 25 a 31 | 16 e 17 | demonstração do conector do Microsoft Learn | você, no Claude |
+| 31 a 35 | 18 a 21 | A3, as ordens escondidas no PDF; a revelação, os casos do STF e do STJ, a regra | duplas |
+| 35 a 37 | 22 e 23 | o plugin e o limite do aviso | você |
+| 37 a 41 | 24 | A4, tomada ou pacote | duplas |
+| 41 a 43 | 25 e 26 | dois jeitos de raspar | você |
+| 43 a 45 | 27 | A5, votação do tema | sala |
+| 45 a 49 | 28 | etapa 1, o Claude no navegador consulta o TJMS | você, no Chrome |
+| 49 a 55 | 29 e 30 | etapa 2, o Claude Code escreve e roda o script | você |
+| 55 a 60 | 31, 32 ou 33 | conferência de três linhas da planilha | duplas |
+| 60 a 63 | 34 e 35 | regras para raspar; captcha | você |
+| 63 a 68 | 36 | o repositório no GitHub | você |
+| 68 a 71 | 37 e 38 | rotinas: o boletim de segunda | você |
+| 71 a 74 | 39 | demonstração da tarefa agendada | você, no Claude |
+| 74 a 76 | 40 | agendar, conferir ou aprovar antes | você |
+| 76 a 84 | 41 | A6, o que é agendável | duplas |
+| 84 a 90 | 42 a 44 | o que levam, o kit, o fecho | você |
 
-Os slides 30, 31 e 32 são a mesma conferência, um para cada tema da votação. Mostre só o do tema vencedor: execução
-fiscal segue normalmente para o 30; improbidade, digite 31 e Enter; ICMS, digite 32 e Enter. Terminada a conferência,
-digite 33 e Enter.
+Os slides 31, 32 e 33 são a mesma conferência, um para cada tema da votação. Mostre só o do tema vencedor: execução
+fiscal segue normalmente para o 31; improbidade, digite 32 e Enter; ICMS, digite 33 e Enter. Terminada a conferência,
+digite 34 e Enter.
 
 ### 4.3. As demonstrações
 
-Word (slides 5 e 6). Numa conversa nova, anexe `modelo-timbrado.docx` e `rascunho-parecer.md` e cole o pedido do slide
-6. Abra o PDF que o Claude devolve e confira com a sala, página por página, o cabeçalho, os estilos e a numeração. O
+Word (slides 7 e 8). Numa conversa nova, anexe `modelo-timbrado.docx` e `rascunho-parecer.md` e cole o pedido do slide
+8. Abra o PDF que o Claude devolve e confira com a sala, página por página, o cabeçalho, os estilos e a numeração. O
 pedido literal é este:
 
 > Use o modelo do escritório anexo (modelo-timbrado.docx). Transforme este rascunho em parecer no padrão do modelo, com
-> o mesmo cabeçalho, estilos e numeração. No fim, gere o PDF e me diga o que não coube no modelo.
+> o mesmo cabeçalho, estilos e numeração. No fim, gere o PDF, confira as páginas e me diga o que não coube no modelo e
+> o que você decidiu sem eu ter pedido.
 
-A2 (slide 12), a skill que a sala dita. São três passos, um por clique, em sete minutos. Primeiro, anote no chat as três
-regras do escritório exatamente como a sala disser (de formatação, de citação, de assinatura). Depois, peça ao Claude
-que crie uma skill com essas três regras. Por último, rode a skill no mesmo rascunho da demonstração do Word e confira
-cada regra no resultado. Para instalar uma skill própria, o caminho conferido em 05/11/2026 é Customize > Skills > "+" >
-"+ Create skill" > "Upload a skill", com a pasta da skill compactada em ZIP; olhe a tela no ensaio, porque o menu muda.
-O texto do segundo passo fica a seu critério; uma forma possível é "crie uma skill com estas três regras, para usar
-quando eu transformar um rascunho em parecer no modelo timbrado".
+O modelo numera sozinho os títulos de seção (1., 2., 3.), como a versão B do slide 6. A última frase pede prestação de
+contas; não garante nada, e por isso a conferência do arquivo continua sendo sua.
 
-Conector (slides 15 e 16). Em Customize > Connectors > "+ Add" > "Add custom connector", dê um nome e cole o endereço
-`https://learn.microsoft.com/api/mcp`. Numa conversa nova, ligue o conector, pergunte algo sobre o Word e abra o link
-que a resposta citar.
+Conector (slides 16 e 17). Em Customize > Connectors > "+ Add" > "Add custom connector", dê um nome e cole o endereço
+`https://learn.microsoft.com/api/mcp`. Numa conversa nova, ligue o conector, pergunte "Como coloco uma caixa do Exchange
+Online em retenção para litígio?" e abra o link que a resposta citar. Evite perguntas de usuário do Word, que no teste
+trouxeram fórum e página de programador; link que começa por `learn.microsoft.com/answers` é fórum de usuários.
 
-Scraper, etapa 1 (slide 27). No Chrome, com a skill do TJMS, cole o pedido trocando o tema pelo vencedor da A5. Se a
-consulta não andar em 40 segundos, toque a gravação e diga à sala que é o ensaio, nunca coleta ao vivo.
+Scraper, etapa 1 (slide 28). No Chrome, com a skill do TJMS, cole o pedido trocando o tema pelo vencedor da A5. Se a
+consulta não andar em 40 segundos, abra a página salva `tjms.html` e diga à sala que é do ensaio, nunca coleta ao vivo.
 
 > Pesquise no TJMS acórdãos de segundo grau sobre [tema votado], julgados nos últimos três meses. Leia as ementas,
 > baixe só os pertinentes e me dê uma planilha com processo, relator, data e o motivo de cada escolha.
 
-Scraper, etapa 2 (slides 28 e 29). No Claude Code, na pasta vazia, cole o pedido com o tema votado. Abra o CSV que o
-script gravar e mostre as três primeiras linhas; o slide seguinte as põe lado a lado com o espelho de cada acórdão.
+Scraper, etapa 2 (slides 29 e 30). No Claude Code, na pasta vazia, cole o pedido com o tema votado. O slide 30 desenha
+o caminho que o script faz; não é gravação. Abra o `boletim-stj.xlsx` que o script gravar (dois cliques; no Mac, o
+Numbers também abre) e mostre as três primeiras linhas; a conferência seguinte as põe lado a lado com o espelho de cada
+acórdão. O pedido exige a planilha em `.xlsx` porque, no ensaio de 06/11/2026, o CSV abriu no Excel com tudo na coluna
+A. Se precisar do `.csv`, não abra com dois cliques: no Excel, Dados > De Texto/CSV, origem UTF-8 e delimitador ponto
+e vírgula. Se o script do Claude Code falhar, rode o do kit (`--offline amostra/20260930.json`) ou abra a planilha
+pronta do tema.
 
-> Escreva um script em Python que baixe o arquivo de setembro de 2026 dos espelhos de acórdãos da Primeira Turma nos
-> Dados Abertos do STJ, filtre as ementas por [tema votado] e grave um CSV com classe, processo, relator, órgão, data e
-> ementa. Uma requisição por vez.
+> Escreva um script em Python que baixe, nos Dados Abertos do STJ, o arquivo JSON de setembro de 2026 (20260930.json)
+> dos espelhos de acórdãos da Primeira Turma, com uma requisição por vez, e filtre as ementas por [tema votado]. Grave a
+> planilha boletim-stj.xlsx com seis colunas separadas, nesta ordem: classe, processo, relator, orgao, data, ementa. O
+> processo vai como texto, a data como data (dd/mm/aaaa) e a ementa inteira numa célula só. Grave também
+> boletim-stj.csv para importar: UTF-8 com BOM, separador ponto e vírgula, todos os campos entre aspas. No fim, reabra
+> os dois arquivos, confira seis colunas em cada linha e me diga quantas linhas gravou.
 
-Rotina (slide 38). Em Scheduled > New task, crie a tarefa com o pedido abaixo e o tema votado. A tarefa roda na nuvem e
-não lê arquivo do seu computador, por isso o pedido não cita pasta nenhuma.
+Conferência (slides 31 a 33). Ao lado de cada número de processo há um botão "copiar", que copia só o número; o toque
+no botão não avança o slide. Cole na pesquisa de jurisprudência do STJ (`scon.stj.jus.br`): o número sozinho traz o
+processo em qualquer classe, e a linha da planilha diz qual é a sua. Se a área de transferência recusar, o botão diz
+"selecionado" e deixa o número selecionado para Ctrl+C (Cmd+C). Seta, Espaço e clique fora do botão continuam
+avançando.
 
-> Toda segunda às 7h10, consulte os Dados Abertos do STJ, abra o arquivo mais recente de espelhos de acórdãos da
-> Primeira Turma e liste os acórdãos sobre [tema votado], cada um com número, data e ementa resumida. Diga a data do
-> arquivo consultado.
+Rotina (slide 39). Em Scheduled > New task, crie a tarefa com o pedido abaixo e o tema votado. A tarefa roda na nuvem e
+não lê arquivo do seu computador, por isso o pedido não cita pasta nenhuma. É a versão de aula: o arquivo do STJ é
+mensal e sai em datas irregulares, e a janela de 7 dias mostra a ideia de checar a data. Ela depende do fuso e da hora
+de corte, e uma execução que falha não recupera o arquivo; para uso real, a rotina guarda o que já processou e avisa
+quando falhar.
+
+> Toda segunda às 7h10, consulte os Dados Abertos do STJ e veja quais arquivos de espelhos de acórdãos da Primeira Turma
+> foram publicados nos últimos 7 dias. Para cada um, liste os acórdãos sobre [tema votado], com número, data da decisão
+> e as duas primeiras linhas da ementa, copiadas sem resumir. Se não houver arquivo novo, responda só "sem arquivo novo
+> desde [data de publicação do mais recente]". Diga sempre o nome e a data de publicação de cada arquivo consultado.
 
 ### 4.4. As atividades da sala
 
@@ -161,74 +185,103 @@ Todas têm o enunciado no slide e o cronômetro na tela do apresentador. A respo
 
 | atividade | slide | tempo | o que a sala faz | resposta |
 |---|---|---|---|---|
-| A1, três defeitos | 9, votação no 10, gabarito no 11 | 4 min | lê três trechos de uma skill e diz que ponto do checklist cada um fere | A fere permissões e dados acessados (dispara em qualquer pedido); B fere arquivos e scripts e comandos (manda a pasta para fora); C fere comandos (executa sem confirmar) |
-| A2, a sala dita | 12 | 7 min | dita três regras do escritório | não há gabarito; confira cada regra no parecer gerado |
-| A3, a ordem escondida | 17, revelação no 18 | 4 min | procura na petição a ordem dirigida à IA e conta quantas há | duas: uma no rodapé, em letra minúscula, e outra em texto branco no meio da página, que só aparece ao selecionar tudo |
-| A4, tomada ou pacote | 23 | 4 min | classifica seis situações em skill, conector pronto, conector próprio ou plugin | 1 conector pronto; 2 conector próprio; 3 skill; 4 conector próprio; 5 plugin; 6 skill |
-| A5, o tema | 26, conferência em 30 a 32 | 2 min mais a conferência | vota entre execução fiscal, improbidade e ICMS; depois cada dupla confere três linhas contra o espelho | não há gabarito; conta quem achou divergência |
-| A6, o que é agendável | 40 | 8 min | classifica três tarefas e sugere outras | boletim do CNJ, agendar; resumo da pasta do caso, agendar com conferência; controle de prazos, não automatizar |
+| A1, três defeitos | 11, votação no 12, gabarito no 13 | 4 min | lê três trechos de uma skill e diz que ponto do checklist cada um fere | aceite mais de um ponto por trecho. A fere dados acessados (entra onde não foi chamada); B fere comandos e dados acessados (manda a pasta para fora; quem não lê código pega por arquivos e scripts); C fere permissões (executa sem pedir) |
+| A3, as ordens escondidas | 18, revelação no 19 | 2 min | abre o PDF do kit e conta quantas ordens dirigidas à IA há nele | duas, as duas em branco, a cor do papel: um parágrafo em corpo 2 no meio da página 1 (entre "Dos fatos" e "Do direito"), que a seleção costuma revelar; e uma linha em corpo 2 colada ao canto inferior direito da página 2, a 1 pt das bordas, que quase ninguém vê. Localização exata nas notas do slide 18 e no gabarito do kit. O agente pode obedecer ou ignorar sem avisar |
+| A4, tomada ou pacote | 24 | 4 min | classifica seis situações em skill, conector da lista, conector por endereço ou plugin | 1 conector da lista; 2 conector por endereço; 3 skill; 4 conector por endereço (servidor autorizado pela TI; ligar sistema interno não é decisão do aluno); 5 plugin; 6 skill |
+| A5, o tema | 27, conferência em 31 a 33 | 2 min mais a conferência | vota entre execução fiscal, improbidade e ICMS; depois cada dupla confere três linhas contra o espelho, com o botão "copiar" para colar o número na pesquisa do STJ | não há gabarito; conta quem achou divergência |
+| A6, o que é agendável | 41 | 8 min | classifica três tarefas e sugere outras | boletim semanal de notícias do CNJ, agendar (se falhar, perde-se uma leitura); andamento do processo no e-SAJ resumido para você, com conferência (a fonte continua o e-SAJ do TJMS, e a intimação, o DJEN e o Domicílio Judicial Eletrônico); esse resumo enviado ao cliente por WhatsApp, aprovar antes (a mensagem sai do escritório e não volta; um aviso padrão e limitado, combinado por escrito com o cliente, pode valer como autorização prévia daquele modelo). É exemplo: ninguém cria consulta automática nem envio real |
 
 Na A6, se uma das sugestões da sala couber em "agendar", você pode criar essa rotina ao vivo; senão, crie a do boletim,
-que já está pronta no slide 38.
+que já está pronta no slide 39. O portal da tarefa 2 é a consulta pública do e-SAJ do TJMS pelo número unificado
+(`esaj.tjms.jus.br/cpopg5/open.do`, 1º grau, com reCAPTCHA invisível; `esaj.tjms.jus.br/cposg5/open.do`, 2º grau),
+conferida em 07/11/2026 sem entrar em conta nem consultar processo. O DataJud, do CNJ, é Beta e não garante atualidade;
+o Comunica PJe só traz o que saiu no DJEN. Nenhum dos dois substitui o andamento no tribunal.
 
 ## 5. Aula 4: Quem decide é você
 
 ### 5.1. O que a aula quer
 
 A Aula 4 tem mais conversa que tela. Cada bloco termina numa decisão da sala: o acesso que se dá ao assistente, o que
-quebra se o preço dobrar, se um modelo chinês pode rodar no órgão, o plano de 30 dias de cada um. Não há demonstração
-ao vivo nem arquivo para abrir; os dois vídeos, nos slides 5 e 12, tocam sozinhos. As cinco atividades, de A7 a A11,
+quebra se o plano mudar, em que condições um modelo chinês pode rodar no órgão, como cada um imagina a própria carreira daqui a 20 anos, o plano de 30 dias. Não há demonstração
+ao vivo nem arquivo para abrir; os dois vídeos, nos slides 5 e 13, tocam sozinhos. As seis atividades (A7 a A11 e o debate do futuro)
 dispensam computador, e a última é a devolutiva do curso inteiro.
 
 ### 5.2. O mapa, minuto a minuto
 
-Os blocos são assistentes 27 minutos, harness 6, quem paga 23, geopolítica 18 e futuro 16.
+Os blocos são assistentes 26 minutos, harness 6, quem paga 19, geopolítica 15 e futuro 24.
 
 | minuto | slides | o que acontece | quem trabalha |
 |---|---|---|---|
 | 0 a 3 | 1 e 2 | capa e roteiro | você |
-| 3 a 14 | 3 a 7 | o chat responde, o assistente age; os cinco do mercado; o vídeo do seu Grok Bot; o que ele lê; quem escreve para você | você narra o vídeo |
-| 14 a 20 | 8 e 9 | o sigilo e o acesso; cortar o acesso não apaga a memória | você |
-| 20 a 27 | 10 | A7, o acesso mínimo | duplas |
-| 27 a 33 | 11 a 13 | o harness: o vídeo dos dez agentes e o custo de cada um | você narra o vídeo |
-| 33 a 44 | 14 a 19 | o custo de cada uso, os US$ 895 bi, quem banca, o usuário pesado, o plano que encolhe | você |
-| 44 a 48 | 20 e 21 | bolha ou não (mão levantada) e a tese | você pergunta |
-| 48 a 56 | 22 e 23 | A8, e se o preço dobrar; o que vai com você | duplas |
-| 56 a 66 | 24 a 29 | chips, os quatro meses, aberto não é seguro, CLOUD Act, as regras | você |
-| 66 a 74 | 30 | A9, debate sobre o modelo chinês | sala dividida |
-| 74 a 80 | 31 a 34 | 2030: o ritmo, os cenários, os sinais | você |
-| 80 a 85 | 35 | A10, o plano de 30 dias | cada um |
-| 85 a 90 | 36 a 38 | A11, a devolutiva; os quatro verbos; o fecho | roda e você |
+| 3 a 13 | 3 a 7 | o chat responde, o assistente age; os sete do mercado; o vídeo do seu Grok Bot; o que ele lê; quem escreve para você | você narra o vídeo |
+| 13 a 21 | 8 a 10 | o sigilo e o acesso; cortar o acesso não apaga a memória; assinatura não é contrato (treino e retenção) | você |
+| 21 a 26 | 11 | A7, o acesso mínimo | duplas |
+| 26 a 32 | 12 a 14 | o harness: o vídeo dos oito agentes e duas buscas, e o custo de cada um | você narra o vídeo |
+| 32 a 41 | 15 a 20 | a computação que já cabe na receita (treino incluído), os US$ 895 bi, quem banca, o usuário pesado, o plano que encolhe | você |
+| 41 a 45 | 21 e 22 | bolha ou não (mão levantada) e a tese | você pergunta |
+| 45 a 51 | 23 e 24 | A8, e se o plano mudar; o que vai com você | duplas |
+| 51 a 60 | 25 a 30 | chips, os quatro meses, aberto não é seguro, CLOUD Act, as regras | você |
+| 60 a 66 | 31 | A9, em que condições o modelo chinês pode rodar no órgão | duplas |
+| 66 a 71 | 32 a 38 | e em 20 anos? o ritmo, os quatro cenários da OCDE, os otimistas, os pessimistas, o que já se mede (19%), os horizontes de 2 a 20 anos | você |
+| 71 a 79 | 39 | debate: sua carreira em 2046 | duplas |
+| 79 a 80 | 40 | os sinais para acompanhar | você |
+| 80 a 85 | 41 | A10, o plano de 30 dias | cada um |
+| 85 a 89 | 42 | A11, a devolutiva (cronômetro de 4 minutos: dois escrevendo, depois a roda) | cada um, depois a roda |
+| 89 a 90 | 43 e 44 | os quatro verbos; o fecho | você |
 
 No slide 5, o vídeo do Grok Bot tem 62 segundos e efeitos sonoros baixos, sem voz; você fala por cima, na ordem das
 cenas: resumo de IA de manhã (5 a 13 s), WhatsApp e agenda (13 a 22), t3code com as quatro IAs (22 a 31), E-MS (31 a
 38), PGE.Net (38 a 44), eventos e editais (44 a 50), compras (50 a 55) e todos ligados ao centro (55 a 62). Mensagens,
 ofícios e compromissos do vídeo são fictícios.
 
-No slide 12, o vídeo tem 40 segundos, também com efeitos sonoros baixos, e você fala por cima dele, na ordem em que os agentes aparecem: o classificador,
-os dois leitores, o agrupador, o redator, os validadores e, por último, o agente que confere o ofício. O slide 11
+No slide 13, o vídeo tem 40 segundos, também com efeitos sonoros baixos, e você fala por cima dele, na ordem em que os agentes aparecem (o vídeo escreve
+"10 agentes" porque conta as duas buscas, marcadas nele como ferramenta): o classificador,
+os dois leitores, o agrupador, o redator, os validadores e, por último, o agente que confere o ofício. O slide 12
 lembra que a co.juris não fala em nome da PGE-MS; diga isso antes do vídeo.
+
+
+No slide 29 (CLOUD Act), "quem pode mandar entregar" quer dizer o seguinte: se o órgão contrata a nuvem de uma empresa
+americana, uma autoridade dos EUA pode ordenar a essa empresa que preserve ou entregue os dados sob o controle dela,
+mesmo guardados num data center no Brasil (18 U.S.C. § 2713). O lugar do servidor não protege; o que conta é quem
+controla o dado. Para o conflito com a lei do outro país, só Reino Unido e Austrália têm acordo com os EUA.
+
+No slide 16, os 57% são toda a computação da Anthropic sobre a receita, treino dos modelos incluído; só atender
+clientes pagantes custou cerca de 14,5% da receita. O que ainda não se paga são os compromissos de data centers dos
+próximos anos (slides 17 e 18).
+
+No slide 34, os quatro cenários são da OCDE e estão no Relatório Internacional de Segurança da IA (fev. 2026), que
+diz não haver consenso sobre o mais provável. A projeção de tarefas de software de vários dias em 2030 é do METR, se a
+tendência atual continuar; os gargalos de dados, chips, capital e energia são opinião de alguns especialistas para
+depois de 2030. Os slides 35 a 38 trazem quem disse cada coisa e quando; as notas de cada um têm a fonte.
+
+No slide 10, quem decide é o tipo de contrato. Na assinatura individual o treino depende de um botão (ligado
+por padrão no ChatGPT e no Gemini pessoal; no Claude, escolha pedida desde 28/08/2025, com até cinco anos de guarda
+para quem permite treino e 30 dias para quem não permite). No contrato empresarial e na API paga, Anthropic, OpenAI,
+Google, AWS e Microsoft declaram não treinar com os dados do cliente; ainda assim guardam por até 30 dias (Google, 55)
+para detectar abuso, e retenção zero só vem com pedido aprovado. A API gratuita do Gemini usa o conteúdo para melhorar
+produtos. Fonte e prazos por serviço em `docs/pesquisa/dia2-retencao-e-treino.md`.
 
 ### 5.3. As atividades da sala
 
 | atividade | slide | tempo | o que a sala faz | resposta-modelo |
 |---|---|---|---|---|
-| A7, o acesso mínimo | 10 | 7 min | escolhe uma tarefa e preenche o que o assistente pode ler, o que pode escrever e o que nunca toca | para a agenda da manhã: lê a agenda e uma pasta de e-mails; escreve um rascunho salvo, nunca enviado; nunca toca a caixa inteira, o sistema do tribunal, pagamento ou apagar. Fecho: "Duas semanas, só lendo." |
-| A8, o preço dobrou | 22, resposta no segundo clique | 5 min | diz o que quebra no trabalho se o plano dobrar de preço | quebra o que está preso ao app: instruções só na memória do chat, documentos só no projeto do fornecedor, nenhum segundo fornecedor testado. O slide 23 mostra o que vai com você |
-| A9, debate | 30 | 6 min | metade defende que o modelo chinês pode rodar no órgão, metade que não; dois minutos de preparo, três de debate | seu fecho: rodar dentro da infraestrutura do órgão tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo, que é o que o CAISI mediu |
-| A10, o plano de 30 dias | 35 | 5 min | cada um escreve três linhas no celular: uma skill, uma pasta de caso, uma rotina | não há gabarito; a quem travar na rotina, pergunte o que se perde se ela falhar em silêncio |
-| A11, a devolutiva | 36 | 5 min | em roda, cada um diz uma coisa que leva e uma que faltou | anote as faltas para a próxima turma |
+| A7, o acesso mínimo | 11 | 5 min | escolhe uma tarefa e preenche o que o assistente pode ler, o que pode escrever e o que nunca toca | para a agenda da manhã: lê a agenda e uma conta de e-mail separada, que recebe por encaminhamento só os e-mails escolhidos (no Gmail, a leitura vale para a caixa inteira e o rascunho também envia); escreve um resumo num arquivo ou um rascunho nessa conta; nunca toca a caixa principal, o sistema do tribunal, pagamento, apagar, link ou anexo de quem escreveu. Cortado o acesso, memória e histórico podem continuar retidos no fornecedor. Quarta linha: se ele errar ou se calar, quem percebe? Fecho: "Duas semanas, só lendo." |
+| A8, o plano mudou | 23, resposta no segundo clique | 4 min | em dois cenários separados (o preço dobra; a franquia cai à metade), diz o que quebra e quantas horas por mês o aumento precisa poupar, pela própria fatura | quebra o que está preso ao app: instruções só na memória do chat, documentos só no projeto do fornecedor, nenhum segundo fornecedor testado. A conta costuma mudar a resposta de "cancelo" para "pago e tiro o trabalho do app". O slide 24 mostra o que vai com você |
+| A9, condições | 31 | 5 min | diz em que condições um modelo aberto chinês, sem internet, no servidor do órgão, pode resumir petições; dois minutos de preparo, dois para ouvir uma condição de cada dupla, um para o fecho | seu fecho: rodar dentro da infraestrutura do órgão tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo, que é o que o CAISI mediu |
+| Debate, sua carreira em 2046 | 39 | 8 min | em dupla, um defende o futuro otimista e o outro o pessimista, cada um com um dado dos slides; 2 min de preparo, 4 de conversa, 2 para três duplas contarem; no fim, cada um diz o que muda já na semana que vem | não há gabarito; o slide 38 lembra que em 20 anos ninguém mede, e a pergunta de fecho puxa para o plano de 30 dias |
+| A10, o plano de 30 dias | 41 | 5 min | cada um escreve três linhas no celular: uma skill, uma pasta de caso no próprio disco, uma rotina; em cada semana, teste fictício primeiro, um número de sucesso e o que ela nunca faz | não há gabarito; a quem travar na rotina, pergunte o que se perde se ela falhar em silêncio |
+| A11, a devolutiva | 42 | 4 min | dois minutos escrevendo (leva: o que vai fazer na segunda-feira; faltou: o que queria ter feito com as mãos), depois a roda | anote as faltas para a próxima turma; no minuto 89, vá para o fecho |
 
 ## 6. Quando algo der errado
 
 A regra das demonstrações vale para todas: uma tentativa ao vivo, e sem resultado útil em 60 segundos (40 no TJMS) você
-para e toca a gravação na moldura do slide. A sala avalia o resultado preparado do mesmo jeito, e a aula não perde o
-ritmo. As notas de cada slide trazem a contingência específica; as mais prováveis estão abaixo.
+para e usa a reserva da seção 2; não há gravação. A sala avalia o resultado preparado do mesmo jeito, e a aula não perde
+o ritmo. As notas de cada slide trazem a contingência específica; as mais prováveis estão abaixo.
 
 Sem internet, a etapa 2 do scraper roda com a amostra do kit, dentro da pasta `scraper`:
-`python3 stj_espelhos.py --tema "execução fiscal" --offline amostra/20260930.json`. A planilha pronta de cada tema
-também está em `material/scraper/amostra/`, e a página salva do TJMS substitui a etapa 1, apresentada como gravação do
-ensaio. Se aparecer captcha no TJMS, pare a automação, que é exatamente o que o slide 34 ensina, e toque a gravação.
+`python3 stj_espelhos.py --tema "execução fiscal" --offline amostra/20260930.json`, que grava `boletim-stj.xlsx` e
+`boletim-stj.csv`. A planilha pronta de cada tema (`execucao.xlsx`, `improbidade.xlsx`, `icms.xlsx`) também está em `material/scraper/amostra/`, e a página salva do TJMS substitui a etapa 1, apresentada como gravação do
+ensaio. Se aparecer captcha no TJMS, pare a automação, que é exatamente o que o slide 35 ensina, e abra a página salva.
 
 Se o conector não entrar, quase sempre a vaga do plano gratuito está ocupada: desconecte o outro em Customize >
 Connectors. Se o Word não sair, confira "Create and edit files" em Settings > Capabilities. Se o projetor falhar ou o

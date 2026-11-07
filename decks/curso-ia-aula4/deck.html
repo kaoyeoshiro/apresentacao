@@ -59,15 +59,19 @@
   /* o círculo da caneta em volta de "Assistente" é largo: a janela B anda para a direita para ele não cruzar o fio */
   [data-slide="chat-agente"] .janela.escolhida { left: 1100px; width: 700px; }
 
-  /* cinco (cartões): três em cima e dois centrados embaixo; o dots, único dos prontos que inclui o Brasil, de dourado */
-  [data-slide="cinco"] .cartoes { top: 300px; row-gap: 28px; grid-template-columns: repeat(6, 1fr); }
-  [data-slide="cinco"] .cartao { grid-column: span 2; min-height: 250px; }
-  [data-slide="cinco"] .ct-tit { font-size: 56px; }
-  [data-slide="cinco"] .ct-sub { font-size: 34px; }
-  [data-slide="cinco"] .ct-txt { margin-top: 8px; font-size: 40px; }
-  [data-slide="cinco"] .cartao:nth-child(4) { grid-column: 2 / 4; }
-  [data-slide="cinco"] .cartao:nth-child(5) { grid-column: 4 / 6; }
-  [data-slide="cinco"] .a-br { border-color: var(--cor-destaque); }
+  /* retencao (comparação): as duas palavras são largas; a janela B anda para a direita como em chat-agente */
+  [data-slide="retencao"] .janela .letra { font-size: 88px; }
+  [data-slide="retencao"] .janela .janela-txt { top: 180px; width: 680px; }
+  [data-slide="retencao"] .janela.escolhida { left: 1100px; width: 700px; }
+  .a-ret-fonte { position: absolute; left: 120px; top: 880px; font-size: var(--esc-1); color: var(--cor-tinta-suave); }
+
+  /* cinco (cartões): sete, quatro em cima e três centrados embaixo, todos iguais (sem destaque) */
+  [data-slide="cinco"] .cartoes { top: 300px; gap: 28px 24px; grid-template-columns: repeat(8, 1fr); }
+  [data-slide="cinco"] .cartao { grid-column: span 2; min-height: 252px; padding: 24px 22px; }
+  [data-slide="cinco"] .cartao:nth-child(5) { grid-column: 2 / 4; }
+  [data-slide="cinco"] .ct-tit { font-size: 40px; }
+  [data-slide="cinco"] .ct-sub { font-size: 32px; }
+  [data-slide="cinco"] .ct-txt { margin-top: 8px; font-size: 36px; line-height: 1.25; }
 
   /* sigilo (cartões): a regra em corpo de leitura, a referência embaixo */
   [data-slide="sigilo"] .cartoes { top: 330px; }
@@ -141,8 +145,9 @@
   .b-vence .b-n, .b-vence .b-v { color: var(--cor-tinta); font-weight: 800; }
   .b-vence .b-t { height: 34px; }
   .b-vence .b-t i { border-radius: 17px; background: var(--cor-destaque); }
-  .b-pct { position: absolute; left: 1380px; top: 330px; width: 420px; }
-  .b-pct-n { display: block; font-size: var(--esc-5); line-height: 1; }
+  .b-pct { position: absolute; left: 1330px; top: 320px; width: 470px; }
+  /* 206 px: o número conta como respiro (texto de 200 px ou mais) no trecho de sigilo a custo */
+  .b-pct-n { display: block; font-size: 206px; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; }
   .b-pct-leg { display: block; margin-top: 18px; font: 400 var(--esc-2)/1.25 var(--fonte-texto); color: var(--cor-tinta-suave); white-space: normal; text-wrap: balance; }
   /* ===== Bloco C: quem paga a conta. Só classes c- e [data-slide] deste bloco. ===== */
 
@@ -169,12 +174,15 @@
   .c-bi { font-size: var(--esc-5); }
   .c-num-leg { position: absolute; left: 120px; top: 640px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--sobre-noite); text-wrap: balance; }
 
-  /* a8 (guia): a pergunta grande à esquerda, sozinha na chegada; à direita, no segundo clique, o checklist do slide seguinte */
-  .c-perg { position: absolute; left: 120px; top: 330px; width: 1030px; font: 400 76px/1.25 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
-  .c-mini-et { left: 1220px; top: 330px; }
-  .c-mini { position: absolute; left: 1220px; top: 386px; width: 580px; box-sizing: border-box; margin: 0; padding: 22px 30px; list-style: none; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; }
-  .c-mini li { display: flex; align-items: center; gap: 22px; height: 72px; font: 600 32px/1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
-  .c-mini i { flex: 0 0 36px; height: 36px; box-sizing: border-box; border: 4px solid var(--suave-sobre-noite); border-radius: 8px; }
+  /* a8 (guia): na chegada, os dois cenários numerados e a pergunta; no segundo clique, no mesmo lugar, o que quebra */
+  .c-perg { position: absolute; left: 120px; top: 320px; width: 1680px; counter-reset: c-cen; }
+  .c-cen { position: relative; margin-bottom: 22px; padding-left: 92px; font: 400 66px/1.25 var(--fonte-texto); color: var(--sobre-noite); counter-increment: c-cen; }
+  .c-cen::before { content: counter(c-cen); position: absolute; left: 0; top: 0; font: 800 66px/1.25 var(--fonte-titulo); color: var(--sinal-noite); }
+  .c-q { width: 1500px; margin-top: 58px; font: 400 50px/1.3 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
+  .c-mini-et { left: 120px; top: 330px; }
+  .c-mini { position: absolute; left: 120px; top: 396px; width: 1300px; box-sizing: border-box; margin: 0; padding: 24px 40px; list-style: none; border: 3px solid var(--linha-sobre-noite); border-radius: 22px; }
+  .c-mini li { display: flex; align-items: center; gap: 30px; height: 96px; font: 600 44px/1 var(--fonte-titulo); color: var(--sobre-noite); white-space: nowrap; }
+  .c-mini i { flex: 0 0 42px; height: 42px; box-sizing: border-box; border: 4px solid var(--suave-sobre-noite); border-radius: 10px; }
 
   /* pesado e portavel: cartões de duas colunas, com altura igual */
   [data-slide="pesado"] .cartoes { top: 330px; grid-template-columns: 0.72fr 1.28fr; }
@@ -191,6 +199,8 @@
   [data-slide="quem-banca"] .estacao { width: 380px; margin-left: -50px; }   /* mais larga e recentrada no ponto da estação */
   .noite[data-slide="pesado"] .cartao { border-color: var(--linha-sobre-noite); }
   .noite[data-slide="pesado"] .ct-sub { color: var(--suave-sobre-noite); }
+  /* custo: a etiqueta de cima é longa (diz o que entra na conta); sem caixa alta nem espaçamento, cabe numa linha */
+  [data-slide="custo"] .c-cab { font: 600 34px/1.2 var(--fonte-titulo); letter-spacing: 0; text-transform: none; }
 /* Bloco d-geopolitica: só classes d- e [data-slide] deste bloco. */
   /* chips: dois cartões largos, mais baixos na tela para o texto respirar */
   [data-slide="chips"] .cartoes { top: 360px; align-items: start; }
@@ -209,7 +219,7 @@
   .d-num-leg { position: absolute; left: 120px; top: 610px; width: 1500px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
   .d-num-fonte { color: var(--cor-tinta-suave); white-space: nowrap; }
 
-  /* aberto-seguro: três cartões com o número grande em cima; o rodapé diz de quem é a avaliação */
+  /* aberto-seguro: três cartões com o número grande em cima; o rodapé diz o que a comparação não mede */
   [data-slide="aberto-seguro"] .cartoes { top: 370px; }
   [data-slide="aberto-seguro"] .cartao { min-height: 400px; }
   .d-ct-n { font-size: 132px; line-height: 1; letter-spacing: -0.02em; }
@@ -221,18 +231,16 @@
   /* regras: o texto do marco "alto risco (Anexo III)" em duas linhas */
   [data-slide="regras"] .etapas li { font-size: 40px; }
 
-  /* a9 (cena guia, noite): a pergunta em cima; as três perguntas à esquerda; os dois lados da sala à direita */
-  .d-a9-perg { position: absolute; left: 120px; top: 306px; font: 400 54px/1.2 var(--fonte-texto); color: var(--sobre-noite); white-space: nowrap; }
-  .d-a9-et { left: 120px; top: 452px; color: var(--suave-sobre-noite); }
-  .d-a9-lista { position: absolute; left: 120px; top: 514px; width: 940px; counter-reset: d-perg; }
-  .d-a9-lista li { counter-increment: d-perg; display: flex; align-items: flex-start; gap: 28px; margin-bottom: 30px; font: 400 46px/1.2 var(--fonte-texto); color: var(--sobre-noite); }
+  /* a9 (cena guia, noite): a pergunta de condições em cima, em duas linhas; as três perguntas embaixo, uma por linha */
+  .d-a9-perg { position: absolute; left: 120px; top: 300px; width: 1640px; font: 400 56px/1.2 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
+  .d-a9-et { left: 120px; top: 498px; color: var(--suave-sobre-noite); }
+  .d-a9-lista { position: absolute; left: 120px; top: 554px; width: 1640px; counter-reset: d-perg; }
+  .d-a9-lista li { counter-increment: d-perg; display: flex; align-items: flex-start; gap: 28px; margin-bottom: 30px; font: 400 44px/1.2 var(--fonte-texto); color: var(--sobre-noite); }
   .d-a9-lista li::before { content: counter(d-perg); flex: 0 0 68px; height: 68px; margin-top: -6px; box-sizing: border-box; border: 4px solid var(--linha-sobre-noite); border-radius: 34px;
                            display: grid; place-items: center; font: 800 36px/1 var(--fonte-titulo); color: var(--sobre-noite); }
-  .d-lados { position: absolute; left: 1140px; top: 514px; width: 660px; display: grid; gap: 32px; }
-  .d-lado { box-sizing: border-box; height: 150px; padding: 0 36px; border: 4px solid var(--linha-sobre-noite); border-radius: 26px;
-            display: flex; flex-direction: column; justify-content: center; gap: 10px; }
-  .d-lado-tit { font: 800 var(--esc-3)/1.05 var(--fonte-titulo); text-transform: var(--titulo-caixa, uppercase); color: var(--sobre-noite); white-space: nowrap; }
-  .d-lado-sub { font: 400 34px/1.25 var(--fonte-texto); color: var(--suave-sobre-noite); }
+
+  /* cloud-act: a legenda é longa; a 34 px ela termina antes da margem direita (1800 px) */
+  [data-slide="cloud-act"] .ramos-leg { font-size: 34px; }
 /* Bloco e-futuro: só classes e- e [data-slide] deste bloco. */
   /* ritmo (claro): "5x" a 320 px, "ao ano" ao lado, a legenda embaixo e a fonte no rodapé */
   .e-num { position: absolute; left: 112px; top: 250px; display: flex; align-items: baseline; gap: 44px; color: var(--cor-tinta); }
@@ -240,9 +248,45 @@
   .e-num-u { font-size: var(--esc-5); line-height: .9; color: var(--cor-tinta-suave); }
   .e-num-leg { position: absolute; left: 120px; top: 610px; width: 1560px; font: 400 var(--esc-3)/1.22 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
 
-  /* cenarios: a caixa do ramo de baixo leva três linhas; o texto se centra na altura da caixa (170 px, de y - 85) */
-  [data-slide="cenarios"] .caixa-txt { box-sizing: border-box; height: 170px; margin-top: -32px; display: grid; align-content: center;
-                                       font-size: 38px; line-height: 1.15; }
+  /* cenarios (claro): quatro degraus que sobem da esquerda para a direita, o tom da caixa escurece a cada um */
+  .e-degraus { position: absolute; left: 120px; top: 320px; width: 1680px; height: 510px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; align-items: end; }
+  .e-degrau { box-sizing: border-box; padding: 26px 30px; border: 4px solid var(--cor-linha); border-radius: 26px; transform-origin: 50% 100%; }
+  .e-degrau:nth-child(1) { height: 250px; background: color-mix(in srgb, var(--cor-tinta) 3%, var(--cor-fundo)); }
+  .e-degrau:nth-child(2) { height: 330px; background: color-mix(in srgb, var(--cor-tinta) 6%, var(--cor-fundo)); }
+  .e-degrau:nth-child(3) { height: 420px; background: color-mix(in srgb, var(--cor-tinta) 9%, var(--cor-fundo)); }
+  .e-degrau:nth-child(4) { height: 510px; background: color-mix(in srgb, var(--cor-tinta) 12%, var(--cor-fundo)); }
+  .e-dg-tit { font: 800 var(--esc-2)/1.1 var(--fonte-titulo); text-transform: var(--titulo-caixa, uppercase); color: var(--cor-tinta); white-space: nowrap; }
+  .e-dg-txt { margin-top: 14px; font: 400 40px/1.22 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
+  [data-slide="cenarios"] .e-dg-fonte { top: 866px; font-size: 32px; }
+
+  /* otimistas (claro) e pessimistas (noite): em cada cartão, quem e quando em cima, pequeno; a frase grande embaixo */
+  [data-slide="otimistas"] .cartoes, [data-slide="pessimistas"] .cartoes { top: 340px; }
+  [data-slide="otimistas"] .cartao, [data-slide="pessimistas"] .cartao { min-height: 300px; padding: 30px 34px; }
+  /* a frase do Amodei é a mais longa: a coluna dele é mais larga, e as três ficam com a mesma altura */
+  [data-slide="pessimistas"] .cartoes { grid-template-columns: 1.4fr 1fr 0.8fr; }
+  [data-slide="otimistas"] .ct-tit, [data-slide="pessimistas"] .ct-tit { font: 700 34px/1.2 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  [data-slide="otimistas"] .ct-txt, [data-slide="pessimistas"] .ct-txt { margin-top: 22px; font-size: 52px; line-height: 1.2; }
+  .noite[data-slide="pessimistas"] .cartao { border-color: var(--linha-sobre-noite); }
+  .noite[data-slide="pessimistas"] .ct-tit { color: var(--suave-sobre-noite); }
+
+  /* medido (claro): "19%" a 320 px à esquerda, a legenda à direita dele, o traço dourado embaixo do número e a linha
+     menor no pé */
+  .e-md-n { position: absolute; left: 112px; top: 270px; font-size: var(--esc-6); line-height: .9; color: var(--cor-tinta); white-space: nowrap; }
+  .e-md-traco { position: absolute; left: 120px; top: 586px; width: 600px; height: 14px; border-radius: 7px; background: var(--cor-destaque); transform-origin: 0 50%; }
+  .e-md-leg { position: absolute; left: 860px; top: 300px; width: 940px; font: 400 48px/1.25 var(--fonte-texto); color: var(--cor-tinta); text-wrap: pretty; }
+  .e-md-sub { position: absolute; left: 120px; top: 680px; width: 1680px; font: 400 40px/1.3 var(--fonte-texto); color: var(--cor-tinta-suave); text-wrap: balance; }
+
+  /* horizontes: textos dos marcos em até três linhas */
+  [data-slide="horizontes"] .etapas li { font-size: 40px; }
+
+  /* debate (noite): as duas setas à direita (sobe e desce); o enunciado à esquerda, a pergunta do fim com a barra dourada */
+  .e-setas { position: absolute; left: 1330px; top: 340px; width: 470px; height: 380px; overflow: visible; }
+  .e-setas path { fill: none; stroke-width: 22; stroke-linecap: round; stroke-linejoin: round; }
+  .e-seta-s { stroke: var(--sobre-noite); }
+  .e-seta-d { stroke: var(--suave-sobre-noite); }
+  .e-db-enun { position: absolute; left: 120px; top: 340px; width: 1080px; font: 400 52px/1.28 var(--fonte-texto); color: var(--sobre-noite); text-wrap: pretty; }
+  .e-db-fim { position: absolute; left: 120px; top: 610px; width: 1160px; box-sizing: border-box; padding-left: 44px; border-left: 12px solid var(--cor-destaque);
+              font: 800 80px/1.12 var(--fonte-titulo); color: var(--sobre-noite); text-wrap: balance; }
 
   /* sinais: textos dos marcos em até duas linhas */
   [data-slide="sinais"] .etapas li { font-size: 40px; }
@@ -299,17 +343,19 @@
       <p class="janela-txt">Age sem você pedir, de hora em hora.</p></div>
   </section>
 
-  <!-- cinco (cartões, claro): retrato de 02/11/2026 (A, Tabela 22.1). O dots leva a borda dourada: o único dos prontos
-       que inclui o Brasil. -->
+  <!-- cinco (cartões, claro): retrato de novembro de 2026, sete assistentes, quatro em cima e três centrados embaixo,
+       sem destaque dourado (docs/pesquisa/dia2-futuro-e-assistentes.md, 2.1 a 2.3). -->
   <section data-slide="cinco">
     <p class="rotulo">Assistentes</p>
-    <h2 class="manchete">Cinco assistentes, em novembro de 2026</h2>
-    <div class="cartoes c3">
+    <h2 class="manchete">Sete assistentes, em novembro de 2026</h2>
+    <div class="cartoes">
       <div class="cartao"><p class="ct-tit">Claude Duet</p><p class="ct-sub">Anthropic</p><p class="ct-txt">Prévia, só nos EUA.</p></div>
-      <div class="cartao a-br"><p class="ct-tit">dots</p><p class="ct-sub">OpenAI</p><p class="ct-txt">Plano Pro, inclui o Brasil.</p></div>
-      <div class="cartao"><p class="ct-tit">Muse</p><p class="ct-sub">Meta</p><p class="ct-txt">No WhatsApp, EUA e Singapura.</p></div>
-      <div class="cartao"><p class="ct-tit">Grok Bot</p><p class="ct-sub">xAI</p><p class="ct-txt">Beta, sem lista de países.</p></div>
-      <div class="cartao"><p class="ct-tit">Hermes Agent</p><p class="ct-sub">Código aberto</p><p class="ct-txt">Roda onde você instalar.</p></div>
+      <div class="cartao"><p class="ct-tit">dots</p><p class="ct-sub">OpenAI</p><p class="ct-txt">Plano Pro, fora da Europa.</p></div>
+      <div class="cartao"><p class="ct-tit">Muse</p><p class="ct-sub">Meta</p><p class="ct-txt">EUA e Singapura.</p></div>
+      <div class="cartao"><p class="ct-tit">Grok Bot</p><p class="ct-sub">xAI</p><p class="ct-txt">Beta, disponível no Brasil.</p></div>
+      <div class="cartao"><p class="ct-tit">Hermes Agent</p><p class="ct-sub">Nous Research</p><p class="ct-txt">Código aberto, no seu computador.</p></div>
+      <div class="cartao"><p class="ct-tit">OpenClaw</p><p class="ct-sub">Código aberto</p><p class="ct-txt">No WhatsApp e no Telegram.</p></div>
+      <div class="cartao"><p class="ct-tit">OpenBot</p><p class="ct-sub">CopilotKit</p><p class="ct-txt">Código aberto, rival do Grok Bot.</p></div>
     </div>
   </section>
 
@@ -381,10 +427,23 @@
     </div>
   </section>
 
-  <!-- a7 (cena guia, claro, A7, 7 min): o enunciado e as três colunas em branco para a dupla preencher. A resposta-modelo
+  <!-- retencao (cena própria no desenho da comparação, claro; chega só com os dois nomes, as frases no clique): assinatura individual contra contrato empresarial ou API; políticas oficiais
+       lidas em 06/11/2026 (docs/pesquisa/dia2-retencao-e-treino.md). Prazos por empresa ficam nas notas. -->
+  <section data-slide="retencao">
+    <p class="rotulo">Sigilo</p>
+    <h2 class="manchete">Assinatura não é contrato</h2>
+    <div class="janela"><p class="display letra">Assinatura</p>
+      <p class="janela-txt">Treina se o botão estiver ligado. Pode guardar por anos. Revisor humano pode ler.</p></div>
+    <div class="fio-v"></div>
+    <div class="janela escolhida"><p class="display letra">Contrato</p>
+      <p class="janela-txt">Não treina, por padrão. Na API, guarda até 30 dias (Google, 55). Zero só sob pedido.</p></div>
+    <p class="a-ret-fonte">Políticas oficiais das empresas, lidas em 06/11/2026.</p>
+  </section>
+
+  <!-- a7 (cena guia, claro, A7, 5 min): o enunciado e as três colunas em branco para a dupla preencher. A resposta-modelo
        e o fecho "Duas semanas, só lendo." ficam só nas notas. -->
   <section data-slide="a7">
-    <p class="rotulo">A7, 7 min</p>
+    <p class="rotulo">A7, 5 min</p>
     <h2 class="manchete">Sua vez: o acesso mínimo</h2>
     <p class="a-enun">Em dupla, escolham uma tarefa (a agenda da manhã, por exemplo) e preencham três colunas: pode ler, pode escrever, nunca.</p>
     <div class="a-cols">
@@ -410,14 +469,14 @@
        é o quadro 0 do clipe: a de 2,5 s (cena montada) aparecia na viagem e sumia quando o clipe começava. -->
   <section data-slide="harness" data-arquetipo="demonstracao" class="noite">
     <p class="rotulo">Harness</p>
-    <h2 class="manchete">Dez agentes, uma peça</h2>
+    <h2 class="manchete">Oito agentes, duas buscas, uma peça</h2>
     <div class="moldura">
       <div class="barra-nav"><i></i><i></i><i></i><u></u></div>
       <div class="tela">
         <video src="midia/harness.mp4" poster="midia/harness-capa.webp" playsinline preload="auto"></video>
       </div>
     </div>
-    <p class="nota-lateral">Peça real, sem processo.</p>
+    <p class="nota-lateral">Peça real; o print não mostra dado do processo.</p>
   </section>
 
   <!-- redator (cena própria, claro): o custo de cada agente na peça do print, em barras na mesma escala. Doutrina e
@@ -441,7 +500,7 @@
     <p class="b-pct"><span class="display b-pct-n">87%</span><span class="b-pct-leg">da peça de US$ 1,59</span></p>
   </section>
 
-  <!-- ===== Bloco C: quem paga a conta (slides 13 a 22, 23 min). Fatos e textos exatos em briefing.md e na ficha
+  <!-- ===== Bloco C: quem paga a conta (slides 15 a 24, 19 min). Fatos e textos exatos em briefing.md e na ficha
        docs/pesquisa/dia2-economia-subsidio-bolha.md (E). ===== -->
   <!-- conta-cap (abertura de capítulo, noite): sem foto por enquanto -->
   <section data-slide="conta-cap" data-arquetipo="abertura" class="noite">
@@ -451,12 +510,12 @@
     <p class="ab-sub">O uso já se paga. A corrida, não.</p>
   </section>
 
-  <!-- custo (cena própria, claro, três paradas): custo de computação da Anthropic sobre a receita, um ano por clique.
+  <!-- custo (cena própria, claro, três paradas): computação total da Anthropic (treino incluído) sobre a receita, um ano por clique.
        Escala: 100% da receita = 280 px; a barra de 653% (1.828 px) não cabe e leva a quebra marcada. S-1/A, 02/11/2026. -->
   <section data-slide="custo">
     <p class="rotulo">Quem paga</p>
-    <h2 class="manchete">Cada uso já se paga</h2>
-    <p class="etiqueta c-cab">custo de computação sobre a receita da Anthropic</p>
+    <h2 class="manchete">A computação já cabe na receita</h2>
+    <p class="etiqueta c-cab">computação total sobre a receita da Anthropic: treino, pesquisa e atendimento</p>
     <div class="c-cem"><i></i><p class="c-cem-leg">custo igual à receita</p></div>
     <div class="c-ano" style="top: 372px"><p class="c-ano-n">2024</p><div class="c-bar c-quebrada" data-v="653"><i></i><u></u></div><p class="display c-pct">653%</p></div>
     <div class="c-ano" style="top: 522px"><p class="c-ano-n">2025</p><div class="c-bar" data-v="160"><i></i></div><p class="display c-pct">160%</p></div>
@@ -477,7 +536,7 @@
     <h2 class="manchete">Quem banca a corrida</h2>
     <div class="ramo" data-y="450">
       <div class="estacao"><b>investidores</b><small>bancam</small></div>
-      <p class="caixa-txt">treino e<br>data centers</p>
+      <p class="caixa-txt">data centers<br>dos próximos anos</p>
     </div>
     <div class="ramo" data-y="720">
       <div class="estacao"><b>usuário leve</b><small>banca</small></div>
@@ -525,18 +584,21 @@
     <p class="respiro"><span>A tecnologia fica.</span><span>O preço <span class="sinal">muda</span>.</span></p>
   </section>
 
-  <!-- a8 (guia, noite, 5 min): na chegada, só a pergunta, grande; no segundo clique, depois do cronômetro, o checklist do
-       slide portavel em miniatura à direita -->
+  <!-- a8 (guia, noite, 5 min): na chegada, os dois cenários separados e a pergunta com a conta; no segundo clique,
+       depois do cronômetro, a pergunta sai e entra o que costuma quebrar (o que vai com você fica para o portavel) -->
   <section data-slide="a8" class="noite">
-    <p class="rotulo">A8, 5 min</p>
-    <h2 class="manchete">Sua vez: e se o preço dobrar?</h2>
-    <p class="c-perg">Em dupla, o que quebra no seu trabalho se o plano dobrar de preço na sexta?</p>
-    <p class="etiqueta c-mini-et">Vai com você</p>
+    <p class="rotulo">A8, 4 min</p>
+    <h2 class="manchete">Sua vez: e se o plano mudar?</h2>
+    <div class="c-perg">
+      <p class="c-cen">O plano dobra de preço.</p>
+      <p class="c-cen">O preço fica, e a franquia cai à metade.</p>
+      <p class="c-q">Em dupla, o que quebra em cada um? Pela sua fatura, quantas horas por mês o aumento precisa poupar?</p>
+    </div>
+    <p class="etiqueta c-mini-et">O que costuma quebrar</p>
     <ul class="c-mini">
-      <li><i></i>a skill</li>
-      <li><i></i>a pasta no seu disco</li>
-      <li><i></i>as instruções em texto</li>
-      <li><i></i>um segundo fornecedor</li>
+      <li><i></i>instruções só na memória do chat</li>
+      <li><i></i>documentos só no projeto do fornecedor</li>
+      <li><i></i>nenhum segundo fornecedor testado</li>
     </ul>
   </section>
 
@@ -594,7 +656,7 @@
   <section data-slide="aberto-seguro">
     <p class="rotulo">Modelos abertos</p>
     <h2 class="manchete">Aberto não quer dizer seguro</h2>
-    <p class="ct-leg">CAISI/NIST, 30/09/2025, DeepSeek R1-0528</p>
+    <p class="ct-leg">CAISI/NIST (governo dos EUA), 30/09/2025, DeepSeek R1-0528</p>
     <div class="cartoes c3">
       <div class="cartao">
         <p class="ct-tit d-ct-n">12x</p>
@@ -609,7 +671,7 @@
         <p class="ct-txt">nos modelos americanos, mesmo truque</p>
       </div>
     </div>
-    <p class="rodape">Avaliação do governo dos EUA sobre modelos chineses.</p>
+    <p class="rodape">Na comparação americana entrou o gpt-oss, também aberto; idioma dos testes não informado.</p>
   </section>
 
   <!-- cloud-act (ramos, S.T.A.R. do bloco): onde o dado mora contra quem manda entregar; G 1.5 -->
@@ -618,13 +680,13 @@
     <h2 class="manchete">Dado no Brasil, empresa nos EUA</h2>
     <div class="ramo" data-y="450">
       <div class="estacao"><b>Data center</b><small>no Brasil</small></div>
-      <p class="caixa-txt">onde o<br>dado mora</p>
+      <p class="caixa-txt">o dado<br>está aqui</p>
     </div>
     <div class="ramo" data-y="720">
       <div class="estacao"><b>Provedor</b><small>americano</small></div>
-      <p class="caixa-txt">quem pode<br>mandar entregar</p>
+      <p class="caixa-txt">uma ordem dos EUA<br>obriga a entregar</p>
     </div>
-    <p class="ramos-leg">CLOUD Act: os EUA têm acordo só com Reino Unido e Austrália.</p>
+    <p class="ramos-leg">CLOUD Act: vale esteja o dado onde estiver. Acordo para o conflito, só Reino Unido e Austrália.</p>
   </section>
 
   <!-- regras (tempo): calendário do AI Act e do Omnibus; o marco de agora é a fiscalização, em vigor desde ago./26 (G 1.4) -->
@@ -640,29 +702,25 @@
     <p class="tempo-leg">No Brasil, o PL 2338/2023 espera parecer na Câmara.</p>
   </section>
 
-  <!-- a9 (cena guia, noite): a pergunta do debate, as três perguntas para preparar e os dois lados da sala. Sem gabarito
-       na tela; o fecho do professor está nas notas (G, seção 2). -->
+  <!-- a9 (cena guia, noite): a pergunta de condições e as três perguntas para preparar. Sem lados de debate e sem
+       gabarito na tela; o fecho do professor está nas notas (G, seção 2). -->
   <section data-slide="a9" class="noite">
-    <p class="rotulo">A9, 6 min</p>
-    <h2 class="manchete">Debate: modelo chinês no órgão?</h2>
-    <p class="d-a9-perg">Modelo aberto chinês, rodando no servidor do órgão. Pode?</p>
+    <p class="rotulo">A9, 5 min</p>
+    <h2 class="manchete">Sua vez: modelo chinês no órgão?</h2>
+    <p class="d-a9-perg">Modelo aberto chinês, sem internet, no servidor do órgão, para resumir petições. Em que condições pode?</p>
     <p class="etiqueta d-a9-et">Para preparar</p>
     <ol class="d-a9-lista">
-      <li>Onde roda?</li>
-      <li>Quem controla a empresa?</li>
-      <li>O que ele faz com uma ordem maliciosa?</li>
+      <li>Quem opera a máquina?</li>
+      <li>O que a empresa ainda controla?</li>
+      <li>E a petição com ordem escondida?</li>
     </ol>
-    <div class="d-lados">
-      <div class="d-lado"><p class="d-lado-tit">Pode</p><p class="d-lado-sub">metade da sala</p></div>
-      <div class="d-lado"><p class="d-lado-tit">Não pode</p><p class="d-lado-sub">a outra metade</p></div>
-    </div>
   </section>
 
   <!-- ===== Bloco E: futuro e fecho (slides 30 a 37). Fatos da ficha docs/pesquisa/dia2-geopolitica-ia.md (G 1.6 e
        seção 3) e das atividades A10 e A11 do briefing. ===== -->
   <section data-slide="futuro-cap" data-arquetipo="respiro" class="noite">
     <p class="rotulo">Futuro</p>
-    <p class="respiro"><span>E em <span class="sinal">2030</span>?</span></p>
+    <p class="respiro"><span>E em <span class="sinal">20</span> anos?</span></p>
   </section>
 
   <!-- ritmo (cena própria, claro, número a 320 px): Relatório Internacional de Segurança da IA, 03/02/2026 (G 1.6) -->
@@ -672,20 +730,73 @@
     <p class="rodape">Relatório Internacional de Segurança da IA, 2026</p>
   </section>
 
-  <!-- cenarios (ramos): a faixa de cenários da OCDE citada pelo mesmo relatório; as tarefas de vários dias são projeção
-       do próprio relatório; os gargalos na legenda (G 1.6) -->
-  <section data-slide="cenarios" data-arquetipo="ramos">
+  <!-- cenarios (cena própria, claro): os quatro cenários da OCDE para 2030, como o Relatório Internacional de Segurança
+       da IA (03/02/2026) os resume, em degraus que sobem da esquerda para a direita (ficha F, seção 4). Sem dourado: o
+       relatório não aponta o mais provável. -->
+  <section data-slide="cenarios">
     <p class="rotulo">Até 2030</p>
-    <h2 class="manchete">De ganho modesto a salto rápido</h2>
-    <div class="ramo" data-y="450">
-      <div class="estacao"><b>Modesto</b></div>
-      <p class="caixa-txt">melhoras<br>pequenas</p>
+    <h2 class="manchete">Quatro cenários para 2030</h2>
+    <div class="e-degraus">
+      <div class="e-degrau"><p class="e-dg-tit">Estanca</p><p class="e-dg-txt">faz rápido, erra, pede revisão</p></div>
+      <div class="e-degrau"><p class="e-dg-tit">Desacelera</p><p class="e-dg-txt">assistente útil, com memória</p></div>
+      <div class="e-degrau"><p class="e-dg-tit">Continua</p><p class="e-dg-txt">colaborador especialista</p></div>
+      <div class="e-degrau"><p class="e-dg-tit">Acelera</p><p class="e-dg-txt">nível de trabalhador remoto</p></div>
     </div>
-    <div class="ramo" data-y="720">
-      <div class="estacao"><b>Rápido</b></div>
-      <p class="caixa-txt">tarefas de software<br>de vários dias,<br>na tendência</p>
+    <p class="rodape e-dg-fonte">OCDE, no Relatório Internacional de Segurança da IA (fev. 2026). Sem consenso sobre o mais provável.</p>
+  </section>
+
+  <!-- otimistas (cartões, claro) e pessimistas (cartões, noite): três visões datadas cada, da ficha F, 3.1 e 3.2 -->
+  <section data-slide="otimistas">
+    <p class="rotulo">Visões do futuro</p>
+    <h2 class="manchete">Os otimistas</h2>
+    <div class="cartoes c3">
+      <div class="cartao"><p class="ct-tit">Dario Amodei, 2024</p><p class="ct-txt">50 a 100 anos de biologia em 5 a 10</p></div>
+      <div class="cartao"><p class="ct-tit">Demis Hassabis, 2026</p><p class="ct-txt">era de ouro da descoberta em 10 a 15 anos</p></div>
+      <div class="cartao"><p class="ct-tit">Goldman Sachs, 2023</p><p class="ct-txt">PIB mundial 7% maior em 10 anos</p></div>
     </div>
-    <p class="ramos-leg">Faixa da OCDE; gargalos: dados, chips, dinheiro e energia.</p>
+  </section>
+
+  <section data-slide="pessimistas" class="noite">
+    <p class="rotulo">Visões do futuro</p>
+    <h2 class="manchete">Os pessimistas</h2>
+    <div class="cartoes c3">
+      <div class="cartao"><p class="ct-tit">Dario Amodei, 2026</p><p class="ct-txt">metade dos empregos de entrada de escritório afetados em 1 a 5 anos</p></div>
+      <div class="cartao"><p class="ct-tit">Geoffrey Hinton, 2025</p><p class="ct-txt">em 2026, capaz de substituir muitos, muitos empregos</p></div>
+      <div class="cartao"><p class="ct-tit">Yoshua Bengio, 2025</p><p class="ct-txt">riscos graves em 5 a 10 anos</p></div>
+    </div>
+  </section>
+
+  <!-- medido (cena própria, claro, número a 320 px): Stanford Digital Economy Lab, 12/08/2026; Thomson Reuters, Future
+       of Professionals 2026 (ficha F, 3.2 e 3.3) -->
+  <section data-slide="medido">
+    <p class="rotulo">O que já se mede</p>
+    <h2 class="manchete">Os iniciantes sentem primeiro</h2>
+    <p class="display e-md-n">19%</p>
+    <i class="e-md-traco"></i>
+    <p class="e-md-leg">menos emprego que o esperado para jovens de 22&nbsp;a&nbsp;25 anos nas funções mais expostas (Stanford, ago.&nbsp;2026)</p>
+    <p class="e-md-sub">O emprego total não caiu. No direito, a pesquisa Thomson Reuters aponta menos vagas de júnior.</p>
+  </section>
+
+  <!-- horizontes (tempo): quatro horizontes, o de 20 anos aceso (ficha F, fecho da seção 3) -->
+  <section data-slide="horizontes" data-arquetipo="tempo">
+    <p class="rotulo">Visões do futuro</p>
+    <h2 class="manchete">2, 5, 10, 20 anos</h2>
+    <ol class="etapas">
+      <li><b>2 anos</b>IA poderosa, diz Amodei</li>
+      <li><b>5 anos</b>metade da entrada afetada, diz Amodei</li>
+      <li><b>10 anos</b>era de ouro ou riscos graves</li>
+      <li class="agora"><b>20 anos</b>ninguém mede: vocês decidem</li>
+    </ol>
+  </section>
+
+  <!-- debate (cena guia, noite, 8 min): na chegada só a pergunta e as duas setas (sobe e desce); no clique, o enunciado,
+       com a pergunta do fim marcada de dourado -->
+  <section data-slide="debate" class="noite">
+    <p class="rotulo">Debate, 8 min</p>
+    <h2 class="manchete">Sua carreira em 2046</h2>
+    <svg class="e-setas" viewBox="0 0 520 420"><path class="e-seta-s" d="M130 380V60M50 140L130 60L210 140"/><path class="e-seta-d" d="M390 40V360M310 280L390 360L470 280"/></svg>
+    <p class="e-db-enun">Em dupla: um defende o futuro otimista, o outro o pessimista, cada um com um dado dos slides.</p>
+    <p class="e-db-fim">No fim: o que você muda já na semana que vem?</p>
   </section>
 
   <!-- sinais (tempo): quatro sinais com fonte pública; o mais próximo, dez./26, aceso (G seção 3, itens 1, 4, 5 e 7) -->
@@ -706,23 +817,23 @@
   <section data-slide="a10" class="noite">
     <p class="rotulo">A10, 5 min</p>
     <h2 class="manchete">Seu plano de 30 dias</h2>
-    <p class="etiqueta e-a10-et">Individual. Cada um guarda o seu.</p>
+    <p class="etiqueta e-a10-et">Teste fictício, um número, um limite.</p>
     <div class="e-plano">
       <div class="e-sem"><p class="e-sem-tit">semana 1</p><p class="e-sem-txt">uma skill do seu jeito</p><i class="e-linha"></i></div>
-      <div class="e-sem"><p class="e-sem-tit">semanas 2 e 3</p><p class="e-sem-txt">uma pasta de caso</p><i class="e-linha"></i></div>
+      <div class="e-sem"><p class="e-sem-tit">semanas 2 e 3</p><p class="e-sem-txt">uma pasta de caso no seu disco, fora do app</p><i class="e-linha"></i></div>
       <div class="e-sem"><p class="e-sem-tit">semana 4</p><p class="e-sem-txt">uma rotina que pode falhar sem dano</p><i class="e-linha"></i></div>
     </div>
   </section>
 
-  <!-- a11 (cena guia, claro): a devolutiva em roda, dois campos grandes -->
+  <!-- a11 (cena guia, claro): a devolutiva, dois campos grandes; dois minutos escrevendo e a roda depois -->
   <section data-slide="a11">
-    <p class="rotulo">A11, 5 min</p>
+    <p class="rotulo">A11, 4 min</p>
     <h2 class="manchete">O que você leva, o que faltou</h2>
     <div class="e-roda">
-      <div class="e-campo"><p class="e-campo-tit">Leva</p><p class="e-campo-sub">diga uma</p></div>
-      <div class="e-campo"><p class="e-campo-tit">Faltou</p><p class="e-campo-sub">diga uma</p></div>
+      <div class="e-campo"><p class="e-campo-tit">Leva</p><p class="e-campo-sub">o que você vai fazer na segunda-feira, numa frase</p></div>
+      <div class="e-campo"><p class="e-campo-tit">Faltou</p><p class="e-campo-sub">o que você queria ter feito com as mãos e não fez</p></div>
     </div>
-    <p class="rodape">Em roda, cada um diz as duas.</p>
+    <p class="rodape">Dois minutos escrevendo; depois, a roda.</p>
   </section>
 
   <!-- curso (tempo): os quatro verbos das quatro aulas, o último aceso -->
@@ -739,8 +850,8 @@
 
   <!-- fecho: a mensagem do curso e o primeiro passo do plano de 30 dias -->
   <section data-slide="fecho" data-arquetipo="fecho" class="noite">
-    <h2 class="display fecho-msg"><span>Delegue pouco.</span><span>Confira a <span class="sinal">fonte</span>.</span></h2>
-    <ol class="fecho-passos"><li>Comece pela semana 1.</li></ol>
+    <h2 class="display fecho-msg"><span>A IA trabalha.</span><span>Quem decide é <span class="sinal">você</span>.</span></h2>
+    <ol class="fecho-passos"><li><code>cojuris.com.br/kit</code></li></ol>
   </section>
 
 
@@ -752,18 +863,18 @@ import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
 
 // 5 blocos da linha do dia, somando 90 minutos. Os ids são os de `bloco` nos slides.
 const blocos = [
-  {id: 'assistentes', rotulo: 'Assistentes', minutos: 27},
+  {id: 'assistentes', rotulo: 'Assistentes', minutos: 26},
   {id: 'harness', rotulo: 'Harness', minutos: 6},
-  {id: 'conta', rotulo: 'Quem paga', minutos: 23},
-  {id: 'geopolitica', rotulo: 'Geopolítica', minutos: 18},
-  {id: 'futuro', rotulo: 'Futuro', minutos: 16},
+  {id: 'conta', rotulo: 'Quem paga', minutos: 19},
+  {id: 'geopolitica', rotulo: 'Geopolítica', minutos: 15},
+  {id: 'futuro', rotulo: 'Futuro', minutos: 24},
 ];
 
 // Uma linha por slide, na ordem da aula. Cada bloco de fonte/ acrescenta as suas com SLIDES.push(...).
 // `notas` é o guia do apresentador: {diga, faca, transicao}.
 const SLIDES = [];
 
-// Bloco A, assistentes (27 min, com a abertura): capa, mapa, chat e assistente, os cinco, a caixa de entrada, quem
+// Bloco A, assistentes (26 min, com a abertura): capa, mapa, chat e assistente, os cinco, a caixa de entrada, quem
 // escreve, o sigilo, a memória e a A7. Fatos só do briefing.md (A 22.2 a 22.6, dia2-sigilo-normas.md).
 SLIDES.push(
   {id: 'capa', titulo: 'Quem decide é você', bloco: 'assistentes', linhaDia: false, segura: 3,
@@ -777,10 +888,10 @@ SLIDES.push(
   {id: 'chat-agente', titulo: 'O chat responde; o assistente age',
    notas: {diga: 'O chat vocês já conhecem: ele responde quando vocês pedem. O assistente age sem vocês pedirem, de hora em hora. O resumo da manhã, a varredura da caixa, o lembrete que ninguém pediu. É essa iniciativa que muda a conversa sobre acesso.',
      faca: ['apontar a palavra circulada: assistente'],
-     transicao: 'Já existem cinco no mercado.'}},
-  {id: 'cinco', titulo: 'Cinco assistentes, em novembro de 2026',
-   notas: {diga: 'Cinco assistentes, retrato de 2 de novembro. O Claude Duet, da Anthropic, saiu em 21 de outubro, em prévia, nos planos Pro, Max e Ultra, só nos EUA. O dots, da OpenAI, saiu em 29 de setembro, no plano Pro, e inclui o Brasil. O Muse, da Meta, de 8 de setembro, funciona no WhatsApp, nos EUA e em Singapura. O Grok Bot, da xAI, é de 11 de agosto, em beta, e não tem lista de países. E o Hermes Agent é código aberto: roda onde você instalar. Isso muda rápido; confiram na página do fabricante antes de assinar.',
-     faca: ['apontar o cartão dourado: o dots é o único dos prontos que inclui o Brasil'],
+     transicao: 'Já existem vários no mercado.'}},
+  {id: 'cinco', titulo: 'Sete assistentes, em novembro de 2026',
+   notas: {diga: 'Sete assistentes, retrato deste mês. O Claude Duet, da Anthropic, saiu em 21 de outubro, em prévia, nos planos Pro, Max e Ultra, só nos EUA. O dots, da OpenAI, saiu em 29 de setembro, no plano Pro, fora da Europa; o Brasil entra. O Muse, da Meta, saiu em 8 de setembro nos EUA, com WhatsApp, e chegou a Singapura em 27 de outubro. O Grok Bot, da xAI, é de 11 de agosto, em beta, e está disponível no Brasil: o app está na loja brasileira, em português. O Hermes Agent, da Nous Research, saiu em 25 de fevereiro; é código aberto e roda no computador de vocês. O OpenClaw também é código aberto, nasceu em novembro de 2025 e tem esse nome desde 30 de janeiro; conversa pelo WhatsApp e pelo Telegram. E o OpenBot, da CopilotKit, é código aberto e se apresenta como rival do Grok Bot. Isso muda rápido; confiram na página do fabricante.',
+     faca: ['o OpenBot não tem data confirmada de lançamento: não dar data', 'cuidado com nomes parecidos: OpenBot da CopilotKit não é o OpenClaw'],
      transicao: 'Vou mostrar como eu uso o meu.'}},
   {id: 'grokbot', titulo: 'Como eu uso o meu', video: [0.9, 61.5], ritmoOk: 'vídeo de 62 s, narrado pelo professor',
    notas: {diga: 'Este é o meu assistente, o Grok Bot, e eu uso para quase tudo. Todo dia de manhã ele me manda um resumo das novidades de IA do X, do Reddit e do YouTube. Lê o meu WhatsApp e põe na agenda os compromissos marcados ali, e também os que eu mando. No trabalho, orquestra tarefas pelo t3code no Claude, no GPT, no opencode e no Gemini. Confere e responde ofícios, CIs e processos no E-MS, sozinho, e analisa as pendências do PGE.Net. Toda semana me manda os eventos de legaltech e os editais abertos para publicação. E faz pesquisa de compras. Reparem no fim: tudo passa por um assistente só.',
@@ -801,50 +912,58 @@ SLIDES.push(
   {id: 'memoria', titulo: 'Cortar o acesso não apaga a memória', passos: [2.2, 1.8, 1.8],
    notas: {diga: 'Revogar o acesso não faz o assistente esquecer. No Duet, desligar um app corta o acesso novo, e o que ele aprendeu fica até vocês zerarem a memória. No dots, a memória só se apaga apagando o dot inteiro. No Grok Bot, apagar um Bot não limpa o computador que os Bots compartilham.',
      faca: ['chegada: o Duet', 'clique 1: o dots', 'clique 2: o Grok Bot'],
+     transicao: 'E o que a empresa faz com o que vocês mandam?'}},
+  {id: 'retencao', titulo: 'Assinatura não é contrato', passos: [1.8, 1.6],
+   notas: {diga: 'Uma pergunta que a sala sempre faz: o que a empresa faz com o que eu mando? Depende menos da empresa e mais do contrato. Na assinatura individual, o treino depende de um botão. No ChatGPT e no Gemini pessoal ele vem ligado; no Claude, desde 28 de agosto de 2025, a Anthropic pede que cada um escolha, e quem permite o treino tem as conversas guardadas por até cinco anos, contra 30 dias de quem não permite. No Gemini pessoal, com a atividade ligada, guarda 18 meses, e conversas lidas por revisores humanos ficam até três anos. No contrato empresarial e na API paga, Anthropic, OpenAI, Google, AWS e Microsoft declaram que não treinam com os dados do cliente. Não treinar não é não guardar: as APIs da Anthropic e da OpenAI guardam até 30 dias, e a do Google 55, para detectar abuso. Retenção zero só com pedido aprovado. No Bedrock da AWS o fabricante do modelo não vê os prompts, e no Azure nada vai para a OpenAI. Uma pegadinha: a API gratuita do Gemini usa o conteúdo para melhorar produtos, com revisão humana. Para quem trabalha com processo sob sigilo, a regra prática é esta: plano pessoal com o botão desligado não substitui contrato; documento sigiloso, só em contrato que diga que não treina e por quanto tempo guarda.',
+     faca: ['chegada: só os dois nomes; pergunte à sala qual dos dois ela usa', 'clique: as regras; aponte na assinatura o botão de treino', 'no contrato: não treinar não é não guardar', 'se perguntarem pelo NYT: a ordem de preservar tudo acabou em 26/09/2025'],
      transicao: 'Então, quanto acesso dar? Vocês decidem.'}},
-  {id: 'a7', titulo: 'Sua vez: o acesso mínimo', pratica: 7,
-   notas: {material: {"objetivo": "Decidir o acesso mínimo de um assistente: o que lê, o que escreve e o que nunca toca.", "abrir": ["aula4/A7-acesso-minimo.md"], "passos": ["Duplas escolhem uma tarefa (a agenda da manhã, por exemplo).", "Preenchem três colunas em sete minutos: pode ler, pode escrever, nunca toca.", "Fecho: duas semanas, só lendo, conta de teste e aprovação para tudo que sai.", "Resposta-modelo no kit: aula4/gabarito.md."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Em dupla, escolham uma tarefa, a agenda da manhã, por exemplo. Preencham três colunas: o que o assistente pode ler, o que pode escrever e o que ele nunca toca. Sete minutos.',
-     faca: ['cronômetro de 7 minutos: começa sozinho na tela do apresentador',
-       'resposta-modelo para a agenda da manhã. Pode ler: a agenda e só os e-mails de uma pasta. Pode escrever: um rascunho salvo, nunca enviado. Nunca: a caixa inteira, o sistema do tribunal com certificado, pagamento, apagar.',
+  {id: 'a7', titulo: 'Sua vez: o acesso mínimo', pratica: 5,
+   notas: {material: {"objetivo": "Decidir o acesso mínimo de um assistente: o que lê, o que escreve e o que nunca toca.", "abrir": ["aula4/A7-acesso-minimo.md"], "passos": ["Duplas escolhem uma tarefa (a agenda da manhã, por exemplo).", "Preenchem três colunas em cinco minutos: pode ler, pode escrever, nunca toca.", "Quarta pergunta, para quem terminar: se ele errar ou se calar, quem percebe, e como?", "Fecho: duas semanas, só lendo, conta de teste e aprovação para tudo que sai.", "Resposta-modelo no kit: aula4/gabarito.md."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Em dupla, escolham uma tarefa, a agenda da manhã, por exemplo. Preencham três colunas: o que o assistente pode ler, o que pode escrever e o que ele nunca toca. Quem terminar responde uma quarta pergunta: se ele errar ou se calar, quem percebe, e como? Cinco minutos.',
+     faca: ['cronômetro de 5 minutos: começa sozinho na tela do apresentador',
+       'resposta-modelo para a agenda da manhã. Pode ler: a agenda e uma conta de e-mail separada, que recebe por encaminhamento só os e-mails escolhidos (no Gmail, a permissão de leitura vale para a caixa inteira e a de rascunho também envia). Pode escrever: um resumo num arquivo, ou um rascunho nessa conta separada. Nunca toca: a caixa principal, o sistema do tribunal com certificado, pagamento, apagar, abrir link ou anexo de quem escreveu.',
+       '"só uma pasta" e "rascunho, nunca enviado" dependem de o produto obedecer à regra; a permissão do Gmail não garante isso, e por isso entra a conta separada',
+       'cortado o acesso, o que ele guardou na memória e no histórico pode continuar existindo: conferir na política do fornecedor o que fica retido e por quanto tempo, e usar os recursos de exclusão. Apagar no app não garante que o provedor apague cópias retidas',
+       'quarta linha, se ele errar ou se calar: a omissão (uma intimação que ficou fora do resumo) só aparece para quem confere; nas duas semanas de teste, alguém compara o resumo com a caixa',
        'fecho: "Duas semanas, só lendo." Uma conta de teste, só leitura, e aprovação para tudo que sai.'],
      transicao: 'Tempo. Agora, o sistema em volta do modelo.'}},
 );
-// Bloco B, harness (6 min): o sistema em volta do modelo, o vídeo dos dez agentes e o custo de cada um. Fatos só do
+// Bloco B, harness (6 min): o sistema em volta do modelo, o vídeo dos oito agentes e duas buscas e o custo de cada um. Fatos só do
 // briefing.md e da ficha docs/pesquisa/dia2-harness-quatilex.md (print de 05/11/2026).
 SLIDES.push(
   {id: 'harness-cap', titulo: 'O sistema em volta do modelo', bloco: 'harness', andamento: 'capitulo', linhaDia: false,
    notas: {diga: 'Até aqui, um assistente sozinho. Agora, o que fica em volta do modelo: o harness. É o sistema que divide o trabalho entre vários agentes, cada um com um modelo. Vou mostrar uma peça da PGE-MS por dentro. Falo da experiência de quem trabalha lá; a co.juris não fala em nome da PGE-MS.',
      faca: ['bloco curto, de 6 minutos: o vídeo e o custo de cada agente', 'apontar o aviso do rodapé'],
-     transicao: 'Uma peça, dez agentes.'}},
-  {id: 'harness', titulo: 'Dez agentes, uma peça', video: [0.9, 39.5], ritmoOk: 'vídeo de 40 s, narrado pelo professor',
-   notas: {diga: 'Esta é uma peça real, gerada no quatilex, sem nenhum dado de processo. Dez agentes e seis modelos trabalharam nela. Primeiro, o classificador lê os autos e decide o tipo do caso. Dois leitores baratos leem os autos ao mesmo tempo e listam argumentos e fatos, com a fonte. O agrupador junta o que os dois disseram igual. Aí entra o redator, com o Claude Opus 5.5, que escreve a peça e confere nos autos. Dois validadores checam os julgados e os artigos de lei citados. Por último, um agente confere se a peça afirma um ofício que não foi expedido. Doutrina e jurisprudência são ferramentas de busca que os leitores e o redator chamam.',
+     transicao: 'Uma peça, oito agentes e duas buscas.'}},
+  {id: 'harness', titulo: 'Oito agentes, duas buscas, uma peça', video: [0.9, 39.5], ritmoOk: 'vídeo de 40 s, narrado pelo professor',
+   notas: {diga: 'Esta é uma peça real, gerada no quatilex, sem nenhum dado de processo. Oito agentes e duas ferramentas de busca, com seis modelos, trabalharam nela. Primeiro, o classificador lê os autos e decide o tipo do caso. Dois leitores baratos leem os autos ao mesmo tempo e listam argumentos e fatos, com a fonte. O agrupador junta o que os dois disseram igual. Aí entra o redator, com o Claude Opus 5.5, que escreve a peça e confere nos autos. Dois validadores checam os julgados e os artigos de lei citados. Por último, um agente confere se a peça afirma um ofício que não foi expedido. Doutrina e jurisprudência são ferramentas de busca que os leitores e o redator chamam.',
      faca: ['o vídeo toca sozinho na moldura; não há nada ao vivo neste slide',
        'o vídeo tem 40 s; falar por cima dele, na ordem em que os agentes aparecem',
-       'os números valem para esta peça, não para a média do sistema'],
+       'os números valem para esta peça, não para a média do sistema',
+       'o vídeo escreve "10 agentes" porque conta as duas buscas, marcadas nele como ferramenta; dizer: oito agentes e duas buscas'],
      transicao: 'E quanto custou cada um?'}},
   {id: 'redator', titulo: 'O caro só onde faz diferença', passos: [3.2],
-   notas: {diga: 'A peça inteira custou US$ 1,59. Só o redator, com o modelo caro, custou US$ 1,39: 87% da conta. Os outros nove, somados, custaram US$ 0,21. O modelo caro fica onde a qualidade decide, na escrita. Ler, classificar, buscar e conferir vão para modelos baratos. É isso que um bom harness faz.',
+   notas: {diga: 'A peça inteira custou US$ 1,59. Só o redator, com o modelo caro, custou US$ 1,39: 87% da conta. As outras nove linhas, entre agentes e buscas, somadas, custaram US$ 0,21. E o redator custa caro porque lê muito: do US$ 1,39 dele, 82% é carregar e reler o contexto, e 18% é escrever. Ler, classificar, buscar e conferir vão para modelos baratos. É isso que um bom harness faz.',
      faca: ['apontar a barra dourada do redator e depois as nove barras finas', 'lembrar: números de uma peça, do print de 05/11/2026'],
      transicao: 'Custo por peça é uma conta. Quem paga a conta inteira é outra história.'}},
 );
-// Bloco C, quem paga a conta (23 min): o uso já se paga, a corrida não; o plano fixo encolhe; o que levar de um app a
+// Bloco C, quem paga a conta (19 min): o uso já se paga, a corrida não; o plano fixo encolhe; o que levar de um app a
 // outro (A8). Fatos só do briefing.md e da ficha docs/pesquisa/dia2-economia-subsidio-bolha.md.
 SLIDES.push(
   {id: 'conta-cap', titulo: 'Quem paga a conta', bloco: 'conta', andamento: 'capitulo', linhaDia: false,
-   notas: {diga: 'A peça custou um dólar e cinquenta e nove. Agora, a conta grande: quem paga a IA que vocês usam? A resposta curta está na tela. Cada uso já se paga. A corrida para o próximo modelo, ainda não.',
-     faca: ['bloco de 23 minutos: custo, compromissos, o plano fixo, bolha e a atividade A8'],
-     transicao: 'Começo pelo custo de cada uso.'}},
-  {id: 'custo', titulo: 'Cada uso já se paga', passos: [3.0, 1.6, 1.6],
-   notas: {diga: 'Estes números vêm do prospecto que a Anthropic entregou à SEC, a comissão de valores dos Estados Unidos, em 2 de novembro de 2026. É o custo de computação dividido pela receita. A linha tracejada é o empate: custo igual à receita. Em 2024, a empresa gastava 653% do que faturava, mais de seis vezes. Em 2025, 160%. De janeiro a setembro de 2026, 57%. O custo de cada uso já cabe na receita.',
+   notas: {diga: 'A peça custou um dólar e cinquenta e nove. Agora, a conta grande: quem paga a IA que vocês usam? A resposta curta está na tela. A computação já cabe na receita. Os compromissos para os próximos anos, ainda não.',
+     faca: ['bloco de 19 minutos: custo, compromissos, o plano fixo, bolha e a atividade A8'],
+     transicao: 'Começo pelo custo da computação.'}},
+  {id: 'custo', titulo: 'A computação já cabe na receita', passos: [3.0, 1.6, 1.6],
+   notas: {diga: 'Estes números vêm do prospecto que a Anthropic entregou à SEC, a comissão de valores dos Estados Unidos, em 2 de novembro de 2026. É toda a computação da empresa dividida pela receita, com o treino dos modelos dentro. O prospecto diz que essa linha cobre pesquisa, desenvolvimento de modelos, atendimento a clientes e uso interno. A linha tracejada é o empate: custo igual à receita. Em 2024, a computação custava 653% do que a empresa faturava, mais de seis vezes. Em 2025, 160%. De janeiro a setembro de 2026, 57%. E só o atendimento a clientes pagantes custou 14,5% da receita nesse período.',
      faca: ['chegada: 2024; avisar que a barra está quebrada porque 653% não cabe na tela',
-       'clique 1: 2025, ainda acima da linha', 'clique 2: 2026, a barra dourada abaixo da linha'],
+       'clique 1: 2025, ainda acima da linha', 'clique 2: 2026, a barra dourada abaixo da linha', 'os 14,5% são conta feita sobre a nota 8 do prospecto (custo da receita, quase todo computação para servir clientes); o valor isolado do treino não aparece no documento'],
      transicao: 'Então onde está o dinheiro que falta? Neste número.'}},
   {id: 'compromissos', titulo: 'US$ 895 bi', passos: [3.2], segura: 3,
    notas: {diga: 'Oitocentos e noventa e cinco bilhões de dólares. É quanto a Anthropic já contratou em computação, segundo o mesmo prospecto. E o contrato manda pagar com ou sem uso. Desse total, 447,5 bilhões vencem até o fim de 2030. A receita vai crescer nesse ritmo? Nenhum documento que eu li responde.',
      faca: ['pausa de três segundos depois do número', 'a expressão do prospecto é "regardless of actual utilization", com ou sem uso de fato'],
      transicao: 'Se o uso se paga, quem banca essa corrida?'}},
   {id: 'quem-banca', titulo: 'Quem banca a corrida',
-   notas: {diga: 'Dois ramos. Em cima, os investidores, junto com a dívida, bancam o treino dos próximos modelos e os data centers. Embaixo, dentro dos planos de preço fixo, o usuário leve banca o usuário pesado. O preço de hoje cobre o uso de hoje. A próxima geração sai de outro bolso.',
+   notas: {diga: 'Dois ramos. Em cima, os investidores, junto com a dívida, bancam os data centers e os compromissos de computação dos próximos anos, os 895 bilhões do slide anterior. O treino de hoje já está dentro da conta da computação que vimos. Embaixo, dentro dos planos de preço fixo, o usuário leve banca o usuário pesado. O preço de hoje não paga a próxima geração.',
      faca: ['apontar o ramo de cima e depois o de baixo'],
      transicao: 'Quem é esse usuário pesado?'}},
   {id: 'pesado', titulo: 'O usuário pesado custa caro',
@@ -863,19 +982,21 @@ SLIDES.push(
    notas: {diga: 'A tecnologia fica: ela é real e é útil. O preço muda, e muda também o que o plano compra. Quem depende de um app só fica preso à conta dele.',
      faca: ['pausa curta'],
      transicao: 'Então vamos testar a dependência de vocês.'}},
-  {id: 'a8', titulo: 'Sua vez: e se o preço dobrar?', pratica: 5, passos: [2.0, 1.4],
-   notas: {material: {"objetivo": "Descobrir o que está preso ao app quando o preço dobra.", "abrir": ["aula4/gabarito.md"], "passos": ["Só a pergunta na tela; cinco minutos em dupla.", "Segundo clique: entra o que vai com você para outro app.", "Peça a duas duplas que digam o que quebra."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Cinco minutos, em dupla. Imaginem que, na sexta, o plano que vocês usam dobra de preço. O que quebra no trabalho de vocês? Pensem no que está preso ao app.',
-     faca: ['chegada: só a pergunta; disparar o cronômetro de 5 minutos (começa sozinho na tela do apresentador)',
-       'segundo clique: a resposta, depois do tempo; entra à direita o que vai com vocês para outro app',
-       'gabarito, no próximo slide: costuma quebrar o que está preso ao app; instruções só na memória do chat, documentos só no projeto do fornecedor, nenhum segundo fornecedor testado',
-       'no fim, pedir a duas duplas que digam o que quebra'],
+  {id: 'a8', titulo: 'Sua vez: e se o plano mudar?', pratica: 4, passos: [2.0, 1.4],
+   notas: {material: {"objetivo": "Separar dois cenários (o preço dobra; a franquia cai à metade), dizer o que quebra em cada um e fazer a conta pela fatura.", "abrir": ["aula4/gabarito.md"], "passos": ["Chegada: os dois cenários e a pergunta; quatro minutos em dupla.", "A conta: diferença da fatura em reais, dividida pelo valor da hora, dá as horas por mês que o aumento precisa poupar.", "Segundo clique: sai a pergunta e entra o que costuma quebrar.", "Peça a duas duplas a conta e o que quebra."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Quatro minutos, em dupla. Na sexta, acontece uma de duas coisas. Cenário 1: o plano dobra de preço. Cenário 2: o preço fica, e a franquia cai à metade. Para cada um: o que quebra no trabalho de vocês? E, com o valor da última fatura e o uso real de vocês, quantas horas por mês o aumento precisa poupar?',
+     faca: ['chegada: os dois cenários e a pergunta; disparar o cronômetro de 4 minutos (começa sozinho na tela do apresentador)',
+       'a conta: diferença da fatura em reais, dividida pelo valor da hora. Com hora de R$ 150 a R$ 300 e câmbio de 4 a 7 (valores fictícios), um plano de US$ 20 que vira US$ 40 se paga com 0,3 a 0,9 hora poupada por mês; um de US$ 200 que dobra, com 2,7 a 9,3 horas',
+       'os dois cenários só se igualam no custo por unidade, e só para quem mantém o uso: quem usa menos da metade da franquia não sente o corte e sente o aumento; quem usa a franquia inteira perde metade do trabalho no corte, ou paga para recuperá-lo',
+       'sem a conta, a resposta tende a ser "cancelo"; com ela, costuma ser pagar e usar o mês para tirar o trabalho do app',
+       'segundo clique, depois do tempo: a pergunta sai e entra o que costuma quebrar, o que está preso ao app; o que vai com vocês fica para o próximo slide',
+       'no fim, pedir a duas duplas a conta e o que quebra'],
      transicao: 'O que não quebra é o que vai com vocês.'}},
   {id: 'portavel', titulo: 'O que vai com você de um app a outro',
-   notas: {diga: 'Quatro coisas vão com vocês. A skill: o mesmo SKILL.md serve ao Claude e ao ChatGPT ou ao Codex. A pasta, com os documentos no seu disco. As instruções, escritas em texto, fora da memória do chat. E um segundo fornecedor, testado antes de precisar. Se o preço dobrar, vocês trocam de app e levam o trabalho junto.',
+   notas: {diga: 'Quatro coisas vão com vocês. A skill: o mesmo SKILL.md serve ao Claude e ao ChatGPT ou ao Codex. A pasta, com os documentos no seu disco. As instruções, escritas em texto, fora da memória do chat, como o CLAUDE.md ou o AGENTS.md da pasta. E um segundo fornecedor, testado antes de precisar. Se o preço dobrar, vocês trocam de app e levam o trabalho junto.',
      faca: ['comparar com o que as duplas disseram'],
      transicao: 'O preço é uma dependência. A outra é onde o dado mora.'}},
 );
-// Bloco D, geopolítica (18 min): capítulo, chips, a distância dos abertos, o teste do CAISI, o CLOUD Act (S.T.A.R.), o
+// Bloco D, geopolítica (15 min): capítulo, chips, a distância dos abertos, o teste do CAISI, o CLOUD Act (S.T.A.R.), o
 // calendário do AI Act e o debate A9. Fatos só do briefing.md e da ficha G (docs/pesquisa/dia2-geopolitica-ia.md).
 SLIDES.push(
   {id: 'geo-cap', titulo: 'Quem manda no dado', bloco: 'geopolitica', andamento: 'capitulo', linhaDia: false,
@@ -891,63 +1012,96 @@ SLIDES.push(
      faca: ['deixar o número na tela em silêncio um instante', 'dizer o que é modelo aberto: o que se baixa e roda em servidor próprio'],
      transicao: 'Perto em capacidade. E em segurança?'}},
   {id: 'aberto-seguro', titulo: 'Aberto não quer dizer seguro',
-   notas: {diga: 'O CAISI, órgão do NIST, do governo americano, testou o DeepSeek R1-0528 em 30 de setembro de 2025. Agentes montados sobre ele foram 12 vezes mais propensos a seguir instruções maliciosas. Com um jailbreak comum, que é um truque de texto para furar as travas do modelo, atenderam 94% dos pedidos maliciosos. Os modelos americanos, 8%. Uma ressalva: é o governo dos EUA avaliando concorrentes chineses. Isso não invalida os números, mas pede leitura com isso em mente.',
-     faca: ['apontar o 94% e o 8%, lado a lado', 'ler o rodapé em voz alta'],
+   notas: {diga: 'O CAISI, órgão do NIST, do governo americano, testou o DeepSeek R1-0528 em 30 de setembro de 2025. Agentes montados sobre ele foram 12 vezes mais propensos a seguir instruções maliciosas. Com um jailbreak comum, que é um truque de texto para furar as travas do modelo, atenderam 94% dos pedidos maliciosos. Os modelos americanos, 8%. Duas ressalvas. É o governo dos EUA avaliando concorrentes chineses, o que não invalida os números, mas pede leitura com isso em mente. E, no rodapé: na comparação americana entrou o gpt-oss, que também é aberto, e a página não informa o idioma dos testes. O teste fala deste modelo; ele não mede aberto contra fechado.',
+     faca: ['apontar o 94% e o 8%, lado a lado', 'ler o rodapé em voz alta: o título diz mais do que a fonte mede'],
      transicao: 'Agora o ponto que eu quero que vocês guardem: onde o dado mora.'}},
   {id: 'cloud-act', titulo: 'Dado no Brasil, empresa nos EUA',
-   notas: {diga: 'O dado pode morar num data center no Brasil. Mas, se o provedor é americano, o CLOUD Act, a lei 18 U.S.C. § 2713, obriga a empresa a preservar ou entregar o que está sob o controle dela, dentro ou fora dos EUA. Onde o dado mora é uma pergunta. Quem pode mandar entregar é outra. Esse conflito se resolve por acordo executivo, e os EUA têm só dois: Reino Unido e Austrália. O Brasil não está na lista do Departamento de Justiça americano.',
-     faca: ['apontar o ramo de cima, onde o dado mora', 'apontar o ramo de baixo, quem pode mandar entregar', 'perguntar à sala: o contrato do seu órgão diz quem é o provedor?'],
+   notas: {diga: 'Imaginem que o órgão de vocês contrata a nuvem de uma empresa americana, com o data center no Brasil. O dado está aqui. Mas o CLOUD Act, a lei americana 18 U.S.C. § 2713, obriga a empresa americana a preservar ou entregar o que está sob o controle dela quando uma autoridade dos EUA manda, com a ordem própria, esteja o dado dentro ou fora dos EUA. Então o lugar onde o dado está não protege sozinho: o que conta é quem controla a empresa. Para resolver o choque entre as leis de dois países, os EUA assinam acordos executivos, e só têm dois, com o Reino Unido e a Austrália. O Brasil não está na lista do Departamento de Justiça americano.',
+     faca: ['ramo de cima: o dado está no Brasil', 'ramo de baixo: a empresa é americana, e é a ela que a ordem dos EUA se dirige', 'perguntar à sala: o contrato do seu órgão diz quem é o provedor?'],
      transicao: 'E as regras sobre a própria IA? Chegam aos poucos.'}},
   {id: 'regras', titulo: 'As regras chegam em datas diferentes',
    notas: {diga: 'Na Europa, o AI Act chega por etapas. Proibições desde fevereiro de 2025. Fiscalização da maior parte das regras desde agosto de 2026: é onde estamos. Alto risco do Anexo III em dezembro de 2027 e produtos regulados em agosto de 2028, datas que o Omnibus Digital adiou. No Brasil, o PL 2338/2023, aprovado no Senado, espera o parecer do relator na Comissão Especial da Câmara. Enquanto isso, valem normas setoriais, como a Resolução CNJ 615/2025.',
      faca: ['apontar o marco aceso: agosto de 2026, a fiscalização'],
      transicao: 'Com isso na mão, vocês decidem.'}},
-  {id: 'a9', titulo: 'Debate: modelo chinês no órgão?', pratica: 6,
-   notas: {material: {"objetivo": "Debater se um modelo aberto chinês pode rodar no servidor do órgão.", "abrir": ["aula4/gabarito.md"], "passos": ["Divida a sala ao meio: um lado defende que pode, o outro que não pode.", "Dois minutos de preparo com as três perguntas do slide, três de debate, um de fecho.", "Seu fecho: rodar em casa tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Debate. Modelo aberto chinês, rodando no servidor do órgão: pode? Metade da sala defende que pode, a outra metade que não pode. Dois minutos para preparar com as três perguntas: onde roda, quem controla a empresa e o que ele faz com uma ordem maliciosa.',
-     faca: ['cronômetro de 6 minutos: começa sozinho na tela do apresentador',
-       'dividir a sala ao meio: um lado defende que pode, o outro que não pode',
-       'dois minutos de preparo, três de debate, um para o fecho',
+  {id: 'a9', titulo: 'Sua vez: modelo chinês no órgão?', pratica: 5,
+   notas: {material: {"objetivo": "Dizer em que condições um modelo aberto chinês pode rodar, sem internet, no servidor do órgão.", "abrir": ["aula4/gabarito.md"], "passos": ["Duplas: dois minutos de preparo com as três perguntas do slide.", "Dois minutos: cada dupla diz uma condição; você anota as condições da sala.", "Um minuto de fecho: rodar em casa tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Modelo aberto de laboratório chinês, rodando sem internet no servidor do órgão, para resumir petições. Em que condições pode? Dois minutos para preparar, em dupla, com três perguntas. Onde roda, e quem opera a máquina? O que a empresa ainda controla, se o dado não sai? O que ele faz com uma petição que traz ordem escondida?',
+     faca: ['cronômetro de 5 minutos: começa sozinho na tela do apresentador',
+       'sem dividir a sala em lados: a pergunta é de condições, e a premissa (sem internet, no servidor do órgão) já responde onde o dado fica',
+       'dois minutos de preparo, dois para ouvir uma condição de cada dupla, um para o fecho',
+       'condições que costumam aparecer: piloto sem internet, sem ferramentas que ajam, testes próprios em português, relatório de impacto',
+       'CLOUD Act, LGPD e lei chinesa: não afirmar alcance que não foi conferido; a revisão normativa fica pendente do professor',
        'fecho do professor (ficha de geopolítica, seção 2): rodar dentro da infraestrutura do órgão tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo, que é o que o CAISI mediu',
        'se a sala confundir: o mesmo modelo usado pela API do fabricante chinês leva o dado à jurisdição chinesa; o par que importa é rodar em casa ou mandar para fora'],
      transicao: 'Tempo. Para fechar, o futuro.'}},
 );
-// Bloco E, futuro e fecho (16 min): capítulo, o ritmo medido, os dois cenários, os sinais, A10, A11, os quatro verbos e
-// o fecho. Fatos só do briefing.md e da ficha G (docs/pesquisa/dia2-geopolitica-ia.md, 1.6 e seção 3).
+// Bloco E, futuro e fecho (24 min): capítulo, o ritmo medido, os quatro cenários, otimistas e pessimistas, o que já se
+// mede, os horizontes, o debate, os sinais, A10, A11, os quatro verbos e o fecho. Fatos só do briefing.md e das fichas
+// docs/pesquisa/dia2-geopolitica-ia.md (1.6 e seção 3) e docs/pesquisa/dia2-futuro-e-assistentes.md (seções 3 e 4).
 SLIDES.push(
   // passos 3,0 s: a viagem de capítulo (2,2 s) só fecha a base da trilha e o pad direito 0,7 s depois do pouso
-  {id: 'futuro-cap', titulo: 'E em 2030?', bloco: 'futuro', andamento: 'capitulo', linhaDia: false, passos: [3.0],
-   notas: {diga: 'Último bloco: e em 2030? Não vou fazer previsão de consultoria. Vou mostrar o ritmo medido, dois cenários e sinais com data, para vocês acompanharem.',
+  {id: 'futuro-cap', titulo: 'E em 20 anos?', bloco: 'futuro', andamento: 'capitulo', linhaDia: false, passos: [3.0],
+   notas: {diga: 'Último bloco: e em 20 anos? Boa parte de vocês ainda terá 20 anos ou mais de carreira pela frente. Não vou fazer previsão de consultoria. Vamos ver o ritmo medido, os cenários, os otimistas, os pessimistas e o que já se mede. Depois, vocês debatem.',
      faca: ['deixar a pergunta na tela um instante antes de falar'],
      transicao: 'Primeiro, o ritmo.'}},
   {id: 'ritmo', titulo: '5x ao ano',
    notas: {diga: 'Cinco vezes ao ano. É quanto cresce o cômputo de treino dos modelos líderes, isto é, o poder de computação gasto para treinar cada nova geração. A eficiência dos algoritmos melhora de 2 a 6 vezes ao ano. Quem mede é o Relatório Internacional de Segurança da IA, de 3 de fevereiro de 2026, presidido por Yoshua Bengio.',
      faca: ['deixar o número na tela em silêncio um instante'],
-     transicao: 'Se esse ritmo continuar, onde chegamos? Depende.'}},
-  {id: 'cenarios', titulo: 'De ganho modesto a salto rápido',
-   notas: {diga: 'O mesmo relatório cita a OCDE: até 2030, o resultado pode ir de melhoras modestas a ganhos rápidos. Essa faixa, do modesto ao rápido, é da OCDE. E o próprio Relatório Internacional de Segurança da IA 2026 projeta: se a tendência se mantiver, os sistemas completariam com confiança tarefas de software bem especificadas que levam vários dias. Há gargalos possíveis: dados, chips, dinheiro e energia. Qualquer um deles pode frear a curva.',
-     faca: ['apontar o ramo de cima, depois o de baixo', 'as tarefas de vários dias são projeção do Relatório Internacional de Segurança da IA 2026; a faixa modesto a rápido é da OCDE, citada nele', 'ler a legenda: os gargalos'],
-     transicao: 'Como saber para qual lado vamos? Olhando sinais.'}},
+     transicao: 'Se esse ritmo seguir, onde chegamos em 2030? A OCDE desenhou quatro cenários.'}},
+  {id: 'cenarios', titulo: 'Quatro cenários para 2030',
+   notas: {diga: 'Quatro cenários para 2030, da OCDE, resumidos no Relatório Internacional de Segurança da IA. No primeiro, o progresso estanca: a IA faz rápido, mas erra e pede revisão humana. É como a velocidade dos aviões de passageiros, que parou em 500 nós. No segundo, desacelera: um assistente útil, que usa o computador e guarda memória. Como os antibióticos depois da era de ouro. No terceiro, continua: um colaborador especialista, que faz tarefas profissionais de um mês. Como a lei de Moore. No quarto, acelera: o nível de um trabalhador remoto, com a IA ajudando a fazer a própria IA. Como o sequenciamento de DNA entre 2000 e 2020. Um estudo do METR projeta que, se a tendência atual continuar, em 2030 a IA fará tarefas de software bem delimitadas que levam vários dias de um engenheiro. E alguns especialistas acham que, depois de 2030, dados, chips, capital e energia podem virar gargalo. O relatório diz que não há consenso sobre o cenário mais provável.',
+     faca: ['dizer de onde vem cada coisa: os quatro cenários são da OCDE; a projeção das tarefas de vários dias é do METR e vale só se a tendência continuar; os gargalos são opinião de alguns especialistas, para depois de 2030, citada pelo relatório',
+       'até 2030, o próprio relatório diz que não há limite duro em energia, chips ou dados'],
+     transicao: 'E quem aposta alto? Os otimistas.'}},
+  {id: 'otimistas', titulo: 'Os otimistas',
+   notas: {diga: 'Três otimistas. Dario Amodei, CEO da Anthropic, em outubro de 2024: a IA pode comprimir 50 a 100 anos de progresso da biologia em 5 a 10 anos. Demis Hassabis, do Google DeepMind, em fevereiro de 2026: em 10 ou 15 anos, uma nova era de ouro da descoberta. E o Goldman Sachs, em 2023: a IA generativa poderia deixar o PIB mundial 7% maior em dez anos. O mesmo relatório do Goldman diz que ela expõe o equivalente a 300 milhões de empregos.',
+     faca: ['guardar o nome de Amodei: ele volta no próximo slide'],
+     transicao: 'Agora o outro lado.'}},
+  {id: 'pessimistas', titulo: 'Os pessimistas',
+   notas: {diga: 'Três pessimistas. O mesmo Dario Amodei, em janeiro de 2026: a IA vai afetar metade dos empregos de entrada de escritório em 1 a 5 anos. Em 2025, ele já tinha falado em desemprego de 10 a 20% nos EUA, com o direito entre os setores mais expostos. Geoffrey Hinton, Nobel de Física de 2024, em dezembro de 2025: em 2026, a IA terá capacidade para substituir muitos, muitos empregos. E Yoshua Bengio, que preside o Relatório Internacional, em 2025: riscos graves em cinco a dez anos. Sobre extinção, ele diz que mesmo 1% de chance não é aceitável.',
+     faca: ['apontar que Amodei aparece nos dois lados: otimista na ciência, pessimista no emprego de entrada'],
+     transicao: 'Isso são visões. E o que já se mede?'}},
+  {id: 'medido', titulo: 'Os iniciantes sentem primeiro',
+   notas: {diga: 'O que já se mede. Stanford, em agosto de 2026: jovens de 22 a 25 anos, nas funções mais expostas à IA, têm 19% menos emprego que o esperado. Em 2025 eram 15%. O efeito vem de menos contratação. E o mesmo estudo diz que não vê perda geral de emprego. O Yale Budget Lab concorda: a mudança nas ocupações é pequena e começou antes da IA. No direito, a Thomson Reuters prevê menos vagas de júnior em 2026, e 78% dos profissionais dizem que o iniciante depende de mentoria para aprender o que a IA está tirando dele. Até Sam Altman recuou em maio de 2026: esperava mais demissões de iniciantes a esta altura e disse "I\'m delighted to be wrong", que bom que errei.',
+     faca: ['traduzir a frase de Altman: "que bom que eu errei"', 'os dados não separam a IA de juros altos e contratação fraca'],
+     transicao: 'Juntando tudo, por horizonte.'}},
+  {id: 'horizontes', titulo: '2, 5, 10, 20 anos',
+   notas: {diga: 'Por horizonte. Em 2 anos, Amodei fala em IA poderosa, e Altman em sistemas que chegam a ideias novas. Em 5, Amodei fala em metade da entrada afetada. Em 10, a disputa é entre a era de ouro de Hassabis e os riscos graves de Bengio. E há os céticos. Daron Acemoglu, Nobel de Economia, calcula no máximo 0,66% de ganho de produtividade em dez anos. Yann LeCun acha que os modelos de linguagem são um beco sem saída para chegar à inteligência humana. Em 20 anos, ninguém mede: nenhuma fonte séria arrisca número. Esse horizonte é o da carreira de vocês, e quem decide são vocês.',
+     faca: ['apontar o marco aceso: 20 anos'],
+     transicao: 'Então vamos debater.'}},
+  {id: 'debate', titulo: 'Sua carreira em 2046', pratica: 8, passos: [2.0, 1.4],
+   notas: {material: {"objetivo": "Debater o futuro da carreira com dados: um lado otimista, outro pessimista, e uma decisão para a semana que vem.", "passos": ["Duplas: um defende o futuro otimista, o outro o pessimista, cada um com um dado dos slides.", "2 minutos de preparo: cada um escolhe o seu dado.", "4 minutos de conversa em dupla.", "2 minutos: três duplas contam o que mudam já na semana que vem."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Sua carreira em 2046. Em dupla. Um de vocês defende o futuro otimista, o outro o pessimista, e cada um com um dado que viu nos slides. Dois minutos para escolher o dado, quatro para conversar. No fim, cada um responde: o que você muda já na semana que vem?',
+     faca: ['chegada: só a pergunta; clique 1: o enunciado',
+       'cronômetro de 8 minutos: começa sozinho na tela do apresentador',
+       'dividir o tempo: 2 minutos de preparo, 4 de conversa, 2 para três duplas contarem',
+       'pergunta de fecho do professor: qual dado mudou a sua decisão, e o que vocês fazem na segunda-feira?'],
+     transicao: 'Para não depender de previsão, sinais com data.'}},
   {id: 'sinais', titulo: 'Sinais para acompanhar',
    notas: {diga: 'Em vez de previsão, sinais com fonte pública. Em 2 de dezembro de 2026, na União Europeia, acaba a transição das regras de transparência do AI Act. Na Câmara, o parecer do relator do PL 2338. Na Epoch AI, a próxima medição da distância entre abertos e fechados, que estava em quatro meses. E em abril de 2027, se o calendário se mantiver, o novo AI Index de Stanford.',
      faca: ['apontar o marco aceso: dezembro de 2026, o mais próximo'],
      transicao: 'O futuro de vocês começa com um plano de 30 dias.'}},
   {id: 'a10', titulo: 'Seu plano de 30 dias', pratica: 5,
-   notas: {material: {"objetivo": "Cada um sai com o próprio plano de 30 dias, em três linhas.", "abrir": ["aula4/A10-plano-30-dias.md"], "passos": ["Sozinhos, cinco minutos, no celular: semana 1 uma skill; semanas 2 e 3 uma pasta de caso; semana 4 uma rotina que pode falhar sem dano.", "Circule pela sala; a quem travar na semana 4: se essa rotina falhar em silêncio, o que se perde?"], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Cada um, sozinho, cinco minutos. Três linhas. Semana 1: uma skill do seu jeito. Semanas 2 e 3: uma pasta de caso. Semana 4: uma rotina que pode falhar sem dano. Escrevam com uma tarefa real de vocês. Cada um guarda o seu.',
+   notas: {material: {"objetivo": "Cada um sai com o próprio plano de 30 dias, em três linhas.", "abrir": ["aula4/A10-plano-30-dias.md"], "passos": ["Sozinhos, cinco minutos, no celular: semana 1 uma skill; semanas 2 e 3 uma pasta de caso no próprio disco, fora do app; semana 4 uma rotina que pode falhar sem dano.", "Em cada semana: com que dado fictício testo primeiro, como sei que deu certo (um número), o que ela nunca faz e quem confere.", "Circule pela sala; a quem travar na semana 4: se essa rotina falhar em silêncio, o que se perde?"], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Cada um, sozinho, cinco minutos. Três linhas. Semana 1: uma skill do seu jeito. Semanas 2 e 3: uma pasta de caso, no disco de vocês, fora do app. Semana 4: uma rotina que pode falhar sem dano. Em cada semana, respondam: com que dado fictício eu testo primeiro, como sei que deu certo, com um número, e o que ela nunca faz. Primeiro o fictício; a tarefa real só depois. Cada um guarda o seu.',
      faca: ['cronômetro de 5 minutos: começa sozinho na tela do apresentador',
        'sem papel: cada um anota no celular, onde quiser',
-       'circular pela sala; a quem travar na semana 4, perguntar: se essa rotina falhar em silêncio, o que se perde?'],
+       'circular pela sala; a quem travar na semana 4, perguntar: se essa rotina falhar em silêncio, o que se perde?',
+       'semana 4: a rotina agendada do Claude exige plano pago; a rotina registra também "rodou e achou zero", para resultado vazio não se confundir com rotina parada',
+       'quem quiser ir além: cada semana com um dono, quem confere o resultado; a ficha completa está no kit, aula4/A10-plano-30-dias.md'],
      transicao: 'Agora eu quero ouvir vocês.'}},
-  {id: 'a11', titulo: 'O que você leva, o que faltou', pratica: 5,
-   notas: {material: {"objetivo": "Devolutiva do curso: o que cada um leva e o que faltou.", "passos": ["Em roda, uma coisa que leva e uma que faltou.", "Anote as faltas para a próxima turma.", "Sala grande: uma frase por pessoa."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Devolutiva do curso. Em roda, cada um diz uma coisa que leva e uma que faltou. Eu anoto as faltas para a próxima turma.',
-     faca: ['cronômetro de 5 minutos: começa sozinho na tela do apresentador', 'anotar as faltas para a próxima turma', 'sala grande: uma frase por pessoa'],
+  {id: 'a11', titulo: 'O que você leva, o que faltou', pratica: 4,
+   notas: {material: {"objetivo": "Devolutiva do curso: o que cada um leva e o que faltou.", "passos": ["Dois minutos escrevendo: leva, o que vai fazer na segunda-feira, numa frase; faltou, o que queria ter feito com as mãos e não fez.", "Depois, a roda: uma frase por pessoa.", "Anote as faltas para a próxima turma.", "Minuto 89: corte a roda e vá para o fecho."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Devolutiva do curso. Dois minutos para escrever duas frases. Leva: o que você vai fazer na segunda-feira. Faltou: o que você queria ter feito com as mãos e não fez. Depois, em roda, quem quiser lê. Eu anoto as faltas para a próxima turma.',
+     faca: ['cronômetro de 4 minutos: começa sozinho na tela do apresentador; vai do minuto 85 ao 89',
+       'dois minutos escrevendo, no celular ou no formulário anônimo, se houver um; depois a roda',
+       'quem não quiser falar fica só com o escrito; dito em roda, diante do professor, o "faltou" pode sair mais brando',
+       'anotar as faltas para a próxima turma',
+       'no minuto 89, cortar a roda: os dois últimos slides e o fecho levam um minuto'],
      transicao: 'Obrigado. Fecho com o curso inteiro.'}},
   {id: 'curso', titulo: 'Quatro aulas, quatro verbos',
    notas: {diga: 'Quatro aulas, quatro verbos. Entender, na Aula 1. Pedir, na Aula 2. Fazer, na Aula 3. E hoje, decidir: o que a IA alcança, quanto ela custa e de quem vocês passam a depender.',
      faca: ['apontar o marco aceso: decidir'],
      transicao: 'Se for para lembrar de uma coisa só...'}},
-  {id: 'fecho', titulo: 'Delegue pouco. Confira a fonte.', segura: 4, linhaDia: false,
-   notas: {diga: 'Delegue pouco. Confira a fonte. Muito obrigado pelas quatro aulas e pela conversa de hoje. O kit do dia 2 está no GitHub, no endereço do fim da Aula 3. Comecem pela semana 1 do plano.',
-     faca: ['o kit: github.com/kaoyeoshiro/kit-dia2-curso-ia', 'deixar a mensagem na tela durante as perguntas'],
+  {id: 'fecho', titulo: 'A IA trabalha. Quem decide é você.', segura: 4, linhaDia: false,
+   notas: {diga: 'A IA trabalha. Quem decide é você. Muito obrigado pelas quatro aulas e pela conversa de hoje. O kit do dia 2 está em cojuris.com.br/kit.',
+     faca: ['o kit: cojuris.com.br/kit (o mesmo material está no GitHub, kaoyeoshiro/kit-dia2-curso-ia)', 'deixar a mensagem na tela durante as perguntas'],
      transicao: 'Fim do curso.'}},
 );
 
@@ -1093,6 +1247,22 @@ CENAS.memoria = (() => {
   };
 })();
 
+// retencao: o desenho da comparação, em dois tempos. Chegam os dois nomes e o fio; no clique, as regras de cada lado
+// e a linha da fonte.
+CENAS.retencao = (() => {
+  const sec = m.secao('retencao'), jans = $$(sec, '.janela'), fio = sec.querySelector('.fio-v');
+  const txts = $$(sec, '.janela-txt'), fonte = sec.querySelector('.a-ret-fonte');
+  return (t, c) => {
+    const x = conteudo(c), d1 = c.desde(1);
+    titulo(sec, x, c);
+    jans.forEach((jn, n) => surgir(jn.querySelector('.letra'), molaAR(x - 0.12 - n * 0.1), {dy: 30}));
+    fio.style.transform = `scaleY(${saida(faixa(x, 0.1, 0.6))})`;
+    txts.forEach((el, n) => surgir(el, molaAR(d1 - n * 0.15), {dy: 24}));
+    revelar(fonte, molaAR(d1 - 0.4));
+    fim(sec, x, 1.0);
+  };
+})();
+
 // a7 (cena guia): o enunciado sobe, as três colunas entram em onda e as linhas em branco de cada uma se traçam.
 CENAS.a7 = (() => {
   const sec = m.secao('a7'), aEnun = sec.querySelector('.a-enun'), aCols = $$(sec, '.a-col');
@@ -1186,20 +1356,22 @@ CENAS.compromissos = (() => {
   };
 })();
 
-// a8: na chegada, só a pergunta; no segundo clique (depois do cronômetro), o checklist em miniatura, item por item.
+// a8: na chegada, os dois cenários e a pergunta; no segundo clique (depois do cronômetro), a pergunta sai e o que
+// costuma quebrar entra no lugar dela, item por item.
 CENAS.a8 = (() => {
   const sec = m.secao('a8'), cPerg = sec.querySelector('.c-perg'), cEt = sec.querySelector('.c-mini-et');
   const cMini = sec.querySelector('.c-mini'), cIt = $$(sec, '.c-mini li');
   return (t, c) => {
-    const x = conteudo(c);
+    const x = conteudo(c), d = c.desde(1);
     titulo(sec, x, c);
-    surgir(cPerg, molaAR(x - 0.2), {dy: 24});
+    const sai = faixa(d, 0, 0.25), kPerg = sai > 0 ? 1 - sai : molaAR(x - 0.2);
+    surgir(cPerg, kPerg, {dy: 24});
+    vis(cPerg, kPerg > 0.001);
     fim(sec, x, 1.2);
-    const d = c.desde(1);
-    vis(cEt, d > 0); vis(cMini, d > 0);
-    revelar(cEt, molaAR(d - 0.05));
-    surgir(cMini, molaAR(d - 0.1), {dy: 0});
-    cIt.forEach((el, n) => surgir(el, molaAR(d - 0.2 - n * 0.12), {dx: 18, dy: 0}));
+    vis(cEt, d > 0.25); vis(cMini, d > 0.25);
+    revelar(cEt, molaAR(d - 0.3));
+    surgir(cMini, molaAR(d - 0.35), {dy: 0});
+    cIt.forEach((el, n) => surgir(el, molaAR(d - 0.45 - n * 0.12), {dx: 18, dy: 0}));
   };
 })();
 // ===== Bloco D: geopolítica =====
@@ -1230,22 +1402,24 @@ CENAS['quatro-meses'] = (() => {
   };
 })();
 
-// a9 (cena guia): a pergunta do debate; as três perguntas entram uma a uma; os dois lados da sala por último.
+// a9 (cena guia): a pergunta de condições; as três perguntas entram uma a uma.
 CENAS.a9 = (() => {
   const sec = m.secao('a9'), dPerg = sec.querySelector('.d-a9-perg'), dEt = sec.querySelector('.d-a9-et');
-  const dLis = $$(sec, '.d-a9-lista li'), dLados = $$(sec, '.d-lado');
+  const dLis = $$(sec, '.d-a9-lista li');
   return (t, c) => {
     const x = conteudo(c);
     titulo(sec, x, c);
     revelar(dPerg, molaAR(x - 0.15));
     revelar(dEt, molaAR(x - 0.5));
     dLis.forEach((li, n) => surgir(li, molaAR(x - 0.6 - n * 0.2), {dx: -22, dy: 0}));
-    dLados.forEach((el, n) => surgir(el, molaAR(x - 1.3 - n * 0.15), {dx: 22, dy: 0}));
     fim(sec, x, 1.6);
   };
 })();
 // ===== Bloco E: futuro e fecho =====
-// futuro-cap (respiro), cenarios (ramos), sinais e curso (tempo) e fecho são arquétipos da biblioteca: sem cena própria.
+// futuro-cap (respiro), horizontes, sinais e curso (tempo) e fecho são arquétipos da biblioteca: sem cena própria.
+// otimistas e pessimistas usam os cartões da base.
+CENAS.otimistas = cartoes('otimistas');
+CENAS.pessimistas = cartoes('pessimistas');
 
 // ritmo: o "5x" sobe, "ao ano" chega ao lado, a caneta dourada sublinha o número; a legenda e a fonte depois.
 CENAS.ritmo = (() => {
@@ -1260,6 +1434,57 @@ CENAS.ritmo = (() => {
     revelar(eLeg, molaAR(x - 0.9));
     revelar(eRod, molaAR(x - 1.3));
     fim(sec, x, 1.4);
+  };
+})();
+
+// cenarios: os quatro degraus crescem de baixo para cima, um depois do outro, da esquerda para a direita; o texto de
+// cada um entra quando ele assenta, e a fonte por último.
+CENAS.cenarios = (() => {
+  const sec = m.secao('cenarios'), eDg = $$(sec, '.e-degrau'), eFonte = sec.querySelector('.e-dg-fonte');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    eDg.forEach((el, n) => {
+      const k = saida(faixa(x, 0.1 + n * 0.25, 0.55 + n * 0.25));
+      el.style.transform = `scaleY(${k.toFixed(4)})`;
+      vis(el, k > 0);
+      [...el.children].forEach((f) => revelar(f, molaAR(x - 0.45 - n * 0.25)));
+    });
+    revelar(eFonte, molaAR(x - 1.4));
+    fim(sec, x, 1.6);
+  };
+})();
+
+// medido: o "19%" sobe, o traço dourado se estende embaixo dele, a legenda entra ao lado e a linha menor por último.
+CENAS.medido = (() => {
+  const sec = m.secao('medido'), q = (s) => sec.querySelector(s);
+  const eN = q('.e-md-n'), eTr = q('.e-md-traco'), eLeg = q('.e-md-leg'), eSub = q('.e-md-sub');
+  return (t, c) => {
+    const x = conteudo(c);
+    titulo(sec, x, c);
+    surgir(eN, molaAR(x - 0.1), {dy: 50});
+    contar(eN, saida(faixa(x, 0.1, 0.9)), 0, 19, {sufixo: '%'});
+    eTr.style.transform = `scaleX(${saida(faixa(x, 0.8, 1.2)).toFixed(4)})`;
+    revelar(eLeg, molaAR(x - 0.6));
+    revelar(eSub, molaAR(x - 1.2));
+    fim(sec, x, 1.5);
+  };
+})();
+
+// debate (cena guia): na chegada, a pergunta e as duas setas, que se traçam (a que sobe, depois a que desce); no clique,
+// o enunciado entra e a pergunta do fim chega por último, com a barra dourada.
+CENAS.debate = (() => {
+  const sec = m.secao('debate'), q = (s) => sec.querySelector(s);
+  const eSob = q('.e-seta-s'), eDes = q('.e-seta-d'), eEnun = q('.e-db-enun'), eFim = q('.e-db-fim');
+  return (t, c) => {
+    const x = conteudo(c), d = c.desde(1);
+    titulo(sec, x, c);
+    tracar(eSob, saida(faixa(x, 0.2, 0.9)));
+    tracar(eDes, saida(faixa(x, 0.6, 1.3)));
+    fim(sec, x, 1.3);
+    vis(eEnun, d > 0); vis(eFim, d > 0);
+    revelar(eEnun, molaAR(d - 0.05));
+    surgir(eFim, molaAR(d - 0.5), {dx: -20, dy: 0});
   };
 })();
 

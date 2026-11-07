@@ -13,15 +13,19 @@
   /* o círculo da caneta em volta de "Assistente" é largo: a janela B anda para a direita para ele não cruzar o fio */
   [data-slide="chat-agente"] .janela.escolhida { left: 1100px; width: 700px; }
 
-  /* cinco (cartões): três em cima e dois centrados embaixo; o dots, único dos prontos que inclui o Brasil, de dourado */
-  [data-slide="cinco"] .cartoes { top: 300px; row-gap: 28px; grid-template-columns: repeat(6, 1fr); }
-  [data-slide="cinco"] .cartao { grid-column: span 2; min-height: 250px; }
-  [data-slide="cinco"] .ct-tit { font-size: 56px; }
-  [data-slide="cinco"] .ct-sub { font-size: 34px; }
-  [data-slide="cinco"] .ct-txt { margin-top: 8px; font-size: 40px; }
-  [data-slide="cinco"] .cartao:nth-child(4) { grid-column: 2 / 4; }
-  [data-slide="cinco"] .cartao:nth-child(5) { grid-column: 4 / 6; }
-  [data-slide="cinco"] .a-br { border-color: var(--cor-destaque); }
+  /* retencao (comparação): as duas palavras são largas; a janela B anda para a direita como em chat-agente */
+  [data-slide="retencao"] .janela .letra { font-size: 88px; }
+  [data-slide="retencao"] .janela .janela-txt { top: 180px; width: 680px; }
+  [data-slide="retencao"] .janela.escolhida { left: 1100px; width: 700px; }
+  .a-ret-fonte { position: absolute; left: 120px; top: 880px; font-size: var(--esc-1); color: var(--cor-tinta-suave); }
+
+  /* cinco (cartões): sete, quatro em cima e três centrados embaixo, todos iguais (sem destaque) */
+  [data-slide="cinco"] .cartoes { top: 300px; gap: 28px 24px; grid-template-columns: repeat(8, 1fr); }
+  [data-slide="cinco"] .cartao { grid-column: span 2; min-height: 252px; padding: 24px 22px; }
+  [data-slide="cinco"] .cartao:nth-child(5) { grid-column: 2 / 4; }
+  [data-slide="cinco"] .ct-tit { font-size: 40px; }
+  [data-slide="cinco"] .ct-sub { font-size: 32px; }
+  [data-slide="cinco"] .ct-txt { margin-top: 8px; font-size: 36px; line-height: 1.25; }
 
   /* sigilo (cartões): a regra em corpo de leitura, a referência embaixo */
   [data-slide="sigilo"] .cartoes { top: 330px; }

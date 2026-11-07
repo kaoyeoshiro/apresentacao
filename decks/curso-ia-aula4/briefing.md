@@ -88,16 +88,31 @@ vídeo do harness sai do claude_video_maker sem custo.
 
 ## Atividades (enunciado na tela, gabarito nas notas)
 
-- **A7, acesso mínimo (slide 9, 7 min).** Exercício 22.1 da apostila. Fecho nas notas: "Duas semanas, só lendo" (A 22.6, caixa "Duas semanas de teste com pouco acesso"). Resposta-modelo para "a agenda da manhã": pode
-  ler a agenda e só os e-mails de uma pasta; pode escrever um rascunho salvo, nunca enviado; nunca: a caixa inteira, o
-  sistema do tribunal com certificado, pagamento, apagar.
-- **A8, plano B (slide 21, 5 min).** O que quebra costuma ser o que está preso ao app: instruções só na memória do chat,
-  documentos só no projeto do fornecedor, nenhum segundo fornecedor testado. O slide 22 é o gabarito.
-- **A9, debate (slide 29, 6 min).** Sem gabarito: o professor fecha com a leitura da ficha de geopolítica (seção 2),
+- **A7, acesso mínimo (slide 11, 5 min).** Exercício 22.1 da apostila. Fecho nas notas: "Duas semanas, só lendo" (A 22.6, caixa "Duas semanas de teste com pouco acesso"). Resposta-modelo para "a agenda da manhã" (revista em
+  06/11/2026): pode ler a agenda e uma conta de e-mail separada, que recebe por encaminhamento só os e-mails escolhidos
+  (no Gmail, a permissão de leitura vale para a caixa inteira e a de rascunho também envia); pode escrever um resumo num
+  arquivo, ou um rascunho nessa conta separada; nunca toca a caixa principal, o sistema do tribunal com certificado,
+  pagamento, apagar, abrir link ou anexo de quem escreveu. Cortado o acesso, memória e histórico podem continuar retidos:
+  conferir a política do fornecedor e usar os recursos de exclusão; apagar no app não garante que o provedor apague
+  cópias retidas. A ficha ganhou a quarta linha "Se ele errar ou se calar: quem percebe, e como?".
+- **A8, plano B (slide 23, 4 min).** Dois cenários separados: o plano dobra de preço; o preço fica e a franquia cai à
+  metade. Para cada um, o que quebra e, pela fatura, quantas horas por mês o aumento precisa poupar (conta da revisão:
+  US$ 20 para US$ 40 se paga com 0,3 a 0,9 hora; US$ 200 que dobra, com 2,7 a 9,3 horas, com hora de R$ 150 a R$ 300 e
+  câmbio de 4 a 7, fictícios). O que quebra costuma ser o que está preso ao app: instruções só na memória do chat,
+  documentos só no projeto do fornecedor, nenhum segundo fornecedor testado; vai na tela no segundo clique. O slide 22
+  mostra o que vai com você.
+- **A9, condições (slide 31, 5 min).** Pergunta de condições, sem lados de debate: "Modelo aberto de laboratório
+  chinês, rodando sem internet no servidor do órgão, para resumir petições. Em que condições pode?", com "Onde roda, e
+  quem opera a máquina? O que a empresa ainda controla, se o dado não sai? O que ele faz com uma petição que traz ordem
+  escondida?" (encurtadas na tela). Sem gabarito: o professor fecha com a leitura da ficha de geopolítica (seção 2),
   de que rodar dentro da infraestrutura do órgão tira o dado do alcance de terceiros e desloca o risco para o
   comportamento do modelo, que é o que a avaliação do CAISI mediu.
-- **A10, plano de 30 dias (slide 34, 5 min).** Individual; cada um guarda o seu.
-- **A11, devolutiva (slide 35, 5 min).** Em roda; o professor anota as faltas para a próxima turma.
+- **A10, plano de 30 dias (slide 34, 5 min).** Individual; cada um guarda o seu. Em cada semana: com que dado fictício
+  testo primeiro, como sei que deu certo (um número), o que ela nunca faz e quem confere; semanas 2 e 3, a pasta no
+  próprio disco, fora do app; semana 4, rotina agendada exige plano pago e registra "rodou e achou zero".
+- **A11, devolutiva (slide 35, 4 min, minutos 85 a 89).** Leva: o que vai fazer na segunda-feira, numa frase. Faltou: o
+  que queria ter feito com as mãos e não fez. Dois minutos escrevendo, depois a roda; o professor anota as faltas para a
+  próxima turma. Os slides 36 e 37 ficam com o minuto 89 a 90.
 
 ## Fontes por slide
 
@@ -184,6 +199,26 @@ quadro 0 na parada final; o defeito era do modo de render do motor, que esperava
 só 0,3 s pelo quadro; com 1 s, três rodadas seguidas deram o mesmo still. Oráculo: 0
 erro(s), 1 aviso (hierarquia), 1 isenção (harness).
 
+## Revisão pós-feedback (06/11/2026)
+
+O professor aprovou o relatório `relatorio-feedback-aulas-3-e-4.md`. O roteiro acima fica como registro da versão 1; o
+que mudou: harness passou a "Oito agentes, duas buscas, uma peça" (o vídeo, que não foi alterado, escreve "10 agentes"
+porque conta as duas buscas como ferramenta), com a legenda "Peça real; o print não mostra dado do processo", e a nota
+do redator diz que 82% do US$ 1,39 é carregar e reler o contexto e 18% é escrever; a A7, a A8, a A9, a A10 e a A11
+mudaram como descrito em "Atividades"; o slide 28 traz no rodapé "Na comparação americana entrou o gpt-oss, também
+aberto; idioma dos testes não informado.", e a origem da avaliação ("governo dos EUA") subiu para a linha da fonte; o
+fecho mostra o endereço do kit. O slide cinco (assistentes) não foi tocado. Ficam com o professor, sem mudança: CLOUD
+Act, LGPD e lei chinesa no fecho da A9; a ressalva da Res. CNJ 615/2025 no cartão do slide 7; a menção do Estatuto aos
+procuradores; o formulário anônimo da A11, que ainda não existe.
+
+Avisos aceitos nesta revisão: aberto-seguro com 52 palavras (o rodapé novo é o texto aprovado e a ressalva do governo
+dos EUA continua na tela); oito slides sem respiro de sigilo a custo, porque a legenda nova do harness passou de 12
+palavras.
+
+Pastas e Projetos (06/11/2026, aprovado em t96u, `parecer-pastas-vs-projetos.md`, seção 9.3): nas notas de `portavel`, as
+instruções fora da memória do chat ganham o exemplo "como o CLAUDE.md ou o AGENTS.md da pasta". O slide `cinco` não foi
+tocado.
+
 ## Slide do Grok Bot (06/11/2026)
 
 A pedido do professor, entrou depois de cinco o slide grokbot ("Como eu uso o meu"), com uma animação de 62 s feita no
@@ -194,3 +229,19 @@ respondidos sozinho por escolha do professor; pendências do PGE.Net; eventos de
 pesquisa de compras). Avatares desenhados por código, sem logotipo; mensagens, ofícios e compromissos fictícios. Tem som: só os efeitos sintetizados, a 30% do volume, para o professor falar por cima; no mesmo dia o vídeo do
 harness passou a ter o mesmo tratamento, também a pedido do professor. As prévias
 da tela do apresentador ficam sempre mudas. O deck passa a 38 slides.
+
+## Ajustes do professor (06/11/2026, noite)
+
+Fonte de tudo o que entrou: `docs/pesquisa/dia2-futuro-e-assistentes.md` (F). O slide `cinco` passou a sete
+assistentes, sem destaque dourado (F 2.1 a 2.3; o OpenBot é o da CopilotKit, sem data confirmada, por isso sem data
+nas notas). Em `custo`, os 57% são a computação total, treino incluído (F 1); a manchete virou "A computação já cabe
+na receita", e os 14,5% do atendimento ficam só nas notas (cálculo sobre a nota 8 do S-1/A). Em `quem-banca`, o ramo
+de cima leva "data centers dos próximos anos". O bloco futuro ficou: futuro-cap ("E em 20 anos?"), ritmo, cenarios
+(os quatro cenários da OCDE, F 4), otimistas e pessimistas (F 3.1 e 3.2), medido (Stanford, 19%, F 3.2 e 3.3),
+horizontes (fecho da F 3), debate (8 min), sinais, a10, a11, curso e fecho. Para o trecho de sigilo a custo não passar
+de cinco slides sem respiro, o "87%" de `redator` subiu para 206 px. Sobram três avisos de palavras aceitos: cinco
+(58, texto ditado), aberto-seguro (52, anterior) e medido (46, texto ditado).
+
+## Slide retencao (06/11/2026)
+
+"Assinatura não é contrato": treino e retenção na assinatura individual contra contrato empresarial e API. Fonte: `docs/pesquisa/dia2-retencao-e-treino.md`, políticas oficiais de Anthropic, OpenAI, Google, AWS e Microsoft lidas em 06/11/2026. "Pode guardar por anos": Claude com treino permitido até 5 anos, Gemini pessoal 18 meses (revisados até 3 anos). "Na API, guarda até 30 dias (Google, 55)": APIs da Anthropic e da OpenAI até 30 dias; Gemini API 55 dias para abuso; Bedrock em regra não guarda. Não confirmado e fora da tela: prazo em dias da revisão de abuso no Azure e no Vertex.

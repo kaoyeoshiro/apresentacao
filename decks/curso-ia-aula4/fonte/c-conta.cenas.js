@@ -54,19 +54,21 @@ CENAS.compromissos = (() => {
   };
 })();
 
-// a8: na chegada, só a pergunta; no segundo clique (depois do cronômetro), o checklist em miniatura, item por item.
+// a8: na chegada, os dois cenários e a pergunta; no segundo clique (depois do cronômetro), a pergunta sai e o que
+// costuma quebrar entra no lugar dela, item por item.
 CENAS.a8 = (() => {
   const sec = m.secao('a8'), cPerg = sec.querySelector('.c-perg'), cEt = sec.querySelector('.c-mini-et');
   const cMini = sec.querySelector('.c-mini'), cIt = $$(sec, '.c-mini li');
   return (t, c) => {
-    const x = conteudo(c);
+    const x = conteudo(c), d = c.desde(1);
     titulo(sec, x, c);
-    surgir(cPerg, molaAR(x - 0.2), {dy: 24});
+    const sai = faixa(d, 0, 0.25), kPerg = sai > 0 ? 1 - sai : molaAR(x - 0.2);
+    surgir(cPerg, kPerg, {dy: 24});
+    vis(cPerg, kPerg > 0.001);
     fim(sec, x, 1.2);
-    const d = c.desde(1);
-    vis(cEt, d > 0); vis(cMini, d > 0);
-    revelar(cEt, molaAR(d - 0.05));
-    surgir(cMini, molaAR(d - 0.1), {dy: 0});
-    cIt.forEach((el, n) => surgir(el, molaAR(d - 0.2 - n * 0.12), {dx: 18, dy: 0}));
+    vis(cEt, d > 0.25); vis(cMini, d > 0.25);
+    revelar(cEt, molaAR(d - 0.3));
+    surgir(cMini, molaAR(d - 0.35), {dy: 0});
+    cIt.forEach((el, n) => surgir(el, molaAR(d - 0.45 - n * 0.12), {dx: 18, dy: 0}));
   };
 })();
