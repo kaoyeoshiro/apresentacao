@@ -5,9 +5,9 @@ import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
 const blocos = [
   {id: 'assistentes', rotulo: 'Assistentes', minutos: 26},
   {id: 'harness', rotulo: 'Harness', minutos: 6},
-  {id: 'conta', rotulo: 'Quem paga', minutos: 19},
+  {id: 'conta', rotulo: 'Quem paga', minutos: 17},
   {id: 'geopolitica', rotulo: 'Geopolítica', minutos: 15},
-  {id: 'futuro', rotulo: 'Futuro', minutos: 24},
+  {id: 'futuro', rotulo: 'Futuro', minutos: 26},
 ];
 
 // Uma linha por slide, na ordem da aula. Cada bloco de fonte/ acrescenta as suas com SLIDES.push(...).
