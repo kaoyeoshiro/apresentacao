@@ -88,14 +88,14 @@ vídeo do harness sai do claude_video_maker sem custo.
 
 ## Atividades (enunciado na tela, gabarito nas notas)
 
-- **A7, acesso mínimo (slide 9, 7 min).** Exercício 22.1 da apostila. Fecho nas notas: "Duas semanas, só lendo" (A 22.6, caixa "Duas semanas de teste com pouco acesso"). Resposta-modelo para "a agenda da manhã" (revista em
+- **A7, acesso mínimo (slide 11, 5 min).** Exercício 22.1 da apostila. Fecho nas notas: "Duas semanas, só lendo" (A 22.6, caixa "Duas semanas de teste com pouco acesso"). Resposta-modelo para "a agenda da manhã" (revista em
   06/11/2026): pode ler a agenda e uma conta de e-mail separada, que recebe por encaminhamento só os e-mails escolhidos
   (no Gmail, a permissão de leitura vale para a caixa inteira e a de rascunho também envia); pode escrever um resumo num
   arquivo, ou um rascunho nessa conta separada; nunca toca a caixa principal, o sistema do tribunal com certificado,
   pagamento, apagar, abrir link ou anexo de quem escreveu. Cortado o acesso, memória e histórico podem continuar retidos:
   conferir a política do fornecedor e usar os recursos de exclusão; apagar no app não garante que o provedor apague
   cópias retidas. A ficha ganhou a quarta linha "Se ele errar ou se calar: quem percebe, e como?".
-- **A8, plano B (slide 21, 5 min).** Dois cenários separados: o plano dobra de preço; o preço fica e a franquia cai à
+- **A8, plano B (slide 23, 4 min).** Dois cenários separados: o plano dobra de preço; o preço fica e a franquia cai à
   metade. Para cada um, o que quebra e, pela fatura, quantas horas por mês o aumento precisa poupar (conta da revisão:
   US$ 20 para US$ 40 se paga com 0,3 a 0,9 hora; US$ 200 que dobra, com 2,7 a 9,3 horas, com hora de R$ 150 a R$ 300 e
   câmbio de 4 a 7, fictícios). O que quebra costuma ser o que está preso ao app: instruções só na memória do chat,
