@@ -107,12 +107,12 @@ vídeo do harness sai do claude_video_maker sem custo.
   escondida?" (encurtadas na tela). Sem gabarito: o professor fecha com a leitura da ficha de geopolítica (seção 2),
   de que rodar dentro da infraestrutura do órgão tira o dado do alcance de terceiros e desloca o risco para o
   comportamento do modelo, que é o que a avaliação do CAISI mediu.
-- **A10, plano de 30 dias (slide 34, 5 min).** Individual; cada um guarda o seu. Em cada semana: com que dado fictício
+- **A10, plano de 30 dias (slide 43, 5 min).** Individual; cada um guarda o seu. Em cada semana: com que dado fictício
   testo primeiro, como sei que deu certo (um número), o que ela nunca faz e quem confere; semanas 2 e 3, a pasta no
   próprio disco, fora do app; semana 4, rotina agendada exige plano pago e registra "rodou e achou zero".
-- **A11, devolutiva (slide 35, 4 min, minutos 85 a 89).** Leva: o que vai fazer na segunda-feira, numa frase. Faltou: o
+- **A11, devolutiva (slide 44, 4 min, minutos 85 a 89).** Leva: o que vai fazer na segunda-feira, numa frase. Faltou: o
   que queria ter feito com as mãos e não fez. Dois minutos escrevendo, depois a roda; o professor anota as faltas para a
-  próxima turma. Os slides 36 e 37 ficam com o minuto 89 a 90.
+  próxima turma. Os slides 45 e 46 ficam com o minuto 89 a 90.
 
 ## Fontes por slide
 

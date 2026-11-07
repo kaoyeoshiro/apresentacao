@@ -319,6 +319,7 @@
   [data-slide="navier"] .ct-txt { margin-top: 20px; font-size: 42px; line-height: 1.3; }
   .f-nv-pe { position: absolute; left: 120px; top: 770px; font-size: 64px; line-height: 1.1; }
   .noite[data-slide="navier"] .cartao { border-color: var(--linha-sobre-noite); }
+  [data-slide="navier"] .f-nv-pe { color: var(--sobre-noite); white-space: normal; }
 </style>
 </head>
 <body>
@@ -751,7 +752,7 @@
     <div class="cartoes c3">
       <div class="cartao"><p class="ct-tit">Biologia, 2024</p><p class="ct-txt">Nobel pelo AlphaFold</p></div>
       <div class="cartao"><p class="ct-tit">Matemática, 2025</p><p class="ct-txt">Ouro na Olimpíada Internacional</p></div>
-      <div class="cartao"><p class="ct-tit">Computação, 2025</p><p class="ct-txt">Multiplica matrizes melhor que Strassen</p></div>
+      <div class="cartao"><p class="ct-tit">Computação, 2025</p><p class="ct-txt">Bate Strassen em matrizes complexas</p></div>
       <div class="cartao"><p class="ct-tit">Meteorologia, 2024</p><p class="ct-txt">Supera a previsão europeia</p></div>
       <div class="cartao"><p class="ct-tit">Química, 2025</p><p class="ct-txt">Antibióticos novos, em camundongos</p></div>
       <div class="cartao"><p class="ct-tit">Matemática, 2026</p><p class="ct-txt">Derrubou conjectura de Erdős</p></div>
@@ -765,7 +766,7 @@
       <div class="cartao"><p class="ct-tit">Fato</p><p class="ct-txt">Em setembro de 2026, a OpenAI apresentou uma prova candidata, com força externa.</p></div>
       <div class="cartao"><p class="ct-tit">Exagero</p><p class="ct-txt">"Resolvido." Ninguém verificou ainda; o Clay não reconheceu; a versão sem força segue aberta.</p></div>
     </div>
-    <p class="display f-nv-pe">Gerar é rápido. Verificar é <span class="sinal">humano</span>.</p>
+    <p class="display rodape f-nv-pe">Gerar é rápido. Verificar é <span class="sinal">humano</span>.</p>
   </section>
 
   <!-- cenarios (cena própria, claro): os quatro cenários da OCDE para 2030, como o Relatório Internacional de Segurança
@@ -1086,11 +1087,11 @@ SLIDES.push(
      faca: ['deixar o número na tela em silêncio um instante'],
      transicao: 'Esse ritmo já deu resultado na ciência.'}},
   {id: 'feitos', titulo: 'A IA já faz ciência',
-   notas: {diga: 'Antes de olhar para a frente, o que a IA já fez. Biologia: o Nobel de Química de 2024 premiou o AlphaFold, que prevê a forma das proteínas, e foi dividido entre David Baker, Demis Hassabis e John Jumper. Matemática: em julho de 2025, o Gemini Deep Think do Google ganhou ouro oficial na Olimpíada Internacional de Matemática, 35 de 42 pontos, corrigido pela própria olimpíada. Computação: em maio de 2025, o AlphaEvolve achou um jeito de multiplicar matrizes 4 por 4 com 48 multiplicações, melhor que o método de Strassen, de 1969, e devolve 0,7% da capacidade de computação do Google. Meteorologia: o GenCast, publicado na Nature em dezembro de 2024, previu melhor que o modelo europeu em 97,2% dos alvos, até 15 dias. Química: em agosto de 2025, o MIT publicou na Cell antibióticos desenhados por IA que curaram infecções em camundongos; ainda não foram testados em gente. E em maio de 2026 um modelo da OpenAI derrubou uma conjectura de Erdős de 1946 sobre distâncias, conferida por nove matemáticos, entre eles Noga Alon e Timothy Gowers. Em todos os casos, a IA gerou e gente conferiu.',
-     faca: ['um cartão por vez, na ordem da tela', 'reforçar: em todos, a verificação foi humana'],
+   notas: {diga: 'Antes de olhar para a frente, o que a IA já fez. Biologia: o Nobel de Química de 2024 premiou o AlphaFold, que prevê a forma das proteínas, e foi dividido entre David Baker, Demis Hassabis e John Jumper. Matemática: em julho de 2025, o Gemini Deep Think do Google ganhou ouro oficial na Olimpíada Internacional de Matemática, 35 de 42 pontos, corrigido pela própria olimpíada. Computação: em maio de 2025, o AlphaEvolve achou um jeito de multiplicar matrizes 4 por 4 de números complexos com 48 multiplicações, melhor que o método de Strassen, de 1969, e devolve 0,7% da capacidade de computação do Google. Meteorologia: o GenCast, publicado na Nature em dezembro de 2024, previu melhor que o modelo europeu em 97,2% dos alvos, até 15 dias. Química: em agosto de 2025, o MIT publicou na Cell antibióticos desenhados por IA que curaram infecções em camundongos; ainda não foram testados em gente. E em maio de 2026 um modelo da OpenAI derrubou uma conjectura de Erdős de 1946 sobre distâncias, conferida por nove matemáticos, entre eles Noga Alon e Timothy Gowers. A IA gera depressa; conferir leva tempo, e na matemática quem confere são matemáticos.',
+     faca: ['um cartão por vez, na ordem da tela', 'reforçar: gerar é rápido, conferir leva tempo'],
      transicao: 'E o Problema do Milênio que saiu no jornal?'}},
   {id: 'navier', titulo: 'Navier-Stokes: fato e exagero',
-   notas: {diga: 'Vocês podem ter ouvido que a IA resolveu um Problema do Milênio, um dos sete problemas de matemática com prêmio de um milhão de dólares do Clay Institute. O fato: em 8 de setembro de 2026, a OpenAI apresentou uma solução candidata para as equações de Navier-Stokes, que descrevem fluidos, na versão com força externa: um modelo interno, com cerca de 10 mil agentes por 88 horas, construiu uma solução que explode em tempo finito. Charles Fefferman, autor do enunciado oficial, elogiou e deu o mérito central a Córdoba e Martínez-Zoroa, cujo método de 2023 foi a base. O exagero é dizer resolvido. Ninguém de fora verificou ainda; o Clay continua listando o problema como aberto e prometeu uma avaliação sem pressa. Um artigo de outubro mostra que o que foi checado no Lean, o programa que confere provas, não corresponde à prova escrita. E a versão sem força externa, a que os matemáticos mais querem, segue aberta: Constantin, Ignatova e Vicol mostraram que o método não chega até ela. Há ainda briga de crédito com pesquisadores da NYU e da Anthropic. A OpenAI disse que não vai pedir o prêmio.',
+   notas: {diga: 'Vocês podem ter ouvido que a IA resolveu um Problema do Milênio, um dos sete problemas de matemática com prêmio de um milhão de dólares do Clay Institute. O fato: em 8 de setembro de 2026, a OpenAI apresentou uma solução candidata para as equações de Navier-Stokes, que descrevem fluidos, na versão com força externa: um modelo interno, com cerca de 10 mil agentes por 88 horas, construiu uma solução que explode em tempo finito. Charles Fefferman, autor do enunciado oficial, elogiou e deu o mérito central a Córdoba e Martínez-Zoroa, cujo método de 2023 foi a base. O exagero é dizer resolvido. Ninguém de fora verificou ainda; o Clay continua listando o problema como aberto e prometeu uma avaliação sem pressa. Um artigo de outubro sustenta que o que foi checado no Lean, o programa que confere provas, não corresponde à prova escrita. E a versão sem força externa, a que os matemáticos mais querem, segue aberta: Constantin, Ignatova e Vicol mostraram que o método não chega até ela. Há ainda briga de crédito com pesquisadores da NYU e da Anthropic. A OpenAI disse que não vai pedir o prêmio.',
      faca: ['ler a frase do pé devagar: é a mesma regra do curso inteiro', 'se perguntarem pelo prêmio: o regulamento do Clay exige publicação e prazo de aceitação; a OpenAI disse que não vai pedir'],
      transicao: 'Se esse ritmo seguir, onde chegamos em 2030? A OCDE desenhou quatro cenários.'}},
   {id: 'cenarios', titulo: 'Quatro cenários para 2030',
