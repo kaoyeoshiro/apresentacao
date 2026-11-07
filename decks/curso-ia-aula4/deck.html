@@ -306,6 +306,20 @@
   .e-campo-tit { font: 800 var(--esc-5)/.92 var(--fonte-titulo); letter-spacing: -0.03em; text-transform: var(--titulo-caixa, uppercase); color: var(--cor-tinta); white-space: nowrap; }
   .e-campo-sub { font: 400 var(--esc-2)/1.25 var(--fonte-texto); color: var(--cor-tinta-suave); }
   [data-slide="a11"] .rodape { top: 846px; color: var(--cor-tinta); }
+
+  /* feitos (claro): seis cartões em duas linhas; área e ano em cima, pequeno; o feito embaixo */
+  [data-slide="feitos"] .cartoes { top: 320px; gap: 28px 36px; }
+  [data-slide="feitos"] .cartao { min-height: 250px; padding: 28px 32px; }
+  [data-slide="feitos"] .ct-tit { font: 700 32px/1.2 var(--fonte-titulo); color: var(--cor-tinta-suave); }
+  [data-slide="feitos"] .ct-txt { margin-top: 18px; font-size: 46px; line-height: 1.2; }
+  /* navier (noite): fato e exagero lado a lado; a frase de fecho no pé */
+  [data-slide="navier"] .cartoes { top: 320px; }
+  [data-slide="navier"] .cartao { min-height: 340px; padding: 30px 36px; }
+  [data-slide="navier"] .ct-tit { font: 700 40px/1.2 var(--fonte-titulo); }
+  [data-slide="navier"] .ct-txt { margin-top: 20px; font-size: 42px; line-height: 1.3; }
+  .f-nv-pe { position: absolute; left: 120px; top: 770px; font-size: 64px; line-height: 1.1; }
+  .noite[data-slide="navier"] .cartao { border-color: var(--linha-sobre-noite); }
+  [data-slide="navier"] .f-nv-pe { color: var(--sobre-noite); white-space: normal; }
 </style>
 </head>
 <body>
@@ -500,7 +514,7 @@
     <p class="b-pct"><span class="display b-pct-n">87%</span><span class="b-pct-leg">da peça de US$ 1,59</span></p>
   </section>
 
-  <!-- ===== Bloco C: quem paga a conta (slides 15 a 24, 19 min). Fatos e textos exatos em briefing.md e na ficha
+  <!-- ===== Bloco C: quem paga a conta (slides 15 a 24, 17 min). Fatos e textos exatos em briefing.md e na ficha
        docs/pesquisa/dia2-economia-subsidio-bolha.md (E). ===== -->
   <!-- conta-cap (abertura de capítulo, noite): sem foto por enquanto -->
   <section data-slide="conta-cap" data-arquetipo="abertura" class="noite">
@@ -730,6 +744,31 @@
     <p class="rodape">Relatório Internacional de Segurança da IA, 2026</p>
   </section>
 
+  <!-- feitos (cartões, claro) e navier (cartões, noite): o que a IA já fez na ciência e o caso Navier-Stokes,
+       fato e exagero (docs/pesquisa/dia2-feitos-cientificos.md, lida em 07/11/2026). -->
+  <section data-slide="feitos">
+    <p class="rotulo">O que já fez</p>
+    <h2 class="manchete">A IA já faz ciência</h2>
+    <div class="cartoes c3">
+      <div class="cartao"><p class="ct-tit">Biologia, 2024</p><p class="ct-txt">Nobel pelo AlphaFold</p></div>
+      <div class="cartao"><p class="ct-tit">Matemática, 2025</p><p class="ct-txt">Ouro na Olimpíada Internacional</p></div>
+      <div class="cartao"><p class="ct-tit">Computação, 2025</p><p class="ct-txt">Bate Strassen em matrizes complexas</p></div>
+      <div class="cartao"><p class="ct-tit">Meteorologia, 2024</p><p class="ct-txt">Supera a previsão europeia</p></div>
+      <div class="cartao"><p class="ct-tit">Química, 2025</p><p class="ct-txt">Antibióticos novos, em camundongos</p></div>
+      <div class="cartao"><p class="ct-tit">Matemática, 2026</p><p class="ct-txt">Derrubou conjectura de Erdős</p></div>
+    </div>
+  </section>
+
+  <section data-slide="navier" class="noite">
+    <p class="rotulo">Problema do Milênio</p>
+    <h2 class="manchete">Navier-Stokes: fato e exagero</h2>
+    <div class="cartoes c2">
+      <div class="cartao"><p class="ct-tit">Fato</p><p class="ct-txt">Em setembro de 2026, a OpenAI apresentou uma prova candidata, com força externa.</p></div>
+      <div class="cartao"><p class="ct-tit">Exagero</p><p class="ct-txt">"Resolvido." Ninguém verificou ainda; o Clay não reconheceu; a versão sem força segue aberta.</p></div>
+    </div>
+    <p class="display rodape f-nv-pe">Gerar é rápido. Verificar é <span class="sinal">humano</span>.</p>
+  </section>
+
   <!-- cenarios (cena própria, claro): os quatro cenários da OCDE para 2030, como o Relatório Internacional de Segurança
        da IA (03/02/2026) os resume, em degraus que sobem da esquerda para a direita (ficha F, seção 4). Sem dourado: o
        relatório não aponta o mais provável. -->
@@ -865,9 +904,9 @@ import {mundo, conteudo, titulo, fim} from '../../motor/cenas.js';
 const blocos = [
   {id: 'assistentes', rotulo: 'Assistentes', minutos: 26},
   {id: 'harness', rotulo: 'Harness', minutos: 6},
-  {id: 'conta', rotulo: 'Quem paga', minutos: 19},
+  {id: 'conta', rotulo: 'Quem paga', minutos: 17},
   {id: 'geopolitica', rotulo: 'Geopolítica', minutos: 15},
-  {id: 'futuro', rotulo: 'Futuro', minutos: 24},
+  {id: 'futuro', rotulo: 'Futuro', minutos: 26},
 ];
 
 // Uma linha por slide, na ordem da aula. Cada bloco de fonte/ acrescenta as suas com SLIDES.push(...).
@@ -946,12 +985,12 @@ SLIDES.push(
      faca: ['apontar a barra dourada do redator e depois as nove barras finas', 'lembrar: números de uma peça, do print de 05/11/2026'],
      transicao: 'Custo por peça é uma conta. Quem paga a conta inteira é outra história.'}},
 );
-// Bloco C, quem paga a conta (19 min): o uso já se paga, a corrida não; o plano fixo encolhe; o que levar de um app a
+// Bloco C, quem paga a conta (17 min): o uso já se paga, a corrida não; o plano fixo encolhe; o que levar de um app a
 // outro (A8). Fatos só do briefing.md e da ficha docs/pesquisa/dia2-economia-subsidio-bolha.md.
 SLIDES.push(
   {id: 'conta-cap', titulo: 'Quem paga a conta', bloco: 'conta', andamento: 'capitulo', linhaDia: false,
    notas: {diga: 'A peça custou um dólar e cinquenta e nove. Agora, a conta grande: quem paga a IA que vocês usam? A resposta curta está na tela. A computação já cabe na receita. Os compromissos para os próximos anos, ainda não.',
-     faca: ['bloco de 19 minutos: custo, compromissos, o plano fixo, bolha e a atividade A8'],
+     faca: ['bloco de 17 minutos: custo, compromissos, o plano fixo, bolha e a atividade A8'],
      transicao: 'Começo pelo custo da computação.'}},
   {id: 'custo', titulo: 'A computação já cabe na receita', passos: [3.0, 1.6, 1.6],
    notas: {diga: 'Estes números vêm do prospecto que a Anthropic entregou à SEC, a comissão de valores dos Estados Unidos, em 2 de novembro de 2026. É toda a computação da empresa dividida pela receita, com o treino dos modelos dentro. O prospecto diz que essa linha cobre pesquisa, desenvolvimento de modelos, atendimento a clientes e uso interno. A linha tracejada é o empate: custo igual à receita. Em 2024, a computação custava 653% do que a empresa faturava, mais de seis vezes. Em 2025, 160%. De janeiro a setembro de 2026, 57%. E só o atendimento a clientes pagantes custou 14,5% da receita nesse período.',
@@ -1034,7 +1073,7 @@ SLIDES.push(
        'se a sala confundir: o mesmo modelo usado pela API do fabricante chinês leva o dado à jurisdição chinesa; o par que importa é rodar em casa ou mandar para fora'],
      transicao: 'Tempo. Para fechar, o futuro.'}},
 );
-// Bloco E, futuro e fecho (24 min): capítulo, o ritmo medido, os quatro cenários, otimistas e pessimistas, o que já se
+// Bloco E, futuro e fecho (26 min): capítulo, o ritmo medido, os quatro cenários, otimistas e pessimistas, o que já se
 // mede, os horizontes, o debate, os sinais, A10, A11, os quatro verbos e o fecho. Fatos só do briefing.md e das fichas
 // docs/pesquisa/dia2-geopolitica-ia.md (1.6 e seção 3) e docs/pesquisa/dia2-futuro-e-assistentes.md (seções 3 e 4).
 SLIDES.push(
@@ -1046,6 +1085,14 @@ SLIDES.push(
   {id: 'ritmo', titulo: '5x ao ano',
    notas: {diga: 'Cinco vezes ao ano. É quanto cresce o cômputo de treino dos modelos líderes, isto é, o poder de computação gasto para treinar cada nova geração. A eficiência dos algoritmos melhora de 2 a 6 vezes ao ano. Quem mede é o Relatório Internacional de Segurança da IA, de 3 de fevereiro de 2026, presidido por Yoshua Bengio.',
      faca: ['deixar o número na tela em silêncio um instante'],
+     transicao: 'Esse ritmo já deu resultado na ciência.'}},
+  {id: 'feitos', titulo: 'A IA já faz ciência',
+   notas: {diga: 'Antes de olhar para a frente, o que a IA já fez. Biologia: o Nobel de Química de 2024 premiou o AlphaFold, que prevê a forma das proteínas, e foi dividido entre David Baker, Demis Hassabis e John Jumper. Matemática: em julho de 2025, o Gemini Deep Think do Google ganhou ouro oficial na Olimpíada Internacional de Matemática, 35 de 42 pontos, corrigido pela própria olimpíada. Computação: em maio de 2025, o AlphaEvolve achou um jeito de multiplicar matrizes 4 por 4 de números complexos com 48 multiplicações, melhor que o método de Strassen, de 1969, e devolve 0,7% da capacidade de computação do Google. Meteorologia: o GenCast, publicado na Nature em dezembro de 2024, previu melhor que o modelo europeu em 97,2% dos alvos, até 15 dias. Química: em agosto de 2025, o MIT publicou na Cell antibióticos desenhados por IA que curaram infecções em camundongos; ainda não foram testados em gente. E em maio de 2026 um modelo da OpenAI derrubou uma conjectura de Erdős de 1946 sobre distâncias, conferida por nove matemáticos, entre eles Noga Alon e Timothy Gowers. A IA gera depressa; conferir leva tempo, e na matemática quem confere são matemáticos.',
+     faca: ['um cartão por vez, na ordem da tela', 'reforçar: gerar é rápido, conferir leva tempo'],
+     transicao: 'E o Problema do Milênio que saiu no jornal?'}},
+  {id: 'navier', titulo: 'Navier-Stokes: fato e exagero',
+   notas: {diga: 'Vocês podem ter ouvido que a IA resolveu um Problema do Milênio, um dos sete problemas de matemática com prêmio de um milhão de dólares do Clay Institute. O fato: em 8 de setembro de 2026, a OpenAI apresentou uma solução candidata para as equações de Navier-Stokes, que descrevem fluidos, na versão com força externa: um modelo interno, com cerca de 10 mil agentes por 88 horas, construiu uma solução que explode em tempo finito. Charles Fefferman, autor do enunciado oficial, elogiou e deu o mérito central a Córdoba e Martínez-Zoroa, cujo método de 2023 foi a base. O exagero é dizer resolvido. Ninguém de fora verificou ainda; o Clay continua listando o problema como aberto e prometeu uma avaliação sem pressa. Um artigo de outubro sustenta que o que foi checado no Lean, o programa que confere provas, não corresponde à prova escrita. E a versão sem força externa, a que os matemáticos mais querem, segue aberta: Constantin, Ignatova e Vicol mostraram que o método não chega até ela. Há ainda briga de crédito com pesquisadores da NYU e da Anthropic. A OpenAI disse que não vai pedir o prêmio.',
+     faca: ['ler a frase do pé devagar: é a mesma regra do curso inteiro', 'se perguntarem pelo prêmio: o regulamento do Clay exige publicação e prazo de aceitação; a OpenAI disse que não vai pedir'],
      transicao: 'Se esse ritmo seguir, onde chegamos em 2030? A OCDE desenhou quatro cenários.'}},
   {id: 'cenarios', titulo: 'Quatro cenários para 2030',
    notas: {diga: 'Quatro cenários para 2030, da OCDE, resumidos no Relatório Internacional de Segurança da IA. No primeiro, o progresso estanca: a IA faz rápido, mas erra e pede revisão humana. É como a velocidade dos aviões de passageiros, que parou em 500 nós. No segundo, desacelera: um assistente útil, que usa o computador e guarda memória. Como os antibióticos depois da era de ouro. No terceiro, continua: um colaborador especialista, que faz tarefas profissionais de um mês. Como a lei de Moore. No quarto, acelera: o nível de um trabalhador remoto, com a IA ajudando a fazer a própria IA. Como o sequenciamento de DNA entre 2000 e 2020. Um estudo do METR projeta que, se a tendência atual continuar, em 2030 a IA fará tarefas de software bem delimitadas que levam vários dias de um engenheiro. E alguns especialistas acham que, depois de 2030, dados, chips, capital e energia podem virar gargalo. O relatório diz que não há consenso sobre o cenário mais provável.',
@@ -1419,6 +1466,8 @@ CENAS.a9 = (() => {
 // futuro-cap (respiro), horizontes, sinais e curso (tempo) e fecho são arquétipos da biblioteca: sem cena própria.
 // otimistas e pessimistas usam os cartões da base.
 CENAS.otimistas = cartoes('otimistas');
+CENAS.feitos = cartoes('feitos');
+CENAS.navier = cartoes('navier');
 CENAS.pessimistas = cartoes('pessimistas');
 
 // ritmo: o "5x" sobe, "ao ano" chega ao lado, a caneta dourada sublinha o número; a legenda e a fonte depois.

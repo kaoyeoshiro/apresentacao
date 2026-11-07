@@ -1,9 +1,9 @@
-// Bloco C, quem paga a conta (19 min): o uso já se paga, a corrida não; o plano fixo encolhe; o que levar de um app a
+// Bloco C, quem paga a conta (17 min): o uso já se paga, a corrida não; o plano fixo encolhe; o que levar de um app a
 // outro (A8). Fatos só do briefing.md e da ficha docs/pesquisa/dia2-economia-subsidio-bolha.md.
 SLIDES.push(
   {id: 'conta-cap', titulo: 'Quem paga a conta', bloco: 'conta', andamento: 'capitulo', linhaDia: false,
    notas: {diga: 'A peça custou um dólar e cinquenta e nove. Agora, a conta grande: quem paga a IA que vocês usam? A resposta curta está na tela. A computação já cabe na receita. Os compromissos para os próximos anos, ainda não.',
-     faca: ['bloco de 19 minutos: custo, compromissos, o plano fixo, bolha e a atividade A8'],
+     faca: ['bloco de 17 minutos: custo, compromissos, o plano fixo, bolha e a atividade A8'],
      transicao: 'Começo pelo custo da computação.'}},
   {id: 'custo', titulo: 'A computação já cabe na receita', passos: [3.0, 1.6, 1.6],
    notas: {diga: 'Estes números vêm do prospecto que a Anthropic entregou à SEC, a comissão de valores dos Estados Unidos, em 2 de novembro de 2026. É toda a computação da empresa dividida pela receita, com o treino dos modelos dentro. O prospecto diz que essa linha cobre pesquisa, desenvolvimento de modelos, atendimento a clientes e uso interno. A linha tracejada é o empate: custo igual à receita. Em 2024, a computação custava 653% do que a empresa faturava, mais de seis vezes. Em 2025, 160%. De janeiro a setembro de 2026, 57%. E só o atendimento a clientes pagantes custou 14,5% da receita nesse período.',
