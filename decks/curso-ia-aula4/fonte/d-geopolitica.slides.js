@@ -1,4 +1,4 @@
-// Bloco D, geopolítica (18 min): capítulo, chips, a distância dos abertos, o teste do CAISI, o CLOUD Act (S.T.A.R.), o
+// Bloco D, geopolítica (15 min): capítulo, chips, a distância dos abertos, o teste do CAISI, o CLOUD Act (S.T.A.R.), o
 // calendário do AI Act e o debate A9. Fatos só do briefing.md e da ficha G (docs/pesquisa/dia2-geopolitica-ia.md).
 SLIDES.push(
   {id: 'geo-cap', titulo: 'Quem manda no dado', bloco: 'geopolitica', andamento: 'capitulo', linhaDia: false,
@@ -26,7 +26,7 @@ SLIDES.push(
      faca: ['apontar o marco aceso: agosto de 2026, a fiscalização'],
      transicao: 'Com isso na mão, vocês decidem.'}},
   {id: 'a9', titulo: 'Sua vez: modelo chinês no órgão?', pratica: 5,
-   notas: {material: {"objetivo": "Dizer em que condições um modelo aberto chinês pode rodar, sem internet, no servidor do órgão.", "abrir": ["aula4/gabarito.md"], "passos": ["Duplas: dois minutos de preparo com as três perguntas do slide.", "Três minutos: cada dupla diz uma condição; você anota as condições da sala.", "Um minuto de fecho: rodar em casa tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Modelo aberto de laboratório chinês, rodando sem internet no servidor do órgão, para resumir petições. Em que condições pode? Dois minutos para preparar, em dupla, com três perguntas. Onde roda, e quem opera a máquina? O que a empresa ainda controla, se o dado não sai? O que ele faz com uma petição que traz ordem escondida?',
+   notas: {material: {"objetivo": "Dizer em que condições um modelo aberto chinês pode rodar, sem internet, no servidor do órgão.", "abrir": ["aula4/gabarito.md"], "passos": ["Duplas: dois minutos de preparo com as três perguntas do slide.", "Dois minutos: cada dupla diz uma condição; você anota as condições da sala.", "Um minuto de fecho: rodar em casa tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo."], "base": "https://github.com/kaoyeoshiro/kit-dia2-curso-ia/blob/main/"}, diga: 'Modelo aberto de laboratório chinês, rodando sem internet no servidor do órgão, para resumir petições. Em que condições pode? Dois minutos para preparar, em dupla, com três perguntas. Onde roda, e quem opera a máquina? O que a empresa ainda controla, se o dado não sai? O que ele faz com uma petição que traz ordem escondida?',
      faca: ['cronômetro de 5 minutos: começa sozinho na tela do apresentador',
        'sem dividir a sala em lados: a pergunta é de condições, e a premissa (sem internet, no servidor do órgão) já responde onde o dado fica',
        'dois minutos de preparo, dois para ouvir uma condição de cada dupla, um para o fecho',

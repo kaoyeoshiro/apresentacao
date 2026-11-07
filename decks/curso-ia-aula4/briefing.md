@@ -205,7 +205,7 @@ O professor aprovou o relatório `relatorio-feedback-aulas-3-e-4.md`. O roteiro 
 que mudou: harness passou a "Oito agentes, duas buscas, uma peça" (o vídeo, que não foi alterado, escreve "10 agentes"
 porque conta as duas buscas como ferramenta), com a legenda "Peça real; o print não mostra dado do processo", e a nota
 do redator diz que 82% do US$ 1,39 é carregar e reler o contexto e 18% é escrever; a A7, a A8, a A9, a A10 e a A11
-mudaram como descrito em "Atividades"; o slide 26 traz no rodapé "Na comparação americana entrou o gpt-oss, também
+mudaram como descrito em "Atividades"; o slide 28 traz no rodapé "Na comparação americana entrou o gpt-oss, também
 aberto; idioma dos testes não informado.", e a origem da avaliação ("governo dos EUA") subiu para a linha da fonte; o
 fecho mostra o endereço do kit. O slide cinco (assistentes) não foi tocado. Ficam com o professor, sem mudança: CLOUD
 Act, LGPD e lei chinesa no fecho da A9; a ressalva da Res. CNJ 615/2025 no cartão do slide 7; a menção do Estatuto aos

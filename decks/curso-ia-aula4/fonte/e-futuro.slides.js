@@ -29,7 +29,7 @@ SLIDES.push(
      faca: ['traduzir a frase de Altman: "que bom que eu errei"', 'os dados não separam a IA de juros altos e contratação fraca'],
      transicao: 'Juntando tudo, por horizonte.'}},
   {id: 'horizontes', titulo: '2, 5, 10, 20 anos',
-   notas: {diga: 'Por horizonte. Em 2 anos, Amodei e Altman falam em IA poderosa. Em 5, Amodei fala em metade da entrada afetada. Em 10, a disputa é entre a era de ouro de Hassabis e os riscos graves de Bengio. E há os céticos. Daron Acemoglu, Nobel de Economia, calcula no máximo 0,66% de ganho de produtividade em dez anos. Yann LeCun acha que os modelos de linguagem são um beco sem saída para chegar à inteligência humana. Em 20 anos, ninguém mede: nenhuma fonte séria arrisca número. Esse horizonte é o da carreira de vocês, e quem decide são vocês.',
+   notas: {diga: 'Por horizonte. Em 2 anos, Amodei fala em IA poderosa, e Altman em sistemas que chegam a ideias novas. Em 5, Amodei fala em metade da entrada afetada. Em 10, a disputa é entre a era de ouro de Hassabis e os riscos graves de Bengio. E há os céticos. Daron Acemoglu, Nobel de Economia, calcula no máximo 0,66% de ganho de produtividade em dez anos. Yann LeCun acha que os modelos de linguagem são um beco sem saída para chegar à inteligência humana. Em 20 anos, ninguém mede: nenhuma fonte séria arrisca número. Esse horizonte é o da carreira de vocês, e quem decide são vocês.',
      faca: ['apontar o marco aceso: 20 anos'],
      transicao: 'Então vamos debater.'}},
   {id: 'debate', titulo: 'Sua carreira em 2046', pratica: 8, passos: [2.0, 1.4],

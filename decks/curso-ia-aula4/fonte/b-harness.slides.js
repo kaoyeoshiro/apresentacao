@@ -1,4 +1,4 @@
-// Bloco B, harness (6 min): o sistema em volta do modelo, o vídeo dos dez agentes e o custo de cada um. Fatos só do
+// Bloco B, harness (6 min): o sistema em volta do modelo, o vídeo dos oito agentes e duas buscas e o custo de cada um. Fatos só do
 // briefing.md e da ficha docs/pesquisa/dia2-harness-quatilex.md (print de 05/11/2026).
 SLIDES.push(
   {id: 'harness-cap', titulo: 'O sistema em volta do modelo', bloco: 'harness', andamento: 'capitulo', linhaDia: false,
