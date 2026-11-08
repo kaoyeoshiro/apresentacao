@@ -2,6 +2,8 @@
 // futuro-cap (respiro), horizontes, sinais e curso (tempo) e fecho são arquétipos da biblioteca: sem cena própria.
 // otimistas e pessimistas usam os cartões da base.
 CENAS.otimistas = cartoes('otimistas');
+CENAS.feitos = cartoes('feitos');
+CENAS.navier = cartoes('navier');
 CENAS.pessimistas = cartoes('pessimistas');
 
 // ritmo: o "5x" sobe, "ao ano" chega ao lado, a caneta dourada sublinha o número; a legenda e a fonte depois.

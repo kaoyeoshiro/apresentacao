@@ -107,12 +107,12 @@ vídeo do harness sai do claude_video_maker sem custo.
   escondida?" (encurtadas na tela). Sem gabarito: o professor fecha com a leitura da ficha de geopolítica (seção 2),
   de que rodar dentro da infraestrutura do órgão tira o dado do alcance de terceiros e desloca o risco para o
   comportamento do modelo, que é o que a avaliação do CAISI mediu.
-- **A10, plano de 30 dias (slide 34, 5 min).** Individual; cada um guarda o seu. Em cada semana: com que dado fictício
+- **A10, plano de 30 dias (slide 43, 5 min).** Individual; cada um guarda o seu. Em cada semana: com que dado fictício
   testo primeiro, como sei que deu certo (um número), o que ela nunca faz e quem confere; semanas 2 e 3, a pasta no
   próprio disco, fora do app; semana 4, rotina agendada exige plano pago e registra "rodou e achou zero".
-- **A11, devolutiva (slide 35, 4 min, minutos 85 a 89).** Leva: o que vai fazer na segunda-feira, numa frase. Faltou: o
+- **A11, devolutiva (slide 44, 4 min, minutos 85 a 89).** Leva: o que vai fazer na segunda-feira, numa frase. Faltou: o
   que queria ter feito com as mãos e não fez. Dois minutos escrevendo, depois a roda; o professor anota as faltas para a
-  próxima turma. Os slides 36 e 37 ficam com o minuto 89 a 90.
+  próxima turma. Os slides 45 e 46 ficam com o minuto 89 a 90.
 
 ## Fontes por slide
 
@@ -245,3 +245,7 @@ de cinco slides sem respiro, o "87%" de `redator` subiu para 206 px. Sobram trê
 ## Slide retencao (06/11/2026)
 
 "Assinatura não é contrato": treino e retenção na assinatura individual contra contrato empresarial e API. Fonte: `docs/pesquisa/dia2-retencao-e-treino.md`, políticas oficiais de Anthropic, OpenAI, Google, AWS e Microsoft lidas em 06/11/2026. "Pode guardar por anos": Claude com treino permitido até 5 anos, Gemini pessoal 18 meses (revisados até 3 anos). "Na API, guarda até 30 dias (Google, 55)": APIs da Anthropic e da OpenAI até 30 dias; Gemini API 55 dias para abuso; Bedrock em regra não guarda. Não confirmado e fora da tela: prazo em dias da revisão de abuso no Azure e no Vertex.
+
+## Slides feitos e navier (07/11/2026)
+
+"A IA já faz ciência" (seis cartões) e "Navier-Stokes: fato e exagero". Fonte: `docs/pesquisa/dia2-feitos-cientificos.md`, lida em 07/11/2026. Nobel de Química 2024 (AlphaFold); ouro oficial do Gemini Deep Think na IMO 2025, 35/42; AlphaEvolve, matrizes 4x4 com 48 multiplicações (maio/2025); GenCast melhor que o modelo europeu em 97,2% dos alvos (Nature, dez/2024); antibióticos NG1 e DN1 do MIT em camundongos (Cell, ago/2025); conjectura de Erdős de 1946 derrubada pela OpenAI, verificada por nove matemáticos (arXiv 2605.20695, maio/2026). Navier-Stokes: solução candidata da OpenAI com força externa (08/09/2026), sem verificação independente, Clay lista como ativo, Lean contestado (arXiv 2610.08144), caso sem força aberto (arXiv 2609.20803). O prazo do regulamento do Clay não foi lido e fica fora da tela.

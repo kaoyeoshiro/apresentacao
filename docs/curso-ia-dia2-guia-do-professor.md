@@ -208,7 +208,7 @@ dispensam computador, e a última é a devolutiva do curso inteiro.
 
 ### 5.2. O mapa, minuto a minuto
 
-Os blocos são assistentes 26 minutos, harness 6, quem paga 19, geopolítica 15 e futuro 24.
+Os blocos são assistentes 26 minutos, harness 6, quem paga 17, geopolítica 15 e futuro 26.
 
 | minuto | slides | o que acontece | quem trabalha |
 |---|---|---|---|
@@ -217,17 +217,17 @@ Os blocos são assistentes 26 minutos, harness 6, quem paga 19, geopolítica 15 
 | 13 a 21 | 8 a 10 | o sigilo e o acesso; cortar o acesso não apaga a memória; assinatura não é contrato (treino e retenção) | você |
 | 21 a 26 | 11 | A7, o acesso mínimo | duplas |
 | 26 a 32 | 12 a 14 | o harness: o vídeo dos oito agentes e duas buscas, e o custo de cada um | você narra o vídeo |
-| 32 a 41 | 15 a 20 | a computação que já cabe na receita (treino incluído), os US$ 895 bi, quem banca, o usuário pesado, o plano que encolhe | você |
-| 41 a 45 | 21 e 22 | bolha ou não (mão levantada) e a tese | você pergunta |
-| 45 a 51 | 23 e 24 | A8, e se o plano mudar; o que vai com você | duplas |
-| 51 a 60 | 25 a 30 | chips, os quatro meses, aberto não é seguro, CLOUD Act, as regras | você |
-| 60 a 66 | 31 | A9, em que condições o modelo chinês pode rodar no órgão | duplas |
-| 66 a 71 | 32 a 38 | e em 20 anos? o ritmo, os quatro cenários da OCDE, os otimistas, os pessimistas, o que já se mede (19%), os horizontes de 2 a 20 anos | você |
-| 71 a 79 | 39 | debate: sua carreira em 2046 | duplas |
-| 79 a 80 | 40 | os sinais para acompanhar | você |
-| 80 a 85 | 41 | A10, o plano de 30 dias | cada um |
-| 85 a 89 | 42 | A11, a devolutiva (cronômetro de 4 minutos: dois escrevendo, depois a roda) | cada um, depois a roda |
-| 89 a 90 | 43 e 44 | os quatro verbos; o fecho | você |
+| 32 a 40 | 15 a 20 | a computação que já cabe na receita (treino incluído), os US$ 895 bi, quem banca, o usuário pesado, o plano que encolhe | você |
+| 40 a 43 | 21 e 22 | bolha ou não (mão levantada) e a tese | você pergunta |
+| 43 a 49 | 23 e 24 | A8, e se o plano mudar; o que vai com você | duplas |
+| 49 a 58 | 25 a 30 | chips, os quatro meses, aberto não é seguro, CLOUD Act, as regras | você |
+| 58 a 64 | 31 | A9, em que condições o modelo chinês pode rodar no órgão | duplas |
+| 64 a 71 | 32 a 40 | e em 20 anos? o ritmo, o que a IA já fez na ciência, Navier-Stokes (fato e exagero), os quatro cenários da OCDE, os otimistas, os pessimistas, o que já se mede (19%), os horizontes de 2 a 20 anos | você |
+| 71 a 79 | 41 | debate: sua carreira em 2046 | duplas |
+| 79 a 80 | 42 | os sinais para acompanhar | você |
+| 80 a 85 | 43 | A10, o plano de 30 dias | cada um |
+| 85 a 89 | 44 | A11, a devolutiva (cronômetro de 4 minutos: dois escrevendo, depois a roda) | cada um, depois a roda |
+| 89 a 90 | 45 e 46 | os quatro verbos; o fecho | você |
 
 No slide 5, o vídeo do Grok Bot tem 62 segundos e efeitos sonoros baixos, sem voz; você fala por cima, na ordem das
 cenas: resumo de IA de manhã (5 a 13 s), WhatsApp e agenda (13 a 22), t3code com as quatro IAs (22 a 31), E-MS (31 a
@@ -249,10 +249,10 @@ No slide 16, os 57% são toda a computação da Anthropic sobre a receita, trein
 clientes pagantes custou cerca de 14,5% da receita. O que ainda não se paga são os compromissos de data centers dos
 próximos anos (slides 17 e 18).
 
-No slide 34, os quatro cenários são da OCDE e estão no Relatório Internacional de Segurança da IA (fev. 2026), que
+No slide 36, os quatro cenários são da OCDE e estão no Relatório Internacional de Segurança da IA (fev. 2026), que
 diz não haver consenso sobre o mais provável. A projeção de tarefas de software de vários dias em 2030 é do METR, se a
 tendência atual continuar; os gargalos de dados, chips, capital e energia são opinião de alguns especialistas para
-depois de 2030. Os slides 35 a 38 trazem quem disse cada coisa e quando; as notas de cada um têm a fonte.
+depois de 2030. Os slides 37 a 40 trazem quem disse cada coisa e quando; as notas de cada um têm a fonte.
 
 No slide 10, quem decide é o tipo de contrato. Na assinatura individual o treino depende de um botão (ligado
 por padrão no ChatGPT e no Gemini pessoal; no Claude, escolha pedida desde 28/08/2025, com até cinco anos de guarda
@@ -261,6 +261,13 @@ Google, AWS e Microsoft declaram não treinar com os dados do cliente; ainda ass
 para detectar abuso, e retenção zero só vem com pedido aprovado. A API gratuita do Gemini usa o conteúdo para melhorar
 produtos. Fonte e prazos por serviço em `docs/pesquisa/dia2-retencao-e-treino.md`.
 
+Nos slides 34 e 35, o que a IA já fez na ciência e o caso Navier-Stokes. A frase que circula, "a IA resolveu um
+Problema do Milênio", é exagero. Em 08/09/2026 a OpenAI apresentou uma solução candidata para as equações de
+Navier-Stokes na versão com força externa; ninguém de fora verificou ainda, o Clay Institute segue listando o problema
+como aberto, um artigo de outubro contesta que a checagem no Lean corresponda à prova escrita, e a versão sem força
+externa, a que mais importa aos matemáticos, continua aberta. Fontes e ressalvas de cada feito em
+`docs/pesquisa/dia2-feitos-cientificos.md`.
+
 ### 5.3. As atividades da sala
 
 | atividade | slide | tempo | o que a sala faz | resposta-modelo |
@@ -268,9 +275,9 @@ produtos. Fonte e prazos por serviço em `docs/pesquisa/dia2-retencao-e-treino.m
 | A7, o acesso mínimo | 11 | 5 min | escolhe uma tarefa e preenche o que o assistente pode ler, o que pode escrever e o que nunca toca | para a agenda da manhã: lê a agenda e uma conta de e-mail separada, que recebe por encaminhamento só os e-mails escolhidos (no Gmail, a leitura vale para a caixa inteira e o rascunho também envia); escreve um resumo num arquivo ou um rascunho nessa conta; nunca toca a caixa principal, o sistema do tribunal, pagamento, apagar, link ou anexo de quem escreveu. Cortado o acesso, memória e histórico podem continuar retidos no fornecedor. Quarta linha: se ele errar ou se calar, quem percebe? Fecho: "Duas semanas, só lendo." |
 | A8, o plano mudou | 23, resposta no segundo clique | 4 min | em dois cenários separados (o preço dobra; a franquia cai à metade), diz o que quebra e quantas horas por mês o aumento precisa poupar, pela própria fatura | quebra o que está preso ao app: instruções só na memória do chat, documentos só no projeto do fornecedor, nenhum segundo fornecedor testado. A conta costuma mudar a resposta de "cancelo" para "pago e tiro o trabalho do app". O slide 24 mostra o que vai com você |
 | A9, condições | 31 | 5 min | diz em que condições um modelo aberto chinês, sem internet, no servidor do órgão, pode resumir petições; dois minutos de preparo, dois para ouvir uma condição de cada dupla, um para o fecho | seu fecho: rodar dentro da infraestrutura do órgão tira o dado do alcance de terceiros e desloca o risco para o comportamento do modelo, que é o que o CAISI mediu |
-| Debate, sua carreira em 2046 | 39 | 8 min | em dupla, um defende o futuro otimista e o outro o pessimista, cada um com um dado dos slides; 2 min de preparo, 4 de conversa, 2 para três duplas contarem; no fim, cada um diz o que muda já na semana que vem | não há gabarito; o slide 38 lembra que em 20 anos ninguém mede, e a pergunta de fecho puxa para o plano de 30 dias |
-| A10, o plano de 30 dias | 41 | 5 min | cada um escreve três linhas no celular: uma skill, uma pasta de caso no próprio disco, uma rotina; em cada semana, teste fictício primeiro, um número de sucesso e o que ela nunca faz | não há gabarito; a quem travar na rotina, pergunte o que se perde se ela falhar em silêncio |
-| A11, a devolutiva | 42 | 4 min | dois minutos escrevendo (leva: o que vai fazer na segunda-feira; faltou: o que queria ter feito com as mãos), depois a roda | anote as faltas para a próxima turma; no minuto 89, vá para o fecho |
+| Debate, sua carreira em 2046 | 41 | 8 min | em dupla, um defende o futuro otimista e o outro o pessimista, cada um com um dado dos slides; 2 min de preparo, 4 de conversa, 2 para três duplas contarem; no fim, cada um diz o que muda já na semana que vem | não há gabarito; o slide 40 lembra que em 20 anos ninguém mede, e a pergunta de fecho puxa para o plano de 30 dias |
+| A10, o plano de 30 dias | 43 | 5 min | cada um escreve três linhas no celular: uma skill, uma pasta de caso no próprio disco, uma rotina; em cada semana, teste fictício primeiro, um número de sucesso e o que ela nunca faz | não há gabarito; a quem travar na rotina, pergunte o que se perde se ela falhar em silêncio |
+| A11, a devolutiva | 44 | 4 min | dois minutos escrevendo (leva: o que vai fazer na segunda-feira; faltou: o que queria ter feito com as mãos), depois a roda | anote as faltas para a próxima turma; no minuto 89, vá para o fecho |
 
 ## 6. Quando algo der errado
 
