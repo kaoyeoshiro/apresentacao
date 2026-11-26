@@ -14,23 +14,29 @@ export {THREE, Reflector};
 
 const W = 1920, H = 1080;
 
-// Cor de um token do tema como THREE.Color. O navegador resolve var() e color-mix; a cor nunca é escrita no deck.
-let sonda;
+// Cor de um token do tema como THREE.Color. O navegador resolve var() e color-mix, e um pixel de canvas 2D converte
+// qualquer espaço de cor (oklch, display-p3) para sRGB; a cor nunca é escrita no deck. Token que não existe é erro,
+// porque cairia calado no preto herdado.
+let sonda, pixel;
 export function corDoTema(token) {
+	if (!getComputedStyle(document.documentElement).getPropertyValue(token).trim()) {
+		throw new Error(`corDoTema: o tema não define ${token} (docs/temas.md)`);
+	}
 	sonda ??= Object.assign(document.createElement('i'), {hidden: true});
 	if (!sonda.isConnected) document.body.append(sonda);
 	sonda.style.color = `var(${token})`;
-	const v = getComputedStyle(sonda).color;
-	const n = (v.replace(/^color\(\s*srgb/, '').match(/[\d.]+/g) || []).map(Number);
-	if (n.length < 3) throw new Error(`corDoTema: o token ${token} não resolve para uma cor (${v})`);
-	const escala = v.startsWith('color(') ? 1 : 255;
-	return new THREE.Color().setRGB(n[0] / escala, n[1] / escala, n[2] / escala, THREE.SRGBColorSpace);
+	pixel ??= Object.assign(document.createElement('canvas'), {width: 1, height: 1}).getContext('2d', {willReadFrequently: true});
+	pixel.clearRect(0, 0, 1, 1);
+	pixel.fillStyle = getComputedStyle(sonda).color;
+	pixel.fillRect(0, 0, 1, 1);
+	const [r, g, b] = pixel.getImageData(0, 0, 1, 1).data;
+	return new THREE.Color().setRGB(r / 255, g / 255, b / 255, THREE.SRGBColorSpace);
 }
 
 // Liga o 3D: um canvas de 1920×1080 no fundo do #palco, câmera, brilho (bloom) e saída com tone mapping ACES.
 // `desenhar()` renderiza o quadro; chame-a uma vez, no fim do desenhar(t, ctx) do deck.
 export function cinema({palco = document.getElementById('palco'), fov = 35, exposicao = 1,
-	brilho = {forca: 0.9, raio: 0.55, limiar: 0.8}, amostras = 4} = {}) {
+	brilho: {forca = 0.9, raio = 0.55, limiar = 0.8} = {}, amostras = 4} = {}) {
 	const canvas = document.createElement('canvas');
 	canvas.id = 'cinema';
 	canvas.width = W;
@@ -50,15 +56,16 @@ export function cinema({palco = document.getElementById('palco'), fov = 35, expo
 	composer.setPixelRatio(1);
 	composer.setSize(W, H);
 	composer.addPass(new RenderPass(cena, camera));
-	const bloom = new UnrealBloomPass(new THREE.Vector2(W, H), brilho.forca, brilho.raio, brilho.limiar);
+	const bloom = new UnrealBloomPass(new THREE.Vector2(W, H), forca, raio, limiar);
 	composer.addPass(bloom);
 	composer.addPass(new OutputPass());
 	return {THREE, cena, camera, renderer, bloom, canvas, desenhar: () => composer.render()};
 }
 
 // Câmera por poses: [{pos: [x, y, z], alvo: [x, y, z], fov}], uma por parada. `u` vai de 0 (primeira pose) a
-// poses.length - 1; entre inteiros, o caminho é uma Catmull-Rom centrípeta, que curva sem passar do ponto.
-export function trajeto(poses) {
+// poses.length - 1; entre inteiros, o caminho é uma Catmull-Rom centrípeta, que curva sem passar do ponto. Pose sem
+// fov usa `fov` (padrão 35), nunca o da câmera: o quadro não pode depender do quadro anterior.
+export function trajeto(poses, {fov = 35} = {}) {
 	const v = (a) => new THREE.Vector3(...a);
 	const P = new THREE.CatmullRomCurve3(poses.map((p) => v(p.pos)), false, 'centripetal');
 	const A = new THREE.CatmullRomCurve3(poses.map((p) => v(p.alvo)), false, 'centripetal');
@@ -68,7 +75,7 @@ export function trajeto(poses) {
 		camera.position.copy(P.getPoint(k));
 		olhar.copy(A.getPoint(k));
 		const i = Math.min(Math.max(n - 1, 0), Math.floor(clamp(u, 0, n))), f = clamp(u - i);
-		const fov0 = poses[i].fov ?? camera.fov, fov1 = (poses[i + 1] ?? poses[i]).fov ?? fov0;
+		const fov0 = poses[i].fov ?? fov, fov1 = (poses[i + 1] ?? poses[i]).fov ?? fov;
 		camera.fov = lerp(fov0, fov1, f);
 		camera.lookAt(olhar);
 		camera.updateProjectionMatrix();

@@ -89,7 +89,10 @@ class _Deck:
         """Passos longos do slide em que um vídeo visível anda mais de meio segundo (o clipe toca e a sala assiste). No
         estilo cinema (canvas #cinema de motor/cinema.js), todo passo longo é a câmera viajando pela cena 3D, que a sala
         assiste como a um vídeo."""
-        cinema = self.pg.evaluate("!!document.querySelector('#palco > canvas#cinema')")
+        cinema = self.pg.evaluate("""(() => { const c = document.querySelector('#palco > canvas#cinema');
+            if (!c) return false;
+            const cs = getComputedStyle(c);
+            return cs.display !== 'none' && cs.visibility !== 'hidden' && Number(cs.opacity) > 0; })()""")
         tocam, t0 = set(), s["t0"]
         for k, d in enumerate(s["passos"]):
             if d > PASSO_LONGO and cinema:
