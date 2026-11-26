@@ -29,7 +29,8 @@ export function corDoTema(token) {
 	pixel.clearRect(0, 0, 1, 1);
 	pixel.fillStyle = getComputedStyle(sonda).color;
 	pixel.fillRect(0, 0, 1, 1);
-	const [r, g, b] = pixel.getImageData(0, 0, 1, 1).data;
+	const [r, g, b, a] = pixel.getImageData(0, 0, 1, 1).data;
+	if (a < 255) throw new Error(`corDoTema: ${token} é transparente; a cena precisa de cor sólida`);
 	return new THREE.Color().setRGB(r / 255, g / 255, b / 255, THREE.SRGBColorSpace);
 }
 

@@ -74,14 +74,21 @@ def test_trajeto_cor_do_tema_e_brilho_nao_dependem_do_quadro_anterior():
         const raiz = document.documentElement.style;
         raiz.setProperty('--t-oklch', 'oklch(0.7 0.15 70)');
         raiz.setProperty('--t-p3', 'color(display-p3 0.2 0.4 0.6)');
-        const cores = ['--t-oklch', '--t-p3'].map((t) => M.corDoTema(t).getHexString());
+        raiz.setProperty('--t-vazio', 'rgba(255, 0, 0, 0)');
+        const cores = ['--t-oklch', '--t-p3'].map((t) => M.corDoTema(t).getHexString());   // getHexString sai em sRGB; o interno do three.js é linear
+        let transparente = null;
+        try { M.corDoTema('--t-vazio'); } catch (e) { transparente = e.message; }
         const C = M.cinema({palco: document.createElement('div'), brilho: {forca: 0.5}});
-        return {ida, volta, semToken, cores, raio: C.bloom.radius, limiar: C.bloom.threshold};
+        return {ida, volta, semToken, cores, transparente, raio: C.bloom.radius, limiar: C.bloom.threshold};
     """)
     assert r["ida"] == [35, 47.5, 47.5] and r["volta"] == [60, 47.5, 35], r
     assert r["semToken"] and "--nao-existe" in r["semToken"]
-    for h in r["cores"]:                              # sRGB de verdade: nenhum canal estourado nem zerado por parsing
-        assert len(h) == 6 and h not in ("000000", "ffffff"), r["cores"]
+    # oklch de matiz 70 é laranja (vermelho > verde > azul); display-p3 (0,2 0,4 0,6) é azul (azul > verde > vermelho).
+    # O leitor antigo dava vermelho estourado no p3 e quase preto no oklch.
+    (r1, g1, b1), (r2, g2, b2) = [[int(h[i:i + 2], 16) for i in (0, 2, 4)] for h in r["cores"]]
+    assert r1 > g1 > b1 and r1 > 150, r["cores"]
+    assert b2 > g2 > r2 and r2 < 90 and b2 > 120, r["cores"]
+    assert r["transparente"] and "transparente" in r["transparente"]
     assert r["raio"] == 0.55 and r["limiar"] == 0.8
 
 

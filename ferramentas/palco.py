@@ -89,13 +89,16 @@ class _Deck:
         """Passos longos do slide em que um vídeo visível anda mais de meio segundo (o clipe toca e a sala assiste). No
         estilo cinema (canvas #cinema de motor/cinema.js), todo passo longo é a câmera viajando pela cena 3D, que a sala
         assiste como a um vídeo."""
-        cinema = self.pg.evaluate("""(() => { const c = document.querySelector('#palco > canvas#cinema');
-            if (!c) return false;
-            const cs = getComputedStyle(c);
-            return cs.display !== 'none' && cs.visibility !== 'hidden' && Number(cs.opacity) > 0; })()""")
+        def cena_visivel(t: float) -> bool:
+            self.pg.evaluate("t => window.__palco.ver(t)", t)
+            return self.pg.evaluate("""(() => { const c = document.querySelector('#palco > canvas#cinema');
+                if (!c) return false;
+                const cs = getComputedStyle(c);
+                return cs.display !== 'none' && cs.visibility !== 'hidden' && Number(cs.opacity) > 0; })()""")
+
         tocam, t0 = set(), s["t0"]
         for k, d in enumerate(s["passos"]):
-            if d > PASSO_LONGO and cinema:
+            if d > PASSO_LONGO and cena_visivel(t0 + d / 2):    # no meio da viagem, não no último quadro carregado
                 tocam.add(k)
             elif d > PASSO_LONGO:
                 # no começo do passo a câmera ainda pode estar chegando, com a moldura do vídeo escondida
