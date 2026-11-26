@@ -1,6 +1,6 @@
 """Motor de palco: apresentações ao vivo feitas por código (motor/palco.js). Contrato em docs/palco.md.
 
-./ap novo <slug> [--tema cojuris] [--modo continuo|slides]  # decks/<slug>/ com o tema escolhido, a partir do
+./ap novo <slug> [--tema cojuris] [--modo continuo|slides|cinema]  # decks/<slug>/ com o tema escolhido, a partir do
                                             # catálogo do plano contínuo (padrão) ou da demonstração (slides)
 ./ap abrir <deck>                           # serve e abre no navegador, para ensaiar e conferir ao vivo
 ./ap sondar <deck>                          # oráculo: legibilidade, hierarquia e sequência, parada por parada
@@ -86,10 +86,21 @@ class _Deck:
         return {m["src"]: m["tempo"] for m in self.midias() if m["tag"] == "video"}
 
     def passos_com_video(self, s: dict) -> set[int]:
-        """Passos longos do slide em que um vídeo visível anda mais de meio segundo (o clipe toca e a sala assiste)."""
+        """Passos longos do slide em que um vídeo visível anda mais de meio segundo (o clipe toca e a sala assiste). No
+        estilo cinema (canvas #cinema de motor/cinema.js), todo passo longo é a câmera viajando pela cena 3D, que a sala
+        assiste como a um vídeo."""
+        def cena_visivel(t: float) -> bool:
+            self.pg.evaluate("t => window.__palco.ver(t)", t)
+            return self.pg.evaluate("""(() => { const c = document.querySelector('#palco > canvas#cinema');
+                if (!c) return false;
+                const cs = getComputedStyle(c);
+                return cs.display !== 'none' && cs.visibility !== 'hidden' && Number(cs.opacity) > 0; })()""")
+
         tocam, t0 = set(), s["t0"]
         for k, d in enumerate(s["passos"]):
-            if d > PASSO_LONGO:
+            if d > PASSO_LONGO and cena_visivel(t0 + d / 2):    # no meio da viagem, não no último quadro carregado
+                tocam.add(k)
+            elif d > PASSO_LONGO:
                 # no começo do passo a câmera ainda pode estar chegando, com a moldura do vídeo escondida
                 a = self.videos_em(t0 + 0.1) or self.videos_em(t0 + d / 4)
                 b = self.videos_em(t0 + d - 0.05)
@@ -246,7 +257,8 @@ def checar_assentado(antes: list[dict], agora: list[dict]) -> list[tuple[str, st
 
 
 def checar_ritmo(slides: list[dict]) -> list[tuple[str, str]]:
-    """Passo longo. `ritmoOk` (data-ritmo-ok da seção) isenta só os passos de `videoPassos`, em que um vídeo toca."""
+    """Passo longo. `ritmoOk` (data-ritmo-ok da seção) isenta só os passos de `videoPassos`, em que um vídeo toca ou a
+    câmera da cena 3D viaja."""
     achados = []
     for s in slides:
         for k, d in enumerate(s["passos"]):
@@ -256,7 +268,7 @@ def checar_ritmo(slides: list[dict]) -> list[tuple[str, str]]:
                 if motivo and k in s.get("videoPassos", ()):
                     achados.append(("ISENTO", f'{msg}; isento por data-ritmo-ok: "{motivo}"'))
                 elif motivo is not None:
-                    achados.append(("AVISO", msg + "; data-ritmo-ok exige motivo e só isenta passo com vídeo tocando"))
+                    achados.append(("AVISO", msg + "; data-ritmo-ok exige motivo e só isenta passo com vídeo tocando ou viagem da cena 3D"))
                 else:
                     achados.append(("AVISO", msg))
     return achados
@@ -675,7 +687,11 @@ def conferir_pacote(arq: Path) -> list[str]:
             pass
         antes = pg.evaluate(parada)
         pg.keyboard.press("ArrowRight")
-        pg.wait_for_timeout(2500)
+        # a parada muda no fim do trecho, e a viagem de uma cena 3D (docs/cinema.md) passa de 5 s
+        try:
+            pg.wait_for_function(f"{parada} > {antes}", timeout=15000)
+        except Exception:
+            pass
         if pg.evaluate(parada) <= antes:
             problemas.append(f"a seta → não avançou da parada {antes}")
         ap = ctx.new_page()
@@ -732,12 +748,13 @@ def empacotar(deck: Path, saida: Path | None = None, *, com_pdf: bool = True, ra
 
 # ---------- novo e abrir ----------
 
-MODOS = ("continuo", "slides")
+MODOS = ("continuo", "slides", "cinema")
 
 
 def novo(slug: str, tema: str | None = None, modo: str = "continuo") -> Path:
     """Deck novo a partir de um molde, com o link do tema trocado. `continuo` (padrão) copia o catálogo do plano
-    contínuo (decks/catalogo, com a mídia-marcador e o crédito dela); `slides` copia a demonstração (decks/demo)."""
+    contínuo (decks/catalogo, com a mídia-marcador e o crédito dela); `slides` copia a demonstração (decks/demo);
+    `cinema` copia a prévia do estilo cinema (decks/cojuris-cinema, docs/cinema.md)."""
     destino = config.DECKS / slug
     if destino.exists():
         raise SystemExit(f"{destino} já existe")
@@ -749,6 +766,8 @@ def novo(slug: str, tema: str | None = None, modo: str = "continuo") -> Path:
     if modo == "continuo":
         # a mídia do catálogo é marcador copiado da prévia e leva o crédito junto (cada item diz de onde veio)
         shutil.copytree(config.CATALOGO, destino, ignore=shutil.ignore_patterns(*ignorar))
+    elif modo == "cinema":
+        shutil.copytree(config.CINEMA, destino, ignore=shutil.ignore_patterns(*ignorar))
     else:
         shutil.copytree(config.DEMO, destino, ignore=shutil.ignore_patterns(*ignorar, "creditos.json"))
     if tema:
@@ -758,6 +777,9 @@ def novo(slug: str, tema: str | None = None, modo: str = "continuo") -> Path:
     if modo == "continuo":
         print(f"{destino / 'deck.html'} criado a partir do catálogo do plano contínuo (docs/cenas.md); reescreva o "
               f"briefing.md, troque ou apague cada slide e a mídia-marcador de midia/, e rode ./ap sondar {rel}")
+    elif modo == "cinema":
+        print(f"{destino / 'deck.html'} criado a partir da prévia do estilo cinema (docs/cinema.md); escreva a metáfora no "
+              f"briefing.md antes de mexer na cena, e rode ./ap sondar {rel}")
     else:
         print(f"{destino / 'deck.html'} criado a partir da demonstração; troque os slides e rode ./ap sondar {rel}")
     return destino

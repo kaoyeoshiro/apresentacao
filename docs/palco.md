@@ -291,7 +291,9 @@ contar como aviso (a última linha diz quantas houve):
   motivo, o achado continua, com a explicação.
 - `data-ritmo-ok="motivo"` na seção do slide isenta o passo longo em que um vídeo visível no quadro toca mais de meio
   segundo. O slide que é só uma pose de câmera sobre o vídeo, sem seção própria, declara `ritmoOk: 'motivo'` na
-  lista de slides. Sem vídeo tocando, o aviso continua, com a explicação.
+  lista de slides. Sem vídeo tocando, o aviso continua, com a explicação. No estilo cinema (`docs/cinema.md`), em que
+  o canvas `#cinema` ocupa o quadro, todo passo longo conta como imagem em movimento e a mesma declaração o isenta.
+  O canvas também conta como imagem do tamanho do quadro na escala do deck.
 
 ## Mídia
 

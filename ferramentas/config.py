@@ -10,6 +10,7 @@ TEMAS = RAIZ / "temas"
 DECKS = RAIZ / "decks"
 DEMO = DECKS / "demo"            # molde do modo slides (./ap novo --modo slides)
 CATALOGO = DECKS / "catalogo"    # molde do plano contínuo, o padrão do ./ap novo (docs/cenas.md)
+CINEMA = DECKS / "cojuris-cinema"  # molde do estilo cinema, cena 3D (docs/cinema.md)
 
 
 def video_maker() -> Path:
