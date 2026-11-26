@@ -607,11 +607,12 @@ export function palco({titulo = document.title, slides, cenas = {}, desenhar = (
 	};
 	// Imagens e vídeos visíveis no quadro: tamanho natural, caixa do layout (ow, oh) e caixa na tela (w, h, já com o
 	// zoom da câmera e os transforms), para o oráculo ver foto ampliada e medir o maior elemento da parada.
-	const midias = () => [...palcoEl.querySelectorAll('img, video')].map((el) => {
+	// O canvas da cena 3D (motor/cinema.js) conta como imagem do quadro inteiro.
+	const midias = () => [...palcoEl.querySelectorAll('img, video, canvas')].map((el) => {
 		const r = el.getBoundingClientRect();
 		return {
 			tag: el.tagName.toLowerCase(), src: el.getAttribute('src') || '',
-			nw: el.naturalWidth ?? el.videoWidth, nh: el.naturalHeight ?? el.videoHeight, ow: el.offsetWidth, oh: el.offsetHeight,
+			nw: el.naturalWidth ?? el.videoWidth ?? el.width, nh: el.naturalHeight ?? el.videoHeight ?? el.height, ow: el.offsetWidth, oh: el.offsetHeight,
 			x: r.left, y: r.top, w: r.width, h: r.height, fit: getComputedStyle(el).objectFit, alfa: visivel(el),
 			tempo: el.tagName === 'VIDEO' ? el.currentTime : null,
 		};

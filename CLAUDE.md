@@ -4,10 +4,24 @@ Apresentações ao vivo de alta qualidade feitas por código, para projetar com 
 diretor de arte, roteirista, programador e revisor; o deck é um HTML em que cada quadro é função do tempo, com uma
 parada por clique. Para qualquer pedido de apresentação, siga a skill `.claude/skills/apresentacao/SKILL.md`.
 
+## Estilos que o repositório faz
+
+O pedido escolhe o estilo; sem pedido, vale o plano contínuo. Cada um tem molde, contrato e régua próprios.
+
+| estilo | como é | quando usar | molde e contrato |
+|---|---|---|---|
+| Plano contínuo (padrão) | câmera 2D que viaja por uma trilha dourada entre slides de 12 arquétipos, imagens em série, vídeo no slide | aula, palestra com conteúdo, qualquer deck longo | `./ap novo <slug>`, `docs/cenas.md`, régua `decks/previa-curso-ia/` |
+| Slides com transições | um slide por vez, entradas animadas, sem trilha | deck curto ou sem fio entre os slides | `./ap novo <slug> --modo slides`, `docs/palco.md` |
+| Cinema | mundo 3D em tempo real (luz, névoa, reflexo, brilho) com câmera de cinema e uma metáfora visual que se transforma a cada clique; pouco texto, por cima | pedido de "cinema", "3D", "cinematográfico" ou "nesse nível" de uma referência assim; abertura, virada e fecho de aula; palestra curta de impacto | `./ap novo <slug> --modo cinema`, `docs/cinema.md`, régua `decks/cojuris-cinema/` |
+
+Os três podem conviver: aula longa no plano contínuo com abertura e fecho em cinema, em decks separados.
+
 ## Mapa
 
 - `motor/`: `palco.js` (tocador ao vivo, tela do apresentador, modo render, oráculo no navegador), `tempo.js`
   (curvas, mola, aleatório com semente), `camera.js` (plano contínuo). Contrato em `docs/palco.md`.
+- `motor/cinema.js`: o estilo cinema (cena 3D atrás do texto), sobre o three.js r186 copiado em `motor/vendor/three/`
+  (MIT). Contrato em `docs/cinema.md`.
 - `motor/cenas.js` e `motor/cenas.css`: a biblioteca do plano contínuo (mundo, trilha dourada, zonas noite, viagens
   e os 12 arquétipos de slide). Contrato em `docs/cenas.md`.
 - `temas/`: um design system por pasta (`noite`, `cojuris`, `pge`, `_modelo`), com `imagem/` para a série de imagens
@@ -23,7 +37,7 @@ parada por clique. Para qualquer pedido de apresentação, siga a skill `.claude
 
 ```bash
 ./ap sync                                   # instala o ambiente Python (fora do disco externo)
-./ap novo <slug> --tema noite|cojuris|pge [--modo continuo|slides]  # deck novo do catálogo (padrão) ou da demonstração
+./ap novo <slug> --tema noite|cojuris|pge [--modo continuo|slides|cinema]  # deck novo do catálogo (padrão), da demonstração ou da prévia de cinema
 ./ap abrir decks/<slug>                     # ao vivo no Chrome (→ ← B F G P ?)
 ./ap sondar decks/<slug>                    # oráculo de legibilidade e ritmo em cada parada; sai 1 se houver ERRO
 ./ap paradas decks/<slug> [--viagens]       # um still por parada e a folha de contato; --viagens: quadros no meio de cada viagem (viagens.png)

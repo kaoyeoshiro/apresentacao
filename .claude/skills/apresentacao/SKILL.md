@@ -1,6 +1,6 @@
 ---
 name: apresentacao
-description: Produz apresentações ao vivo de alto impacto feitas por código (motor de palco), para projetar com passador de slides, no nível da prévia aprovada do curso de IA. Plano contínuo por padrão, montado com a biblioteca de arquétipos (a câmera viaja por uma trilha dourada, um clique por slide abre tudo com animação), imagens geradas em série e tratadas nas cores do tema, vídeo dentro do slide, tela do apresentador, PDF de contingência e pacote que roda sem internet. Use para "faz uma apresentação", "slides para minha palestra", "deck para a aula", "apresentação animada", "transforma isso em slides", "palestra sobre X", ou para revisar por que um deck parece PowerPoint de modelo. Não use para .pptx editável nem para vídeo narrado.
+description: Produz apresentações ao vivo de alto impacto feitas por código (motor de palco), para projetar com passador de slides, no nível da prévia aprovada do curso de IA. Plano contínuo por padrão, montado com a biblioteca de arquétipos (a câmera viaja por uma trilha dourada, um clique por slide abre tudo com animação), imagens geradas em série e tratadas nas cores do tema, vídeo dentro do slide, tela do apresentador, PDF de contingência e pacote que roda sem internet. Também faz o estilo cinema, com mundo 3D em tempo real e câmera de cinema, quando o pedido falar em cinema, 3D, cinematográfico ou mostrar uma referência nesse nível. Use para "faz uma apresentação", "slides para minha palestra", "deck para a aula", "apresentação animada", "transforma isso em slides", "palestra sobre X", ou para revisar por que um deck parece PowerPoint de modelo. Não use para .pptx editável nem para vídeo narrado.
 ---
 
 # apresentacao
@@ -25,6 +25,9 @@ Pergunte com a ferramenta de perguntas, no máximo três por vez, a opção reco
 
 - tema: um de `temas/` (`ls temas | grep -v '^_'`), nunca herdado do deck anterior; tema novo se cria antes de tudo,
   pela seção "Criar um tema novo" de `docs/temas.md`;
+- estilo: os três de "Estilos que o repositório faz", no `CLAUDE.md`. Se o pedido já disse cinema, 3D ou mostrou
+  referência assim, não pergunte: é o cinema, e vale `docs/cinema.md` no lugar de `docs/cenas.md` nos passos 4 e 5
+  (a metáfora em uma frase vem antes do roteiro). Sem pista no pedido, pergunte entre estes:
 - modo: "Plano contínuo (Recomendado)", em que a câmera viaja por uma trilha entre os slides, ou "Slides com
   transições", mais simples, para deck curto ou conteúdo sem fio entre os slides;
 - público, duração e a mensagem que a plateia leva em uma frase, se o pedido não disser.
@@ -56,6 +59,7 @@ Passa quando: tema, modo, público, duração e mensagem estão respondidos, e a
 ```bash
 ./ap novo <slug> --tema <tema>                  # plano contínuo: copia decks/catalogo
 ./ap novo <slug> --tema <tema> --modo slides    # só se o usuário escolheu slides com transições
+./ap novo <slug> --tema <tema> --modo cinema    # estilo cinema: copia a prévia 3D (docs/cinema.md)
 ./ap sondar decks/<slug>
 ```
 
@@ -195,7 +199,7 @@ Passa quando: `./ap empacotar decks/<slug>` termina em "pacote: ok, abre sem int
 - Texto dentro de imagem ou vídeo, lista de tópicos como layout, parágrafo em slide, texto abaixo de 30 px.
 - Cor, fonte ou logo escritos no deck: só `var()` do tema.
 - Animação fora do tempo: `setTimeout`, `Date.now()`, `Math.random()` sem semente, CSS transition (o lint barra).
-- Paralaxe, câmera inclinada, pulsos correndo pela trilha, `mix-blend-mode` ou `will-change` no `#mundo`, filtro SVG
+- No plano contínuo: paralaxe, câmera inclinada, pulsos correndo pela trilha, `mix-blend-mode` ou `will-change` no `#mundo`, filtro SVG
   de duotone ao vivo, notebook ou celular ilustrado como moldura, rabisco à mão em toda parada, número ilustrativo
   gigante (`docs/cenas.md`, "O que a biblioteca não faz").
 - Recurso da internet em tempo de palco: fonte, vídeo, imagem e iframe ficam locais no pacote.

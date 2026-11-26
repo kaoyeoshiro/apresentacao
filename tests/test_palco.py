@@ -220,7 +220,7 @@ def test_novo_recusa_tema_que_nao_existe():
     assert not (config.DECKS / "_teste-inexistente").exists()
 
 
-@pytest.mark.parametrize("modo, molde", [("continuo", "catalogo"), ("slides", "demo")])
+@pytest.mark.parametrize("modo, molde", [("continuo", "catalogo"), ("slides", "demo"), ("cinema", "cojuris-cinema")])
 def test_novo_copia_o_molde_do_modo(modo, molde):
     """continuo (o padrão) parte do catálogo, com a mídia-marcador e o crédito dela; slides parte da demonstração.
     Saídas do molde (storyboard/, output/, pacote/) não vão junto. O oráculo do deck criado, por tema, fica em

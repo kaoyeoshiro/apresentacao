@@ -1,0 +1,284 @@
+<!doctype html>
+<!-- Prévia do estilo cinema (motor/cinema.js, contrato em docs/cinema.md) na marca co.juris. Cinco paradas: um ponto
+     dourado no escuro vira traço de circuito, sobe pelo sulco de uma coluna clássica, acende a coluna inteira e o dia
+     clareia até o logo. A coluna com trilhas douradas é o grafismo da própria marca (temas/cojuris/regras.md).
+     Ao vivo: ./ap abrir decks/cojuris-cinema   ·   ./ap sondar decks/cojuris-cinema   ·   ./ap paradas decks/cojuris-cinema -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>co.juris em cinema</title>
+<link rel="stylesheet" href="../../temas/cojuris/tema.css">
+<style>
+  #palco { background: var(--cor-tinta); color: var(--cor-sobre-tinta); font-family: var(--fonte-texto); }
+  /* escurece só o canto onde mora o texto; entra junto com ele */
+  .sombra { position: absolute; inset: 0; opacity: 0;
+    background: radial-gradient(ellipse 1250px 560px at 0% 100%, color-mix(in srgb, var(--cor-tinta) 72%, transparent), color-mix(in srgb, var(--cor-tinta) 0%, transparent)); }
+  .sombra.topo { background: radial-gradient(ellipse 1250px 520px at 0% 0%, color-mix(in srgb, var(--cor-tinta) 72%, transparent), color-mix(in srgb, var(--cor-tinta) 0%, transparent)); }
+  .manchete.topo { bottom: auto; top: 130px; }
+  /* no fim, o papel da marca cobre a esquerda do quadro, onde o logo entra (o logo só vai sobre fundo claro) */
+  #veu { position: absolute; inset: 0; opacity: 0;
+    background: linear-gradient(90deg, var(--cor-fundo) 0%, var(--cor-fundo) 40%, color-mix(in srgb, var(--cor-fundo) 0%, transparent) 66%); }
+  .kicker { position: absolute; left: 120px; top: 110px; margin: 0; font-family: var(--fonte-titulo); font-weight: 700;
+    font-size: 32px; letter-spacing: 0.2em; color: var(--cor-destaque); }
+  .manchete { position: absolute; left: 116px; bottom: 150px; margin: 0; max-width: 1500px; font-family: var(--fonte-titulo);
+    font-weight: 800; font-size: 104px; line-height: 1.04; letter-spacing: -0.01em; text-transform: uppercase; }
+  .manchete b { font-weight: 800; color: var(--cor-destaque); }
+  .logo { position: absolute; left: 190px; top: 170px; height: 560px; aspect-ratio: var(--logo-marca-proporcao);
+    background: var(--logo-marca) center / contain no-repeat; }
+  #fe-curso { position: absolute; left: 100px; top: 800px; width: 900px; margin: 0; font-family: var(--fonte-texto);
+    font-size: 40px; line-height: 1.3; color: var(--cor-tinta); text-align: center; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div id="veu"></div>
+  <section data-slide="ponto">
+    <p class="kicker" id="po-kicker">IA NA PRÁTICA JURÍDICA</p>
+  </section>
+  <section data-slide="fio" data-ritmo-ok="a câmera viaja pela cena 3D: o movimento é o conteúdo">
+    <div class="sombra topo" id="fi-sombra"></div>
+    <h1 class="manchete topo" id="fi-titulo">Achar o fio <b>da meada.</b></h1>
+  </section>
+  <section data-slide="coluna" data-ritmo-ok="a câmera viaja pela cena 3D: o movimento é o conteúdo">
+    <div class="sombra" id="co-sombra"></div>
+    <h1 class="manchete" id="co-titulo">A tradição<br><b>segura</b> o peso.</h1>
+  </section>
+  <section data-slide="circuito" data-ritmo-ok="a câmera viaja pela cena 3D: o movimento é o conteúdo">
+    <div class="sombra topo" id="ci-sombra"></div>
+    <h1 class="manchete topo" id="ci-titulo">A <b>IA</b> sobe<br>pela tradição.</h1>
+  </section>
+  <section data-slide="fecho" data-ritmo-ok="a câmera viaja pela cena 3D: o movimento é o conteúdo">
+    <div class="logo" id="fe-logo" role="img" aria-label="co.juris"></div>
+    <p id="fe-curso">Curso presencial de IA aplicada ao Direito</p>
+  </section>
+</div>
+
+<script type="module">
+import {palco, surgir, molaAR, faixa, entradaSaida, clamp, lerp, aleatorio} from '../../motor/palco.js';
+import {cinema, corDoTema, trajeto, respirar, fio, halo, ceu, poeira, lajes, Reflector, THREE} from '../../motor/cinema.js';
+
+const $ = (id) => document.getElementById(id);
+
+// ---------- cores: só tokens do tema ----------
+const OURO = corDoTema('--cor-destaque'), TINTA = corDoTema('--cor-tinta'), FUNDO = corDoTema('--cor-fundo');
+const PAPEL = corDoTema('--cor-papel');
+const mistura = (a, b, k) => a.clone().lerp(b, k);
+// horizonte do céu = cor da névoa: o chão some nela sem linha dura
+const NOITE_CEU = TINTA.clone().multiplyScalar(0.16), NOITE_NEVOA = mistura(TINTA, OURO, 0.06).multiplyScalar(0.42);
+const NOITE_HORIZONTE = NOITE_NEVOA, DIA = FUNDO.clone().multiplyScalar(1.12);
+// o amanhecer passa por uma aurora dourada: a meia distância entre marinho e papel é um cinza sem vida
+const AURORA = mistura(FUNDO, OURO, 0.55).multiplyScalar(0.8);
+const amanhecer = (alvo, noite, k) => (k < 0.5 ? alvo.lerpColors(noite, AURORA, k * 2) : alvo.lerpColors(AURORA, DIA, k * 2 - 1));
+
+// ---------- palco 3D ----------
+const C = cinema({fov: 38, brilho: {forca: 0.6, raio: 0.45, limiar: 0.9}});
+const {cena, camera, renderer} = C;
+renderer.toneMapping = THREE.NeutralToneMapping;   // cores da marca fiéis; ACES puxaria o off-white para o cinza
+const ceuM = ceu({topo: NOITE_CEU, horizonte: NOITE_HORIZONTE});
+cena.add(ceuM);
+cena.fog = new THREE.FogExp2(NOITE_NEVOA.clone(), 0.05);
+
+// chão: espelho por baixo de uma laje translúcida (pedra molhada)
+const espelho = new Reflector(new THREE.PlaneGeometry(400, 400), {clipBias: 0.003, textureWidth: 1920, textureHeight: 1080,
+  color: mistura(TINTA, PAPEL, 0.35)});
+espelho.rotation.x = -Math.PI / 2;
+cena.add(espelho);
+const pisoTx = lajes({lado: 4, semente: 5});
+pisoTx.repeat.set(50, 50);   // lajes de 2 m
+const lajeMat = new THREE.MeshStandardMaterial({color: TINTA.clone().multiplyScalar(0.5), map: pisoTx, roughness: 0.8, transparent: true, opacity: 0.8});
+const laje = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), lajeMat);
+laje.rotation.x = -Math.PI / 2;
+laje.position.y = 0.004;
+cena.add(laje);
+
+// luzes
+const ceuLuz = new THREE.HemisphereLight(mistura(TINTA, PAPEL, 0.5), TINTA.clone().multiplyScalar(0.2), 0.25);
+// luz rasante de lado: é ela que desenha o relevo das caneluras
+const chave = new THREE.DirectionalLight(mistura(PAPEL, OURO, 0.2), 0.9);
+chave.position.set(9, 4, 5);
+const contra = new THREE.DirectionalLight(OURO, 2.2);
+contra.position.set(-6, 8, -10);
+const cabecaLuz = new THREE.PointLight(OURO, 2, 0, 2);
+const colunaLuz = new THREE.PointLight(OURO, 0, 0, 2);
+colunaLuz.position.set(0.8, 5, 3.2);
+cena.add(ceuLuz, chave, contra, cabecaLuz, colunaLuz);
+
+// ---------- a coluna (dórica, caneluras em cosseno) ----------
+const N = 20, PROF = 0.05, Y0 = 0.39, Y1 = 9.38;
+const raioFuste = (y) => lerp(0.95, 0.82, clamp((y - Y0) / (Y1 - Y0)));
+const perfil = (th) => 1 - PROF * Math.pow(0.5 + 0.5 * Math.cos(N * th), 0.6);
+const pedra = new THREE.MeshStandardMaterial({color: FUNDO, roughness: 0.62, metalness: 0});
+const fusteGeo = new THREE.CylinderGeometry(0.82, 0.95, Y1 - Y0, 200, 48, true);
+{
+  const P = fusteGeo.attributes.position;
+  for (let v = 0; v < P.count; v++) {
+    const x = P.getX(v), z = P.getZ(v), y = P.getY(v) + (Y0 + Y1) / 2, th = Math.atan2(x, z);
+    const r = raioFuste(y) * perfil(th);
+    P.setXYZ(v, r * Math.sin(th), P.getY(v), r * Math.cos(th));
+  }
+  fusteGeo.computeVertexNormals();
+}
+const coluna = new THREE.Group();
+const peca = (geo, y) => { const m = new THREE.Mesh(geo, pedra); m.position.y = y; coluna.add(m); };
+peca(fusteGeo, (Y0 + Y1) / 2);
+peca(new THREE.CylinderGeometry(1.12, 1.18, 0.23, 96), 0.115);
+peca(new THREE.CylinderGeometry(1.0, 1.07, 0.16, 96), 0.31);
+peca(new THREE.CylinderGeometry(1.22, 0.86, 0.42, 96), Y1 + 0.21);
+peca(new THREE.BoxGeometry(2.6, 0.34, 2.6), Y1 + 0.59);
+cena.add(coluna);
+
+// ---------- trilhas de circuito ----------
+const R_FIO = 0.026;
+const em = (r, th, y) => [r * Math.sin(th), y, r * Math.cos(th)];
+const sulco = (th) => {
+  const rg = (y) => raioFuste(y) * (1 - PROF) + R_FIO * 0.5;
+  return [em(1.42, th, 0.02), em(1.21, th, 0.02), em(1.21, th, 0.245), em(1.09, th, 0.245), em(1.09, th, 0.405),
+    em(rg(Y0 + 0.02), th, 0.405), em(rg(Y1 - 0.05), th, Y1 - 0.05)];
+};
+const anda = (p, a, L) => [p[0] + Math.sin(a) * L, p[1], p[2] + Math.cos(a) * L];
+const pad = (p, cor, k) => {
+  const m = new THREE.Mesh(new THREE.RingGeometry(0.1, 0.19, 32), new THREE.MeshBasicMaterial({color: cor.clone().multiplyScalar(k), side: THREE.DoubleSide}));
+  m.rotation.x = -Math.PI / 2;
+  m.position.set(p[0], 0.021, p[2]);
+  return m;
+};
+const fios = [];   // {malha, base}: intensidade de noite, para baixar no dia
+const novoFio = (pts, intensidade) => { const m = fio(pts, {raio: R_FIO, cor: OURO, intensidade}); fios.push({malha: m, base: intensidade}); cena.add(m); return m; };
+
+// o fio principal: do ponto (longe, no chão) até a base da coluna pelo sulco 1, e depois sobe por ele
+const TH0 = (2 * Math.PI) / N;
+const baseP = em(1.42, TH0, 0.02), p1 = anda(baseP, TH0, 4.6), p2 = anda(p1, TH0 + Math.PI / 4, 6), INICIO = anda(p2, TH0, 8);
+const chao = novoFio([INICIO, p2, p1, baseP], 4.5);
+const subida = novoFio(sulco(TH0), 4.5);
+const marcaInicio = pad(INICIO, OURO, 3);
+cena.add(marcaInicio);
+
+// a rede: um traço por sulco, que sai da base, vira 45° e segue; aceso de leve desde o começo (gravado no chão)
+const rnd = aleatorio(11), rede = [], APAGADO = 0.1;
+for (let k = 0; k < N; k++) {
+  const th = (2 * Math.PI * k) / N;
+  const pts = [em(1.42, th, 0.02)];
+  pts.push(anda(pts[0], th, 1.2 + rnd() * 3.2));
+  pts.push(anda(pts[1], th + (rnd() < 0.5 ? -1 : 1) * Math.PI / 4, 1.5 + rnd() * 3.5));
+  pts.push(anda(pts[2], th, 2 + rnd() * 7));
+  const sobe = sulco(th);
+  if (k !== 1) novoFio(pts, APAGADO);
+  const fim = pad(pts[3], OURO, APAGADO);
+  cena.add(fim);
+  rede.push({th, k, chao: k === 1 ? null : novoFio(pts, 3.2), sobe: k === 1 ? null : novoFio(sobe, 3.2), fim,
+    dist: Math.min(k, N - k) / (N / 2)});
+}
+
+const cabeca = halo(OURO, {tamanho: 0.7, intensidade: 1.6});
+cena.add(cabeca);
+const ar = poeira({n: 700, caixa: [[-16, 0.1, -12], [16, 11, 24]], cor: mistura(OURO, PAPEL, 0.4), tamanho: 0.09, opacidade: 0.7});
+cena.add(ar);
+
+// ---------- câmera: uma pose por parada (a primeira é o escuro antes da abertura) ----------
+const S = INICIO;
+const poses = [
+  {pos: [S[0] + 3.6, 1.5, S[2] + 5.6], alvo: [S[0], 0, S[2]], fov: 34},
+  {pos: [S[0] + 1.7, 0.55, S[2] + 2.7], alvo: [S[0] - 0.4, 0.05, S[2] - 0.6], fov: 38},
+  {pos: [11, 3.5, 19], alvo: [-1.2, 2.0, 2.2], fov: 40},
+  {pos: [2.3, 0.75, 4.6], alvo: [-1.45, 7.4, 1.16], fov: 46},
+  {pos: [-12.5, 5.2, 17.5], alvo: [-2.6, 4.9, -1.4], fov: 40},
+  {pos: [-9.5, 6.2, 25], alvo: [-4.6, 5.2, 0], fov: 34},
+];
+const posar = trajeto(poses);
+
+// ---------- linha do tempo ----------
+const slides = [
+  {id: 'ponto', titulo: 'O ponto', passos: [2.2], segura: 3,
+    notas: {diga: 'Todo trabalho jurídico começa pequeno: um ponto, uma dúvida, uma peça para fazer.', transicao: 'Vamos seguir esse ponto.'}},
+  {id: 'fio', titulo: 'O fio da meada', passos: [5.2],
+    notas: {diga: 'O ponto vira um traço. É o raciocínio que liga a dúvida ao que importa no processo.'}},
+  {id: 'coluna', titulo: 'A coluna', passos: [4.2],
+    notas: {diga: 'E chega na coluna: a tradição do Direito, que continua de pé e segura o peso.'}},
+  {id: 'circuito', titulo: 'O circuito', passos: [4.4],
+    notas: {diga: 'A IA entra pelos sulcos dessa coluna. Ela trabalha dentro da tradição, com revisão humana em cada passo.'}},
+  {id: 'fecho', titulo: 'co.juris', passos: [5.4], segura: 4,
+    notas: {diga: 'É isso que a co.juris ensina: IA aplicada à prática jurídica, com o pé na tradição.'}},
+];
+
+// a manchete sobe com a sombra que a deixa legível, sem esperar a mola assentar
+const manchete = (id, d) => {
+  surgir($(`${id}-titulo`), molaAR(d), {dy: 36});
+  $(`${id}-sombra`).style.opacity = clamp(d / 0.6 + 1);
+};
+const cenas = {
+  ponto: (t, c) => surgir($('po-kicker'), molaAR(c.desde(0) - 1.2)),
+  fio: (t, c) => manchete('fi', c.desde(0) - 3.9),
+  coluna: (t, c) => manchete('co', c.desde(0) - 3.0),
+  circuito: (t, c) => manchete('ci', c.desde(0) - 3.0),
+  fecho: (t, c) => {
+    surgir($('fe-logo'), molaAR(c.desde(0) - 3.4), {dy: 24});
+    surgir($('fe-curso'), molaAR(c.desde(0) - 3.9), {dy: 24});
+  },
+};
+
+const olhar = new THREE.Vector3();
+function desenhar(t, ctx) {
+  const k = (id) => ctx.k(id, 0);
+  const s = ctx.slide, p = ctx.p(0);
+  // câmera: o slide i viaja da pose i à pose i + 1
+  const alvo = posar(camera, s.i + entradaSaida(p));
+
+  const rFio = entradaSaida(faixa(k('fio'), 0.04, 0.82));
+  const rSobe = entradaSaida(faixa(k('coluna'), 0.08, 0.78));
+  const kc = k('circuito');
+  const dia = entradaSaida(faixa(k('fecho'), 0.08, 0.8));
+
+  chao.userData.revelar(rFio);
+  subida.userData.revelar(rSobe);
+  const ponta = rSobe > 0 ? subida.userData.ponta(rSobe) : chao.userData.ponta(rFio);
+  // no fio, a câmera vira para acompanhar a ponta e devolve o olhar à pose no fim
+  if (s.id === 'fio') {
+    camera.lookAt(olhar.copy(alvo).lerp(ponta, Math.sin(Math.PI * p) * 0.75));
+  }
+  respirar(camera, ctx.ocioso, {amp: 0.05});
+
+  // a ponta brilha, pulsa de leve parada e se apaga quando a coluna acende
+  const vivo = (0.25 + 0.75 * k('ponto')) * (1 - faixa(kc, 0.2, 0.7));
+  cabeca.position.copy(ponta);
+  cabeca.scale.setScalar(0.7 * (1 + 0.07 * Math.sin(ctx.ocioso * 2.2)) * vivo);
+  cabeca.visible = vivo > 0.01;
+  cabecaLuz.position.copy(ponta).add(new THREE.Vector3(0, 0.25, 0));
+  cabecaLuz.intensity = 3 * vivo;
+
+  // a coluna acende: sulcos sobem em onda a partir do sulco do fio, e a rede do chão corre para fora
+  for (const r of rede) {
+    if (!r.sobe) continue;
+    const a = 0.05 + 0.35 * r.dist;
+    r.sobe.userData.revelar(entradaSaida(faixa(kc, a, a + 0.45)));
+    r.chao.userData.revelar(entradaSaida(faixa(kc, a + 0.1, a + 0.55)), 0);
+  }
+  for (const r of rede) {
+    const aceso = r.chao ? faixa(kc, 0.55 + 0.35 * r.dist, 0.7 + 0.35 * r.dist) : rFio;
+    r.fim.material.color.copy(OURO).multiplyScalar(lerp(APAGADO, 3, aceso) * lerp(1, 0.4, dia));
+  }
+  colunaLuz.intensity = 7 * entradaSaida(faixa(kc, 0.1, 0.8)) * (1 - dia);
+
+  // amanhecer: céu, névoa, chão e luzes vão do marinho ao papel da marca
+  ceuM.material.uniforms.topo.value.lerpColors(NOITE_CEU, DIA, dia);
+  amanhecer(ceuM.material.uniforms.horizonte.value, NOITE_HORIZONTE, dia);
+  amanhecer(cena.fog.color, NOITE_NEVOA, dia);
+  cena.fog.density = lerp(0.05, 0.022, dia);
+  lajeMat.color.lerpColors(TINTA.clone().multiplyScalar(0.5), FUNDO, dia);
+  lajeMat.opacity = lerp(0.78, 0.9, dia);
+  ceuLuz.intensity = lerp(0.5, 2.4, dia);
+  chave.intensity = lerp(0.35, 2.2, dia);
+  contra.intensity = lerp(1.4, 0.4, dia);
+  C.bloom.strength = lerp(0.6, 0.08, dia);
+  for (const f of fios) f.malha.material.color.copy(OURO).multiplyScalar(lerp(f.base, Math.min(f.base, 0.9), dia));
+  marcaInicio.material.color.copy(OURO).multiplyScalar(lerp(3 * vivo + 0.3, 0.6, dia));
+
+  ar.userData.desenhar(t + ctx.ocioso);
+  ar.material.opacity = 0.55 * (1 - dia);
+  $('veu').style.opacity = faixa(k('fecho'), 0.42, 0.82);
+  C.desenhar();
+}
+
+palco({titulo: 'co.juris em cinema', slides, cenas, desenhar, autoplay: true});
+</script>
+</body>
+</html>
